@@ -75,3 +75,22 @@ Button {
     border: none;
     background-color: #2A3647;
 }
+
+.boardAddTask {
+    background-color: white;
+    border-radius: 30px;
+    border: 2px solid #e4dedc;
+    width: 1000px;
+    display: flex;
+    justify-content: center;
+    margin-left: 150px;
+}
+
+.widthBoard {
+    width: 80%;
+}
+
+.bottomInfo {
+    display: flex;
+    justify-content: space-between;
+}

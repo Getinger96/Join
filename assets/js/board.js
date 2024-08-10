@@ -1,3 +1,6 @@
+
+let description = [];
+
 let todos = [{
     'id': 0,
     'title': 'Putzen',
@@ -18,6 +21,18 @@ document.addEventListener("DOMContentLoaded", function () {
     updateHTML();
 });
 
+//add Task
+function addTask() {
+    let task = document.getElementById('addTask');
+    task.innerHTML = '';
+    for(let i = 0; i < todos.length; i++) {
+        let title = todos[i][title];
+        let description = description[i];
+    }
+    task.innerHTML += addNewTaskHTML(title, description)
+}
+
+//Task
 function updateHTML() {
     let open = todos.filter(t => t['category'] == 'open');
     document.getElementById('open').innerHTML = '';
@@ -48,6 +63,7 @@ function updateHTML() {
     }
 }
 
+//Drag & Drop
 function startDragging(id) {
     currentDraggedElement = id;
 }
@@ -72,3 +88,4 @@ function highlight(id) {
 function removeHighlight(id) {
     document.getElementById(id).classList.remove('drag-area-highlight');
 }
+

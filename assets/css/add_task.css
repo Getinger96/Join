@@ -2,3 +2,20 @@
     display: flex;
     justify-content: space-between;
 }
+
+.separatorTask {
+    width: 2px;
+    height: 450px;
+    background-color: #e4dedc;
+}
+
+.alaignItems {
+    align-items: center;
+}
+
+.flexdirection {
+    display: flex;
+    flex-direction: column;
+    margin-top: 16px;
+    margin-bottom: 8px;
+}

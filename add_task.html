@@ -56,40 +56,45 @@
                                     <p>Title</p>
                                     <p class="red">*</p>
                                 </div>
-                                <input type="text">
+                                <input type="text" placeholder="enter a title" required>
                             </div>
-                            <div>
-                                <p>Description</p>
-                                <input type="text">
+                            <div class="flexdirection">
+                                <label for="description">Description</label>
+                                <textarea id="description" type="text" placeholder="Enter a Description"></textarea>
                             </div>
-                            <div>
-                                <p>Assigned to</p>
-                                <textarea type="text"></textarea>
+                            <div class="flexdirection">
+                                <label for="assigned">Assigned to</label>
+                                <select name="" id="assigned" disabled="disabled">Select contacts to assign
+                                    <option value=""></option>
+                                </select>
                             </div>
                         </div>
                         <div class="separatorTask"></div>
                         <div>
-                            <div>
+                            <div class="flexdirection">
                                 <div class="displayFlex">
                                     <p>Due date</p>
                                     <p class="red">*</p>
                                 </div>
-                                <input type="text">
+                                <input type="date" required>
                             </div>
                             <div>
                                 <p>Prio</p>
                                 <div>
-                                    <div>Urgent <img src="" alt=""></div>
-                                    <div>Medium <img src="" alt=""></div>
-                                    <div>Low <img src="" alt=""></div>
+                                    <div onclick="urgent()">Urgent <img src="" alt=""></div>
+                                    <div onclick="medium()">Medium <img src="" alt=""></div>
+                                    <div onclick="low()">Low <img src="" alt=""></div>
                                 </div>
                             </div>
-                            <div>
-                                <div class="displayFlex">
-                                    <p>Category</p>
+                            <div class="flexdirection">
+                                <div class="displayFlex alaignItems">
+                                    <label id="category">Category</label>
                                     <p class="red">*</p>
                                 </div>
-                                <input type="text">
+                                <select name="text" id="category" disabled="disabled">Select task category
+                                    <option value="technicalTask">Technical Task</option>
+                                    <option value="userStory">User Story</option>
+                                </select>
                             </div>
                             <div>
                                 <p>Subtasks</p>
