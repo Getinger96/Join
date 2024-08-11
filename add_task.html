@@ -8,109 +8,39 @@
 
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="./assets/css/add_task.css">
-    <script src="./assets/js/board.js"></script>
+    <link rel="stylesheet" href="Styles/Desktop_template.css">
     <script src="./assets/js/add_task.js"></script>
+    <script src="script.js"></script>
 </head>
 
-<body onload="updateHTML()">
-    <section class="board displayFlex backgrount-color">
-        <nav>
-            <div class="sideblock">
-                <a class="logo" href="./index.html"><img src="./assets/img/Capa 2.png" alt="logo"></a>
-                <ul class="sidelink">
-                    <li><a class="navLink" href="#"><img class="icon" src="./assets/img/Icons.png">Summary</a>
-                    </li>
-                    <li><a class="navLink" href="#"><img class="icon" src="./assets/img/Icons (1).png">Add
-                            Task</a>
-                    </li>
-                    <li><a class="navLink" href="#"><img class="icon" src="./assets/img/Icons (3).png">Board</a>
-                    </li>
-                    <li><a class="navLink" href="#"><img class="icon" src="./assets/img/Icons (2).png">Contacts</a>
-                    </li>
-                </ul>
-                <ul>
-                    <li><a class="navLink" href="#">Privacy Policy</a></li>
-                    <li><a class="navLink" href="#">Legal notice</a></li>
-                </ul>
-            </div>
-        </nav>
+<body onload="init()">
+    <header>
+        <div w3-include-html="assets/Templates/desktop_template.html"></div>
+    </header>
+    <h1>Add Task</h1>
 
-        <nav class="width100">
-            <div class="headblock">
-                <div class="title">
-                    <p class="kanbanBoardTitle">Kanban Projekt Management Tool</p>
-                </div>
-                <div class="headUserContainer">
-                    <img src="./assets/img/help.png">
-                    <p class="logInUser">LT</p>
-                </div>
-            </div>
+    <div class="input_Task_Container_left">
+        <div class="Title_Container">
+            <span class="Title_Header">Title</span>
+            <input class="input_Title" required type="text">
+        </div>
+        <div>
+            <span>Description</span>
+            <input type="text">
+        </div>
+        <div>
+            <span>Assigned to</span>
+            <select name="" id="">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    
+      
 
-            <div class="divBoard">
-                <div class="boardtitle addTaskBoard">
-                    <h1>Add Task</h1>
-                    <div class="addTaskContainer">
-                        <div>
-                            <div>
-                                <div class="displayFlex">
-                                    <p>Title</p>
-                                    <p class="red">*</p>
-                                </div>
-                                <input type="text">
-                            </div>
-                            <div>
-                                <p>Description</p>
-                                <input type="text">
-                            </div>
-                            <div>
-                                <p>Assigned to</p>
-                                <textarea type="text"></textarea>
-                            </div>
-                        </div>
-                        <div class="separatorTask"></div>
-                        <div>
-                            <div>
-                                <div class="displayFlex">
-                                    <p>Due date</p>
-                                    <p class="red">*</p>
-                                </div>
-                                <input type="text">
-                            </div>
-                            <div>
-                                <p>Prio</p>
-                                <div>
-                                    <div>Urgent <img src="" alt=""></div>
-                                    <div>Medium <img src="" alt=""></div>
-                                    <div>Low <img src="" alt=""></div>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="displayFlex">
-                                    <p>Category</p>
-                                    <p class="red">*</p>
-                                </div>
-                                <input type="text">
-                            </div>
-                            <div>
-                                <p>Subtasks</p>
-                                <input type="text">
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="displayFlex">
-                            <p class="red">*</p>
-                            <p>This field is required</p>
-                        </div>
-                        <div>
-                            <Div>Clear</Div>
-                            <Div>Create Task</Div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </nav>
-    </section>
+       
+
+          
 </body>
 
 </html>

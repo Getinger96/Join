@@ -7,16 +7,19 @@
     justify-content: space-between;
     align-items: center;
     flex-direction: column;
+    position: absolute;
 }
 
 
 .headblock {
-    width: auto;
+    width: 100vw;
     height: 96px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: white;
+    padding: 20px 40px 20px 348px;
+    box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.1);
 }
 
 .logo {
