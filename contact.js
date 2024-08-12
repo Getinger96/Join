@@ -18,3 +18,20 @@ async function fetchContacts() {
         console.error("Fehler beim Abrufen der Kontakte:", error);
     }
 }
+
+function displayContacts(contacts) {
+    if (!contacts) {
+        console.log("Keine Kontakte vorhanden.");
+        return;
+    }
+
+    for (const [id, contact] of Object.entries(contacts)) {
+        console.log(`Kontakt ID: ${id}, Details:`, contact);
+        const contactElement = document.createElement('div');
+        contactElement.textContent = `Name: ${contact.name}, Email: ${contact.email}`;
+        document.body.appendChild(contactElement);
+    }
+}
+
+
+fetchContacts();

@@ -6,100 +6,70 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Board</title>
 
-    <link rel="stylesheet" href="./style.css">
-    <link rel="stylesheet" href="./assets/css/board.css">
-    <link rel="stylesheet" href="./assets/css/add_task.css">
+    <link rel="stylesheet" href="Styles/board.css">
+    <link rel="stylesheet" href="Styles/">
+    <link rel="stylesheet" href="Styles/Desktop_template.css">
     <script src="./assets/js/board.js"></script>
     <script src="./assets/js/add_task.js"></script>
 </head>
 
 <body onload="updateHTML()">
+    <header>
+        <div w3-include-html="assets/Templates/desktop_template.html"></div>
+    </header>
     <section>
-        <nav class="board displayFlex backgrount-color">
-            <nav>
-                <div class="sideblock">
-                    <a class="logo" href="./index.html"><img src="./assets/img/Capa 2.png" alt="logo"></a>
-                    <ul class="sidelink">
-                        <li><a class="navLink" href="#"><img class="icon" src="./assets/img/Icons.png">Summary</a>
-                        </li>
-                        <li><a class="navLink" href="#"><img class="icon" src="./assets/img/Icons (1).png">Add
-                                Task</a>
-                        </li>
-                        <li><a class="navLink" href="#"><img class="icon" src="./assets/img/Icons (3).png">Board</a>
-                        </li>
-                        <li><a class="navLink" href="#"><img class="icon" src="./assets/img/Icons (2).png">Contacts</a>
-                        </li>
-                    </ul>
-                    <ul>
-                        <li><a class="navLink" href="#">Privacy Policy</a></li>
-                        <li><a class="navLink" href="#">Legal notice</a></li>
-                    </ul>
-                </div>
-            </nav>
-
-            <nav class="width100">
-                <div class="headblock">
-                    <div class="title">
-                        <p class="kanbanBoardTitle">Kanban Projekt Management Tool</p>
+        <div class="divBoard">
+            <div class="boardtitle spaceBetween addTaskBoard">
+                <h1>Board</h1>
+                <div class="displayFlex">
+                    <div class="displayFlex searchContainer addTask">
+                        <input class="search" type="text">
+                        <div class="separator"></div>
+                        <img src="./assets/img/Frame 122.png">
                     </div>
-                    <div class="headUserContainer">
-                        <img src="./assets/img/help.png">
-                        <p class="logInUser">LT</p>
+                    <div onclick="addTask()" class="displayFlex addTask buttonContainer">
+                        <button>Add task</button>
+                        <img src="./assets/img/add.png">
                     </div>
                 </div>
+            </div>
 
-                <div class="divBoard">
-                    <div class="boardtitle spaceBetween addTaskBoard">
-                        <h1>Board</h1>
-                        <div class="displayFlex">
-                            <div class="displayFlex searchContainer addTask">
-                                <input class="search" type="text">
-                                <div class="separator"></div>
-                                <img src="./assets/img/Frame 122.png">
-                            </div>
-                            <div onclick="addTask()" class="displayFlex addTask buttonContainer">
-                                <button>Add task</button>
-                                <img src="./assets/img/add.png">
-                            </div>
-                        </div>
+            <div class="spaceBetween boardtitle">
+                <div class="paddingRight">
+                    <div class="statusButton">
+                        <p>To do</p>
+                        <img onclick="addTask()" src="./assets/img/plus button.png">
                     </div>
-
-                    <div class="spaceBetween boardtitle">
-                        <div class="paddingRight">
-                            <div class="statusButton">
-                                <p>To do</p>
-                                <img onclick="addTask()" src="./assets/img/plus button.png">
-                            </div>
-                            <div class="drag-area" id="open" ondrop="moveTo('open')" ondragover="allowDrop(event)"
-                                ondragleave="removeHighlight('open')"></div>
-                        </div>
-                        <div class="paddingRight">
-                            <div class="statusButton">
-                                <p>In progress</p>
-                                <img onclick="addTask()" src="./assets/img/plus button.png">
-                            </div>
-                            <div class="drag-area" id="progress" ondrop="moveTo('progress')"
-                                ondragover="allowDrop(event)" ondragleave="removeHighlight('progress')"></div>
-                        </div>
-                        <div class="paddingRight">
-                            <div class="statusButton">
-                                <p>Await feedback</p>
-                                <img onclick="addTask()" src="./assets/img/plus button.png">
-                            </div>
-                            <div class="drag-area" id="awaitFeedback" ondrop="moveTo('awaitFeedback')"
-                                ondragover="allowDrop(event)" ondragleave="removeHighlight('awaitFeedback')"></div>
-                        </div>
-                        <div class="paddingRight">
-                            <div class="statusButton">
-                                <p>Done</p>
-                                <img onclick="addTask()" src="./assets/img/plus button.png">
-                            </div>
-                            <div class="drag-area" id="closed" ondrop="moveTo('closed')" ondragover="allowDrop(event)"
-                                ondragleave="removeHighlight('closed')"></div>
-                        </div>
-                    </div>
+                    <div class="drag-area" id="open" ondrop="moveTo('open')" ondragover="allowDrop(event)"
+                        ondragleave="removeHighlight('open')"></div>
                 </div>
-            </nav>
+                <div class="paddingRight">
+                    <div class="statusButton">
+                        <p>In progress</p>
+                        <img onclick="addTask()" src="./assets/img/plus button.png">
+                    </div>
+                    <div class="drag-area" id="progress" ondrop="moveTo('progress')" ondragover="allowDrop(event)"
+                        ondragleave="removeHighlight('progress')"></div>
+                </div>
+                <div class="paddingRight">
+                    <div class="statusButton">
+                        <p>Await feedback</p>
+                        <img onclick="addTask()" src="./assets/img/plus button.png">
+                    </div>
+                    <div class="drag-area" id="awaitFeedback" ondrop="moveTo('awaitFeedback')"
+                        ondragover="allowDrop(event)" ondragleave="removeHighlight('awaitFeedback')"></div>
+                </div>
+                <div class="paddingRight">
+                    <div class="statusButton">
+                        <p>Done</p>
+                        <img onclick="addTask()" src="./assets/img/plus button.png">
+                    </div>
+                    <div class="drag-area" id="closed" ondrop="moveTo('closed')" ondragover="allowDrop(event)"
+                        ondragleave="removeHighlight('closed')"></div>
+                </div>
+            </div>
+        </div>
+        </nav>
         </nav>
 
         <section id="boardAddTask" class="boardAddTask">
