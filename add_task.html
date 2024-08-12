@@ -18,25 +18,59 @@
     <header>
         <div w3-include-html="assets/Templates/desktop_template.html"></div>
     </header>
-    <h1>Add Task</h1>
 
-    <div class="input_Task_Container_left">
-        <div class="Title_Container">
-            <span class="Title_Header">Title</span>
-            <input class="input_Title" required type="text">
+    <h1>Add Task</h1>
+    <div class="addTask_Container">
+        <div class="input_Task_Container_left">
+            <div class="Title_Container">
+                <span class="Title_Header">Title<span class="red">*</span></span>
+                <textarea placeholder="Enter a Title" class="input_Title" required type="text"></textarea>
+            </div>
+            <div class="Description_Container">
+                <span class="Description_Header">Description</span>
+                <textarea class="input_Description" placeholder="Enter a Description" type="text"></textarea>
+            </div>
+            <div class="AssignedTO_Container">
+                <span class="Assign_Header">Assigned to</span>
+                <select class="select_container" name="" id="">
+                    <option class="selector_Txt" value="" disabled selected>Select contact to assign</option>
+                    <option value=""></option>
+                </select>
+            </div>
         </div>
-        <div>
-            <span>Description</span>
-            <input type="text">
+
+        <div class="dividing_Line"></div>
+
+        <div class="Task_Container_right">
+
+            <div class="date_Container">
+                <span class="Date_header">Due date <span class="red">*</span></span>
+                <input class="input_Date" type="date">
+            </div>
+
+            <div class="Prio_Container">
+                <span class="prio_Header">Prio</span>
+                <div class="Prio_btn_Container">
+                    <button class="Prio_Btn">Urgent <img src="assets/IMG/Prio_Urgent.svg" alt=""></button>
+                    <button class="Prio_Btn">Medium <img src="assets/IMG/Prio_Medium.svg" alt=""></button>
+                    <button class="Prio_Btn">Low <img src="assets/IMG/Prio_LOw.svg" alt=""></button>
+                </div>
+
+            </div>
+
+            <div class="cataegory_Container">
+                <span class="category_Header">Category <span class="red">*</span></span>
+                <select class="select_Category" name="" id="">
+                    <option class="selector_Txt" value="" disabled selected>Select task category</option>
+                    <option value=""></option>
+                </select>
+            </div>
         </div>
-        <div>
-            <span>Assigned to</span>
-            <select name="" id="">
-                <option value=""></option>
-            </select>
-        </div>
+
+
     </div>
-    
+
+
 </body>
 
 </html>
