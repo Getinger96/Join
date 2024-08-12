@@ -4,19 +4,119 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact</title>
-    
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="./assets/css/add_task.css">
+    <link rel="icon" type="image/x-icon" href="./assets/img/Capa 2.png" >
+    <link rel="stylesheet" href="contact.css">
     <link rel="stylesheet" href="Styles/Desktop_template.css">
+    <link rel="stylesheet" href="css/add_task.css">
     <script src="./assets/js/add_task.js"></script>
     <script src="script.js" defer></script>
-    <script src="contact.js" defer></script>
+    <script src="contact.jsr" defer></script>
 </head>
 
 
-<body onload="init()">
+<body onload="init(); fetchContacts();">
     <header>
         <div w3-include-html="assets/Templates/desktop_template.html"></div>
+
     </header>
+<section class="middle-Section">
+
+    <section class="contactlist"> 
+        <div class="newcontactbutton">
+        <button> Add new contact
+        <img src="assets/IMG/person_add.png" alt=""> </button>
+
+        </div>
+        <div class="listing-contacted">
+        <div class="contacts-alphabet">
+       <span> A</span>
+        </div> 
+       <hr class="contactlist-hr">
+
+
+        <div class="single-contact-box">
+            <div class="contact-icon">
+                <span> BS</span>
+            </div>
+            <div class="contact-content">
+                <span class="contactname"> Bart Simpson</span>
+                <a class="contactmail" href="mailto:elbarto@springfield.com"> elbarto@springfield.com </a>
+            </div>
+        </div>
+
+
+        <div class="listing-contacted">
+            <div class="contacts-alphabet">
+           <span> A</span>
+            </div> 
+           <hr class="contactlist-hr">
+    
+    
+            <div class="single-contact-box">
+                <div class="contact-icon">
+                    <span> BS</span>
+                </div>
+                <div class="contact-content">
+                    <span class="contactname"> Bart Simpson</span>
+                    <a class="contactmail" href="mailto:elbarto@springfield.com"> elbarto@springfield.com </a>
+                </div>
+            </div>
+
+
+ 
+    </section>
+
+    <div>
+
+    <section class="contactview">
+        <div class="headline-contacts">
+        <div class="contactshead">   
+        <h1 class="headlinecontactsstyle"> Contacts</h1>
+        <hr class="headline-hr">
+        </div>
+        <h2>Better with a team </h2>
+        </div>    
+
+    </section>
+
+
+    <div class="largcontactbox">
+        <div class="largsingle-contact-box">
+            <div class="largcontact-icon">
+                <span> BS</span>
+            </div>
+            <div class="largcontact-content">
+                <span class="largcontactname"> Bart Simpson</span>
+                <div class="editanddelete">
+                <img class="editicon" src="assets/IMG/edit.png" alt="">
+                <span class="edit"> Edit</span>
+
+                <div class="deletecontent">
+                <img class="deleteicon" src="assets/IMG/delete.png" alt="">
+                <span class="delete"> delete </span>
+
+                </div>
+                </div>
+            </div>    
+                  
+    </div>          
+            <div class="contactinfo">
+            <span class="contactinfoname"> Contact Information</span>
+      
+
+            <div class="contactmailsection">
+                <span class="Emailname"> Email </span>
+                <a class="contactmailadress" href="mailto:elbarto@springfield.com"> elbarto@springfield.com </a>
+            </div>
+
+            <div class="contactphonesection">
+                <span class="phonename"> Phone </span>
+                <a class="contactphone" href="84556"> 84556 </a>
+            </div>
+
+            </div> 
+</section>
+
+
 </body>
 </html>
