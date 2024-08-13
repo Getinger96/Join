@@ -3,8 +3,18 @@ body {
     background-color: #F6F7F8;
     font-family: 'Inter';
     font-weight: 400;
+    width: 1440px;
+    height: 1024px;
+   
 
 
+}
+
+.add_task_content {
+    display: flex;
+    flex-direction: column;
+    margin-left:328px ;
+   
 }
 
 
@@ -12,7 +22,6 @@ h1 {
     width: 278px;
     height: 73px;
     margin-top: 206px;
-    margin-left: 328px;
     gap: 1px;
     font-size: 61px;
     line-height: 73.2px;
@@ -20,6 +29,10 @@ h1 {
 
 .addTask_Container {
     display: flex;
+
+   
+    
+    
 }
 
 
@@ -27,7 +40,6 @@ h1 {
 
     width: 440px;
     height: 376px;
-    margin-left: 328px;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -278,9 +290,66 @@ box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.1);
     box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.1);
     display: flex;
     justify-content: space-between;
-    padding: 12px 16px 12px 16px;
     font-family: 'Inter';
     font-weight: 400;
     font-size: 20px;
     line-height: 24px;
+}
+
+
+.Subtasks_Container {
+    width: 440px;
+    height: 80px;
+    display: flex;
+    gap: 8px;
+    flex-direction: column;
+    margin-top: 24px;
+
+}
+
+.Subtasks_Header{
+    width: 88px;
+    height: 24px;
+    font-family: 'Inter';
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+}
+
+.Subtask_Inputfield_Container {
+    width: 440px;
+    height: 48px;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    background-color: #FFFFFF;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    
+}
+
+.Subtasks_Inputfield {
+    border: none;
+    flex: 1;
+    height: 24px;
+    font-family: 'Inter';
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+
+    
+}
+
+.Subtasks_Btn {
+    border: none;
+    background-color: #FFFFFF;
+    width: 24px;
+    height: 24px;
+    padding-right: 25px;
+    
+}
+
+input:focus {
+    outline: none;
 }
