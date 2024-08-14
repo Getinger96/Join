@@ -194,10 +194,8 @@ function updateHTML() {
 // Überprüfe, ob eine Spalte leer ist, und zeige die Nachricht entsprechend an
 function emptyTasks(columnId) {
     const column = document.getElementById(columnId);
-    console.log('Column:', column);
     const tasks = column.querySelectorAll('.todo');
     const noTasks = column.parentElement.querySelector('.noTasks');
-    console.log('noTasks:', noTasks);
 
     if (noTasks) {
         if (tasks.length === 0) {
