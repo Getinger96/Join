@@ -94,3 +94,21 @@ Button {
     display: flex;
     justify-content: space-between;
 }
+
+/*Add Task*/
+.addTaskContainer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.noTasks {
+    grid-column: span 2;
+    text-align: center;
+    background-color: #dadada;
+    color: #999;
+    border: 2px dotted #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    display: block;
+    width: 250px;
+}
