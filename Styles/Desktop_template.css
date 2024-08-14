@@ -1,3 +1,4 @@
+
 .sideblock {
     width: 232px;
     background-color: #2A3647;
@@ -20,6 +21,19 @@
     background-color: white;
     padding: 20px 40px 20px 348px;
     box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+    width:319px ;
+    height: 24px;
+}
+
+.headUserContainer {
+    width: 104px;
+    height: 56px;
+    display: flex;
+    gap: 16px;
+    align-items: center;
 }
 
 .logo {
