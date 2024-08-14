@@ -6,19 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Board</title>
 
-    <link rel="stylesheet" href="./style.css">
-    <link rel="stylesheet" href="./assets/css/board.css">
+    <link rel="stylesheet" href="./Styles/board.css">
     <link rel="stylesheet" href="./assets/css/add_task.css">
     <link rel="stylesheet" href="./Styles/Desktop_template.css">
+    <link rel="stylesheet" href="./Styles/fontStyles.css">
     <script src="./assets/js/board.js"></script>
     <script src="./assets/js/add_task.js"></script>
-    <script src="./script.js"></script>
+    <script src="./assets/js/script.js"></script>
 </head>
 
 <body onload="updateHTML()">
-    <header>
-        <div w3-include-html="assets/Templates/desktop_template.html"></div>
-    </header>
     <section>
         <nav class="board displayFlex backgrount-color">
             <nav>
@@ -107,6 +104,7 @@
                                 ondragleave="removeHighlight('closed')"></div>
                         </div>
                     </div>
+                </div>
                 </div>
             </nav>
         </nav>
