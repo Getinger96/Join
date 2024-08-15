@@ -15,170 +15,144 @@
     <script src="./assets/js/script.js"></script>
 </head>
 
-<body onload="updateHTML()">
+<body onload="init()">
+    <header>
+        <div w3-include-html="assets/Templates/desktop_template.html"></div>
+    </header>
     <section>
         <nav class="board displayFlex backgrount-color">
             <nav>
-                <div class="sideblock">
-                    <a class="logo" href="./index.html"><img src="./assets/img/Capa 2.png" alt="logo"></a>
-                    <ul class="sidelink">
-                        <li><a class="navLink" href="#"><img class="icon" src="./assets/img/Icons.png">Summary</a>
-                        </li>
-                        <li><a class="navLink" href="#"><img class="icon" src="./assets/img/Icons (1).png">Add
-                                Task</a>
-                        </li>
-                        <li><a class="navLink" href="#"><img class="icon" src="./assets/img/Icons (3).png">Board</a>
-                        </li>
-                        <li><a class="navLink" href="#"><img class="icon" src="./assets/img/Icons (2).png">Contacts</a>
-                        </li>
-                    </ul>
-                    <ul>
-                        <li><a class="navLink" href="#">Privacy Policy</a></li>
-                        <li><a class="navLink" href="#">Legal notice</a></li>
-                    </ul>
-                </div>
+                <nav class="width100">
+                    <div class="divBoard">
+                        <div class="boardtitle spaceBetween addTaskBoard">
+                            <h1>Board</h1>
+                            <div class="displayFlex">
+                                <div class="displayFlex searchContainer addTask">
+                                    <input class="search" type="text">
+                                    <div class="separator"></div>
+                                    <img src="./assets/img/Frame 122.png">
+                                </div>
+                                <div onclick="addTask()" class="displayFlex addTask buttonContainer">
+                                    <button>Add task</button>
+                                    <img src="./assets/img/add.png">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="spaceBetween boardtitle">
+                            <div class="paddingRight">
+                                <div class="statusButton">
+                                    <p>To do</p>
+                                    <img onclick="addTask()" src="./assets/img/plus button.png">
+                                </div>
+                                <div class="noTasks" style="display: none;">No tasks To do</div>
+                                <div class="drag-area" id="open" ondrop="moveTo('open')" ondragover="allowDrop(event)"
+                                    ondragleave="removeHighlight('open')"></div>
+                            </div>
+                            <div class="paddingRight">
+                                <div class="statusButton">
+                                    <p>In progress</p>
+                                    <img onclick="addTask()" src="./assets/img/plus button.png">
+                                </div>
+                                <div class="noTasks" style="display: none;">No tasks in progress</div>
+                                <div class="drag-area" id="progress" ondrop="moveTo('progress')"
+                                    ondragover="allowDrop(event)" ondragleave="removeHighlight('progress')"></div>
+                            </div>
+                            <div class="paddingRight">
+                                <div class="statusButton">
+                                    <p>Await feedback</p>
+                                    <img onclick="addTask()" src="./assets/img/plus button.png">
+                                </div>
+                                <div class="noTasks" style="display: none;">No tasks Await feedback</div>
+                                <div class="drag-area" id="awaitFeedback" ondrop="moveTo('awaitFeedback')"
+                                    ondragover="allowDrop(event)" ondragleave="removeHighlight('awaitFeedback')"></div>
+                            </div>
+                            <div class="paddingRight">
+                                <div class="statusButton">
+                                    <p>Done</p>
+                                    <img onclick="addTask()" src="./assets/img/plus button.png">
+                                </div>
+                                <div class="noTasks" style="display: none;">No tasks Done</div>
+                                <div class="drag-area" id="closed" ondrop="moveTo('closed')"
+                                    ondragover="allowDrop(event)" ondragleave="removeHighlight('closed')"></div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </nav>
             </nav>
 
-            <nav class="width100">
-                <div class="headblock">
-                    <div class="title">
-                        <p class="kanbanBoardTitle">Kanban Projekt Management Tool</p>
-                    </div>
-                    <div class="headUserContainer">
-                        <img src="./assets/img/help.png">
-                        <p class="logInUser">LT</p>
-                    </div>
-                </div>
-
-                <div class="divBoard">
-                    <div class="boardtitle spaceBetween addTaskBoard">
-                        <h1>Board</h1>
-                        <div class="displayFlex">
-                            <div class="displayFlex searchContainer addTask">
-                                <input class="search" type="text">
-                                <div class="separator"></div>
-                                <img src="./assets/img/Frame 122.png">
-                            </div>
-                            <div onclick="addTask()" class="displayFlex addTask buttonContainer">
-                                <button>Add task</button>
-                                <img src="./assets/img/add.png">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="spaceBetween boardtitle">
-                        <div class="paddingRight">
-                            <div class="statusButton">
-                                <p>To do</p>
-                                <img onclick="addTask()" src="./assets/img/plus button.png">
-                            </div>
-                            <div class="noTasks" style="display: none;">No tasks To do</div>
-                            <div class="drag-area" id="open" ondrop="moveTo('open')" ondragover="allowDrop(event)"
-                                ondragleave="removeHighlight('open')"></div>
-                        </div>
-                        <div class="paddingRight">
-                            <div class="statusButton">
-                                <p>In progress</p>
-                                <img onclick="addTask()" src="./assets/img/plus button.png">
-                            </div>
-                            <div class="noTasks" style="display: none;">No tasks in progress</div>
-                            <div class="drag-area" id="progress" ondrop="moveTo('progress')"
-                                ondragover="allowDrop(event)" ondragleave="removeHighlight('progress')"></div>
-                        </div>
-                        <div class="paddingRight">
-                            <div class="statusButton">
-                                <p>Await feedback</p>
-                                <img onclick="addTask()" src="./assets/img/plus button.png">
-                            </div>
-                            <div class="noTasks" style="display: none;">No tasks Await feedback</div>
-                            <div class="drag-area" id="awaitFeedback" ondrop="moveTo('awaitFeedback')"
-                                ondragover="allowDrop(event)" ondragleave="removeHighlight('awaitFeedback')"></div>
-                        </div>
-                        <div class="paddingRight">
-                            <div class="statusButton">
-                                <p>Done</p>
-                                <img onclick="addTask()" src="./assets/img/plus button.png">
-                            </div>
-                            <div class="noTasks" style="display: none;">No tasks Done</div>
-                            <div class="drag-area" id="closed" ondrop="moveTo('closed')" ondragover="allowDrop(event)"
-                                ondragleave="removeHighlight('closed')"></div>
-                        </div>
-                    </div>
-                </div>
-                </div>
-            </nav>
-        </nav>
-
-        <section id="boardAddTask" class="boardAddTask">
-            <div class="widthBoard">
-                <div class="boardtitle addTaskBoard">
-                    <h1>Add Task</h1>
-                    <div class="addTaskContainer">
-                        <div>
+            <section id="boardAddTask" class="boardAddTask">
+                <div class="widthBoard">
+                    <div class="boardtitle addTaskBoard">
+                        <h1>Add Task</h1>
+                        <div class="addTaskContainer">
                             <div>
-                                <div class="displayFlex">
-                                    <p>Title</p>
-                                    <p class="red">*</p>
-                                </div>
-                                <input type="text" placeholder="enter a title" required>
-                            </div>
-                            <div class="flexdirection">
-                                <label for="description">Description</label>
-                                <textarea id="description" type="text" placeholder="Enter a Description"></textarea>
-                            </div>
-                            <div class="flexdirection">
-                                <label for="assigned">Assigned to</label>
-                                <select name="" id="assigned" disabled="disabled">Select contacts to assign
-                                    <option value=""></option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="separatorTask"></div>
-                        <div>
-                            <div class="flexdirection">
-                                <div class="displayFlex">
-                                    <p>Due date</p>
-                                    <p class="red">*</p>
-                                </div>
-                                <input type="date" required>
-                            </div>
-                            <div>
-                                <p>Prio</p>
                                 <div>
-                                    <div onclick="urgent()">Urgent <img src="./assets/img/Prio alta.png"></div>
-                                    <div onclick="medium()">Medium <img src="./assets/img/Prio media.png"></div>
-                                    <div onclick="low()">Low <img src="./assets/img/Prio baja.png"></div>
+                                    <div class="displayFlex">
+                                        <p>Title</p>
+                                        <p class="red">*</p>
+                                    </div>
+                                    <input type="text" placeholder="enter a title" required>
+                                </div>
+                                <div class="flexdirection">
+                                    <label for="description">Description</label>
+                                    <textarea id="description" type="text" placeholder="Enter a Description"></textarea>
+                                </div>
+                                <div class="flexdirection">
+                                    <label for="assigned">Assigned to</label>
+                                    <select name="" id="assigned" disabled="disabled">Select contacts to assign
+                                        <option value=""></option>
+                                    </select>
                                 </div>
                             </div>
-                            <div class="flexdirection">
-                                <div class="displayFlex alaignItems">
-                                    <label id="category">Category</label>
-                                    <p class="red">*</p>
+                            <div class="separatorTask"></div>
+                            <div>
+                                <div class="flexdirection">
+                                    <div class="displayFlex">
+                                        <p>Due date</p>
+                                        <p class="red">*</p>
+                                    </div>
+                                    <input type="date" required>
                                 </div>
-                                <select name="text" id="category" disabled="disabled">Select task category
-                                    <option value="technicalTask">Technical Task</option>
-                                    <option value="userStory">User Story</option>
-                                </select>
+                                <div>
+                                    <p>Prio</p>
+                                    <div>
+                                        <div onclick="urgent()">Urgent <img src="./assets/img/Prio alta.png"></div>
+                                        <div onclick="medium()">Medium <img src="./assets/img/Prio media.png"></div>
+                                        <div onclick="low()">Low <img src="./assets/img/Prio baja.png"></div>
+                                    </div>
+                                </div>
+                                <div class="flexdirection">
+                                    <div class="displayFlex alaignItems">
+                                        <label id="category">Category</label>
+                                        <p class="red">*</p>
+                                    </div>
+                                    <select name="text" id="category" disabled="disabled">Select task category
+                                        <option value="technicalTask">Technical Task</option>
+                                        <option value="userStory">User Story</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <p>Subtasks</p>
+                                    <input type="text">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bottomInfo">
+                            <div class="displayFlex">
+                                <p class="red">*</p>
+                                <p>This field is required</p>
                             </div>
                             <div>
-                                <p>Subtasks</p>
-                                <input type="text">
+                                <Div>Clear</Div>
+                                <Div>Create Task</Div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="bottomInfo">
-                        <div class="displayFlex">
-                            <p class="red">*</p>
-                            <p>This field is required</p>
-                        </div>
-                        <div>
-                            <Div>Clear</Div>
-                            <Div>Create Task</Div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </nav>
     </section>
 </body>
 
