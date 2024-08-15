@@ -168,6 +168,11 @@ gap: 10px;
         gap: 5px;
     }
 
+    .deletecontent:hover  {
+        color: #1009ef;
+        filter: invert(53%) sepia(96%) saturate(406%) hue-rotate(155deg) brightness(92%) contrast(92%);
+    }
+
     .edit {
     margin-right: 30px;
     cursor: pointer;
@@ -244,3 +249,94 @@ padding-top: 50px;
     font-size: 18px;
     font-weight: bold;   
     }
+
+    .editcontent {
+    gap: 5px;
+    display: flex;
+    align-items: center;
+}
+
+
+    .editcontent:hover {
+        color: #1009ef;
+        filter: invert(53%) sepia(96%) saturate(406%) hue-rotate(155deg) brightness(92%) contrast(92%);
+    }
+
+
+
+   .newContact {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    background: rgba(0, 0, 0, 0.8);
+    
+   }     
+
+
+
+.contactCars-overview {
+   border: outset 8px black;
+   margin: 15px 40px;
+   box-shadow: 1px 0px 16px 0px white;
+   border-width: 8px;
+   display: flex;
+   height: 592px;
+   width: 1220px;
+   position: fixed;
+   left: 200px;
+   right: 0;
+   bottom: 0;
+   top: 200px;
+}
+
+
+.newCard-logo {
+width: 56px;
+height: 67px;
+
+}
+
+.leftside {
+display: flex;
+color: white;
+background-color: rgb(42, 54, 71);
+width: 467px;
+flex-direction: column;
+justify-content: center;
+align-items: flex-start;
+padding: 0px 30px 50px 40px;
+
+}
+
+
+.addcontactheadline {
+    font-weight: 700;
+    font-size: 61px;
+    margin-block-start: 20px;
+    margin-block-end: 30px;
+}
+
+
+.addcontactsecondline {
+    font-weight: bolder;
+    font-size: 27px;
+}
+
+.hrnewcontact {
+    margin-block-start: 20px;
+    border: 2px solid #00cbff2b;
+    width: 100px;
+    margin: 0;
+    margin-top: 15px;
+}
+
+.hrdiv {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
