@@ -280,9 +280,7 @@ padding-top: 50px;
 
 
 .contactCars-overview {
-   border: outset 8px black;
    margin: 15px 40px;
-   box-shadow: 1px 0px 16px 0px white;
    border-width: 8px;
    display: flex;
    height: 592px;
@@ -310,7 +308,22 @@ flex-direction: column;
 justify-content: center;
 align-items: flex-start;
 padding: 0px 30px 50px 40px;
+border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
 
+}
+
+.right-side {
+background-color: white;
+width: 100%;
+border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.contactlogo {
+    display:flex;
+    align-items: center;
+    justify-content: center;
 }
 
 
