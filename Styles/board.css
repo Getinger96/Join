@@ -1,3 +1,9 @@
+body {
+    margin: 0;
+    font-family: 'Inter';
+    background-color: rgb(246, 247, 248);
+}
+
 .drag-area {
     height: 688px;
     width: 252px;
@@ -95,20 +101,106 @@ Button {
     justify-content: space-between;
 }
 
-
-.separatorTask {
-    width: 2px;
-    height: 450px;
-    background-color: #e4dedc;
+/*Header*/
+.kanbanBoardTitle {
+    font-size: 18px;
 }
 
-.alaignItems {
-    align-items: center;
+.sideblock {
+    height: 100vh;
+    width: 232px;
+    background-color: rgb(42, 54, 71);
 }
 
-.flexdirection {
+.headblock {
+    width: auto;
+    height: 96px;
     display: flex;
-    flex-direction: column;
-    margin-top: 16px;
-    margin-bottom: 8px;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+}
+
+.logo {
+    padding-top: 100px;
+    padding-bottom: 100px;
+    display: flex;
+    justify-content: center;
+}
+
+nav ul {
+    list-style: none;
+}
+
+.navLink {
+    text-decoration: none;
+    color: #CDCDCD;
+    display: flex;
+    align-items: center;
+    padding: 12px;
+}
+
+.sidelink {
+    padding-bottom: 90%;
+}
+
+.icon {
+    padding-right: 8px;
+}
+
+.headUserContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 50px;
+}
+
+.title {
+    margin-left: 100px;
+}
+
+.logInUser {
+    padding: 10px;
+    border-radius: 100%;
+    border: 3px solid #2A3647;
+    margin-left: 8px;
+}
+
+.width100 {
+    width: 100%;
+}
+
+.red {
+    color: red;
+}
+
+.displayFlex {
+    display: flex;
+}
+
+h1 {
+    font-size: 48px;
+}
+
+/*Add Task*/
+.divBoard {
+    margin-left: 300px;
+    margin-right: 50px;
+}
+
+.addTaskContainer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.noTasks {
+    grid-column: span 2;
+    text-align: center;
+    background-color: #dadada;
+    color: #999;
+    border: 2px dotted #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    display: block;
+    width: 250px;
 }
