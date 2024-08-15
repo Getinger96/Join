@@ -330,8 +330,9 @@ padding: 0px 30px 50px 40px;
 .hrnewcontact {
     margin-block-start: 20px;
     border: 2px solid #00cbff2b;
-    border-block-width: initial;
-
+    width: 100px;
+    margin: 0;
+    margin-top: 15px;
 }
 
 .hrdiv {
