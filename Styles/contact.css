@@ -90,6 +90,12 @@ button {
     align-items: center;
 }
 
+
+.single-contact-box:hover {
+    background-color: #2a3647;
+    border-radius: 10px;
+}
+
 .contact-icon {
 border-radius: 100%;
 padding: 15px;

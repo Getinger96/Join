@@ -18,9 +18,10 @@
     <header>
         <div w3-include-html="assets/Templates/desktop_template.html"></div>
     </header>
-
+<div class="add_task_content">
     <h1>Add Task</h1>
     <div class="addTask_Container">
+        
         <div class="input_Task_Container_left">
             <div class="Title_Container">
                 <span class="Title_Header">Title<span class="red">*</span></span>
@@ -65,11 +66,30 @@
                     <option value=""></option>
                 </select>
             </div>
+
+            <div class="Subtasks_Container">
+                <span class="Subtasks_Header">Subtasks</span>
+                <div class="Subtask_Inputfield_Container">
+                    <input placeholder="Add new Subtask" class="Subtasks_Inputfield" type="text">
+                    
+                    <button class="Subtasks_Btn"><img src="assets/IMG/add_subtask_img.svg" alt=""></button>
+                </div>
+                
+
+            </div>
         </div>
 
 
     </div>
 
+
+</div>
+<div class="Btn_Container">
+    <button class="clear_Btn">Clear <img class="clear-icon" src="assets/IMG/x_icon_clear.svg" alt=""></button>
+    <button class="Create_Btn">Create Task <img class="create_icon" src="assets/IMG/clear_Img.svg" alt=""></button>
+  </div>
+<div class="required_info_Container"><span class="red">*</span><span>This field is required</span></div>
+  
 
 </body>
 

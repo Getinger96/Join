@@ -7,7 +7,6 @@
     <link rel="icon" type="image/x-icon" href="./assets/img/Capa 2.png" >
     <link rel="stylesheet" href="contact.css">
     <link rel="stylesheet" href="Styles/Desktop_template.css">
-    <link rel="stylesheet" href="css/add_task.css">
     <script src="./assets/js/add_task.js"></script>
     <script src="script.js"></script>
     <script src="contact.js"></script>
@@ -27,42 +26,19 @@
         <img src="assets/IMG/person_add.png" alt=""> </button>
 
         </div>
-        <div class="listing-contacted">
-        <div class="contacts-alphabet">
-       <span> A</span>
-        </div> 
-       <hr class="contactlist-hr">
-
-
-        <div class="single-contact-box">
-            <div class="contact-icon">
-                <span> BS</span>
-            </div>
-            <div class="contact-content">
-                <span class="contactname"> Bart Simpson</span>
-                <a class="contactmail" href="mailto:elbarto@springfield.com"> elbarto@springfield.com </a>
-            </div>
-        </div>
-
-
-        <div class="listing-contacted">
+        `<div class="listing-contacted">
             <div class="contacts-alphabet">
-           <span> A</span>
+           <span id="letter"> A</span>
             </div> 
            <hr class="contactlist-hr">
     
     
-            <div class="single-contact-box">
-                <div class="contact-icon">
-                    <span> BS</span>
-                </div>
-                <div class="contact-content">
-                    <span class="contactname"> Bart Simpson</span>
-                    <a class="contactmail" href="mailto:elbarto@springfield.com"> elbarto@springfield.com </a>
-                </div>
-            </div>
+            <div id="contactview"></div>
+          
+    
+     
 
-
+        
  
     </section>
 
@@ -79,42 +55,8 @@
 
     </section>
 
-
-    <div class="largcontactbox">
-        <div class="largsingle-contact-box">
-            <div class="largcontact-icon">
-                <span> BS</span>
-            </div>
-            <div class="largcontact-content">
-                <span class="largcontactname"> Bart Simpson</span>
-                <div class="editanddelete">
-                <img class="editicon" src="assets/IMG/edit.png" alt="">
-                <span class="edit"> Edit</span>
-
-                <div class="deletecontent">
-                <img class="deleteicon" src="assets/IMG/delete.png" alt="">
-                <span class="delete"> delete </span>
-
-                </div>
-                </div>
-            </div>    
-                  
-    </div>          
-            <div class="contactinfo">
-            <span class="contactinfoname"> Contact Information</span>
-      
-
-            <div class="contactmailsection">
-                <span class="Emailname"> Email </span>
-                <a class="contactmailadress" href="mailto:elbarto@springfield.com"> elbarto@springfield.com </a>
-            </div>
-
-            <div class="contactphonesection">
-                <span class="phonename"> Phone </span>
-                <a class="contactphone" href="84556"> 84556 </a>
-            </div>
-
-            </div> 
+    <div id="contactViewBig${id}"></div>
+    
 </section>
 
 

@@ -21,40 +21,11 @@ document.addEventListener("DOMContentLoaded", function () {
     updateHTML();
 });
 
-function includeHTML() {// funktion für die templates
-    var z, i, elmnt, file, xhttp;
-    /* Loop through a collection of all HTML elements: */
-    z = document.getElementsByTagName("*");
-    for (i = 0; i < z.length; i++) {
-        elmnt = z[i];
-        /*search for elements with a certain atrribute:*/
-        file = elmnt.getAttribute("w3-include-html");
-        if (file) {
-            /* Make an HTTP request using the attribute value as the file name: */
-            xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function () {
-                if (this.readyState == 4) {
-                    if (this.status == 200) { elmnt.innerHTML = this.responseText; }
-                    if (this.status == 404) { elmnt.innerHTML = "Page not found."; }
-                    /* Remove the attribute, and call this function once more: */
-                    elmnt.removeAttribute("w3-include-html");
-                    includeHTML();
-                }
-            }
-            xhttp.open("GET", file, true);
-            xhttp.send();
-            /* Exit the function: */
-            return;
-        }
-    }
-};
-
-
 //add Task
 function addTask() {
     let task = document.getElementById('addTask');
     task.innerHTML = '';
-    for(let i = 0; i < todos.length; i++) {
+    for (let i = 0; i < todos.length; i++) {
         let title = todos[i][title];
         let description = description[i];
     }
@@ -90,7 +61,6 @@ function updateHTML() {
         const element = closed[index];
         document.getElementById('closed').innerHTML += generateTodoHTML(element);
     }
-    includeHTML();
 }
 
 //Drag & Drop
@@ -99,7 +69,7 @@ function startDragging(id) {
 }
 
 function generateTodoHTML(element) {
-    return `<div draggable="true" ondragstart="startDragging(${element['id']})" class="todo">${element['title']}</div>`;
+    return `<div draggable="true" ondragstart="startDragging(${element.id})" class="todo">${element.title}</div>`;
 }
 
 function allowDrop(ev) {
@@ -107,8 +77,14 @@ function allowDrop(ev) {
 }
 
 function moveTo(category) {
-    todos.find(todo => todo.id === currentDraggedElement).category = category;
-    updateHTML();
+    // Finde das Task-Element nach seiner ID und aktualisiere die Kategorie
+    const draggedTodoIndex = todos.findIndex(todo => todo.id === currentDraggedElement);
+    if (draggedTodoIndex !== -1) {
+        todos[draggedTodoIndex].category = category;
+        updateHTML(); // Aktualisiere die HTML-Darstellung nach dem Verschieben
+    } else {
+        console.error("Dragged element not found:", currentDraggedElement);
+    }
 }
 
 function highlight(id) {
@@ -117,5 +93,118 @@ function highlight(id) {
 
 function removeHighlight(id) {
     document.getElementById(id).classList.remove('drag-area-highlight');
+}
+
+// Update der HTML-Elemente basierend auf den aktuellen Aufgaben
+function updateHTML() {
+    let openContainer = document.getElementById('open');
+    let progressContainer = document.getElementById('progress');
+    let awaitFeedbackContainer = document.getElementById('awaitFeedback');
+    let closedContainer = document.getElementById('closed');
+
+    openContainer.innerHTML = '';
+    progressContainer.innerHTML = '';
+    awaitFeedbackContainer.innerHTML = '';
+    closedContainer.innerHTML = '';
+
+    todos.forEach(todo => {
+        const taskHTML = generateTodoHTML(todo);
+        if (todo.category === 'open') {
+            openContainer.innerHTML += taskHTML;
+        } else if (todo.category === 'progress') {
+            progressContainer.innerHTML += taskHTML;
+        } else if (todo.category === 'awaitFeedback') {
+            awaitFeedbackContainer.innerHTML += taskHTML;
+        } else if (todo.category === 'closed') {
+            closedContainer.innerHTML += taskHTML;
+        }
+    });
+
+    // Überprüfe nach jedem Update, ob es Aufgaben in den Spalten gibt
+    emptyTasks('open');
+    emptyTasks('progress');
+    emptyTasks('awaitFeedback');
+    emptyTasks('closed');
+}
+
+// Überprüfe, ob eine Spalte leer ist, und zeige die Nachricht entsprechend an
+function startDragging(id) {
+    currentDraggedElement = id;
+}
+
+function generateTodoHTML(element) {
+    return `<div draggable="true" ondragstart="startDragging(${element.id})" class="todo">${element.title}</div>`;
+}
+
+function allowDrop(ev) {
+    ev.preventDefault();
+}
+
+function moveTo(category) {
+    // Finde das Task-Element nach seiner ID und aktualisiere die Kategorie
+    const draggedTodoIndex = todos.findIndex(todo => todo.id === currentDraggedElement);
+    if (draggedTodoIndex !== -1) {
+        todos[draggedTodoIndex].category = category;
+        updateHTML(); // Aktualisiere die HTML-Darstellung nach dem Verschieben
+    } else {
+        console.error("Dragged element not found:", currentDraggedElement);
+    }
+}
+
+function highlight(id) {
+    document.getElementById(id).classList.add('drag-area-highlight');
+}
+
+function removeHighlight(id) {
+    document.getElementById(id).classList.remove('drag-area-highlight');
+}
+
+// Update der HTML-Elemente basierend auf den aktuellen Aufgaben
+function updateHTML() {
+    let openContainer = document.getElementById('open');
+    let progressContainer = document.getElementById('progress');
+    let awaitFeedbackContainer = document.getElementById('awaitFeedback');
+    let closedContainer = document.getElementById('closed');
+
+    openContainer.innerHTML = '';
+    progressContainer.innerHTML = '';
+    awaitFeedbackContainer.innerHTML = '';
+    closedContainer.innerHTML = '';
+
+    todos.forEach(todo => {
+        const taskHTML = generateTodoHTML(todo);
+        if (todo.category === 'open') {
+            openContainer.innerHTML += taskHTML;
+        } else if (todo.category === 'progress') {
+            progressContainer.innerHTML += taskHTML;
+        } else if (todo.category === 'awaitFeedback') {
+            awaitFeedbackContainer.innerHTML += taskHTML;
+        } else if (todo.category === 'closed') {
+            closedContainer.innerHTML += taskHTML;
+        }
+    });
+
+    // Überprüfe nach jedem Update, ob es Aufgaben in den Spalten gibt
+    emptyTasks('open');
+    emptyTasks('progress');
+    emptyTasks('awaitFeedback');
+    emptyTasks('closed');
+}
+
+// Überprüfe, ob eine Spalte leer ist, und zeige die Nachricht entsprechend an
+function emptyTasks(columnId) {
+    const column = document.getElementById(columnId);
+    const tasks = column.querySelectorAll('.todo');
+    const noTasks = column.parentElement.querySelector('.noTasks');
+
+    if (noTasks) {
+        if (tasks.length === 0) {
+            noTasks.style.display = 'block';
+        } else {
+            noTasks.style.display = 'none';
+        }
+    } else {
+        console.error(`Element mit der Klasse 'noTasks' nicht gefunden für Spalte: ${columnId}`);
+    }
 }
 
