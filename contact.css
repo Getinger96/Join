@@ -1,0 +1,240 @@
+
+body {
+    margin: 0;
+}
+
+.headlinecontactsstyle {
+    font-size: 61px;
+
+}
+
+.headline-contacts {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.contactview {
+    display: flex;
+    padding: 10px 40px;
+}
+
+.middle-Section {
+    margin-left: 220px;
+    width: calc(100vw - 232px); 
+    display: flex;
+    align-items: flex-start;
+}
+    .contactshead {
+    display: flex;
+    gap: 30px;
+    }
+
+    .headline-hr {
+    border: 1px solid blue;
+    margin-block-start: 2.8em;
+    margin-block-end: 2.5em;
+
+    }
+button {
+    background-color: #2A3647;
+    color: white;
+    font-size: 18px;
+    padding: 10px 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    border-radius: 12px;
+}
+
+
+.contactlist {
+    padding-top: 30px;
+    width: 456px;
+    box-shadow: 4px 0px 6px 0px #00000014;
+    display: flex;
+    flex-direction: column;
+    padding: 40px 0px 0px 65px
+
+}
+
+.newcontactbutton {
+    display: flex;
+    align-items: center;
+}
+
+.contacts-alphabet {
+    display: flex;
+    padding: 12px 50px;
+    flex-direction: column;
+    font-size: 21px;
+}
+
+ .contactlist-hr {
+    border: 1px solid;
+    width: 350px;
+    margin: 0px;
+    margin-block-start: 6px;
+    color: #cfd3d1;
+    margin-top: 5px;
+}
+
+
+.single-contact-box {
+    padding: 15px 24px;
+    display: flex;
+    gap: 35px;
+    margin-top: 8px;
+    border-radius: 8px;
+    align-items: center;
+}
+
+.contact-icon {
+border-radius: 100%;
+padding: 15px;
+background-color: red;
+color: white;
+font-size: 12px;
+display: flex;
+}
+
+.contactname {
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.contact-content {
+display: flex;
+flex-direction: column;
+gap: 10px;
+
+}
+
+.contactmail {
+    text-decoration: none;
+    color: #0a00fb;
+    font-size: 16px;
+}
+
+
+.largsingle-contact-box {
+    padding: 0px 60px;
+    display: flex;
+    gap: 60px;
+    border-radius: 8px;
+    align-items: center;
+}
+
+
+.largcontact-icon {
+    border-radius: 100%;
+    padding: 30px;
+    background-color: red;
+    color: white;
+    font-size: 47px;
+    display: flex;
+    }
+
+
+
+    .largcontactname {
+        font-size: 47px;
+        font-weight: 600;
+    }
+    
+    .largcontact-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    }
+
+
+    .editanddelete {    
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    }
+
+    .deletecontent  {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .edit {
+    margin-right: 30px;
+    cursor: pointer;
+    }
+
+
+    .editicon {
+        cursor: pointer; 
+        width: 24px;
+        height: 24px;
+    }
+
+    .delete {
+        cursor: pointer; 
+
+    }
+
+
+    .deleteicon {
+        cursor: pointer; 
+        width: 24px;
+        height: 24px;
+
+    }
+
+    .contactinfo {
+    display: flex;
+    flex-direction: column;
+    padding: 40px 30px 30px 60px;
+}
+
+
+.contactmailsection {
+display: flex;
+flex-direction: column;
+gap: 20px;
+padding-top: 50px;
+
+}
+
+.contactinfoname {
+    font-size: 24px;
+}
+
+.contactphonesection {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-top: 30px;
+    
+    }
+
+
+    .contactphone {
+        text-decoration: none;
+        color: black;
+        font-size: 18px;
+    }
+
+
+    .contactmailadress {
+        text-decoration: none;
+        font-size: 18px;
+    }
+
+
+    .Emailname {
+    font-size: 18px;
+    font-weight: bold;
+    }
+
+
+    .phonename {
+    font-size: 18px;
+    font-weight: bold;   
+    }
