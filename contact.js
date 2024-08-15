@@ -80,6 +80,15 @@ function letterSorting() {
             if (group) {
                 group.contacts.push(contact);
             } // Erklärung
+
+
+            //// group sieht so aus:
+
+        //letter: 'A',
+        //contacts: [
+        //{ name: 'Alice', email: 'alice@example.com', forname: 'Alice', lastname: 'Doe', phone: '+1234567890' },
+        //{ name: 'Alicia', email: 'alicia@example.com', forname: 'Alicia', lastname: 'Smith', phone: '+0987654321' }
+    
             // groupedContacts ist ein array mit objekten buchstaben und die kontakte 
             // find suchw nach dem Elemente das die Bedinigung erfüllt
             // group ist ein Einzelnes objekt im array z. letter: m contact[name, email]#
@@ -102,10 +111,9 @@ function letterSorting() {
 
 
 function getContactBig(index,contactsName,contactsEmail,contactPhone,contactLastname) {
-    let showContacts = document.getElementById(`contactViewBig${index}`);
-    console.log(index);
-    
-    showContacts.innerHTML = showContactBig(contactsName,contactsEmail,contactPhone,contactLastname);
+    let showContacts = document.getElementById('contactViewBig');
+    showContacts.innerHTML = 
+    showContacts.innerHTML = showContactBig(contactsName, contactsEmail, contactPhone, contactLastname);
 
 
 } 
@@ -121,10 +129,12 @@ function showContactBig(contactsName,contactsEmail,contactPhone,contactLastname)
             <div class="largcontact-content">
                 <span class="largcontactname"> ${contactsName} </span>
                 <div class="editanddelete">
+                <div onclick="edit()" class="editcontent blur">
                 <img class="editicon" src="assets/IMG/edit.png" alt="">
                 <span class="edit"> Edit</span>
+                </div>
 
-                <div class="deletecontent">
+                <div class="deletecontent" onclick="delete()">
                 <img class="deleteicon" src="assets/IMG/delete.png" alt="">
                 <span class="delete"> delete </span>
 
@@ -148,4 +158,11 @@ function showContactBig(contactsName,contactsEmail,contactPhone,contactLastname)
             </div>
 
             </div> `;
+}
+
+
+function addNewContact() {
+
+
+    
 }
