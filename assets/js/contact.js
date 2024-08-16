@@ -161,8 +161,6 @@ function showContactBig(contactsName,contactsEmail,contactPhone,contactLastname)
 }
 
 
-function addNewContact() {
-
-
-    
+function addNewContact() {   
 }
+
