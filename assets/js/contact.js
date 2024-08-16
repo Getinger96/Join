@@ -11,18 +11,21 @@ async function fetchContacts() {
         }
         let contacts = await response.json();
 
-        // Füge alle Kontakte direkt zum Array hinzu
+      
         contactsArray = Object.values(contacts); // Werte von einem Objekt in ein Array umwandeln
 
-        // Gruppiere die Kontakte nach Anfangsbuchstaben
+       
         letterSorting();
 
-        // Zeige die Kontakte an
+     
         getContacts();
     } catch (error) {
         console.error("Fehler beim Abrufen der Kontakte:", error);
     }
 }
+
+
+
 
 function getContacts() {
     let showContacts = document.getElementById('contactview');
@@ -76,7 +79,7 @@ function letterSorting() {
             console.log(groupedContacts);
         } else {
 
-            let group = groupedContacts.find(group => group.letter === firstLetter);
+            let group = groupedContacts.find(contacts => contacts.letter === firstLetter);
             if (group) {
                 group.contacts.push(contact);
             } // Erklärung
@@ -112,7 +115,6 @@ function letterSorting() {
 
 function getContactBig(index,contactsName,contactsEmail,contactPhone,contactLastname) {
     let showContacts = document.getElementById('contactViewBig');
-    showContacts.innerHTML = 
     showContacts.innerHTML = showContactBig(contactsName, contactsEmail, contactPhone, contactLastname);
 
 
