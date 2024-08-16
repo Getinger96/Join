@@ -352,14 +352,6 @@ button {
     align-items: flex-start;
 }
 
-#name:focus,
-#mail:focus,
-#telephone:focus {
-    border-color: #94D5F0;
-    color: black;
-    outline: none;
-}
-
 input::placeholder {
     color: #d1d1d1;
 }
@@ -402,8 +394,13 @@ input[type="tel"] {
 input[type="text"]:focus,
 input[type="email"]:focus,
 input[type="tel"]:focus {
-    color: black;
-    border-color: #94D5F0;
+    color: black !important;
+}
+
+.input-field:focus-within {
+    color: black !important;
+    border-color: #94D5F0 !important;
+    outline: none !important;
 }
 
 input::placeholder {
@@ -440,7 +437,11 @@ input::placeholder {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.cancel-button:hover .closethewindow-button {
+.cancel-button:hover img.close-button {
+    filter: invert(57%) sepia(70%) saturate(1822%) hue-rotate(165deg) brightness(99%) contrast(101%);
+}
+
+.cancel-button:active img.close-button {
     filter: invert(57%) sepia(70%) saturate(1822%) hue-rotate(165deg) brightness(99%) contrast(101%);
 }
 
@@ -467,12 +468,11 @@ input::placeholder {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-
 .closethewindow-button {
     position: absolute;
     top: 48px;
     right: 80px;
-    width: 32px; /* Größe des Schließen-Buttons */
+    width: 32px;
     height: 32px;
     cursor: pointer;
     transition: transform 0.2s ease-in-out;
@@ -481,3 +481,4 @@ input::placeholder {
 .closethewindow-button:hover {
     transform: scale(1.1); 
 }
+
