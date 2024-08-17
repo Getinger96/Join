@@ -1,5 +1,7 @@
 
+const base_URL = "https://join-37803-default-rtdb.europe-west1.firebasedatabase.app";
 let description = [];
+let subtask = [];
 
 let todos = [{
     'id': 0,
@@ -208,3 +210,30 @@ function emptyTasks(columnId) {
     }
 }
 
+// Add Subtask
+function addSubtask() {
+    let list = document.getElementById('list');
+    list.innerHTML = ''; //Liste wird gelöscht
+    for (let i = 0; i < subtask.length; i++) {
+        let li = document.createElement('li'); //Liste wird wieder hinzugefügt
+        li.innerHTML = subtask[i] + /*html*/` <button class="subtaskList" onclick="deleteItem(' + i +')"><img src="./assets/img/delete.png"></button>`;
+        list.appendChild(li);
+    }
+}
+
+function deleteItem(i) { //Einzelnen Elemente aus der Liste löschen
+    subtask.splice(i, 1);
+    addSubtask();
+}
+
+function addCurrentSubtask() {
+    if (subtask.length < 5) {
+        let CurrentSubtask = document.getElementById('new-subtask').value;
+        subtask.push(CurrentSubtask);
+        document.getElementById('new-subtask').value = ''; // Liste wieder leeren
+        addSubtask();
+    }
+    else {
+        alert('Genügend Subtasks hinzugefügt!');
+    }
+}

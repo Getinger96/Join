@@ -103,6 +103,8 @@
                                 <label for="assigned">Assigned to</label>
                                 <select class="inputTitle marginTop" name="text" id="assigned"
                                     disabled="disabled">Select contacts to assign
+                                    <option class="selector_Txt" value="" disabled selected>Select contact to assign
+                                    </option>
                                     <option value=""></option>
                                 </select>
                             </div>
@@ -140,7 +142,12 @@
                             </div>
                             <div class="divPaddingBottum">
                                 <p>Subtasks</p>
-                                <input class="inputTitle" type="text">
+                                <div class="inputTitle divSubtask">
+                                    <input id="new-subtask" class="subtasksInputfield" type="text">
+                                    <button class="subtaskButton" onclick="addCurrentSubtask()"><img
+                                            src="assets/IMG/add_subtask_img.svg"></button>
+                                </div>
+                                <ul id="list"></ul>
                             </div>
                         </div>
                     </div>
