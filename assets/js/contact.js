@@ -35,6 +35,7 @@ function getContacts() {
     for (let index = 0; index < beginningLetter.length; index++) {
         let letter = beginningLetter[index];
         showContacts.innerHTML += `<h2>${letter}</h2>`;
+        showContacts.innerHTML += `<hr class="contactlist-hr">`;
 
         // Füge alle Kontakte der Gruppe hinzu
         let group = groupedContacts.find(group => group.letter === letter);
@@ -52,7 +53,7 @@ function displayContacts(contactIndex,contactsEmail, contactsName,contactLastnam
     
     return `<div onclick="getContactBig(${contactIndex}, '${contactsName}', '${contactsEmail}', '${contactPhone}', '${contactLastname}')" class="single-contact-box">
                 <div class="contact-icon">
-                    <span>${contactsName.charAt(0).toUpperCase()} ${contactLastname.charAt(0).toUpperCase()}</span>
+                    <span>${contactsName.charAt(0).toUpperCase()}${contactLastname.charAt(0).toUpperCase()}</span>
                 </div>
                 <div class="contact-content">
                     <span class="contactname"> ${contactsName}</span>
@@ -126,13 +127,13 @@ function showContactBig(contactsName,contactsEmail,contactPhone,contactLastname)
     return `<div class="largcontactbox">
         <div class="largsingle-contact-box">
             <div class="largcontact-icon">
-                <span> ${contactsName.charAt(0).toUpperCase()} ${contactLastname.charAt(0).toUpperCase()}</span>
+                <span> ${contactsName.charAt(0).toUpperCase()}${contactLastname.charAt(0).toUpperCase()}</span>
             </div>
             <div class="largcontact-content">
                 <span class="largcontactname"> ${contactsName} </span>
                 <div class="editanddelete">
                 <div onclick="edit()" class="editcontent blur">
-                <img class="editicon" src="assets/IMG/edit.png" alt="">
+                <img class="editicon" src="assets/IMG/edit.svg" alt="">
                 <span class="edit"> Edit</span>
                 </div>
 
@@ -151,7 +152,7 @@ function showContactBig(contactsName,contactsEmail,contactPhone,contactLastname)
 
             <div class="contactmailsection">
                 <span class="Emailname"> Email </span>
-                <a class="contactmailadress" href="mailto:${contactsEmail}"> ${contactsEmail} </a>
+                <a class="contactmailadress" href="mailto:${contactsEmail}">${contactsEmail} </a>
             </div>
 
             <div class="contactphonesection">
@@ -163,6 +164,15 @@ function showContactBig(contactsName,contactsEmail,contactPhone,contactLastname)
 }
 
 
-function addNewContact() {   
+function addNewContact() {
+    let newContactOverlay = document.getElementById('newContact'); 
+    newContactOverlay.style.display = 'flex';
 }
+
+function closeCardContact() {
+    let newContactOverlay = document.getElementById('newContact');
+    newContactOverlay.style.display = 'none';
+}
+
+
 

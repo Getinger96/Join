@@ -20,47 +20,94 @@
         <div w3-include-html="assets/Templates/desktop_template.html"></div>
 
     </header>
-<section class="middle-Section">
+    <section class="middle-Section">
 
-    <section class="contactlist"> 
-        <div class="newcontactbutton">
-        <button onclick="addNewContact()"> Add new contact
-        <img src="assets/IMG/person_add.png" alt=""> </button>
-
-        </div>
-        `<div class="listing-contacted">
-            <div class="contacts-alphabet">
-           <span id="letter"> A</span>
-            </div> 
-           <hr class="contactlist-hr">
-    
-    
+        <section class="contactlist">
+            <div class="newcontactbutton">
+                <button class="addnewcontactbutton" onclick="addNewContact()">
+                    Add new contact
+                    <img class="addpersonlogo" src="assets/IMG/person_add.png" alt="">
+                </button>
+            </div>
+            <div class="listing-contacted">
+                <div class="contacts-alphabet">
+                </div>
+            </div>
             <div id="contactview"></div>
+        </section>
+
+
+
+            <section class="contactview">
+                <div class="headline-contacts">
+                        <h1>Contacts</h1>
+                        <hr>
+                        <h2>Better with a team </h2>
+                    </div>
+                </div>
+                <div id="contactViewBig" class="contact-details-container">
+                    <!-- Hier werden die Kontaktinformationen angezeigt -->
+                </div>
+            </section>
+
           
-            
 
-    
-        
-    
-    
-    
-    
-    
-    </div>
-     
-
-        
- 
     </section>
+    </div>
 
 
- 
+    <div class="newContact" id="newContact">
+        <div class="contactCars-overview">
 
-    <section class="contactview">
-        <div class="headline-contacts">
-        <div class="contactshead">   
-        <h1 class="headlinecontactsstyle"> Contacts</h1>
-        <hr class="headline-hr">
+            <div class="leftside">
+                <div class="leftsidehead">
+                    <img class="newCard-logo" src="assets/IMG/Capa 1.png" alt="">
+                    <h2 class="addcontactheadline">Add contact</h2>
+
+                    <span class="addcontactsecondline"> Tasks are better with a team!</span>
+                    <div class="hrdiv">
+                        <hr class="hrnewcontact">
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="right-side">
+                <img src="assets/IMG/Close.svg" alt="Close" class="closethewindow-button" onclick="closeCardContact()">
+                <div class="contactlogo">
+                    <img class="addNewContactimg" src="assets/IMG/Group 13.png" alt="NewContatLogo">
+
+                    <div class="addnewContactquery">
+                        <form action="">
+                            <div class="input-container">
+                                <div class="input-field name-icon">
+                                    <input type="text" id="name" name="Name" placeholder="Name">
+                                    <img src="assets/IMG/person.svg" alt="Person Icon" class="input-icon">
+                                </div>
+                                <div class="input-field mail-icon">
+                                    <input type="email" id="mail" name="Email" placeholder="Email">
+                                    <img src="assets/IMG/mail.svg" alt="Mail Icon" class="input-icon">
+                                </div>
+                                <div class="input-field phone-icon">
+                                    <input type="tel" id="telephone" name="Phone" placeholder="Phone">
+                                    <img src="assets/IMG/call.svg" alt="Call Icon" class="input-icon">
+                                </div>
+                            </div>
+                        </form>
+                        <div class="two-buttons">
+                            <button class="cancel-button">Cancel<img class="close-button"
+                                    src="assets/IMG/iconoir_cancel.png"></button>
+                            <button class="createContact-button">Create Contact<img src="assets/IMG/check.svg"></button>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+
+
         </div>
         <h2>Better with a team </h2>
         </div>    
@@ -130,6 +177,8 @@
 
     <div>
 
+
+        <div>
 
 
 </body>
