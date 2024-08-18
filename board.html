@@ -27,13 +27,13 @@
                     <h1>Board</h1>
                     <div class="displayFlex alignCenter">
                         <div class="displayFlex searchContainer addTask">
-                            <input class="search" type="text">
+                            <input onkeyup="search()" id="searchInput" class="search" type="text">
                             <div class="separator"></div>
                             <img src="./assets/img/Frame 122.png">
                         </div>
-                        <div onclick="addTask()" class="displayFlex addTask buttonContainer">
+                        <div onclick="openTask()" class="displayFlex addTask buttonContainer">
                             <button>Add task</button>
-                            <img src="./assets/img/add.png">
+                            <img src="./assets/img/add (1).png">
                         </div>
                     </div>
                 </div>
@@ -42,7 +42,7 @@
                     <div class="paddingRight">
                         <div class="statusButton">
                             <p>To do</p>
-                            <img onclick="addTask()" src="./assets/img/plus button.png">
+                            <img onclick="openTask()" src="./assets/img/plus button.png">
                         </div>
                         <div class="noTasks" style="display: none;">No tasks To do</div>
                         <div class="drag-area" id="open" ondrop="moveTo('open')" ondragover="allowDrop(event)"
@@ -51,7 +51,7 @@
                     <div class="paddingRight">
                         <div class="statusButton">
                             <p>In progress</p>
-                            <img onclick="addTask()" src="./assets/img/plus button.png">
+                            <img onclick="openTask()" src="./assets/img/plus button.png">
                         </div>
                         <div class="noTasks" style="display: none;">No tasks in progress</div>
                         <div class="drag-area" id="progress" ondrop="moveTo('progress')" ondragover="allowDrop(event)"
@@ -60,7 +60,7 @@
                     <div class="paddingRight">
                         <div class="statusButton">
                             <p>Await feedback</p>
-                            <img onclick="addTask()" src="./assets/img/plus button.png">
+                            <img onclick="openTask()" src="./assets/img/plus button.png">
                         </div>
                         <div class="noTasks" style="display: none;">No tasks Await feedback</div>
                         <div class="drag-area" id="awaitFeedback" ondrop="moveTo('awaitFeedback')"
@@ -69,7 +69,7 @@
                     <div class="paddingRight">
                         <div class="statusButton">
                             <p>Done</p>
-                            <img onclick="addTask()" src="./assets/img/plus button.png">
+                            <img onclick="openTask()" src="./assets/img/plus button.png">
                         </div>
                         <div class="noTasks" style="display: none;">No tasks Done</div>
                         <div class="drag-area" id="closed" ondrop="moveTo('closed')" ondragover="allowDrop(event)"
@@ -79,92 +79,9 @@
             </div>
             </div>
         </nav>
-        </nav>
 
-        <section id="boardAddTask" class="boardAddTask">
-            <div class="widthBoard">
-                <div class="boardtitle addTaskBoard">
-                    <h2>Add Task</h2>
-                    <div class="addTaskContainer">
-                        <div>
-                            <div>
-                                <div class="displayFlex">
-                                    <p>Title</p>
-                                    <p class="red">*</p>
-                                </div>
-                                <input class="inputTitle" type="text" placeholder="enter a title" required>
-                            </div>
-                            <div class="flexdirection">
-                                <label for="description">Description</label>
-                                <textarea class="inputDescription marginTop" id="description" type="text"
-                                    placeholder="Enter a Description"></textarea>
-                            </div>
-                            <div class="flexdirection">
-                                <label for="assigned">Assigned to</label>
-                                <select class="inputTitle marginTop" name="text" id="assigned"
-                                    disabled="disabled">Select contacts to assign
-                                    <option class="selector_Txt" value="" disabled selected>Select contact to assign
-                                    </option>
-                                    <option value=""></option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="separatorTask"></div>
-                        <div>
-                            <div class="flexdirection">
-                                <div class="displayFlex">
-                                    <p>Due date</p>
-                                    <p class="red">*</p>
-                                </div>
-                                <input class="inputTitle" type="date" required>
-                            </div>
-                            <div>
-                                <p>Prio</p>
-                                <div class="marginButtomButton">
-                                    <button class="buttonContainerPrio" onclick="urgent()">Urgent <img
-                                            src="./assets/img/Prio alta.png"></button>
-                                    <button class="buttonContainerPrio" onclick="medium()">Medium <img
-                                            src="./assets/IMG/Prio_Medium.svg"></button>
-                                    <button class="buttonContainerPrio" onclick="low()">Low <img
-                                            src="./assets/img/Prio baja.png"></button>
-                                </div>
-                            </div>
-                            <div class="flexdirection">
-                                <div class="displayFlex alaignItems">
-                                    <label id="category">Category</label>
-                                    <p class="red">*</p>
-                                </div>
-                                <select class="inputTitle marginTop" name="text" id="category"
-                                    disabled="disabled">Select task category
-                                    <option value="technicalTask">Technical Task</option>
-                                    <option value="userStory">User Story</option>
-                                </select>
-                            </div>
-                            <div class="divPaddingBottum">
-                                <p>Subtasks</p>
-                                <div class="inputTitle divSubtask">
-                                    <input id="new-subtask" class="subtasksInputfield" type="text">
-                                    <button class="subtaskButton" onclick="addCurrentSubtask()"><img
-                                            src="assets/IMG/add_subtask_img.svg"></button>
-                                </div>
-                                <ul id="list"></ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bottomInfo">
-                        <div class="displayFlex">
-                            <p class="red">*</p>
-                            <p>This field is required</p>
-                        </div>
-                        <div class="divButtonButtom">
-                            <button class="buttonContainerWhite">Clear <img
-                                    src="./assets/IMG/x_icon_clear.svg"></button>
-                            <button class="buttonContainerdark">Create Task <img
-                                    src="assets/IMG/clear_Img.svg"></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <section>
+            <div w3-include-html="assets/Templates/board_add_task.html"></div>
         </section>
     </section>
 </body>
