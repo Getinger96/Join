@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="./assets/img/Capa 2.png" />
+    <link rel="stylesheet" href="./Styles/register.css">
+    <script src="./assets/js/register.js"></script>
+
+    <title>Registrierung </title>
+</head>
+<body>
+
+    <header>
+
+        <div class="loginheadline">
+            <img class="loginlogo" src="assets/IMG/Join_logo.svg" alt="">
+
+            <div class="signzUpsection">
+            <span class="notajoinUser"> Not a Join user ?</span>
+            <button class="signupsection"> Sign up</button>
+            </div>
+
+        </div>
+
+
+
+    </header>
+
+    <section class="register">
+
+        <h1 class="login-headline"> Sign up </h1>
+        <hr class="signuphr">
+        <form onsubmit="addnewUser(); return false;">
+            <div class="inputenamesection">
+                <input  id="username" class="inputname" type="text" required placeholder="Name"> 
+                <img  class="mailicon"src="assets/IMG/person.png" alt="">
+            </div>
+    
+            <div class="inputemailsection">
+                <input id="usermail" class="inputemail" type="email" required placeholder="E-Mail"> 
+                <img  class="mailicon"src="assets/IMG/mail.png" alt="">
+            </div>
+    
+            
+            <div class="inputpasswordsection">
+                <input id="userpassword" class="inputpassword" type="password" required placeholder="Password">
+                <img src="assets/IMG/lock.png" alt="">
+            </div>
+    
+            <div class="inputpasswordsection">
+                <input id="userconfirmpassword" class="inputconfirmpassword" type="password" required placeholder=" Confrim Password">
+                <img src="assets/IMG/lock.png" alt="">
+            </div>
+    
+        <div class="checkboxsection">
+        <input id="checkbox" class="checkbox" type="checkbox"> 
+        <span class="Rememberme"> I accept the <a href="./privacy_policy.html"> Privacy policy</a>  </span>
+        </div>
+
+        <div class="loginandgustbutton"> 
+        <button class="loginbutton"> Sign Up</button>
+        </div>
+        </form>
+
+
+
+    </section>
+    
+</body>
+</html>
