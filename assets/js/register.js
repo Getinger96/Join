@@ -1,13 +1,29 @@
 
-const base_URL = "https://join-login-3f057-default-rtdb.europe-west1.firebasedatabase.app/";
-let users = [];
+const base_URL = "https://join-37803-default-rtdb.europe-west1.firebasedatabase.app/";
+let contacts = [];
 
 async function loadUsers(path = '') {
     let response = await fetch(base_URL + path + ".json");
-    let userJSON = await  response.json();
-    users = userJSON; 
-    console.log(users);
+    let userJSON = await response.json();
+    let userAsArray = Object.keys(userJSON.contacts);
+    console.log(userAsArray);
     
+  
+    Object.keys(userJSON.contacts).forEach(key => {
+        let contactGroup = userJSON.contacts[key];
+
+        // Überprüfe, ob die Kontaktgruppe verschachtelte Kontakte enthält
+        if (!contactGroup.email ) {
+            // Es ist ein verschachteltes Objekt, durchlaufe alle verschachtelten Kontakte
+            Object.keys(contactGroup).forEach(subKey => {
+                contacts.push(contactGroup[subKey]);
+            });
+        } else {
+            // Es ist ein einfacher Kontakt
+            contacts.push(contactGroup);
+        }
+    });
+    console.log(contacts);
 }
 
 
@@ -25,15 +41,15 @@ async function postData(path="", data={}) {
 }
 
 async function  addnewUser() {
-    let username = document.getElementById('username').value;
-    let usermail = document.getElementById('usermail').value;
-    let userpassword = document.getElementById('userpassword').value;
-    let userconfirmpassword = document.getElementById('userconfirmpassword').value;
-    let checkbox = document.getElementById('checkbox').checked;
+    let username = document.getElementById('username');
+    let usermail = document.getElementById('usermail');
+    let userpassword = document.getElementById('userpassword');
+    let userconfirmpassword = document.getElementById('userconfirmpassword');
+    let checkbox = document.getElementById('checkbox');
 
 
 
-    if (userpassword.length <= 5) {
+    if (userpassword.value.length <= 5) {
         alert("Passwords must have maximal 6 characters");
         username.value = '';
         usermail.value = '';
@@ -45,26 +61,51 @@ async function  addnewUser() {
     }
 
 
-    if (userpassword !== userconfirmpassword) {
+    if (userpassword.value !== userconfirmpassword.value) {
         alert("Passwords do not match!")
+        username.value = '';
+        usermail.value = '';
+        userpassword.value = '';
+        userconfirmpassword.value = '';
+        checkbox.checked = false;
         return;
     }
 
-    if (!checkbox) {
+    if (checkbox.checked = false) {
         alert("You must accept the privacy policy to register.");
+        username.value = '';
+        usermail.value = '';
+        userpassword.value = '';
+        userconfirmpassword.value = '';
+        checkbox.checked = false;
         return;
     }
 
 
-    let newUser = {
-        name: username,
-        email: usermail,
-        password: userpassword
+    let contactCurrentNumber = contacts.length +1;
+    let contactKey = `contact_${contactCurrentNumber}`;
+
+  
+    let newContact  = {
+        name: username.value,
+        email: usermail.value,
+        password: userpassword.value
     };
 
 
-    await postData("users", newUser)
-    console.log(responsASJson);
-    await loadUsers('users');
+    await postData(`contacts/${contactKey}`, newContact)
+    emptyTheInputFields(username, usermail, userpassword, userconfirmpassword, checkbox);
 
+
+    await loadUsers('users');
+  
+}
+
+
+function emptyTheInputFields(username, usermail, userpassword, userconfirmpassword, checkbox) {
+    username.value = '';
+    usermail.value = '';
+    userpassword.value = '';
+    userconfirmpassword.value = '';
+    checkbox.checked = false;
 }

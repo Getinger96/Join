@@ -5,9 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="./assets/img/Capa 2.png" />
     <link rel="stylesheet" href="./Styles/login.css">
+    <script src="./assets/js/register.js"></script>
+    <script src="./assets/js/login.js"></script>
     <title>Login</title>
 </head>
-<body>
+<body onload="loadUsers(path = '')">
 
     <header>
 
@@ -29,18 +31,18 @@
 
         <h1 class="login-headline"> LOG IN </h1>
         <hr class="loginhr">
-        <form action="">
+        <form onsubmit="loginAction(); return false;">
         <div class="inputemailsection">
-            <input  class="inputname" type="email" required placeholder="E-Mail"> 
+            <input id="emaillogin" class="inputemail" type="email" required placeholder="E-Mail"> 
             <img  class="mailicon"src="assets/IMG/mail.png" alt="">
         </div>
         
         <div class="inputpasswordsection">
-            <input class="inputpassword" type="password" required placeholder="Password">
+            <input id="passwordlogin" class="inputpassword" type="password" required placeholder="Password">
             <img src="assets/IMG/lock.png" alt="">
         </div>
         <div class="checkboxsection">
-        <input class="checkbox" type="checkbox"> 
+        <input id="checkboxlogin" class="checkbox" type="checkbox"> 
         <span class="Rememberme"> Remember me </span>
         </div>
 

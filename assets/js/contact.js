@@ -1,31 +1,51 @@
-const base_URL = "https://join-37803-default-rtdb.europe-west1.firebasedatabase.app";
+const base_URL = "https://join-37803-default-rtdb.europe-west1.firebasedatabase.app/";
 let contactsArray = [];
 let beginningLetter = [];
 let groupedContacts = [];
 
 
+<<<<<<< HEAD
 async function fetchContacts() {
     try {
         let response = await fetch(base_URL + "/contacts.json");
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
+=======
+async function fetchContacts(path = '') {
+    let response = await fetch(base_URL + path + ".json");
+    let userJSON = await response.json();
+    let userAsArray = Object.keys(userJSON.contacts);
+    console.log(userAsArray);
+    
+  
+    Object.keys(userJSON.contacts).forEach(key => {
+        let contactGroup = userJSON.contacts[key];
+
+        // Überprüfe, ob die Kontaktgruppe verschachtelte Kontakte enthält
+        if (!contactGroup.email ) {
+            // Es ist ein verschachteltes Objekt, durchlaufe alle verschachtelten Kontakte
+            Object.keys(contactGroup).forEach(subKey => {
+                contactsArray.push(contactGroup[subKey]);
+            });
+        } else {
+            // Es ist ein einfacher Kontakt
+            contactsArray.push(contactGroup);
+>>>>>>> d997ea716423b37b8e82a7ff526021ee097a9a4e
         }
-        let contacts = await response.json();
+    });
 
-      
-        contactsArray = Object.values(contacts); // Werte von einem Objekt in ein Array umwandeln
-
-       
-        letterSorting();
-
-     
-        getContacts();
-    } catch (error) {
-        console.error("Fehler beim Abrufen der Kontakte:", error);
-    }
+    letterSorting();
+    console.log(contactsArray);
 }
 
+function getLastName(fullName) {
+    let nameParts = fullName.trim().split(' ');
 
+    // Der Nachname ist das letzte Element
+    let lastName = nameParts[nameParts.length - 1];
+
+    return lastName;
+}
 
 
 function getContacts() {
@@ -42,7 +62,8 @@ function getContacts() {
         let group = groupedContacts.find(group => group.letter === letter);
         if (group) {
             group.contacts.forEach((contact, contactIndex) => {
-                showContacts.innerHTML += displayContacts(contactIndex,contact.email, contact.name, contact.lastname,contact.phone);
+                let contactLastname = getLastName(contact.name);
+                showContacts.innerHTML += displayContacts(contactIndex,contact.email, contact.name, contactLastname,contact.phone);
             });
         }
     }};
@@ -121,6 +142,8 @@ function getContactBig(index,contactsName,contactsEmail,contactPhone,contactLast
 
 
 } 
+
+
 
 
 function showContactBig(contactsName,contactsEmail,contactPhone,contactLastname) {

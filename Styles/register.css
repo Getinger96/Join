@@ -9,11 +9,22 @@ body {
     justify-content: space-between;
     padding:  70px 100px 0px 100px;
     }
+
     
     
     .loginlogo {
         width: 100px;
         height: 122px;
+    }
+
+
+    .loginscreen {
+        position: absolute;
+    width: 274px;
+    height: 335px;
+    top: 50%;
+    left: 50%;
+    z-index: 100;
     }
     
     .notajoinUser {
