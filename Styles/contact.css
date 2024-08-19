@@ -130,7 +130,6 @@ h2 {
 }
 
 .contact-icon {
-    background-color:black;
     height: 42px;
     width: 42px;
     border-radius: 42px;
@@ -301,7 +300,10 @@ h2 {
     display: flex;
     height: 592px;
     width: 1212px;
-    position: relative;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .leftside {
