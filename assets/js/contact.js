@@ -4,13 +4,6 @@ let beginningLetter = [];
 let groupedContacts = [];
 
 
-<<<<<<< HEAD
-async function fetchContacts() {
-    try {
-        let response = await fetch(base_URL + "/contacts.json");
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-=======
 async function fetchContacts(path = '') {
     let response = await fetch(base_URL + path + ".json");
     let userJSON = await response.json();
@@ -30,7 +23,6 @@ async function fetchContacts(path = '') {
         } else {
             // Es ist ein einfacher Kontakt
             contactsArray.push(contactGroup);
->>>>>>> d997ea716423b37b8e82a7ff526021ee097a9a4e
         }
     });
 
@@ -158,12 +150,12 @@ function showContactBig(contactsName,contactsEmail,contactPhone,contactLastname)
                 <div class="editanddelete">
                 <div onclick="edit()" class="editcontent blur">
                 <img class="editicon" src="assets/IMG/edit.svg" alt="">
-                <span class="edit">Edit</span>
+                <span class="edit"> Edit</span>
                 </div>
 
                 <div class="deletecontent" onclick="delete()">
                 <img class="deleteicon" src="assets/IMG/delete.png" alt="">
-                <span class="delete">Delete</span>
+                <span class="delete"> delete </span>
 
                 </div>
                 </div>
@@ -191,107 +183,9 @@ function showContactBig(contactsName,contactsEmail,contactPhone,contactLastname)
 function addNewContact() {
     let newContactOverlay = document.getElementById('newContact'); 
     newContactOverlay.style.display = 'flex';
-    
 }
 
 function closeCardContact() {
     let newContactOverlay = document.getElementById('newContact');
     newContactOverlay.style.display = 'none';
 }
-
-const colors = [
-    '#FF5733', // Orange
-    '#FFC300', // Gelb
-    '#33FF57', // Grün
-    '#33FFF3', // Türkis
-    '#3357FF', // Blau
-    '#A133FF', // Lila
-    '#FF33A1', // Pink
-    '#FF8F33'  // Hellorange
-];
-
-function getContacts() {
-    let showContacts = document.getElementById('contactview');
-    showContacts.innerHTML = '';
-
-    let contactCounter = 0; // Zähler für die gesamte Anzahl der Kontakte
-
-    for (let index = 0; index < beginningLetter.length; index++) {
-        let letter = beginningLetter[index];
-        showContacts.innerHTML += `<h2>${letter}</h2>`;
-        showContacts.innerHTML += `<hr class="contactlist-hr">`;
-
-        // Füge alle Kontakte der Gruppe hinzu
-        let group = groupedContacts.find(group => group.letter === letter);
-        if (group) {
-            group.contacts.forEach((contact) => {
-                let colorIndex = contactCounter % colors.length;
-                let color = colors[colorIndex];
-                showContacts.innerHTML += displayContacts(contactCounter, contact.email, contact.name, contact.lastname, contact.phone, color);
-                contactCounter++; // Erhöhe den Zähler nach jedem Kontakt
-            });
-        }
-    }
-}
-
-function displayContacts(contactIndex, contactsEmail, contactsName, contactLastname, contactPhone, color) {
-    return `<div onclick="getContactBig(${contactIndex}, '${contactsName}', '${contactsEmail}', '${contactPhone}', '${contactLastname}')" class="single-contact-box">
-                <div class="contact-icon" style="background-color:${color};">
-                    <span>${contactsName.charAt(0).toUpperCase()}${contactLastname.charAt(0).toUpperCase()}</span>
-                </div>
-                <div class="contact-content">
-                    <span class="contactname"> ${contactsName}</span>
-                    <a class="contactmail" href="mailto:${contactsEmail}"> ${contactsEmail} </a>
-                </div>
-            </div>`;
-}
-
-function displayContacts(contactIndex, contactsEmail, contactsName, contactLastname, contactPhone, color) {
-    return `<div onclick="getContactBig(${contactIndex}, '${contactsName}', '${contactsEmail}', '${contactPhone}', '${contactLastname}', '${color}')" class="single-contact-box">  
-                <!-- Änderung: Farbe 'color' wird als zusätzliches Argument an getContactBig übergeben (grau) -->
-                
-                <div class="contact-icon" style="background-color:${color};">
-                    <span>${contactsName.charAt(0).toUpperCase()}${contactLastname.charAt(0).toUpperCase()}</span>
-                </div>
-                <div class="contact-content">
-                    <span class="contactname"> ${contactsName}</span>
-                    <a class="contactmail" href="mailto:${contactsEmail}"> ${contactsEmail} </a>
-                </div>
-            </div>`;
-}
-
-function getContactBig(contactIndex, contactsName, contactsEmail, contactPhone, contactLastname, color) {  
-    <!-- Änderung: Der Parameter 'color' wurde hinzugefügt (grau) -->
-    
-    let showContacts = document.getElementById('contactViewBig');
-    showContacts.innerHTML = `
-        <div class="largcontactbox">
-            <div class="largsingle-contact-box">
-                <div class="largcontact-icon" style="background-color:${color};"> 
-                    <!-- Änderung: Die übergebene Farbe wird hier auf das große Kontakt-Icon angewendet (grau) -->
-                    
-                    <span>${contactsName.charAt(0).toUpperCase()}${contactLastname.charAt(0).toUpperCase()}</span>
-                </div>
-                <div class="largcontact-content">
-                    <span class="largcontactname">${contactsName}</span>
-                    <div class="editanddelete">
-                        <!-- Edit und Delete-Buttons -->
-                    </div>
-                </div>
-            </div>    
-            <div class="contactinfo">
-                <span class="contactinfoname">Contact Information</span>
-                <div class="contactmailsection">
-                    <span class="Emailname">Email</span>
-                    <a class="contactmailadress" href="mailto:${contactsEmail}">${contactsEmail}</a>
-                </div>
-                <div class="contactphonesection">
-                    <span class="phonename">Phone</span>
-                    <a class="contactphone" href="tel:${contactPhone}">${contactPhone}</a>
-                </div>
-            </div>
-        </div>`;
-}
-
-
-
