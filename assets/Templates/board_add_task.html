@@ -3,7 +3,8 @@
         <div class="boardtitle addTaskBoard">
             <div class="addTaskContainer">
                 <h2>Add Task</h2>
-                <button class="closeAddTask" onclick="closeTask()"><img src="./assets/img/iconoir_cancel.png"></button>
+                <button class="closeAddTask curser" onclick="closeTask()"><img
+                        src="./assets/img/iconoir_cancel.png"></button>
             </div>
             <div class="addTaskContainer">
                 <div>
@@ -21,10 +22,11 @@
                     </div>
                     <div class="flexdirection">
                         <label for="assigned">Assigned to</label>
-                        <select class="inputTitle marginTop" name="text" id="assigned">
-                            <option class="selector_Txt" value="" disabled selected>Select contact to assign
+                        <select class="inputTitle marginTop curser" name="text" id="assigned"
+                            onchange="handleContactSelection()">
+                            <option id="contact-list" class="selector_Txt" value="" disabled selected>Select contact to
+                                assign
                             </option>
-                            <option value=""></option>
                         </select>
                     </div>
                 </div>
@@ -35,16 +37,16 @@
                             <p>Due date</p>
                             <p class="red">*</p>
                         </div>
-                        <input class="inputTitle" type="date" required>
+                        <input class="inputTitle curser" type="date" required>
                     </div>
                     <div>
                         <p>Prio</p>
                         <div class="marginButtomButton">
-                            <button id="urgent" class="buttonContainerPrio" onclick="urgent()">Urgent <img
+                            <button id="urgent" class="buttonContainerPrio curser" onclick="urgent()">Urgent <img
                                     id="urgentIcon" src="./assets/img/Prio_Urgent.svg"></button>
-                            <button id="medium" class="buttonContainerPrio" onclick="medium()">Medium <img
+                            <button id="medium" class="buttonContainerPrio curser" onclick="medium()">Medium <img
                                     id="mediumIcon" src="./assets/IMG/Prio_Medium.svg"></button>
-                            <button id="low" class="buttonContainerPrio" onclick="low()">Low <img id="lowIcon"
+                            <button id="low" class="buttonContainerPrio curser" onclick="low()">Low <img id="lowIcon"
                                     src="./assets/img/Prio_LOw.svg"></button>
                         </div>
                     </div>
@@ -53,7 +55,7 @@
                             <label id="category">Category</label>
                             <p class="red">*</p>
                         </div>
-                        <select class="inputTitle marginTop" name="text" id="category">Select task category
+                        <select class="inputTitle marginTop curser" name="text" id="category">Select task category
                             <option value="technicalTask">Technical Task</option>
                             <option value="userStory">User Story</option>
                         </select>
@@ -62,7 +64,7 @@
                         <p>Subtasks</p>
                         <div class="inputTitle divSubtask">
                             <input id="new-subtask" class="subtasksInputfield" type="text">
-                            <button class="subtaskButton" onclick="addCurrentSubtask()"><img
+                            <button class="subtaskButton curser" onclick="addCurrentSubtask()"><img
                                     src="assets/IMG/add_subtask_img.svg"></button>
                         </div>
                         <ul id="list"></ul>
@@ -75,8 +77,9 @@
                     <p>This field is required</p>
                 </div>
                 <div class="divButtonButtom">
-                    <button onclick="clearTask()" class="buttonContainerWhite">Clear <img src="./assets/IMG/x_icon_clear.svg"></button>
-                    <button class="buttonContainerdark">Create Task <img src="assets/IMG/clear_Img.svg"></button>
+                    <button onclick="clearTask()" class="buttonContainerWhite curser">Clear <img
+                            src="./assets/IMG/x_icon_clear.svg"></button>
+                    <button class="buttonContainerdark curser">Create Task <img src="assets/IMG/clear_Img.svg"></button>
                 </div>
             </div>
         </div>

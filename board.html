@@ -13,6 +13,8 @@
     <script src="./assets/js/board.js"></script>
     <script src="./assets/js/add_task.js"></script>
     <script src="./assets/js/script.js"></script>
+    <script src="./assets/js/board_database.js"></script>
+    <link rel="icon" type="image/x-icon" href="./assets/img/Capa 2.png" />
 </head>
 
 <body onload="init()">
@@ -29,10 +31,10 @@
                         <div class="displayFlex searchContainer addTask">
                             <input onkeyup="search()" id="searchInput" class="search" type="text">
                             <div class="separator"></div>
-                            <img src="./assets/img/Frame 122.png">
+                            <img class="curser" src="./assets/img/Frame 122.png">
                         </div>
-                        <div onclick="openTask()" class="displayFlex addTask buttonContainer">
-                            <button>Add task</button>
+                        <div onclick="openTask()" class="displayFlex addTask buttonContainer curser">
+                            <button class="curser">Add task</button>
                             <img src="./assets/img/add (1).png">
                         </div>
                     </div>
@@ -42,7 +44,7 @@
                     <div class="paddingRight">
                         <div class="statusButton">
                             <p>To do</p>
-                            <img onclick="openTask()" src="./assets/img/plus button.png">
+                            <img class="curser" onclick="openTask()" src="./assets/img/plus button.png">
                         </div>
                         <div class="noTasks" style="display: none;">No tasks To do</div>
                         <div class="drag-area" id="open" ondrop="moveTo('open')" ondragover="allowDrop(event)"
@@ -51,7 +53,7 @@
                     <div class="paddingRight">
                         <div class="statusButton">
                             <p>In progress</p>
-                            <img onclick="openTask()" src="./assets/img/plus button.png">
+                            <img class="curser" onclick="openTask()" src="./assets/img/plus button.png">
                         </div>
                         <div class="noTasks" style="display: none;">No tasks in progress</div>
                         <div class="drag-area" id="progress" ondrop="moveTo('progress')" ondragover="allowDrop(event)"
@@ -60,7 +62,7 @@
                     <div class="paddingRight">
                         <div class="statusButton">
                             <p>Await feedback</p>
-                            <img onclick="openTask()" src="./assets/img/plus button.png">
+                            <img class="curser" onclick="openTask()" src="./assets/img/plus button.png">
                         </div>
                         <div class="noTasks" style="display: none;">No tasks Await feedback</div>
                         <div class="drag-area" id="awaitFeedback" ondrop="moveTo('awaitFeedback')"
@@ -69,7 +71,7 @@
                     <div class="paddingRight">
                         <div class="statusButton">
                             <p>Done</p>
-                            <img onclick="openTask()" src="./assets/img/plus button.png">
+                            <img class="curser" onclick="openTask()" src="./assets/img/plus button.png">
                         </div>
                         <div class="noTasks" style="display: none;">No tasks Done</div>
                         <div class="drag-area" id="closed" ondrop="moveTo('closed')" ondragover="allowDrop(event)"

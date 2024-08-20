@@ -1,8 +1,4 @@
 
-const base_URL = "https://join-37803-default-rtdb.europe-west1.firebasedatabase.app";
-let description = [];
-let subtask = [];
-
 let todos = [{
     'id': 0,
     'title': 'Putzen',
@@ -88,7 +84,7 @@ function startDragging(id) {
 }
 
 function generateTodoHTML(element) {
-    return `<h3 draggable="true" ondragstart="startDragging(${element.id})" class="todo">${element.title}</h3>`;
+    return `<h3 draggable="true" ondragstart="startDragging(${element.id})" class="todo curser">${element.title}</h3>`;
 }
 
 function allowDrop(ev) {
@@ -152,7 +148,7 @@ function startDragging(id) {
 }
 
 function generateTodoHTML(element) {
-    return `<h3 draggable="true" ondragstart="startDragging(${element.id})" class="todo">${element.title}</h3>`;
+    return `<h3 draggable="true" ondragstart="startDragging(${element.id})" class="todo curser">${element.title}</h3>`;
 }
 
 function allowDrop(ev) {
@@ -306,6 +302,56 @@ function showTasksSearch(search, todos) {
     }
 }
 
+//Add Task leeren
 function clearTask() {
-    
+    // Titel-Eingabefeld leeren
+    document.querySelector('.inputTitle[type="text"]').value = '';
+
+    // Beschreibungstextfeld leeren
+    document.getElementById('description').value = '';
+
+    // 'Assigned to'-Dropdown zurücksetzen
+    document.getElementById('assigned').selectedIndex = 0;
+
+    // Datumseingabefeld leeren
+    document.querySelector('.inputTitle[type="date"]').value = '';
+
+    // Prioritäts-Buttons zurücksetzen
+    resetPrioButtons();
+
+    // Kategorie-Dropdown zurücksetzen
+    document.getElementById('category').selectedIndex = 0;
+
+    // Subtasks-Liste leeren
+    document.getElementById('list').innerHTML = '';
+
+    // Subtask-Eingabefeld leeren
+    document.getElementById('new-subtask').value = '';
 }
+
+function resetPrioButtons() {
+    // Hintergrundfarbe und Bild der Prio-Buttons auf den Standard zurücksetzen
+    const prioButtons = ['urgent', 'medium', 'low'];
+    prioButtons.forEach(id => {
+        let button = document.getElementById(id);
+        let icon = document.getElementById(id + 'Icon');
+
+        // Hintergrundfarbe und Textfarbe zurücksetzen
+        button.style.backgroundColor = 'initial';
+        button.style.color = 'initial';
+
+        // Icon-Bild zurücksetzen
+        switch (id) {
+            case 'urgent':
+                icon.src = './assets/img/Prio_Urgent.svg';
+                break;
+            case 'medium':
+                icon.src = './assets/IMG/Prio_Medium.svg';
+                break;
+            case 'low':
+                icon.src = './assets/img/Prio_LOw.svg';
+                break;
+        }
+    });
+}
+
