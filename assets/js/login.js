@@ -4,7 +4,7 @@ async function loadUsers(path = '') {
     let userJSON = await response.json();
     let userAsArray = Object.keys(userJSON.contacts);
     console.log(userAsArray);
-    
+    screenLogo();
   
     Object.keys(userJSON.contacts).forEach(key => {
         let contactGroup = userJSON.contacts[key];
@@ -37,4 +37,15 @@ async function loginAction() {
         console.log("Login failed: No matching user found.");
         alert("Incorrect email or password!");
     }
+}
+
+
+function screenLogo() {
+
+    setTimeout(() => {
+       document.getElementById("logoscreen").classList.add("loginlogo");
+   }, 1500);
+
+    
+  document.getElementById("logoscreensection").classList.add("logoscreennone");
 }
