@@ -128,6 +128,18 @@ h2 {
     background-color: #e3e3ec;
     border-radius: 10px;
 }
+.single-contact-box.selected {
+    background-color: #2A3647; /* Dunkelblauer Hintergrund für die ausgewählte Box */
+    color: white; /* Setzt die Standardtextfarbe auf Weiß */
+}
+
+.single-contact-box.selected .contactname {
+    color: white; /* Ändert die Schriftfarbe des Namens zu Weiß */
+}
+
+.single-contact-box.selected .contactmail {
+    color: #007CEE; /* E-Mail-Adresse bleibt in der ursprünglichen Farbe */
+}
 
 .contact-icon {
     height: 42px;
@@ -157,6 +169,10 @@ h2 {
     text-decoration: none;
     color:  #007CEE;
     font-size: 16px;
+}
+
+.contactmail:hover {
+    background-color: transparent;
 }
 
 
@@ -256,10 +272,18 @@ h2 {
     font-size: 16px;
 }
 
+.contactphone:hover{
+    background:transparent;
+}
+
 .contactmailadress {
     text-decoration: none;
     font-size: 16px;
     color: #007CEE;
+}
+
+.contactmailadress:hover {
+    background-color: transparent;
 }
 
 .Emailname {
