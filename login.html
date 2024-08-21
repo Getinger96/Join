@@ -9,7 +9,7 @@
     <script src="./assets/js/login.js"></script>
     <title>Login</title>
 </head>
-<body onload="loadUsers(path = '')">
+<body onload="loadUsers(path = '')" id="myopacity">
 
     <header>
 
@@ -18,7 +18,7 @@
 
             <div class="signzUpsection">
             <span class="notajoinUser"> Not a Join user ?</span>
-            <button class="signupsection"> Sign up</button>
+            <button class="signupsection" onclick="redirectToRegister()"> Sign up</button>
             </div>
 
         </div>
@@ -39,8 +39,12 @@
         
         <div class="inputpasswordsection">
             <input id="passwordlogin" class="inputpassword" type="password" required placeholder="Password">
-            <img src="assets/IMG/lock.png" alt="">
+            <img  src="assets/IMG/lock.png" alt="">
         </div>
+
+        <span class="incorrectentrystyle" id="incorrectentry">
+        </span>
+
         <div class="checkboxsection">
         <input id="checkboxlogin" class="checkbox" type="checkbox"> 
         <span class="Rememberme"> Remember me </span>

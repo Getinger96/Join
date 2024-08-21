@@ -109,3 +109,49 @@ function emptyTheInputFields(username, usermail, userpassword, userconfirmpasswo
     userconfirmpassword.value = '';
     checkbox.checked = false;
 }
+
+
+function passwordvisbility() {
+
+    document.getElementById("visbilityimg").src = "assets/IMG/visibility_off_password.png";
+    
+}
+
+
+function showVisbility() {
+    let userpassword = document.getElementById('userpassword');
+    let visibilityImg = document.getElementById('visbilityimg');
+    
+    if (userpassword.type === "password") {
+        userpassword.type = "text"
+        visibilityImg.src = "assets/IMG/visibility_on.png"; 
+    } else {
+        userpassword.type = "password"
+        visibilityImg.src = "assets/IMG/visibility_off_password.png"; 
+    }
+
+}
+
+
+function passwordconfirmvisbility() {
+
+    document.getElementById("visbilityimgconfirm").src = "assets/IMG/visibility_off_password.png";
+    
+}
+
+
+
+function showVisbilityconfirmpassword() {
+    let userpassword = document.getElementById('userconfirmpassword');
+    let visibilityImg = document.getElementById('visbilityimgconfirm');
+    
+    if (userpassword.type === "password") {
+        userpassword.type = "text"
+        visibilityImg.src = "assets/IMG/visibility_on.png"; 
+    } else {
+        userpassword.type = "password"
+        visibilityImg.src = "assets/IMG/visibility_off_password.png"; 
+    }
+
+}
+

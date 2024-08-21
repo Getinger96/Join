@@ -63,7 +63,7 @@ body {
         height: 595px;
         justify-content: center;
         position: fixed;
-        top: 248px;
+        top: 190px;
         left: 600px;
         right: 0;
         bottom: 0;
@@ -208,4 +208,28 @@ body {
                 gap: 35px;
                 padding: 0px 25px 39px 0px;
                 justify-content: center;
+            }
+
+
+            footer {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                position: fixed;
+                top: 850px;
+                left: 800px;
+                gap: 60px;
+                color: #A8A8A8;
+            }
+
+
+            .privacypolicyandlegalnotice {
+                text-decoration: none;
+                color: black;
+
+            }
+
+
+            .privacypolicyandlegalnotice:hover {
+                color: #2A3647;;
             }

@@ -16,9 +16,6 @@
         <div class="loginheadline">
             <img class="loginlogo" src="assets/IMG/Join_logo.svg" alt="">
 
-            <div class="signzUpsection">
-            <span class="notajoinUser"> Not a Join user ?</span>
-            <button class="signupsection"> Sign up</button>
             </div>
 
         </div>
@@ -44,13 +41,13 @@
     
             
             <div class="inputpasswordsection">
-                <input id="userpassword" class="inputpassword" type="password" required placeholder="Password">
-                <img src="assets/IMG/lock.png" alt="">
+                <input id="userpassword" class="inputpassword" type="password"  onclick="passwordvisbility()"required placeholder="Password">
+                <img id="visbilityimg" src="assets/IMG/lock.png" alt="" onclick="showVisbility()">
             </div>
     
             <div class="inputpasswordsection">
-                <input id="userconfirmpassword" class="inputconfirmpassword" type="password" required placeholder=" Confrim Password">
-                <img src="assets/IMG/lock.png" alt="">
+                <input id="userconfirmpassword" class="inputconfirmpassword" type="password" onclick="passwordconfirmvisbility()" required placeholder=" Confrim Password">
+                <img id="visbilityimgconfirm" src="assets/IMG/lock.png" alt="" onclick="showVisbilityconfirmpassword()">
             </div>
     
         <div class="checkboxsection">
@@ -64,8 +61,15 @@
         </form>
 
 
-
     </section>
+
+    <footer>
+        <a class="privacypolicyandlegalnotice" href="./privacy_policy.html">Privacy Policy </a>
+        <a class="privacypolicyandlegalnotice" href="./privacy_policy.html"> Legal notice</a>
+
+
+    </footer>
+
     
 </body>
 </html>

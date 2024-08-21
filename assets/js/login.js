@@ -26,16 +26,19 @@ async function loadUsers(path = '') {
 async function loginAction() {
     let loginMail = document.getElementById('emaillogin');
     let loginPassword = document.getElementById('passwordlogin');
+    let loginInfo = document.getElementById('incorrectentry');
 
     // Stelle sicher, dass users ein Array ist
     let user = contacts.find(u => u.email === loginMail.value && u.password === loginPassword.value);
 
     if(user) {
-        alert("Login successful: " + contacts.name);
-        // Weiterleitung oder weitere Aktionen bei erfolgreichem Login
+        loginInfo.innerText = loginSuccesfull();
+        emptyTheInputFields(loginMail,loginPassword);
+
     } else {
-        console.log("Login failed: No matching user found.");
-        alert("Incorrect email or password!");
+        loginInfo.innerText = wrongPasswordOrEmail();
+        emptyTheInputFields(loginMail,loginPassword);
+        
     }
 }
 
@@ -44,8 +47,36 @@ function screenLogo() {
 
     setTimeout(() => {
        document.getElementById("logoscreen").classList.add("loginlogo");
-   }, 1500);
+   }, 500);
 
     
   document.getElementById("logoscreensection").classList.add("logoscreennone");
+  document.getElementById("myopacity").style.opacity = "1";
+
+
+}
+
+
+function wrongPasswordOrEmail() {
+return `
+Please note that the password or email address are incorrect !!!`;
+
+}
+
+
+function loginSuccesfull() {
+    return `
+    logging in worked !!!`;
+
+}
+
+function  emptyTheInputFields(loginMail,loginPassword) {
+
+    loginMail.value ='';
+    loginPassword.value ='';
+}
+
+
+function redirectToRegister() {
+    window.location.href = "register.html";
 }
