@@ -1,0 +1,255 @@
+body {
+margin: 0;
+box-sizing: border-box;
+}
+
+.loginheadline {
+display: flex;
+align-items: center;
+justify-content: space-between;
+padding:  70px 100px 0px 100px;
+}
+
+
+.notajoinUser {
+    font-size: 20px;
+    font-weight: 500;
+    margin-right: 20px;
+}
+
+
+.signupsection {
+background-color: #2A3647;
+color: #fff;
+border: none;
+border-radius: 10px;
+padding: 18px;
+
+}
+
+.signupsection:hover {
+    background-color: #0068fa;
+    font-weight: bolder;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.register{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: white;
+        padding: 0px 88px 48px 88px;
+        border-radius: 30px;
+        gap: 8px;
+        box-shadow: 3px 0px 14px 21px #d9bebe0a;
+        width: 650px;
+        height: 493px;
+        justify-content: center;
+        position: fixed;
+        top: 280px;
+        left: 600px;
+        right: 0;
+        bottom: 0;
+    
+    }
+
+    .loginhr {
+        border: 2px solid #29ABE2;;
+        width: 30%;
+        margin-block-start: 0;
+
+    }
+
+    .login-headline{
+    font-size: 61px;
+    font-weight: 700;
+    margin-block-end: 6px;
+
+    }
+
+    .inputemailsection {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        padding: 11px 12px;
+        border: 1px solid gray;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        margin-top: 20px;
+        cursor: pointer;
+    }
+
+
+    .inputpasswordsection {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        padding: 11px 12px;
+        border: 1px solid gray;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        margin-top: 20px;
+        cursor: pointer;
+    }
+
+
+        .inputemail {
+        border: none;
+        padding: 10px;
+        width: 100%;
+        cursor: pointer;
+        }
+
+
+        
+        .inputpassword {
+            border: none;
+            padding: 10px;
+            width: 100%;
+            cursor: pointer;
+            }
+
+            .mailicon {
+                margin-left: 120px;
+                cursor: pointer;
+            }
+
+            .checkboxsection {
+                padding: 30px 0px 24px 24px;
+
+            }
+
+    
+            .loginbutton{ 
+            font-weight: bolder;
+            padding: 15px;
+            border-radius: 10px;
+            border: none;
+            background-color: #2A3647;
+            color: white;
+            font-size: 20px;
+        }
+
+
+        .loginbutton:hover {
+            background-color: #0068fa;
+            font-weight: bolder;
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        .guestbutton {
+            font-weight: bolder;
+            padding: 15px;
+            border-radius: 10px;
+            background-color: white;
+            color: black;
+            font-size: 20px;
+        }
+
+
+        .guestbutton:hover {
+            color: #0068fa;
+            border: solid 1px #0068fa;
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    
+        }
+
+        .Rememberme {
+            font-size: 18px;
+        }
+
+        .loginandgustbutton {
+            display: flex;
+            gap: 35px;
+            padding: 15px;
+        }
+        
+
+
+        .Screen-Logo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        animation: logoScreen 1s linear;
+        animation-timing-function: ease-in-out;
+        background-color: white;
+
+
+        }   
+        @keyframes logoScreen {
+
+            from {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            to {
+                justify-content: flex-start;
+                align-items: flex-start;
+                width: 50%;
+                height: 50%;
+            
+
+            }
+            
+        }
+
+
+        
+        .loginlogo {
+        width: 100px;
+        height: 122px;
+                }
+
+        .big-logo {
+            position: absolute;
+            width: 274px;
+            height: 335px;
+            top: 30%;
+            left: 45%;
+            animation-fill-mode: forwards;
+            animation-timing-function: ease-in-out;
+            animation-duration: 400ms;
+            animation-delay: 1s; 
+            animation: BiglogoScreen 1s linear;
+        }
+
+        @keyframes BiglogoScreen {
+
+            form {
+                top: 50%;
+                left: 150px;
+                width: 274px;
+                height: 300px;
+            }
+
+            to {
+                top: 70px;
+                left: 99px;
+                width: 100px;
+                height: 122px;
+            }     
+
+
+    
+        }
+
+
+
+
+        .logoscreennone {
+            display: none;
+        }
+
+
+        .incorrectentrystyle {
+            color: red;
+        }

@@ -4,6 +4,17 @@ body {
     background-color: rgb(246, 247, 248);
 }
 
+h2 {
+    font-size: 54px;
+}
+
+p,
+label {
+    font-size: 20px;
+    margin-bottom: 8px;
+    margin-top: 8px;
+}
+
 .drag-area {
     height: 688px;
     width: 252px;
@@ -43,6 +54,9 @@ body {
 .spaceBetween {
     display: flex;
     justify-content: space-between;
+}
+
+.alignCenter {
     align-items: center;
 }
 
@@ -86,19 +100,21 @@ Button {
     background-color: white;
     border-radius: 30px;
     border: 2px solid #e4dedc;
-    width: 1000px;
+    width: 1100px;
     display: flex;
     justify-content: center;
     margin-left: 150px;
 }
 
 .widthBoard {
-    width: 80%;
+    width: 90%;
+    margin-left: 50px;
 }
 
 .bottomInfo {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 50px;
 }
 
 /*Header*/
@@ -203,4 +219,145 @@ h1 {
     border-radius: 5px;
     display: block;
     width: 250px;
+}
+
+.inputTitle {
+    width: 440px;
+    height: 48px;
+    border-radius: 10px;
+    border: 1px solid #D1D1D1;
+    margin-bottom: 24px;
+    font-size: 20px;
+    font-family: 'Inter';
+}
+
+.inputDescription {
+    width: 440px;
+    height: 120px;
+    border-radius: 10px;
+    border: 1px solid #D1D1D1;
+    margin-bottom: 24px;
+    font-size: 20px;
+    font-family: 'Inter';
+}
+
+.marginTop {
+    margin-top: 6px;
+}
+
+.divButtonButtom {
+    width: 334px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.buttonContainerWhite {
+    height: 56px;
+    width: 126px;
+    border-radius: 10px;
+    background-color: white;
+    color: black;
+    border-radius: 10px;
+    border: 1px solid #2A3647;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.buttonContainerdark {
+    height: 56px;
+    width: 160px;
+    border-radius: 10px;
+    background-color: #2A3647;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.buttonContainerPrio {
+    height: 56px;
+    width: 136px;
+    border-radius: 10px;
+    background-color: white;
+    color: black;
+    border-radius: 10px;
+    border: 1px solid #eceef2;
+
+}
+
+.marginButtomButton {
+    margin-bottom: 28px;
+}
+
+.divPaddingBottum {
+    padding-bottom: 80px;
+}
+
+.subtasksInputfield {
+    border: none;
+    flex: 1;
+    width: 350px;
+    height: 40px;
+    margin-right: 50px;
+    font-family: 'Inter';
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+}
+
+.subtaskButton {
+    background-color: #FFFFFF;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 25px;
+    margin-right: 6px;
+    padding: 0;
+    border-radius: 50px;
+}
+
+.divSubtask {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.subtaskButton:hover {
+    background-color: #eceef2;
+}
+
+.subtaskList {
+    background-color: #FFFFFF;
+    width: 30px;
+}
+
+ul {
+    width: 400px;
+    font-size: 20px;
+}
+
+li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.positionTask {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 47%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.closeAddTask {
+    background-color: #FFFFFF;
+}
+
+.curser {
+    cursor: pointer;
 }

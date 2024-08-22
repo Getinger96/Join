@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="./assets/img/Capa 2.png" />
+    <link rel="stylesheet" href="./Styles/login.css">
+    <script src="./assets/js/register.js"></script>
+    <script src="./assets/js/login.js"></script>
+    <title>Login</title>
+</head>
+<body onload="loadUsers(path = '')" id="myopacity">
+
+    <header>
+
+        <div class="loginheadline">
+            <img class="loginlogo" src="assets/IMG/Join_logo.svg" alt="">
+
+            <div class="signzUpsection">
+            <span class="notajoinUser"> Not a Join user ?</span>
+            <button class="signupsection" onclick="redirectToRegister()"> Sign up</button>
+            </div>
+
+        </div>
+
+
+
+    </header>
+
+    <section class="register">
+
+        <h1 class="login-headline"> LOG IN </h1>
+        <hr class="loginhr">
+        <form onsubmit="loginAction(); return false;">
+        <div class="inputemailsection">
+            <input id="emaillogin" class="inputemail" type="email" required placeholder="E-Mail"> 
+            <img  class="mailicon"src="assets/IMG/mail.png" alt="">
+        </div>
+        
+        <div class="inputpasswordsection">
+            <input id="passwordlogin" class="inputpassword" type="password" required placeholder="Password">
+            <img  src="assets/IMG/lock.png" alt="">
+        </div>
+
+        <span class="incorrectentrystyle" id="incorrectentry">
+        </span>
+
+        <div class="checkboxsection">
+        <input id="checkboxlogin" class="checkbox" type="checkbox"> 
+        <span class="Rememberme"> Remember me </span>
+        </div>
+
+        <div class="loginandgustbutton"> 
+        <button class="loginbutton"> Login in</button>
+        <button class="guestbutton">Guest Log in </button>
+        </div>
+        </form>
+
+
+
+    </section>
+
+
+    <div id="logoscreensection" class="Screen-Logo">
+
+        <img id="logoscreen" class="big-logo" src="assets/IMG/Join_logo.svg" alt="">
+
+
+    </div>
+    
+</body>
+</html>
