@@ -62,41 +62,47 @@
 
                 <div class="date_Container">
                     <span class="Date_header">Due date <span class="red">*</span></span>
-                    <div class="date_input_Container">
-                        <input  placeholder="dd/mm/yyyy" class="input_date" required type="date">
-                        <img class="img_calender" src="assets/IMG/Calender.svg" alt="">
-                    </div>
+
+                    <input placeholder="dd/mm/yyyy" class="input_date" required type="date">
+
                 </div>
 
                 <div class="Prio_Container">
                     <span class="prio_Header">Prio</span>
                     <div class="Prio_btn_Container">
-                        <button id="Urgent_container" onclick="selectedDificultyUrgent()" class="Prio_Btn">Urgent <img src="assets/IMG/PRio_urgent (2).svg" alt=""></button>
-                        <button onclick="selectedDificultyMedium()" class="Prio_Btn">Medium <img src="assets/IMG/Prio_medium (2).svg" alt=""></button>
-                        <button onclick="selectedDificultyLow()" class="Prio_Btn">Low <img src="assets/IMG/Prio_Low (2).svg" alt=""></button>
+                        <button type="button" id="Urgent_container" onclick="selectedDificultyUrgent()"
+                            class="Prio_Btn">Urgent <img id="Urgent_IMG" src="assets/IMG/PRio_urgent (2).svg" alt="">
+                            <img id="sele_IMG_URG" class="d_none" src="assets/IMG/Prio_urgent_WHITE.svg"
+                                alt=""></button>
+                        <button type="button" id="MediumContainer" onclick="selectedDificultyMedium()"
+                            class="Prio_Btn">Medium <img id="Med_IMG" src="assets/IMG/Prio_medium (2).svg" alt=""> <img
+                                class="d_none" id="sele_IMG_Med" src="assets/IMG/PRio_Medium_WHITE.svg" alt=""></button>
+                        <button type="button" id="LowContainer" onclick="selectedDificultyLow()" class="Prio_Btn">Low
+                            <img id="Low_IMG" src="assets/IMG/Prio_Low (2).svg" alt=""><img class="d_none"
+                                id="sele_IMG_low" src="assets/IMG/Prio_LOW_WHITE.svg" alt=""></button>
                     </div>
 
-                    </div>
-
-                    <div class="cataegory_Container">
-                        <span class="category_Header">Category <span class="red">*</span></span>
-                        <select class="select_Category" name="" id="">
-                            <option class="selector_Txt" value="" disabled selected>Select task category</option>
-                            <option value=""></option>
-                        </select>
-                    </div>
-
-                    <div class="Subtasks_Container">
-                        <span class="Subtasks_Header">Subtasks</span>
-                        <div class="Subtask_Inputfield_Container">
-                            <input placeholder="Add new Subtask" class="Subtasks_Inputfield" type="text">
-
-                            <button class="Subtasks_Btn"><img src="assets/IMG/add_subtask_img.svg" alt=""></button>
-                        </div>
-
-
-                    </div>
                 </div>
+
+                <div class="cataegory_Container">
+                    <span class="category_Header">Category <span class="red">*</span></span>
+                    <select class="select_Category" name="" id="">
+                        <option class="selector_Txt" value="" disabled selected>Select task category</option>
+                        <option value=""></option>
+                    </select>
+                </div>
+
+                <div class="Subtasks_Container">
+                    <span class="Subtasks_Header">Subtasks</span>
+                    <div class="Subtask_Inputfield_Container">
+                        <input placeholder="Add new Subtask" class="Subtasks_Inputfield" type="text">
+
+                        <button class="Subtasks_Btn"><img src="assets/IMG/add_subtask_img.svg" alt=""></button>
+                    </div>
+
+
+                </div>
+            </div>
 
 
         </form>

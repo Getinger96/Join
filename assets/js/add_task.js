@@ -126,10 +126,82 @@ function showSelectedProfile(firstletters, i) {
 
 
 function selectedDificultyUrgent() {
+    
 
     let urgent= document.getElementById('Urgent_container');
+    let IMG= document.getElementById('sele_IMG_URG');
+    let img= document.getElementById('Urgent_IMG');
+    img.classList.toggle('d_none')
+    IMG.classList.toggle('d_none')
     urgent.classList.toggle('color_white');
-    urgent.classList.toggle('bg_urgent');
+    urgent.classList.toggle('bg_urgent_selected');
+    let medium= document.getElementById('MediumContainer');
+    medium.classList.remove('color_white');
+    medium.classList.remove('bg_Medium');
+    let IMG_MEDIUM_SELEC= document.getElementById('sele_IMG_Med');
+    let img_medium= document.getElementById('Med_IMG');
+    IMG_MEDIUM_SELEC.classList.add('d_none')
+    img_medium.classList.remove('d_none')
+    let LOW= document.getElementById('LowContainer');
+    let IMG_LOW= document.getElementById('sele_IMG_low');
+    let img_low= document.getElementById('Low_IMG');
+    IMG_LOW.classList.add('d_none')
+    img_low.classList.remove('d_none')
+    LOW.classList.remove('color_white');
+    LOW.classList.remove('bg_Low');
+
+}
+
+function selectedDificultyMedium() {
+
+    let medium= document.getElementById('MediumContainer');
+    let IMG= document.getElementById('sele_IMG_Med');
+    let img= document.getElementById('Med_IMG');
+    img.classList.toggle('d_none')
+    IMG.classList.toggle('d_none')
+    medium.classList.toggle('color_white');
+    medium.classList.toggle('bg_Medium');
+    let urgent= document.getElementById('Urgent_container');
+    let IMG_URGENT= document.getElementById('sele_IMG_URG');
+    let img_urgent= document.getElementById('Urgent_IMG');
+    IMG_URGENT.classList.add('d_none')
+    img_urgent.classList.remove('d_none')
+    urgent.classList.remove('color_white');
+    urgent.classList.remove('bg_urgent_selected');
+    let LOW= document.getElementById('LowContainer');
+    let IMG_LOW= document.getElementById('sele_IMG_low');
+    let img_low= document.getElementById('Low_IMG');
+    IMG_LOW.classList.add('d_none')
+    img_low.classList.remove('d_none')
+    LOW.classList.remove('color_white');
+    LOW.classList.remove('bg_Low');
+
+
+}
+
+function selectedDificultyLow() {
+
+    let LOW= document.getElementById('LowContainer');
+    let IMG= document.getElementById('sele_IMG_low');
+    let img= document.getElementById('Low_IMG');
+    img.classList.toggle('d_none')
+    IMG.classList.toggle('d_none')
+    LOW.classList.toggle('color_white');
+    LOW.classList.toggle('bg_Low');
+    let medium= document.getElementById('MediumContainer');
+    medium.classList.remove('color_white');
+    medium.classList.remove('bg_Medium');
+    let IMG_MEDIUM_SELEC= document.getElementById('sele_IMG_Med');
+    let img_medium= document.getElementById('Med_IMG');
+    IMG_MEDIUM_SELEC.classList.add('d_none');
+    img_medium.classList.remove('d_none');
+    let urgent= document.getElementById('Urgent_container');
+    let IMG_URGENT= document.getElementById('sele_IMG_URG');
+    let img_urgent= document.getElementById('Urgent_IMG');
+    IMG_URGENT.classList.add('d_none');
+    img_urgent.classList.remove('d_none');
+    urgent.classList.remove('color_white');
+    urgent.classList.remove('bg_urgent_selected');
 
 }
 
