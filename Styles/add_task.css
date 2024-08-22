@@ -136,25 +136,127 @@ h1 {
 
 
 .select_container {
-    width: 440px;
+    width: 428px;
     height: 48px;
     border-radius: 10px;
-    border: 1px;
+    border: 1px solid #D1D1D1;
     display: flex;
     justify-content: space-between;
-    padding: 12px, 16px, 12px, 16px;
     font-family: 'Inter';
     font-weight: 400;
     font-size: 20px;
     line-height: 24px;
+    background-color: #FFFFFF;
+    padding: 10px;
+    
+    z-index: 1;
 }
 
-.selector_Txt {
-    font-family: 'Inter';
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 24px;
+.arrow_drop_downaa {
+    width: 24px;
+    height: 24px;
 }
+
+.Selection_Container {
+    width: 448px;
+    height: 300px;
+    background-color: #FFFFFF;
+    position: absolute;
+    margin-top: 74px;
+    border-radius: 10px;
+    border-radius: 10px;
+    border: 1px solid #D1D1D1;
+    padding-right: 0px;
+    padding-top: 9px;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    
+    
+
+}
+
+.profile_Container {
+    display: flex;
+    width: 426px;
+    height: 56px;
+    justify-content: space-between;
+    align-items: center;
+    
+
+}
+
+
+
+.bg_color {
+    background-color: #2A3647;
+}
+
+.color_white {
+    color: #FFFFFF;
+}
+
+.bg_urgent {
+    background-color: #FF3D00;
+}
+
+.bg_Medium {
+    background-color: #FFA800;
+}
+
+.bg_Low {
+    background-color: #7AE229;
+}
+
+
+.profile_Container:hover {
+    border: 1px solid rgba(0,0,0,0.1);
+    
+}
+
+.profile_container_header {
+    width: 225px;
+    height: 42px;
+    gap: 16px;
+    display: flex;
+    align-items: center;
+    padding: 7px 16px 7px 16px ;
+
+}
+
+.check_img {
+    width: 24px;
+    height: 24px;
+}
+.checked_img {
+    width: 24px;
+    height: 24px;
+}
+
+
+.profile_Badge_assign {
+    width: 42px;
+    height: 42px;
+    border-radius: 45px;
+    display: flex;
+    border: 2px solid #FFFFFF;
+    background-color: aqua;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.Selected_profiles_Container {
+    display: flex;
+}
+
+
+
+.d_none {
+    display: none;
+}
+
 
 .separatorTask {
     width: 2px;
@@ -207,21 +309,36 @@ h1 {
     line-height: 24px;
 }
 
-.input_Date {
+.date_input_Container {
+    height: 48px;
     width: 440px;
-    height: 64px;
+    border: 1px solid #D1D1D1;
+    background-color: #FFFFFF;
     border-radius: 10px;
-    border: 1px solid #D1D1D1; 
-    color: #D1D1D1;
+    display: flex;
+   
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.input_date {
+    width: 119px;
+    height: 24px;
     font-family: 'Inter';
     font-weight: 400;
     font-size: 20px;
     line-height: 24px;
+    border: none;
+    
 }
-::-webkit-calendar-picker-indicator{
+
+.img_calender {
     width: 24px;
     height: 24px;
 }
+
+
 
 .Prio_Container {
     width: 440px;
@@ -237,6 +354,8 @@ h1 {
     font-weight: 400;
     font-size: 20px;
     line-height: 24px;
+    display: flex;
+
 }
 
 .Prio_btn_Container {
@@ -263,6 +382,14 @@ h1 {
     border: 1px solid  #FFFFFF ;
 box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.1);
 }
+
+.Prio_Btn:hover {
+    box-shadow: 0px 4px 5px 0px rgba(0,0,0,0.25);
+}
+    
+
+
+
 
 
 .cataegory_Container {

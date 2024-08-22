@@ -23,6 +23,15 @@
     box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.1);
 }
 
+.logInUser {
+   padding: 10px;
+    border-radius: 45px;
+    border: 3px solid #2A3647;
+    margin-left: 8px;
+    height: 42px;
+    width: 42px;
+}
+
 .title {
     width:319px ;
     height: 24px;
