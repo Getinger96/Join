@@ -46,38 +46,26 @@ async function  addnewUser() {
     let userpassword = document.getElementById('userpassword');
     let userconfirmpassword = document.getElementById('userconfirmpassword');
     let checkbox = document.getElementById('checkbox');
+    let sigUpInfo = document.getElementById('signupinfotext');
 
 
 
     if (userpassword.value.length <= 5) {
-        alert("Passwords must have maximal 6 characters");
-        username.value = '';
-        usermail.value = '';
-        userpassword.value = '';
-        userconfirmpassword.value = '';
-        checkbox.checked = false;
-        
+        sigUpInfo.innerHTML = passwordToShort();
+        emptyTheInputFields(username, usermail, userpassword, userconfirmpassword, checkbox);
         return;
     }
 
 
     if (userpassword.value !== userconfirmpassword.value) {
-        alert("Passwords do not match!")
-        username.value = '';
-        usermail.value = '';
-        userpassword.value = '';
-        userconfirmpassword.value = '';
-        checkbox.checked = false;
+        sigUpInfo.innerHTML = passwordNoMatch();
+        emptyTheInputFields(username, usermail, userpassword, userconfirmpassword, checkbox);
         return;
     }
 
     if (checkbox.checked = false) {
-        alert("You must accept the privacy policy to register.");
-        username.value = '';
-        usermail.value = '';
-        userpassword.value = '';
-        userconfirmpassword.value = '';
-        checkbox.checked = false;
+        sigUpInfo.innerHTML = checkboxNoChecked();
+        emptyTheInputFields(username, usermail, userpassword, userconfirmpassword, checkbox);
         return;
     }
 
@@ -155,3 +143,21 @@ function showVisbilityconfirmpassword() {
 
 }
 
+
+function passwordToShort() {
+    return `
+    Passwords must have maximal 6 characters !!!`;
+    
+    }
+
+function passwordNoMatch() {
+    return `
+    Passwords do not match! !!!`;
+
+}
+
+function checkboxNoChecked() {
+    return `
+    You must accept the privacy policy to register !!!`;
+
+}

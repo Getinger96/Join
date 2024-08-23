@@ -9,16 +9,16 @@
     <script src="./assets/js/login.js"></script>
     <title>Login</title>
 </head>
-<body onload="loadUsers(path = '')" id="myopacity">
+<body onload="loadUsers(path = ''); screenWidth();" onresize="screenWidth()" id="myopacity">
 
     <header>
 
         <div class="loginheadline">
             <img class="loginlogo" src="assets/IMG/Join_logo.svg" alt="">
 
-            <div class="signzUpsection">
+            <div class="signUpsection">
             <span class="notajoinUser"> Not a Join user ?</span>
-            <button class="signupsection" onclick="redirectToRegister()"> Sign up</button>
+            <button class="signupsectionbutton" onclick="redirectToRegister()"> Sign up</button>
             </div>
 
         </div>
@@ -26,12 +26,12 @@
 
 
     </header>
-
+    <div class="middle-section">
     <section class="register">
 
         <h1 class="login-headline"> LOG IN </h1>
         <hr class="loginhr">
-        <form onsubmit="loginAction(); return false;">
+        <form onsubmit="loginAction(); return false; ">
         <div class="inputemailsection">
             <input id="emaillogin" class="inputemail" type="email" required placeholder="E-Mail"> 
             <img  class="mailicon"src="assets/IMG/mail.png" alt="">
@@ -59,8 +59,22 @@
 
 
     </section>
+    </div>
+
+    <div class="signUpsectionmobilversion">
+        <span class="notajoinUsermobilversion"> Not a Join user ?</span>
+        <button class="signupsectionmobilversionbutton" onclick="redirectToRegister()"> Sign up</button>
+        </div>
+
+    <div class="privacy_policyandlegal_notesSection">
+
+        <a  class="privacypolicyandlegalnotice" href="privacy_policy.html"> Privacy Policy</a>
+        <a  class="privacypolicyandlegalnotice" href="legal_notes.html"> Legal Notes </a>
 
 
+    </div>
+    
+    
     <div id="logoscreensection" class="Screen-Logo">
 
         <img id="logoscreen" class="big-logo" src="assets/IMG/Join_logo.svg" alt="">

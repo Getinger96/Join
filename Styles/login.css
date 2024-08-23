@@ -1,6 +1,9 @@
 body {
 margin: 0;
 box-sizing: border-box;
+font-family: "inter", sans-serif;
+background-color: #f6f7f8;
+  
 }
 
 .loginheadline {
@@ -18,7 +21,7 @@ padding:  70px 100px 0px 100px;
 }
 
 
-.signupsection {
+.signupsectionbutton {
 background-color: #2A3647;
 color: #fff;
 border: none;
@@ -27,7 +30,7 @@ padding: 18px;
 
 }
 
-.signupsection:hover {
+.signupsectionbutton:hover {
     background-color: #0068fa;
     font-weight: bolder;
     cursor: pointer;
@@ -43,14 +46,7 @@ padding: 18px;
         border-radius: 30px;
         gap: 8px;
         box-shadow: 3px 0px 14px 21px #d9bebe0a;
-        width: 650px;
-        height: 493px;
         justify-content: center;
-        position: fixed;
-        top: 280px;
-        left: 600px;
-        right: 0;
-        bottom: 0;
     
     }
 
@@ -178,9 +174,10 @@ padding: 18px;
         top: 0;
         right: 0;
         left: 0;
-        animation: logoScreen 1s linear;
+        animation: logoScreen 800ms linear;
         animation-timing-function: ease-in-out;
         background-color: white;
+        animation-duration: 500ms;
 
 
         }   
@@ -194,8 +191,7 @@ padding: 18px;
             to {
                 justify-content: flex-start;
                 align-items: flex-start;
-                width: 50%;
-                height: 50%;
+                
             
 
             }
@@ -213,13 +209,13 @@ padding: 18px;
             position: absolute;
             width: 274px;
             height: 335px;
-            top: 30%;
-            left: 45%;
+            top: 33%;
+            left: 42%;
             animation-fill-mode: forwards;
             animation-timing-function: ease-in-out;
-            animation-duration: 400ms;
-            animation-delay: 1s; 
-            animation: BiglogoScreen 1s linear;
+            animation: BiglogoScreen 800ms linear;
+            animation-duration: 500ms;
+
         }
 
         @keyframes BiglogoScreen {
@@ -234,8 +230,8 @@ padding: 18px;
             to {
                 top: 70px;
                 left: 99px;
-                width: 100px;
-                height: 122px;
+                width: 70px;
+                height: 70px;
             }     
 
 
@@ -252,4 +248,141 @@ padding: 18px;
 
         .incorrectentrystyle {
             color: red;
+        }
+        
+        
+        .middle-section     {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+        }
+
+        .privacypolicyandlegalnotice {
+            color: #aaa2a2;
+            text-decoration: none;
+        }
+
+
+        .privacy_policyandlegal_notesSection {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .privacypolicyandlegalnotice:hover {
+            color: #0068fa;
+            font-weight: bolder;
+        }
+
+
+        .notajoinUsermobilversion {
+            font-size: 20px;
+            font-weight: 500;
+            margin-right: 20px;
+        }
+        
+        
+        .signupsectionmobilversionbutton {
+        background-color: #2A3647;
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+        padding: 18px;
+        
+        }
+        
+        .signupsectionmobilversionbutton:hover {
+            background-color: #0068fa;
+            font-weight: bolder;
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        .signUpsectionmobilversion {
+        display: none;
+        justify-content: center;
+        align-items: center;
+        padding: 20px 0px 30px 0px;
+        }
+
+        @media (max-width:530px) {
+
+            .loginheadline {
+                padding: 20px 0px 0px 20px;   
+            }
+
+            .signUpsectionmobilversion {
+                padding: 0px 0px 25px 0px;
+
+            }
+
+
+            .loginlogo {
+                width: 70px;
+                height: 70px;
+            }
+
+
+            .login-headline {
+                font-size: 45px;
+                
+            }
+
+
+            .inputemailsection {
+                margin-top: 15px;
+                padding: 8px 10px;
+            }
+
+
+            .inputpasswordsection {
+                margin-top: 15px;
+                padding: 8px 10px;
+
+            }
+
+            .loginandgustbutton  {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .guestbutton {
+                padding: 10px;
+            }
+
+            .register  {
+                padding: 0px 88px 48px 50px;
+
+            }
+        }
+
+
+        @media (max-width:430px) {
+    
+            
+            .login-headline {
+                font-size: 35px;
+                
+            }
+
+
+            .inputemailsection {
+                width: 230px;
+            }
+
+
+            .inputpasswordsection {
+                width: 230px;
+            }
+
+            .register {
+                padding: 0px 0px 48px 5px;
+
+            }
+
+            .notajoinUsermobilversion {
+                font-size: 15px;
+            }
+
         }

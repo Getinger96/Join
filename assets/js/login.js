@@ -45,10 +45,7 @@ async function loginAction() {
 
 function screenLogo() {
 
-    setTimeout(() => {
-       document.getElementById("logoscreen").classList.add("loginlogo");
-   }, 500);
-
+document.getElementById("logoscreen").classList.add("loginlogo");
     
   document.getElementById("logoscreensection").classList.add("logoscreennone");
   document.getElementById("myopacity").style.opacity = "1";
@@ -79,4 +76,24 @@ function  emptyTheInputFields(loginMail,loginPassword) {
 
 function redirectToRegister() {
     window.location.href = "register.html";
+}
+
+
+function screenWidth() {
+
+   let screenWidth = window.innerWidth;
+   let signUpSection = document.querySelector('.signUpsection');
+   let signUpSectionMobilVersion = document.querySelector('.signUpsectionmobilversion');
+
+
+    if (screenWidth <= 900 ) {
+        signUpSection.style.display = 'none';
+        signUpSectionMobilVersion.style.display = 'flex';
+
+    } else {
+         signUpSection.style.display = 'block';
+        signUpSectionMobilVersion.style.display = 'none';
+        
+    }
+
 }
