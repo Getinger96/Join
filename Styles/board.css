@@ -21,6 +21,7 @@ label {
     margin-bottom: 50px;
     display: flex;
     align-items: flex-start;
+    flex-direction: column;
 }
 
 .drag-area-highlight {
@@ -360,4 +361,108 @@ li {
 
 .curser {
     cursor: pointer;
+}
+
+.AssignedTO_Container {
+    width: 440px;
+    height: 80px;
+    margin-top: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.Assign_Header {
+    font-family: 'Inter';
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    width: 112px;
+    height: 24px;
+}
+
+.select_container {
+    width: 428px;
+    height: 48px;
+    border-radius: 10px;
+    border: 1px solid #D1D1D1;
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Inter';
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    background-color: #FFFFFF;
+    padding: 10px;
+
+    z-index: 1;
+}
+
+.arrow_drop_downaa {
+    width: 24px;
+    height: 24px;
+}
+
+.Selection_Container {
+    width: 448px;
+    height: 300px;
+    background-color: #FFFFFF;
+    position: absolute;
+    margin-top: 74px;
+    border-radius: 10px;
+    border-radius: 10px;
+    border: 1px solid #D1D1D1;
+    padding-right: 0px;
+    padding-top: 9px;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+.d_none {
+    display: none;
+}
+
+.Selected_profiles_Container {
+    display: flex;
+}
+
+.profile_Container {
+    display: flex;
+    width: 426px;
+    height: 56px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.profile_container_header {
+    width: 225px;
+    height: 42px;
+    gap: 16px;
+    display: flex;
+    align-items: center;
+    padding: 7px 16px 7px 16px;
+
+}
+
+.profile_Badge_assign {
+    width: 42px;
+    height: 42px;
+    border-radius: 45px;
+    display: flex;
+    border: 2px solid #FFFFFF;
+    background-color: aqua;
+    justify-content: center;
+    align-items: center;
+}
+
+.check_img {
+    width: 24px;
+    height: 24px;
+}
+
+.checked_img {
+    width: 24px;
+    height: 24px;
 }
