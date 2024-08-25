@@ -1,38 +1,33 @@
-const BAse_URL = "https://join-37803-default-rtdb.europe-west1.firebasedatabase.app/"
-let Contacts = [];
+const base_URL = "https://join-37803-default-rtdb.europe-west1.firebasedatabase.app/";
+let contacts = [];
 
 
 
-async function onloadfunc() {
+async function onloadfunc(path = '') {
 
-    let userResponse = await loadcontacts("contacts");
-    console.log(userResponse)
-    let UserKeyArray = Object.keys(userResponse)
-    console.log(UserKeyArray)
+    let response = await fetch(base_URL + path + ".json");
+    let userJSON = await response.json();
+    let userAsArray = Object.values(userJSON.contacts);
+
+    for (let index = 0; index < userAsArray.length; index++) {
+        let user = userAsArray[index];
+        let newUser = Object.keys(user)
+        let contact = userAsArray[index][newUser]
 
 
-    for (let index = 0; index < UserKeyArray.length; index++) {
-        Contacts.push(
-            {
-                id: UserKeyArray[index],
-                user: userResponse[UserKeyArray[index]],
-            }
-        )
+        contacts.push({
+            email: contact.email,
+            name: contact.name,
+            password: contact.password,
+        })
+
 
     }
-    console.log(Contacts)
+    console.log(contacts)
     renderSelectionContainer();
-
-
 }
 
-async function loadcontacts(path) {
-    let response = await fetch(BAse_URL + path + ".json")
-    let responseToJson = await response.json();
-    return responseToJson;
 
-
-}
 
 
 
@@ -56,19 +51,29 @@ function closelist() {
 
 }
 
+function getLastName(name) {
+    let lastName = name.trim().split(' ');
+    return lastName[lastName.length - 1];
+}
+
+
 function renderSelectionContainer() {
     let profiles = document.getElementById('Selection_Container');
-    profiles.innerHTML = '';
+    if (!profiles) {
+        console.error('Selection_Container not found');
+        return;
+    }
+    profiles.innerHTML = ' ';
 
-    for (let i = 0; i < Contacts.length; i++) {
-        let contact = Contacts[i];
-        let name = contact.user.name;
-        let forNAme = contact.user.forname;
-        let lastName = contact.user.lastname;
-        let firstletterforname = forNAme.charAt(0);
-        let firstletterlastname = lastName.charAt(0);
-        let firstletters = firstletterforname + firstletterlastname;
-
+    for (let i = 0; i < contacts.length; i++) {
+        let contact = contacts[i];
+        let name = contact.name;
+        let forNAme = name.charAt(0);
+        let forNAmebig= forNAme.toUpperCase();
+        let lastname = getLastName(name);
+        let firstletterlastname = lastname.charAt(0);
+        let firstletterlastnameBIG= firstletterlastname.toUpperCase();
+        let firstletters = forNAmebig+ firstletterlastnameBIG;
         profiles.innerHTML += `
        <div id="profile_Container${i}" onclick="selectedContact(${i},'${name}','${firstletters}')" class="profile_Container">
          <div class="profile_container_header">
@@ -127,25 +132,25 @@ function showSelectedProfile(firstletters, i) {
 
 
 function selectedDificultyUrgent() {
-    
 
-    let urgent= document.getElementById('Urgent_container');
-    let IMG= document.getElementById('sele_IMG_URG');
-    let img= document.getElementById('Urgent_IMG');
+
+    let urgent = document.getElementById('Urgent_container');
+    let IMG = document.getElementById('sele_IMG_URG');
+    let img = document.getElementById('Urgent_IMG');
     img.classList.toggle('d_none')
     IMG.classList.toggle('d_none')
     urgent.classList.toggle('color_white');
     urgent.classList.toggle('bg_urgent_selected');
-    let medium= document.getElementById('MediumContainer');
+    let medium = document.getElementById('MediumContainer');
     medium.classList.remove('color_white');
     medium.classList.remove('bg_Medium');
-    let IMG_MEDIUM_SELEC= document.getElementById('sele_IMG_Med');
-    let img_medium= document.getElementById('Med_IMG');
+    let IMG_MEDIUM_SELEC = document.getElementById('sele_IMG_Med');
+    let img_medium = document.getElementById('Med_IMG');
     IMG_MEDIUM_SELEC.classList.add('d_none')
     img_medium.classList.remove('d_none')
-    let LOW= document.getElementById('LowContainer');
-    let IMG_LOW= document.getElementById('sele_IMG_low');
-    let img_low= document.getElementById('Low_IMG');
+    let LOW = document.getElementById('LowContainer');
+    let IMG_LOW = document.getElementById('sele_IMG_low');
+    let img_low = document.getElementById('Low_IMG');
     IMG_LOW.classList.add('d_none')
     img_low.classList.remove('d_none')
     LOW.classList.remove('color_white');
@@ -155,23 +160,23 @@ function selectedDificultyUrgent() {
 
 function selectedDificultyMedium() {
 
-    let medium= document.getElementById('MediumContainer');
-    let IMG= document.getElementById('sele_IMG_Med');
-    let img= document.getElementById('Med_IMG');
+    let medium = document.getElementById('MediumContainer');
+    let IMG = document.getElementById('sele_IMG_Med');
+    let img = document.getElementById('Med_IMG');
     img.classList.toggle('d_none')
     IMG.classList.toggle('d_none')
     medium.classList.toggle('color_white');
     medium.classList.toggle('bg_Medium');
-    let urgent= document.getElementById('Urgent_container');
-    let IMG_URGENT= document.getElementById('sele_IMG_URG');
-    let img_urgent= document.getElementById('Urgent_IMG');
+    let urgent = document.getElementById('Urgent_container');
+    let IMG_URGENT = document.getElementById('sele_IMG_URG');
+    let img_urgent = document.getElementById('Urgent_IMG');
     IMG_URGENT.classList.add('d_none')
     img_urgent.classList.remove('d_none')
     urgent.classList.remove('color_white');
     urgent.classList.remove('bg_urgent_selected');
-    let LOW= document.getElementById('LowContainer');
-    let IMG_LOW= document.getElementById('sele_IMG_low');
-    let img_low= document.getElementById('Low_IMG');
+    let LOW = document.getElementById('LowContainer');
+    let IMG_LOW = document.getElementById('sele_IMG_low');
+    let img_low = document.getElementById('Low_IMG');
     IMG_LOW.classList.add('d_none')
     img_low.classList.remove('d_none')
     LOW.classList.remove('color_white');
@@ -182,23 +187,23 @@ function selectedDificultyMedium() {
 
 function selectedDificultyLow() {
 
-    let LOW= document.getElementById('LowContainer');
-    let IMG= document.getElementById('sele_IMG_low');
-    let img= document.getElementById('Low_IMG');
+    let LOW = document.getElementById('LowContainer');
+    let IMG = document.getElementById('sele_IMG_low');
+    let img = document.getElementById('Low_IMG');
     img.classList.toggle('d_none')
     IMG.classList.toggle('d_none')
     LOW.classList.toggle('color_white');
     LOW.classList.toggle('bg_Low');
-    let medium= document.getElementById('MediumContainer');
+    let medium = document.getElementById('MediumContainer');
     medium.classList.remove('color_white');
     medium.classList.remove('bg_Medium');
-    let IMG_MEDIUM_SELEC= document.getElementById('sele_IMG_Med');
-    let img_medium= document.getElementById('Med_IMG');
+    let IMG_MEDIUM_SELEC = document.getElementById('sele_IMG_Med');
+    let img_medium = document.getElementById('Med_IMG');
     IMG_MEDIUM_SELEC.classList.add('d_none');
     img_medium.classList.remove('d_none');
-    let urgent= document.getElementById('Urgent_container');
-    let IMG_URGENT= document.getElementById('sele_IMG_URG');
-    let img_urgent= document.getElementById('Urgent_IMG');
+    let urgent = document.getElementById('Urgent_container');
+    let IMG_URGENT = document.getElementById('sele_IMG_URG');
+    let img_urgent = document.getElementById('Urgent_IMG');
     IMG_URGENT.classList.add('d_none');
     img_urgent.classList.remove('d_none');
     urgent.classList.remove('color_white');

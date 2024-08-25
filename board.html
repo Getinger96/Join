@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="Styles/Desktop_template.css">
     <link rel="stylesheet" href="./Styles/fontStyles.css">
     <script src="./assets/js/board.js"></script>
-    <script src="./assets/js/add_task.js"></script>
+
     <script src="./assets/js/script.js"></script>
     <script src="./assets/js/board_database.js"></script>
     <link rel="icon" type="image/x-icon" href="./assets/img/Capa 2.png" />
@@ -46,7 +46,7 @@
                             <p>To do</p>
                             <img class="curser" onclick="openTask()" src="./assets/img/plus button.png">
                         </div>
-                        <div class="noTasks" style="display: none;">No tasks To do</div>
+                        <div class="noTasks" category="open" style="display: none;">No tasks To do</div>
                         <div class="drag-area" id="open" ondrop="moveTo('open')" ondragover="allowDrop(event)"
                             ondragleave="removeHighlight('open')"></div>
                     </div>
@@ -55,7 +55,7 @@
                             <p>In progress</p>
                             <img class="curser" onclick="openTask()" src="./assets/img/plus button.png">
                         </div>
-                        <div class="noTasks" style="display: none;">No tasks in progress</div>
+                        <div class="noTasks" category="progress" style="display: none;">No tasks in progress</div>
                         <div class="drag-area" id="progress" ondrop="moveTo('progress')" ondragover="allowDrop(event)"
                             ondragleave="removeHighlight('progress')"></div>
                     </div>
@@ -64,7 +64,8 @@
                             <p>Await feedback</p>
                             <img class="curser" onclick="openTask()" src="./assets/img/plus button.png">
                         </div>
-                        <div class="noTasks" style="display: none;">No tasks Await feedback</div>
+                        <div class="noTasks" category="awaitFeedback" style="display: none;">No tasks Await feedback
+                        </div>
                         <div class="drag-area" id="awaitFeedback" ondrop="moveTo('awaitFeedback')"
                             ondragover="allowDrop(event)" ondragleave="removeHighlight('awaitFeedback')"></div>
                     </div>
@@ -73,7 +74,7 @@
                             <p>Done</p>
                             <img class="curser" onclick="openTask()" src="./assets/img/plus button.png">
                         </div>
-                        <div class="noTasks" style="display: none;">No tasks Done</div>
+                        <div class="noTasks" category="closed" style="display: none;">No tasks Done</div>
                         <div class="drag-area" id="closed" ondrop="moveTo('closed')" ondragover="allowDrop(event)"
                             ondragleave="removeHighlight('closed')"></div>
                     </div>

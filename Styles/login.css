@@ -51,9 +51,10 @@ padding: 18px;
     }
 
     .loginhr {
-        border: 2px solid #29ABE2;;
         width: 30%;
         margin-block-start: 0;
+        border: 2px solid;
+        color: #29ABE2;
 
     }
 
@@ -174,10 +175,10 @@ padding: 18px;
         top: 0;
         right: 0;
         left: 0;
-        animation: logoScreen 800ms linear;
+        animation: logoScreen 1.5s forwards;
         animation-timing-function: ease-in-out;
         background-color: white;
-        animation-duration: 500ms;
+      
 
 
         }   
@@ -189,6 +190,7 @@ padding: 18px;
                 align-items: center;
             }
             to {
+                display: none;
                 justify-content: flex-start;
                 align-items: flex-start;
                 
@@ -213,8 +215,9 @@ padding: 18px;
             left: 42%;
             animation-fill-mode: forwards;
             animation-timing-function: ease-in-out;
-            animation: BiglogoScreen 800ms linear;
-            animation-duration: 500ms;
+            animation: BiglogoScreen 1.5s forwards;
+            
+         
 
         }
 
@@ -355,6 +358,81 @@ padding: 18px;
                 padding: 0px 88px 48px 50px;
 
             }
+            .Screen-Logo {
+                animation: logoScreen 500ms forwards;
+                animation-timing-function: ease-in-out;
+                animation-delay: 0.5s;
+        
+        
+                }   
+                @keyframes logoScreen {
+        
+                    from {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        transform: scale(1) translate(0%, 0%); /* Das Element wird in seiner Originalgröße angezeigt (scale(1)) und bleibt an seiner ursprünglichen Position (translate(0%, 0%)). */
+                        opacity: 1; /* Das Element ist vollständig sichtbar zu Beginn. */
+
+                    
+                    }
+                    to {
+                        display: none;
+                        transform:  scale(0.) translate(-50%, -50%);
+                        opacity: 0;
+                    
+        
+                    }
+                    
+                }
+
+
+            .big-logo {
+                position: static;
+                width: 150px;
+                height: 150px;
+                animation-fill-mode: forwards;
+                animation-timing-function: ease-in-out;
+                animation: BiglogoScreen 1s forwards;
+                animation-delay: 0.5s;
+           
+           
+            }
+
+
+
+            @keyframes BiglogoScreen {
+
+                form {
+                width: 150px;
+                height: 150px;
+                }
+    
+                to {
+                    width: 70px;
+                    height: 70px;
+                
+                }     
+    
+    
+        
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         }
 
 

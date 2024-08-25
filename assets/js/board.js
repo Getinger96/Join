@@ -1,15 +1,19 @@
+let subtask = [];
 
 let todos = [{
     'id': 0,
-    'title': 'Putzen',
+    'title': 'Kochwelt Page & Recipe Recommender',
+    'description': 'Build start page with recipe recommendation',
     'category': 'open'
 }, {
     'id': 1,
-    'title': 'Kochen',
+    'title': 'CSS Architecture Planning',
+    'description': 'Define CSS naming conventiond and structure.',
     'category': 'open'
 }, {
     'id': 2,
-    'title': 'Einkaufen',
+    'title': 'HTML Base Template Creation',
+    'description': 'Create reusable HTML base templates...',
     'category': 'closed'
 }];
 
@@ -23,44 +27,75 @@ function openTask() {
     let taskDiv = document.getElementById('boardAddTask');
 
     if (taskDiv.style.display === 'none' || taskDiv.style.display === '') {
-        // Wenn die div ausgeblendet ist, zeige sie an
+        // Wenn das div ausgeblendet ist, zeige es an
         taskDiv.style.display = 'block';
     } else {
-        // Wenn die div sichtbar ist, blende sie wieder aus
+        // Wenn das div sichtbar ist, blende es wieder aus
         taskDiv.style.display = 'none';
     }
 }
 
 function closeTask() {
     let taskDiv = document.getElementById('boardAddTask');
-    taskDiv.style.display = 'none'; // Blendet die div wieder aus
+    taskDiv.style.display = 'none'; // Blendet das div wieder aus
 }
 
-//add Task
+// Funktion, um eine neue Aufgabe hinzuzufügen
 function addTask() {
-    let task = document.getElementById('addTask');
-    task.innerHTML = '';
-    for (let i = 0; i < todos.length; i++) {
-        let title = todos[i][title];
-        let description = description[i];
-        task.innerHTML += addNewTaskHTML(title, description)
-    }
+    // Sammeln der Eingabedaten aus den Feldern
+    let title = document.getElementById('taskTitle').value;
+    let description = document.getElementById('taskDescription').value;
+    let category = document.getElementById('taskCategory').value;
+
+    // Generiere eine neue ID für die Aufgabe
+    let newId = todos.length ? todos[todos.length - 1].id + 1 : 0;
+
+    // Erstellen einer neuen Aufgabe als Objekt
+    let newTask = {
+        id: newId,  // ID der Aufgabe
+        title: title,
+        description: description,
+        category: category
+    };
+
+    // Hinzufügen der neuen Aufgabe zum todos-Array
+    todos.push(newTask);
+
+    // Aktualisieren der HTML-Anzeige
+    updateHTML();
+
+    // Formular zurücksetzen
+    clearTask();
+    closeTask();
 }
 
-//Task
+// Generieren des HTML-Codes für eine Aufgabe
+function generateTodoHTML(todo) {
+    return `
+        <div class="todo" draggable="true" ondragstart="startDragging(${todo.id})">
+            <h3>${todo.title}</h3>
+            <p>${todo.description}</p>
+        </div>
+    `;
+}
+
+// Funktion, um die Aufgaben in den richtigen Bereichen zu aktualisieren
 function updateHTML() {
     let openContainer = document.getElementById('open');
     let progressContainer = document.getElementById('progress');
     let awaitFeedbackContainer = document.getElementById('awaitFeedback');
     let closedContainer = document.getElementById('closed');
 
+    // Leeren der Container
     openContainer.innerHTML = '';
     progressContainer.innerHTML = '';
     awaitFeedbackContainer.innerHTML = '';
     closedContainer.innerHTML = '';
 
+    // Iterieren über alle Aufgaben und sie in den richtigen Bereich einfügen
     todos.forEach(todo => {
         const taskHTML = generateTodoHTML(todo);
+
         if (todo.category === 'open') {
             openContainer.innerHTML += taskHTML;
         } else if (todo.category === 'progress') {
@@ -72,123 +107,65 @@ function updateHTML() {
         }
     });
 
+    // Überprüfen, ob die Bereiche leer sind
     emptyTasks('open');
     emptyTasks('progress');
     emptyTasks('awaitFeedback');
     emptyTasks('closed');
 }
 
-//Drag & Drop
-function startDragging(id) {
-    currentDraggedElement = id;
-}
+// Funktion, um leere Bereiche mit einem Hinweis zu versehen
+function emptyTasks(category) {
+    let container = document.getElementById(category);
+    let noTasksElement = document.querySelector(`.noTasks[category="${category}"]`);
 
-function generateTodoHTML(element) {
-    return `<h3 draggable="true" ondragstart="startDragging(${element.id})" class="todo curser">${element.title}</h3>`;
-}
-
-function allowDrop(ev) {
-    ev.preventDefault();
-}
-
-function moveTo(category) {
-    // Finde das Task-Element nach seiner ID und aktualisiere die Kategorie
-    const draggedTodoIndex = todos.findIndex(todo => todo.id === currentDraggedElement);
-    if (draggedTodoIndex !== -1) {
-        todos[draggedTodoIndex].category = category;
-        updateHTML(); // Aktualisiere die HTML-Darstellung nach dem Verschieben
-    } else {
-        console.error("Dragged element not found:", currentDraggedElement);
-    }
-}
-
-function highlight(id) {
-    document.getElementById(id).classList.add('drag-area-highlight');
-}
-
-function removeHighlight(id) {
-    document.getElementById(id).classList.remove('drag-area-highlight');
-}
-
-// Update der HTML-Elemente basierend auf den aktuellen Aufgaben
-function updateHTML() {
-    let openContainer = document.getElementById('open');
-    let progressContainer = document.getElementById('progress');
-    let awaitFeedbackContainer = document.getElementById('awaitFeedback');
-    let closedContainer = document.getElementById('closed');
-
-    openContainer.innerHTML = '';
-    progressContainer.innerHTML = '';
-    awaitFeedbackContainer.innerHTML = '';
-    closedContainer.innerHTML = '';
-
-    todos.forEach(todo => {
-        const taskHTML = generateTodoHTML(todo);
-        if (todo.category === 'open') {
-            openContainer.innerHTML += taskHTML;
-        } else if (todo.category === 'progress') {
-            progressContainer.innerHTML += taskHTML;
-        } else if (todo.category === 'awaitFeedback') {
-            awaitFeedbackContainer.innerHTML += taskHTML;
-        } else if (todo.category === 'closed') {
-            closedContainer.innerHTML += taskHTML;
-        }
-    });
-
-    // Überprüfe nach jedem Update, ob es Aufgaben in den Spalten gibt
-    emptyTasks('open');
-    emptyTasks('progress');
-    emptyTasks('awaitFeedback');
-    emptyTasks('closed');
-}
-
-// Überprüfe, ob eine Spalte leer ist, und zeige die Nachricht entsprechend an
-function startDragging(id) {
-    currentDraggedElement = id;
-}
-
-function generateTodoHTML(element) {
-    return `<h3 draggable="true" ondragstart="startDragging(${element.id})" class="todo curser">${element.title}</h3>`;
-}
-
-function allowDrop(ev) {
-    ev.preventDefault();
-}
-
-function moveTo(category) {
-    // Finde das Task-Element nach seiner ID und aktualisiere die Kategorie
-    const draggedTodoIndex = todos.findIndex(todo => todo.id === currentDraggedElement);
-    if (draggedTodoIndex !== -1) {
-        todos[draggedTodoIndex].category = category;
-        updateHTML(); // Aktualisiere die HTML-Darstellung nach dem Verschieben
-    } else {
-        console.error("Dragged element not found:", currentDraggedElement);
-    }
-}
-
-function highlight(id) {
-    document.getElementById(id).classList.add('drag-area-highlight');
-}
-
-function removeHighlight(id) {
-    document.getElementById(id).classList.remove('drag-area-highlight');
-}
-
-// Überprüfe, ob eine Spalte leer ist, und zeige die Nachricht entsprechend an
-function emptyTasks(columnId) {
-    const column = document.getElementById(columnId);
-    const tasks = column.querySelectorAll('.todo');
-    const noTasks = column.parentElement.querySelector('.noTasks');
-
-    if (noTasks) {
-        if (tasks.length === 0) {
-            noTasks.style.display = 'block';
+    if (noTasksElement) {
+        if (container.innerHTML.trim() === '') {
+            noTasksElement.style.display = 'block';
         } else {
-            noTasks.style.display = 'none';
+            noTasksElement.style.display = 'none';
         }
     } else {
-        console.error(`Element mit der Klasse 'noTasks' nicht gefunden für Spalte: ${columnId}`);
+        console.error(`Element mit category="${category}" nicht gefunden.`);
     }
+}
+
+function allowDrop(ev) {
+    ev.preventDefault();
+}
+
+function highlight(id) {
+    document.getElementById(id).classList.add('drag-area-highlight');
+}
+
+function removeHighlight(id) {
+    document.getElementById(id).classList.remove('drag-area-highlight');
+}
+
+
+
+// Überprüfe, ob eine Spalte leer ist, und zeige die Nachricht entsprechend an
+function startDragging(id) {
+    currentDraggedElement = id;
+}
+
+function moveTo(category) {
+    // Finde das Task-Element nach seiner ID und aktualisiere die Kategorie
+    const draggedTodoIndex = todos.findIndex(todo => todo.id === currentDraggedElement);
+    if (draggedTodoIndex !== -1) {
+        todos[draggedTodoIndex].category = category;
+        updateHTML(); // Aktualisiere die HTML-Darstellung nach dem Verschieben
+    } else {
+        console.error("Dragged element not found:", currentDraggedElement);
+    }
+}
+
+function highlight(id) {
+    document.getElementById(id).classList.add('drag-area-highlight');
+}
+
+function removeHighlight(id) {
+    document.getElementById(id).classList.remove('drag-area-highlight');
 }
 
 // Add Subtask
@@ -219,14 +196,13 @@ function addCurrentSubtask() {
     }
 }
 
-
 //Prio Buttons
 function resetButtons() {
     // Zurücksetzen aller Buttons
     let buttons = [
-        { id: 'urgent', color: 'initial', imgSrc: './assets/img/Prio_Urgent.svg' },
-        { id: 'medium', color: 'initial', imgSrc: './assets/IMG/Prio_Medium.svg' },
-        { id: 'low', color: 'initial', imgSrc: './assets/img/Prio_Low.svg' }
+        { id: 'urgent', color: 'initial', imgSrc: './assets/img/PRio_urgent (2).svg' },
+        { id: 'medium', color: 'initial', imgSrc: './assets/IMG/Prio_medium (2).svg' },
+        { id: 'low', color: 'initial', imgSrc: './assets/img/Prio_Low (2).svg' }
     ];
 
     buttons.forEach(button => {
@@ -305,19 +281,10 @@ function showTasksSearch(search, todos) {
 //Add Task leeren
 function clearTask() {
     // Titel-Eingabefeld leeren
-    document.querySelector('.inputTitle[type="text"]').value = '';
+    document.getElementById('taskTitle').value = '';
 
     // Beschreibungstextfeld leeren
     document.getElementById('description').value = '';
-
-    // 'Assigned to'-Dropdown zurücksetzen
-    document.getElementById('assigned').selectedIndex = 0;
-
-    // Datumseingabefeld leeren
-    document.querySelector('.inputTitle[type="date"]').value = '';
-
-    // Prioritäts-Buttons zurücksetzen
-    resetPrioButtons();
 
     // Kategorie-Dropdown zurücksetzen
     document.getElementById('category').selectedIndex = 0;
@@ -327,6 +294,15 @@ function clearTask() {
 
     // Subtask-Eingabefeld leeren
     document.getElementById('new-subtask').value = '';
+
+    // 'Assigned to'-Dropdown zurücksetzen (falls vorhanden)
+    document.getElementById('select_container').selectedIndex = 0;
+
+    // Datumseingabefeld leeren (falls vorhanden)
+    document.querySelector('.inputTitle[type="date"]').value = '';
+
+    // Prioritäts-Buttons zurücksetzen
+    resetButtons();
 }
 
 function resetPrioButtons() {
@@ -355,3 +331,38 @@ function resetPrioButtons() {
     });
 }
 
+function createTask() {
+    // Sammeln der Eingabedaten aus den Feldern
+    let title = document.getElementById('taskTitle').value.trim();
+    let description = document.getElementById('description').value.trim();
+    let category = document.getElementById('category').value;
+
+    // Überprüfen, ob die Eingabefelder ausgefüllt sind
+    if (title === '' || description === '') {
+        alert('Bitte füllen Sie sowohl den Titel als auch die Beschreibung aus.');
+        return;
+    }
+
+    // Generiere eine neue ID für die Aufgabe
+    let newId = todos.length ? todos[todos.length - 1].id + 1 : 0;
+
+    // Erstellen einer neuen Aufgabe als Objekt
+    let newTask = {
+        id: newId,  // ID der Aufgabe
+        title: title,
+        description: description,
+        category: category
+    };
+
+    // Hinzufügen der neuen Aufgabe zum todos-Array
+    todos.push(newTask);
+
+    // Aktualisieren der HTML-Anzeige
+    updateHTML();
+
+    // Formular zurücksetzen
+    clearTask();
+
+    // Schließen des Formulars
+    closeTask();
+}
