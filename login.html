@@ -30,14 +30,14 @@
     <section class="register">
 
         <h1 class="login-headline"> LOG IN </h1>
-        <hr class="loginhr">
-        <form onsubmit="loginAction(); return false; ">
-        <div class="inputemailsection">
+        <hr class="loginhr" id="loginHr">
+        <form onsubmit="loginAction(); return false;" novalidate >
+        <div class="inputemailsection" id="inputmailsection">
             <input id="emaillogin" class="inputemail" type="email" required placeholder="E-Mail"> 
             <img  class="mailicon"src="assets/IMG/mail.png" alt="">
         </div>
         
-        <div class="inputpasswordsection">
+        <div class="inputpasswordsection" id="inputpasswordsection">
             <input id="passwordlogin" class="inputpassword" type="password" required placeholder="Password">
             <img  src="assets/IMG/lock.png" alt="">
         </div>
