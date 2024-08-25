@@ -25,6 +25,10 @@ async function onloadfunc() {
 
 }
 
+
+
+
+
 async function loadcontacts(path) {
     let response = await fetch(BAse_URL + path + ".json")
     let responseToJson = await response.json();

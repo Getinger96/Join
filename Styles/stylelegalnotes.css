@@ -1,0 +1,24 @@
+body {
+    margin: 0;
+    background-color: #F6F7F8;
+    font-family: 'Inter';
+    font-weight: 400;
+}
+
+
+
+.middle-Section  {
+    margin-left: 328px;
+}
+
+h1 {
+    font-size: 48px;
+}
+
+
+a {
+    text-decoration: none;
+    color: rgb(20, 8, 253);
+}
+
+

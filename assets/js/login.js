@@ -27,31 +27,72 @@ async function loginAction() {
     let loginMail = document.getElementById('emaillogin');
     let loginPassword = document.getElementById('passwordlogin');
     let loginInfo = document.getElementById('incorrectentry');
+  
 
-    // Stelle sicher, dass users ein Array ist
+
+    if (!emailIsCorrect(loginMail.value)) {
+        loginInfo.innerText = 'Please enter a valid email address!';
+        emptyTheInputFields(loginMail,loginPassword);
+        changeColorHrAndBorderMistake();
+        return; // Beende die Funktion, wenn die E-Mail-Adresse ungültig ist
+    }
+
+
     let user = contacts.find(u => u.email === loginMail.value && u.password === loginPassword.value);
+
+
+
+    if (loginMail.value === '' && loginPassword.value === '') {
+        emptyTheInputFields(loginMail,loginPassword);
+        changeColorHrAndBorderMistake();
+    }
+
 
     if(user) {
         loginInfo.innerText = loginSuccesfull();
         emptyTheInputFields(loginMail,loginPassword);
+        changeColorHrAndBorderCorrect();
 
     } else {
         loginInfo.innerText = wrongPasswordOrEmail();
         emptyTheInputFields(loginMail,loginPassword);
+        changeColorHrAndBorderMistake();
         
     }
 }
 
 
-function screenLogo() {
+//function screenLogo() {
 
-document.getElementById("logoscreen").classList.add("loginlogo");
+//document.getElementById("logoscreen").classList.add("loginlogo");
     
-  document.getElementById("logoscreensection").classList.add("logoscreennone");
-  document.getElementById("myopacity").style.opacity = "1";
+  //document.getElementById("logoscreensection").classList.add("logoscreennone");
+  //document.getElementById("myopacity").style.opacity = "1";
 
+
+
+
+function changeColorHrAndBorderMistake() {
+
+    document.getElementById("loginHr").style.color = "red";
+    document.getElementById("inputmailsection").style.border= "3px solid red";
+    document.getElementById("inputpasswordsection").style.border= "3px solid red";
 
 }
+
+function changeColorHrAndBorderCorrect() {
+    document.getElementById("loginHr").style.color = "green";
+    document.getElementById("inputmailsection").style.border= "3px solid green";
+    document.getElementById("inputpasswordsection").style.border= "3px solid green";
+
+}
+
+
+function emailIsCorrect(email) {
+    let emailCheck = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailCheck.test(email); 
+}
+
 
 
 function wrongPasswordOrEmail() {
