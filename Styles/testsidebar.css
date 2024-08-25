@@ -2,7 +2,7 @@
 .sideblock {
     width: 232px;
     background-color: #2A3647;
-    height: 1024px;
+    height: 85vh;
     padding: 64px 0px 64px 0px;
     display: flex;
     justify-content: space-between;
@@ -101,8 +101,6 @@
 }
 
 .sidelink {
-    width: 232px;
-    height: 229px;
     gap: 15px;
     display: flex;
     flex-direction: column;
@@ -207,4 +205,9 @@ main {
     margin-left: 273px;
 
 
+}
+
+
+.headline {
+    padding: 100px;
 }
