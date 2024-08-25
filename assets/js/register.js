@@ -2,30 +2,27 @@
 const base_URL = "https://join-37803-default-rtdb.europe-west1.firebasedatabase.app/";
 let contacts = [];
 
+
 async function loadUsers(path = '') {
     let response = await fetch(base_URL + path + ".json");
     let userJSON = await response.json();
-    let userAsArray = Object.keys(userJSON.contacts);
-    console.log(userAsArray);
+    let userAsArray = Object.values(userJSON.contacts);
     
-  
-    Object.keys(userJSON.contacts).forEach(key => {
-        let contactGroup = userJSON.contacts[key];
+    for (let index = 0; index < userAsArray.length; index++) {
+        let user = userAsArray[index];
+        let newUser = Object.keys(user)
+        let contact = userAsArray[index][newUser]
 
-        // Überprüfe, ob die Kontaktgruppe verschachtelte Kontakte enthält
-        if (!contactGroup.email ) {
-            // Es ist ein verschachteltes Objekt, durchlaufe alle verschachtelten Kontakte
-            Object.keys(contactGroup).forEach(subKey => {
-                contacts.push(contactGroup[subKey]);
-            });
-        } else {
-            // Es ist ein einfacher Kontakt
-            contacts.push(contactGroup);
-        }
-    });
-    console.log(contacts);
+
+        contacts.push({
+            email: contact.email,
+            name: contact.name,
+            password: contact.password,
+        })
+      
+
 }
-
+}
 
 async function postData(path="", data={}) {
     let response = await fetch(base_URL + path + ".json", {

@@ -18,22 +18,26 @@ let selectedContactIndex = null;
 async function fetchContacts(path = '') {
     let response = await fetch(base_URL + path + ".json");
     let userJSON = await response.json();
+    let userAsArray = Object.values(userJSON.contacts);
+    
+    for (let index = 0; index < userAsArray.length; index++) {
+        let user = userAsArray[index];
+        let newUser = Object.keys(user)
+        let contact = userAsArray[index][newUser]
 
-    Object.keys(userJSON.contacts).forEach(key => {
-        let contactGroup = userJSON.contacts[key];
+        contactsArray.push({
+            email: contact.email,
+            name: contact.name,
+            password: contact.password,
+        })
+      
 
-        if (!contactGroup.email) {
-            Object.keys(contactGroup).forEach(subKey => {
-                contactsArray.push(contactGroup[subKey]);
-            });
-        } else {
-            contactsArray.push(contactGroup);
-        }
-    });
+    console.log(contactsArray);
 
     letterSorting();
 }
 
+}
 function getLastName(fullName) {
     let nameParts = fullName.trim().split(' ');
     return nameParts[nameParts.length - 1];
