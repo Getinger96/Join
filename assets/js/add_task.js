@@ -8,6 +8,7 @@ async function onloadfunc() {
     let userResponse = await loadcontacts("contacts");
     console.log(userResponse)
     let UserKeyArray = Object.keys(userResponse)
+    console.log(UserKeyArray)
 
 
     for (let index = 0; index < UserKeyArray.length; index++) {
