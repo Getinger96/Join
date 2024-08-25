@@ -61,6 +61,10 @@ function closelist() {
 
 function renderSelectionContainer() {
     let profiles = document.getElementById('Selection_Container');
+    if (!profiles) {
+        console.error('Selection_Container not found');
+        return;
+    }
     profiles.innerHTML = '';
 
     for (let i = 0; i < Contacts.length; i++) {

@@ -45,7 +45,6 @@ h2 {
     height:364px;
 }
 
-
 .middle-Section {
     font-family: "inter", sans-serif;
     margin-left: 238px;
@@ -61,8 +60,6 @@ h2 {
     padding: 20px;
     height:100vh;
 }
-
-
 
 .addnewcontactbutton {
     font-family: "inter", sans-serif;
@@ -98,15 +95,14 @@ h2 {
     max-height: 100vh;
     overflow-y: auto; 
     z-index: 10;
+    cursor:pointer;
 }
-
 
 .newcontactbutton {
     display: flex;
     align-items: center;
     justify-content:center;
 }
-
 
 .contactlist-hr {
     border: 1px solid;
@@ -153,7 +149,6 @@ h2 {
     align-items: center;
 }
 
-
 .contactname {
     font-size: 20px;
     font-weight: 400;
@@ -175,13 +170,11 @@ h2 {
     background-color: transparent;
 }
 
-
 .largsingle-contact-box {
     display: flex;
     gap: 54px;
     align-items: center;
 }
-
 
 .largcontact-icon {
     flex-shrink: 0; 
@@ -201,7 +194,6 @@ h2 {
     font-weight: 600;
     white-space: nowrap;
 }
-
 
 .editanddelete {
     display: flex;
@@ -342,7 +334,6 @@ h2 {
     border-bottom-left-radius: 30px;
 }
 
-
 .right-side {
     position: relative;
     background-color: white;
@@ -407,7 +398,6 @@ h2 {
     margin-top:-70px;
 }
 
-
 input::placeholder {
     color: #d1d1d1;
 }
@@ -439,12 +429,16 @@ input[type="tel"] {
     outline: none;
     font-size: 20px;
     color: #d1d1d1;
+    cursor:pointer;
 }
 
-input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="tel"]:focus {
-    color: black !important;
+input:focus {
+    color: black; 
+}
+
+
+input:not(:placeholder-shown) {
+    color: black; 
 }
 
 .input-field:focus-within {
@@ -452,6 +446,7 @@ input[type="tel"]:focus {
     border-color: #94D5F0 !important;
     outline: none !important;
 }
+/* Ende des neuen Abschnitts */
 
 .two-buttons {
     display: flex;
@@ -528,3 +523,4 @@ input[type="tel"]:focus {
 .closethewindow-button:hover {
     transform: scale(1.1); 
 }
+
