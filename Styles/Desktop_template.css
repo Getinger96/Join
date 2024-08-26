@@ -8,14 +8,13 @@
     justify-content: space-between;
     align-items: center;
     flex-direction: column;
-    position: absolute;
+    position: fixed;
     z-index:10;
     
 }
 
 
 .headblock {
-    width: 1440px;
     height: 96px;
     display: flex;
     justify-content: space-between;

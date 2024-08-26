@@ -1,4 +1,11 @@
 
+body {
+    margin: 0;
+    font-family: "inter", sans-serif;
+}
+
+
+
 .sideblock {
     width: 232px;
     background-color: #2A3647;

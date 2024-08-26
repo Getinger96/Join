@@ -82,6 +82,9 @@ async function  addnewUser() {
 
 
     await postData(`contacts/${contactKey}`, newContact)
+
+
+
     emptyTheInputFields(username, usermail, userpassword, userconfirmpassword, checkbox);
 
 

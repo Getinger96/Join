@@ -30,5 +30,4 @@ function includeHTML() {
 function init() {
 
     includeHTML();
-    onloadfunc();
 }
