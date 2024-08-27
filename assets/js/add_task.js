@@ -1,3 +1,15 @@
+const colors = [
+    '#FF5733', // Orange
+    '#FFC300', // Gelb
+    '#33FF57', // Grün
+    '#33FFF3', // Türkis
+    '#3357FF', // Blau
+    '#A133FF', // Lila
+    '#FF33A1', // Pink
+    '#FF8F33'  // Hellorange
+];
+
+
 const base_URL = "https://join-37803-default-rtdb.europe-west1.firebasedatabase.app/";
 let contacts = [];
 
@@ -50,6 +62,32 @@ function closelist() {
 
 
 }
+
+
+function openCategoryLIst() {
+let seleCon= document.getElementById('Selection_Container_Category');
+let arrowcona = document.getElementById('arrow_img_container_Category');
+arrowcona.innerHTML= '';
+arrowcona.innerHTML=`<img onclick="closelistCategory()"class="arrow_drop_downaa" src="assets/IMG/arrow_drop_up.svg" alt="">`;
+seleCon.classList.remove('d_none');
+seleCon.innerHTML = `  <div onclick="choosedUserStory()" id="userStory" class= "userStory">User Story</div>
+                        <div onclick="choosedTechnicalTask()" id="technichalTask" class= "technical_TAsk">Technical Task</div>
+                         `
+
+}
+
+function closelistCategory() {
+    let selecCon = document.getElementById('Selection_Container_Category');
+    let arrowCon = document.getElementById('arrow_img_container_Category');
+    arrowCon.innerHTML = '';
+    arrowCon.innerHTML = `<img onclick="openCategoryLIst()"class="arrow_drop_downaa" src="assets/IMG/arrow_drop_downaa.svg" alt="">`;
+    selecCon.classList.add('d_none');
+
+
+
+}
+
+
 
 function getLastName(name) {
     let lastName = name.trim().split(' ');
@@ -210,4 +248,40 @@ function selectedDificultyLow() {
     urgent.classList.remove('bg_urgent_selected');
 
 }
+
+
+function addSubtask() {
+
+    let list= document.getElementById('ul_subtasks');
+    let subtask= document.getElementById('input_Subtasks').value;
+
+    if (subtask=="") {
+      
+        
+    }
+    else {
+        list.innerHTML+=`<li>${subtask}</li>`;
+        document.getElementById('input_Subtasks').value = '';
+    }
+   
+    
+}
+
+
+function choosedUserStory() {
+let userStory= document.getElementById('Category');
+userStory.innerHTML="";
+
+userStory.value="User Story"
+
+}
+
+function choosedTechnicalTask() {
+    let userStory= document.getElementById('Category');
+    userStory.innerHTML="";
+    
+    userStory.value="Technical Task";
+    
+    }
+    
 
