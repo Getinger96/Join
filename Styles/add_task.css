@@ -419,7 +419,7 @@ box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.1);
 .Selection_Container_Category {
     width: 445px;
     background-color: #FFFFFF;
-    position: fixed;
+    position: absolute;
     margin-top: 74px;
     border-radius: 10px;
     border-radius: 10px;
@@ -430,6 +430,10 @@ box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.1);
     flex-direction: column;
     
     
+}
+
+.deleteSubtask {
+    border: none;
 }
 
 .userStory {

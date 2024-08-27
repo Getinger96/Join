@@ -12,6 +12,7 @@ const colors = [
 
 const base_URL = "https://join-37803-default-rtdb.europe-west1.firebasedatabase.app/";
 let contacts = [];
+let subtasks= [];
 
 
 
@@ -22,10 +23,7 @@ async function onloadfunc(path = '') {
     let userAsArray = Object.values(userJSON.contacts);
 
     for (let index = 0; index < userAsArray.length; index++) {
-        let user = userAsArray[index];
-        let newUser = Object.keys(user)
-        let contact = userAsArray[index][newUser]
-
+        let contact = userAsArray[index];
 
         contacts.push({
             email: contact.email,
@@ -253,16 +251,22 @@ function selectedDificultyLow() {
 function addSubtask() {
 
     let list= document.getElementById('ul_subtasks');
-    let subtask= document.getElementById('input_Subtasks').value;
+    let subtaskInput= document.getElementById('input_Subtasks').value;
+    subtasks.push(subtaskInput);
 
-    if (subtask=="") {
+    for (let i = 0; i < subtasks.length; i++) {
+        let subtask= subtasks[i];
+
+        if (subtaskInput=="") {
       
         
+        }
+        else {
+            list.innerHTML+=`<li>${subtask} <button class="deleteSubtask" onclick="deleteItem()"><img src="./assets/img/delete.png"></button</li> `;
+            document.getElementById('input_Subtasks').value = '';
+        }
     }
-    else {
-        list.innerHTML+=`<li>${subtask}</li>`;
-        document.getElementById('input_Subtasks').value = '';
-    }
+   
    
     
 }
