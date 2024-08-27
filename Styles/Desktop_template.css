@@ -5,12 +5,11 @@
     height: 1024px;
     padding: 64px 0px 64px 0px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
     flex-direction: column;
     position: fixed;
     z-index:10;
-    
+    gap: 200px;
 }
 
 

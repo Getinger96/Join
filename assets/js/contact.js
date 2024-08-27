@@ -21,23 +21,21 @@ async function fetchContacts(path = '') {
     let userAsArray = Object.values(userJSON.contacts);
     
     for (let index = 0; index < userAsArray.length; index++) {
-        let user = userAsArray[index];
-        let newUser = Object.keys(user)
-        let contact = userAsArray[index][newUser]
+        let contact = userAsArray[index];
+
 
         contactsArray.push({
             email: contact.email,
             name: contact.name,
             password: contact.password,
         })
+        console.log(contactsArray);
+
+        letterSorting()
+
+}
+}
       
-
-    console.log(contactsArray);
-
-    letterSorting();
-}
-
-}
 function getLastName(fullName) {
     let nameParts = fullName.trim().split(' ');
     return nameParts[nameParts.length - 1];

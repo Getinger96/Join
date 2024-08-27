@@ -149,8 +149,13 @@ body {
                     width: 100%;
                     cursor: pointer;
                     font-size: 16px;
-                    }    
-
+                    }
+                    
+                    
+                    .signin-btn:disabled {
+                        background-color: #a8a8a8;
+                        color: #d1d1d1;
+                    }
             
             .inputpassword {
                 border: none;
@@ -254,6 +259,9 @@ body {
             color: red;
             margin-top: 20px;
             }
+
+
+
 
 
             @media (max-width:530px)  {
