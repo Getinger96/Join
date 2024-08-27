@@ -430,6 +430,7 @@ input[type="tel"] {
     font-size: 20px;
     color: #d1d1d1;
     cursor:pointer;
+    width:100%;
 }
 
 input:focus {
