@@ -9,9 +9,7 @@ async function loadUsers(path = '') {
     let userAsArray = Object.values(userJSON.contacts);
     
     for (let index = 0; index < userAsArray.length; index++) {
-        let user = userAsArray[index];
-        let newUser = Object.keys(user)
-        let contact = userAsArray[index][newUser]
+        let contact = userAsArray[index];
 
 
         contacts.push({
@@ -60,18 +58,12 @@ async function  addnewUser() {
         return;
     }
 
-    if (checkbox.checked = false) {
+    if (!checkbox.checked) {
         sigUpInfo.innerHTML = checkboxNoChecked();
         emptyTheInputFields(username, usermail, userpassword, userconfirmpassword, checkbox);
         return;
     }
 
-
-
-
-    
-    let contactCurrentNumber = contacts.length +1;
-    let contactKey = `contact_${contactCurrentNumber}`;
 
   
     let newContact  = {
@@ -81,7 +73,7 @@ async function  addnewUser() {
     };
 
 
-    await postData(`contacts/${contactKey}`, newContact)
+    await postData(`contacts`, newContact)
 
 
 
@@ -91,6 +83,22 @@ async function  addnewUser() {
     await loadUsers('users');
   
 }
+
+function checkFormCompletion() {
+    let username = document.getElementById('username').value.trim();
+    let usermail = document.getElementById('usermail').value.trim();
+    let userpassword = document.getElementById('userpassword').value.trim();
+    let userconfirmpassword = document.getElementById('userconfirmpassword').value.trim();
+    let checkbox = document.getElementById('checkbox').checked;
+    let signUpButton = document.getElementById('signUpButton');
+
+    if (username !== "" && usermail !== "" && userpassword !== "" && userconfirmpassword !== "" && checkbox) {
+        signUpButton.disabled = false;
+    } else {
+        signUpButton.disabled = true;
+    }
+}
+
 
 
 function emptyTheInputFields(username, usermail, userpassword, userconfirmpassword, checkbox) {

@@ -19,7 +19,7 @@ body {
 }
 
 
-h1 {
+.headline_addTask {
     width: 278px;
     height: 73px;
     margin-top: 206px;
@@ -242,9 +242,6 @@ h1 {
 
 
 
-.d_none {
-    display: none;
-}
 
 
 .separatorTask {
@@ -419,6 +416,52 @@ box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.1);
     line-height: 24px;
 }
 
+.Selection_Container_Category {
+    width: 445px;
+    background-color: #FFFFFF;
+    position: fixed;
+    margin-top: 74px;
+    border-radius: 10px;
+    border-radius: 10px;
+    border: 1px solid #D1D1D1;
+    padding-right: 0px;
+    padding-top: 9px;
+    display: flex;
+    flex-direction: column;
+    
+    
+}
+
+.userStory {
+display: flex;
+padding: 12px 16px 12px 16px;
+font-family: 'Inter';
+font-weight: 400;
+font-size: 20px;
+line-height: 24px;
+
+
+}
+
+.userStory:hover {
+cursor: pointer;
+background-color: #e4dedc;
+}
+
+.technical_TAsk {
+    display: flex;
+padding: 14px 16px 22px 16px;
+font-family: 'Inter';
+font-weight: 400;
+font-size: 20px;
+line-height: 24px;
+}
+
+.technical_TAsk:hover {
+    cursor: pointer;
+    background-color: #e4dedc;
+}
+
 
 .Subtasks_Container {
     width: 440px;
@@ -475,6 +518,15 @@ box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.1);
 
 input:focus {
     outline: none;
+}
+
+.Category_Input {
+    border: none;
+    font-family: 'Inter';
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    color: black;
 }
 
 
@@ -536,4 +588,8 @@ input:focus {
 .create_icon {
     height: 24px;
     width: 24px;
+}
+
+.d_none {
+    display: none;
 }
