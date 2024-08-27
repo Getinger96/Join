@@ -23,7 +23,7 @@
         <div w3-include-html="assets/Templates/desktop_template.html"></div>
     </header>
     <div class="add_task_content">
-        <h1>Add Task</h1>
+        <h1 class="headline_addTask">Add Task</h1>
         <form class="addTask_Container">
 
             <div class="input_Task_Container_left">
@@ -38,7 +38,7 @@
                 <div class="AssignedTO_Container">
                     <span class="Assign_Header">Assigned to</span>
                     <div id="select_container" class="select_container">
-                        <span>Select contacts to assign</span>
+                        <span>Select contacts to assign </span>
                         <div id="arrow_img_container"> <img onclick="openList()" class="arrow_drop_downaa"
                                 src="assets/IMG/arrow_drop_downaa.svg" alt=""></div>
                     </div>
@@ -87,22 +87,31 @@
 
                 <div class="cataegory_Container">
                     <span class="category_Header">Category <span class="red">*</span></span>
-                    <select class="select_Category" name="" id="">
-                        <option class="selector_Txt" value="" disabled selected>Select task category</option>
-                        <option value=""></option>
-                    </select>
+                    <div id="select_container" class="select_container">
+                        <input id="Category" class="Category_Input" placeholder="Select Category" type="text">
+                        <div id="arrow_img_container_Category"> <img onclick="openCategoryLIst()" class="arrow_drop_downaa"
+                                src="assets/IMG/arrow_drop_downaa.svg" alt=""></div>
+                    </div>
+                    <div id="Selection_Container_Category" class="Selection_Container_Category d_none">
+                      
                 </div>
 
                 <div class="Subtasks_Container">
                     <span class="Subtasks_Header">Subtasks</span>
                     <div class="Subtask_Inputfield_Container">
-                        <input placeholder="Add new Subtask" class="Subtasks_Inputfield" type="text">
+                        <input id="input_Subtasks" placeholder="Add new Subtask" class="Subtasks_Inputfield" type="text">
 
-                        <button class="Subtasks_Btn"><img src="assets/IMG/add_subtask_img.svg" alt=""></button>
+                        <button  id="add_Subtask" type="button" onclick="addSubtask()" class="Subtasks_Btn"><img src="assets/IMG/add_subtask_img.svg" alt=""></button>
+                       
                     </div>
+                  
 
 
                 </div>
+                <ul id="ul_subtasks" class="ul_subtasks">
+                      
+
+                </ul>
             </div>
 
 
