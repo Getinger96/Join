@@ -19,7 +19,6 @@ async function fetchContacts(path = '') {
     let response = await fetch(base_URL + path + ".json");
     let userJSON = await response.json();
     let userAsArray = Object.values(userJSON.contacts);
-<<<<<<< HEAD
 
     for (let index = 0; index < userAsArray.length; index++) {
         let contact = userAsArray[index];
@@ -38,25 +37,6 @@ async function fetchContacts(path = '') {
 }
 
 
-=======
-    
-    for (let index = 0; index < userAsArray.length; index++) {
-        let contact = userAsArray[index];
-
-
-        contactsArray.push({
-            email: contact.email,
-            name: contact.name,
-            password: contact.password,
-        })
-        console.log(contactsArray);
-
-        letterSorting()
-
-}
-}
-      
->>>>>>> 61e8cdb148de5b2d367d3d71f0db36fc621215c2
 function getLastName(fullName) {
     let nameParts = fullName.trim().split(' ');
     return nameParts[nameParts.length - 1];
@@ -315,5 +295,3 @@ async function postData(path = "", data = {}) {
 
     return responsASJson = await response.json();
 }
-
-
