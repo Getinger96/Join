@@ -13,12 +13,32 @@ const base_URL = "https://join-37803-default-rtdb.europe-west1.firebasedatabase.
 let contactsArray = [];
 let beginningLetter = [];
 let groupedContacts = [];
-let selectedContactIndex = null; 
+let selectedContactIndex = null;
 
 async function fetchContacts(path = '') {
     let response = await fetch(base_URL + path + ".json");
     let userJSON = await response.json();
     let userAsArray = Object.values(userJSON.contacts);
+<<<<<<< HEAD
+
+    for (let index = 0; index < userAsArray.length; index++) {
+        let contact = userAsArray[index];
+
+        if (contact && contact.email) {
+            contactsArray.push({
+                email: contact.email,
+                name: contact.name,
+                password: contact.password,
+            });
+        }
+    }
+
+    console.log(contactsArray);
+    letterSorting();
+}
+
+
+=======
     
     for (let index = 0; index < userAsArray.length; index++) {
         let contact = userAsArray[index];
@@ -44,8 +64,6 @@ function getLastName(fullName) {
 function getContacts() {
     let showContacts = document.getElementById('contactview');
     showContacts.innerHTML = '';
-
-    let contactCounter = 0;
 
     groupedContacts = [];
     // Füge alle Kontakte der Gruppe hinzu
@@ -111,11 +129,11 @@ function showContactBig(contactsName, contactsEmail, contactPhone, contactLastna
             <div class="largcontact-content">
                 <span class="largcontactname">${contactsName}</span>
                 <div class="editanddelete">
-                <div onclick="edit()" class="editcontent blur">
+                <div onclick="editContact(selectedContactIndex)" class="editcontent blur">
                 <img class="editicon" src="assets/IMG/edit.svg" alt="">
                 <span class="edit">Edit</span>
                 </div>
-                <div class="deletecontent" onclick="delete()">
+                <div class="deletecontent" onclick="deleteContact(selectedContactIndex)">
                 <img class="deleteicon" src="assets/IMG/delete.png" alt="">
                 <span class="delete">Delete</span>
                 </div>
@@ -158,12 +176,143 @@ function letterSorting() {
     getContacts();
 }
 
+async function createContact() {
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('mail').value.trim();
+    const phone = document.getElementById('telephone').value.trim();
+
+    const newContact = {
+        name: name,
+        email: email,
+        phone: phone
+    };
+
+    contactsArray.push(newContact);
+    await postData('contacts', newContact);
+    letterSorting();
+    closeCardContact();
+}
+
 function addNewContact() {
-    let newContactOverlay = document.getElementById('newContact'); 
+    let newContactOverlay = document.getElementById('newContact');
     newContactOverlay.style.display = 'flex';
+
+    const cancelButton = document.querySelector('.cancel-button');
+    cancelButton.onclick = function () {
+        closeCardContact();
+    };
+
+    const createButton = document.querySelector('.createContact-button');
+    createButton.onclick = function () {
+        const form = document.getElementById('contactForm');
+        
+        if (form.checkValidity()) {
+            createContact(); 
+            closeCardContact(); 
+        } else {
+            form.reportValidity(); 
+        }
+    };
+}
+
+
+
+function editContact(index) {
+    let contact = contactsArray[index];
+
+    document.querySelector('.addcontactheadline').textContent = 'Edit Contact';
+    document.querySelector('.addcontactsecondline').style.display = 'none';
+    document.getElementById('name').value = contact.name;
+    document.getElementById('mail').value = contact.email;
+    document.getElementById('telephone').value = contact.phone;
+    document.querySelector('.createContact-button').innerHTML = 'Save <img src="assets/IMG/check.svg" alt="Save Icon" class="button-icon" style="margin-left: 8px;">';
+
+    const cancelButton = document.querySelector('.cancel-button');
+    cancelButton.textContent = 'Delete';
+    cancelButton.style.display = 'block';
+    cancelButton.onclick = function () { deleteContact(index); };
+
+    const saveButton = document.querySelector('.createContact-button');
+    saveButton.onclick = function () {
+        saveEditedContact(index);
+    };
+
+    let newContactOverlay = document.getElementById('newContact');
+    newContactOverlay.style.display = 'flex';
+}
+
+function saveEditedContact(index) {
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('mail').value.trim();
+    const phone = document.getElementById('telephone').value.trim();
+
+    contactsArray[index].name = name;
+    contactsArray[index].email = email;
+    contactsArray[index].phone = phone;
+
+    letterSorting();
+
+    closeCardContact();
+}
+
+function deleteContact(index) {
+    if (index > -1) {
+        contactsArray.splice(index, 1);
+        letterSorting();
+        closeCardContact();
+        clearBigContactView();
+    } else {
+        console.error("Invalid index for deletion:", index);
+    }
 }
 
 function closeCardContact() {
     let newContactOverlay = document.getElementById('newContact');
     newContactOverlay.style.display = 'none';
+
+    document.querySelector('.addcontactheadline').textContent = 'Add Contact';
+    document.querySelector('.addcontactsecondline').style.display = 'flex';
+    document.getElementById('name').value = '';
+    document.getElementById('mail').value = '';
+    document.getElementById('telephone').value = '';
+    document.querySelector('.createContact-button').textContent = 'Create Contact';
+
+    const cancelButton = document.querySelector('.cancel-button');
+    cancelButton.innerHTML = 'Cancel<img class="close-button" src="assets/IMG/iconoir_cancel.png">';
+    cancelButton.style.display = 'flex';
 }
+
+function clearBigContactView() {
+    let showContacts = document.getElementById('contactViewBig');
+    showContacts.innerHTML = '';
+}
+
+function saveEditedContact(index) {
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('mail').value.trim();
+    const phone = document.getElementById('telephone').value.trim();
+
+    if (name && email && phone) {
+        contactsArray[index].name = name;
+        contactsArray[index].email = email;
+        contactsArray[index].phone = phone;
+
+        letterSorting();
+        closeCardContact();
+        getContactBig(index);
+    }
+}
+
+async function postData(path = "", data = {}) {
+    let response = await fetch(base_URL + path + ".json", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    });
+
+    return responsASJson = await response.json();
+}
+
+
