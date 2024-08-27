@@ -18,10 +18,6 @@ let selectedContactIndex = null;
 async function fetchContacts(path = '') {
     let response = await fetch(base_URL + path + ".json");
     let userJSON = await response.json();
-    if (!userJSON.contacts) {
-        console.error('No contacts found in the response.');
-        return;
-    }
     let userAsArray = Object.values(userJSON.contacts);
 
     for (let index = 0; index < userAsArray.length; index++) {

@@ -16,8 +16,7 @@ let subtasks= [];
 
 
 
-async function onloadfunc(path = '') {
-
+async function fetchContacts(path = '') {
     let response = await fetch(base_URL + path + ".json");
     let userJSON = await response.json();
     let userAsArray = Object.values(userJSON.contacts);
@@ -25,16 +24,17 @@ async function onloadfunc(path = '') {
     for (let index = 0; index < userAsArray.length; index++) {
         let contact = userAsArray[index];
 
-        contacts.push({
-            email: contact.email,
-            name: contact.name,
-            password: contact.password,
-        })
-
-
+        if (contact && contact.email) {
+            contactsArray.push({
+                email: contact.email,
+                name: contact.name,
+                password: contact.password,
+            });
+        }
     }
-    console.log(contacts)
-    renderSelectionContainer();
+
+    console.log(contactsArray);
+    letterSorting();
 }
 
 
