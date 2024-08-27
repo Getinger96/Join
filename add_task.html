@@ -8,7 +8,6 @@
 
     <link rel="stylesheet" href="Styles/add_task.css">
     <link rel="stylesheet" href="Styles/Desktop_template.css">
-    <link rel="stylesheet" href="Styles/Desktop_template.css">
     <link rel="stylesheet" href="Styles/fontStyles.css">
     <script src="./assets/js/add_task.js"></script>
     <script src="assets/js/script.js"></script>
@@ -89,30 +88,32 @@
                     <span class="category_Header">Category <span class="red">*</span></span>
                     <div id="select_container" class="select_container">
                         <input id="Category" class="Category_Input" placeholder="Select Category" type="text">
-                        <div id="arrow_img_container_Category"> <img onclick="openCategoryLIst()" class="arrow_drop_downaa"
-                                src="assets/IMG/arrow_drop_downaa.svg" alt=""></div>
+                        <div id="arrow_img_container_Category"> <img onclick="openCategoryLIst()"
+                                class="arrow_drop_downaa" src="assets/IMG/arrow_drop_downaa.svg" alt=""></div>
                     </div>
                     <div id="Selection_Container_Category" class="Selection_Container_Category d_none">
-                      
-                </div>
 
-                <div class="Subtasks_Container">
-                    <span class="Subtasks_Header">Subtasks</span>
-                    <div class="Subtask_Inputfield_Container">
-                        <input id="input_Subtasks" placeholder="Add new Subtask" class="Subtasks_Inputfield" type="text">
-
-                        <button  id="add_Subtask" type="button" onclick="addSubtask()" class="Subtasks_Btn"><img src="assets/IMG/add_subtask_img.svg" alt=""></button>
-                       
                     </div>
-                  
+
+                    <div class="Subtasks_Container">
+                        <span class="Subtasks_Header">Subtasks</span>
+                        <div class="Subtask_Inputfield_Container">
+                            <input id="input_Subtasks" placeholder="Add new Subtask" class="Subtasks_Inputfield"
+                                type="text">
+
+                            <button id="add_Subtask" type="button" onclick="addSubtask()" class="Subtasks_Btn"><img
+                                    src="assets/IMG/add_subtask_img.svg" alt=""></button>
+
+                        </div>
 
 
+
+                    </div>
+                    <ul id="ul_subtasks" class="ul_subtasks">
+
+
+                    </ul>
                 </div>
-                <ul id="ul_subtasks" class="ul_subtasks">
-                      
-
-                </ul>
-            </div>
 
 
         </form>
