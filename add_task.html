@@ -28,11 +28,12 @@
             <div class="input_Task_Container_left">
                 <div class="Title_Container">
                     <span class="Title_Header">Title<span class="red">*</span></span>
-                    <textarea placeholder="Enter a Title" class="input_Title" required type="text"></textarea>
+                    <textarea id="title" placeholder="Enter a Title" class="input_Title" required
+                        type="text"></textarea>
                 </div>
                 <div class="Description_Container">
                     <span class="Description_Header">Description</span>
-                    <textarea class="input_Description" placeholder="Enter a Description" type="text"></textarea>
+                    <textarea id="Description" class="input_Description" placeholder="Enter a Description" type="text"></textarea>
                 </div>
                 <div class="AssignedTO_Container">
                     <span class="Assign_Header">Assigned to</span>
@@ -62,24 +63,21 @@
                 <div class="date_Container">
                     <span class="Date_header">Due date <span class="red">*</span></span>
 
-                    <input placeholder="dd/mm/yyyy" class="input_date" required type="date">
+                    <input id="dueDate" placeholder="dd/mm/yyyy" class="input_date" required type="date">
 
                 </div>
 
                 <div class="Prio_Container">
                     <span class="prio_Header">Prio</span>
                     <div class="Prio_btn_Container">
-                        <button type="button" id="Urgent_container" onclick="selectedDificultyUrgent()"
-                            class="Prio_Btn">Urgent <img id="Urgent_IMG" src="assets/IMG/PRio_urgent (2).svg" alt="">
-                            <img id="sele_IMG_URG" class="d_none" src="assets/IMG/Prio_urgent_WHITE.svg"
-                                alt=""></button>
-                        <button type="button" id="MediumContainer" onclick="selectedDificultyMedium()"
-                            class="Prio_Btn">Medium <img id="Med_IMG" src="assets/IMG/Prio_medium (2).svg" alt="">
-                            <img class="d_none" id="sele_IMG_Med" src="assets/IMG/PRio_Medium_WHITE.svg"
-                                alt=""></button>
-                        <button type="button" id="LowContainer" onclick="selectedDificultyLow()" class="Prio_Btn">Low
-                            <img id="Low_IMG" src="assets/IMG/Prio_Low (2).svg" alt=""><img class="d_none"
-                                id="sele_IMG_low" src="assets/IMG/Prio_LOW_WHITE.svg" alt=""></button>
+                        <button type="button" id="'urgent" onclick="urgent()" class="Prio_Btn">Urgent <img
+                                id="urgentIcon" src="assets/IMG/PRio_urgent (2).svg" alt=""></button>
+
+                            <button type="button" id="medium" onclick="medium()" class="Prio_Btn">Medium <img
+                                    id="mediumIcon" src="assets/IMG/Prio_medium (2).svg" alt="">
+                            </button>
+                            <button type="button" id="low" onclick="low()" class="Prio_Btn">Low
+                                <img id="lowIcon" src="assets/IMG/Prio_Low (2).svg" alt=""></button>
                     </div>
 
                 </div>
@@ -101,8 +99,8 @@
                             <input id="input_Subtasks" placeholder="Add new Subtask" class="Subtasks_Inputfield"
                                 type="text">
 
-                            <button id="add_Subtask" type="button" onclick="addSubtask()" class="Subtasks_Btn"><img
-                                    src="assets/IMG/add_subtask_img.svg" alt=""></button>
+                            <button id="add_Subtask" type="button" onclick="addCurrentSubtask()"
+                                class="Subtasks_Btn"><img src="assets/IMG/add_subtask_img.svg" alt=""></button>
 
                         </div>
 
@@ -122,7 +120,8 @@
     </div>
     <div class="Btn_Container">
         <button class="clear_Btn">Clear <img class="clear-icon" src="assets/IMG/x_icon_clear.svg" alt=""></button>
-        <button class="Create_Btn">Create Task <img class="create_icon" src="assets/IMG/clear_Img.svg" alt=""></button>
+        <button onclick="createTask()"  class="Create_Btn">Create Task <img class="create_icon"
+                src="assets/IMG/clear_Img.svg" alt=""></button>
     </div>
     <div class="required_info_Container"><span class="red">*</span><span>This field is required</span></div>
 

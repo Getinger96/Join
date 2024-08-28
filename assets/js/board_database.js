@@ -26,8 +26,6 @@ async function fetchContacts(path = '') {
         if (contact && contact.email) {
             contactsArray.push({
                 email: contact.email,
-                name: contact.name,
-                password: contact.password,
             });
         }
     }
@@ -36,36 +34,30 @@ async function fetchContacts(path = '') {
     letterSorting();
 }
 
-function getContacts() {
-    let showContacts = document.getElementById('contactview');
-    showContacts.innerHTML = '';
+function getLastName(fullName) {
+    let nameParts = fullName.trim().split(' ');
+    return nameParts[nameParts.length - 1];
+}
 
-    groupedContacts = {}; // Verwende ein Objekt statt eines Arrays
-
-    contactsArray.forEach((contact, index) => {
+function letterSorting() {
+    contactsArray.forEach(contact => {
         let firstLetter = contact.name.charAt(0).toUpperCase();
-        let colorIndex = index % colors.length;
-        let color = colors[colorIndex];
 
-        if (!groupedContacts[firstLetter]) {
-            groupedContacts[firstLetter] = [];
+        if (beginningLetter.indexOf(firstLetter) === -1) {
+            beginningLetter.push(firstLetter);
+            groupedContacts.push({
+                letter: firstLetter,
+                contacts: [contact]
+            });
+        } else {
+            let group = groupedContacts.find(contacts => contacts.letter === firstLetter);
+            if (group) {
+                group.contacts.push(contact);
+            }
         }
-
-        groupedContacts[firstLetter].push({ ...contact, index, color });
     });
 
-    beginningLetter = Object.keys(groupedContacts).sort();
-
-    for (let index = 0; index < beginningLetter.length; index++) {
-        let letter = beginningLetter[index];
-        showContacts.innerHTML += `<h2>${letter}</h2>`;
-        showContacts.innerHTML += `<hr class="contactlist-hr">`;
-
-        groupedContacts[letter].forEach(contact => {
-            let selectedClass = (contact.index === selectedContactIndex) ? 'selected' : '';
-            showContacts.innerHTML += displayContacts(contact.index, contact.email, contact.name, getLastName(contact.name), contact.phone, selectedClass, contact.color);
-        });
-    }
+    beginningLetter.sort();
 }
 
 function getLastName(fullName) {
