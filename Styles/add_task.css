@@ -514,7 +514,9 @@ line-height: 24px;
 .Subtasks_Btn {
     border: none;
     background-color: #FFFFFF;
-    width: 30px;
+    width: 24px;
+    height: 24px;
+    padding-right: 25px;
     
 }
 
@@ -595,4 +597,3 @@ input:focus {
 .d_none {
     display: none;
 }
-
