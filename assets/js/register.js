@@ -17,10 +17,10 @@ async function loadUsers(path = '') {
             name: contact.name,
             password: contact.password,
         })
-      
+}
 
 }
-}
+
 
 async function postData(path="", data={}) {
     let response = await fetch(base_URL + path + ".json", {
@@ -79,6 +79,12 @@ async function  addnewUser() {
 
     emptyTheInputFields(username, usermail, userpassword, userconfirmpassword, checkbox);
 
+    showSignedUpSuccessfully();
+
+    setTimeout(() => {window.location.href ='login.html'
+        
+    }, 3000);
+
 
     await loadUsers('users');
   
@@ -92,14 +98,17 @@ function checkFormCompletion() {
     let checkbox = document.getElementById('checkbox').checked;
     let signUpButton = document.getElementById('signUpButton');
 
+    // Die Bedingung ist jetzt korrigiert, um den Button korrekt zu aktivieren/deaktivieren
     if (username !== "" && usermail !== "" && userpassword !== "" && userconfirmpassword !== "" && checkbox) {
-        signUpButton.disabled = false;
+        signUpButton.disabled = false; // Button aktivieren
+        signUpButton.classList.remove('disabledbutton');
+        signUpButton.classList.add('enabledbutton');
     } else {
-        signUpButton.disabled = true;
+        signUpButton.disabled = true; // Button deaktivieren
+        signUpButton.classList.remove('enabledbutton');
+        signUpButton.classList.add('disabledbutton');
     }
 }
-
-
 
 function emptyTheInputFields(username, usermail, userpassword, userconfirmpassword, checkbox) {
     username.value = '';
@@ -171,4 +180,14 @@ function checkboxNoChecked() {
     return `
     You must accept the privacy policy to register !!!`;
 
+}
+
+
+function showSignedUpSuccessfully() {
+    document.getElementById('Signedupsuccessfully').innerHTML =`  <div class="Signedupsuccessfully">
+    <span class="textstylesuccessfully"> You Signed Up successfully</span>
+    <img class="" src="assets/IMG/You Signed Up successfully.png" alt="">   
+
+
+    </div>`;
 }
