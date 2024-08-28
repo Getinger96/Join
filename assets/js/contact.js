@@ -19,26 +19,6 @@ async function fetchContacts(path = '') {
     let response = await fetch(base_URL + path + ".json");
     let userJSON = await response.json();
     let userAsArray = Object.values(userJSON.contacts);
-<<<<<<< HEAD
-
-    for (let index = 0; index < userAsArray.length; index++) {
-        let contact = userAsArray[index];
-
-        if (contact && contact.email) {
-            contactsArray.push({
-                email: contact.email,
-                name: contact.name,
-                password: contact.password,
-            });
-        }
-    }
-
-    console.log(contactsArray);
-    letterSorting();
-}
-
-
-=======
     
     for (let index = 0; index < userAsArray.length; index++) {
         let contact = userAsArray[index];

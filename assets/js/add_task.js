@@ -12,7 +12,10 @@ const colors = [
 
 const base_URL = "https://join-37803-default-rtdb.europe-west1.firebasedatabase.app/";
 let contacts = [];
-let subtasks= [];
+let subtasks = [];
+let assignedContacts = [];
+let prio= [];
+
 
 
 
@@ -63,12 +66,12 @@ function closelist() {
 
 
 function openCategoryLIst() {
-let seleCon= document.getElementById('Selection_Container_Category');
-let arrowcona = document.getElementById('arrow_img_container_Category');
-arrowcona.innerHTML= '';
-arrowcona.innerHTML=`<img onclick="closelistCategory()"class="arrow_drop_downaa" src="assets/IMG/arrow_drop_up.svg" alt="">`;
-seleCon.classList.remove('d_none');
-seleCon.innerHTML = `  <div onclick="choosedUserStory()" id="userStory" class= "userStory">User Story</div>
+    let seleCon = document.getElementById('Selection_Container_Category');
+    let arrowcona = document.getElementById('arrow_img_container_Category');
+    arrowcona.innerHTML = '';
+    arrowcona.innerHTML = `<img onclick="closelistCategory()"class="arrow_drop_downaa" src="assets/IMG/arrow_drop_up.svg" alt="">`;
+    seleCon.classList.remove('d_none');
+    seleCon.innerHTML = `  <div onclick="choosedUserStory()" id="userStory" class= "userStory">User Story</div>
                         <div onclick="choosedTechnicalTask()" id="technichalTask" class= "technical_TAsk">Technical Task</div>
                          `
 
@@ -105,41 +108,79 @@ function renderSelectionContainer() {
         let contact = contacts[i];
         let name = contact.name;
         let forNAme = name.charAt(0);
-        let forNAmebig= forNAme.toUpperCase();
+        let forNAmebig = forNAme.toUpperCase();
         let lastname = getLastName(name);
         let firstletterlastname = lastname.charAt(0);
-        let firstletterlastnameBIG= firstletterlastname.toUpperCase();
-        let firstletters = forNAmebig+ firstletterlastnameBIG;
+        let firstletterlastnameBIG = firstletterlastname.toUpperCase();
+        let firstletters = forNAmebig + firstletterlastnameBIG;
         profiles.innerHTML += `
-       <div id="profile_Container${i}" onclick="selectedContact(${i},'${name}','${firstletters}')" class="profile_Container">
+       <div id="profile_Container${i}" " class="profile_Container">
          <div class="profile_container_header">
           <div class="profile_Badge_assign">${firstletters}</div>
           <div>${name}</div>
          </div>
-          <div>
-          <img id="checkImg${i}"  class="check_img  " src="assets/IMG/Check button.svg" alt="">
-          <img  id="checkedImg${i}" class="checked_img d_none" src="assets/IMG/Checked button.svg" alt="">
+          <div id="checkbox${i}">
+          <img onclick="selectedContact(${i},'${name}','${firstletters}')"  class="check_img " src="assets/IMG/Check button.svg" alt="">
+          
          </div>
          
       
         </div>`;
+
     }
+
 }
 
-function selectedContact(i, name, firstletters) {
+function selectedContact(i, name, firstletters,) {
+
+    let checkbox = document.getElementById(`checkbox${i}`);
+
+    checkbox.innerHTML = '';
+    checkbox.innerHTML = `<img onclick="deselctedtContact(${i},'${name}','${firstletters}')"  class="checked_img" src="assets/IMG/Checked button.svg" alt="">`
 
 
     let profileContainer = document.getElementById(`profile_Container${i}`);
-    let checkImg = document.getElementById(`checkImg${i}`);
-    let checkedImg = document.getElementById(`checkedImg${i}`);
-
-    checkImg.classList.toggle('d_none');
-    checkedImg.classList.toggle('d_none');
 
 
 
-    profileContainer.classList.toggle('bg_color');
-    profileContainer.classList.toggle('color_white');
+
+    profileContainer.classList.add('bg_color');
+    profileContainer.classList.add('color_white');
+
+    assignedContacts.push(name)
+
+
+    showSelectedProfile(firstletters, i);
+
+}
+
+
+
+
+
+
+
+function deselctedtContact(i, name, firstletters) {
+
+
+    let checkbox = document.getElementById(`checkbox${i}`);
+
+    checkbox.innerHTML = '';
+    checkbox.innerHTML = `<img onclick="selectedContact(${i},'${name}','${firstletters}')" id="checkImg${i}"  class="check_img  " src="assets/IMG/Check button.svg" alt="">`
+
+
+
+    let profileContainer = document.getElementById(`profile_Container${i}`);
+
+
+
+
+
+    profileContainer.classList.remove('bg_color');
+    profileContainer.classList.remove('color_white');
+
+    assignedContacts.splice(name, 1)
+
 
     showSelectedProfile(firstletters, i);
 
@@ -167,125 +208,151 @@ function showSelectedProfile(firstletters, i) {
 
 
 
-function selectedDificultyUrgent() {
 
 
-    let urgent = document.getElementById('Urgent_container');
-    let IMG = document.getElementById('sele_IMG_URG');
-    let img = document.getElementById('Urgent_IMG');
-    img.classList.toggle('d_none')
-    IMG.classList.toggle('d_none')
-    urgent.classList.toggle('color_white');
-    urgent.classList.toggle('bg_urgent_selected');
-    let medium = document.getElementById('MediumContainer');
-    medium.classList.remove('color_white');
-    medium.classList.remove('bg_Medium');
-    let IMG_MEDIUM_SELEC = document.getElementById('sele_IMG_Med');
-    let img_medium = document.getElementById('Med_IMG');
-    IMG_MEDIUM_SELEC.classList.add('d_none')
-    img_medium.classList.remove('d_none')
-    let LOW = document.getElementById('LowContainer');
-    let IMG_LOW = document.getElementById('sele_IMG_low');
-    let img_low = document.getElementById('Low_IMG');
-    IMG_LOW.classList.add('d_none')
-    img_low.classList.remove('d_none')
-    LOW.classList.remove('color_white');
-    LOW.classList.remove('bg_Low');
+function resetButtons() {
+    // Zurücksetzen aller Buttons
+    let buttons = [
+        { id: 'urgent', color: 'initial', imgSrc: './assets/img/PRio_urgent (2).svg' },
+        { id: 'medium', color: 'initial', imgSrc: './assets/IMG/Prio_medium (2).svg' },
+        { id: 'low', color: 'initial', imgSrc: './assets/img/Prio_Low (2).svg' }
+    ];
 
+    buttons.forEach(button => {
+        let btnElement = document.getElementById(button.id);
+        let iconElement = document.getElementById(button.id + "Icon");
+
+        btnElement.style.backgroundColor = button.color;
+        btnElement.style.color = 'initial';
+        iconElement.src = button.imgSrc;
+    });
 }
 
-function selectedDificultyMedium() {
+function urgent() {
+    resetButtons();  // Setzt alle anderen Buttons zurück
 
-    let medium = document.getElementById('MediumContainer');
-    let IMG = document.getElementById('sele_IMG_Med');
-    let img = document.getElementById('Med_IMG');
-    img.classList.toggle('d_none')
-    IMG.classList.toggle('d_none')
-    medium.classList.toggle('color_white');
-    medium.classList.toggle('bg_Medium');
-    let urgent = document.getElementById('Urgent_container');
-    let IMG_URGENT = document.getElementById('sele_IMG_URG');
-    let img_urgent = document.getElementById('Urgent_IMG');
-    IMG_URGENT.classList.add('d_none')
-    img_urgent.classList.remove('d_none')
-    urgent.classList.remove('color_white');
-    urgent.classList.remove('bg_urgent_selected');
-    let LOW = document.getElementById('LowContainer');
-    let IMG_LOW = document.getElementById('sele_IMG_low');
-    let img_low = document.getElementById('Low_IMG');
-    IMG_LOW.classList.add('d_none')
-    img_low.classList.remove('d_none')
-    LOW.classList.remove('color_white');
-    LOW.classList.remove('bg_Low');
+    let urgentButton = document.getElementById("urgent");
+    let urgentIcon = document.getElementById("urgentIcon");
 
-
+    // Setze die neuen Styles und das Bild
+    urgentButton.style.backgroundColor = "red";
+    urgentButton.style.color = "white";
+    urgentIcon.src = "./assets/IMG/iconUrgentWhite.svg";
 }
 
-function selectedDificultyLow() {
+function medium() {
+    resetButtons();  // Setzt alle anderen Buttons zurück
 
-    let LOW = document.getElementById('LowContainer');
-    let IMG = document.getElementById('sele_IMG_low');
-    let img = document.getElementById('Low_IMG');
-    img.classList.toggle('d_none')
-    IMG.classList.toggle('d_none')
-    LOW.classList.toggle('color_white');
-    LOW.classList.toggle('bg_Low');
-    let medium = document.getElementById('MediumContainer');
-    medium.classList.remove('color_white');
-    medium.classList.remove('bg_Medium');
-    let IMG_MEDIUM_SELEC = document.getElementById('sele_IMG_Med');
-    let img_medium = document.getElementById('Med_IMG');
-    IMG_MEDIUM_SELEC.classList.add('d_none');
-    img_medium.classList.remove('d_none');
-    let urgent = document.getElementById('Urgent_container');
-    let IMG_URGENT = document.getElementById('sele_IMG_URG');
-    let img_urgent = document.getElementById('Urgent_IMG');
-    IMG_URGENT.classList.add('d_none');
-    img_urgent.classList.remove('d_none');
-    urgent.classList.remove('color_white');
-    urgent.classList.remove('bg_urgent_selected');
+    let mediumButton = document.getElementById("medium");
+    let mediumIcon = document.getElementById("mediumIcon");
 
+    // Setze die neuen Styles und das Bild
+    mediumButton.style.backgroundColor = "orange";
+    mediumButton.style.color = "white";
+    mediumIcon.src = "./assets/IMG/iconMediumWhite.svg";
 }
 
+function low() {
+    resetButtons();  // Setzt alle anderen Buttons zurück
+
+    let lowButton = document.getElementById("low");
+    let lowIcon = document.getElementById("lowIcon");
+
+    // Setze die neuen Styles und das Bild
+    lowButton.style.backgroundColor = "limegreen";
+    lowButton.style.color = "white";
+    lowIcon.src = "./assets/IMG/iconLowWhite.svg";
+}
 
 function addSubtask() {
-
-    let list= document.getElementById('ul_subtasks');
-    let subtaskInput= document.getElementById('input_Subtasks').value;
-    subtasks.push(subtaskInput);
-
+    let list = document.getElementById('ul_subtasks');
+    list.innerHTML = ''; //Liste wird gelöscht
     for (let i = 0; i < subtasks.length; i++) {
-        let subtask= subtasks[i];
-
-        if (subtaskInput=="") {
-      
-        
-        }
-        else {
-            list.innerHTML+=`<li>${subtask} <button class="deleteSubtask" onclick="deleteItem()"><img src="./assets/img/delete.png"></button</li> `;
-            document.getElementById('input_Subtasks').value = '';
-        }
+        let li = document.createElement('li'); //Liste wird wieder hinzugefügt
+        li.innerHTML = subtasks[i] + /*html*/ ` <button class="Subtasks_Btn" onclick="deleteItem(${i})"><img src="./assets/img/delete.png"></button>`;
+        list.appendChild(li);
     }
-   
-   
-    
+}
+
+function deleteItem(i) { //Einzelnen Elemente aus der Liste löschen
+    subtasks.splice(i, 1);
+    addSubtask();
+}
+
+function addCurrentSubtask() {
+    if (subtasks.length < 5) {
+        let CurrentSubtask = document.getElementById('input_Subtasks').value;
+        subtasks.push(CurrentSubtask);
+        document.getElementById('input_Subtasks').value = ''; // Liste wieder leeren
+        addSubtask();
+    }
+    else {
+        alert('Genügend Subtasks hinzugefügt!');
+    }
 }
 
 
 function choosedUserStory() {
-let userStory= document.getElementById('Category');
-userStory.innerHTML="";
+    let userStory = document.getElementById('Category');
+    userStory.innerHTML = "";
 
-userStory.value="User Story"
+    userStory.value = "User Story"
 
 }
 
 function choosedTechnicalTask() {
-    let userStory= document.getElementById('Category');
-    userStory.innerHTML="";
+    let userStory = document.getElementById('Category');
+    userStory.innerHTML = "";
+
+    userStory.value = "Technical Task";
+
+}
+
+
+
+async function postData(path = "", data = {}) {
+    let response = await fetch(base_URL + path + ".json", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    });
+
+    return responsASJson = await response.json();
+
+}
+
+
+async function createTask() {
     
-    userStory.value="Technical Task";
     
-    }
+    let titel = document.getElementById('title');
+    let description = document.getElementById('Description')
+    let assignedContact = assignedContacts;
+    let date = document.getElementById('dueDate');
+    let category= document.getElementById('Category');
+    let subtask=subtasks;
+
+
+
+    let newTask  = {
+        Titel: titel.value,
+        Description: description.value,
+        AssignedContact: assignedContact,
+        Date : date.value,
+        Category : category.value,
+        Subtask : subtask
+    };
     
+
+    await postData(`task`, newTask)
+
+   
+
+
+
+
+
+}
 
