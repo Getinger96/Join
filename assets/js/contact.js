@@ -294,5 +294,3 @@ async function postData(path = "", data = {}) {
 
     return responsASJson = await response.json();
 }
-
-
