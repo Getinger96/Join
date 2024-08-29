@@ -525,3 +525,20 @@ input:not(:placeholder-shown) {
     transform: scale(1.1); 
 }
 
+
+@keyframes slide-in-from-right {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+  
+  .transition-in-from-right {
+    animation: slide-in-from-right 300ms forwards ease-in-out;
+  }
+  
+  
+
+
