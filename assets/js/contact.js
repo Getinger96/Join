@@ -16,7 +16,6 @@ let groupedContacts = [];
 let selectedContactIndex = null;
 
 async function fetchContacts(path = '') {
-    
     let response = await fetch(base_URL + path + ".json");
     let userJSON = await response.json();
     let userAsArray = Object.entries(userJSON.contacts);
@@ -36,7 +35,7 @@ async function fetchContacts(path = '') {
     }
 
     console.log(contactsArray);
-    letterSorting();
+    sortContactsByLetter();
 }
 
 function getLastName(fullName) {
@@ -44,10 +43,7 @@ function getLastName(fullName) {
     return nameParts[nameParts.length - 1];
 }
 
-function getContacts() {
-    let showContacts = document.getElementById('contactview');
-    let content = ''; 
-
+function groupContacts() {
     groupedContacts = {};
 
     contactsArray.forEach((contact, index) => {
@@ -55,7 +51,7 @@ function getContacts() {
         let colorIndex = index;
 
         if (colorIndex >= colors.length) {
-            colorIndex = colorIndex - colors.length;
+            colorIndex -= colors.length;
         }
 
         let color = colors[colorIndex];
@@ -68,9 +64,13 @@ function getContacts() {
     });
 
     beginningLetter = Object.keys(groupedContacts).sort();
+}
 
-    for (let index = 0; index < beginningLetter.length; index++) {
-        let letter = beginningLetter[index];
+function renderContacts() {
+    let showContacts = document.getElementById('contactview');
+    let content = '';
+
+    beginningLetter.forEach(letter => {
         content += `<h2>${letter}</h2>`;
         content += `<hr class="contactlist-hr">`;
 
@@ -78,9 +78,14 @@ function getContacts() {
             let selectedClass = (contact.index === selectedContactIndex) ? 'selected' : '';
             content += displayContacts(contact.index, contact.email, contact.name, getLastName(contact.name), contact.phone, selectedClass, contact.color);
         });
-    }
+    });
 
-    showContacts.innerHTML = content; 
+    showContacts.innerHTML = content;
+}
+
+function getContacts() {
+    groupContacts();
+    renderContacts();
 }
 
 function displayContacts(contactIndex, contactsEmail, contactsName, contactLastname, contactPhone, selectedClass, color) {
@@ -143,28 +148,33 @@ function showContactBig(contactsName, contactsEmail, contactPhone, contactLastna
     </div>`;
 }
 
-function letterSorting() {
+function collectBeginningLetters() {
     beginningLetter = []; 
-    groupedContacts = []; 
+    groupedContacts = {}; 
 
     contactsArray.forEach(contact => {
         let firstLetter = contact.name.charAt(0).toUpperCase();
-
-        if (beginningLetter.indexOf(firstLetter) === -1) {
+        if (!beginningLetter.includes(firstLetter)) {
             beginningLetter.push(firstLetter);
-            groupedContacts.push({
-                letter: firstLetter,
-                contacts: [contact]
-            });
-        } else {
-            let group = groupedContacts.find(contacts => contacts.letter === firstLetter);
-            if (group) {
-                group.contacts.push(contact);
-            }
         }
     });
 
     beginningLetter.sort();
+}
+
+function groupContactsByLetter() {
+    contactsArray.forEach(contact => {
+        let firstLetter = contact.name.charAt(0).toUpperCase();
+        if (!groupedContacts[firstLetter]) {
+            groupedContacts[firstLetter] = [];
+        }
+        groupedContacts[firstLetter].push(contact);
+    });
+}
+
+function sortContactsByLetter() {
+    collectBeginningLetters();
+    groupContactsByLetter();
     getContacts();
 }
 
@@ -181,7 +191,7 @@ async function createContact() {
 
     contactsArray.push(newContact);
     await postData('contacts', newContact);
-    letterSorting();
+    sortContactsByLetter();
     closeCardContact();
 }
 
@@ -209,7 +219,7 @@ function addNewContact() {
     };
 }
 
-function editContact(index) {
+function htmlEditForm(index) {
     let contact = contactsArray[index];
 
     document.querySelector('.addcontactheadline').textContent = 'Edit Contact';
@@ -219,6 +229,12 @@ function editContact(index) {
     document.getElementById('telephone').value = contact.phone;
     document.querySelector('.createContact-button').innerHTML = 'Save <img src="assets/IMG/check.svg" alt="Save Icon" class="button-icon" style="margin-left: 8px;">';
 
+    let newContactOverlay = document.getElementById('newContact');
+    newContactOverlay.classList.add('transition-in-from-right');
+    newContactOverlay.style.display = 'flex';
+}
+
+function editFunctionAction(index) {
     const cancelButton = document.querySelector('.cancel-button');
     cancelButton.textContent = 'Delete';
     cancelButton.style.display = 'block';
@@ -228,10 +244,11 @@ function editContact(index) {
     saveButton.onclick = function () {
         saveEditedContact(index);
     };
+}
 
-    let newContactOverlay = document.getElementById('newContact');
-    newContactOverlay.classList.add('transition-in-from-right');
-    newContactOverlay.style.display = 'flex';
+function editContact(index) {
+    htmlEditForm(index);
+    editFunctionAction(index);
 }
 
 async function deleteContact(index) {
@@ -239,7 +256,7 @@ async function deleteContact(index) {
         const contact = contactsArray[index];
         await deleteData(`contacts/${contact.id}`);
         contactsArray.splice(index, 1);
-        letterSorting();
+        sortContactsByLetter();
         closeCardContact();
         clearBigContactView();
     } else {
@@ -280,7 +297,9 @@ async function saveEditedContact(index) {
         contactsArray[index].email = email;
         contactsArray[index].phone = phone;
 
-        letterSorting();
+        await putData(`contacts/${contact.id}`);
+
+        sortContactsByLetter();
         closeCardContact();
         getContactBig(index);
     }
@@ -317,6 +336,3 @@ async function putData(path = "", data = {}) {
 
     return responsASJson = await response.json();
 }
-
-
-
