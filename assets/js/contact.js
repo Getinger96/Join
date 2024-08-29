@@ -16,11 +16,14 @@ let groupedContacts = [];
 let selectedContactIndex = null;
 
 async function fetchContacts(path = '') {
+    
     let response = await fetch(base_URL + path + ".json");
     let userJSON = await response.json();
-    let userAsArray = Object.entries(userJSON.contacts); // Verwende Object.entries
+    let userAsArray = Object.entries(userJSON.contacts);
 
-    for (let [id, contact] of userAsArray) { // Iteriere über id und contact
+    contactsArray = []; 
+
+    for (let [id, contact] of userAsArray) {
         if (contact && contact.email) {
             contactsArray.push({
                 id: id,
@@ -36,7 +39,6 @@ async function fetchContacts(path = '') {
     letterSorting();
 }
 
-
 function getLastName(fullName) {
     let nameParts = fullName.trim().split(' ');
     return nameParts[nameParts.length - 1];
@@ -44,13 +46,18 @@ function getLastName(fullName) {
 
 function getContacts() {
     let showContacts = document.getElementById('contactview');
-    let content = ''; // Erstelle eine Variable für den gesamten Inhalt
+    let content = ''; 
 
-    groupedContacts = [];
+    groupedContacts = {};
 
     contactsArray.forEach((contact, index) => {
         let firstLetter = contact.name.charAt(0).toUpperCase();
-        let colorIndex = index % colors.length;
+        let colorIndex = index;
+
+        if (colorIndex >= colors.length) {
+            colorIndex = colorIndex - colors.length;
+        }
+
         let color = colors[colorIndex];
 
         if (!groupedContacts[firstLetter]) {
@@ -73,9 +80,8 @@ function getContacts() {
         });
     }
 
-    showContacts.innerHTML = content; // Setze den gesamten Inhalt einmalig
+    showContacts.innerHTML = content; 
 }
-
 
 function displayContacts(contactIndex, contactsEmail, contactsName, contactLastname, contactPhone, selectedClass, color) {
     return `<div onclick="selectContact(${contactIndex})" class="single-contact-box ${selectedClass}" style="background-color:${selectedClass ? '#2A3647' : ''};">
@@ -91,16 +97,16 @@ function displayContacts(contactIndex, contactsEmail, contactsName, contactLastn
 
 function selectContact(index) {
     selectedContactIndex = index;
-    console.log('Selected Contact Index:', selectedContactIndex); // Debugging
-    getContacts(); // Kontakte neu rendern, um die Markierung zu aktualisieren
-    getContactBig(index); // Zeige den ausgewählten Kontakt in der großen Ansicht an
+    console.log('Selected Contact Index:', selectedContactIndex); 
+    getContacts(); 
+    getContactBig(index); 
 }
 
 function getContactBig(index) {
     let contact = contactsArray[index];
-    console.log('Selected Contact:', contact); // Debugging
+    console.log('Selected Contact:', contact);
     let showContacts = document.getElementById('contactViewBig');
-    showContacts.innerHTML = showContactBig(contact.name, contact.email, contact.phone, getLastName(contact.name), colors[index % colors.length]);
+    showContacts.innerHTML = showContactBig(contact.name, contact.email, contact.phone, getLastName(contact.name), colors[index]);
 }
 
 function showContactBig(contactsName, contactsEmail, contactPhone, contactLastname, color) {
@@ -138,6 +144,9 @@ function showContactBig(contactsName, contactsEmail, contactPhone, contactLastna
 }
 
 function letterSorting() {
+    beginningLetter = []; 
+    groupedContacts = []; 
+
     contactsArray.forEach(contact => {
         let firstLetter = contact.name.charAt(0).toUpperCase();
 
@@ -199,8 +208,6 @@ function addNewContact() {
         }
     };
 }
-
-
 
 function editContact(index) {
     let contact = contactsArray[index];
@@ -273,14 +280,11 @@ async function saveEditedContact(index) {
         contactsArray[index].email = email;
         contactsArray[index].phone = phone;
 
-       
         letterSorting();
         closeCardContact();
         getContactBig(index);
     }
 }
-
-
 
 async function postData(path = "", data = {}) {
     let response = await fetch(base_URL + path + ".json", {
@@ -312,9 +316,7 @@ async function putData(path = "", data = {}) {
     });
 
     return responsASJson = await response.json();
-
 }
-
 
 
 

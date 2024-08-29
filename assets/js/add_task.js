@@ -14,7 +14,7 @@ const base_URL = "https://join-37803-default-rtdb.europe-west1.firebasedatabase.
 let contacts = [];
 let subtasks = [];
 let assignedContacts = [];
-let prio= [];
+let prio = [];
 
 
 
@@ -27,17 +27,18 @@ async function fetchContacts(path = '') {
     for (let index = 0; index < userAsArray.length; index++) {
         let contact = userAsArray[index];
 
-        if (contact && contact.email) {
-            contactsArray.push({
-                email: contact.email,
-                name: contact.name,
-                password: contact.password,
-            });
-        }
-    }
 
-    console.log(contactsArray);
-    letterSorting();
+        contacts.push({
+            email: contact.email,
+            name: contact.name,
+            password: contact.password,
+        })
+        console.log(contacts);
+
+
+
+    }
+    renderSelectionContainer()
 }
 
 
@@ -297,6 +298,9 @@ function choosedUserStory() {
     userStory.innerHTML = "";
 
     userStory.value = "User Story"
+    closelistCategory();
+
+
 
 }
 
@@ -305,6 +309,7 @@ function choosedTechnicalTask() {
     userStory.innerHTML = "";
 
     userStory.value = "Technical Task";
+    closelistCategory();
 
 }
 
@@ -325,34 +330,72 @@ async function postData(path = "", data = {}) {
 
 
 async function createTask() {
-    
-    
+
+
     let titel = document.getElementById('title');
     let description = document.getElementById('Description')
     let assignedContact = assignedContacts;
     let date = document.getElementById('dueDate');
-    let category= document.getElementById('Category');
-    let subtask=subtasks;
+    let category = document.getElementById('Category');
+    let subtask = subtasks;
 
 
 
-    let newTask  = {
+    let newTask = {
         Titel: titel.value,
         Description: description.value,
         AssignedContact: assignedContact,
-        Date : date.value,
-        Category : category.value,
-        Subtask : subtask
+        Date: date.value,
+        Category: category.value,
+        Subtask: subtask
     };
-    
+
 
     await postData(`task`, newTask)
 
+
+
+
+
+
+
+}
+
+function clearTask() {
+    for (let i = 0; i < contacts.length; i++) {
+        let contact = contacts[i];
+        let name = contact.name;
+        let forNAme = name.charAt(0);
+        let forNAmebig = forNAme.toUpperCase();
+        let lastname = getLastName(name);
+        let firstletterlastname = lastname.charAt(0);
+        let firstletterlastnameBIG = firstletterlastname.toUpperCase();
+        let firstletters = forNAmebig + firstletterlastnameBIG;
+        deselctedtContact(i, name, firstletters)
+    }
    
 
+    let selectedProfileContainer = document.getElementById('Selected_profiles_Container');
+    selectedProfileContainer.innerHTML = '';
 
 
+    let list = document.getElementById('ul_subtasks');
+    list.innerHTML = '';
+
+    let titel = document.getElementById('title');
+    let description = document.getElementById('Description')
+
+    let date = document.getElementById('dueDate');
+    let category = document.getElementById('Category');
 
 
+    titel.value = "";
+    description.value = "";
+    assignedContacts = [];
+    date.value = "";
+    category.value = "";
+    subtasks = [];
+
+    
 }
 
