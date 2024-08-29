@@ -49,7 +49,7 @@ function getContacts() {
 
     showContacts.innerHTML = '';
 
-    groupedContacts = [];
+    let groupedContacts = {};
     contactsArray.forEach((contact, index) => {
         let firstLetter = contact.name.charAt(0).toUpperCase();
         let colorIndex = index % colors.length;
@@ -62,7 +62,7 @@ function getContacts() {
         groupedContacts[firstLetter].push({ ...contact, index, color });
     });
 
-    beginningLetter = Object.keys(groupedContacts).sort();
+    let beginningLetter = Object.keys(groupedContacts).sort();
 
     for (let index = 0; index < beginningLetter.length; index++) {
         let letter = beginningLetter[index];
@@ -92,12 +92,12 @@ function closelist() {
 
 function displayContacts(contactIndex, contactsName, contactLastname, selectedClass, color) {
     const isSelected = selectedContactIndices.includes(contactIndex);
-    const backgroundColor = isSelected ? '#2A3647' : '';
-    const textColor = isSelected ? 'white' : 'black';
+    const backgroundColor = isSelected ? '#2A3647' : '';  // Hintergrundfarbe für ausgewählte Kontakte
+    const textColor = isSelected ? 'white' : 'black';  // Textfarbe für ausgewählte Kontakte
 
     return `<div onclick="selectContact(${contactIndex})" class="single-contact-box ${isSelected ? 'selected' : ''}" style="background-color:${backgroundColor};">
                 <div class="contact-icon" style="background-color:${color};">
-                    <span>${contactsName.charAt(0).toUpperCase()}${contactLastname.charAt(0).toUpperCase()}</span>
+                    <span style="color: ${textColor};">${contactsName.charAt(0).toUpperCase()}${contactLastname.charAt(0).toUpperCase()}</span>
                 </div>
                 <div class="contact-content">
                     <span class="contactname" style="color:${textColor};">${contactsName}</span>
@@ -185,8 +185,13 @@ function showSelectedProfile() {
         let contact = contactsArray[index];
         let firstletters = `${contact.name.charAt(0).toUpperCase()}${getLastName(contact.name).charAt(0).toUpperCase()}`;
 
+        let colorIndex = index % colors.length;
+        let color = colors[colorIndex];
+
         selectedProfileContainer.innerHTML += `
-            <div class="profile_Badge_assign">${firstletters}</div>
+            <div class="contact-icon" style="background-color:${color};">
+                <div>${firstletters}</div>
+            </div>
         `;
     });
 }
