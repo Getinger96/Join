@@ -28,6 +28,7 @@ function includeHTML() {
 
 
 function init() {
+    fetchContacts();
 
     includeHTML();
 }

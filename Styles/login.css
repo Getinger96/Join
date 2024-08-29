@@ -388,7 +388,9 @@ padding: 18px;
 
 
             .big-logo {
-                position: static;
+                position: absolute;
+                top: 34%;
+                left: 30%;
                 width: 150px;
                 height: 150px;
                 animation-fill-mode: forwards;
@@ -406,11 +408,16 @@ padding: 18px;
                 form {
                 width: 150px;
                 height: 150px;
+                top: 34%;
+                left: 30%;
                 }
     
                 to {
+                    top: 10px;
+                    left: 10px;
                     width: 70px;
                     height: 70px;
+                    
                 
                 }     
     

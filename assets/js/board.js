@@ -194,7 +194,7 @@ function addCurrentSubtask() {
     else {
         alert('Genügend Subtasks hinzugefügt!');
     }
-}
+} 
 
 //Prio Buttons
 function resetButtons() {

@@ -1,40 +1,78 @@
-const BAse_URL = "https://join-37803-default-rtdb.europe-west1.firebasedatabase.app/"
-let Contacts = [];
+const colors = [
+    '#FF5733', // Orange
+    '#FFC300', // Gelb
+    '#33FF57', // Grün
+    '#33FFF3', // Türkis
+    '#3357FF', // Blau
+    '#A133FF', // Lila
+    '#FF33A1', // Pink
+    '#FF8F33'  // Hellorange
+];
+
+const base_URL = "https://join-37803-default-rtdb.europe-west1.firebasedatabase.app/";
+let contactsArray = [];
+let beginningLetter = [];
+let groupedContacts = [];
+let selectedContactIndices = [];
+
+async function fetchContacts(path = '') {
+    let response = await fetch(base_URL + path + ".json");
+    let userJSON = await response.json();
+    let userAsArray = Object.values(userJSON.contacts);
+
+    for (let index = 0; index < userAsArray.length; index++) {
+        let contact = userAsArray[index];
 
 
+        contactsArray.push({
+            name: contact.name,
+        })
+        console.log(contactsArray);
 
-async function onloadfunc() {
-
-    let userResponse = await loadcontacts("contacts");
-    console.log(userResponse)
-    let UserKeyArray = Object.keys(userResponse)
-
-
-    for (let index = 0; index < UserKeyArray.length; index++) {
-        Contacts.push(
-            {
-                id: UserKeyArray[index],
-                user: userResponse[UserKeyArray[index]],
-            }
-        )
+        letterSorting()
 
     }
-    console.log(Contacts)
-    renderSelectionContainer();
-
-
 }
 
-async function loadcontacts(path) {
-    let response = await fetch(BAse_URL + path + ".json")
-    let responseToJson = await response.json();
-    return responseToJson;
-
-
+function getLastName(fullName) {
+    let nameParts = fullName.trim().split(' ');
+    return nameParts[nameParts.length - 1];
 }
 
+function getContacts() {
+    let showContacts = document.getElementById('Selection_Container');
 
+    if (!showContacts) {
+        console.error("Element with ID 'Selection_Container' not found.");
+        return;
+    }
 
+    showContacts.innerHTML = '';
+
+    groupedContacts = [];
+    contactsArray.forEach((contact, index) => {
+        let firstLetter = contact.name.charAt(0).toUpperCase();
+        let colorIndex = index % colors.length;
+        let color = colors[colorIndex];
+
+        if (!groupedContacts[firstLetter]) {
+            groupedContacts[firstLetter] = [];
+        }
+
+        groupedContacts[firstLetter].push({ ...contact, index, color });
+    });
+
+    beginningLetter = Object.keys(groupedContacts).sort();
+
+    for (let index = 0; index < beginningLetter.length; index++) {
+        let letter = beginningLetter[index];
+        showContacts.innerHTML += `<h2 class="letter">${letter}</h2>`;
+
+        groupedContacts[letter].forEach(contact => {
+            showContacts.innerHTML += displayContacts(contact.index, contact.name, getLastName(contact.name), '', contact.color);
+        });
+    }
+}
 
 function openList() {
     let selecCon = document.getElementById('Selection_Container');
@@ -50,75 +88,106 @@ function closelist() {
     arrowCon.innerHTML = '';
     arrowCon.innerHTML = `<img onclick="openList()"class="arrow_drop_downaa" src="assets/IMG/arrow_drop_downaa.svg" alt="">`;
     selecCon.classList.add('d_none');
-
-
-
 }
 
-function renderSelectionContainer() {
-    let profiles = document.getElementById('Selection_Container');
-    profiles.innerHTML = '';
+function displayContacts(contactIndex, contactsName, contactLastname, selectedClass, color) {
+    const isSelected = selectedContactIndices.includes(contactIndex);
+    const backgroundColor = isSelected ? '#2A3647' : '';
+    const textColor = isSelected ? 'white' : 'black';
 
-    for (let i = 0; i < Contacts.length; i++) {
-        let contact = Contacts[i];
-        let name = contact.user.name;
-        let forNAme = contact.user.forname;
-        let lastName = contact.user.lastname;
-        let firstletterforname = forNAme.charAt(0);
-        let firstletterlastname = lastName.charAt(0);
-        let firstletters = firstletterforname + firstletterlastname;
+    return `<div onclick="selectContact(${contactIndex})" class="single-contact-box ${isSelected ? 'selected' : ''}" style="background-color:${backgroundColor};">
+                <div class="contact-icon" style="background-color:${color};">
+                    <span>${contactsName.charAt(0).toUpperCase()}${contactLastname.charAt(0).toUpperCase()}</span>
+                </div>
+                <div class="contact-content">
+                    <span class="contactname" style="color:${textColor};">${contactsName}</span>
+                </div>
+            </div>`;
+}
 
-        profiles.innerHTML += `
-       <div id="profile_Container${i}" onclick="selectedContact(${i},'${name}','${firstletters}')" class="profile_Container">
-         <div class="profile_container_header">
-          <div class="profile_Badge_assign">${firstletters}</div>
-          <div>${name}</div>
-         </div>
-          <div>
-          <img id="checkImg${i}"  class="check_img  " src="assets/IMG/Check button.svg" alt="">
-          <img  id="checkedImg${i}" class="checked_img d_none" src="assets/IMG/Checked button.svg" alt="">
-         </div>
-         
-      
-        </div>`;
+function selectContact(index) {
+    const contact = contactsArray[index];
+    const selectedIndex = selectedContactIndices.indexOf(index);
+
+    if (selectedIndex > -1) {
+        // Wenn bereits ausgewählt, dann abwählen und Farbe übergeben
+        deselctedtContact(index, contact.name, `${contact.name.charAt(0).toUpperCase()}${getLastName(contact.name).charAt(0).toUpperCase()}`, contact.color);
+        selectedContactIndices.splice(selectedIndex, 1);
+    } else {
+        // Wenn noch nicht ausgewählt, dann auswählen
+        selectedContactIndices.push(index);
+        showSelectedProfile(); // Aktualisiere die Anzeige der ausgewählten Profile
     }
+
+    getContacts(); // Kontakte neu rendern, um die Markierung zu aktualisieren
 }
 
-function selectedContact(i, name, firstletters) {
+function letterSorting() {
+    contactsArray.forEach(contact => {
+        let firstLetter = contact.name.charAt(0).toUpperCase();
 
+        if (beginningLetter.indexOf(firstLetter) === -1) {
+            beginningLetter.push(firstLetter);
+            groupedContacts.push({
+                letter: firstLetter,
+                contacts: [contact]
+            });
+        } else {
+            let group = groupedContacts.find(contacts => contacts.letter === firstLetter);
+            if (group) {
+                group.contacts.push(contact);
+            }
+        }
+    });
+
+    beginningLetter.sort();
+    getContacts();
+}
+
+function selectContact(index) {
+    const selectedIndex = selectedContactIndices.indexOf(index);
+
+    if (selectedIndex > -1) {
+        selectedContactIndices.splice(selectedIndex, 1);
+    } else {
+        selectedContactIndices.push(index);
+    }
+
+    console.log('Selected Contact Indices:', selectedContactIndices);
+    getContacts();
+    showSelectedProfile(); // Aktualisiere die Anzeige der ausgewählten Profile
+}
+
+function deselctedtContact(i, name, firstletters, color) {
+    let checkbox = document.getElementById(`checkbox${i}`);
+
+    checkbox.innerHTML = '';
+    checkbox.innerHTML = `<img onclick="selectedContact(${i},'${name}','${firstletters}')" id="checkImg${i}"  class="check_img" src="assets/IMG/Check button.svg" alt="">`;
 
     let profileContainer = document.getElementById(`profile_Container${i}`);
-    let checkImg = document.getElementById(`checkImg${i}`);
-    let checkedImg = document.getElementById(`checkedImg${i}`);
 
-    checkImg.classList.toggle('d_none');
-    checkedImg.classList.toggle('d_none');
+    // Setze die Originalfarben zurück
+    profileContainer.style.backgroundColor = '';
+    profileContainer.classList.remove(color);
+    profileContainer.classList.remove('color_white');
 
-
-
-    profileContainer.classList.toggle('bg_color');
-    profileContainer.classList.toggle('color_white');
+    // Entferne den Namen aus der Liste der zugewiesenen Kontakte
+    assignedContacts.splice(assignedContacts.indexOf(name), 1);
 
     showSelectedProfile(firstletters, i);
-
 }
 
-
-function showSelectedProfile(firstletters, i) {
-
+function showSelectedProfile() {
     let selectedProfileContainer = document.getElementById('Selected_profiles_Container');
-    let profilebadgeassign = document.getElementById(`profile_Badge_assign${i}`)
+    selectedProfileContainer.innerHTML = '';
 
-    if (profilebadgeassign) {
+    selectedContactIndices.forEach(index => {
+        let contact = contactsArray[index];
+        let firstletters = `${contact.name.charAt(0).toUpperCase()}${getLastName(contact.name).charAt(0).toUpperCase()}`;
 
-        profilebadgeassign.remove();
-
-    } else {
         selectedProfileContainer.innerHTML += `
-
-    <div id="profile_Badge_assign${i}" class="profile_Badge_assign">${firstletters}</div>
-    `;
-    }
-
-
+            <div class="profile_Badge_assign">${firstletters}</div>
+        `;
+    });
 }
+
