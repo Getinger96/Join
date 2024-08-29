@@ -18,24 +18,25 @@ let selectedContactIndex = null;
 async function fetchContacts(path = '') {
     let response = await fetch(base_URL + path + ".json");
     let userJSON = await response.json();
-    let userAsArray = Object.values(userJSON.contacts);
-    
-    for (let index = 0; index < userAsArray.length; index++) {
-        let contact = userAsArray[index];
+    let userAsArray = Object.entries(userJSON.contacts); // Verwende Object.entries
 
+    for (let [id, contact] of userAsArray) { // Iteriere über id und contact
+        if (contact && contact.email) {
+            contactsArray.push({
+                id: id,
+                email: contact.email,
+                name: contact.name,
+                password: contact.password,
+                phone: contact.phone
+            });
+        }
+    }
 
-        contactsArray.push({
-            email: contact.email,
-            name: contact.name,
-            password: contact.password,
-        })
-        console.log(contactsArray);
-
-        letterSorting()
-
+    console.log(contactsArray);
+    letterSorting();
 }
-}
-      
+
+
 function getLastName(fullName) {
     let nameParts = fullName.trim().split(' ');
     return nameParts[nameParts.length - 1];
@@ -43,10 +44,10 @@ function getLastName(fullName) {
 
 function getContacts() {
     let showContacts = document.getElementById('contactview');
-    showContacts.innerHTML = '';
+    let content = ''; // Erstelle eine Variable für den gesamten Inhalt
 
     groupedContacts = [];
-    // Füge alle Kontakte der Gruppe hinzu
+
     contactsArray.forEach((contact, index) => {
         let firstLetter = contact.name.charAt(0).toUpperCase();
         let colorIndex = index % colors.length;
@@ -61,18 +62,20 @@ function getContacts() {
 
     beginningLetter = Object.keys(groupedContacts).sort();
 
-    // Anzeigen der Kontakte
     for (let index = 0; index < beginningLetter.length; index++) {
         let letter = beginningLetter[index];
-        showContacts.innerHTML += `<h2>${letter}</h2>`;
-        showContacts.innerHTML += `<hr class="contactlist-hr">`;
+        content += `<h2>${letter}</h2>`;
+        content += `<hr class="contactlist-hr">`;
 
         groupedContacts[letter].forEach(contact => {
             let selectedClass = (contact.index === selectedContactIndex) ? 'selected' : '';
-            showContacts.innerHTML += displayContacts(contact.index, contact.email, contact.name, getLastName(contact.name), contact.phone, selectedClass, contact.color);
+            content += displayContacts(contact.index, contact.email, contact.name, getLastName(contact.name), contact.phone, selectedClass, contact.color);
         });
     }
+
+    showContacts.innerHTML = content; // Setze den gesamten Inhalt einmalig
 }
+
 
 function displayContacts(contactIndex, contactsEmail, contactsName, contactLastname, contactPhone, selectedClass, color) {
     return `<div onclick="selectContact(${contactIndex})" class="single-contact-box ${selectedClass}" style="background-color:${selectedClass ? '#2A3647' : ''};">
@@ -177,6 +180,8 @@ function addNewContact() {
     let newContactOverlay = document.getElementById('newContact');
     newContactOverlay.style.display = 'flex';
 
+    newContactOverlay.classList.add('transition-in-from-right');
+
     const cancelButton = document.querySelector('.cancel-button');
     cancelButton.onclick = function () {
         closeCardContact();
@@ -218,25 +223,14 @@ function editContact(index) {
     };
 
     let newContactOverlay = document.getElementById('newContact');
+    newContactOverlay.classList.add('transition-in-from-right');
     newContactOverlay.style.display = 'flex';
 }
 
-function saveEditedContact(index) {
-    const name = document.getElementById('name').value.trim();
-    const email = document.getElementById('mail').value.trim();
-    const phone = document.getElementById('telephone').value.trim();
-
-    contactsArray[index].name = name;
-    contactsArray[index].email = email;
-    contactsArray[index].phone = phone;
-
-    letterSorting();
-
-    closeCardContact();
-}
-
-function deleteContact(index) {
+async function deleteContact(index) {
     if (index > -1) {
+        const contact = contactsArray[index];
+        await deleteData(`contacts/${contact.id}`);
         contactsArray.splice(index, 1);
         letterSorting();
         closeCardContact();
@@ -249,6 +243,8 @@ function deleteContact(index) {
 function closeCardContact() {
     let newContactOverlay = document.getElementById('newContact');
     newContactOverlay.style.display = 'none';
+
+    newContactOverlay.classList.remove('transition-in-from-right');
 
     document.querySelector('.addcontactheadline').textContent = 'Add Contact';
     document.querySelector('.addcontactsecondline').style.display = 'flex';
@@ -267,7 +263,7 @@ function clearBigContactView() {
     showContacts.innerHTML = '';
 }
 
-function saveEditedContact(index) {
+async function saveEditedContact(index) {
     const name = document.getElementById('name').value.trim();
     const email = document.getElementById('mail').value.trim();
     const phone = document.getElementById('telephone').value.trim();
@@ -277,11 +273,14 @@ function saveEditedContact(index) {
         contactsArray[index].email = email;
         contactsArray[index].phone = phone;
 
+       
         letterSorting();
         closeCardContact();
         getContactBig(index);
     }
 }
+
+
 
 async function postData(path = "", data = {}) {
     let response = await fetch(base_URL + path + ".json", {
@@ -294,3 +293,28 @@ async function postData(path = "", data = {}) {
 
     return responsASJson = await response.json();
 }
+
+async function deleteData(path="") {
+    let response = await fetch(base_URL + path + ".json", {
+        method: "DELETE",
+    });
+
+return responsASJson = await response.json();
+}
+
+async function putData(path = "", data = {}) {
+    let response = await fetch(base_URL + path + ".json", {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    });
+
+    return responsASJson = await response.json();
+
+}
+
+
+
+

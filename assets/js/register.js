@@ -35,7 +35,7 @@ async function postData(path="", data={}) {
     
 }
 
-async function  addnewUser() {
+async function  checkRegistration() {
     let username = document.getElementById('username');
     let usermail = document.getElementById('usermail');
     let userpassword = document.getElementById('userpassword');
@@ -44,10 +44,22 @@ async function  addnewUser() {
     let sigUpInfo = document.getElementById('signupinfotext');
 
 
+    let user = contacts.find(u => u.email === usermail.value);
+
+
+    if (user) {
+        sigUpInfo.innerHTML = emailIsAlreadyAvailable();
+        emptyTheInputFields(username, usermail, userpassword, userconfirmpassword, checkbox);
+        ButtonDisabledSet();
+        return;
+    }
+
+
 
     if (userpassword.value.length <= 5) {
         sigUpInfo.innerHTML = passwordToShort();
         emptyTheInputFields(username, usermail, userpassword, userconfirmpassword, checkbox);
+        ButtonDisabledSet();
         return;
     }
 
@@ -55,17 +67,21 @@ async function  addnewUser() {
     if (userpassword.value !== userconfirmpassword.value) {
         sigUpInfo.innerHTML = passwordNoMatch();
         emptyTheInputFields(username, usermail, userpassword, userconfirmpassword, checkbox);
+        ButtonDisabledSet();
         return;
     }
 
     if (!checkbox.checked) {
         sigUpInfo.innerHTML = checkboxNoChecked();
         emptyTheInputFields(username, usermail, userpassword, userconfirmpassword, checkbox);
+        ButtonDisabledSet();
         return;
     }
 
-
-  
+    addNewUser(username, usermail, userpassword, userconfirmpassword, checkbox)
+}
+   async function addNewUser(username, usermail, userpassword, userconfirmpassword, checkbox) {
+    
     let newContact  = {
         name: username.value,
         email: usermail.value,
@@ -89,6 +105,16 @@ async function  addnewUser() {
     await loadUsers('users');
   
 }
+
+
+function ButtonDisabledSet() {
+    let signUpButton = document.getElementById('signUpButton');
+    signUpButton.classList.remove('enabledbutton');
+    signUpButton.classList.add('disabledbutton');
+
+}
+
+
 
 function checkFormCompletion() {
     let username = document.getElementById('username').value.trim();
@@ -190,4 +216,9 @@ function showSignedUpSuccessfully() {
 
 
     </div>`;
+}
+
+function emailIsAlreadyAvailable() {
+return `Attention, the email already exists!!!`
+
 }
