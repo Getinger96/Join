@@ -51,8 +51,9 @@
 }
 
 .logo {
-    width: 220px;
+    width: 100px;
     height: 121.97px;
+    margin-left: 50px;
 }
 
 .navLink_Summary {
