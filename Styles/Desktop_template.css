@@ -1,17 +1,16 @@
-
 .sideblock {
     width: 232px;
     background-color: #2A3647;
-    height: 1024px;
+    height: 100vh;
+    /* Volle Höhe des Bildschirms */
     padding: 64px 0px 64px 0px;
     display: flex;
-    align-items: center;
     flex-direction: column;
+    justify-content: space-between;
+    /* Verteilt den Platz zwischen den Elementen */
     position: fixed;
-    z-index:10;
-    gap: 200px;
+    z-index: 10;
 }
-
 
 .headblock {
     height: 96px;
@@ -21,7 +20,7 @@
     background-color: white;
     padding: 20px 40px 20px 348px;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
-    z-index:5;
+    z-index: 5;
     position: relative;
     font-size: 20px;
     line-height: 24px;
@@ -30,7 +29,7 @@
 }
 
 .logInUser {
-   padding: 10px;
+    padding: 10px;
     border-radius: 45px;
     border: 3px solid #2A3647;
     margin-left: 8px;
@@ -39,7 +38,7 @@
 }
 
 .title {
-    width:319px ;
+    width: 319px;
     height: 24px;
 }
 
@@ -52,11 +51,9 @@
 }
 
 .logo {
-    width: 100.03px;
+    width: 220px;
     height: 121.97px;
 }
-
-
 
 .navLink_Summary {
 
@@ -66,9 +63,6 @@
     gap: 8px;
     padding: 8px 56px 8px 56px;
     align-items: center;
-
-
-
 }
 
 .navLink_Contact {
@@ -99,26 +93,19 @@
     gap: 8px;
     padding: 8px 56px 8px 56px;
     align-items: center;
-
-
 }
 
 .sidelink {
     width: 232px;
-    height: 229px;
-    gap: 15px;
     display: flex;
     flex-direction: column;
-
+    gap: 15px;
 }
-
-
 
 .icon_container {
     width: 30px;
     height: 30px;
     display: flex;
-
     align-items: center;
 }
 
@@ -127,7 +114,6 @@
     height: 30px;
     gap: 10px;
     display: flex;
-
 }
 
 .icon_summary {
@@ -142,14 +128,11 @@
     height: 25.03px;
     top: 2.17px;
     left: 2.19px;
-
 }
 
 .icon_board {
     width: 25px;
     height: 29.55px;
-
-
 }
 
 .icon_contact {
@@ -157,8 +140,6 @@
     height: 25px;
     top: 2.5px;
     left: 3.75px;
-
-
 }
 
 .txt_Summary {
@@ -174,7 +155,6 @@
 }
 
 .txt_Board {
-
     font-size: 16px;
     line-height: 19.2px;
 }
@@ -185,11 +165,11 @@
 }
 
 .bottom_Side_Block {
-
     display: flex;
     flex-direction: column;
     gap: 4px;
-
+    margin-bottom: 150px;
+    padding-left: 40px;
 }
 
 .navLink {
