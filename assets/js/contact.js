@@ -16,11 +16,14 @@ let groupedContacts = [];
 let selectedContactIndex = null;
 
 async function fetchContacts(path = '') {
+    
     let response = await fetch(base_URL + path + ".json");
     let userJSON = await response.json();
-    let userAsArray = Object.entries(userJSON.contacts); // Verwende Object.entries
+    let userAsArray = Object.entries(userJSON.contacts);
 
-    for (let [id, contact] of userAsArray) { // Iteriere über id und contact
+    contactsArray = []; // Leere das Array, um doppelte Einträge zu vermeiden
+
+    for (let [id, contact] of userAsArray) {
         if (contact && contact.email) {
             contactsArray.push({
                 id: id,
@@ -37,6 +40,7 @@ async function fetchContacts(path = '') {
 }
 
 
+
 function getLastName(fullName) {
     let nameParts = fullName.trim().split(' ');
     return nameParts[nameParts.length - 1];
@@ -46,7 +50,7 @@ function getContacts() {
     let showContacts = document.getElementById('contactview');
     let content = ''; // Erstelle eine Variable für den gesamten Inhalt
 
-    groupedContacts = [];
+    groupedContacts = {}; // Sicherstellen, dass groupedContacts ein leeres Objekt ist
 
     contactsArray.forEach((contact, index) => {
         let firstLetter = contact.name.charAt(0).toUpperCase();
@@ -75,6 +79,7 @@ function getContacts() {
 
     showContacts.innerHTML = content; // Setze den gesamten Inhalt einmalig
 }
+
 
 
 function displayContacts(contactIndex, contactsEmail, contactsName, contactLastname, contactPhone, selectedClass, color) {
@@ -138,6 +143,9 @@ function showContactBig(contactsName, contactsEmail, contactPhone, contactLastna
 }
 
 function letterSorting() {
+    beginningLetter = []; // Leere das Array
+    groupedContacts = []; // Leere das Array
+
     contactsArray.forEach(contact => {
         let firstLetter = contact.name.charAt(0).toUpperCase();
 
@@ -158,6 +166,7 @@ function letterSorting() {
     beginningLetter.sort();
     getContacts();
 }
+
 
 async function createContact() {
     const name = document.getElementById('name').value.trim();
