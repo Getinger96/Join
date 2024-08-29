@@ -169,12 +169,12 @@
     flex-direction: column;
     gap: 4px;
     margin-bottom: 150px;
-    padding-left: 40px;
 }
 
 .navLink {
     text-decoration: none;
     color: #FFFFFF;
+    padding-left: 40px;
 }
 
 a:hover {
