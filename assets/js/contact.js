@@ -297,11 +297,10 @@ async function saveEditedContact(index) {
         contactsArray[index].email = email;
         contactsArray[index].phone = phone;
 
-        await putData(`contacts/${contact.id}`);
-
         sortContactsByLetter();
         closeCardContact();
         getContactBig(index);
+
     }
 }
 
