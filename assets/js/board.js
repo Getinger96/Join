@@ -132,17 +132,18 @@ function emptyTasks(category) {
 
 function allowDrop(ev) {
     ev.preventDefault();
+    const target = ev.target.closest('.drag-area');
+    if (target) {
+        highlight(target.id);
+    }
 }
 
-function highlight(id) {
-    document.getElementById(id).classList.add('drag-area-highlight');
+function dragLeave(ev) {
+    const target = ev.target.closest('.drag-area');
+    if (target) {
+        removeHighlight(target.id);
+    }
 }
-
-function removeHighlight(id) {
-    document.getElementById(id).classList.remove('drag-area-highlight');
-}
-
-
 
 // Überprüfe, ob eine Spalte leer ist, und zeige die Nachricht entsprechend an
 function startDragging(id) {
@@ -150,22 +151,26 @@ function startDragging(id) {
 }
 
 function moveTo(category) {
-    // Finde das Task-Element nach seiner ID und aktualisiere die Kategorie
     const draggedTodoIndex = todos.findIndex(todo => todo.id === currentDraggedElement);
     if (draggedTodoIndex !== -1) {
         todos[draggedTodoIndex].category = category;
-        updateHTML(); // Aktualisiere die HTML-Darstellung nach dem Verschieben
-    } else {
-        console.error("Dragged element not found:", currentDraggedElement);
+        updateHTML(); // Aktualisiert die HTML-Darstellung nach dem Verschieben
+        removeHighlight(category); // Entfernt das Highlight nach dem Ablegen
     }
 }
 
 function highlight(id) {
-    document.getElementById(id).classList.add('drag-area-highlight');
+    const element = document.getElementById(id);
+    if (element) {
+        element.classList.add('drag-area-highlight');
+    }
 }
 
 function removeHighlight(id) {
-    document.getElementById(id).classList.remove('drag-area-highlight');
+    const element = document.getElementById(id);
+    if (element) {
+        element.classList.remove('drag-area-highlight');
+    }
 }
 
 // Add Subtask
@@ -194,7 +199,7 @@ function addCurrentSubtask() {
     else {
         alert('Genügend Subtasks hinzugefügt!');
     }
-} 
+}
 
 //Prio Buttons
 function resetButtons() {
