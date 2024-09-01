@@ -207,73 +207,109 @@ function showSelectedProfile(firstletters, i) {
 
 }
 
+function dateinput() {
 
 
+    let duedate = document.getElementById('dueDate');
+    duedate.min = new Date().toISOString().split('T')[0];
 
-
-function resetButtons() {
-    // Zurücksetzen aller Buttons
-    let buttons = [
-        { id: 'urgent', color: 'initial', imgSrc: './assets/img/PRio_urgent (2).svg' },
-        { id: 'medium', color: 'initial', imgSrc: './assets/IMG/Prio_medium (2).svg' },
-        { id: 'low', color: 'initial', imgSrc: './assets/img/Prio_Low (2).svg' }
-    ];
-
-    buttons.forEach(button => {
-        let btnElement = document.getElementById(button.id);
-        let iconElement = document.getElementById(button.id + "Icon");
-
-        btnElement.style.backgroundColor = button.color;
-        btnElement.style.color = 'initial';
-        iconElement.src = button.imgSrc;
-    });
 }
 
-function urgent() {
-    resetButtons();  // Setzt alle anderen Buttons zurück
 
-    let urgentButton = document.getElementById("urgent");
-    let urgentIcon = document.getElementById("urgentIcon");
 
-    // Setze die neuen Styles und das Bild
-    urgentButton.style.backgroundColor = "red";
-    urgentButton.style.color = "white";
-    urgentIcon.src = "./assets/IMG/iconUrgentWhite.svg";
+
+
+function renderPrioButtons() {
+    let prioButtonContainer = document.getElementById('Prio_btn_Container');
+    prioButtonContainer.innerHTML = `
+                        
+                        <button onclick="chossedurgent()" type="button" id="urgent"  class="Prio_Btn">Urgent <img
+                                id="urgentIcon" src="assets/IMG/PRio_urgent (2).svg" alt=""></button>
+
+                                 <button type="button" id="medium" onclick="choossedmedium()" class="Prio_Btn">Medium <img
+                                id="mediumIcon" src="assets/IMG/Prio_medium (2).svg" alt="">
+                        </button>
+
+                        <button type="button" id="low" onclick="choosedlow()" class="Prio_Btn">Low
+                            <img id="lowIcon" src="assets/IMG/Prio_Low (2).svg" alt=""></button>
+
+    `
+
 }
 
-function medium() {
-    resetButtons();  // Setzt alle anderen Buttons zurück
+function chossedurgent() {
+    renderPrioButtons();
 
-    let mediumButton = document.getElementById("medium");
-    let mediumIcon = document.getElementById("mediumIcon");
+    let urgent = document.getElementById('urgent');
+    urgent.innerHTML =
+        `
+     Urgent
+     <img src="assets/IMG/Prio_urgent_WHITE.svg" alt="">
+     `;
 
-    // Setze die neuen Styles und das Bild
-    mediumButton.style.backgroundColor = "orange";
-    mediumButton.style.color = "white";
-    mediumIcon.src = "./assets/IMG/iconMediumWhite.svg";
+    urgent.classList.add('bg_urgent_selected');
+    urgent.classList.add('color_white')
+    prio = [];
+    prio.push('urgent');
+
+
+};
+
+function choossedmedium() {
+    renderPrioButtons();
+    let medium = document.getElementById('medium');
+    medium.innerHTML =
+        `
+    Medium
+    <img src="assets/IMG/PRio_Medium_WHITE.svg" alt="">
+    `;
+
+    medium.classList.add('color_white');
+    medium.classList.add('bg_Medium');
+    prio = [];
+    prio.push('medium');
+
 }
 
-function low() {
-    resetButtons();  // Setzt alle anderen Buttons zurück
+function choosedlow() {
+    renderPrioButtons();
+    let low = document.getElementById('low');
+    low.innerHTML =
+        `
+    Low
+    <img src="assets/IMG/Prio_LOW_WHITE.svg" alt="">
+    `;
 
-    let lowButton = document.getElementById("low");
-    let lowIcon = document.getElementById("lowIcon");
+    low.classList.add('color_white');
+    low.classList.add('bg_Low');
+    prio = [];
+    prio.push('low');
 
-    // Setze die neuen Styles und das Bild
-    lowButton.style.backgroundColor = "limegreen";
-    lowButton.style.color = "white";
-    lowIcon.src = "./assets/IMG/iconLowWhite.svg";
 }
 
 function addSubtask() {
     let list = document.getElementById('ul_subtasks');
     list.innerHTML = ''; //Liste wird gelöscht
-    for (let i = 0; i < subtasks.length; i++) {
-        let li = document.createElement('li'); //Liste wird wieder hinzugefügt
-        li.innerHTML = subtasks[i] + /*html*/ ` <button class="Subtasks_Btn" onclick="deleteItem(${i})"><img src="./assets/img/delete.png"></button>`;
-        list.appendChild(li);
-    }
+    
+        
+    
+        for (let i = 0; i < subtasks.length; i++) {
+            let li = document.createElement('li'); //Liste wird wieder hinzugefügt
+            li.innerHTML = subtasks[i] + /*html*/ ` <button class="Subtasks_Btn" onclick="deleteItem(${i})"><img src="./assets/img/delete.png"></button>`;
+            list.appendChild(li);
+    
+    
+        }
+
+    
+
+
+
+
+
+   
 }
+
 
 function deleteItem(i) { //Einzelnen Elemente aus der Liste löschen
     subtasks.splice(i, 1);
@@ -282,10 +318,23 @@ function deleteItem(i) { //Einzelnen Elemente aus der Liste löschen
 
 function addCurrentSubtask() {
     if (subtasks.length < 5) {
-        let CurrentSubtask = document.getElementById('input_Subtasks').value;
-        subtasks.push(CurrentSubtask);
-        document.getElementById('input_Subtasks').value = ''; // Liste wieder leeren
-        addSubtask();
+        let Currentubtask = document.getElementById('input_Subtasks').value;
+        if (Currentubtask=='') {
+            
+            
+        }else {
+            subtasks.push(Currentubtask);
+            document.getElementById('input_Subtasks').value = ''; // Liste wieder leeren
+            addSubtask();
+
+        }
+
+
+
+      
+
+
+
     }
     else {
         alert('Genügend Subtasks hinzugefügt!');
@@ -346,6 +395,7 @@ async function createTask() {
         Description: description.value,
         AssignedContact: assignedContact,
         Date: date.value,
+        Prio: prio,
         Category: category.value,
         Subtask: subtask
     };
@@ -373,7 +423,7 @@ function clearTask() {
         let firstletters = forNAmebig + firstletterlastnameBIG;
         deselctedtContact(i, name, firstletters)
     }
-   
+
 
     let selectedProfileContainer = document.getElementById('Selected_profiles_Container');
     selectedProfileContainer.innerHTML = '';
@@ -395,7 +445,8 @@ function clearTask() {
     date.value = "";
     category.value = "";
     subtasks = [];
+    prio = [];
+    renderPrioButtons();
 
-    
 }
 

@@ -33,7 +33,8 @@
                 </div>
                 <div class="Description_Container">
                     <span class="Description_Header">Description</span>
-                    <textarea id="Description" class="input_Description" placeholder="Enter a Description" type="text"></textarea>
+                    <textarea id="Description" class="input_Description" placeholder="Enter a Description"
+                        type="text"></textarea>
                 </div>
                 <div class="AssignedTO_Container">
                     <span class="Assign_Header">Assigned to</span>
@@ -63,21 +64,14 @@
                 <div class="date_Container">
                     <span class="Date_header">Due date <span class="red">*</span></span>
 
-                    <input id="dueDate" placeholder="dd/mm/yyyy" class="input_date" required type="date">
+                    <input onclick="dateinput()" id="dueDate" placeholder="dd/mm/yyyy" class="input_date" required type="date">
 
                 </div>
 
                 <div class="Prio_Container">
                     <span class="prio_Header">Prio</span>
-                    <div class="Prio_btn_Container">
-                        <button type="button" id="'urgent" onclick="urgent()" class="Prio_Btn">Urgent <img
-                                id="urgentIcon" src="assets/IMG/PRio_urgent (2).svg" alt=""></button>
-
-                            <button type="button" id="medium" onclick="medium()" class="Prio_Btn">Medium <img
-                                    id="mediumIcon" src="assets/IMG/Prio_medium (2).svg" alt="">
-                            </button>
-                            <button type="button" id="low" onclick="low()" class="Prio_Btn">Low
-                                <img id="lowIcon" src="assets/IMG/Prio_Low (2).svg" alt=""></button>
+                    <div id="Prio_btn_Container" class="Prio_btn_Container">
+                        
                     </div>
 
                 </div>
@@ -119,8 +113,9 @@
 
     </div>
     <div class="Btn_Container">
-        <button onclick="clearTask()" class="clear_Btn">Clear <img class="clear-icon" src="assets/IMG/x_icon_clear.svg" alt=""></button>
-        <button onclick="createTask()"  class="Create_Btn">Create Task <img class="create_icon"
+        <button onclick="clearTask()" class="clear_Btn">Clear <img class="clear-icon" src="assets/IMG/x_icon_clear.svg"
+                alt=""></button>
+        <button onclick="createTask()" class="Create_Btn">Create Task <img class="create_icon"
                 src="assets/IMG/clear_Img.svg" alt=""></button>
     </div>
     <div class="required_info_Container"><span class="red">*</span><span>This field is required</span></div>

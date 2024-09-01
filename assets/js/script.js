@@ -31,4 +31,5 @@ function init() {
     fetchContacts();
 
     includeHTML();
+    renderPrioButtons();
 }
