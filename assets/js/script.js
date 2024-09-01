@@ -29,6 +29,7 @@ function includeHTML() {
 
 function init() {
     fetchContacts();
-
+    fetchAllTasks()
     includeHTML();
+    renderPrioButtons();
 }

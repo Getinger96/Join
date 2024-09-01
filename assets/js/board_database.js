@@ -15,6 +15,226 @@ let beginningLetter = [];
 let groupedContacts = [];
 let selectedContactIndices = [];
 
+const base_URL_Add_Task = "https://join-task-1db93-default-rtdb.europe-west1.firebasedatabase.app/";
+let currentPriority = 'none';
+
+let todos = [
+    {
+        id: 0,
+        title: 'Kochwelt Page & Recipe Recommender',
+        description: 'Build start page with recipe recommendation',
+        category: 'open'
+    },
+    {
+        id: 1,
+        title: 'CSS Architecture Planning',
+        description: 'Define CSS naming conventiond and structure.',
+        category: 'open'
+    },
+    {
+        id: 2,
+        title: 'HTML Base Template Creation',
+        description: 'Create reusable HTML base templates...',
+        category: 'closed'
+    }
+];
+
+let currentCategory = 'open';
+
+// Funktion, um eine neue Aufgabe hinzuzufügen und in die Firebase-Datenbank zu speichern
+function addTask() {
+    // Eingabewerte abrufen
+    let title = document.getElementById('taskTitle').value.trim();
+    let description = document.getElementById('description').value.trim();
+    let contact = document.getElementById('Selected_profiles_Container').value.trim();
+    let date = document.getElementById('taskDueDate').value;
+    let category = document.getElementById('category').value;
+    let subtaskListElement = document.getElementById('list');
+
+    // Überprüfen, ob die Pflichtfelder ausgefüllt sind
+    if (title === '' || date === '' || category === '') {
+        alert('Bitte füllen Sie den Titel, das Fälligkeitsdatum und die Kategorie aus.');
+        return;
+    }
+
+    // Optionales Feld verarbeiten
+    let subtask = Array.from(subtaskListElement.children).map(li => li.textContent.trim());
+
+    let newId = todos.length ? todos[todos.length - 1].id + 1 : 0;
+
+    let newTask = {
+        id: newId,
+        title: title,
+        description: description,
+        contact: contact,
+        date: date,
+        category: category,
+        priority: currentPriority, // Setze die Priorität
+        subtasks: subtask
+    };
+
+    todos.push(newTask);
+    updateHTML();
+    clearTask();
+    closeTask();
+
+    addTaskToDatabase(newTask);
+}
+
+function createTask() {
+    // Elemente abrufen
+    let titleElement = document.getElementById('taskTitle');
+    let descriptionElement = document.getElementById('description');
+    let contactElement = document.getElementById('Selected_profiles_Container');
+    let dateElement = document.getElementById('taskDueDate');
+    let categoryElement = document.getElementById('category');
+    let subtaskListElement = document.getElementById('list');
+
+    // Überprüfen, ob die Elemente existieren
+    if (!titleElement || !descriptionElement || !contactElement || !dateElement || !categoryElement || !subtaskListElement) {
+        console.error('Ein oder mehrere erforderliche HTML-Elemente fehlen.');
+        return;
+    }
+
+    // Eingabewerte abrufen
+    let title = titleElement.value.trim();
+    let description = descriptionElement.value.trim();
+    let contact = contactElement.value;
+    let date = dateElement.value;
+    let category = categoryElement.value;
+    let subtask = Array.from(subtaskListElement.children).map(li => li.textContent.trim());
+
+    // Überprüfen, ob die erforderlichen Felder ausgefüllt sind
+    if (title === '' || category === '') {
+        alert('Bitte füllen Sie sowohl den Titel als auch die Kategorie aus.');
+        return;
+    }
+
+    // Generiere eine neue ID für die Aufgabe
+    let newId = todos.length ? todos[todos.length - 1].id + 1 : 0;
+
+    // Erstellen einer neuen Aufgabe als Objekt
+    let newTask = {
+        id: newId,
+        title: title,
+        description: description,
+        contact: contact,
+        date: date,
+        category: category,
+        priority: currentPriority,
+        subtasks: subtask
+    };
+
+    // Hinzufügen der neuen Aufgabe zum todos-Array
+    todos.push(newTask);
+
+    // Aufgabe in Firebase hochladen
+    addTaskToDatabase(newTask);
+
+    // Aktualisieren der HTML-Anzeige
+    updateHTML();
+
+    // Formular zurücksetzen
+    clearTask();
+
+    // Schließen des Formulars
+    closeTask();
+}
+
+async function addTaskToDatabase(task) {
+    try {
+        let response = await fetch(base_URL_Add_Task + "tasks.json", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(task)
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP-Fehler! Status: ${response.status}`);
+        }
+
+        let responseData = await response.json();
+        console.log("Aufgabe erfolgreich hinzugefügt:", responseData);
+    } catch (error) {
+        console.error("Fehler beim Hinzufügen der Aufgabe:", error);
+    }
+}
+
+// Abrufen aller Aufgaben aus der Datenbank
+async function fetchAllTasks(path = '') {
+    try {
+        let response = await fetch(base_URL_Add_Task + path + "tasks.json");
+
+        if (!response.ok) {
+            throw new Error(`HTTP-Fehler! Status: ${response.status}`);
+        }
+
+        let tasksJSON = await response.json();
+        console.log("Alle Aufgaben:", tasksJSON);
+
+        // Überprüfen, ob tasksJSON existiert und ob es tatsächlich Aufgaben enthält
+        if (tasksJSON) {
+            todos = Object.values(tasksJSON);
+            updateHTML(); // Update HTML nach dem Laden der Aufgaben
+        } else {
+            console.warn("Keine Aufgaben gefunden.");
+            todos = [];  // Leere Liste setzen, falls keine Aufgaben vorhanden sind
+        }
+    } catch (error) {
+        console.error("Fehler beim Abrufen der Aufgaben:", error);
+    }
+}
+
+// Aktualisiert die HTML-Darstellung
+function updateHTML() {
+    const containers = {
+        open: document.getElementById('open'),
+        progress: document.getElementById('progress'),
+        awaitFeedback: document.getElementById('awaitFeedback'),
+        closed: document.getElementById('closed')
+    };
+
+    // Leeren der Container
+    for (let category in containers) {
+        containers[category].innerHTML = '';
+    }
+
+    // Aufgaben anzeigen
+    todos.forEach(todo => {
+        if (todo.category && containers[todo.category]) {
+            const taskHTML = generateTodoHTML(todo);
+            containers[todo.category].innerHTML += taskHTML;
+        } else {
+            console.error(`No container found for category "${todo.category}"`);
+        }
+    });
+
+    // Leere Bereiche überprüfen
+    ['open', 'progress', 'awaitFeedback', 'closed'].forEach(category => {
+        emptyTasks(category);
+    });
+}
+
+// Funktion, um leere Bereiche mit einem Hinweis zu versehen
+function emptyTasks(category) {
+    let container = document.getElementById(category);
+    let noTasksElement = document.querySelector(`.noTasks[category="${category}"]`);
+
+    if (noTasksElement) {
+        if (container && container.innerHTML.trim() === '') {
+            noTasksElement.style.display = 'block';
+        } else {
+            noTasksElement.style.display = 'none';
+        }
+    } else {
+        console.error(`Element mit category="${category}" nicht gefunden.`);
+    }
+}
+
+
+// Board Contacts
 async function fetchContacts(path = '') {
     let response = await fetch(base_URL + path + ".json");
     let userJSON = await response.json();
@@ -27,7 +247,6 @@ async function fetchContacts(path = '') {
         contactsArray.push({
             name: contact.name,
         })
-        console.log(contactsArray);
 
         letterSorting()
 
@@ -49,7 +268,7 @@ function getContacts() {
 
     showContacts.innerHTML = '';
 
-    groupedContacts = [];
+    let groupedContacts = {};
     contactsArray.forEach((contact, index) => {
         let firstLetter = contact.name.charAt(0).toUpperCase();
         let colorIndex = index % colors.length;
@@ -62,7 +281,7 @@ function getContacts() {
         groupedContacts[firstLetter].push({ ...contact, index, color });
     });
 
-    beginningLetter = Object.keys(groupedContacts).sort();
+    let beginningLetter = Object.keys(groupedContacts).sort();
 
     for (let index = 0; index < beginningLetter.length; index++) {
         let letter = beginningLetter[index];
@@ -92,12 +311,12 @@ function closelist() {
 
 function displayContacts(contactIndex, contactsName, contactLastname, selectedClass, color) {
     const isSelected = selectedContactIndices.includes(contactIndex);
-    const backgroundColor = isSelected ? '#2A3647' : '';
-    const textColor = isSelected ? 'white' : 'black';
+    const backgroundColor = isSelected ? '#2A3647' : '';  // Hintergrundfarbe für ausgewählte Kontakte
+    const textColor = isSelected ? 'white' : 'black';  // Textfarbe für ausgewählte Kontakte
 
     return `<div onclick="selectContact(${contactIndex})" class="single-contact-box ${isSelected ? 'selected' : ''}" style="background-color:${backgroundColor};">
                 <div class="contact-icon" style="background-color:${color};">
-                    <span>${contactsName.charAt(0).toUpperCase()}${contactLastname.charAt(0).toUpperCase()}</span>
+                    <span style="color: ${textColor};">${contactsName.charAt(0).toUpperCase()}${contactLastname.charAt(0).toUpperCase()}</span>
                 </div>
                 <div class="contact-content">
                     <span class="contactname" style="color:${textColor};">${contactsName}</span>
@@ -181,13 +400,26 @@ function showSelectedProfile() {
     let selectedProfileContainer = document.getElementById('Selected_profiles_Container');
     selectedProfileContainer.innerHTML = '';
 
+    if (selectedContactIndices.length === 0) {
+        selectedProfileContainer.style.display = 'none'; // Verstecke, wenn keine Kontakte ausgewählt sind
+        return;
+    }
+
+    selectedProfileContainer.style.display = 'flex'; // Stelle sicher, dass der Container sichtbar ist
     selectedContactIndices.forEach(index => {
         let contact = contactsArray[index];
         let firstletters = `${contact.name.charAt(0).toUpperCase()}${getLastName(contact.name).charAt(0).toUpperCase()}`;
 
+        let colorIndex = index % colors.length;
+        let color = colors[colorIndex];
+
         selectedProfileContainer.innerHTML += `
-            <div class="profile_Badge_assign">${firstletters}</div>
+            <div class="contact-icon" style="background-color:${color};">
+                <div>${firstletters}</div>
+            </div>
         `;
     });
 }
+
+
 

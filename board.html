@@ -10,10 +10,12 @@
     <link rel="stylesheet" href="./assets/css/add_task.css">
     <link rel="stylesheet" href="Styles/Desktop_template.css">
     <link rel="stylesheet" href="./Styles/fontStyles.css">
+    <link rel="stylesheet" href="./Styles/mobile_tamplate.css">
     <script src="./assets/js/board.js"></script>
-
     <script src="./assets/js/script.js"></script>
     <script src="./assets/js/board_database.js"></script>
+    <script src="./assets/templates/mobile_version.html"></script>
+
     <link rel="icon" type="image/x-icon" href="./assets/img/Capa 2.png" />
 </head>
 
@@ -26,14 +28,19 @@
         <nav class="board displayFlex backgrount-color">
             <div class="divBoard">
                 <div class="boardtitle spaceBetween addTaskBoard">
-                    <h1>Board</h1>
+                    <div class="titleButtonBoard">
+                        <h1>Board</h1>
+                        <div onclick="openTask()" class="buttonContainerSmall curser">
+                            <img class="imgButton" src="./assets/img/add (1).png">
+                        </div>
+                    </div>
                     <div class="displayFlex alignCenter">
                         <div class="displayFlex searchContainer addTask">
                             <input onkeyup="search()" id="searchInput" class="search" type="text">
                             <div class="separator"></div>
                             <img class="curser" src="./assets/img/Frame 122.png">
                         </div>
-                        <div onclick="openTask()" class="displayFlex addTask buttonContainer curser">
+                        <div onclick="openTask()" class="displayFlex button-d-none addTask buttonContainer curser">
                             <button class="curser">Add task</button>
                             <img src="./assets/img/add (1).png">
                         </div>
@@ -41,27 +48,30 @@
                 </div>
 
                 <div class="spaceBetween boardtitle">
+                    <!-- to do -->
                     <div class="paddingRight">
                         <div class="statusButton">
-                            <p>To do</p>
+                            <p class="text">To do</p>
                             <img class="curser" onclick="openTask()" src="./assets/img/plus button.png">
                         </div>
                         <div class="noTasks" category="open" style="display: none;">No tasks To do</div>
                         <div class="drag-area" id="open" ondrop="moveTo('open')" ondragover="allowDrop(event)"
                             ondragleave="removeHighlight('open')"></div>
                     </div>
+                    <!-- in progress -->
                     <div class="paddingRight">
                         <div class="statusButton">
-                            <p>In progress</p>
+                            <p class="text">In progress</p>
                             <img class="curser" onclick="openTask()" src="./assets/img/plus button.png">
                         </div>
                         <div class="noTasks" category="progress" style="display: none;">No tasks in progress</div>
                         <div class="drag-area" id="progress" ondrop="moveTo('progress')" ondragover="allowDrop(event)"
                             ondragleave="removeHighlight('progress')"></div>
                     </div>
+                    <!-- await feedback -->
                     <div class="paddingRight">
                         <div class="statusButton">
-                            <p>Await feedback</p>
+                            <p class="text">Await feedback</p>
                             <img class="curser" onclick="openTask()" src="./assets/img/plus button.png">
                         </div>
                         <div class="noTasks" category="awaitFeedback" style="display: none;">No tasks Await feedback
@@ -69,9 +79,10 @@
                         <div class="drag-area" id="awaitFeedback" ondrop="moveTo('awaitFeedback')"
                             ondragover="allowDrop(event)" ondragleave="removeHighlight('awaitFeedback')"></div>
                     </div>
+                    <!-- done -->
                     <div class="paddingRight">
                         <div class="statusButton">
-                            <p>Done</p>
+                            <p class="text">Done</p>
                             <img class="curser" onclick="openTask()" src="./assets/img/plus button.png">
                         </div>
                         <div class="noTasks" category="closed" style="display: none;">No tasks Done</div>
@@ -80,12 +91,19 @@
                     </div>
                 </div>
             </div>
-            </div>
         </nav>
 
         <section>
             <div w3-include-html="assets/Templates/board_add_task.html"></div>
         </section>
+
+
+        <section>
+            <div w3-include-html="assets/Templates/mobile_version.html"></div>
+        </section>
+
+
+
     </section>
 </body>
 
