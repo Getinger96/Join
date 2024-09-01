@@ -29,9 +29,10 @@
 }
 
 .kanbanBoardTitle {
-    margin-left: 300px; 
+    margin-left: 300px;
 
 }
+
 .logInUser {
     padding: 10px;
     border-radius: 45px;
@@ -44,7 +45,7 @@
 .title {
     display: flex;
     align-items: center;
-    gap: 16px; 
+    gap: 16px;
 }
 
 .headUserContainer {
@@ -189,13 +190,39 @@ a:hover {
     display: none;
 }
 
-@media(max-width: 800px) {
+@media(max-width: 1450px) {
     .sideblock {
         display: none;
     }
 
     .headblock {
+        padding: 20px 40px 20px 100px;
+    }
+
+    .kanbanBoardTitle {
+        margin-left: 0;
+    }
+}
+
+@media(max-width: 1220px) {
+    .headblock {
         padding: 20px 40px 20px 60px;
+    }
+}
+
+@media(max-width: 500px) {
+    .kanbanBoardTitle {
+        display: none;
+    }
+
+    .headUserContainer img[src*="help.png"] {
+        display: none;
+    }
+
+    .MobileIcon {
+        display: block;
+        width: 36px;
+        height: 44px;
     }
 }
 
@@ -211,25 +238,11 @@ a:hover {
     .headblock {
         padding: 20px 30px 20px 30px;
         height: 80px;
-        justify-content: space-between; 
-        padding: 20px 16px; 
-    }
-
-    .kanbanBoardTitle {
-        display: none;
-    }
-
-    .headUserContainer img[src*="help.png"] {
-        display: none;
+        justify-content: space-between;
+        padding: 20px 16px;
     }
 
     .headUserContainer {
-        width:60px;
-    }
-
-    .MobileIcon {
-        display: block;
-        width: 32px; 
-        height: 39.02px;
+        width: 60px;
     }
 }

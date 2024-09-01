@@ -1,75 +1,62 @@
 let subtask = [];
 
-let todos = [{
-    'id': 0,
-    'title': 'Kochwelt Page & Recipe Recommender',
-    'description': 'Build start page with recipe recommendation',
-    'category': 'open'
-}, {
-    'id': 1,
-    'title': 'CSS Architecture Planning',
-    'description': 'Define CSS naming conventiond and structure.',
-    'category': 'open'
-}, {
-    'id': 2,
-    'title': 'HTML Base Template Creation',
-    'description': 'Create reusable HTML base templates...',
-    'category': 'closed'
-}];
-
 let currentDraggedElement;
 
 document.addEventListener("DOMContentLoaded", function () {
     updateHTML();
 });
 
-function openTask() {
+function openTask(categoryId) {
+    currentCategory = categoryId; // Setzt die aktuelle Kategorie
     let taskDiv = document.getElementById('boardAddTask');
-
-    if (taskDiv.style.display === 'none' || taskDiv.style.display === '') {
-        // Wenn das div ausgeblendet ist, zeige es an
-        taskDiv.style.display = 'block';
-    } else {
-        // Wenn das div sichtbar ist, blende es wieder aus
-        taskDiv.style.display = 'none';
-    }
+    taskDiv.style.display = taskDiv.style.display === 'none' || taskDiv.style.display === '' ? 'block' : 'none';
 }
 
 function closeTask() {
-    let taskDiv = document.getElementById('boardAddTask');
-    taskDiv.style.display = 'none'; // Blendet das div wieder aus
+    document.getElementById('boardAddTask').style.display = 'none';
 }
 
-// Funktion, um eine neue Aufgabe hinzuzufügen
-function addTask() {
-    // Sammeln der Eingabedaten aus den Feldern
-    let title = document.getElementById('taskTitle').value;
-    let description = document.getElementById('taskDescription').value;
-    let category = document.getElementById('taskCategory').value;
+// Speichert die Aufgabe und ordnet sie der aktuellen Kategorie zu
+function saveTask() {
+    let title = document.getElementById('taskTitle').value.trim();
+    let description = document.getElementById('description').value.trim();
+    let date = document.getElementById('taskDueDate').value;
+
+    // Überprüfen, ob die erforderlichen Felder ausgefüllt sind
+    if (title === '' || date === '' || !currentCategory) {
+        alert('Bitte füllen Sie sowohl den Titel, das Fälligkeitsdatum als auch die Kategorie aus.');
+        return;
+    }
 
     // Generiere eine neue ID für die Aufgabe
     let newId = todos.length ? todos[todos.length - 1].id + 1 : 0;
 
     // Erstellen einer neuen Aufgabe als Objekt
     let newTask = {
-        id: newId,  // ID der Aufgabe
+        id: newId,
         title: title,
         description: description,
-        category: category
+        date: date,
+        category: currentCategory
     };
 
     // Hinzufügen der neuen Aufgabe zum todos-Array
     todos.push(newTask);
+
+    // Aufgabe in Firebase hochladen
+    addTaskToDatabase(newTask);
 
     // Aktualisieren der HTML-Anzeige
     updateHTML();
 
     // Formular zurücksetzen
     clearTask();
+
+    // Schließen des Formulars
     closeTask();
 }
 
-// Generieren des HTML-Codes für eine Aufgabe
+// Funktion zum Generieren von HTML für eine Aufgabe
 function generateTodoHTML(todo) {
     return `
         <div class="todo" draggable="true" ondragstart="startDragging(${todo.id})">
@@ -77,57 +64,6 @@ function generateTodoHTML(todo) {
             <p>${todo.description}</p>
         </div>
     `;
-}
-
-// Funktion, um die Aufgaben in den richtigen Bereichen zu aktualisieren
-function updateHTML() {
-    let openContainer = document.getElementById('open');
-    let progressContainer = document.getElementById('progress');
-    let awaitFeedbackContainer = document.getElementById('awaitFeedback');
-    let closedContainer = document.getElementById('closed');
-
-    // Leeren der Container
-    openContainer.innerHTML = '';
-    progressContainer.innerHTML = '';
-    awaitFeedbackContainer.innerHTML = '';
-    closedContainer.innerHTML = '';
-
-    // Iterieren über alle Aufgaben und sie in den richtigen Bereich einfügen
-    todos.forEach(todo => {
-        const taskHTML = generateTodoHTML(todo);
-
-        if (todo.category === 'open') {
-            openContainer.innerHTML += taskHTML;
-        } else if (todo.category === 'progress') {
-            progressContainer.innerHTML += taskHTML;
-        } else if (todo.category === 'awaitFeedback') {
-            awaitFeedbackContainer.innerHTML += taskHTML;
-        } else if (todo.category === 'closed') {
-            closedContainer.innerHTML += taskHTML;
-        }
-    });
-
-    // Überprüfen, ob die Bereiche leer sind
-    emptyTasks('open');
-    emptyTasks('progress');
-    emptyTasks('awaitFeedback');
-    emptyTasks('closed');
-}
-
-// Funktion, um leere Bereiche mit einem Hinweis zu versehen
-function emptyTasks(category) {
-    let container = document.getElementById(category);
-    let noTasksElement = document.querySelector(`.noTasks[category="${category}"]`);
-
-    if (noTasksElement) {
-        if (container.innerHTML.trim() === '') {
-            noTasksElement.style.display = 'block';
-        } else {
-            noTasksElement.style.display = 'none';
-        }
-    } else {
-        console.error(`Element mit category="${category}" nicht gefunden.`);
-    }
 }
 
 function allowDrop(ev) {
@@ -154,8 +90,10 @@ function moveTo(category) {
     const draggedTodoIndex = todos.findIndex(todo => todo.id === currentDraggedElement);
     if (draggedTodoIndex !== -1) {
         todos[draggedTodoIndex].category = category;
-        updateHTML(); // Aktualisiert die HTML-Darstellung nach dem Verschieben
-        removeHighlight(category); // Entfernt das Highlight nach dem Ablegen
+        updateHTML();
+        removeHighlight(category);
+    } else {
+        console.error(`Task with id ${currentDraggedElement} not found.`);
     }
 }
 
@@ -218,6 +156,8 @@ function resetButtons() {
         btnElement.style.color = 'initial';
         iconElement.src = button.imgSrc;
     });
+
+    currentPriority = 'none';  // Keine Priorität ausgewählt
 }
 
 function urgent() {
@@ -230,6 +170,8 @@ function urgent() {
     urgentButton.style.backgroundColor = "red";
     urgentButton.style.color = "white";
     urgentIcon.src = "./assets/IMG/iconUrgentWhite.svg";
+
+    currentPriority = 'urgent';  // Setzt die Priorität auf 'urgent'
 }
 
 function medium() {
@@ -242,6 +184,8 @@ function medium() {
     mediumButton.style.backgroundColor = "orange";
     mediumButton.style.color = "white";
     mediumIcon.src = "./assets/IMG/iconMediumWhite.svg";
+
+    currentPriority = 'medium';  // Setzt die Priorität auf 'medium'
 }
 
 function low() {
@@ -254,6 +198,8 @@ function low() {
     lowButton.style.backgroundColor = "limegreen";
     lowButton.style.color = "white";
     lowIcon.src = "./assets/IMG/iconLowWhite.svg";
+
+    currentPriority = 'low';  // Setzt die Priorität auf 'low'
 }
 
 function search() {
@@ -308,6 +254,11 @@ function clearTask() {
 
     // Prioritäts-Buttons zurücksetzen
     resetButtons();
+
+    // Ausgewählte Kontakte zurücksetzen
+    selectedContactIndices = [];
+    document.getElementById('Selected_profiles_Container').innerHTML = '';
+    document.getElementById('Selected_profiles_Container').style.display = 'none'; // Verstecke den Container
 }
 
 function resetPrioButtons() {
@@ -334,40 +285,4 @@ function resetPrioButtons() {
                 break;
         }
     });
-}
-
-function createTask() {
-    // Sammeln der Eingabedaten aus den Feldern
-    let title = document.getElementById('taskTitle').value.trim();
-    let description = document.getElementById('description').value.trim();
-    let category = document.getElementById('category').value;
-
-    // Überprüfen, ob die Eingabefelder ausgefüllt sind
-    if (title === '' || description === '') {
-        alert('Bitte füllen Sie sowohl den Titel als auch die Beschreibung aus.');
-        return;
-    }
-
-    // Generiere eine neue ID für die Aufgabe
-    let newId = todos.length ? todos[todos.length - 1].id + 1 : 0;
-
-    // Erstellen einer neuen Aufgabe als Objekt
-    let newTask = {
-        id: newId,  // ID der Aufgabe
-        title: title,
-        description: description,
-        category: category
-    };
-
-    // Hinzufügen der neuen Aufgabe zum todos-Array
-    todos.push(newTask);
-
-    // Aktualisieren der HTML-Anzeige
-    updateHTML();
-
-    // Formular zurücksetzen
-    clearTask();
-
-    // Schließen des Formulars
-    closeTask();
 }
