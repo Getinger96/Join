@@ -33,8 +33,7 @@ async function fetchContacts(path = '') {
             });
         }
     }
-
-    console.log(contactsArray);
+    
     sortContactsByLetter();
 }
 
@@ -107,6 +106,22 @@ function selectContact(index) {
     getContactBig(index); 
 }
 
+function selectContact(index) {
+    selectedContactIndex = index;
+    getContacts(); 
+    getContactBig(index); 
+
+    // Zeige die Detailansicht in der mobilen Version an
+    const detailView = document.querySelector('.contactview-container');
+    detailView.classList.add('active');
+}
+
+function closeDetailView() {
+    const detailView = document.querySelector('.contactview-container');
+    detailView.classList.remove('active');
+}
+
+
 function getContactBig(index) {
     let contact = contactsArray[index];
     console.log('Selected Contact:', contact);
@@ -145,8 +160,10 @@ function showContactBig(contactsName, contactsEmail, contactPhone, contactLastna
                 <a class="contactphone" href="tel:${contactPhone}">${contactPhone}</a>
             </div>
         </div>
+        <img src="assets/IMG/arrow-left-line.png" alt="backButton" onclick="closeDetailView()" class="back-button">
     </div>`;
 }
+
 
 function collectBeginningLetters() {
     beginningLetter = []; 
@@ -219,6 +236,13 @@ function addNewContact() {
     };
 }
 
+function displayEditContactLogo(contactsName, contactLastname, color) {
+    return `
+        <div class="edit-contact-logo" style="background-color:${color};">
+            <span>${contactsName.charAt(0).toUpperCase()}${contactLastname.charAt(0).toUpperCase()}</span>
+        </div>`;
+}
+
 function htmlEditForm(index) {
     let contact = contactsArray[index];
 
@@ -228,7 +252,8 @@ function htmlEditForm(index) {
     document.getElementById('mail').value = contact.email;
     document.getElementById('telephone').value = contact.phone;
     document.querySelector('.createContact-button').innerHTML = 'Save <img src="assets/IMG/check.svg" alt="Save Icon" class="button-icon" style="margin-left: 8px;">';
-
+    document.querySelector('.addNewContactimg').style.display = 'none';
+   
     let newContactOverlay = document.getElementById('newContact');
     newContactOverlay.classList.add('transition-in-from-right');
     newContactOverlay.style.display = 'flex';
@@ -239,7 +264,6 @@ function editFunctionAction(index) {
     cancelButton.textContent = 'Delete';
     cancelButton.style.display = 'block';
     cancelButton.onclick = function () { deleteContact(index); };
-
     const saveButton = document.querySelector('.createContact-button');
     saveButton.onclick = function () {
         saveEditedContact(index);
@@ -276,6 +300,7 @@ function closeCardContact() {
     document.getElementById('mail').value = '';
     document.getElementById('telephone').value = '';
     document.querySelector('.createContact-button').textContent = 'Create Contact';
+    document.querySelector('.addNewContactimg').style.display = 'block';
 
     const cancelButton = document.querySelector('.cancel-button');
     cancelButton.innerHTML = 'Cancel<img class="close-button" src="assets/IMG/iconoir_cancel.png">';
@@ -297,11 +322,10 @@ async function saveEditedContact(index) {
         contactsArray[index].email = email;
         contactsArray[index].phone = phone;
 
-        await putData(`contacts/${contact.id}`);
-
         sortContactsByLetter();
         closeCardContact();
         getContactBig(index);
+
     }
 }
 
