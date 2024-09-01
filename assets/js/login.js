@@ -5,10 +5,8 @@ async function loadUsers(path = '') {
     let userAsArray = Object.values(userJSON.contacts);
     
     for (let index = 0; index < userAsArray.length; index++) {
-        let user = userAsArray[index];
-        let newUser = Object.keys(user)
-        let contact = userAsArray[index][newUser]
-
+        let contact = userAsArray[index];
+      
 
         contacts.push({
             email: contact.email,
@@ -59,14 +57,15 @@ async function loginAction() {
 }
 
 
-//function screenLogo() {
-
-//document.getElementById("logoscreen").classList.add("loginlogo");
+function guestLogin() {
+    let loginMail = document.getElementById('emaillogin');
+    let loginPassword = document.getElementById('passwordlogin');
     
-  //document.getElementById("logoscreensection").classList.add("logoscreennone");
-  //document.getElementById("myopacity").style.opacity = "1";
+    loginMail.value = "guest@web.de";  
+    loginPassword.value = "guest123456";  
 
-
+    
+}
 
 
 function changeColorHrAndBorderMistake() {
