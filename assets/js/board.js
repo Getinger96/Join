@@ -1,4 +1,5 @@
 let subtask = [];
+
 let todos = [
     {
         id: 0,
@@ -9,28 +10,24 @@ let todos = [
     {
         id: 1,
         title: 'CSS Architecture Planning',
-        description: 'Define CSS naming convention and structure.',
-        category: 'progress'
+        description: 'Define CSS naming conventiond and structure.',
+        category: 'open'
+    },
+    {
+        id: 2,
+        title: 'HTML Base Template Creation',
+        description: 'Create reusable HTML base templates...',
+        category: 'closed'
     }
-    // Weitere todo-Objekte
 ];
-
-
 
 let currentDraggedElement;
 
 document.addEventListener("DOMContentLoaded", function () {
-    let showContacts = document.getElementById('Selection_Container');
-
-    if (!showContacts) {
-        console.error("Element with ID 'Selection_Container' not found.");
-        return;
-    }
     updateHTML();
 });
 
-function openTask(categoryId) {
-    currentCategory = categoryId; // Setzt die aktuelle Kategorie
+function openTask() {
     let taskDiv = document.getElementById('boardAddTask');
     taskDiv.style.display = taskDiv.style.display === 'none' || taskDiv.style.display === '' ? 'block' : 'none';
 }
@@ -39,47 +36,7 @@ function closeTask() {
     document.getElementById('boardAddTask').style.display = 'none';
 }
 
-// Speichert die Aufgabe und ordnet sie der aktuellen Kategorie zu
-function saveTask() {
-    let title = document.getElementById('taskTitle').value.trim();
-    let description = document.getElementById('description').value.trim();
-    let date = document.getElementById('taskDueDate').value;
-
-    // Überprüfen, ob die erforderlichen Felder ausgefüllt sind
-    if (title === '' || date === '' || !currentCategory) {
-        alert('Bitte füllen Sie sowohl den Titel, das Fälligkeitsdatum als auch die Kategorie aus.');
-        return;
-    }
-
-    // Generiere eine neue ID für die Aufgabe
-    let newId = todos.length ? todos[todos.length - 1].id + 1 : 0;
-
-    // Erstellen einer neuen Aufgabe als Objekt
-    let newTask = {
-        id: newId,
-        title: title,
-        description: description,
-        date: date,
-        category: currentCategory
-    };
-
-    // Hinzufügen der neuen Aufgabe zum todos-Array
-    todos.push(newTask);
-
-    // Aufgabe in Firebase hochladen
-    addTaskToDatabase(newTask);
-
-    // Aktualisieren der HTML-Anzeige
-    updateHTML();
-
-    // Formular zurücksetzen
-    clearTask();
-
-    // Schließen des Formulars
-    closeTask();
-}
-
-// Funktion zum Generieren von HTML für eine Aufgabe
+// Generieren des HTML-Codes für eine Aufgabe
 function generateTodoHTML(todo) {
     return `
         <div class="todo" draggable="true" ondragstart="startDragging(${todo.id})">
@@ -110,11 +67,6 @@ function startDragging(id) {
 }
 
 function moveTo(category) {
-    if (!category) {
-        console.error('Invalid category:', category);
-        return;
-    }
-
     const draggedTodoIndex = todos.findIndex(todo => todo.id === currentDraggedElement);
     if (draggedTodoIndex !== -1) {
         todos[draggedTodoIndex].category = category;
@@ -280,11 +232,6 @@ function clearTask() {
 
     // Prioritäts-Buttons zurücksetzen
     resetButtons();
-
-    // Ausgewählte Kontakte zurücksetzen
-    selectedContactIndices = [];
-    document.getElementById('Selected_profiles_Container').innerHTML = '';
-    document.getElementById('Selected_profiles_Container').style.display = 'none'; // Verstecke den Container
 }
 
 function resetPrioButtons() {
@@ -312,4 +259,3 @@ function resetPrioButtons() {
         }
     });
 }
-
