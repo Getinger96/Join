@@ -47,3 +47,13 @@
         display: block;
     }
 }
+
+@media(max-width: 400px) {
+
+    .txtSummaryMobil,
+    .txt_add_mobil,
+    .txt_Board_mobil,
+    .txt_Contacts_mobil {
+        font-size: 14px;
+    }
+}

@@ -1,13 +1,13 @@
 <section id="boardAddTask" class="boardAddTask positionTask">
     <div class="widthBoard">
         <div class="boardtitle addTaskBoard">
-            <div class="addTaskContainer">
+            <div class="addTaskTitle">
                 <h2>Add Task</h2>
                 <button class="closeAddTask curser" onclick="closeTask()"><img
                         src="./assets/img/iconoir_cancel.png"></button>
             </div>
             <div class="addTaskContainer">
-                <div>
+                <div class="divSectionAddTask">
                     <div>
                         <div class="displayFlex">
                             <p>Title</p>
@@ -35,7 +35,7 @@
                     </div>
                 </div>
                 <div class="separatorTask"></div>
-                <div>
+                <div class="divSectionAddTask">
                     <div class="flexdirection">
                         <div class="displayFlex">
                             <p>Due date</p>
@@ -47,11 +47,11 @@
                         <p>Prio</p>
                         <div class="marginButtomButton">
                             <button id="urgent" class="buttonContainerPrio curser" onclick="urgent()">Urgent <img
-                                    id="urgentIcon" src="./assets/img/PRio_urgent (2).svg"></button>
+                                    class="prioButton" id="urgentIcon" src="./assets/img/PRio_urgent (2).svg"></button>
                             <button id="medium" class="buttonContainerPrio curser" onclick="medium()">Medium <img
-                                    id="mediumIcon" src="./assets/IMG/Prio_medium (2).svg"></button>
-                            <button id="low" class="buttonContainerPrio curser" onclick="low()">Low <img id="lowIcon"
-                                    src="./assets/img/Prio_Low (2).svg"></button>
+                                    class="prioButton" id="mediumIcon" src="./assets/IMG/Prio_medium (2).svg"></button>
+                            <button id="low" class="buttonContainerPrio curser" onclick="low()">Low <img
+                                    class="prioButton" id="lowIcon" src="./assets/img/Prio_Low (2).svg"></button>
                         </div>
                     </div>
                     <div class="flexdirection">

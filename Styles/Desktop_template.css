@@ -186,6 +186,20 @@ a:hover {
     }
 
     .headblock {
-        padding: 20px 40px 20px 100px;
+        padding: 20px 40px 20px 60px;
+    }
+}
+
+@media(max-width: 400px) {
+    .kanbanBoardTitle {
+        font-size: 16px;
+    }
+
+    .logInUser {
+        font-size: 14px;
+    }
+
+    .headblock {
+        padding: 20px 30px 20px 30px;
     }
 }

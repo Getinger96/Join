@@ -456,6 +456,31 @@ span {
         margin-left: 100px;
         margin-right: 50px;
     }
+
+    .positionTask {
+        left: 38%;
+        width: 900px;
+    }
+
+    .inputTitle {
+        width: 340px;
+    }
+
+    .inputDescription {
+        width: 340px;
+    }
+
+    .select_container {
+        width: 328px;
+    }
+
+    .divSectionAddTask {
+        width: 360px;
+    }
+
+    .buttonContainerPrio {
+        width: 110px;
+    }
 }
 
 @media(max-width: 1220px) {
@@ -515,5 +540,299 @@ span {
 
     .searchContainer {
         width: 450px;
+    }
+
+    .positionTask {
+        left: 35%;
+        width: 840px;
+        padding: 4px;
+    }
+}
+
+@media(max-width: 920px) {
+    .addTaskContainer {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+    }
+
+    .addTaskTitle {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .separatorTask {
+        display: none;
+    }
+
+    .positionTask {
+        margin-top: 80px;
+        width: 500px;
+    }
+
+    h2 {
+        font-size: 48px;
+    }
+
+    .buttonContainerWhite {
+        height: 56px;
+        width: 100px;
+    }
+
+    .buttonContainerdark {
+        height: 56px;
+        width: 136px;
+    }
+}
+
+@media(max-width: 680px) {
+    .positionTask {
+        left: 23%;
+    }
+}
+
+@media(max-width: 580px) {
+    .divBoard {
+        width: 400px;
+    }
+
+    .noTasks {
+        width: 350px;
+    }
+
+    .positionTask {
+        width: 400px;
+    }
+
+    .widthBoard {
+        width: 90%;
+        margin-left: 24px;
+    }
+
+    .inputTitle {
+        width: 300px;
+    }
+
+    .inputDescription {
+        width: 300px;
+    }
+
+    .select_container {
+        width: 290px;
+    }
+
+    .buttonContainerPrio {
+        width: 96px;
+        font-size: 14px;
+    }
+
+    .buttonContainerWhite {
+        height: 56px;
+        width: 75px;
+    }
+
+    ul {
+        width: 300px;
+        font-size: 20px;
+    }
+
+    .AssignedTO_Container {
+        width: 300px;
+    }
+}
+
+@media(max-width: 490px) {
+    .divBoard {
+        width: 250px;
+    }
+
+    .noTasks {
+        width: 150px;
+    }
+
+    .search {
+        border: none;
+        height: 32px;
+        width: 100px;
+    }
+
+    .searchContainer {
+        width: 250px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .separator {
+        display: none;
+    }
+
+    .positionTask {
+        left: 15%;
+        width: 360px;
+    }
+
+    .divSectionAddTask {
+        width: 300px;
+    }
+
+    .subtasksInputfield {
+        margin-right: 0px;
+    }
+}
+
+@media(max-width: 430px) {
+    h2 {
+        font-size: 36px;
+    }
+
+    p,
+    label {
+        font-size: 16px;
+    }
+
+    .inputTitle {
+        font-size: 16px;
+    }
+
+    .inputDescription {
+        font-size: 16px;
+    }
+
+    .Assign_Header {
+        font-size: 16px;
+    }
+
+    span {
+        font-size: 16px;
+    }
+
+    .buttonContainerWhite {
+        display: none;
+    }
+
+    .buttonContainerdark {
+        height: 56px;
+        width: 123px;
+        font-size: 16px;
+    }
+
+    .inputTitle {
+        width: 250px;
+    }
+
+    .inputDescription {
+        width: 250px;
+    }
+
+    .select_container {
+        width: 230px;
+    }
+
+    .buttonContainerPrio {
+        width: 80px;
+        font-size: 14px;
+    }
+
+    .buttonContainerPrio {
+        height: 40px;
+        width: 80px;
+    }
+
+    .prioButton {
+        width: 14px;
+    }
+
+    .subtasksInputfield {
+        width: 200px;
+    }
+
+    .positionTask {
+        left: 6%;
+        width: 300px;
+    }
+
+    .divSectionAddTask {
+        width: 250px;
+    }
+}
+
+@media(max-width: 400px) {
+    h1 {
+        font-size: 48px;
+    }
+
+    .imgButton {
+        height: 30px;
+    }
+
+    p,
+    label {
+        font-size: 18px;
+    }
+
+    .divBoard {
+        margin-left: 30px;
+    }
+}
+
+@media(max-width: 350px) {
+    .widthBoard {
+        width: 86%;
+        margin-left: 14px;
+    }
+
+    .divSectionAddTask {
+        width: 230px;
+    }
+
+    .inputTitle {
+        width: 190px;
+    }
+
+    .inputDescription {
+        width: 190px;
+    }
+
+    .select_container {
+        width: 170px;
+    }
+
+    span {
+        font-size: 12px;
+    }
+
+    p,
+    label {
+        font-size: 14px;
+    }
+
+    .subtasksInputfield {
+        width: 100px;
+    }
+
+    .buttonContainerdark {
+        height: 48px;
+        width: 112px;
+        font-size: 14px;
+    }
+
+    .positionTask {
+        left: 0%;
+        width: 250px;
+    }
+
+    .buttonContainerPrio {
+        height: 44px;
+        width: 62px;
+        margin-right: 4px;
+    }
+
+    .marginButtomButton {
+        margin-bottom: 28px;
+        display: flex;
+    }
+
+    .AssignedTO_Container {
+        margin-bottom: 24px;
     }
 }
