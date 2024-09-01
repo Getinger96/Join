@@ -17,36 +17,14 @@ let selectedContactIndices = [];
 
 const base_URL_Add_Task = "https://join-task-1db93-default-rtdb.europe-west1.firebasedatabase.app/";
 let currentPriority = 'none';
-
-let todos = [
-    {
-        id: 0,
-        title: 'Kochwelt Page & Recipe Recommender',
-        description: 'Build start page with recipe recommendation',
-        category: 'open'
-    },
-    {
-        id: 1,
-        title: 'CSS Architecture Planning',
-        description: 'Define CSS naming conventiond and structure.',
-        category: 'open'
-    },
-    {
-        id: 2,
-        title: 'HTML Base Template Creation',
-        description: 'Create reusable HTML base templates...',
-        category: 'closed'
-    }
-];
-
 let currentCategory = 'open';
+
 
 // Funktion, um eine neue Aufgabe hinzuzufügen und in die Firebase-Datenbank zu speichern
 function addTask() {
     // Eingabewerte abrufen
     let title = document.getElementById('taskTitle').value.trim();
     let description = document.getElementById('description').value.trim();
-    let contact = document.getElementById('Selected_profiles_Container').value.trim();
     let date = document.getElementById('taskDueDate').value;
     let category = document.getElementById('category').value;
     let subtaskListElement = document.getElementById('list');
@@ -57,27 +35,35 @@ function addTask() {
         return;
     }
 
-    // Optionales Feld verarbeiten
+    // Kontakte aus dem Container abrufen
+    let contactContainer = document.getElementById('Selected_profiles_Container');
+    let contacts = Array.from(contactContainer.children).map(contactIcon => contactIcon.textContent.trim());
+
+    // Subtasks verarbeiten
     let subtask = Array.from(subtaskListElement.children).map(li => li.textContent.trim());
 
+    // Neue ID generieren
     let newId = todos.length ? todos[todos.length - 1].id + 1 : 0;
 
+    // Neues Task-Objekt erstellen
     let newTask = {
         id: newId,
         title: title,
         description: description,
-        contact: contact,
+        contacts: contacts,  // Die ausgewählten Kontakte
         date: date,
         category: category,
         priority: currentPriority, // Setze die Priorität
         subtasks: subtask
     };
 
+    // Neues Task-Objekt zur Liste hinzufügen
     todos.push(newTask);
     updateHTML();
     clearTask();
     closeTask();
 
+    // Aufgabe in der Datenbank speichern
     addTaskToDatabase(newTask);
 }
 
@@ -196,22 +182,23 @@ function updateHTML() {
         closed: document.getElementById('closed')
     };
 
-    // Leeren der Container
+    // Leere alle Container
     for (let category in containers) {
         containers[category].innerHTML = '';
     }
 
-    // Aufgaben anzeigen
+    // Aufgaben durchgehen und den richtigen Container hinzufügen
     todos.forEach(todo => {
         if (todo.category && containers[todo.category]) {
             const taskHTML = generateTodoHTML(todo);
             containers[todo.category].innerHTML += taskHTML;
+            console.log(`Added task to ${todo.category}:`, taskHTML);
         } else {
             console.error(`No container found for category "${todo.category}"`);
         }
     });
 
-    // Leere Bereiche überprüfen
+    // Überprüfen, ob die Kategorien leer sind, um die leeren Aufgaben anzuzeigen
     ['open', 'progress', 'awaitFeedback', 'closed'].forEach(category => {
         emptyTasks(category);
     });

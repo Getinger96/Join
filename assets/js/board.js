@@ -1,8 +1,31 @@
 let subtask = [];
+let todos = [
+    {
+        id: 0,
+        title: 'Kochwelt Page & Recipe Recommender',
+        description: 'Build start page with recipe recommendation',
+        category: 'open'
+    },
+    {
+        id: 1,
+        title: 'CSS Architecture Planning',
+        description: 'Define CSS naming convention and structure.',
+        category: 'progress'
+    }
+    // Weitere todo-Objekte
+];
+
+
 
 let currentDraggedElement;
 
 document.addEventListener("DOMContentLoaded", function () {
+    let showContacts = document.getElementById('Selection_Container');
+
+    if (!showContacts) {
+        console.error("Element with ID 'Selection_Container' not found.");
+        return;
+    }
     updateHTML();
 });
 
@@ -87,13 +110,16 @@ function startDragging(id) {
 }
 
 function moveTo(category) {
+    if (!category) {
+        console.error('Invalid category:', category);
+        return;
+    }
+
     const draggedTodoIndex = todos.findIndex(todo => todo.id === currentDraggedElement);
     if (draggedTodoIndex !== -1) {
         todos[draggedTodoIndex].category = category;
         updateHTML();
         removeHighlight(category);
-    } else {
-        console.error(`Task with id ${currentDraggedElement} not found.`);
     }
 }
 
