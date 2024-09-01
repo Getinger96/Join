@@ -37,7 +37,7 @@ async function fetchContacts(path = '') {
     sortContactsByLetter();
 }
 
-}
+
 
 function getLastName(fullName) {
     let nameParts = fullName.trim().split(' ');

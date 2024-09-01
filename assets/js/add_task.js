@@ -26,12 +26,20 @@ async function fetchContacts(path = '') {
 
     for (let index = 0; index < userAsArray.length; index++) {
         let contact = userAsArray[index];
+        let colorIndex = index;
+
+        if (colorIndex >= colors.length) {
+            colorIndex -= colors.length;
+        }
+
+        let color = colors[colorIndex];
 
 
         contacts.push({
             email: contact.email,
             name: contact.name,
             password: contact.password,
+            color:color,
         })
         console.log(contacts);
 
@@ -107,6 +115,9 @@ function renderSelectionContainer() {
 
     for (let i = 0; i < contacts.length; i++) {
         let contact = contacts[i];
+        let contactColour = contacts[i].color;
+        console.log(contactColour);
+        
         let name = contact.name;
         let forNAme = name.charAt(0);
         let forNAmebig = forNAme.toUpperCase();
@@ -115,7 +126,7 @@ function renderSelectionContainer() {
         let firstletterlastnameBIG = firstletterlastname.toUpperCase();
         let firstletters = forNAmebig + firstletterlastnameBIG;
         profiles.innerHTML += `
-       <div id="profile_Container${i}" " class="profile_Container">
+       <div id="profile_Container${i} ${contactColour}" " class="profile_Container">
          <div class="profile_container_header">
           <div class="profile_Badge_assign">${firstletters}</div>
           <div>${name}</div>
