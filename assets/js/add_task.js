@@ -1,12 +1,12 @@
 const colors = [
-    '#FF5733', // Orange
-    '#FFC300', // Gelb
-    '#33FF57', // Grün
-    '#33FFF3', // Türkis
-    '#3357FF', // Blau
-    '#A133FF', // Lila
-    '#FF33A1', // Pink
-    '#FF8F33'  // Hellorange
+    'orange',
+    'gelb',
+    'grün',
+    'türkis',
+    'blau',
+    'lila',
+    'pink',
+    'hellorange'
 ];
 
 
@@ -26,14 +26,28 @@ async function fetchContacts(path = '') {
 
     for (let index = 0; index < userAsArray.length; index++) {
         let contact = userAsArray[index];
+        let colorIndex = index;
+
+        if (colorIndex >= colors.length) {
+            colorIndex -= colors.length;
+        }
+
+        let color = colors[colorIndex];
+
+        if (contact.email == 'guest@web.de') {
 
 
-        contacts.push({
-            email: contact.email,
-            name: contact.name,
-            password: contact.password,
-        })
-        console.log(contacts);
+        } else {
+            contacts.push({
+                email: contact.email,
+                name: contact.name,
+                password: contact.password,
+                color: color,
+            })
+            console.log(contacts);
+
+        }
+
 
 
 
@@ -108,6 +122,7 @@ function renderSelectionContainer() {
     for (let i = 0; i < contacts.length; i++) {
         let contact = contacts[i];
         let name = contact.name;
+        let contactColour = contacts[i].color;
         let forNAme = name.charAt(0);
         let forNAmebig = forNAme.toUpperCase();
         let lastname = getLastName(name);
@@ -117,11 +132,11 @@ function renderSelectionContainer() {
         profiles.innerHTML += `
        <div id="profile_Container${i}" " class="profile_Container">
          <div class="profile_container_header">
-          <div class="profile_Badge_assign">${firstletters}</div>
+          <div class="profile_Badge_assign ${contactColour}">${firstletters}</div>
           <div>${name}</div>
          </div>
           <div id="checkbox${i}">
-          <img onclick="selectedContact(${i},'${name}','${firstletters}')"  class="check_img " src="assets/IMG/Check button.svg" alt="">
+          <img onclick="selectedContact(${i},'${name}','${firstletters}','${contactColour}')"  class="check_img " src="assets/IMG/Check button.svg" alt="">
           
          </div>
          
@@ -132,12 +147,12 @@ function renderSelectionContainer() {
 
 }
 
-function selectedContact(i, name, firstletters,) {
+function selectedContact(i, name, firstletters, contactColour) {
 
     let checkbox = document.getElementById(`checkbox${i}`);
 
     checkbox.innerHTML = '';
-    checkbox.innerHTML = `<img onclick="deselctedtContact(${i},'${name}','${firstletters}')"  class="checked_img" src="assets/IMG/Checked button.svg" alt="">`
+    checkbox.innerHTML = `<img onclick="deselctedtContact(${i},'${name}','${firstletters}','${contactColour}')"  class="checked_img" src="assets/IMG/Checked button.svg" alt="">`
 
 
     let profileContainer = document.getElementById(`profile_Container${i}`);
@@ -151,7 +166,7 @@ function selectedContact(i, name, firstletters,) {
     assignedContacts.push(name)
 
 
-    showSelectedProfile(firstletters, i);
+    showSelectedProfile(firstletters, i, contactColour);
 
 }
 
@@ -161,13 +176,13 @@ function selectedContact(i, name, firstletters,) {
 
 
 
-function deselctedtContact(i, name, firstletters) {
+function deselctedtContact(i, name, firstletters, contactColour) {
 
 
     let checkbox = document.getElementById(`checkbox${i}`);
 
     checkbox.innerHTML = '';
-    checkbox.innerHTML = `<img onclick="selectedContact(${i},'${name}','${firstletters}')" id="checkImg${i}"  class="check_img  " src="assets/IMG/Check button.svg" alt="">`
+    checkbox.innerHTML = `<img onclick="selectedContact(${i},'${name}','${firstletters}','${contactColour}')" id="checkImg${i}"  class="check_img  " src="assets/IMG/Check button.svg" alt="">`
 
 
 
@@ -183,12 +198,12 @@ function deselctedtContact(i, name, firstletters) {
     assignedContacts.splice(name, 1)
 
 
-    showSelectedProfile(firstletters, i);
+    showSelectedProfile(firstletters, i, contactColour);
 
 }
 
 
-function showSelectedProfile(firstletters, i) {
+function showSelectedProfile(firstletters, i, contactColour) {
 
     let selectedProfileContainer = document.getElementById('Selected_profiles_Container');
     let profilebadgeassign = document.getElementById(`profile_Badge_assign${i}`)
@@ -200,7 +215,7 @@ function showSelectedProfile(firstletters, i) {
     } else {
         selectedProfileContainer.innerHTML += `
 
-    <div id="profile_Badge_assign${i}" class="profile_Badge_assign">${firstletters}</div>
+    <div id="profile_Badge_assign${i}" class="profile_Badge_assign ${contactColour}">${firstletters}</div>
     `;
     }
 
@@ -290,24 +305,24 @@ function choosedlow() {
 function addSubtask() {
     let list = document.getElementById('ul_subtasks');
     list.innerHTML = ''; //Liste wird gelöscht
-    
-        
-    
-        for (let i = 0; i < subtasks.length; i++) {
-            let li = document.createElement('li'); //Liste wird wieder hinzugefügt
-            li.innerHTML = subtasks[i] + /*html*/ ` <button class="Subtasks_Btn" onclick="deleteItem(${i})"><img src="./assets/img/delete.png"></button>`;
-            list.appendChild(li);
-    
-    
-        }
 
-    
+
+
+    for (let i = 0; i < subtasks.length; i++) {
+        let li = document.createElement('li'); //Liste wird wieder hinzugefügt
+        li.innerHTML = subtasks[i] + /*html*/ ` <button class="Subtasks_Btn" onclick="deleteItem(${i})"><img src="./assets/img/delete.png"></button>`;
+        list.appendChild(li);
+
+
+    }
 
 
 
 
 
-   
+
+
+
 }
 
 
@@ -319,10 +334,10 @@ function deleteItem(i) { //Einzelnen Elemente aus der Liste löschen
 function addCurrentSubtask() {
     if (subtasks.length < 5) {
         let Currentubtask = document.getElementById('input_Subtasks').value;
-        if (Currentubtask=='') {
-            
-            
-        }else {
+        if (Currentubtask == '') {
+
+
+        } else {
             subtasks.push(Currentubtask);
             document.getElementById('input_Subtasks').value = ''; // Liste wieder leeren
             addSubtask();
@@ -331,7 +346,7 @@ function addCurrentSubtask() {
 
 
 
-      
+
 
 
 
@@ -387,9 +402,7 @@ async function createTask() {
     let date = document.getElementById('dueDate');
     let category = document.getElementById('Category');
     let subtask = subtasks;
-
-
-
+    
     let newTask = {
         Titel: titel.value,
         Description: description.value,
@@ -401,11 +414,24 @@ async function createTask() {
     };
 
 
-    await postData(`task`, newTask)
+
+    if (titel.value == "" || date.value == "" || category.value == "") {
+        console.log(titel.value);
+        console.log(date.value);
+        console.log(category.value);
+      
 
 
 
+    } else {
+       
 
+
+        await postData(`tasks`, newTask);
+        clearTask();
+
+
+    }
 
 
 
@@ -414,6 +440,7 @@ async function createTask() {
 function clearTask() {
     for (let i = 0; i < contacts.length; i++) {
         let contact = contacts[i];
+        let contactColour = contacts[i].color;
         let name = contact.name;
         let forNAme = name.charAt(0);
         let forNAmebig = forNAme.toUpperCase();
@@ -421,12 +448,15 @@ function clearTask() {
         let firstletterlastname = lastname.charAt(0);
         let firstletterlastnameBIG = firstletterlastname.toUpperCase();
         let firstletters = forNAmebig + firstletterlastnameBIG;
-        deselctedtContact(i, name, firstletters)
+        deselctedtContact(i, name, firstletters, contactColour)
     }
 
 
     let selectedProfileContainer = document.getElementById('Selected_profiles_Container');
     selectedProfileContainer.innerHTML = '';
+
+    let inpuSubtask = document.getElementById('input_Subtasks');
+    inpuSubtask.value = "";
 
 
     let list = document.getElementById('ul_subtasks');

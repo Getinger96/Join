@@ -22,8 +22,12 @@
         <div w3-include-html="./assets/templates/desktop_template.html"></div>
     </header>
     <div class="add_task_content">
-        <h1 class="headline_addTask">Add Task</h1>
-        <form class="addTask_Container">
+        <div class="h1-container">
+            <h1 class="headline_addTask">Add Task</h1>
+
+        </div>
+
+        <form id="form_addtask" class="addTask_Container">
 
             <div class="input_Task_Container_left">
                 <div class="Title_Container">
@@ -64,14 +68,15 @@
                 <div class="date_Container">
                     <span class="Date_header">Due date <span class="red">*</span></span>
 
-                    <input onclick="dateinput()" id="dueDate" placeholder="dd/mm/yyyy" class="input_date" required type="date">
+                    <input onclick="dateinput()" id="dueDate" placeholder="dd/mm/yyyy" class="input_date" required
+                        type="date">
 
                 </div>
 
                 <div class="Prio_Container">
                     <span class="prio_Header">Prio</span>
                     <div id="Prio_btn_Container" class="Prio_btn_Container">
-                        
+
                     </div>
 
                 </div>
@@ -79,7 +84,7 @@
                 <div class="cataegory_Container">
                     <span class="category_Header">Category <span class="red">*</span></span>
                     <div id="select_container" class="select_container">
-                        <input id="Category" class="Category_Input" placeholder="Select Category" type="text">
+                        <input id="Category" class="Category_Input" placeholder="Select Category" type="text" required>
                         <div id="arrow_img_container_Category"> <img onclick="openCategoryLIst()"
                                 class="arrow_drop_downaa" src="assets/IMG/arrow_drop_downaa.svg" alt=""></div>
                     </div>
@@ -106,19 +111,27 @@
 
                     </ul>
                 </div>
+            </div>
+          
+
+
+
 
 
         </form>
+        <div class="Btn_Container">
+            <button onclick="clearTask()" class="clear_Btn">Clear <img class="clear-icon"
+                    src="assets/IMG/x_icon_clear.svg" alt=""></button>
+            <button type="submit" form="form_addtask" onclick="createTask()" class="Create_Btn">Create Task <img class="create_icon"
+                    src="assets/IMG/clear_Img.svg" alt=""></button>
+        </div>
+
+        <div class="required_info_Container"><span class="red">*</span><span>This field is required</span></div>
 
 
     </div>
-    <div class="Btn_Container">
-        <button onclick="clearTask()" class="clear_Btn">Clear <img class="clear-icon" src="assets/IMG/x_icon_clear.svg"
-                alt=""></button>
-        <button onclick="createTask()" class="Create_Btn">Create Task <img class="create_icon"
-                src="assets/IMG/clear_Img.svg" alt=""></button>
-    </div>
-    <div class="required_info_Container"><span class="red">*</span><span>This field is required</span></div>
+
+
 
 
 
