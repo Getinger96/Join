@@ -29,7 +29,7 @@ async function loginAction() {
         loginInfo.innerText = 'Please enter a valid email address!';
         emptyTheInputFields(loginMail,loginPassword);
         changeColorHrAndBorderMistake();
-        return; // Beende die Funktion, wenn die E-Mail-Adresse ungültig ist
+        return; 
     }
 
 
@@ -44,16 +44,19 @@ async function loginAction() {
 
 
     if(user) {
-        loginInfo.innerText = loginSuccesfull();
         emptyTheInputFields(loginMail,loginPassword);
-        changeColorHrAndBorderCorrect();
 
+        setTimeout(() => { loginInfo.innerText = loginUpSuccessfully()
+            
+        }, 3000);
+
+        
     } else {
         loginInfo.innerText = wrongPasswordOrEmail();
         emptyTheInputFields(loginMail,loginPassword);
         changeColorHrAndBorderMistake();
-        
     }
+
 }
 
 
@@ -67,6 +70,15 @@ function guestLogin() {
     
 }
 
+
+
+
+function loginUpSuccessfully() {
+    document.getElementById('loginupsuccessfully').innerHTML =`  <div class="loginUpsuccessfully">
+    <span class="loginstylesuccessfully"> Good  Afternoon !!!</span>
+
+    </div>`;
+}
 
 function changeColorHrAndBorderMistake() {
 

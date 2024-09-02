@@ -124,13 +124,13 @@ function checkFormCompletion() {
     let checkbox = document.getElementById('checkbox').checked;
     let signUpButton = document.getElementById('signUpButton');
 
-    // Die Bedingung ist jetzt korrigiert, um den Button korrekt zu aktivieren/deaktivieren
+  
     if (username !== "" && usermail !== "" && userpassword !== "" && userconfirmpassword !== "" && checkbox) {
-        signUpButton.disabled = false; // Button aktivieren
+        signUpButton.disabled = false; 
         signUpButton.classList.remove('disabledbutton');
         signUpButton.classList.add('enabledbutton');
     } else {
-        signUpButton.disabled = true; // Button deaktivieren
+        signUpButton.disabled = true; 
         signUpButton.classList.remove('enabledbutton');
         signUpButton.classList.add('disabledbutton');
     }
