@@ -5,21 +5,34 @@ let todos = [
         id: 0,
         title: 'Kochwelt Page & Recipe Recommender',
         description: 'Build start page with recipe recommendation',
-        category: 'open'
+        kategorie: 'technicalTask',
+        date: '2024-09-01',
+        contacts: ['John Doe', 'Jane Smith'],
+        priority: 'high',
+        subtasks: ['Research recipes', 'Create layout']
     },
     {
         id: 1,
         title: 'CSS Architecture Planning',
-        description: 'Define CSS naming conventiond and structure.',
-        category: 'open'
+        description: 'Define CSS naming conventions and structure.',
+        kategorie: 'userStory',
+        date: '2024-09-02',
+        contacts: ['John Doe'],
+        priority: 'medium',
+        subtasks: ['Research BEM', 'Draft CSS plan']
     },
     {
         id: 2,
         title: 'HTML Base Template Creation',
         description: 'Create reusable HTML base templates...',
-        category: 'closed'
+        kategorie: 'technicalTask',
+        date: '2024-09-03',
+        contacts: ['Jane Smith'],
+        priority: 'low',
+        subtasks: ['Create header template', 'Create footer template']
     }
 ];
+
 
 let currentDraggedElement;
 
@@ -38,10 +51,19 @@ function closeTask() {
 
 // Generieren des HTML-Codes für eine Aufgabe
 function generateTodoHTML(todo) {
+    const contactsHTML = todo.contacts.map(contact => `<span>${contact}</span>`).join(', ');
+    const subtasksHTML = todo.subtasks.length > 0 ? `<ul>${todo.subtasks.map(subtask => `<li>${subtask}</li>`).join('')}</ul>` : '<p>No subtasks</p>';
+    const priorityHTML = `<p><strong>Priority:</strong> ${todo.priority}</p>`;
+    const dateHTML = `<p><strong>Due Date:</strong> ${todo.date}</p>`;
+
     return `
         <div class="todo" draggable="true" ondragstart="startDragging(${todo.id})">
             <h3>${todo.title}</h3>
             <p>${todo.description}</p>
+            ${dateHTML}
+            ${priorityHTML}
+            <p><strong>Contacts:</strong> ${contactsHTML}</p>
+            <div><strong>Subtasks:</strong> ${subtasksHTML}</div>
         </div>
     `;
 }
@@ -216,7 +238,7 @@ function clearTask() {
     document.getElementById('description').value = '';
 
     // Kategorie-Dropdown zurücksetzen
-    document.getElementById('category').selectedIndex = 0;
+    document.getElementById('kategorie').selectedIndex = 0;
 
     // Subtasks-Liste leeren
     document.getElementById('list').innerHTML = '';
@@ -259,3 +281,14 @@ function resetPrioButtons() {
         }
     });
 }
+
+// Funktion, um den Wert des select-Elements abzurufen
+function getSelectedCategory() {
+    const categorySelect = document.getElementById('kategorie');
+    if (categorySelect) {
+        return categorySelect.value;
+    }
+    return null;
+}
+
+

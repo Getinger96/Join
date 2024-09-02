@@ -17,6 +17,7 @@ let selectedContactIndices = [];
 
 let currentPriority = 'none';
 let currentCategory = 'open';
+let path = "tasks";
 
 
 // Funktion, um eine neue Aufgabe hinzuzufügen und in die Firebase-Datenbank zu speichern
@@ -61,39 +62,42 @@ async function saveTask(isNewTask = true, task = {}) {
 }
 
 function createTask() {
-    let title = document.getElementById('taskTitle').value.trim();
-    let description = document.getElementById('description').value.trim();
-    let date = document.getElementById('taskDueDate').value;
-    let category = document.getElementById('category').value; // Hier Kategorie abgerufen
-    let subtaskListElement = document.getElementById('list');
-    let contacts = Array.from(document.getElementById('Selected_profiles_Container').children).map(contactIcon => contactIcon.textContent.trim());
+    // Hole die Werte aus den Formularfeldern
+    const title = document.getElementById('taskTitle').value;
+    const description = document.getElementById('description').value;
+    const dueDate = document.getElementById('taskDueDate').value;
+    const priority = document.querySelector('.buttonContainerPrio.curser.active')?.id || 'low'; // Fallback auf 'low'
+    const kategorie = document.getElementById('kategorie').value; // Hier sicherstellen, dass dieser Wert den Container IDs entspricht
+    const subtasks = Array.from(document.querySelectorAll('#list li')).map(li => li.textContent);
 
-    // Überprüfen, ob die Pflichtfelder ausgefüllt sind
-    if (title === '' || date === '' || category === '') {
-        alert('Bitte füllen Sie den Titel, das Fälligkeitsdatum und die Kategorie aus.');
-        return;
-    }
+    // Überprüfen, ob kategorie ein gültiger Status ist
+    const validCategories = ['open', 'progress', 'awaitFeedback', 'closed'];
+    const status = validCategories.includes(kategorie) ? kategorie : 'open'; // Fallback auf 'open'
 
-    let subtask = Array.from(subtaskListElement.children).map(li => li.textContent.trim());
-    let taskId = todos.length ? todos[todos.length - 1].id + 1 : 0;
-
-    let task = {
-        id: taskId,
+    // Erstelle ein neues Todo-Objekt
+    const newTodo = {
+        id: generateUniqueId(), // Funktion zum Erzeugen einer einzigartigen ID
         title: title,
         description: description,
-        contacts: contacts,
-        date: date,
-        category: category,
-        priority: currentPriority,
-        subtasks: subtask
+        dueDate: dueDate,
+        priority: priority,
+        kategorie: kategorie,
+        subtasks: subtasks,
+        status: status // Standardmäßig auf "open" setzen
     };
 
-    saveTask(true, task); // Aufruf zum Speichern der Aufgabe (neue Aufgabe)
+    // Füge das neue Todo zur Liste hinzu
+    todos.push(newTodo);
+
+    // Aktualisiere die HTML-Darstellung
+    updateHTML();
+
+    // Schließe das Formular
+    closeTask();
 }
 
 
-
-async function addTaskToDatabase(task) {
+async function addTaskToDatabase(task, path) {
     try {
         let response = await fetch(base_URL + path + ".json", {
             method: "POST",
@@ -109,15 +113,18 @@ async function addTaskToDatabase(task) {
 
         let responseData = await response.json();
         console.log("Aufgabe erfolgreich hinzugefügt:", responseData);
+        return responseData;
     } catch (error) {
         console.error("Fehler beim Hinzufügen der Aufgabe:", error);
+        throw error; // Re-throw the error to be caught by the calling function
     }
 }
 
+
 // Abrufen aller Aufgaben aus der Datenbank
-async function fetchAllTasks(path = '') {
+async function fetchAllTasks(path = 'tasks') {
     try {
-        let response = await fetch(base_URL + path + "tasks.json");
+        let response = await fetch(base_URL + path + ".json");
 
         if (!response.ok) {
             throw new Error(`HTTP-Fehler! Status: ${response.status}`);
@@ -127,20 +134,23 @@ async function fetchAllTasks(path = '') {
         console.log("Alle Aufgaben:", tasksJSON);
 
         if (tasksJSON) {
-            todos = Object.values(tasksJSON).filter(task => task.category); // Filtere ungültige Aufgaben
+            todos = Object.keys(tasksJSON).map(key => ({ id: key, ...tasksJSON[key] }));
             updateHTML(); // Update HTML nach dem Laden der Aufgaben
         } else {
             console.warn("Keine Aufgaben gefunden.");
             todos = []; // Leere Liste setzen, falls keine Aufgaben vorhanden sind
+            updateHTML();
         }
     } catch (error) {
         console.error("Fehler beim Abrufen der Aufgaben:", error);
     }
 }
 
-
 // Aktualisiert die HTML-Darstellung
 function updateHTML() {
+    console.log("Aktuelle Todos:", todos);
+
+    // Container für verschiedene Status
     const containers = {
         open: document.getElementById('open'),
         progress: document.getElementById('progress'),
@@ -149,23 +159,26 @@ function updateHTML() {
     };
 
     // Leere alle Container
-    Object.values(containers).forEach(container => container.innerHTML = '');
-
-    // Protokolliere die Container-IDs
-    console.log('Available containers:', Object.keys(containers));
-
-    // Aufgaben durchgehen und den richtigen Container hinzufügen
-    todos.forEach(todo => {
-        console.log(`Task ID: ${todo.id}, Category: ${todo.category}`);
-        if (todo.category in containers) {
-            const taskHTML = generateTodoHTML(todo);
-            containers[todo.category].innerHTML += taskHTML;
-            console.log(`Added task to ${todo.category}:`, taskHTML);
+    Object.values(containers).forEach(container => {
+        if (container) {
+            container.innerHTML = '';
+        } else {
+            console.error('Container nicht gefunden.');
         }
     });
 
+    // Aufgaben durchgehen und dem richtigen Container hinzufügen
+    todos.forEach(todo => {
+        console.log("Aktuelle Aufgabe:", todo);
+        if (containers[todo.status]) {  // Hier wird der Status verwendet
+            const taskHTML = generateTodoHTML(todo);
+            containers[todo.status].innerHTML += taskHTML;
+        } else {
+            console.error(`Container für Status "${todo.status}" nicht gefunden.`);
+        }
+    });
 
-    // Überprüfen, ob die Kategorien leer sind, um die leeren Aufgaben anzuzeigen
+    // Überprüfen, ob die Kategorien leer sind, um leere Aufgaben anzuzeigen
     ['open', 'progress', 'awaitFeedback', 'closed'].forEach(category => {
         emptyTasks(category);
     });
@@ -262,6 +275,7 @@ function closelist() {
     arrowCon.innerHTML = `<img onclick="openList()"class="arrow_drop_downaa" src="assets/IMG/arrow_drop_downaa.svg" alt="">`;
     selecCon.classList.add('d_none');
 }
+
 
 function displayContacts(contactIndex, contactsName, contactLastname, selectedClass, color) {
     const isSelected = selectedContactIndices.includes(contactIndex);
