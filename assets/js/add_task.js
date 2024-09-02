@@ -121,6 +121,8 @@ function renderSelectionContainer() {
 
     for (let i = 0; i < contacts.length; i++) {
         let contact = contacts[i];
+        
+        
         let name = contact.name;
         let contactColour = contacts[i].color;
         let forNAme = name.charAt(0);
@@ -130,7 +132,7 @@ function renderSelectionContainer() {
         let firstletterlastnameBIG = firstletterlastname.toUpperCase();
         let firstletters = forNAmebig + firstletterlastnameBIG;
         profiles.innerHTML += `
-       <div id="profile_Container${i}" " class="profile_Container">
+       <div id="profile_Container${i} ${contactColour}" " class="profile_Container">
          <div class="profile_container_header">
           <div class="profile_Badge_assign ${contactColour}">${firstletters}</div>
           <div>${name}</div>

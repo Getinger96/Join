@@ -15,41 +15,58 @@ let beginningLetter = [];
 let groupedContacts = [];
 let selectedContactIndices = [];
 
-const base_URL_Add_Task = "https://join-task-1db93-default-rtdb.europe-west1.firebasedatabase.app/";
 let currentPriority = 'none';
-
-let todos = [
-    {
-        id: 0,
-        title: 'Kochwelt Page & Recipe Recommender',
-        description: 'Build start page with recipe recommendation',
-        category: 'open'
-    },
-    {
-        id: 1,
-        title: 'CSS Architecture Planning',
-        description: 'Define CSS naming conventiond and structure.',
-        category: 'open'
-    },
-    {
-        id: 2,
-        title: 'HTML Base Template Creation',
-        description: 'Create reusable HTML base templates...',
-        category: 'closed'
-    }
-];
-
 let currentCategory = 'open';
 
+
 // Funktion, um eine neue Aufgabe hinzuzufügen und in die Firebase-Datenbank zu speichern
-function addTask() {
-    // Eingabewerte abrufen
+async function saveTask(isNewTask = true, task = {}) {
+    try {
+        let url = base_URL + "tasks.json";
+        if (!isNewTask) {
+            url = base_URL + `tasks/${task.id}.json`; // Update URL für bestehende Aufgabe
+        }
+
+        let response = await fetch(url, {
+            method: isNewTask ? "POST" : "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(task)
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP-Fehler! Status: ${response.status}`);
+        }
+
+        let responseData = await response.json();
+        console.log(isNewTask ? "Aufgabe erfolgreich hinzugefügt" : "Aufgabe erfolgreich aktualisiert:", responseData);
+
+        if (isNewTask) {
+            task.id = responseData.name; // Firebase generiert automatisch eine ID
+            todos.push(task); // Füge neue Aufgabe zur Liste hinzu
+        } else {
+            const index = todos.findIndex(t => t.id === task.id);
+            if (index > -1) {
+                todos[index] = task; // Aktualisiere bestehende Aufgabe
+            }
+        }
+
+        updateHTML();
+        clearTask();
+        closeTask();
+    } catch (error) {
+        console.error("Fehler beim Speichern der Aufgabe:", error);
+    }
+}
+
+function createTask() {
     let title = document.getElementById('taskTitle').value.trim();
     let description = document.getElementById('description').value.trim();
-    let contact = document.getElementById('Selected_profiles_Container').value.trim();
     let date = document.getElementById('taskDueDate').value;
-    let category = document.getElementById('category').value;
+    let category = document.getElementById('category').value; // Hier Kategorie abgerufen
     let subtaskListElement = document.getElementById('list');
+    let contacts = Array.from(document.getElementById('Selected_profiles_Container').children).map(contactIcon => contactIcon.textContent.trim());
 
     // Überprüfen, ob die Pflichtfelder ausgefüllt sind
     if (title === '' || date === '' || category === '') {
@@ -57,93 +74,28 @@ function addTask() {
         return;
     }
 
-    // Optionales Feld verarbeiten
     let subtask = Array.from(subtaskListElement.children).map(li => li.textContent.trim());
+    let taskId = todos.length ? todos[todos.length - 1].id + 1 : 0;
 
-    let newId = todos.length ? todos[todos.length - 1].id + 1 : 0;
-
-    let newTask = {
-        id: newId,
+    let task = {
+        id: taskId,
         title: title,
         description: description,
-        contact: contact,
-        date: date,
-        category: category,
-        priority: currentPriority, // Setze die Priorität
-        subtasks: subtask
-    };
-
-    todos.push(newTask);
-    updateHTML();
-    clearTask();
-    closeTask();
-
-    addTaskToDatabase(newTask);
-}
-
-function createTask() {
-    // Elemente abrufen
-    let titleElement = document.getElementById('taskTitle');
-    let descriptionElement = document.getElementById('description');
-    let contactElement = document.getElementById('Selected_profiles_Container');
-    let dateElement = document.getElementById('taskDueDate');
-    let categoryElement = document.getElementById('category');
-    let subtaskListElement = document.getElementById('list');
-
-    // Überprüfen, ob die Elemente existieren
-    if (!titleElement || !descriptionElement || !contactElement || !dateElement || !categoryElement || !subtaskListElement) {
-        console.error('Ein oder mehrere erforderliche HTML-Elemente fehlen.');
-        return;
-    }
-
-    // Eingabewerte abrufen
-    let title = titleElement.value.trim();
-    let description = descriptionElement.value.trim();
-    let contact = contactElement.value;
-    let date = dateElement.value;
-    let category = categoryElement.value;
-    let subtask = Array.from(subtaskListElement.children).map(li => li.textContent.trim());
-
-    // Überprüfen, ob die erforderlichen Felder ausgefüllt sind
-    if (title === '' || category === '') {
-        alert('Bitte füllen Sie sowohl den Titel als auch die Kategorie aus.');
-        return;
-    }
-
-    // Generiere eine neue ID für die Aufgabe
-    let newId = todos.length ? todos[todos.length - 1].id + 1 : 0;
-
-    // Erstellen einer neuen Aufgabe als Objekt
-    let newTask = {
-        id: newId,
-        title: title,
-        description: description,
-        contact: contact,
+        contacts: contacts,
         date: date,
         category: category,
         priority: currentPriority,
         subtasks: subtask
     };
 
-    // Hinzufügen der neuen Aufgabe zum todos-Array
-    todos.push(newTask);
-
-    // Aufgabe in Firebase hochladen
-    addTaskToDatabase(newTask);
-
-    // Aktualisieren der HTML-Anzeige
-    updateHTML();
-
-    // Formular zurücksetzen
-    clearTask();
-
-    // Schließen des Formulars
-    closeTask();
+    saveTask(true, task); // Aufruf zum Speichern der Aufgabe (neue Aufgabe)
 }
+
+
 
 async function addTaskToDatabase(task) {
     try {
-        let response = await fetch(base_URL_Add_Task + "tasks.json", {
+        let response = await fetch(base_URL + path + ".json", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -165,7 +117,7 @@ async function addTaskToDatabase(task) {
 // Abrufen aller Aufgaben aus der Datenbank
 async function fetchAllTasks(path = '') {
     try {
-        let response = await fetch(base_URL_Add_Task + path + "tasks.json");
+        let response = await fetch(base_URL + path + "tasks.json");
 
         if (!response.ok) {
             throw new Error(`HTTP-Fehler! Status: ${response.status}`);
@@ -174,18 +126,18 @@ async function fetchAllTasks(path = '') {
         let tasksJSON = await response.json();
         console.log("Alle Aufgaben:", tasksJSON);
 
-        // Überprüfen, ob tasksJSON existiert und ob es tatsächlich Aufgaben enthält
         if (tasksJSON) {
-            todos = Object.values(tasksJSON);
+            todos = Object.values(tasksJSON).filter(task => task.category); // Filtere ungültige Aufgaben
             updateHTML(); // Update HTML nach dem Laden der Aufgaben
         } else {
             console.warn("Keine Aufgaben gefunden.");
-            todos = [];  // Leere Liste setzen, falls keine Aufgaben vorhanden sind
+            todos = []; // Leere Liste setzen, falls keine Aufgaben vorhanden sind
         }
     } catch (error) {
         console.error("Fehler beim Abrufen der Aufgaben:", error);
     }
 }
+
 
 // Aktualisiert die HTML-Darstellung
 function updateHTML() {
@@ -196,22 +148,24 @@ function updateHTML() {
         closed: document.getElementById('closed')
     };
 
-    // Leeren der Container
-    for (let category in containers) {
-        containers[category].innerHTML = '';
-    }
+    // Leere alle Container
+    Object.values(containers).forEach(container => container.innerHTML = '');
 
-    // Aufgaben anzeigen
+    // Protokolliere die Container-IDs
+    console.log('Available containers:', Object.keys(containers));
+
+    // Aufgaben durchgehen und den richtigen Container hinzufügen
     todos.forEach(todo => {
-        if (todo.category && containers[todo.category]) {
+        console.log(`Task ID: ${todo.id}, Category: ${todo.category}`);
+        if (todo.category in containers) {
             const taskHTML = generateTodoHTML(todo);
             containers[todo.category].innerHTML += taskHTML;
-        } else {
-            console.error(`No container found for category "${todo.category}"`);
+            console.log(`Added task to ${todo.category}:`, taskHTML);
         }
     });
 
-    // Leere Bereiche überprüfen
+
+    // Überprüfen, ob die Kategorien leer sind, um die leeren Aufgaben anzuzeigen
     ['open', 'progress', 'awaitFeedback', 'closed'].forEach(category => {
         emptyTasks(category);
     });
@@ -420,6 +374,7 @@ function showSelectedProfile() {
         `;
     });
 }
+
 
 
 
