@@ -568,7 +568,7 @@ input:not(:placeholder-shown) {
     }
 
     .kanbanBoardTitle {
-        margin-left: 250px !important;
+        margin-left: 300px !important;
     }
 }
 
@@ -742,6 +742,19 @@ input:not(:placeholder-shown) {
         overflow-x: hidden;
     }
 
+    .sideblock {
+        display: none;
+    }
+
+    .d-none {
+        display: block !important;
+    }
+
+    .kanbanBoardTitle {
+        margin-left: 0px !important;
+    }
+
+
     .middle-Section {
         margin-left: 0;
         overflow-x: hidden;
@@ -789,7 +802,7 @@ input:not(:placeholder-shown) {
     .add-contact-button {
         display: block;
         position: fixed;
-        top: 758px;
+        top: 780px;
         right: 10px;
         width: 56px;
         height: 56px;
