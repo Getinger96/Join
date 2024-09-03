@@ -18,9 +18,8 @@ body {
 
 
 .headline_addTask {
-    width: 278px;
-    height: 73px;
-    margin-top: 206px;
+    display: flex;
+   
     gap: 1px;
     font-size: 61px;
     line-height: 73.2px;
@@ -28,6 +27,7 @@ body {
 
 .addTask_Container {
     display: flex;
+    
 
 
 
@@ -157,7 +157,7 @@ body {
 
 .Selection_Container {
     width: 448px;
-    height: 300px;
+    height: 250px;
     background-color: #FFFFFF;
     position: absolute;
     margin-top: 74px;
@@ -578,7 +578,7 @@ input:focus {
     margin-left: 667.25px;
     display: flex;
     gap: 16px;
-    margin-top: 146px;
+    margin-top: 100px;
 }
 
 .clear_Btn {
@@ -628,3 +628,36 @@ input:focus {
 .d_none {
     display: none;
 }
+
+@media(max-width: 1450px) {
+
+    .add_task_content {
+        margin-left: 0px;
+        
+    }
+
+    .headline_addTask {
+      padding: 16px;
+         margin-top: 0px;
+         font-size: 47px;
+    line-height: 56.4px;
+     
+}
+
+.addTask_Container {
+    padding: 16px;
+   
+}
+
+.Btn_Container {
+   
+    margin-left: 667.25px;
+    display: flex;
+    gap: 16px;
+    margin-top: 50px;
+
+
+}
+}
+
+@media(max-width: )
