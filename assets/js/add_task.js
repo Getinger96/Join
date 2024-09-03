@@ -396,15 +396,13 @@ async function postData(path = "", data = {}) {
 
 
 async function createTask() {
-
-
     let titel = document.getElementById('title');
-    let description = document.getElementById('Description')
+    let description = document.getElementById('Description');
     let assignedContact = assignedContacts;
     let date = document.getElementById('dueDate');
     let category = document.getElementById('Category');
     let subtask = subtasks;
-    
+
     let newTask = {
         Titel: titel.value,
         Description: description.value,
@@ -415,29 +413,19 @@ async function createTask() {
         Subtask: subtask
     };
 
-
-
-    if (titel.value == "" || date.value == "" || category.value == "") {
+    if (titel.value === "" || date.value === "" || category.value === "") {
+        alert("Bitte füllen Sie alle Pflichtfelder aus.");
         console.log(titel.value);
         console.log(date.value);
         console.log(category.value);
-      
-
-
-
+        return;
     } else {
-       
-
-
+        console.log(newTask);  // Debugging: Überprüfen Sie das Objekt vor dem Posten
         await postData(`tasks`, newTask);
         clearTask();
-
-
     }
-
-
-
 }
+
 
 function clearTask() {
     for (let i = 0; i < contacts.length; i++) {

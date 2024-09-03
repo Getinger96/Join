@@ -536,6 +536,14 @@ input:not(:placeholder-shown) {
     display: none;
 }
 
+.menu-button-img {
+    display:none;
+}
+
+.add-contact-button {
+    display: none;
+}
+
 @keyframes slide-in-from-right {
     from {
         transform: translateX(100%);
@@ -549,6 +557,21 @@ input:not(:placeholder-shown) {
 .transition-in-from-right {
     animation: slide-in-from-right 300ms forwards ease-in-out;
 }
+
+@media(max-width: 1450px) {
+    .sideblock {
+        display: block;
+    }
+
+    .d-none {
+        display: none !important;
+    }
+
+    .kanbanBoardTitle {
+        margin-left: 250px !important;
+    }
+}
+
 
 @media(max-width: 1350px) {
     .headline-contacts {
@@ -715,26 +738,32 @@ input:not(:placeholder-shown) {
 }
 
 @media(max-width: 800px) {
+    body {
+        overflow-x: hidden;
+    }
+
     .middle-Section {
         margin-left: 0;
+        overflow-x: hidden;
     }
 
     .contactview-container {
         display: none;
-
+        margin-top: 0px;
     }
 
     .contactview-container.active {
         display: block;
         position: absolute;
-        top: 0;
+        top: 96px;
         left: 0;
         width: 100%;
-        height: 100%;
-        background: white;
-        z-index: 10;
-        padding: 20px;
+        height: calc(100% - 96px);
+        background: #f6f7f8;
+        padding: 0;
+        z-index: 4;
         overflow-y: auto;
+        overflow-x: hidden;
     }
 
     .contactlist {
@@ -742,7 +771,29 @@ input:not(:placeholder-shown) {
     }
 
     .back-button {
+        position: absolute;
+        top: 70px;
+        right: 20px;
         display: block;
+    }
+
+    .menu-button-img {
+        position: absolute;
+        width: 56px;
+        height: 56px;
+        top: 690px;
+        right: 10px;
+        display: block;
+    }
+
+    .add-contact-button {
+        display: block;
+        position: fixed;
+        top: 758px;
+        right: 10px;
+        width: 56px;
+        height: 56px;
+        z-index: 100;
     }
 
     .headline-contacts h2 {
@@ -753,33 +804,49 @@ input:not(:placeholder-shown) {
     .headline-contacts {
         display: flex;
         flex-direction: column;
-        padding-left:16px;
+        padding-left: 16px;
     }
 
     .contact-details-container {
         padding: 16px;
-        padding-top:50px;
+        padding-top: 50px;
     }
 
     .headline-contacts hr {
+        order: 2;
         height: 90px;
-        border: 3px solid #29abe2;
+        border: 2px solid #29abe2;
         border-radius: 3px;
-        transform-origin: center;  
-        margin: 0; 
+        transform-origin: center;
+        margin: 0;
+        width: 90px;
     }
 
-
-@media(max-width: 450px) {
-
-
-    h2 {
-        text-align: left;
+    .editanddelete {
+        display:none;
     }
+    
 
-    .contactlist {
-        padding: 0;
-        padding-bottom: 122px;
+    @media(max-width: 450px) {
+
+
+        h2 {
+            text-align: left;
+        }
+
+        .contactlist {
+            padding: 0;
+            padding-bottom: 122px;
+        }
+
+        .largsingle-contact-box {
+            gap: 18px;
+        }
+
+        .largcontactname {
+            letter-spacing:-2px;
+            white-space: normal;
+        }
+
     }
-}
 }
