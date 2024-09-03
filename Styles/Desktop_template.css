@@ -196,7 +196,8 @@ a:hover {
     }
 
     .headblock {
-        padding: 20px 40px 20px 100px;
+        padding: 20px 16px 20px 16px;
+        height: 80px;
     }
 
     .kanbanBoardTitle {

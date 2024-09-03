@@ -62,28 +62,64 @@ async function saveTask(isNewTask = true, task = {}) {
 }
 
 function createTask() {
-    // Hole die Werte aus den Formularfeldern
-    const title = document.getElementById('taskTitle').value;
-    const description = document.getElementById('description').value;
-    const dueDate = document.getElementById('taskDueDate').value;
-    const priority = document.querySelector('.buttonContainerPrio.curser.active')?.id || 'low'; // Fallback auf 'low'
-    const kategorie = document.getElementById('kategorie').value; // Hier sicherstellen, dass dieser Wert den Container IDs entspricht
+    // Hole die Werte aus den Formularfeldern und überprüfe die Existenz der Elemente
+    const titleElement = document.getElementById('taskTitle');
+    const dueDateElement = document.getElementById('taskDueDate');
+    const kategorieElement = document.getElementById('kategorie');
+
+    // Überprüfen, ob die Elemente existieren und gültige Werte haben
+    if (!titleElement) {
+        alert("Das Feld für den Titel wurde nicht gefunden.");
+        return;
+    }
+    const title = titleElement.value.trim();
+    if (!title) {
+        alert("Bitte geben Sie einen Titel für die Aufgabe ein.");
+        return;
+    }
+
+    if (!dueDateElement) {
+        alert("Das Feld für das Fälligkeitsdatum wurde nicht gefunden.");
+        return;
+    }
+    const dueDate = dueDateElement.value.trim();
+    if (!dueDate) {
+        alert("Bitte geben Sie ein Fälligkeitsdatum für die Aufgabe ein.");
+        return;
+    }
+
+    if (!kategorieElement) {
+        alert("Das Feld für die Kategorie wurde nicht gefunden.");
+        return;
+    }
+    const kategorie = kategorieElement.value.trim();
+    if (!kategorie) {
+        alert("Bitte wählen Sie eine Kategorie für die Aufgabe aus.");
+        return;
+    }
+
+    // Optional: Weitere Felder wie Beschreibung und Priorität
+    const descriptionElement = document.getElementById('description');
+    const description = descriptionElement ? descriptionElement.value.trim() : '';
+    const priority = document.querySelector('.buttonContainerPrio.curser.active')?.id || 'low';
+
+    // Sammeln der Unteraufgaben (falls vorhanden)
     const subtasks = Array.from(document.querySelectorAll('#list li')).map(li => li.textContent);
 
     // Überprüfen, ob kategorie ein gültiger Status ist
     const validCategories = ['open', 'progress', 'awaitFeedback', 'closed'];
-    const status = validCategories.includes(kategorie) ? kategorie : 'open'; // Fallback auf 'open'
+    const status = validCategories.includes(kategorie) ? kategorie : 'open';
 
     // Erstelle ein neues Todo-Objekt
     const newTodo = {
-        id: generateUniqueId(), // Funktion zum Erzeugen einer einzigartigen ID
+        id: generateUniqueId(),
         title: title,
         description: description,
         dueDate: dueDate,
         priority: priority,
         kategorie: kategorie,
         subtasks: subtasks,
-        status: status // Standardmäßig auf "open" setzen
+        status: status
     };
 
     // Füge das neue Todo zur Liste hinzu
@@ -170,7 +206,7 @@ function updateHTML() {
     // Aufgaben durchgehen und dem richtigen Container hinzufügen
     todos.forEach(todo => {
         console.log("Aktuelle Aufgabe:", todo);
-        if (containers[todo.status]) {  // Hier wird der Status verwendet
+        if (containers[todo.status]) {  // Verwende 'status' für die Zuordnung
             const taskHTML = generateTodoHTML(todo);
             containers[todo.status].innerHTML += taskHTML;
         } else {

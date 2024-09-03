@@ -55,6 +55,10 @@ async function fetchContacts(path = '') {
     renderSelectionContainer()
 }
 
+function func1(event) {
+    event.stopPropagation();
+}
+
 
 
 
@@ -65,6 +69,7 @@ function openList() {
     let arrowCon = document.getElementById('arrow_img_container');
     arrowCon.innerHTML = `<img onclick="closelist()"class="arrow_drop_downaa" src="assets/IMG/arrow_drop_up.svg" alt="">`;
     selecCon.classList.remove('d_none');
+   
 
 }
 
@@ -132,7 +137,7 @@ function renderSelectionContainer() {
         let firstletterlastnameBIG = firstletterlastname.toUpperCase();
         let firstletters = forNAmebig + firstletterlastnameBIG;
         profiles.innerHTML += `
-       <div id="profile_Container${i} ${contactColour}" " class="profile_Container">
+       <div id="profile_Container${i}" class="profile_Container">
          <div class="profile_container_header">
           <div class="profile_Badge_assign ${contactColour}">${firstletters}</div>
           <div>${name}</div>
@@ -158,10 +163,6 @@ function selectedContact(i, name, firstletters, contactColour) {
 
 
     let profileContainer = document.getElementById(`profile_Container${i}`);
-
-
-
-
     profileContainer.classList.add('bg_color');
     profileContainer.classList.add('color_white');
 
@@ -169,6 +170,8 @@ function selectedContact(i, name, firstletters, contactColour) {
 
 
     showSelectedProfile(firstletters, i, contactColour);
+    
+
 
 }
 
@@ -413,14 +416,12 @@ async function createTask() {
         Subtask: subtask
     };
 
-    if (titel.value === "" || date.value === "" || category.value === "") {
-        alert("Bitte füllen Sie alle Pflichtfelder aus.");
+    if (titel.value == "" || date.value == "" || category.value == "") {
         console.log(titel.value);
         console.log(date.value);
         console.log(category.value);
-        return;
+
     } else {
-        console.log(newTask);  // Debugging: Überprüfen Sie das Objekt vor dem Posten
         await postData(`tasks`, newTask);
         clearTask();
     }
