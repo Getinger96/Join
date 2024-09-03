@@ -13,9 +13,7 @@ body {
 .middle-Section {
     font-family: "inter", sans-serif;
     margin-left: 328px;
-    width: calc(100vw - 232px);
-    display: flex;
-    align-items: flex-start;
+    margin-right: 50px;
 }
 
 .sideblock {
