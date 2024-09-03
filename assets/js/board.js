@@ -53,22 +53,62 @@ function closeTask() {
 }
 
 // Generieren des HTML-Codes für eine Aufgabe
-function generateTodoHTML(todo) {
+function generateTodoHTML(todo, contactIndex, contactsName = '', contactLastname = '', isSelected, color, backgroundColor, textColor) {
     // Überprüfe, ob das todo-Objekt die erwartete Struktur hat
     const title = todo.title || 'Kein Titel';
     const description = todo.description || 'Keine Beschreibung verfügbar';
     const dueDate = todo.dueDate || 'Kein Datum festgelegt';
-    const priority = todo.priority || 'Niedrig';
+    const priority = todo.priority || 'low'; // Standardwert 'low'
 
     // Überprüfen, ob subtasks existieren und ein Array sind
     const subtasks = Array.isArray(todo.subtasks) ? todo.subtasks : [];
 
-    return `
+    // Definiere Prioritäts-Icons
+    let priorityIcon = '';
+    switch (priority) {
+        case 'urgent':
+            priorityIcon = './assets/img/PRio_urgent (2).svg';
+            break;
+        case 'medium':
+            priorityIcon = './assets/IMG/Prio_medium (2).svg';
+            break;
+        case 'low':
+            priorityIcon = './assets/IMG/iconLowWhite.svg';
+            break;
+        default:
+            priorityIcon = './assets/img/Prio_Low (2).svg'; // Fallback-Icon
+    }
+
+    // Definiere Farben basierend auf der Kategorie
+    let categoryColor = '';
+    switch (todo.kategorie) {
+        case 'technicalTask':
+            categoryColor = '#1FD7C1';
+            break;
+        case 'userStory':
+            categoryColor = '#0038FF';
+            break;
+        default:
+            categoryColor = '#CCCCCC'; // Fallback-Farbe
+    }
+
+    return /*html*/`
         <div class="todo" draggable="true" ondragstart="startDragging(${todo.id})">
+            <div class="divKategorie" style="background-color: ${categoryColor};">${todo.kategorie}</div>
             <h3>${title}</h3>
             <p>${description}</p>
-            <p>Due Date: ${dueDate}</p>
-            <p>Priority: ${priority}</p>
+            <p>Priority: <img src="${priorityIcon}" alt="${priority} Priority"></p>
+
+            <div onclick="selectContact(${contactIndex})" class="single-contact-box ${isSelected ? 'selected' : ''}" style="background-color:${backgroundColor};">
+                <div class="contact-icon" style="background-color:${color};">
+                    <span style="color: ${textColor};">
+                        ${contactsName.charAt(0).toUpperCase() || ''}${contactLastname.charAt(0).toUpperCase() || ''}
+                    </span>
+                </div>
+                <div class="contact-content">
+                    <span class="contactname" style="color:${textColor};">${contactsName}</span>
+                </div>
+            </div>
         </div>
     `;
 }

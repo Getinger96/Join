@@ -62,55 +62,33 @@ async function saveTask(isNewTask = true, task = {}) {
 }
 
 function createTask() {
-    // Hole die Werte aus den Formularfeldern und überprüfe die Existenz der Elemente
+    // Hole die Werte aus den Formularfeldern
     const titleElement = document.getElementById('taskTitle');
     const dueDateElement = document.getElementById('taskDueDate');
     const kategorieElement = document.getElementById('kategorie');
 
-    // Überprüfen, ob die Elemente existieren und gültige Werte haben
-    if (!titleElement) {
-        alert("Das Feld für den Titel wurde nicht gefunden.");
+    if (!titleElement || !dueDateElement || !kategorieElement) {
+        alert("Bitte füllen Sie alle Pflichtfelder aus.");
         return;
     }
+
     const title = titleElement.value.trim();
-    if (!title) {
-        alert("Bitte geben Sie einen Titel für die Aufgabe ein.");
-        return;
-    }
-
-    if (!dueDateElement) {
-        alert("Das Feld für das Fälligkeitsdatum wurde nicht gefunden.");
-        return;
-    }
     const dueDate = dueDateElement.value.trim();
-    if (!dueDate) {
-        alert("Bitte geben Sie ein Fälligkeitsdatum für die Aufgabe ein.");
-        return;
-    }
-
-    if (!kategorieElement) {
-        alert("Das Feld für die Kategorie wurde nicht gefunden.");
-        return;
-    }
     const kategorie = kategorieElement.value.trim();
-    if (!kategorie) {
-        alert("Bitte wählen Sie eine Kategorie für die Aufgabe aus.");
+
+    if (!title || !dueDate || !kategorie) {
+        alert("Bitte füllen Sie alle Pflichtfelder aus.");
         return;
     }
 
-    // Optional: Weitere Felder wie Beschreibung und Priorität
     const descriptionElement = document.getElementById('description');
     const description = descriptionElement ? descriptionElement.value.trim() : '';
-    const priority = document.querySelector('.buttonContainerPrio.curser.active')?.id || 'low';
-
-    // Sammeln der Unteraufgaben (falls vorhanden)
+    const priority = currentPriority;  // Verwende die aktuelle Priorität
     const subtasks = Array.from(document.querySelectorAll('#list li')).map(li => li.textContent);
 
-    // Überprüfen, ob kategorie ein gültiger Status ist
     const validCategories = ['open', 'progress', 'awaitFeedback', 'closed'];
     const status = validCategories.includes(kategorie) ? kategorie : 'open';
 
-    // Erstelle ein neues Todo-Objekt
     const newTodo = {
         id: generateUniqueId(),
         title: title,
@@ -125,37 +103,35 @@ function createTask() {
     // Füge das neue Todo zur Liste hinzu
     todos.push(newTodo);
 
+    // Speichern der Todos im localStorage
+    saveTodos();
+
     // Aktualisiere die HTML-Darstellung
     updateHTML();
+
+    // Formular zurücksetzen
+    resetForm();
 
     // Schließe das Formular
     closeTask();
 }
 
+function saveTodos() {
+    localStorage.setItem('todos', JSON.stringify(todos));
+}
 
-async function addTaskToDatabase(task, path) {
-    try {
-        let response = await fetch(base_URL + path + ".json", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(task)
-        });
-
-        if (!response.ok) {
-            throw new Error(`HTTP-Fehler! Status: ${response.status}`);
-        }
-
-        let responseData = await response.json();
-        console.log("Aufgabe erfolgreich hinzugefügt:", responseData);
-        return responseData;
-    } catch (error) {
-        console.error("Fehler beim Hinzufügen der Aufgabe:", error);
-        throw error; // Re-throw the error to be caught by the calling function
+function loadTodos() {
+    const storedTodos = localStorage.getItem('todos');
+    if (storedTodos) {
+        todos = JSON.parse(storedTodos);
     }
 }
 
+// Rufe loadTodos beim Laden der Seite auf
+document.addEventListener('DOMContentLoaded', () => {
+    loadTodos();
+    updateHTML();
+});
 
 // Abrufen aller Aufgaben aus der Datenbank
 async function fetchAllTasks(path = 'tasks') {

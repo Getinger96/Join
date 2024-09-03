@@ -470,6 +470,18 @@ span {
     justify-content: space-between;
 }
 
+.divKategorie {
+    height: 30px;
+    width: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    border-radius: 10px;
+    margin-bottom: 14px;
+    margin-top: 8px;
+}
+
 @media(max-width: 1450px) {
     .divBoard {
         margin-left: 100px;
