@@ -399,15 +399,13 @@ async function postData(path = "", data = {}) {
 
 
 async function createTask() {
-
-
     let titel = document.getElementById('title');
-    let description = document.getElementById('Description')
+    let description = document.getElementById('Description');
     let assignedContact = assignedContacts;
     let date = document.getElementById('dueDate');
     let category = document.getElementById('Category');
     let subtask = subtasks;
-    
+
     let newTask = {
         Titel: titel.value,
         Description: description.value,
@@ -428,6 +426,7 @@ async function createTask() {
         clearTask();
     }
 }
+
 
 function clearTask() {
     for (let i = 0; i < contacts.length; i++) {

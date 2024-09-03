@@ -19,7 +19,7 @@ async function fetchContacts(path = '') {
     let response = await fetch(base_URL + path + ".json");
     let userJSON = await response.json();
     let userAsArray = Object.values(userJSON.contacts);
-    
+
     for (let index = 0; index < userAsArray.length; index++) {
         let contact = userAsArray[index];
 
@@ -98,22 +98,16 @@ function displayContacts(contactIndex, contactsEmail, contactsName, contactLastn
                     <span class="contactname" style="color:${selectedClass ? 'white' : 'black'};">${contactsName}</span>
                     <a class="contactmail" href="mailto:${contactsEmail}">${contactsEmail}</a>
                 </div>
+                <img src="assets/IMG/Secondary mobile contact V1.png" alt="Add Contact" class="add-contact-button" onclick="openNewContactMobile()">
             </div>`;
 }
 
-function selectContact(index) {
-    selectedContactIndex = index;
-    console.log('Selected Contact Index:', selectedContactIndex); 
-    getContacts(); 
-    getContactBig(index); 
-}
 
 function selectContact(index) {
     selectedContactIndex = index;
-    getContacts(); 
-    getContactBig(index); 
+    getContacts();
+    getContactBig(index);
 
-    // Zeige die Detailansicht in der mobilen Version an
     const detailView = document.querySelector('.contactview-container');
     detailView.classList.add('active');
 }
@@ -162,14 +156,15 @@ function showContactBig(contactsName, contactsEmail, contactPhone, contactLastna
                 <a class="contactphone" href="tel:${contactPhone}">${contactPhone}</a>
             </div>
         </div>
-        <img src="assets/IMG/arrow-left-line.png" alt="backButton" onclick="closeDetailView()" class="back-button">
+          <img src="assets/IMG/arrow-left-line.png" alt="backButton" onclick="closeDetailView()" class="back-button">
+    <img src="assets/IMG/Menu Contact options.png" alt="Menu button" class="menu-button-img" onclick="toggleMenu()">
     </div>`;
 }
 
 
 function collectBeginningLetters() {
-    beginningLetter = []; 
-    groupedContacts = {}; 
+    beginningLetter = [];
+    groupedContacts = {};
 
     contactsArray.forEach(contact => {
         let firstLetter = contact.name.charAt(0).toUpperCase();
@@ -228,12 +223,12 @@ function addNewContact() {
     const createButton = document.querySelector('.createContact-button');
     createButton.onclick = function () {
         const form = document.getElementById('contactForm');
-        
+
         if (form.checkValidity()) {
-            createContact(); 
-            closeCardContact(); 
+            createContact();
+            closeCardContact();
         } else {
-            form.reportValidity(); 
+            form.reportValidity();
         }
     };
 }
@@ -255,7 +250,7 @@ function htmlEditForm(index) {
     document.getElementById('telephone').value = contact.phone;
     document.querySelector('.createContact-button').innerHTML = 'Save <img src="assets/IMG/check.svg" alt="Save Icon" class="button-icon" style="margin-left: 8px;">';
     document.querySelector('.addNewContactimg').style.display = 'none';
-   
+
     let newContactOverlay = document.getElementById('newContact');
     newContactOverlay.classList.add('transition-in-from-right');
     newContactOverlay.style.display = 'flex';
@@ -343,12 +338,12 @@ async function postData(path = "", data = {}) {
     return responsASJson = await response.json();
 }
 
-async function deleteData(path="") {
+async function deleteData(path = "") {
     let response = await fetch(base_URL + path + ".json", {
         method: "DELETE",
     });
 
-return responsASJson = await response.json();
+    return responsASJson = await response.json();
 }
 
 async function putData(path = "", data = {}) {
@@ -362,3 +357,4 @@ async function putData(path = "", data = {}) {
 
     return responsASJson = await response.json();
 }
+
