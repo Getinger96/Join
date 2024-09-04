@@ -660,4 +660,55 @@ input:focus {
 }
 }
 
-@media(max-width: )
+@media(max-width:1005px) {
+
+    .add_task_content {
+        
+        align-items: center;
+    }
+
+    .addTask_Container {
+        display: flex;
+        flex-direction: column;
+    }
+
+
+    .dividing_Line {
+        width: 0px;
+        height: 424px;
+        border: 1px solid #D1D1D1;
+        margin-left: 48.25px;
+        display: none;
+    }
+
+    .header_COntainer {
+        display: flex;
+    width: 500px;
+    }
+
+    .clear_Btn {
+      display: none;
+    }
+
+    .Task_Container_right {
+       
+        margin-left: 0px;
+    }
+
+    .Btn_Container {
+      
+        display: flex;
+        gap: 16px;
+        margin-top: 0px;
+    margin-left: 390px;
+        margin-bottom: 0px;
+    }
+
+    .required_info_Container {
+        width: 170px;
+        height: 27px;
+        margin-top: -25px;
+        margin-bottom: 100px;
+        margin-right: 300px;
+    }
+}

@@ -402,7 +402,7 @@ async function createTask() {
 
 
     let titel = document.getElementById('title');
-    let description = document.getElementById('Description')
+    let description = document.getElementById('Description');
     let assignedContact = assignedContacts;
     let date = document.getElementById('dueDate');
     let category = document.getElementById('Category');
@@ -418,15 +418,16 @@ async function createTask() {
         Subtask: subtask
     };
 
-    if (titel.value == "" || date.value == "" || category.value == "") {
-        console.log(titel.value);
-        console.log(date.value);
-        console.log(category.value);
+if (titel.value==='' || date.value===''|| category.value==='') {
+    
+}else {
+    await postData(`tasks`, newTask);
+    clearTask();
 
-    } else {
-        await postData(`tasks`, newTask);
-        clearTask();
-    }
+
+}
+ 
+    
 }
 
 function clearTask() {
