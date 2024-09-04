@@ -63,63 +63,75 @@ async function saveTask(isNewTask = true, task = {}) {
 
 function createTask() {
     // Hole die Werte aus den Formularfeldern
-    const title = document.getElementById('taskTitle').value;
-    const description = document.getElementById('description').value;
-    const dueDate = document.getElementById('taskDueDate').value;
-    const priority = document.querySelector('.buttonContainerPrio.curser.active')?.id || 'low'; // Fallback auf 'low'
-    const kategorie = document.getElementById('kategorie').value; // Hier sicherstellen, dass dieser Wert den Container IDs entspricht
+    const titleElement = document.getElementById('taskTitle');
+    const dueDateElement = document.getElementById('taskDueDate');
+    const kategorieElement = document.getElementById('kategorie');
+
+    if (!titleElement || !dueDateElement || !kategorieElement) {
+        alert("Bitte füllen Sie alle Pflichtfelder aus.");
+        return;
+    }
+
+    const title = titleElement.value.trim();
+    const dueDate = dueDateElement.value.trim();
+    const kategorie = kategorieElement.value.trim();
+
+    if (!title || !dueDate || !kategorie) {
+        alert("Bitte füllen Sie alle Pflichtfelder aus.");
+        return;
+    }
+
+    const descriptionElement = document.getElementById('description');
+    const description = descriptionElement ? descriptionElement.value.trim() : '';
+    const priority = currentPriority;  // Verwende die aktuelle Priorität
     const subtasks = Array.from(document.querySelectorAll('#list li')).map(li => li.textContent);
 
-    // Überprüfen, ob kategorie ein gültiger Status ist
     const validCategories = ['open', 'progress', 'awaitFeedback', 'closed'];
-    const status = validCategories.includes(kategorie) ? kategorie : 'open'; // Fallback auf 'open'
+    const status = validCategories.includes(kategorie) ? kategorie : 'open';
 
-    // Erstelle ein neues Todo-Objekt
     const newTodo = {
-        id: generateUniqueId(), // Funktion zum Erzeugen einer einzigartigen ID
+        id: generateUniqueId(),
         title: title,
         description: description,
         dueDate: dueDate,
         priority: priority,
         kategorie: kategorie,
         subtasks: subtasks,
-        status: status // Standardmäßig auf "open" setzen
+        status: status
     };
 
     // Füge das neue Todo zur Liste hinzu
     todos.push(newTodo);
 
+    // Speichern der Todos im localStorage
+    saveTodos();
+
     // Aktualisiere die HTML-Darstellung
     updateHTML();
+
+    // Formular zurücksetzen
+    resetForm();
 
     // Schließe das Formular
     closeTask();
 }
 
+function saveTodos() {
+    localStorage.setItem('todos', JSON.stringify(todos));
+}
 
-async function addTaskToDatabase(task, path) {
-    try {
-        let response = await fetch(base_URL + path + ".json", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(task)
-        });
-
-        if (!response.ok) {
-            throw new Error(`HTTP-Fehler! Status: ${response.status}`);
-        }
-
-        let responseData = await response.json();
-        console.log("Aufgabe erfolgreich hinzugefügt:", responseData);
-        return responseData;
-    } catch (error) {
-        console.error("Fehler beim Hinzufügen der Aufgabe:", error);
-        throw error; // Re-throw the error to be caught by the calling function
+function loadTodos() {
+    const storedTodos = localStorage.getItem('todos');
+    if (storedTodos) {
+        todos = JSON.parse(storedTodos);
     }
 }
 
+// Rufe loadTodos beim Laden der Seite auf
+document.addEventListener('DOMContentLoaded', () => {
+    loadTodos();
+    updateHTML();
+});
 
 // Abrufen aller Aufgaben aus der Datenbank
 async function fetchAllTasks(path = 'tasks') {
@@ -170,7 +182,7 @@ function updateHTML() {
     // Aufgaben durchgehen und dem richtigen Container hinzufügen
     todos.forEach(todo => {
         console.log("Aktuelle Aufgabe:", todo);
-        if (containers[todo.status]) {  // Hier wird der Status verwendet
+        if (containers[todo.status]) {  // Verwende 'status' für die Zuordnung
             const taskHTML = generateTodoHTML(todo);
             containers[todo.status].innerHTML += taskHTML;
         } else {

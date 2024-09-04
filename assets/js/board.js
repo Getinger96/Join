@@ -9,7 +9,8 @@ let todos = [
         date: '2024-09-01',
         contacts: ['John Doe', 'Jane Smith'],
         priority: 'high',
-        subtasks: ['Research recipes', 'Create layout']
+        subtasks: ['Research recipes', 'Create layout'],
+        status: 'open'  // Startstatus festlegen
     },
     {
         id: 1,
@@ -19,7 +20,8 @@ let todos = [
         date: '2024-09-02',
         contacts: ['John Doe'],
         priority: 'medium',
-        subtasks: ['Research BEM', 'Draft CSS plan']
+        subtasks: ['Research BEM', 'Draft CSS plan'],
+        status: 'progress'  // Startstatus festlegen
     },
     {
         id: 2,
@@ -29,7 +31,8 @@ let todos = [
         date: '2024-09-03',
         contacts: ['Jane Smith'],
         priority: 'low',
-        subtasks: ['Create header template', 'Create footer template']
+        subtasks: ['Create header template', 'Create footer template'],
+        status: 'awaitFeedback'  // Startstatus festlegen
     }
 ];
 
@@ -50,23 +53,66 @@ function closeTask() {
 }
 
 // Generieren des HTML-Codes für eine Aufgabe
-function generateTodoHTML(todo) {
-    const contactsHTML = todo.contacts.map(contact => `<span>${contact}</span>`).join(', ');
-    const subtasksHTML = todo.subtasks.length > 0 ? `<ul>${todo.subtasks.map(subtask => `<li>${subtask}</li>`).join('')}</ul>` : '<p>No subtasks</p>';
-    const priorityHTML = `<p><strong>Priority:</strong> ${todo.priority}</p>`;
-    const dateHTML = `<p><strong>Due Date:</strong> ${todo.date}</p>`;
+function generateTodoHTML(todo, contactIndex, contactsName = '', contactLastname = '', isSelected, color, backgroundColor, textColor) {
+    // Überprüfe, ob das todo-Objekt die erwartete Struktur hat
+    const title = todo.title || 'Kein Titel';
+    const description = todo.description || 'Keine Beschreibung verfügbar';
+    const dueDate = todo.dueDate || 'Kein Datum festgelegt';
+    const priority = todo.priority || 'low'; // Standardwert 'low'
 
-    return `
+    // Überprüfen, ob subtasks existieren und ein Array sind
+    const subtasks = Array.isArray(todo.subtasks) ? todo.subtasks : [];
+
+    // Definiere Prioritäts-Icons
+    let priorityIcon = '';
+    switch (priority) {
+        case 'urgent':
+            priorityIcon = './assets/img/PRio_urgent (2).svg';
+            break;
+        case 'medium':
+            priorityIcon = './assets/IMG/Prio_medium (2).svg';
+            break;
+        case 'low':
+            priorityIcon = './assets/IMG/iconLowWhite.svg';
+            break;
+        default:
+            priorityIcon = './assets/img/Prio_Low (2).svg'; // Fallback-Icon
+    }
+
+    // Definiere Farben basierend auf der Kategorie
+    let categoryColor = '';
+    switch (todo.kategorie) {
+        case 'technicalTask':
+            categoryColor = '#1FD7C1';
+            break;
+        case 'userStory':
+            categoryColor = '#0038FF';
+            break;
+        default:
+            categoryColor = '#CCCCCC'; // Fallback-Farbe
+    }
+
+    return /*html*/`
         <div class="todo" draggable="true" ondragstart="startDragging(${todo.id})">
-            <h3>${todo.title}</h3>
-            <p>${todo.description}</p>
-            ${dateHTML}
-            ${priorityHTML}
-            <p><strong>Contacts:</strong> ${contactsHTML}</p>
-            <div><strong>Subtasks:</strong> ${subtasksHTML}</div>
+            <div class="divKategorie" style="background-color: ${categoryColor};">${todo.kategorie}</div>
+            <h3>${title}</h3>
+            <p>${description}</p>
+            <p>Priority: <img src="${priorityIcon}" alt="${priority} Priority"></p>
+
+            <div onclick="selectContact(${contactIndex})" class="single-contact-box ${isSelected ? 'selected' : ''}" style="background-color:${backgroundColor};">
+                <div class="contact-icon" style="background-color:${color};">
+                    <span style="color: ${textColor};">
+                        ${contactsName.charAt(0).toUpperCase() || ''}${contactLastname.charAt(0).toUpperCase() || ''}
+                    </span>
+                </div>
+                <div class="contact-content">
+                    <span class="contactname" style="color:${textColor};">${contactsName}</span>
+                </div>
+            </div>
         </div>
     `;
 }
+
 
 function allowDrop(ev) {
     ev.preventDefault();
@@ -91,8 +137,8 @@ function startDragging(id) {
 function moveTo(category) {
     const draggedTodoIndex = todos.findIndex(todo => todo.id === currentDraggedElement);
     if (draggedTodoIndex !== -1) {
-        todos[draggedTodoIndex].category = category;
-        updateHTML();
+        todos[draggedTodoIndex].status = category;  // Aktualisiere den Status auf die neue Kategorie
+        updateHTML();  // Aktualisiere die HTML-Darstellung
         removeHighlight(category);
     }
 }
@@ -289,6 +335,10 @@ function getSelectedCategory() {
         return categorySelect.value;
     }
     return null;
+}
+
+function generateUniqueId() {
+    return todos.length > 0 ? todos[todos.length - 1].id + 1 : 0;
 }
 
 
