@@ -1,0 +1,207 @@
+@media(max-width: 1450px) {
+
+    .add_task_content {
+        margin-left: 0px;
+    }
+
+    .headline_addTask {
+        padding: 16px;
+        margin-top: 0px;
+        font-size: 47px;
+        line-height: 56.4px;
+    }
+
+    .addTask_Container {
+        padding: 16px;
+    }
+
+    .Btn_Container {
+        margin-left: 0px;
+        display: flex;
+        gap: 16px;
+        margin-top: 80px;
+    }
+}
+
+@media(max-width:1005px) {
+
+    .add_task_content {
+        align-items: center;
+    }
+
+    .addTask_Container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .dividing_Line {
+        width: 0px;
+        height: 424px;
+        border: 1px solid #D1D1D1;
+        margin-left: 48.25px;
+        display: none;
+    }
+
+    .header_COntainer {
+        display: flex;
+    }
+
+    .clear_Btn {
+        display: none;
+    }
+
+    .Task_Container_right {
+        margin-left: 0px;
+        margin-top: 80px;
+    }
+
+    .Btn_Container {
+        display: flex;
+        gap: 90px;
+        margin-top: 80px;
+        margin-left: 0px;
+        margin-bottom: 150px;
+        align-items: center;
+    }
+
+    .required_info_Container {
+        width: auto;
+        height: 0px;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        margin-right: 0px;
+    }
+}
+
+@media(max-width:500px) {
+    .addTask_Container {
+        padding: 0px;
+    }
+
+    .input_Task_Container_left {
+        width: 280px;
+    }
+
+    .Title_Header {
+        width: 280px;
+    }
+
+    .input_Title {
+        width: 280px;
+    }
+
+    .Description_Container {
+        width: 280px;
+
+    }
+
+    .input_Description {
+        width: 280px;
+    }
+
+    .AssignedTO_Container {
+        width: 280px;
+    }
+
+    .select_container {
+        width: 280px;
+        padding: 2px;
+    }
+
+    .Selection_Container {
+        width: 280px;
+        margin-top: 66px;
+    }
+
+    .Selected_profiles_Container {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .profile_Container {
+      width: auto;
+    }
+
+    .date_Container {
+        width: 280px;
+    }
+
+    .input_date {
+        width: 280px;
+    }
+
+    .Prio_Container {
+        width: 280px;
+    }
+
+    .Prio_btn_Container {
+        width: 280px;
+        gap: 8px;
+    }
+
+    .Prio_Btn {
+        width: 121.33px;
+        padding: 8px 5px 8px 5px;
+        font-family: 'Inter';
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19.2px;
+    }
+
+    .cataegory_Container {
+        width: 280px;
+    }
+
+    .Selection_Container_Category {
+        width: 280px;
+    }
+
+    .Subtasks_Container {
+        width: 280px;
+    }
+
+    .Subtask_Inputfield_Container {
+        width: 280px;
+    }
+
+    .required_info_Container {
+        width: 150px;
+        height: auto;
+        font-size: 12px;
+    }
+
+    .add_task_content {
+        padding: 8px;
+    }
+
+    .Btn_Container {
+        margin-top: 100px;
+        gap: 45px;
+    }
+
+    .Task_Container_right {
+        width: 280px;
+    }
+
+    .Create_Btn {
+        width: 140px;
+        font-size: 12px;
+    }
+
+    .Btn_Container {
+        display: flex;
+        gap: 0px;
+        margin-top: 120px;
+        margin-left: 0px;
+        margin-bottom: 150px;
+        align-items: baseline;
+    }
+
+    .Subtasks_Inputfield {
+        font-size: 16px;
+    }
+
+    .Category_Input {
+        font-size: 16px;
+    }
+}
