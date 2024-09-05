@@ -3,54 +3,43 @@ body {
     background-color: #F6F7F8;
     font-family: 'Inter';
     font-weight: 400;
-
-
-
-
 }
 
 .add_task_content {
     display: flex;
     flex-direction: column;
     margin-left: 328px;
-
 }
-
 
 .headline_addTask {
     display: flex;
-   
     gap: 1px;
     font-size: 61px;
     line-height: 73.2px;
 }
 
-.addTask_Container {
+.header_COntainer {
     display: flex;
-    
-
-
-
-
+    justify-content: center;
 }
 
+.addTask_Container {
+    display: flex;
+    justify-content: center;
+}
 
 .input_Task_Container_left {
-
     width: 440px;
     height: 376px;
     display: flex;
     flex-direction: column;
     gap: 10px;
-
 }
 
 .Title_Container {
-
     gap: 8px;
     display: flex;
     flex-direction: column;
-
 }
 
 .Title_Header {
@@ -74,8 +63,6 @@ body {
     font-family: 'Inter';
     font-weight: 400;
     outline: none;
-
-
 }
 
 .Description_Container {
@@ -110,7 +97,6 @@ body {
 }
 
 ::placeholder {
-
     color: #D1D1D1;
 }
 
@@ -131,7 +117,6 @@ body {
     width: 112px;
     height: 24px;
 }
-
 
 .select_container {
     width: 428px;
@@ -170,9 +155,6 @@ body {
     display: flex;
     flex-direction: column;
     overflow-x: hidden;
-
-
-
 }
 
 .profile_Container {
@@ -181,10 +163,7 @@ body {
     height: 56px;
     justify-content: space-between;
     align-items: center;
-
-
 }
-
 
 .bg_color {
     background-color: #2A3647;
@@ -194,12 +173,8 @@ body {
     color: #FFFFFF;
 }
 
-
-
-
 .profile_Container:hover {
     border: 1px solid rgba(0, 0, 0, 0.1);
-
 }
 
 .profile_container_header {
@@ -209,7 +184,6 @@ body {
     display: flex;
     align-items: center;
     padding: 7px 16px 7px 16px;
-
 }
 
 .check_img {
@@ -222,7 +196,6 @@ body {
     height: 24px;
 }
 
-
 .profile_Badge_assign {
     width: 42px;
     height: 42px;
@@ -231,7 +204,6 @@ body {
     border: 2px solid #FFFFFF;
     justify-content: center;
     align-items: center;
-
 }
 
 .orange {
@@ -270,10 +242,6 @@ body {
 .Selected_profiles_Container {
     display: flex;
 }
-
-
-
-
 
 .separatorTask {
     width: 2px;
@@ -326,8 +294,6 @@ body {
     line-height: 24px;
 }
 
-
-
 .input_date {
     height: 48px;
     width: 440px;
@@ -339,16 +305,12 @@ body {
     font-size: 20px;
     line-height: 24px;
     border: none;
-
-
 }
 
 .img_calender {
     width: 24px;
     height: 24px;
 }
-
-
 
 .Prio_Container {
     width: 440px;
@@ -365,7 +327,6 @@ body {
     font-size: 20px;
     line-height: 24px;
     display: flex;
-
 }
 
 .Prio_btn_Container {
@@ -409,21 +370,13 @@ body {
     background-color: #7AE229;
 }
 
-
-
-
-
-
 .cataegory_Container {
-
     width: 440px;
     height: 80px;
     margin-top: 16px;
     display: flex;
     flex-direction: column;
     gap: 8px;
-
-
 }
 
 .category_Header {
@@ -459,8 +412,17 @@ body {
     padding-top: 9px;
     display: flex;
     flex-direction: column;
+}
 
+.ul_subtasks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+}
 
+.li{
+    display: flex;
+    align-items: center;
 }
 
 .deleteSubtask {
@@ -474,8 +436,6 @@ body {
     font-weight: 400;
     font-size: 20px;
     line-height: 24px;
-
-
 }
 
 .userStory:hover {
@@ -497,7 +457,6 @@ body {
     background-color: #e4dedc;
 }
 
-
 .Subtasks_Container {
     width: 440px;
     height: 80px;
@@ -505,7 +464,6 @@ body {
     gap: 8px;
     flex-direction: column;
     margin-top: 24px;
-
 }
 
 .Subtasks_Header {
@@ -526,8 +484,6 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-
-
 }
 
 .Subtasks_Inputfield {
@@ -538,8 +494,6 @@ body {
     font-weight: 400;
     font-size: 20px;
     line-height: 24px;
-
-
 }
 
 .Subtasks_Btn {
@@ -548,7 +502,6 @@ body {
     width: 24px;
     height: 24px;
     padding-right: 25px;
-
 }
 
 input:focus {
@@ -564,21 +517,18 @@ input:focus {
     color: black;
 }
 
-
-.required_info_Container {
-    width: 170px;
-    height: 27px;
-    margin-top: -19px;
-
+.clear_COntainer {
+    display: flex;
+    gap: 16px;
 }
 
 .Btn_Container {
-    width: 309px;
-    height: 56px;
-    margin-left: 667.25px;
     display: flex;
     gap: 16px;
-    margin-top: 100px;
+    margin-top: 150px;
+    align-items: center;
+    justify-content: space-around;
+    margin-bottom: 150px;
 }
 
 .clear_Btn {
@@ -614,10 +564,8 @@ input:focus {
 }
 
 .clear-icon {
-
     height: 24px;
     width: 24px;
-
 }
 
 .create_icon {
@@ -629,86 +577,3 @@ input:focus {
     display: none;
 }
 
-@media(max-width: 1450px) {
-
-    .add_task_content {
-        margin-left: 0px;
-        
-    }
-
-    .headline_addTask {
-      padding: 16px;
-         margin-top: 0px;
-         font-size: 47px;
-    line-height: 56.4px;
-     
-}
-
-.addTask_Container {
-    padding: 16px;
-   
-}
-
-.Btn_Container {
-   
-    margin-left: 667.25px;
-    display: flex;
-    gap: 16px;
-    margin-top: 50px;
-
-
-}
-}
-
-@media(max-width:1005px) {
-
-    .add_task_content {
-        
-        align-items: center;
-    }
-
-    .addTask_Container {
-        display: flex;
-        flex-direction: column;
-    }
-
-
-    .dividing_Line {
-        width: 0px;
-        height: 424px;
-        border: 1px solid #D1D1D1;
-        margin-left: 48.25px;
-        display: none;
-    }
-
-    .header_COntainer {
-        display: flex;
-    width: 500px;
-    }
-
-    .clear_Btn {
-      display: none;
-    }
-
-    .Task_Container_right {
-       
-        margin-left: 0px;
-    }
-
-    .Btn_Container {
-      
-        display: flex;
-        gap: 16px;
-        margin-top: 0px;
-    margin-left: 390px;
-        margin-bottom: 0px;
-    }
-
-    .required_info_Container {
-        width: 170px;
-        height: 27px;
-        margin-top: -25px;
-        margin-bottom: 100px;
-        margin-right: 300px;
-    }
-}

@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="./Styles/Desktop_template.css">
     <link rel="stylesheet" href="./Styles/fontStyles.css">
     <link rel="stylesheet" href="./Styles/mobile_tamplate.css">
+    <link rel="stylesheet" href="Styles/add_task_responsive.css">
     <script src="./assets/js/add_task.js"></script>
     <script src="./assets/js/script.js"></script>
 
@@ -22,25 +23,13 @@
     <header>
         <div w3-include-html="./assets/Templates/desktop_template.html"></div>
     </header>
-    <div class="add_task_content" onclick="closelist(); closelistCategory()" >
-    
+    <div class="add_task_content" onclick="closelist(); closelistCategory()">
+
         <div class="header_COntainer">
-            
-                <h1 class="headline_addTask">Add Task</h1>
-
-
-            
+            <h1 class="headline_addTask">Add Task</h1>
         </div>
-           
-
-        
-
-       
-
-
 
         <form id="form_addtask" class="addTask_Container">
-
             <div class="input_Task_Container_left">
                 <div class="Title_Container">
                     <span class="Title_Header">Title<span class="red">*</span></span>
@@ -54,7 +43,7 @@
                 </div>
                 <div onclick="func1(event)" class="AssignedTO_Container">
                     <span class="Assign_Header">Assigned to</span>
-                    <div   id="select_container" class="select_container">
+                    <div id="select_container" class="select_container">
                         <span>Select contacts to assign </span>
                         <div id="arrow_img_container"> <img onclick="openList()" class="arrow_drop_downaa"
                                 src="assets/IMG/arrow_drop_downaa.svg" alt=""></div>
@@ -63,8 +52,6 @@
 
                     </div>
                     <div id="Selected_profiles_Container" class="Selected_profiles_Container">
-
-
                     </div>
 
 
@@ -76,23 +63,16 @@
             <div class="dividing_Line"></div>
 
             <div class="Task_Container_right">
-
                 <div class="date_Container">
                     <span class="Date_header">Due date <span class="red">*</span></span>
-
                     <input onclick="dateinput()" id="dueDate" placeholder="dd/mm/yyyy" class="input_date" required
                         type="date">
-
                 </div>
-
                 <div class="Prio_Container">
                     <span class="prio_Header">Prio</span>
                     <div id="Prio_btn_Container" class="Prio_btn_Container">
-
                     </div>
-
                 </div>
-
                 <div onclick="func1(event)" class="cataegory_Container">
                     <span class="category_Header">Category <span class="red">*</span></span>
                     <div id="select_container" class="select_container">
@@ -101,57 +81,34 @@
                                 class="arrow_drop_downaa" src="assets/IMG/arrow_drop_downaa.svg" alt=""></div>
                     </div>
                     <div id="Selection_Container_Category" class="Selection_Container_Category d_none">
-
                     </div>
-
                     <div class="Subtasks_Container">
                         <span class="Subtasks_Header">Subtasks</span>
                         <div class="Subtask_Inputfield_Container">
                             <input id="input_Subtasks" placeholder="Add new Subtask" class="Subtasks_Inputfield"
                                 type="text">
-
                             <button id="add_Subtask" type="button" onclick="addCurrentSubtask()"
                                 class="Subtasks_Btn"><img src="assets/IMG/add_subtask_img.svg" alt=""></button>
-
                         </div>
-
-
-
                     </div>
-                    <ul id="ul_subtasks" class="ul_subtasks">
-
-
-                    </ul>
+                    <div id="ul_subtasks" class="ul_subtasks">
+                    </div>
                 </div>
             </div>
-
-
-
-
-
-
         </form>
         <div class="Btn_Container">
-            <button onclick="clearTask()" class="clear_Btn">Clear <img class="clear-icon"
-                    src="assets/IMG/x_icon_clear.svg" alt=""></button>
-            <button type="submit" form="form_addtask" onclick="createTask()" class="Create_Btn">Create Task <img
-                    class="create_icon" src="assets/IMG/clear_Img.svg" alt=""></button>
+            <div class="required_info_Container"><span class="red">*</span><span>This field is required</span></div>
+            <div class="clear_COntainer">
+                <button onclick="clearTask()" class="clear_Btn">Clear <img class="clear-icon"
+                        src="assets/IMG/x_icon_clear.svg" alt=""></button>
+                <button type="submit" form="form_addtask" onclick="createTask(event)" class="Create_Btn">Create Task <img
+                        class="create_icon" src="assets/IMG/clear_Img.svg" alt=""></button>
+            </div>
         </div>
-
-        <div class="required_info_Container"><span class="red">*</span><span>This field is required</span></div>
-
-      
     </div>
     <section>
         <div w3-include-html="assets/Templates/mobile_version.html"></div>
     </section>
-
-
-
-
-
-
-
 </body>
 
 </html>
