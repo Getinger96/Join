@@ -277,7 +277,7 @@ function choosedTechnicalTask() {
     closelistCategory();
 }
 
-async function postData(path = "", data = {}) {
+async function postData(path="", data={}) {
     let response = await fetch(base_URL + path + ".json", {
         method: "POST",
         headers: {
@@ -310,13 +310,12 @@ async function createTask(event) {
         Subtask: subtask
     };
 
-    if (titel.value === '' || date.value === '' || category.value === '') {
+if (titel.value==='' || date.value===''|| category.value==='') {
+    
+}else {
+    await postData(`tasks`, newTask);
+    clearTask();
 
-    } else {
-        await postData(`tasks`, newTask);
-
-        clearTask();
-    }
 
 }
 
