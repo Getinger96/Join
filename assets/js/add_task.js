@@ -289,7 +289,8 @@ async function postData(path = "", data = {}) {
     return responsASJson = await response.json();
 }
 
-async function createTask() {
+async function createTask(event) {
+    event.preventDefault();
     
     let titel = document.getElementById('title');
     let description = document.getElementById('Description');
