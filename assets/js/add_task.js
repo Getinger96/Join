@@ -384,7 +384,7 @@ function choosedTechnicalTask() {
 
 
 
-async function postData(path = "", data = {}) {
+async function postData(path="", data={}) {
     let response = await fetch(base_URL + path + ".json", {
         method: "POST",
         headers: {
@@ -394,11 +394,12 @@ async function postData(path = "", data = {}) {
     });
 
     return responsASJson = await response.json();
-
+    
 }
 
 
-async function createTask() {
+async function createTask(event) {
+    event.preventDefault();
     let titel = document.getElementById('title');
     let description = document.getElementById('Description');
     let assignedContact = assignedContacts;
@@ -417,8 +418,11 @@ async function createTask() {
     };
 
 if (titel.value==='' || date.value===''|| category.value==='') {
-    
+    alert("Bitte fülle alle erforderlichen Felder aus.");
+    return;
 }else {
+    console.log(newTask);
+    
     await postData(`tasks`, newTask);
     clearTask();
 
