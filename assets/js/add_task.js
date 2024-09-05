@@ -318,6 +318,7 @@ if (titel.value==='' || date.value===''|| category.value==='') {
 
 
 }
+}
 
 function clearTask() {
     for (let i = 0; i < contacts.length; i++) {
