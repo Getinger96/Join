@@ -522,10 +522,12 @@ input[type="tel"] {
     
     .overlay-add-contact-mobile-top {
         width: 336px;
+        height:312px;
     }
  
     .overlay-add-contact-mobile-bottom {
         width: 336px;
+        height:350px;
     }
     
     
@@ -536,7 +538,11 @@ input[type="tel"] {
     input[type="text"],
     input[type="email"],
     input[type="tel"] {
-        width: 280px;
+        width: 304px;
+    }
+
+    .overlay-add-contact-profile-img-mobile {
+        top: 270px;
     }
     
 }
