@@ -1,4 +1,4 @@
-/* Mobiles Overlay für Kontaktformular */
+
 .mobileNewContactOverlay {
     position: fixed;
     top: 0;
@@ -10,7 +10,7 @@
     justify-content: center;
     align-items: center;
     z-index: 9999;
-    display:none;
+    display: none;
 }
 
 .mobileNewContactOverlay-hidden {
@@ -32,7 +32,6 @@
     border-radius: 30px;
 }
 
-/* Oberer Teil - Blau */
 .overlay-add-contact-mobile-top {
     background-color: #2A3647;
     width: 396px;
@@ -45,17 +44,17 @@
 .overlay-add-contact-mobile-top h1 {
     font-size: 47px;
     text-align: left;
-    margin-left: 20px; 
-    margin-bottom:-15px;
-    margin-top:130px;
+    margin-left: 20px;
+    margin-bottom: -15px;
+    margin-top: 130px;
 }
 
 .overlay-add-contact-mobile-top span {
     font-size: 20px;
-    text-align: left; 
+    text-align: left;
     margin-left: 20px;
     display: block;
-    margin-top: 15px; 
+    margin-top: 15px;
 }
 
 .overlay-add-contact-mobile-top hr {
@@ -66,7 +65,6 @@
 }
 
 
-/* Profilbild */
 .overlay-add-contact-profile-img-mobile {
     width: 80px;
     height: 80px;
@@ -77,16 +75,15 @@
     position: absolute;
     top: 310px;
     left: 50%;
-    transform: translateX(-50%); /* Profilbild horizontal zentrieren */
+    transform: translateX(-50%);
 }
 
 .overlay-add-contact-profile-img-mobile img {
-    width: 120px; /* Bildgröße */
+    width: 120px;
     height: 120px;
     border-radius: 50%;
 }
 
-/* Unterer Teil - Weiß */
 .overlay-add-contact-mobile-bottom {
     background-color: white;
     width: 396px;
@@ -94,13 +91,12 @@
     border-radius: 0 0 30px 30px;
 }
 
-/* Eingabefelder */
 .input-fields-add-contact-mobile {
     display: flex;
     flex-direction: column;
     gap: 15px;
     width: 364px;
-    margin: 80px auto 0 auto; /* Zentrieren und Platz nach oben */
+    margin: 80px auto 0 auto;
 }
 
 .input-field-mobile {
@@ -129,7 +125,6 @@ input[type="tel"] {
     padding-left: 10px;
 }
 
-/* Create Contact Button */
 .createContact-mobile-button {
     width: 202px;
     height: 51px;
@@ -144,11 +139,32 @@ input[type="tel"] {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 10px; /* Platz zwischen Text und Bild */
+    gap: 10px;
+}
+
+.save-button {
+    width: 99px;
+    height: 51px;
+    border-radius: 10px;
+    background-color: #2A3647;
+    color: white;
+    font-size: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.delete-button {
+    width: 82px;
+    height: 51px;
+    border-radius: 10px;
+    background-color: white;
+    font-size: 20px;
+    justify-content: center;
+    align-items: center;
 }
 
 .check-icon-mobile {
-    width: 24px; /* Bildgröße anpassen */
+    width: 24px;
     height: 24px;
 }
 
@@ -156,14 +172,13 @@ input[type="tel"] {
     background-color: #29ABE2;
 }
 
-/* Formular-Buttons */
 .mobile-form-buttons {
     display: flex;
     justify-content: center;
     width: 100%;
+    gap: 20px;
 }
 
-/* Close Button */
 .close-button-mobile {
     position: absolute;
     top: 20px;
@@ -178,10 +193,11 @@ input[type="tel"] {
     transform: scale(1.1);
 }
 
-
-
-
-
+.input-field-mobile:focus-within {
+    color: black !important;
+    border-color: #94D5F0 !important;
+    outline: none !important;
+}
 
 @media(max-width: 1450px) {
     .sideblock {
@@ -519,30 +535,30 @@ input[type="tel"] {
     .overlay-add-contact-mobile {
         width: 336px;
     }
-    
+
     .overlay-add-contact-mobile-top {
         width: 336px;
-        height:312px;
+        height: 312px;
     }
- 
+
     .overlay-add-contact-mobile-bottom {
         width: 336px;
-        height:350px;
+        height: 350px;
     }
-    
-    
+
+
     .input-fields-add-contact-mobile {
         width: 304px;
     }
-    
+
     input[type="text"],
     input[type="email"],
     input[type="tel"] {
-        width: 304px;
+        width: 270px;
     }
 
     .overlay-add-contact-profile-img-mobile {
         top: 270px;
     }
-    
+
 }

@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="./Styles/mobile_tamplate.css">
     <script src="./assets/js/script.js"></script>
     <script src="./assets/js/contact.js"></script>
+    <script src="./assets/js/contact_mobile.js"></script>
     <script src="./assets/js/board_database.js"></script>
     <script src="./assets/js/board.js"></script>
     <script src="./assets/templates/mobile_version.html"></script>
@@ -124,6 +125,17 @@
                             Create Contact
                             <img src="./assets/IMG/check.svg" alt="Check Icon" class="check-icon-mobile">
                         </button>
+                    
+                        <button type="button" class="delete-button" style="display: none;" onclick="deleteContactMobile(selectedContactIndex)">
+                            Delete
+                        </button>
+
+                        <button type="button" class="save-button" style="display: none;" onclick="saveEditedContactMobile(selectedContactIndex)">
+                            Save
+                            <img src="./assets/IMG/check.svg" alt="Check Icon" class="check-icon-mobile">
+                        </button>
+                    
+                        
                     </div>
                 </div>
                 <div class="close-button-mobile" onclick="closeMobileNewContact()">

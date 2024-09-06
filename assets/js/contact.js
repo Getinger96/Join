@@ -287,9 +287,17 @@ function editFunctionAction(index) {
 }
 
 function editContact(index) {
-    htmlEditForm(index);
-    editFunctionAction(index);
+    // Prüfen, ob die Bildschirmbreite kleiner als 800px ist (mobile Ansicht)
+    if (window.innerWidth <= 800) {
+        // Mobile Overlay anzeigen
+        showMobileEditContactOverlay(index);
+    } else {
+        // Desktop-Overlay anzeigen (wenn Desktop-Version weiterhin benötigt wird)
+        htmlEditForm(index);
+        editFunctionAction(index);
+    }
 }
+
 
 async function deleteContact(index) {
     if (index > -1) {
