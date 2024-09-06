@@ -225,6 +225,17 @@ a:hover {
         width: 36px;
         height: 44px;
     }
+
+    .headblock {
+        padding: 20px 30px 20px 30px;
+        height: 40px;
+        justify-content: space-between;
+        padding: 20px 16px;
+    }
+
+    .headUserContainer {
+        width: 55px;
+    }
 }
 
 @media(max-width: 400px) {
@@ -234,13 +245,6 @@ a:hover {
 
     .logInUser {
         font-size: 14px;
-    }
-
-    .headblock {
-        padding: 20px 30px 20px 30px;
-        height: 80px;
-        justify-content: space-between;
-        padding: 20px 16px;
     }
 
     .headUserContainer {
