@@ -9,16 +9,7 @@ function toggleMenu() {
 }
 
 
-document.addEventListener('click', function (event) {
-    const menu = document.getElementById("contextMenu");
-    const menuButton = document.querySelector('.menu-button-img');
 
-    if (menu && menuButton) {
-        if (!menu.contains(event.target) && !menuButton.contains(event.target)) {
-            menu.style.display = "none";
-        }
-    }
-});
 
 function showMobileNewContactOverlay() {
     let overlay = document.getElementById("mobileNewContactOverlay");
@@ -33,16 +24,15 @@ function closeMobileNewContact() {
     overlay.style.display = 'none';
 }
 
-function handleAddContactClick(event) {
+function mobileAddContact(event) {
     event.stopPropagation();  // Verhindert, dass das übergeordnete div ausgewählt wird
 
-    if (window.innerWidth <= 800) {
+    if (window.innerWidth <= 1150) {
         showMobileNewContactOverlay();
     } else {
         addNewContact();
     }
 }
-
 
 
 async function createContactMobile() {
