@@ -25,6 +25,7 @@ async function fetchContacts(path = '') {
 
         if (contact.email !== "guest@web.de") {
             contactsArray.push({
+                id: key,
                 email: contact.email,
                 name: contact.name,
                 password: contact.password,
@@ -97,7 +98,7 @@ function displayContacts(contactIndex, contactsEmail, contactsName, contactLastn
                     <span class="contactname" style="color:${selectedClass ? 'white' : 'black'};">${contactsName}</span>
                     <a class="contactmail" href="mailto:${contactsEmail}">${contactsEmail}</a>
                 </div>
-             <img src="assets/IMG/Secondary mobile contact V1.png" alt="Add Contact" class="add-contact-button" onclick="handleAddContactClick(event)">
+             <img src="assets/IMG/Secondary mobile contact V1.png" alt="Add Contact" class="add-contact-button" onclick="mobileAddContact(event)">
             </div>`;
 }
 
@@ -287,12 +288,10 @@ function editFunctionAction(index) {
 }
 
 function editContact(index) {
-    // Prüfen, ob die Bildschirmbreite kleiner als 800px ist (mobile Ansicht)
-    if (window.innerWidth <= 800) {
-        // Mobile Overlay anzeigen
+    if (window.innerWidth <= 1150) {
         showMobileEditContactOverlay(index);
     } else {
-        // Desktop-Overlay anzeigen (wenn Desktop-Version weiterhin benötigt wird)
+
         htmlEditForm(index);
         editFunctionAction(index);
     }
@@ -306,8 +305,7 @@ async function deleteContact(index) {
         contactsArray.splice(index, 1);
         sortContactsByLetter();
         
-     
-        if (window.innerWidth <= 800) {
+        if (window.innerWidth <= 1150) {
             closeDetailView();
         } else {
             clearBigContactView();
@@ -335,7 +333,7 @@ function closeCardContact() {
     document.querySelector('.createContact-button').textContent = 'Create Contact';
     document.querySelector('.addNewContactimg').style.display = 'block';
 
-      if (window.innerWidth <= 800) {
+      if (window.innerWidth <= 1150) {
         clearBigContactView();
         document.querySelector('.contactview-container').classList.remove('active');
         renderContacts();

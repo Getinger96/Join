@@ -106,7 +106,7 @@
     border: 1px solid #d1d1d1;
     border-radius: 10px;
     height: 41px;
-    padding-left:10px;
+    padding-left:5px;
 }
 
 .input-icon-mobile {
@@ -198,6 +198,10 @@ input[type="tel"] {
     color: black !important;
     border-color: #94D5F0 !important;
     outline: none !important;
+}
+
+.menu-item {
+    display:none;
 }
 
 @media(max-width: 1450px) {
@@ -328,9 +332,16 @@ input[type="tel"] {
     .contactlist-hr {
         width: 250px;
     }
+
+    .contactCars-overview {
+        width: 1140px;
+    }
 }
 
 @media(max-width: 1150px) {
+    body {
+        overflow-x: hidden;
+    }
     .contactview-container {
         display: none;
     }
@@ -365,6 +376,7 @@ input[type="tel"] {
     .contactlist {
         width: 350px;
         margin: 0 auto;
+        padding-bottom: 122px;
     }
 
     .contactlist-hr {
@@ -380,12 +392,7 @@ input[type="tel"] {
         height: 56px;
         z-index: 100;
     }
-}
-
-@media(max-width: 800px) {
-    body {
-        overflow-x: hidden;
-    }
+  
 
     #mobileNewContactOverlay {
         display: none;
@@ -408,11 +415,6 @@ input[type="tel"] {
         overflow-x: hidden;
     }
 
-    .contactview-container {
-        display: none;
-        margin-top: 0px;
-    }
-
     .contactview-container.active {
         display: block;
         position: absolute;
@@ -426,9 +428,6 @@ input[type="tel"] {
         overflow-x: hidden;
     }
 
-    .contactlist {
-        padding-bottom: 122px;
-    }
 
     .back-button {
         position: absolute;
@@ -506,6 +505,7 @@ input[type="tel"] {
         display: block;
         cursor: pointer;
     }
+}
 
     @media(max-width: 500px) {
         h2 {
@@ -530,7 +530,7 @@ input[type="tel"] {
             white-space: normal;
         }
     }
-}
+
 
 @media(max-width: 450px) {
     .overlay-add-contact-mobile {
@@ -539,12 +539,12 @@ input[type="tel"] {
 
     .overlay-add-contact-mobile-top {
         width: 336px;
-        height: 282px;
+        height: 312px;
     }
 
     .overlay-add-contact-mobile-bottom {
         width: 336px;
-        height: 320px;
+        height: 350px;
     }
 
 
