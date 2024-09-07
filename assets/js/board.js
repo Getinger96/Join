@@ -8,7 +8,7 @@ let todos = [
         kategorie: 'technicalTask',
         date: '2024-09-01',
         contacts: ['John Doe', 'Jane Smith'],
-        priority: 'high',
+        priority: 'urgent',
         subtasks: ['Research recipes', 'Create layout'],
         status: 'open'  // Startstatus festlegen
     },
@@ -19,7 +19,7 @@ let todos = [
         kategorie: 'userStory',
         date: '2024-09-02',
         contacts: ['John Doe'],
-        priority: 'medium',
+        priority: 'urgent',
         subtasks: ['Research BEM', 'Draft CSS plan'],
         status: 'progress'  // Startstatus festlegen
     },
@@ -30,7 +30,7 @@ let todos = [
         kategorie: 'technicalTask',
         date: '2024-09-03',
         contacts: ['Jane Smith'],
-        priority: 'low',
+        priority: 'urgent',
         subtasks: ['Create header template', 'Create footer template'],
         status: 'awaitFeedback'  // Startstatus festlegen
     }

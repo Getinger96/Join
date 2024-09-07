@@ -44,9 +44,13 @@ async function loginAction() {
 
 
     if(user) {
+        localStorage.setItem('loggedInUser', JSON.stringify(user)); 
         emptyTheInputFields(loginMail,loginPassword);
 
-        setTimeout(() => { loginInfo.innerText = loginUpSuccessfully()
+        loginUpSuccessfully();
+       
+
+        setTimeout(() => { window.location.href = "summary.html";
             
         }, 3000);
 
@@ -67,7 +71,7 @@ function guestLogin() {
     loginMail.value = "guest@web.de";  
     loginPassword.value = "guest123456";  
 
-    
+
 }
 
 
@@ -78,6 +82,8 @@ function loginUpSuccessfully() {
     <span class="loginstylesuccessfully"> Good  Afternoon !!!</span>
 
     </div>`;
+
+    
 }
 
 function changeColorHrAndBorderMistake() {
