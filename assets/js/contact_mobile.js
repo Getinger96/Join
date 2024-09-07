@@ -1,9 +1,15 @@
 function toggleMenu() {
     const menu = document.getElementById("contextMenu");
-    menu.style.display = (menu.style.display === "block") ? "none" : "block";
+
+    if (menu.style.display === "block") {
+        menu.style.display = "none";
+    } else {
+        menu.style.display = "block";
+    }
 }
 
-document.addEventListener('click', function(event) {
+
+document.addEventListener('click', function (event) {
     const menu = document.getElementById("contextMenu");
     const menuButton = document.querySelector('.menu-button-img');
 
@@ -15,16 +21,16 @@ document.addEventListener('click', function(event) {
 });
 
 function showMobileNewContactOverlay() {
-    var overlay = document.getElementById("mobileNewContactOverlay");
+    let overlay = document.getElementById("mobileNewContactOverlay");
     overlay.classList.remove("mobileNewContactOverlay-hidden");
-    overlay.style.display = 'flex'; 
+    overlay.style.display = 'flex';
 }
 
 
 function closeMobileNewContact() {
-    var overlay = document.getElementById("mobileNewContactOverlay");
+    let overlay = document.getElementById("mobileNewContactOverlay");
     overlay.classList.add("mobileNewContactOverlay-hidden");
-    overlay.style.display = 'none'; 
+    overlay.style.display = 'none';
 }
 
 function handleAddContactClick(event) {
@@ -33,7 +39,7 @@ function handleAddContactClick(event) {
     if (window.innerWidth <= 800) {
         showMobileNewContactOverlay();
     } else {
-        addNewContact();  
+        addNewContact();
     }
 }
 
@@ -59,26 +65,26 @@ async function createContactMobile() {
 
 function showMobileNewContactOverlay() {
     let overlay = document.getElementById("mobileNewContactOverlay");
-    overlay.querySelector("h1").textContent = "Add contact"; 
-    overlay.querySelector("span").textContent = "Tasks are better with a team!"; 
-    overlay.querySelector(".createContact-mobile-button").style.display = "flex"; 
-    overlay.querySelector(".save-button").style.display = "none"; 
-    overlay.querySelector(".delete-button").style.display = "none"; 
-    overlay.querySelector("input[type='text']").value = ''; 
+    overlay.querySelector("h1").textContent = "Add contact";
+    overlay.querySelector("span").textContent = "Tasks are better with a team!";
+    overlay.querySelector(".createContact-mobile-button").style.display = "flex";
+    overlay.querySelector(".save-button").style.display = "none";
+    overlay.querySelector(".delete-button").style.display = "none";
+    overlay.querySelector("input[type='text']").value = '';
     overlay.querySelector("input[type='email']").value = '';
     overlay.querySelector("input[type='tel']").value = '';
-    overlay.style.display = 'flex'; 
+    overlay.style.display = 'flex';
 }
 
 function showMobileEditContactOverlay(contactIndex) {
     let overlay = document.getElementById("mobileNewContactOverlay");
-    let contact = contactsArray[contactIndex]; 
+    let contact = contactsArray[contactIndex];
 
-    overlay.querySelector("h1").textContent = "Edit contact"; 
-    overlay.querySelector("span").textContent = ""; 
-    overlay.querySelector(".createContact-mobile-button").style.display = "none"; 
-    overlay.querySelector(".save-button").style.display = "flex"; 
-    overlay.querySelector(".delete-button").style.display = "flex"; 
+    overlay.querySelector("h1").textContent = "Edit contact";
+    overlay.querySelector("span").textContent = "";
+    overlay.querySelector(".createContact-mobile-button").style.display = "none";
+    overlay.querySelector(".save-button").style.display = "flex";
+    overlay.querySelector(".delete-button").style.display = "flex";
 
     document.getElementById('mobileName').value = contact.name;
     document.getElementById('mobileMail').value = contact.email;
@@ -98,9 +104,9 @@ async function saveEditedContactMobile(contactIndex) {
         contactsArray[contactIndex].email = email;
         contactsArray[contactIndex].phone = phone;
 
-        sortContactsByLetter(); 
-        closeMobileNewContact(); 
-        getContactBig(contactIndex); 
+        sortContactsByLetter();
+        closeMobileNewContact();
+        getContactBig(contactIndex);
     }
 }
 
@@ -108,9 +114,9 @@ async function saveEditedContactMobile(contactIndex) {
 async function deleteContactMobile(contactIndex) {
     if (contactIndex > -1) {
         const contact = contactsArray[contactIndex];
-        await deleteData(`contacts/${contact.id}`); 
-        contactsArray.splice(contactIndex, 1); 
-        sortContactsByLetter(); 
-        closeMobileNewContact(); 
+        await deleteData(`contacts/${contact.id}`);
+        contactsArray.splice(contactIndex, 1);
+        sortContactsByLetter();
+        closeMobileNewContact();
     }
 }
