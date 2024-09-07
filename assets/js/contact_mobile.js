@@ -31,7 +31,6 @@ function handleAddContactClick(event) {
     event.stopPropagation();  // Verhindert, dass das übergeordnete div ausgewählt wird
 
     if (window.innerWidth <= 800) {
-        // Wenn auf einem mobilen Gerät, das mobile Overlay öffnen
         showMobileNewContactOverlay();
     } else {
         addNewContact();  
@@ -59,7 +58,7 @@ async function createContactMobile() {
 
 
 function showMobileNewContactOverlay() {
-    var overlay = document.getElementById("mobileNewContactOverlay");
+    let overlay = document.getElementById("mobileNewContactOverlay");
     overlay.querySelector("h1").textContent = "Add contact"; 
     overlay.querySelector("span").textContent = "Tasks are better with a team!"; 
     overlay.querySelector(".createContact-mobile-button").style.display = "flex"; 
@@ -72,8 +71,8 @@ function showMobileNewContactOverlay() {
 }
 
 function showMobileEditContactOverlay(contactIndex) {
-    var overlay = document.getElementById("mobileNewContactOverlay");
-    var contact = contactsArray[contactIndex]; 
+    let overlay = document.getElementById("mobileNewContactOverlay");
+    let contact = contactsArray[contactIndex]; 
 
     overlay.querySelector("h1").textContent = "Edit contact"; 
     overlay.querySelector("span").textContent = ""; 
@@ -87,6 +86,7 @@ function showMobileEditContactOverlay(contactIndex) {
 
     overlay.style.display = 'flex';
 }
+
 
 async function saveEditedContactMobile(contactIndex) {
     const name = document.getElementById('mobileName').value.trim();

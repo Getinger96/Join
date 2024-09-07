@@ -106,7 +106,7 @@
     border: 1px solid #d1d1d1;
     border-radius: 10px;
     height: 41px;
-    padding-left:10px;
+    padding-left:5px;
 }
 
 .input-icon-mobile {
@@ -539,12 +539,12 @@ input[type="tel"] {
 
     .overlay-add-contact-mobile-top {
         width: 336px;
-        height: 282px;
+        height: 312px;
     }
 
     .overlay-add-contact-mobile-bottom {
         width: 336px;
-        height: 320px;
+        height: 350px;
     }
 
 
