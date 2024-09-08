@@ -331,3 +331,295 @@ gap:10px
     display: flex;
     gap:20px
 }
+
+
+@media (max-width:1450px) {
+ 
+    
+    .middle-SectionSummary {
+        margin-left: 0;
+        overflow-x: hidden;
+        display: block;
+        margin-top: 0px;
+    }
+
+
+
+    .greetingTheContact {
+        display: none;
+    }
+
+
+    .kanbanBoardSection {
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+    }
+}
+
+
+
+@media (max-width:650px) {
+
+.summary_hr {
+    display: none;
+}
+
+.summary_headline {
+    display: block;
+    margin-top: 10px;
+}
+
+
+.summary_secondline {
+    
+margin-block-start: 10px;
+
+
+}
+.kanbanBoardSection {
+    align-items: flex-start;
+}   
+
+.newhr {
+    margin-block-start: 5px;
+    margin-block-end: 0px;
+    margin-inline-start: 0;
+    border: 2.5px solid #29abe2;
+    border-radius: 3px;
+    width: 300px;
+
+
+}
+
+
+.kanbanboradtodoanddone {
+    display: flex;
+    gap: 22px;
+}
+
+.kanbanboradtodo {
+    height: 110px;
+    width: 200px;
+    text-align: center;
+    justify-content: center;
+}
+
+.imgtodo {
+    width: 50px;
+    height: 50px;
+}
+
+
+.todonummber {
+    font-size: 40px;
+
+}
+
+.contentodoboard {
+    gap:25px;
+    padding: 0px;
+}
+
+.todotext {
+    font-size: 14px;
+}
+
+
+
+
+
+
+.kanbanboraddone {
+    height: 110px;
+    width: 200px;
+    text-align: center;
+    justify-content: center;
+}
+
+.imgdone {
+    width: 50px;
+    height: 50px;
+}
+
+
+.donenummber {
+    font-size: 40px;
+
+}
+
+.contendoneboard {
+    gap:25px;
+    padding: 0px;
+}
+
+
+.donetext {
+    font-size: 14px;
+}
+
+
+.kanbanboardprio {
+    height: 110px;
+    width: 450px;
+}
+
+.prioimg {
+    width: 50px;
+    height: 50px;
+}
+
+
+.prionummber {
+    font-size: 40px;
+}
+
+
+.priotext {
+    font-size: 16px;  
+}
+
+
+
+    .prioimgsection {
+    padding: 15px;
+    gap: 25px;
+
+    }
+
+    .priosection {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.datekanbanboard {
+    font-size: 20px;
+}
+
+.Upcoming-Deadline {
+    font-size: 14px;
+}
+
+
+
+
+.taskboard {
+    height: 110px; 
+    text-align: center;
+    justify-content: center;
+    width: 120px;
+}
+
+
+.taskboard:hover {
+    transform: scale(1.0);
+}
+
+.taskinBoardcompartment {
+    padding: 0;
+}
+
+
+.Tasknumber {
+    font-size: 40px;
+
+}
+
+
+
+.Tasktext {
+    font-size: 14px;
+}
+
+
+
+
+
+}
+
+
+
+@media (max-width:500px) {
+
+
+
+    .summary_title_big {
+        font-size: 40px; 
+    }
+
+
+    .summary_secondline {
+        font-size: 18px;
+    }
+
+
+    .summary_headline {
+        flex-direction: column;
+        display: flex;
+        margin-top: 10px;
+        gap: 0px;
+    }
+
+
+
+    .newhr {
+        width: 200px; 
+    }     
+
+
+    .kanbanboradtodo {
+    width: 130px;
+    }
+
+    .imgtodo {
+        width: 45px;
+        height: 45px;
+    }
+
+
+    .kanbanboraddone {
+        width: 130px;
+        }
+    
+        .imgdone {
+            width: 45px;
+            height: 45px;
+        }
+    
+        .kanbanboardprio {
+        width: 300px;
+
+}
+
+
+
+
+.prioimg {
+    width: 45px;
+    height: 45px;
+}
+
+
+
+.datekanbanboard {
+    font-size: 18px;
+}
+
+
+
+.taskboard {
+    width: 90px;
+}
+
+
+
+
+
+
+
+
+
+
+}

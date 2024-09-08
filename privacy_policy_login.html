@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="./assets/img/Capa 2.png" />
     <link rel="stylesheet" href="Styles/privacy_login.css">
+    <link rel="stylesheet" href="Styles/Desktop_template.css">
 
 
     <script src="./assets/js/scriptloginhtml.js"></script>
@@ -18,7 +19,25 @@
 <body onload="includeHTML()">
 
     <header>
+
+        
         <div w3-include-html="./assets/templates/sidebar_login.html"></div>
+        <div class="headblock">
+        <div class="title">
+            <span class="kanbanBoardTitle">Kanban Projekt Management Tool</span>
+            <img src="./assets/IMG/Capa 3.png" alt="MobileIcon" class="MobileIcon">
+        </div>
+        <div class="headUserContainer">
+            <img src="./assets/IMG/help.png">
+            <div class="logInUser_Container" onclick="showLogOutSection();">
+                <span class="logInUser" id="loginUserId"></span>
+            </div>
+    
+        </div>
+    </div>
+    
+    <div id="logoutId"> </div>
+    
     </header>
 
 
@@ -92,6 +111,14 @@
         <p>Telefon: +41794189941<br />
             E-Mail: tasholli.liridona@gmail.com
         </p>
+
+        <p> Philip Tesch <br>
+            im Mühlental 2a <br>
+            55595 Traisen </p>
+
+            <p> Telefon :+4915150645442 <br>
+                E-Mail: philiptesch99@gmail.com</p>
+
 
         <p>André Sutter<br />
             Baslerstrasse 29<br />

@@ -146,6 +146,20 @@ document.getElementById('currentDate').innerHTML = `${getCurrentDay}`;
 //}
 
 
+
+function summaryScreenWidth() {
+
+    let screenWidth = window.innerWidth;
+    let getNewHrLine = document.getElementById('newHrLineHeader');
+
+    if (screenWidth <= 900) {
+        getNewHrLine.classList.add('newhr')
+        
+    }
+    
+}
+
+
 function showTheKanbanBoardDocument() {
 
 
