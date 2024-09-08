@@ -12,18 +12,34 @@
     <script src="./assets/js/script.js"></script>
     <script src="./assets/templates/mobile_version.html"></script>
     <script src="./assets/js/board_database.js"></script>
-
+    <script src="./assets/js/board.js"> </script>
+    <script src="./assets/js/summary.js"> </script>
 
     <link rel="icon" type="image/x-icon" href="./assets/img/Capa 2.png" />
 </head>
 
-<body onload="init()">
+<body onload= "init(); loadToDoAtTheKanbanBoard()">
     <header>
         <div w3-include-html="./assets/templates/desktop_template.html"></div>
     </header>
 
 
     <section class="middle-SectionSummary">
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <section class="kanbanBoardSection">
+
         <div class="summary_headline">
         <h1 class="summary_title_big"> Join 360 </h1>
             <hr class="summary_hr">
@@ -34,10 +50,12 @@
         <section class="kanbanboradtodoanddone">
 
             <div class="kanbanboradtodo">
-            <div class="contentodoboard">
-                <img  class="imgtodo" src="./assets/IMG/Frame 59.png" alt="">
+            <div class="contentodoboard" onclick="showTheKanbanBoardDocument()">
+                <img  class="imgtodo" id="iconBoardToDo" src="./assets/IMG/Frame 59.png"  onmouseover="changeImageToDoDefault(true)" 
+                onmouseout="changeImageToDoDefault(false)">
+                
                 <div class="kanbandboardtodocompartment">
-                    <span class="todonummber"> 1</span>
+                    <span class="todonummber" id="toDoNumber"> </span>
                     <span class="todotext"> to do </span>
 
                 </div>
@@ -48,10 +66,12 @@
 
 
             <div class="kanbanboraddone">
-                <div class="contendoneboard">
-                    <img  class="imgdone" src="./assets/IMG/Frame 59 (1).png" alt="">
+                <div class="contendoneboard" onclick="showTheKanbanBoardDocument()">
+                    <img  class="imgdone" id="iconBoardDone"src="./assets/IMG/Frame 59 (1).png"  onmouseover="changeImageDoneDefault(true)" 
+                    onmouseout="changeImageDoneDefault(false)">
+
                     <div class="kanbandboarddonecompartment">
-                        <span class="donenummber"> 1</span>
+                        <span class="donenummber" id="accomplishedTask"> </span>
                         <span class="donetext"> done </span>
     
                     </div>
@@ -62,22 +82,85 @@
 
             </section>      
             
-            
 
+            <section class="priosection">
             <div class="kanbanboardprio">
+                <div class="prioimgsection" onclick="showTheKanbanBoardDocument()">
+                    <img  class="prioimg" src="./assets/IMG/Frame 59 (6).png" alt="">
+
+                    <div class="priocompartment">
+                    <span class="prionummber" id="prioUrgentId"> 1</span>
+                    <span class="priotext"> urgent </span>
+                    </div>
+                    <hr class="hrpriocontent">
+
+                    <div class="contentdate">
+                        <span class="datekanbanboard" id="currentDate"> Oktober 16, 2024</span>
+                        <span class="Upcoming-Deadline"> Upcoming Deadline </span>
+
+
+
+                    </div>
+                    
+
+                </div>
                 
-    
                 </div>
 
 
+            <section class="thridsectionsummary">
 
+                <div class="taskboard" >
+                        <div class="taskinBoardcompartment" onclick="showTheKanbanBoardDocument()">
+                            <span class="Tasknumber" id="allTaskinBoard"> </span>
+                            <span class="Tasktext"> Tasks in board </span>
+        
+                        </div>
+                    </div>
+        
+                    </div>
+
+                    <div class="taskboard">
+                        <div class="taskinBoardcompartment" onclick="showTheKanbanBoardDocument()">
+                            <span class="Tasknumber" id="taskInProgress"> </span>
+                            <span class="Tasktext"> Tasks in Progress </span>
+        
+                        </div>
+                    </div>
+        
+                    </div>
+                    
+
+                    <div class="taskboard">
+                        <div class="taskinBoardcompartment" onclick="showTheKanbanBoardDocument()">
+                            <span class="Tasknumber" id="taskAwaitingFeedback"> </span>
+                            <span class="Tasktext"> Awaiting Feedback </span>
+        
+                        </div>
+                    </div>
+        
+                    </div>
+
+            </section>       
 
         
     </section>
 
+
+</section>    
+        <div class="greetingTheContact">
+        <span class="loginstylesuccessfully"> Good  Afternoon !!!</span>
+    
+        </div>
+
+
+
     <section>
         <div w3-include-html="assets/Templates/mobile_version.html"></div>
     </section>
+
+
+    
     
 </body>
 </html>

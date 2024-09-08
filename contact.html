@@ -9,18 +9,19 @@
     <link rel="stylesheet" href="Styles/Desktop_template.css">
     <link rel="stylesheet" href="./assets/css/add_task.css">
     <link rel="stylesheet" href="./Styles/contact.css">
+    <link rel="stylesheet" href="./Styles/contact_responsive.css">
     <link rel="stylesheet" href="./Styles/mobile_tamplate.css">
     <script src="./assets/js/script.js"></script>
     <script src="./assets/js/contact.js"></script>
+    <script src="./assets/js/contact_mobile.js"></script>
     <script src="./assets/js/board_database.js"></script>
     <script src="./assets/js/board.js"></script>
-    <script src="https://www.w3schools.com/lib/w3.js"></script> 
     <script src="./assets/templates/mobile_version.html"></script>
 </head>
 
 <body onload="init()">
     <header>
-        <div w3-include-html="./assets/templates/desktop_template.html"></div>
+        <div w3-include-html="./assets/Templates/desktop_template.html"></div>
     </header>
 
     <section class="middle-Section">
@@ -89,15 +90,68 @@
                                     src="assets/IMG/check.svg"></button>
                         </div>
                     </form>                    
-
                 </div>
             </div>
         </div>
     </div>
 
+    <div class="mobileNewContactOverlay mobileNewContactOverlay-hidden" id="mobileNewContactOverlay">
+        <div class="overlay-add-contact-mobile">
+            <div class="overlay-add-contact-mobile-top">
+                <h1>Add contact</h1>
+                <span>Tasks are better with a team!</span>
+                <hr>
+                <div class="overlay-add-contact-profile-img-mobile">
+                    <img src="assets/IMG/Group 13.png" alt="Profile Image" />
+                </div>
+            </div>
+            
+            <div class="overlay-add-contact-mobile-bottom">
+                <div class="input-fields-add-contact-mobile">
+                    <div class="input-field-mobile name-icon-mobile">
+                        <input type="text" id="mobileName" placeholder="Name" required>
+                        <img src="./assets/IMG/person.svg" alt="Person Icon" class="input-icon-mobile">
+                    </div>
+                    <div class="input-field-mobile mail-icon-mobile">
+                        <input type="email" id="mobileMail" placeholder="Email" required>
+                        <img src="./assets/IMG/mail.svg" alt="Mail Icon" class="input-icon-mobile">
+                    </div>
+                    <div class="input-field-mobile phone-icon-mobile">
+                        <input type="tel" id="mobilePhone" placeholder="Phone" required>
+                        <img src="./assets/IMG/call.svg" alt="Call Icon" class="input-icon-mobile">
+                    </div>
+                    <div class="mobile-form-buttons">
+                        <button type="button" class="createContact-mobile-button" onclick="createContactMobile()">
+                            Create Contact
+                            <img src="./assets/IMG/check.svg" alt="Check Icon" class="check-icon-mobile">
+                        </button>
+                    
+                        <button type="button" class="delete-button" style="display: none;" onclick="deleteContactMobile(selectedContactIndex)">
+                            Delete
+                        </button>
+
+                        <button type="button" class="save-button" style="display: none;" onclick="saveEditedContactMobile(selectedContactIndex)">
+                            Save
+                            <img src="./assets/IMG/check.svg" alt="Check Icon" class="check-icon-mobile">
+                        </button>
+                    
+                        
+                    </div>
+                </div>
+                <div class="close-button-mobile" onclick="closeMobileNewContact()">
+                    <img src="./assets/IMG/Close.png" alt="Close">
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+
     <section>
-        <div w3-include-html="assets/templates/mobile_version.html"></div>
+        <div w3-include-html="assets/Templates/mobile_version.html"></div>
     </section>
+
+    <nav id="mobileNav" class="mobile-nav"></nav>
 
 </body>
 

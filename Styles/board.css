@@ -104,6 +104,9 @@ Button {
     background-color: #2A3647;
 }
 
+
+
+
 .boardAddTask {
     background-color: white;
     border-radius: 30px;
@@ -316,6 +319,7 @@ li {
 
 .curser {
     cursor: pointer;
+    
 }
 
 .AssignedTO_Container {

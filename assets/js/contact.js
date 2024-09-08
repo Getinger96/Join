@@ -108,7 +108,7 @@ function displayContacts(contactIndex, contactsEmail, contactsName, contactLastn
                     <span class="contactname" style="color:${selectedClass ? 'white' : 'black'};">${contactsName}</span>
                     <a class="contactmail" href="mailto:${contactsEmail}">${contactsEmail}</a>
                 </div>
-                <img src="assets/IMG/Secondary mobile contact V1.png" alt="Add Contact" class="add-contact-button" onclick="openNewContactMobile()">
+             <img src="assets/IMG/Secondary mobile contact V1.png" alt="Add Contact" class="add-contact-button" onclick="mobileAddContact(event)">
             </div>`;
 }
 
@@ -131,9 +131,17 @@ function closeDetailView() {
 function getContactBig(index) {
     let contact = contactsArray[index];
     console.log('Selected Contact:', contact);
+
+    let colorIndex = index;
+    if (colorIndex >= colors.length) {
+        colorIndex -= colors.length;
+    }
+    let color = colors[colorIndex];
+
     let showContacts = document.getElementById('contactViewBig');
-    showContacts.innerHTML = showContactBig(contact.name, contact.email, contact.phone, getLastName(contact.name), colors[index]);
+    showContacts.innerHTML = showContactBig(contact.name, contact.email, contact.phone, getLastName(contact.name), color);
 }
+
 
 function showContactBig(contactsName, contactsEmail, contactPhone, contactLastname, color) {
     return `<div class="largcontactbox">
@@ -144,14 +152,14 @@ function showContactBig(contactsName, contactsEmail, contactPhone, contactLastna
             <div class="largcontact-content">
                 <span class="largcontactname">${contactsName}</span>
                 <div class="editanddelete">
-                <div onclick="editContact(selectedContactIndex)" class="editcontent blur">
-                <img class="editicon" src="assets/IMG/edit.svg" alt="">
-                <span class="edit">Edit</span>
-                </div>
-                <div class="deletecontent" onclick="deleteContact(selectedContactIndex)">
-                <img class="deleteicon" src="assets/IMG/delete.png" alt="">
-                <span class="delete">Delete</span>
-                </div>
+                    <div onclick="editContact(selectedContactIndex)" class="editcontent blur">
+                        <img class="editicon" src="assets/IMG/edit.svg" alt="">
+                        <span class="edit">Edit</span>
+                    </div>
+                    <div class="deletecontent" onclick="deleteContact(selectedContactIndex)">
+                        <img class="deleteicon" src="assets/IMG/delete.png" alt="">
+                        <span class="delete">Delete</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -166,8 +174,19 @@ function showContactBig(contactsName, contactsEmail, contactPhone, contactLastna
                 <a class="contactphone" href="tel:${contactPhone}">${contactPhone}</a>
             </div>
         </div>
-          <img src="assets/IMG/arrow-left-line.png" alt="backButton" onclick="closeDetailView()" class="back-button">
-    <img src="assets/IMG/Menu Contact options.png" alt="Menu button" class="menu-button-img" onclick="toggleMenu()">
+        <img src="assets/IMG/arrow-left-line.png" alt="backButton" onclick="closeDetailView()" class="back-button">
+        <img src="assets/IMG/Menu Contact options.png" alt="Menu button" class="menu-button-img" onclick="toggleMenu()">
+        <!-- Hier ist das Toggle-Menü für mobile Geräte -->
+        <div id="contextMenu" class="context-menu">
+            <div onclick="editContact(selectedContactIndex)" class="menu-item">
+                <img src="assets/IMG/edit.svg" alt="Edit" class="menu-icon">
+                <span>Edit</span>
+            </div>
+            <div onclick="deleteContact(selectedContactIndex)" class="menu-item">
+                <img src="assets/IMG/delete.png" alt="Delete" class="menu-icon">
+                <span>Delete</span>
+            </div>
+        </div>
     </div>`;
 }
 
@@ -219,10 +238,11 @@ async function createContact() {
     closeCardContact();
 }
 
+
 function addNewContact() {
+    selectedContactIndex = null;
     let newContactOverlay = document.getElementById('newContact');
     newContactOverlay.style.display = 'flex';
-
     newContactOverlay.classList.add('transition-in-from-right');
 
     const cancelButton = document.querySelector('.cancel-button');
@@ -233,7 +253,6 @@ function addNewContact() {
     const createButton = document.querySelector('.createContact-button');
     createButton.onclick = function () {
         const form = document.getElementById('contactForm');
-
         if (form.checkValidity()) {
             createContact();
             closeCardContact();
@@ -242,6 +261,7 @@ function addNewContact() {
         }
     };
 }
+
 
 function displayEditContactLogo(contactsName, contactLastname, color) {
     return `
@@ -278,9 +298,15 @@ function editFunctionAction(index) {
 }
 
 function editContact(index) {
-    htmlEditForm(index);
-    editFunctionAction(index);
+    if (window.innerWidth <= 1150) {
+        showMobileEditContactOverlay(index);
+    } else {
+
+        htmlEditForm(index);
+        editFunctionAction(index);
+    }
 }
+
 
 async function deleteContact(index) {
     let key= contactsArray[index].id;
@@ -289,19 +315,27 @@ async function deleteContact(index) {
         await deleteData(`contacts/${key}`);
         contactsArray.splice(index, 1);
         sortContactsByLetter();
-        closeCardContact();
-        clearBigContactView();
+        
+        if (window.innerWidth <= 1150) {
+            closeDetailView();
+        } else {
+            clearBigContactView();
+        }
+
+        getContacts();
+        
     } else {
         console.error("Invalid index for deletion:", index);
     }
 }
 
 function closeCardContact() {
-    let newContactOverlay = document.getElementById('newContact');
+    const newContactOverlay = document.getElementById('newContact');
     newContactOverlay.style.display = 'none';
-
     newContactOverlay.classList.remove('transition-in-from-right');
 
+    document.querySelector('.cancel-button').textContent = 'Cancel';
+    document.querySelector('.cancel-button').onclick = closeCardContact;
     document.querySelector('.addcontactheadline').textContent = 'Add Contact';
     document.querySelector('.addcontactsecondline').style.display = 'flex';
     document.getElementById('name').value = '';
@@ -310,9 +344,11 @@ function closeCardContact() {
     document.querySelector('.createContact-button').textContent = 'Create Contact';
     document.querySelector('.addNewContactimg').style.display = 'block';
 
-    const cancelButton = document.querySelector('.cancel-button');
-    cancelButton.innerHTML = 'Cancel<img class="close-button" src="assets/IMG/iconoir_cancel.png">';
-    cancelButton.style.display = 'flex';
+      if (window.innerWidth <= 1150) {
+        clearBigContactView();
+        document.querySelector('.contactview-container').classList.remove('active');
+        renderContacts();
+    }
 }
 
 function clearBigContactView() {
@@ -392,4 +428,9 @@ async function putData(path = "", data = {}) {
 
     return responsASJson = await response.json();
 }
+
+
+
+
+
 
