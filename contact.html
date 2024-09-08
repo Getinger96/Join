@@ -26,7 +26,7 @@
     <section class="middle-Section">
         <section class="contactlist">
             <div class="newcontactbutton">
-                <button class="addnewcontactbutton" onclick="addNewContact()">
+                <button class="addnewcontactbutton" onclick="addNewContact(event)">
                     Add new contact
                     <img class="addpersonlogo" src="assets/IMG/person_add.png" alt="">
                 </button>
@@ -67,7 +67,7 @@
                 <div class="contactlogo">
                     <img class="addNewContactimg" src="assets/IMG/Group 13.png" alt="NewContactLogo">
 
-                    <form id="contactForm">
+                    <form onsubmit="return false;" id="contactForm">
                         <div class="input-container">
                             <div class="input-field name-icon">
                                 <input type="text" id="name" name="Name" placeholder="Name" required>
@@ -85,7 +85,7 @@
                         <div class="two-buttons">
                             <button type="button" class="cancel-button" onclick="cancel()">Cancel<img class="close-button"
                                     src="assets/IMG/iconoir_cancel.png"></button>
-                            <button type="submit" class="createContact-button">Create Contact<img
+                            <button onclick="saveEditedContact()" type="submit" class="createContact-button">Create Contact<img
                                     src="assets/IMG/check.svg"></button>
                         </div>
                     </form>                    

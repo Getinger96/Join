@@ -18,24 +18,34 @@ let selectedContactIndex = null;
 async function fetchContacts(path = '') {
     let response = await fetch(base_URL + path + ".json");
     let userJSON = await response.json();
+    let keysArray = Object.keys(userJSON.contacts);
     let userAsArray = Object.values(userJSON.contacts);
+
+
 
     for (let index = 0; index < userAsArray.length; index++) {
         let contact = userAsArray[index];
+        let key = keysArray[index];
+
+
 
         if (contact.email !== "guest@web.de") {
             contactsArray.push({
+                
+                
+                id: key,
                 email: contact.email,
                 name: contact.name,
                 password: contact.password,
                 phone: contact.phone
             });
         }
-    }
+    };
 
     console.log(contactsArray);
-    sortContactsByLetter();
+    sortContactsByLetter();  // Kontakte sortieren
 }
+
 
 
 
@@ -273,9 +283,10 @@ function editContact(index) {
 }
 
 async function deleteContact(index) {
+    let key= contactsArray[index].id;
     if (index > -1) {
-        const contact = contactsArray[index];
-        await deleteData(`contacts/${contact.id}`);
+        
+        await deleteData(`contacts/${key}`);
         contactsArray.splice(index, 1);
         sortContactsByLetter();
         closeCardContact();
@@ -310,21 +321,45 @@ function clearBigContactView() {
 }
 
 async function saveEditedContact(index) {
+
+
     const name = document.getElementById('name').value.trim();
     const email = document.getElementById('mail').value.trim();
     const phone = document.getElementById('telephone').value.trim();
 
     if (name && email && phone) {
+        
+
+
+
+        let key= contactsArray[index].id;
         contactsArray[index].name = name;
         contactsArray[index].email = email;
         contactsArray[index].phone = phone;
 
+        const newContact = {
+            name: name,
+            email: email,
+            phone: phone
+        };
+
+
+
         sortContactsByLetter();
         closeCardContact();
         getContactBig(index);
+        putData(`contacts/${key}`, newContact)
 
     }
+
 }
+
+
+
+
+
+
+
 
 async function postData(path = "", data = {}) {
     let response = await fetch(base_URL + path + ".json", {
