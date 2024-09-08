@@ -31,17 +31,9 @@ a {
     height: 40px;
 }
 
-.headUserContainer {
-    display:none !important;
-}
-
-.sidelink {
-    display:none !important;
-}
-
 @media(max-width: 1450px) {
     .d-none {
-        display: none !important;
+        display: block;
     }
 
 .middle-Section-Privacy {
