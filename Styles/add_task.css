@@ -5,6 +5,7 @@ body {
     font-weight: 400;
 }
 
+
 .add_task_content {
     display: flex;
     flex-direction: column;

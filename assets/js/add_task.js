@@ -37,6 +37,7 @@ async function fetchContacts(path = '') {
 
         } else {
             contacts.push({
+                id: key,
                 email: contact.email,
                 name: contact.name,
                 password: contact.password,
