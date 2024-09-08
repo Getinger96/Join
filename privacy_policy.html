@@ -4,23 +4,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="./assets/img/Capa 2.png" />
+    <link rel="icon" type="image/x-icon" href="./assets/img/Capa 3.png">
+    <link rel="stylesheet" href="Styles/fontStyles.css">
     <link rel="stylesheet" href="Styles/stylePrivacyPolicy.css">
     <link rel="stylesheet" href="Styles/Desktop_template.css">
-    <link rel="stylesheet" href="Styles/add_task.css">
-    <script src="assets/js/script.js"></script>
-    <script src="./assets/js/contact.js"></script>
-    <title>Kanban Project Management Tool </title>
+    <link rel="stylesheet" href="./Styles/mobile_tamplate.css">
+    <script src="./assets/js/script.js"></script>
+    <title>Privacy Policy</title>
 </head>
 
-<body onload="init()">
+<body onload="includeHTML()">
 
     <header>
-        <div w3-include-html="./assets/templates/desktop_template.html"></div>
+        <div w3-include-html="./assets/Templates/desktop_template.html"></div>
     </header>
 
+    <img src="./assets/img/arrow-left-line.png" class="top-right-img" onclick="goToSummary()" alt="Back to Summary">
 
-    <section class="middle-Section">
+    <section class="middle-Section-Privacy">
         <section class="privacyPolicy">
             <div class="headline"> </div>
 
@@ -283,6 +284,10 @@
 
 
     </section>
+    </section>
+
+    <section>
+        <div w3-include-html="assets/Templates/mobile_version.html"></div>
     </section>
 </body>
 

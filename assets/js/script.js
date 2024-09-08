@@ -105,4 +105,7 @@ async function checkIfLoggedIn() {
     }
 }
 
+function goToSummary() {
+    window.location.href = 'summary.html'; 
+}
 
