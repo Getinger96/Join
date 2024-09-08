@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Summery</title>
-
+    <title>Summary</title>
+    <link rel="icon" type="image/x-icon" href="./assets/img/Capa 3.png" />
     <link rel="stylesheet" href="Styles/Desktop_template.css">
     <link rel="stylesheet" href="./Styles/fontStyles.css">
     <link rel="stylesheet" href="./Styles/mobile_tamplate.css">
     <link rel="stylesheet" href="./Styles/summary.css">
+    <link rel="stylesheet" href="./Styles/mobile_tamplate.css">
     <script src="./assets/js/script.js"></script>
     <script src="./assets/templates/mobile_version.html"></script>
     <script src="./assets/js/board_database.js"></script>
@@ -18,12 +19,31 @@
     <link rel="icon" type="image/x-icon" href="./assets/img/Capa 2.png" />
 </head>
 
-<body onload= "init(); loadToDoAtTheKanbanBoard()">
+<body onload= "init(); loadToDoAtTheKanbanBoard(); summaryScreenWidth()">
     <header>
+
+    
         <div w3-include-html="./assets/templates/desktop_template.html"></div>
+        <div class="headblock">
+            <div class="title">
+                <span class="kanbanBoardTitle">Kanban Projekt Management Tool</span>
+                <img src="./assets/IMG/Capa 3.png" alt="MobileIcon" class="MobileIcon">
+            </div>
+            <div class="headUserContainer">
+                <img src="./assets/IMG/help.png">
+                <div class="logInUser_Container" onclick="showLogOutSection();">
+                    <span class="logInUser" id="loginUserId"></span>
+                </div>
+        
+            </div>
+        </div>
+        
+        <div id="logoutId"> </div>
+        
+        
     </header>
 
-
+    <main>
     <section class="middle-SectionSummary">
 
 
@@ -44,6 +64,7 @@
         <h1 class="summary_title_big"> Join 360 </h1>
             <hr class="summary_hr">
             <h3 class="summary_secondline"> Key Metrics at a Glance </h3>
+            <div id="newHrLineHeader"> </div>
         </div>    
 
 
@@ -153,14 +174,17 @@
     
         </div>
 
-
-
+<div></div>
+<footer>
     <section>
         <div w3-include-html="assets/Templates/mobile_version.html"></div>
+    
     </section>
+    <nav id="mobileNav" class="mobile-nav"></nav>
+
+</footer>
 
 
-    
-    
+</main>
 </body>
 </html>

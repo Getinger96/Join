@@ -3,7 +3,6 @@
 
 
 async function includeHTML() {
-    checkIfLoggedIn();
     var z, i, elmnt, file, xhttp;
     /* Loop through a collection of all HTML elements: */
     z = document.getElementsByTagName("*");
@@ -26,6 +25,7 @@ async function includeHTML() {
             xhttp.open("GET", file, true);
             xhttp.send();
             /* Exit the function: */
+            await  checkIfLoggedIn(); 
             return;
         }
     }
@@ -34,9 +34,9 @@ async function includeHTML() {
 
 async function init() {
     
-    fetchContacts();
-    
-    includeHTML();
+fetchContacts(); 
+  await includeHTML();
+
    
 }
 
@@ -104,6 +104,7 @@ async function checkIfLoggedIn() {
         console.log('Kein Benutzer ist eingeloggt');
     }
 }
+
 
 function goToSummary() {
     window.location.href = 'summary.html'; 

@@ -25,3 +25,8 @@ function includeHTML() {
         }
     }
 };
+
+function goToSummary() {
+    window.location.href = 'summary.html'; 
+}
+
