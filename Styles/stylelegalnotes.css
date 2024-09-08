@@ -31,9 +31,17 @@ a {
     height: 40px;
 }
 
+.headUserContainer {
+    display:none !important;
+}
+
+.sidelink {
+    display:none !important;
+}
+
 @media(max-width: 1450px) {
     .d-none {
-        display: block;
+        display: none !important;
     }
 
 .middle-Section-Privacy {
