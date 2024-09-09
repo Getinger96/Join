@@ -27,6 +27,7 @@ async function fetchContacts(path = '') {
         let contact = userAsArray[index];
         let key = keysArray[index];
         let colorIndex = index;
+        let key = keysArray[index];
 
         if (colorIndex >= colors.length) {
             colorIndex -= colors.length;
