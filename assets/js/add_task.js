@@ -300,6 +300,9 @@ async function postData(path = "", data = {}) {
 
 async function createTask(event) {
     event.preventDefault();
+    let loggedInUser = localStorage.getItem('loggedInUser'); 
+    loggedInUser = JSON.parse(loggedInUser);
+    
     let titel = document.getElementById('title');
     let description = document.getElementById('Description');
     let assignedContact = assignedContacts;
@@ -318,16 +321,24 @@ async function createTask(event) {
         Subtask: subtask
     };
 
-if (titel.value==='' || date.value===''|| category.value==='') {
-    alert("Bitte fülle alle erforderlichen Felder aus.");
-    return;
-}else {
-    console.log(newTask);
-    
-    await postData(`tasks`, newTask);
+if (loggedInUser) {
+    localStorage.setItem('guestTasks',JSON.stringify(newTask))
     clearTask();
+}else{
+    if (titel.value==='' || date.value===''|| category.value==='') {
+        alert("Bitte fülle alle erforderlichen Felder aus.");
+        return;
+    }else {
+        console.log(newTask);
+        
+        await postData(`tasks`, newTask);
+        clearTask();
+    
+    }
+   
 
 }
+  
 
 }
 
@@ -372,4 +383,6 @@ function clearTask() {
     renderPrioButtons();
 
 }
+
+
 
