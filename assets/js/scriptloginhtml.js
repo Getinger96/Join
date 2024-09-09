@@ -25,3 +25,12 @@ function includeHTML() {
         }
     }
 };
+
+function goToSummary() {
+    window.location.href = 'summary.html'; 
+}
+
+function goToLogin() {
+    window.location.href = 'login.html'; 
+}
+

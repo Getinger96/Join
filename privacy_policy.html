@@ -4,21 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="./assets/img/Capa 2.png" />
+    <link rel="icon" type="image/x-icon" href="./assets/img/Capa 3.png">
+    <link rel="stylesheet" href="Styles/fontStyles.css">
     <link rel="stylesheet" href="Styles/stylePrivacyPolicy.css">
     <link rel="stylesheet" href="Styles/Desktop_template.css">
-    <link rel="stylesheet" href="Styles/add_task.css">
-    <script src="assets/js/script.js"></script>
-    <script src="./assets/js/contact.js"></script>
-    <title>Kanban Project Management Tool </title>
+    <link rel="stylesheet" href="./Styles/mobile_tamplate.css">
+    <script src="./assets/js/script.js"></script>
+    <title>Privacy Policy</title>
 </head>
 
-<body onload="init()">
+<body onload="includeHTML()">
 
-    <header>
-
-        
-        <div w3-include-html="./assets/templates/desktop_template.html"></div>
+    <div w3-include-html="./assets/Templates/desktop_template.html"></div>
+    <div class="headblock">
         <div class="title">
             <span class="kanbanBoardTitle">Kanban Projekt Management Tool</span>
             <img src="./assets/IMG/Capa 3.png" alt="MobileIcon" class="MobileIcon">
@@ -28,16 +26,15 @@
             <div class="logInUser_Container" onclick="showLogOutSection();">
                 <span class="logInUser" id="loginUserId"></span>
             </div>
-    
+
         </div>
     </div>
-    
+
     <div id="logoutId"> </div>
-    
-    </header>
 
+    <img src="./assets/img/arrow-left-line.png" class="top-right-img" onclick="goToSummary()" alt="Back to Summary">
 
-    <section class="middle-Section">
+    <section class="middle-Section-Privacy">
         <section class="privacyPolicy">
             <div class="headline"> </div>
 
@@ -114,8 +111,8 @@
             </p>
 
             <p> Philip Tesch <br>
-            im Mühlental 2a <br>
-            55595 Traisen </p>
+                im Mühlental 2a <br>
+                55595 Traisen </p>
 
             <p> Telefon :+4915150645442 <br>
                 E-Mail: philiptesch99@gmail.com</p>
@@ -128,7 +125,7 @@
             <p>Telefon: +41796921781<br />
                 E-Mail: andre-sutter@hotmail.com
             </p>
-            
+
             <p>Verantwortliche Stelle ist die nat&uuml;rliche oder juristische Person, die allein oder gemeinsam mit
                 anderen &uuml;ber die Zwecke und Mittel der Verarbeitung von personenbezogenen Daten (z.&nbsp;B. Namen,
                 E-Mail-Adressen o. &Auml;.) entscheidet.</p>
@@ -300,6 +297,10 @@
 
 
     </section>
+    </section>
+
+    <section>
+        <div w3-include-html="assets/Templates/mobile_version.html"></div>
     </section>
 </body>
 

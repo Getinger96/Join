@@ -1,16 +1,11 @@
-@font-face {
-    font-family: myFont;
-    src: url(./assets/font/Open_Sans/OpenSans-VariableFont_wdth\,wght.ttf);
-}
-
 body {
     margin: 0;
     background-color: #F6F7F8;
-    font-family: "inter", sans-serif;
+    font-family: 'Inter';
     font-weight: 400;
 }
 
-.middle-Section {
+.middle-Section-Privacy {
     font-family: "inter", sans-serif;
     margin-left: 328px;
     margin-right: 50px;

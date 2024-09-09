@@ -20,11 +20,14 @@ let prio = [];
 async function fetchContacts(path = '') {
     let response = await fetch(base_URL + path + ".json");
     let userJSON = await response.json();
+    let keysArray = Object.keys(userJSON.contacts);
     let userAsArray = Object.values(userJSON.contacts);
 
     for (let index = 0; index < userAsArray.length; index++) {
         let contact = userAsArray[index];
+        let key = keysArray[index];
         let colorIndex = index;
+       
 
         if (colorIndex >= colors.length) {
             colorIndex -= colors.length;
@@ -47,6 +50,7 @@ async function fetchContacts(path = '') {
         }
     }
     renderSelectionContainer()
+    renderPrioButtons()
 }
 
 function func1(event) {
@@ -296,6 +300,9 @@ async function postData(path = "", data = {}) {
 
 async function createTask(event) {
     event.preventDefault();
+    let loggedInUser = localStorage.getItem('loggedInUser'); 
+    loggedInUser = JSON.parse(loggedInUser);
+    
     let titel = document.getElementById('title');
     let description = document.getElementById('Description');
     let assignedContact = assignedContacts;
@@ -314,16 +321,24 @@ async function createTask(event) {
         Subtask: subtask
     };
 
-if (titel.value==='' || date.value===''|| category.value==='') {
-    alert("Bitte fülle alle erforderlichen Felder aus.");
-    return;
-}else {
-    console.log(newTask);
-    
-    await postData(`tasks`, newTask);
+if (loggedInUser) {
+    localStorage.setItem('guestTasks',JSON.stringify(newTask))
     clearTask();
+}else{
+    if (titel.value==='' || date.value===''|| category.value==='') {
+        alert("Bitte fülle alle erforderlichen Felder aus.");
+        return;
+    }else {
+        console.log(newTask);
+        
+        await postData(`tasks`, newTask);
+        clearTask();
+    
+    }
+   
 
 }
+  
 
 }
 
@@ -368,4 +383,6 @@ function clearTask() {
     renderPrioButtons();
 
 }
+
+
 
