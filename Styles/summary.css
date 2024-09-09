@@ -70,15 +70,16 @@ height: 80px;
     justify-content: center;
     align-items: center;
     flex: 1;
-    margin-right: 150px;
-}
+    }
 
 
 .loginstylesuccessfully {
-        font-size: 47px;
-        font-weight: 500;
+    font-size: 47px;
+    font-weight: bolder;
+    position: absolute;
 
 }
+
 
     .kanbanboradtodo:hover {
         transform: scale(1.15);
@@ -355,6 +356,12 @@ gap:10px
         flex-direction: column;
         padding: 20px;
     }
+
+
+    .kanbanboardprio:hover {
+        transform: scale(1.05);
+    }
+    
 }
 
 
@@ -369,7 +376,6 @@ gap:10px
     display: block;
     margin-top: 10px;
 }
-
 
 .summary_secondline {
     

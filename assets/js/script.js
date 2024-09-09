@@ -1,5 +1,31 @@
-
-
+let colorLetter = [
+    { letter: 'A', color: 'red' },     // A -> Red
+    { letter: 'B', color: 'blue' },    // B -> Blue
+    { letter: 'C', color: 'blue' },    // C -> Blue
+    { letter: 'D', color: 'red' },     // D -> Red
+    { letter: 'E', color: 'red' },     // E -> Red
+    { letter: 'F', color: 'red' },     // F -> Red
+    { letter: 'G', color: 'green' },   // G -> Green
+    { letter: 'H', color: 'yellow' },  // H -> Yellow
+    { letter: 'I', color: 'orange' },  // I -> Orange
+    { letter: 'J', color: 'violet' },  // J -> Violet
+    { letter: 'K', color: 'blue' },    // K -> Blue
+    { letter: 'L', color: 'blue' },    // L -> Blue
+    { letter: 'M', color: 'green' },   // M -> Green
+    { letter: 'N', color: 'yellow' },  // N -> Yellow
+    { letter: 'O', color: 'orange' },  // O -> Orange
+    { letter: 'P', color: 'violet' },  // P -> Violet
+    { letter: 'Q', color: 'green' },   // Q -> Green
+    { letter: 'R', color: 'yellow' },  // R -> Yellow
+    { letter: 'S', color: 'orange' },  // S -> Orange
+    { letter: 'T', color: 'violet' },  // T -> Violet
+    { letter: 'U', color: 'green' },   // U -> Green
+    { letter: 'V', color: 'yellow' },  // V -> Yellow
+    { letter: 'W', color: 'orange' },  // W -> Orange
+    { letter: 'X', color: 'violet' },  // X -> Violet
+    { letter: 'Y', color: 'green' },   // Y -> Green
+    { letter: 'Z', color: 'yellow' }   // Z -> Yellow
+];
 
 
 async function includeHTML() {
@@ -25,9 +51,8 @@ async function includeHTML() {
             xhttp.open("GET", file, true);
             xhttp.send();
             /* Exit the function: */
-            await  checkIfLoggedIn(); 
-            return;
-        }
+            return
+        } 
     }
 };
 
@@ -35,7 +60,8 @@ async function includeHTML() {
 async function init() {
     
 fetchContacts(); 
-  await includeHTML();
+includeHTML();
+checkIfLoggedIn(); 
 
    
 }
@@ -69,7 +95,6 @@ logOutVisibleBoolean =!logOutVisibleBoolean;
 
 
 async function showTheNameInitial(loggedInUser) {
-    console.log(loggedInUser);
     
 
    let userSign = document.getElementById('loginUserId');
@@ -78,26 +103,47 @@ async function showTheNameInitial(loggedInUser) {
 
    let nameParts = fullName.split(" ");
 
+   let firstName;
+
    if (nameParts.length >= 2) {
-    let firstName = nameParts[0].charAt(0).toUpperCase();  
+    firstName = nameParts[0].charAt(0).toUpperCase();  
     let lastName = nameParts[1].charAt(0).toUpperCase();
     userSign.innerHTML = `${firstName} ${lastName}`;
+
+
+    if (condition) {
+        
+    }
     
    } else {
-    let firstName = nameParts[0].charAt(0).toUpperCase();  
+    firstName = nameParts[0].charAt(0).toUpperCase();  
     userSign.innerHTML = `${firstName}`;
    }
 
+   showTheNameInitialInColor(firstName);
+}
+
+function showTheNameInitialInColor(firstName) {
+
+    let userSign = document.getElementById('loginUserId');
+    colorLetter.forEach(colorLetterItem => {
+
     
+
+        if (firstName === colorLetterItem.letter) {
+            let currentColor = colorLetterItem.color; 
+            userSign.style.color = currentColor;
+        }
+    });
 }
 
 
-async function checkIfLoggedIn() {
+ function checkIfLoggedIn() {
     let loggedInUser = localStorage.getItem('loggedInUser'); 
     if (loggedInUser) {
         loggedInUser = JSON.parse(loggedInUser); 
         console.log(loggedInUser);
-      await  showTheNameInitial(loggedInUser);
+       showTheNameInitial(loggedInUser);
      
       
     } else {

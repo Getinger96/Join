@@ -52,7 +52,7 @@ async function loginAction() {
 
         setTimeout(() => { window.location.href = "summary.html";
             
-        }, 3000);
+        }, 2000);
 
         
     } else {
@@ -79,12 +79,33 @@ function guestLogin() {
 
 function loginUpSuccessfully() {
     document.getElementById('loginupsuccessfully').innerHTML =`  <div class="loginUpsuccessfully">
-    <span class="loginstylesuccessfully"> Good  Afternoon !!!</span>
+    <span class="loginstylesuccessfully" id="showTheRightTimeLogin"></span>
 
     </div>`;
 
-    
+    showTheCurrentTime();
 }
+
+
+function  showTheCurrentTime(){
+
+
+    let currentTime = new Date().getHours();
+    let greetingText = document.getElementById('showTheRightTimeLogin');
+    
+    if (currentTime < 12) {
+      greetingText.innerHTML = "Good Morning !!!"; 
+      
+    } else if (currentTime < 18) {
+        greetingText.innerHTML = "Good Afternoon !!!"; 
+      console.log(greetingText);
+    } else {
+        greetingText.innerHTML = "Good Evening !!!"; 
+    
+    }
+    
+    }
+
 
 function changeColorHrAndBorderMistake() {
 

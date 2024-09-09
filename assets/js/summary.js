@@ -132,20 +132,29 @@ let date = new Date()
     let getCurrentDay = `${month} ${day},   ${year} `;
 
 document.getElementById('currentDate').innerHTML = `${getCurrentDay}`;
+
+    showTheCurrentTime();
 }
 
 
-
-//function loginUpSuccessfully() {
- //   document.getElementById('loginupsuccessfully').innerHTML =`  <div class="loginUpsuccessfully">
-  //  <span class="loginstylesuccessfully"> Good  Afternoon !!!</span>
-
-   // </div>`;
-
-    
-//}
+function  showTheCurrentTime(){
 
 
+let currentTime = new Date().getHours();
+let greetingText = document.getElementById('showTheRightTime');
+
+if (currentTime < 12) {
+  greetingText.innerHTML = "Good Morning !!!"; 
+  
+} else if (currentTime < 18) {
+    greetingText.innerHTML = "Good Afternoon !!!"; 
+  console.log(greetingText);
+} else {
+    greetingText.innerHTML = "Good Evening !!!"; 
+
+}
+
+}
 
 function summaryScreenWidth() {
 
