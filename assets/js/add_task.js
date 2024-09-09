@@ -27,7 +27,7 @@ async function fetchContacts(path = '') {
         let contact = userAsArray[index];
         let key = keysArray[index];
         let colorIndex = index;
-        let key = keysArray[index];
+       
 
         if (colorIndex >= colors.length) {
             colorIndex -= colors.length;
@@ -50,6 +50,7 @@ async function fetchContacts(path = '') {
         }
     }
     renderSelectionContainer()
+    renderPrioButtons()
 }
 
 function func1(event) {
