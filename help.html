@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="./assets/img/Capa 3.png">
+    <link rel="stylesheet" href="Styles/fontStyles.css">
+    <link rel="stylesheet" href="Styles/help.css">
+    <link rel="stylesheet" href="Styles/Desktop_template.css">
+    <link rel="stylesheet" href="./Styles/mobile_tamplate.css">
+    <script src="./assets/js/script.js"></script>
+    <title>Help</title>
+
+</head>
+
+<body onload="includeHTML()">
+
+    <div w3-include-html="./assets/Templates/desktop_template.html"></div>
+    <div class="headblock">
+        <div class="title">
+            <span class="kanbanBoardTitle">Kanban Projekt Management Tool</span>
+            <img src="./assets/IMG/Capa 3.png" alt="MobileIcon" class="MobileIcon">
+        </div>
+        <div class="headUserContainer">
+            <a href="help.html" class="help-link">
+                <img src="./assets/IMG/help.png" alt="Hilfe" class="help-icon">
+            </a>
+            <div class="logInUser_Container" onclick="showLogOutSection();">
+                <span class="logInUser" id="loginUserId"></span>
+            </div>
+    
+        </div>
+    </div>
+    
+    <div id="logoutId"> </div>
+    
+
+    <img src="./assets/img/arrow-left-line.png" class="top-right-img" onclick="goToSummary()" alt="Back to Summary">
+
+    <section class="middle-Section-Privacy">
+
+        <h1>Hilfe</h1>
+        <p>
+            Willkommen auf der Hilfeseite für <a href="#">Join</a>, deinem Leitfaden zur Nutzung unseres
+            Kanban-Projektmanagement-Tools.
+            Hier geben wir dir einen Überblick darüber, was <a href="#">Join</a> ist, wie es dir helfen kann und wie du
+            es verwendest.
+        </p>
+
+        <h2>Was ist Join?</h2>
+        <p>
+            <a href="#">Join</a> ist ein auf Kanban basierendes Projektmanagement-Tool, das von einer Gruppe engagierter
+            Studenten
+            im Rahmen ihres Web-Entwicklungs-Bootcamps an der Developer Akademie entwickelt wurde.
+        </p>
+        <p>
+            Kanban, ein japanischer Begriff, der "Anschlagtafel" bedeutet, ist eine äußerst effektive Methode, um Arbeit
+            zu visualisieren, laufende Arbeiten zu begrenzen und die Effizienz (oder den Fluss) zu maximieren. <a
+                href="#">Join</a> nutzt die Prinzipien des Kanban, um Benutzern dabei zu helfen, ihre Aufgaben und
+            Projekte auf intuitive Weise zu verwalten.
+        </p>
+        <p>
+            Es ist wichtig zu beachten, dass <a href="#">Join</a> als eine Lernübung entwickelt wurde und nicht für den
+            umfangreichen geschäftlichen Gebrauch bestimmt ist. Obwohl wir bemüht sind, die bestmögliche
+            Benutzererfahrung zu gewährleisten, können wir keine gleichbleibende Verfügbarkeit, Zuverlässigkeit,
+            Genauigkeit oder andere Qualitätsaspekte von <a href="#">Join</a> garantieren.
+        </p>
+
+        <h2>Wie benutze ich es?</h2>
+        <p>Hier ist eine Schritt-für-Schritt-Anleitung zur Nutzung von <a href="#">Join</a>:</p>
+
+        <h3>1. Das Board erkunden</h3>
+        <p>
+            Wenn du dich bei <a href="#">Join</a> anmeldest, findest du ein Standard-Board. Dieses Board stellt dein
+            Projekt dar und enthält vier Standardlisten: "To Do", "In Progress", "Await feedback" und "Done".
+        </p>
+
+        <h3>2. Kontakte erstellen</h3>
+        <p>
+            In <a href="#">Join</a> kannst du Kontakte hinzufügen, um an deinen Projekten zu arbeiten. Gehe in den
+            Abschnitt "Kontakte", klicke auf "Neuer Kontakt" und fülle die erforderlichen Informationen aus. Sobald
+            hinzugefügt, können diese Kontakte Aufgaben zugewiesen bekommen und mit den Aufgaben auf dem Board
+            interagieren.
+        </p>
+
+        <h3>3. Karten hinzufügen</h3>
+        <p>
+            Nachdem du deine Kontakte hinzugefügt hast, kannst du damit beginnen, Karten hinzuzufügen. Karten stellen
+            einzelne Aufgaben dar. Klicke auf den "+"-Button unter der entsprechenden Liste, um eine neue Karte zu
+            erstellen. Fülle die Aufgabendetails in der Karte aus, wie z.B. Aufgabenname, Beschreibung,
+            Fälligkeitsdatum, Zuweisungen usw.
+        </p>
+
+        <h3>4. Karten verschieben</h3>
+        <p>
+            Während sich die Aufgabe von einem Stadium ins nächste bewegt, kannst du dies auf dem Board widerspiegeln,
+            indem du die Karte von einer Liste in eine andere ziehst und ablegst.
+        </p>
+
+        <h3>5. Karten löschen</h3>
+        <p>
+            Sobald eine Aufgabe abgeschlossen ist, kannst du sie entweder in die "Done"-Liste verschieben oder löschen.
+            Das Löschen einer Karte wird sie dauerhaft vom Board entfernen. Bitte sei vorsichtig beim Löschen von
+            Karten, da diese Aktion nicht rückgängig gemacht werden kann.
+        </p>
+
+        <p>
+            Denke daran, dass eine effektive Nutzung von <a href="#">Join</a> regelmäßige Updates von dir und deinem
+            Team erfordert, um sicherzustellen, dass das Board den aktuellen Stand deines Projekts widerspiegelt.
+        </p>
+
+        <p>
+            Hast du noch Fragen zu <a href="#">Join</a>? Kontaktiere uns gerne unter [Deine Kontakt-E-Mail]. Wir sind
+            hier, um dir zu helfen!
+        </p>
+
+        <h3>Viel Spaß mit Join!</h3>
+    </section>
+
+    <section>
+        <div w3-include-html="assets/Templates/mobile_version.html"></div>
+    </section>
+
+</body>
+
+</html>

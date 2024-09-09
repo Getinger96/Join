@@ -246,6 +246,24 @@ a:hover {
     display: none;
 }
 
+.help-icon {
+    cursor: pointer;
+}
+
+.help-link {
+    background-color: transparent !important;
+    border: none; 
+    padding: 0; 
+    margin: 0; 
+    display: inline-block;
+}
+
+.help-link img {
+    background-color: transparent;
+    display: block; 
+}
+
+
 @media(max-width: 1450px) {
     .sideblock {
         display: none;
@@ -276,6 +294,10 @@ a:hover {
         width: 120px;
         height: 120px;
         top: 130px;
+    }
+
+    .logInUser {
+        padding:0;
     }
 
 

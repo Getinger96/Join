@@ -9,11 +9,6 @@
     <link rel="stylesheet" href="Styles/privacy_login.css">
     <link rel="stylesheet" href="Styles/Desktop_template.css">
     <link rel="stylesheet" href="./Styles/mobile_tamplate.css">
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 06dd56497d25a9345a5422ec09d26d1d2f7fde5a
     <script src="./assets/js/scriptloginhtml.js"></script>
     <script src="./assets/js/login.js"></script>
     <title>Privacy Policy</title>
@@ -24,20 +19,22 @@
 
     <div w3-include-html="./assets/Templates/desktop_template.html"></div>
     <div class="headblock">
-    <div class="title">
-        <span class="kanbanBoardTitle">Kanban Projekt Management Tool</span>
-        <img src="./assets/IMG/Capa 3.png" alt="MobileIcon" class="MobileIcon">
-    </div>
-    <div class="headUserContainer">
-        <img src="./assets/IMG/help.png">
-        <div class="logInUser_Container" onclick="showLogOutSection();">
-            <span class="logInUser" id="loginUserId"></span>
+        <div class="title">
+            <span class="kanbanBoardTitle">Kanban Projekt Management Tool</span>
+            <img src="./assets/IMG/Capa 3.png" alt="MobileIcon" class="MobileIcon">
         </div>
-
+        <div class="headUserContainer">
+            <a href="help.html" class="help-link">
+                <img src="./assets/IMG/help.png" alt="Hilfe" class="help-icon">
+            </a>
+            <div class="logInUser_Container" onclick="showLogOutSection();">
+                <span class="logInUser" id="loginUserId"></span>
+            </div>
+    
+        </div>
     </div>
-</div>
-
-<div id="logoutId"> </div>
+    
+    <div id="logoutId"> </div>
 
     <img src="./assets/img/arrow-left-line.png" class="top-right-img" onclick="goToLogin()" alt="Back to Login">
     
