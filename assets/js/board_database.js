@@ -100,11 +100,8 @@ function createTask() {
         status: status
     };
 
-    // Füge das neue Todo zur Liste hinzu
-    todos.push(newTodo);
-
-    // Speichern der Todos im localStorage
-    saveTodos();
+  
+   
 
     // Aktualisiere die HTML-Darstellung
     updateHTML();
@@ -116,52 +113,21 @@ function createTask() {
     closeTask();
 }
 
-function saveTodos() {
-    localStorage.setItem('todos', JSON.stringify(todos));
-}
 
-function loadTodos() {
-    const storedTodos = localStorage.getItem('todos');
-    if (storedTodos) {
-        todos = JSON.parse(storedTodos);
-    }
-}
+
 
 // Rufe loadTodos beim Laden der Seite auf
 document.addEventListener('DOMContentLoaded', () => {
-    loadTodos();
+   
     updateHTML();
 });
 
-// Abrufen aller Aufgaben aus der Datenbank
-async function fetchAllTasks(path = 'tasks') {
-    try {
-        let response = await fetch(base_URL + path + ".json");
 
-        if (!response.ok) {
-            throw new Error(`HTTP-Fehler! Status: ${response.status}`);
-        }
 
-        let tasksJSON = await response.json();
-        console.log("Alle Aufgaben:", tasksJSON);
-
-        if (tasksJSON) {
-            todos = Object.keys(tasksJSON).map(key => ({ id: key, ...tasksJSON[key] }));
-            updateHTML(); // Update HTML nach dem Laden der Aufgaben
-        } else {
-            console.warn("Keine Aufgaben gefunden.");
-            todos = []; // Leere Liste setzen, falls keine Aufgaben vorhanden sind
-            updateHTML();
-        }
-    } catch (error) {
-        console.error("Fehler beim Abrufen der Aufgaben:", error);
-    }
-}
 
 // Aktualisiert die HTML-Darstellung
 function updateHTML() {
-    console.log("Aktuelle Todos:", tasksArray);
-
+    
     // Container für verschiedene Status
     const containers = {
         open: document.getElementById('open'),
@@ -186,7 +152,7 @@ function updateHTML() {
             const taskHTML = generateTodoHTML(task);
             containers[task.status].innerHTML += taskHTML;
         } else {
-            console.error(`Container für Status "${todo.status}" nicht gefunden.`);
+            console.error(`Container für Status "${task.status}" nicht gefunden.`);
         }
     });
 

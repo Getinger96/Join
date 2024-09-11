@@ -9,6 +9,7 @@ let currentDraggedElement;
 
 document.addEventListener("DOMContentLoaded", function () {
     updateHTML();
+    
 });
 
 async function fetchTasks(path = '') {
