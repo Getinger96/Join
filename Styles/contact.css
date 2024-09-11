@@ -57,6 +57,7 @@ h2 {
     align-items: stretch;
     height: 100vh;
     overflow: hidden;
+    margin-top: 140px;
 }
 
 .contactview-container {
