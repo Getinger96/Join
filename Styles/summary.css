@@ -6,8 +6,15 @@ body {
 
 .middle-SectionSummary {
     margin-left: 328px;
-    margin-top: 100px;
     display: flex;
+    margin-bottom: 120px;
+    margin-top: 200px;
+    overflow-y: auto;
+    max-height: 80vh;
+}
+
+.kanbanBoardSection {
+    margin-bottom: 120px;
 }
 
 
@@ -335,13 +342,12 @@ gap:10px
 
 
 @media (max-width:1450px) {
- 
+    
     
     .middle-SectionSummary {
         margin-left: 0;
         overflow-x: hidden;
         display: block;
-        margin-top: 0px;
     }
 
 
@@ -621,7 +627,9 @@ margin-block-start: 10px;
 
 
 
-
+.kanbanBoardSection {
+    padding: 10px;
+}
 
 
 

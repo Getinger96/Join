@@ -10,6 +10,7 @@ body {
     font-family: "inter", sans-serif;
     margin-left: 328px;
     margin-right: 50px;
+    margin-top: 200px;
 
 }
 
@@ -53,10 +54,7 @@ body {
     width: 42px;
 }
 
-.title {
-    width: 319px;
-    height: 24px;
-}
+
 
 .headUserContainer {
     width: 104px;

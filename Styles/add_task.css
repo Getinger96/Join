@@ -10,6 +10,7 @@ body {
     display: flex;
     flex-direction: column;
     margin-left: 328px;
+    margin-top: 200px;
 }
 
 .headline_addTask {

@@ -111,10 +111,6 @@ async function showTheNameInitial(loggedInUser) {
     let lastName = nameParts[1].charAt(0).toUpperCase();
     userSign.innerHTML = `${firstName} ${lastName}`;
 
-
-    if (condition) {
-        
-    }
     
    } else {
     firstName = nameParts[0].charAt(0).toUpperCase();  
