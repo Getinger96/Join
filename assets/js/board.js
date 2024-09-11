@@ -7,9 +7,6 @@ let tasksArray = [];
 
 let currentDraggedElement;
 
-document.addEventListener("DOMContentLoaded", function () {
-    updateHTML();
-});
 
 async function fetchTasks(path = '') {
     let response = await fetch(base_URL + path + ".json");
@@ -35,6 +32,7 @@ async function fetchTasks(path = '') {
         
     }
     console.log(tasksArray)
+    updateHTML();
 }
 
 function openTask() {
