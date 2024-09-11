@@ -302,6 +302,7 @@ async function createTask(event) {
     event.preventDefault();
     let loggedInUser = localStorage.getItem('loggedInUser'); 
     loggedInUser = JSON.parse(loggedInUser);
+    let guest = {"email":"guest@web.de","name":"guest","password":"guest123456"}
     
     let titel = document.getElementById('title');
     let description = document.getElementById('Description');
@@ -309,7 +310,7 @@ async function createTask(event) {
     let date = document.getElementById('dueDate');
     let category = document.getElementById('Category');
     let subtask = subtasks;
-    console.log(base_URL);
+    
 
     let newTask = {
         Titel: titel.value,
@@ -321,7 +322,7 @@ async function createTask(event) {
         Subtask: subtask
     };
 
-if (loggedInUser) {
+if (loggedInUser=== guest) {
     localStorage.setItem('guestTasks',JSON.stringify(newTask))
     clearTask();
 }else{
