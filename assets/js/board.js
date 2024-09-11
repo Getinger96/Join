@@ -1,5 +1,7 @@
-let subtask = [];
 
+
+let subtask = [];
+let tasksArray = [];
 let todos = [
     {
         id: 0,
@@ -42,6 +44,27 @@ let currentDraggedElement;
 document.addEventListener("DOMContentLoaded", function () {
     updateHTML();
 });
+
+async function fetchTasks(path = '') {
+    let response = await fetch(base_URL + path + ".json");
+    let userJSON = await response.json();
+    let tasksAsarray= Object.values(userJSON.task)
+
+
+    for (let index = 0; index < tasksAsarray.length; index++) {
+        let task = tasksAsarray[index];
+
+        tasksArray.push(
+            {
+                Title: task.title,
+                Description: task.description,
+                Assigned: task
+
+            }
+        )
+        
+    }
+}
 
 function openTask() {
     let taskDiv = document.getElementById('boardAddTask');
