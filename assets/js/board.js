@@ -2,41 +2,7 @@
 
 let subtask = [];
 let tasksArray = [];
-let todos = [
-    {
-        id: 0,
-        title: 'Kochwelt Page & Recipe Recommender',
-        description: 'Build start page with recipe recommendation',
-        kategorie: 'technicalTask',
-        date: '2024-09-01',
-        contacts: ['John Doe', 'Jane Smith'],
-        priority: 'urgent',
-        subtasks: ['Research recipes', 'Create layout'],
-        status: 'open'  // Startstatus festlegen
-    },
-    {
-        id: 1,
-        title: 'CSS Architecture Planning',
-        description: 'Define CSS naming conventions and structure.',
-        kategorie: 'userStory',
-        date: '2024-09-02',
-        contacts: ['John Doe'],
-        priority: 'urgent',
-        subtasks: ['Research BEM', 'Draft CSS plan'],
-        status: 'progress'  // Startstatus festlegen
-    },
-    {
-        id: 2,
-        title: 'HTML Base Template Creation',
-        description: 'Create reusable HTML base templates...',
-        kategorie: 'technicalTask',
-        date: '2024-09-03',
-        contacts: ['Jane Smith'],
-        priority: 'urgent',
-        subtasks: ['Create header template', 'Create footer template'],
-        status: 'awaitFeedback'  // Startstatus festlegen
-    }
-];
+
 
 
 let currentDraggedElement;
@@ -48,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
 async function fetchTasks(path = '') {
     let response = await fetch(base_URL + path + ".json");
     let userJSON = await response.json();
-    let tasksAsarray= Object.values(userJSON.task)
+    let tasksAsarray= Object.values(userJSON.tasks)
 
 
     for (let index = 0; index < tasksAsarray.length; index++) {
@@ -63,6 +29,7 @@ async function fetchTasks(path = '') {
                 Prio: task.Prio,
                 Category: task.Category,
                 subtask: task.Subtask,
+                status: 'open' ,
             }
         )
         
@@ -80,15 +47,18 @@ function closeTask() {
 }
 
 // Generieren des HTML-Codes für eine Aufgabe
-function generateTodoHTML(todo, contactIndex, contactsName = '', contactLastname = '', isSelected, color, backgroundColor, textColor) {
+function generateTodoHTML(task, contactIndex, contactsName = '', contactLastname = '', isSelected, color, backgroundColor, textColor) {
     // Überprüfe, ob das todo-Objekt die erwartete Struktur hat
-    const title = todo.title || 'Kein Titel';
-    const description = todo.description || 'Keine Beschreibung verfügbar';
-    const dueDate = todo.dueDate || 'Kein Datum festgelegt';
-    const priority = todo.priority || 'low'; // Standardwert 'low'
+    const title = task.Title || 'Kein Titel';
+    const description = task.Description || 'Keine Beschreibung verfügbar';
+    const dueDate = task.duedate || 'Kein Datum festgelegt';
+    const priority = task.Prio || 'low'; // Standardwert 'low'
+    const assignedContacts= task.Assigned|| 'Whole Team';
+    const category= task.Category;
+    const subtask=  task.subtask || 'no Subtasks'
+    
 
-    // Überprüfen, ob subtasks existieren und ein Array sind
-    const subtasks = Array.isArray(todo.subtasks) ? todo.subtasks : [];
+   
 
     // Definiere Prioritäts-Icons
     let priorityIcon = '';
@@ -108,7 +78,7 @@ function generateTodoHTML(todo, contactIndex, contactsName = '', contactLastname
 
     // Definiere Farben basierend auf der Kategorie
     let categoryColor = '';
-    switch (todo.kategorie) {
+    switch (category) {
         case 'technicalTask':
             categoryColor = '#1FD7C1';
             break;
@@ -120,8 +90,8 @@ function generateTodoHTML(todo, contactIndex, contactsName = '', contactLastname
     }
 
     return /*html*/`
-        <div class="todo" draggable="true" ondragstart="startDragging(${todo.id})">
-            <div class="divKategorie" style="background-color: ${categoryColor};">${todo.kategorie}</div>
+        <div class="todo" draggable="true" ondragstart="startDragging(${category})">
+            <div class="divKategorie" style="background-color: ${categoryColor};">${category}</div>
             <h3>${title}</h3>
             <p>${description}</p>
             <p>Priority: <img src="${priorityIcon}" alt="${priority} Priority"></p>

@@ -160,7 +160,7 @@ async function fetchAllTasks(path = 'tasks') {
 
 // Aktualisiert die HTML-Darstellung
 function updateHTML() {
-    console.log("Aktuelle Todos:", todos);
+    console.log("Aktuelle Todos:", tasksArray);
 
     // Container für verschiedene Status
     const containers = {
@@ -180,11 +180,11 @@ function updateHTML() {
     });
 
     // Aufgaben durchgehen und dem richtigen Container hinzufügen
-    todos.forEach(todo => {
-        console.log("Aktuelle Aufgabe:", todo);
-        if (containers[todo.status]) {  // Verwende 'status' für die Zuordnung
-            const taskHTML = generateTodoHTML(todo);
-            containers[todo.status].innerHTML += taskHTML;
+    tasksArray.forEach(task => {
+        console.log("Aktuelle Aufgabe:", task);
+        if (containers[task.status]) {  // Verwende 'status' für die Zuordnung
+            const taskHTML = generateTodoHTML(task);
+            containers[task.status].innerHTML += taskHTML;
         } else {
             console.error(`Container für Status "${todo.status}" nicht gefunden.`);
         }
