@@ -58,10 +58,12 @@ async function includeHTML() {
 
 
 async function init() {
+   
     
 fetchContacts(); 
 includeHTML();
 checkIfLoggedIn(); 
+
 
    
 }

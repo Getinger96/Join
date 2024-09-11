@@ -58,12 +58,16 @@ async function fetchTasks(path = '') {
             {
                 Title: task.title,
                 Description: task.description,
-                Assigned: task
-
+                Assigned: task.AssignedContact,
+                duedate: task.Date,
+                Prio: task.Prio,
+                Category: task.Category,
+                subtask: task.Subtask,
             }
         )
         
     }
+    console.log(tasksArray)
 }
 
 function openTask() {
