@@ -130,9 +130,9 @@ function startDragging(id) {
 }
 
 function moveTo(category) {
-    const draggedTodoIndex = todos.findIndex(todo => todo.id === currentDraggedElement);
+    const draggedTodoIndex = tasksArray.findIndex(task => tasksArray.id === currentDraggedElement);
     if (draggedTodoIndex !== -1) {
-        todos[draggedTodoIndex].status = category;  // Aktualisiere den Status auf die neue Kategorie
+        tasksArray[draggedTodoIndex].status = category;  // Aktualisiere den Status auf die neue Kategorie
         updateHTML();  // Aktualisiere die HTML-Darstellung
         removeHighlight(category);
     }
