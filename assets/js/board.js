@@ -47,13 +47,13 @@ function closeTask() {
 // Generieren des HTML-Codes für eine Aufgabe
 function generateTodoHTML(task, contactIndex, contactsName = '', contactLastname = '', isSelected, color, backgroundColor, textColor) {
     // Überprüfe, ob das todo-Objekt die erwartete Struktur hat
-    const title = task.Title || 'Kein Titel';
-    const description = task.Description || 'Keine Beschreibung verfügbar';
-    const dueDate = task.duedate || 'Kein Datum festgelegt';
-    const priority = task.Prio || 'low'; // Standardwert 'low'
-    const assignedContacts= task.Assigned|| 'Whole Team';
+    const title = task.Title;
+    const description = task.Description ;
+    const dueDate = task.duedate;
+    const priority = task.Prio;
+    const assignedContacts= task.Assigned;
     const category= task.Category;
-    const subtask=  task.subtask || 'no Subtasks'
+    const subtask=  task.subtask;
     
 
    
