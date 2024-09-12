@@ -487,6 +487,16 @@ span {
     margin-top: 8px;
 }
 
+.profilebadge {
+    width: 42px;
+    height: 42px;
+    border-radius: 45px;
+    display: flex;
+    border: 2px solid #FFFFFF;
+    justify-content: center;
+    align-items: center;
+}
+
 @media(max-width: 1450px) {
     .divBoard {
         margin-left: 100px;

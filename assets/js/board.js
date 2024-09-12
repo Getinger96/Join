@@ -19,7 +19,7 @@ async function fetchTasks(path = '') {
 
         tasksArray.push(
             {
-                Title: task.title,
+                Title: task.Titel,
                 Description: task.description,
                 Assigned: task.AssignedContact,
                 duedate: task.Date,
@@ -30,9 +30,12 @@ async function fetchTasks(path = '') {
             }
         )
         
+        
+        generateTodoHTML(task,index)
     }
+   
     console.log(tasksArray)
-    updateHTML();
+   
 }
 
 function openTask() {
@@ -45,67 +48,84 @@ function closeTask() {
 }
 
 // Generieren des HTML-Codes für eine Aufgabe
-function generateTodoHTML(task, contactIndex, contactsName = '', contactLastname = '', isSelected, color, backgroundColor, textColor) {
+function generateTodoHTML(task,index) {
     // Überprüfe, ob das todo-Objekt die erwartete Struktur hat
-    const title = task.Title;
-    const description = task.Description ;
-    const dueDate = task.duedate;
-    const priority = task.Prio;
-    const assignedContacts= task.Assigned;
-    const category= task.Category;
-    const subtask=  task.subtask;
+    let title = task.Titel;
+    let description = task.Description ;
+    let dueDate = task.Date;
+    let priority = task.Prio;
+    let assignedContacts= task.AssignedContact;
+    let category= task.Category;
+    let subtask=  task.Subtask;
+
+    
+
+   
     
 
    
 
     // Definiere Prioritäts-Icons
     let priorityIcon = '';
-    switch (priority) {
-        case 'urgent':
-            priorityIcon = './assets/img/PRio_urgent (2).svg';
-            break;
-        case 'medium':
-            priorityIcon = './assets/IMG/Prio_medium (2).svg';
-            break;
-        case 'low':
-            priorityIcon = './assets/IMG/iconLowWhite.svg';
-            break;
-        default:
-            priorityIcon = './assets/img/Prio_Low (2).svg'; // Fallback-Icon
+    if (priority== 'urgent') {
+        priorityIcon = './assets/img/PRio_urgent (2).svg';
+        
+    }else if (priority== 'medium') {
+        priorityIcon = './assets/IMG/Prio_medium (2).svg';
+    }else if (priority=='low') {
+        priorityIcon = './assets/IMG/iconLowWhite.svg';
+
+
+    }else {
+        priorityIcon = './assets/img/Prio_Low (2).svg';
     }
+
+   
 
     // Definiere Farben basierend auf der Kategorie
     let categoryColor = '';
-    switch (category) {
-        case 'technicalTask':
-            categoryColor = '#1FD7C1';
-            break;
-        case 'userStory':
-            categoryColor = '#0038FF';
-            break;
-        default:
-            categoryColor = '#CCCCCC'; // Fallback-Farbe
-    }
+    if (category=='Technical Task') {
+        categoryColor = '#1FD7C1';
+    }else{
+        categoryColor = '#0038FF';
+        
+    } 
+        
+    
+    let open = document.getElementById('open')
+    open.innerHTML+=   /*html*/`
+    <div class="todo" draggable="true" ondragstart="startDragging(${category})">
+        <div class="divKategorie" style="background-color: ${categoryColor};">${category}</div>
+        <h3>${title}</h3>
+        <p>${description}</p>
+        <p>Priority: <img src="${priorityIcon}" alt="${priority} Priority"></p>
+        <p>Duedate: ${dueDate}</p>
+        <p id="assignedContacts${index}">Assigned Contacts:</p>
+        <p>Subtaskasks: ${subtask}</p>
+            
+        
 
-    return /*html*/`
-        <div class="todo" draggable="true" ondragstart="startDragging(${category})">
-            <div class="divKategorie" style="background-color: ${categoryColor};">${category}</div>
-            <h3>${title}</h3>
-            <p>${description}</p>
-            <p>Priority: <img src="${priorityIcon}" alt="${priority} Priority"></p>
+     
+    </div>
+`;
+    
+    
+getassignecontacts(assignedContacts,index)
 
-            <div onclick="selectContact(${contactIndex})" class="single-contact-box ${isSelected ? 'selected' : ''}" style="background-color:${backgroundColor};">
-                <div class="contact-icon" style="background-color:${color};">
-                    <span style="color: ${textColor};">
-                        ${contactsName.charAt(0).toUpperCase() || ''}${contactLastname.charAt(0).toUpperCase() || ''}
-                    </span>
-                </div>
-                <div class="contact-content">
-                    <span class="contactname" style="color:${textColor};">${contactsName}</span>
-                </div>
-            </div>
-        </div>
-    `;
+   
+}
+
+function getassignecontacts(assignedContacts,index) {
+let asignedContainer = document.getElementById(`assignedContacts${index}`);
+console.log(assignedContacts)
+
+for (let index = 0; index < assignedContacts.length; index++) {
+    let contact = assignedContacts[index];
+
+    asignedContainer.innerHTML+=`<div class="profilebadge">${contact}</div>`;
+    
+}
+
 }
 
 
@@ -333,7 +353,7 @@ function getSelectedCategory() {
 }
 
 function generateUniqueId() {
-    return todos.length > 0 ? todos[todos.length - 1].id + 1 : 0;
+    return tasksArray.length > 0 ? tasksArray[tasksArray.length - 1].id + 1 : 0;
 }
 
 
