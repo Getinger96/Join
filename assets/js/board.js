@@ -26,7 +26,7 @@ async function fetchTasks(path = '') {
                 Prio: task.Prio,
                 Category: task.Category,
                 subtask: task.Subtask,
-                status: 'open' ,
+                status: 'open',
             }
         )
         
@@ -36,6 +36,41 @@ async function fetchTasks(path = '') {
    
     console.log(tasksArray)
    
+}
+
+function updateHtml() {
+
+    let open = tasksArray.filter(t =>['status']== 'open');
+    document.getElementById('open').innerHTML='';
+
+    for (let index = 0; index < open.length; index++) {
+        const element = open[index];
+        document.getElementById('open').innerHTML += generateTodoHTML(element);
+    }
+
+    let progress = tasksArray.filter(t =>['status']== 'progress');
+    document.getElementById('progress').innerHTML='';
+
+    for (let index = 0; index < progress.length; index++) {
+        const element = progress[index];
+        document.getElementById('progress').innerHTML += generateTodoHTML(element);
+    }
+
+    let awaitFeedback = tasksArray.filter(t =>['status']== 'awaitFeedback');
+    document.getElementById('awaitFeedback').innerHTML='';
+
+    for (let index = 0; index < awaitFeedback.length; index++) {
+        const element = awaitFeedback[index];
+        document.getElementById('awaitFeedback').innerHTML += generateTodoHTML(element);
+    }
+
+    let closed = tasksArray.filter(t =>['status']== 'closed');
+    document.getElementById('closed').innerHTML='';
+
+    for (let index = 0; index < closed.length; index++) {
+        const element = closed[index];
+        document.getElementById('closed').innerHTML += generateTodoHTML(element);
+    }
 }
 
 function openTask() {
@@ -57,6 +92,7 @@ function generateTodoHTML(task,index) {
     let assignedContacts= task.AssignedContact;
     let category= task.Category;
     let subtask=  task.Subtask;
+    
 
     
 
@@ -94,7 +130,7 @@ function generateTodoHTML(task,index) {
     
     let open = document.getElementById('open')
     open.innerHTML+=   /*html*/`
-    <div class="todo" draggable="true" ondragstart="startDragging(${category})">
+    <div class="todo" draggable="true" ondragstart="startDragging(${index})">
         <div class="divKategorie" style="background-color: ${categoryColor};">${category}</div>
         <h3>${title}</h3>
         <p>${description}</p>
@@ -145,17 +181,14 @@ function dragLeave(ev) {
 }
 
 // Überprüfe, ob eine Spalte leer ist, und zeige die Nachricht entsprechend an
-function startDragging(id) {
-    currentDraggedElement = id;
+function startDragging(index) {
+    currentDraggedElement = index;
 }
 
 function moveTo(category) {
-    const draggedTodoIndex = tasksArray.findIndex(task => tasksArray.id === currentDraggedElement);
-    if (draggedTodoIndex !== -1) {
-        tasksArray[draggedTodoIndex].status = category;  // Aktualisiere den Status auf die neue Kategorie
-        updateHTML();  // Aktualisiere die HTML-Darstellung
-        removeHighlight(category);
-    }
+   tasksArray[currentDraggedElement]['status']= category;
+   updateHtml();
+   
 }
 
 function highlight(id) {
