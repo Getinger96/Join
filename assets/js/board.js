@@ -30,47 +30,14 @@ async function fetchTasks(path = '') {
             }
         )
 
-        updateHtml()
+        generateTodoHTML(task,index)
     }
 
     console.log(tasksArray)
 
 }
 
-function updateHtml() {
 
-    let open = tasksArray.filter(t => t['status'] == 'open');
-    document.getElementById('open').innerHTML = '';
-
-    for (let index = 0; index < open.length; index++) {
-        const element = open[index];
-        document.getElementById('open').innerHTML += generateTodoHTML(element);
-    }
-
-    let progress = tasksArray.filter(t => t['status'] == 'progress');
-    document.getElementById('progress').innerHTML = '';
-
-    for (let index = 0; index < progress.length; index++) {
-        const element = progress[index];
-        document.getElementById('progress').innerHTML += generateTodoHTML(element);
-    }
-
-    let awaitFeedback = tasksArray.filter(t => t['status'] == 'awaitFeedback');
-    document.getElementById('awaitFeedback').innerHTML = '';
-
-    for (let index = 0; index < awaitFeedback.length; index++) {
-        const element = awaitFeedback[index];
-        document.getElementById('awaitFeedback').innerHTML += generateTodoHTML(element);
-    };
-    let closed = tasksArray.filter(t => t['status'] == 'closed');
-    document.getElementById('closed').innerHTML = '';
-
-    for (let index = 0; index < closed.length; index++) {
-        const element = closed[index];
-        document.getElementById('closed').innerHTML += generateTodoHTML(element);
-    };
-
-}
 
 
 
@@ -86,7 +53,7 @@ function closeTask() {
 }
 
 // Generieren des HTML-Codes für eine Aufgabe
-function generateTodoHTML(element) {
+function generateTodoHTML(task,index) {
     // Überprüfe, ob das todo-Objekt die erwartete Struktur hat
     let title = task.Titel;
     let description = task.Description;
@@ -99,9 +66,9 @@ function generateTodoHTML(element) {
 
 
 
+   
 
-
-
+   
 
 
     // Definiere Prioritäts-Icons
@@ -129,10 +96,10 @@ function generateTodoHTML(element) {
         categoryColor = '#0038FF';
 
     }
-
+   
 
     let open = document.getElementById('open')
-    open.innerHTML +=   /*html*/`
+    open.innerHTML+=   /*html*/`
     <div class="todo" draggable="true" ondragstart="startDragging(${index})">
         <div class="divKategorie" style="background-color: ${categoryColor};">${category}</div>
         <h3>${title}</h3>
@@ -146,11 +113,11 @@ function generateTodoHTML(element) {
 
      
     </div>
-`;
+   
+       `;
 
 
-    getassignecontacts(assignedContacts, index)
-
+getassignecontacts(assignedContacts, index)
 
 }
 
