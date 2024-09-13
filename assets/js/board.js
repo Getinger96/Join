@@ -11,7 +11,7 @@ let currentDraggedElement;
 async function fetchTasks(path = '') {
     let response = await fetch(base_URL + path + ".json");
     let userJSON = await response.json();
-    let tasksAsarray= Object.values(userJSON.tasks)
+    let tasksAsarray = Object.values(userJSON.tasks)
 
 
     for (let index = 0; index < tasksAsarray.length; index++) {
@@ -29,49 +29,52 @@ async function fetchTasks(path = '') {
                 status: 'open',
             }
         )
-        
-        
-        generateTodoHTML(task,index)
+
+        updateHtml()
     }
-   
+
     console.log(tasksArray)
-   
+
 }
 
 function updateHtml() {
 
-    let open = tasksArray.filter(t =>['status']== 'open');
-    document.getElementById('open').innerHTML='';
+    let open = tasksArray.filter(t => t['status'] == 'open');
+    document.getElementById('open').innerHTML = '';
 
     for (let index = 0; index < open.length; index++) {
         const element = open[index];
         document.getElementById('open').innerHTML += generateTodoHTML(element);
     }
 
-    let progress = tasksArray.filter(t =>['status']== 'progress');
-    document.getElementById('progress').innerHTML='';
+    let progress = tasksArray.filter(t => t['status'] == 'progress');
+    document.getElementById('progress').innerHTML = '';
 
     for (let index = 0; index < progress.length; index++) {
         const element = progress[index];
         document.getElementById('progress').innerHTML += generateTodoHTML(element);
     }
 
-    let awaitFeedback = tasksArray.filter(t =>['status']== 'awaitFeedback');
-    document.getElementById('awaitFeedback').innerHTML='';
+    let awaitFeedback = tasksArray.filter(t => t['status'] == 'awaitFeedback');
+    document.getElementById('awaitFeedback').innerHTML = '';
 
     for (let index = 0; index < awaitFeedback.length; index++) {
         const element = awaitFeedback[index];
         document.getElementById('awaitFeedback').innerHTML += generateTodoHTML(element);
-    }
-
-    let closed = tasksArray.filter(t =>['status']== 'closed');
-    document.getElementById('closed').innerHTML='';
+    };
+    let closed = tasksArray.filter(t => t['status'] == 'closed');
+    document.getElementById('closed').innerHTML = '';
 
     for (let index = 0; index < closed.length; index++) {
         const element = closed[index];
         document.getElementById('closed').innerHTML += generateTodoHTML(element);
-    }
+    };
+
 }
+
+
+
+
 
 function openTask() {
     let taskDiv = document.getElementById('boardAddTask');
@@ -83,53 +86,53 @@ function closeTask() {
 }
 
 // Generieren des HTML-Codes für eine Aufgabe
-function generateTodoHTML(task,index) {
+function generateTodoHTML(element) {
     // Überprüfe, ob das todo-Objekt die erwartete Struktur hat
     let title = task.Titel;
-    let description = task.Description ;
+    let description = task.Description;
     let dueDate = task.Date;
     let priority = task.Prio;
-    let assignedContacts= task.AssignedContact;
-    let category= task.Category;
-    let subtask=  task.Subtask;
-    
+    let assignedContacts =task.AssignedContact;
+    let category = task.Category;
+    let subtask = task.Subtask;
 
-    
 
-   
-    
 
-   
+
+
+
+
+
 
     // Definiere Prioritäts-Icons
     let priorityIcon = '';
-    if (priority== 'urgent') {
+    if (priority == 'urgent') {
         priorityIcon = './assets/img/PRio_urgent (2).svg';
-        
-    }else if (priority== 'medium') {
+
+    } else if (priority == 'medium') {
         priorityIcon = './assets/IMG/Prio_medium (2).svg';
-    }else if (priority=='low') {
+    } else if (priority == 'low') {
         priorityIcon = './assets/IMG/iconLowWhite.svg';
 
 
-    }else {
+    } else {
         priorityIcon = './assets/img/Prio_Low (2).svg';
     }
 
-   
+
 
     // Definiere Farben basierend auf der Kategorie
     let categoryColor = '';
-    if (category=='Technical Task') {
+    if (category == 'Technical Task') {
         categoryColor = '#1FD7C1';
-    }else{
+    } else {
         categoryColor = '#0038FF';
-        
-    } 
-        
-    
+
+    }
+
+
     let open = document.getElementById('open')
-    open.innerHTML+=   /*html*/`
+    open.innerHTML +=   /*html*/`
     <div class="todo" draggable="true" ondragstart="startDragging(${index})">
         <div class="divKategorie" style="background-color: ${categoryColor};">${category}</div>
         <h3>${title}</h3>
@@ -144,23 +147,23 @@ function generateTodoHTML(task,index) {
      
     </div>
 `;
-    
-    
-getassignecontacts(assignedContacts,index)
 
-   
+
+    getassignecontacts(assignedContacts, index)
+
+
 }
 
-function getassignecontacts(assignedContacts,index) {
-let asignedContainer = document.getElementById(`assignedContacts${index}`);
-console.log(assignedContacts)
+function getassignecontacts(assignedContacts, index) {
+    let asignedContainer = document.getElementById(`assignedContacts${index}`);
+    console.log(assignedContacts)
 
-for (let index = 0; index < assignedContacts.length; index++) {
-    let contact = assignedContacts[index];
+    for (let index = 0; index < assignedContacts.length; index++) {
+        let contact = assignedContacts[index];
 
-    asignedContainer.innerHTML+=`<div class="profilebadge">${contact}</div>`;
-    
-}
+        asignedContainer.innerHTML += `<div class="profilebadge">${contact}</div>`;
+
+    }
 
 }
 
@@ -186,9 +189,9 @@ function startDragging(index) {
 }
 
 function moveTo(category) {
-   tasksArray[currentDraggedElement]['status']= category;
-   updateHtml();
-   
+    tasksArray[currentDraggedElement]['status'] = category;
+    updateHtml();
+
 }
 
 function highlight(id) {
