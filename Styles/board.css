@@ -34,9 +34,11 @@ label {
 .todo {
     background-color: white;
     border: 1px solid black;
-    border-radius: 5px;
+    border-radius: 24px;
     margin-bottom: 10px;
     padding: 8px;
+    width:252px;
+    height:263px;
 }
 
 h3 {
@@ -458,7 +460,7 @@ li {
 }
 
 span {
-    font-size: 20px;
+    font-size: 16px;
 }
 
 .letter {
