@@ -27,9 +27,9 @@ async function fetchTasks(path = '') {
                 status: 'open',
             }
         )
-        updateHtml();
+        
     }
-
+    updateHtml();
     console.log(tasksArray)
 
 }
