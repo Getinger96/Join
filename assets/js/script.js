@@ -63,13 +63,6 @@ async function init() {
 fetchContacts();
 includeHTML();
 checkIfLoggedIn();
-<<<<<<< HEAD
-fetchTasksSummary();
-=======
-fetchTasks();
-
-
->>>>>>> ea73104dddb7ac6accb64af3416e8c66d17547df
 
    
 }

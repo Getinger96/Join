@@ -27,12 +27,7 @@ async function fetchTasks(path = '') {
                 status: 'open',
             }
         )
-<<<<<<< HEAD
-        updateHtml(task);
-=======
-
-        generateTodoHTML(task,index)
->>>>>>> ea73104dddb7ac6accb64af3416e8c66d17547df
+        updateHtml();
     }
 
     console.log(tasksArray)
@@ -41,8 +36,7 @@ async function fetchTasks(path = '') {
 
 
 
-<<<<<<< HEAD
-function updateHtml(task) {
+function updateHtml() {
 let statusCategories = ['open', 'progress', 'awaitFeedback', 'closed'];
 
 for (let index = 0; index < statusCategories.length; index++) {
@@ -58,9 +52,6 @@ for (let index = 0; index < statusCategories.length; index++) {
 }
 
 
-=======
-
->>>>>>> ea73104dddb7ac6accb64af3416e8c66d17547df
 
 
 
@@ -74,7 +65,6 @@ function closeTask() {
 }
 
 // Generieren des HTML-Codes für eine Aufgabe
-<<<<<<< HEAD
 function generateTodoHTML(task, taskIndex) {
     // Überprüfe, ob das todo-Objekt die erwartete Struktur hat
     let title = task.Title;
@@ -84,17 +74,6 @@ function generateTodoHTML(task, taskIndex) {
     let assignedContacts =task.Assigned;
     let category = task.Category;
     let subtask = task.subtask;
-=======
-function generateTodoHTML(task,index) {
-    // Überprüfe, ob das todo-Objekt die erwartete Struktur hat
-    let title = task.Titel;
-    let description = task.Description;
-    let dueDate = task.Date;
-    let priority = task.Prio;
-    let assignedContacts =task.AssignedContact;
-    let category = task.Category;
-    let subtask = task.Subtask;
->>>>>>> ea73104dddb7ac6accb64af3416e8c66d17547df
 
 
 
@@ -131,20 +110,13 @@ function generateTodoHTML(task,index) {
     }
    
 
-<<<<<<< HEAD
   return  `
     <div class="todo" draggable="true" ondragstart="startDragging(${taskIndex})">
-=======
-    let open = document.getElementById('open')
-    open.innerHTML+=   /*html*/`
-    <div class="todo" draggable="true" ondragstart="startDragging(${index})">
->>>>>>> ea73104dddb7ac6accb64af3416e8c66d17547df
         <div class="divKategorie" style="background-color: ${categoryColor};">${category}</div>
         <h3>${title}</h3>
         <p>${description}</p>
         <p>Priority: <img src="${priorityIcon}" alt="${priority} Priority"></p>
         <p>Duedate: ${dueDate}</p>
-<<<<<<< HEAD
         <p id="assignedContacts${taskIndex}">Assigned Contacts:</p>
         <p>Subtasks: ${subtask}</p>
     </div>`;
@@ -154,25 +126,6 @@ function getassignecontacts(task, taskIndex) {
     let assignedContacts =task.Assigned;
 
     let asignedContainer = document.getElementById(`assignedContacts${taskIndex}`);
-=======
-        <p id="assignedContacts${index}">Assigned Contacts:</p>
-        <p>Subtaskasks: ${subtask}</p>
-            
-        
-
-     
-    </div>
-   
-       `;
-
-
-getassignecontacts(assignedContacts, index)
-
-}
-
-function getassignecontacts(assignedContacts, index) {
-    let asignedContainer = document.getElementById(`assignedContacts${index}`);
->>>>>>> ea73104dddb7ac6accb64af3416e8c66d17547df
     console.log(assignedContacts)
 
     for (let index = 0; index < assignedContacts.length; index++) {
@@ -404,10 +357,4 @@ function getSelectedCategory() {
 
 function generateUniqueId() {
     return tasksArray.length > 0 ? tasksArray[tasksArray.length - 1].id + 1 : 0;
-<<<<<<< HEAD
 }
-=======
-}
-
-
->>>>>>> ea73104dddb7ac6accb64af3416e8c66d17547df
