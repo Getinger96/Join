@@ -77,7 +77,9 @@ function generateTodoHTML(task, taskIndex) {
 
 
 
-
+    if (description === undefined ) {
+        description="";
+    }
    
 
    
@@ -113,11 +115,11 @@ function generateTodoHTML(task, taskIndex) {
   return  `
     <div class="todo" draggable="true" ondragstart="startDragging(${taskIndex})">
         <div class="divKategorie" style="background-color: ${categoryColor};">${category}</div>
-        <h3>${title}</h3>
-        <p>${description}</p>
+        <h3 class="title">${title}</h3>
+        <p class=""description">${description}</p>
         <p>Priority: <img src="${priorityIcon}" alt="${priority} Priority"></p>
         <p>Duedate: ${dueDate}</p>
-        <p id="assignedContacts${taskIndex}">Assigned Contacts:</p>
+        <div class="boardContacts" id="assignedContacts${taskIndex}"></div>
         <p>Subtasks: ${subtask}</p>
     </div>`;
 }
@@ -129,13 +131,34 @@ function getassignecontacts(task, taskIndex) {
     console.log(assignedContacts)
 
     for (let index = 0; index < assignedContacts.length; index++) {
-        let contact = assignedContacts[index];
+        let contact = assignedContacts[index];  
+            nameParts = contact.split(" ");
 
-        asignedContainer.innerHTML += `<div class="profilebadge">${contact}</div>`;
+          let  firstLetterForName;
+          let  firstLetterLastName;
+
+        if (nameParts.length >= 2) {
+            firstLetterForName = nameParts[0].charAt(0).toUpperCase();
+            firstLetterLastName = nameParts[1].charAt(0).toUpperCase();
+            asignedContainer.innerHTML += `<div class="contact-iconBoard">
+                    <span>${firstLetterForName}${firstLetterLastName} </span>
+                </div>`;
+        } else {
+            firstLetterForName = nameParts[0].charAt(0).toUpperCase();
+            asignedContainer.innerHTML += `<div class="contact-iconBoard">
+                    <span>${firstLetterForName} </span>
+                </div>`;
+        }
 
     }
 
 }
+
+function getLastName(fullName) {
+    let nameParts = fullName.trim().split(' ');
+    return nameParts[nameParts.length - 1];
+}
+
 
 
 function allowDrop(ev) {

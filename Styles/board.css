@@ -10,7 +10,14 @@ h2 {
 
 p,
 label {
-    font-size: 20px;
+    font-size: 16px;
+    margin-bottom: 8px;
+    margin-top: 8px;
+}
+
+
+.title {
+    font-size: 16px;
     margin-bottom: 8px;
     margin-top: 8px;
 }
@@ -33,7 +40,7 @@ label {
 
 .todo {
     background-color: white;
-    border: 1px solid black;
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.35), 0px 3px 5px rgba(0, 0, 0, 0.5);
     border-radius: 24px;
     margin-bottom: 10px;
     padding: 8px;
@@ -41,10 +48,51 @@ label {
     height:263px;
 }
 
+.todo:hover {
+    transform: rotate(5deg);
+    cursor: pointer;
+}
 h3 {
     margin: 0;
 }
 
+.boardContacts {
+    display: flex;
+    max-width: 120px;
+}
+
+.contact-iconBoard {
+    display: inline-flex;
+    border-radius: 100%;
+    background-color: red;
+    width: 32px;
+    height: 32px;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid white;
+    transform: translateX(-10px);
+}
+
+/* Das erste Icon bleibt an seiner Position */
+.contact-iconBoard:first-child {
+    transform: translateX(0);
+}
+
+/* Jedes weitere Icon wird mehr nach links verschoben */
+.contact-iconBoard:nth-child(2) {
+    transform: translateX(-10px);
+}
+
+.contact-iconBoard:nth-child(3) {
+    transform: translateX(-20px);
+}
+
+
+.title {
+    font-size: 16px;
+
+
+}
 .statusButton {
     display: flex;
     justify-content: space-between;
