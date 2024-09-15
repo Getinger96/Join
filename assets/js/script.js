@@ -60,10 +60,10 @@ async function includeHTML() {
 async function init() {
    
     
-fetchContacts(); 
+fetchContacts();
 includeHTML();
-checkIfLoggedIn(); 
-
+checkIfLoggedIn();
+fetchTasksSummary();
 
    
 }

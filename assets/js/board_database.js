@@ -21,45 +21,7 @@ let path = "tasks";
 
 
 // Funktion, um eine neue Aufgabe hinzuzufügen und in die Firebase-Datenbank zu speichern
-async function saveTask(isNewTask = true, task = {}) {
-    try {
-        let url = base_URL + "tasks.json";
-        if (!isNewTask) {
-            url = base_URL + `tasks/${task.id}.json`; // Update URL für bestehende Aufgabe
-        }
 
-        let response = await fetch(url, {
-            method: isNewTask ? "POST" : "PUT",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(task)
-        });
-
-        if (!response.ok) {
-            throw new Error(`HTTP-Fehler! Status: ${response.status}`);
-        }
-
-        let responseData = await response.json();
-        console.log(isNewTask ? "Aufgabe erfolgreich hinzugefügt" : "Aufgabe erfolgreich aktualisiert:", responseData);
-
-        if (isNewTask) {
-            task.id = responseData.name; // Firebase generiert automatisch eine ID
-            todos.push(task); // Füge neue Aufgabe zur Liste hinzu
-        } else {
-            const index = todos.findIndex(t => t.id === task.id);
-            if (index > -1) {
-                todos[index] = task; // Aktualisiere bestehende Aufgabe
-            }
-        }
-
-        updateHTML();
-        clearTask();
-        closeTask();
-    } catch (error) {
-        console.error("Fehler beim Speichern der Aufgabe:", error);
-    }
-}
 
 function createTask() {
     // Hole die Werte aus den Formularfeldern
@@ -100,15 +62,11 @@ function createTask() {
         status: status
     };
 
-    // Füge das neue Todo zur Liste hinzu
-    todos.push(newTodo);
-
-    // Speichern der Todos im localStorage
-    saveTodos();
+  
+   
 
     // Aktualisiere die HTML-Darstellung
-    updateHTML();
-
+   
     // Formular zurücksetzen
     resetForm();
 
@@ -116,85 +74,16 @@ function createTask() {
     closeTask();
 }
 
-function saveTodos() {
-    localStorage.setItem('todos', JSON.stringify(todos));
-}
 
-function loadTodos() {
-    const storedTodos = localStorage.getItem('todos');
-    if (storedTodos) {
-        todos = JSON.parse(storedTodos);
-    }
-}
+
 
 // Rufe loadTodos beim Laden der Seite auf
-document.addEventListener('DOMContentLoaded', () => {
-    loadTodos();
-    updateHTML();
-});
 
-// Abrufen aller Aufgaben aus der Datenbank
-async function fetchAllTasks(path = 'tasks') {
-    try {
-        let response = await fetch(base_URL + path + ".json");
 
-        if (!response.ok) {
-            throw new Error(`HTTP-Fehler! Status: ${response.status}`);
-        }
 
-        let tasksJSON = await response.json();
-        console.log("Alle Aufgaben:", tasksJSON);
 
-        if (tasksJSON) {
-            todos = Object.keys(tasksJSON).map(key => ({ id: key, ...tasksJSON[key] }));
-            updateHTML(); // Update HTML nach dem Laden der Aufgaben
-        } else {
-            console.warn("Keine Aufgaben gefunden.");
-            todos = []; // Leere Liste setzen, falls keine Aufgaben vorhanden sind
-            updateHTML();
-        }
-    } catch (error) {
-        console.error("Fehler beim Abrufen der Aufgaben:", error);
-    }
-}
 
 // Aktualisiert die HTML-Darstellung
-function updateHTML() {
-    console.log("Aktuelle Todos:", tasksArray);
-
-    // Container für verschiedene Status
-    const containers = {
-        open: document.getElementById('open'),
-        progress: document.getElementById('progress'),
-        awaitFeedback: document.getElementById('awaitFeedback'),
-        closed: document.getElementById('closed')
-    };
-
-    // Leere alle Container
-    Object.values(containers).forEach(container => {
-        if (container) {
-            container.innerHTML = '';
-        } else {
-            console.error('Container nicht gefunden.');
-        }
-    });
-
-    // Aufgaben durchgehen und dem richtigen Container hinzufügen
-    tasksArray.forEach(task => {
-        console.log("Aktuelle Aufgabe:", task);
-        if (containers[task.status]) {  // Verwende 'status' für die Zuordnung
-            const taskHTML = generateTodoHTML(task);
-            containers[task.status].innerHTML += taskHTML;
-        } else {
-            console.error(`Container für Status "${todo.status}" nicht gefunden.`);
-        }
-    });
-
-    // Überprüfen, ob die Kategorien leer sind, um leere Aufgaben anzuzeigen
-    ['open', 'progress', 'awaitFeedback', 'closed'].forEach(category => {
-        emptyTasks(category);
-    });
-}
 
 // Funktion, um leere Bereiche mit einem Hinweis zu versehen
 function emptyTasks(category) {
@@ -403,4 +292,55 @@ function showSelectedProfile() {
 
 
 
+function updateHTML() {
+    console.log("Aktuelle Todos:", tasksArray);
 
+    // Container für verschiedene Status
+    const containers = {
+        open: document.getElementById('open'),
+        progress: document.getElementById('progress'),
+        awaitFeedback: document.getElementById('awaitFeedback'),
+        closed: document.getElementById('closed')
+    };
+
+    // Leere alle Container
+    Object.values(containers).forEach(container => {
+        if (container) {
+            container.innerHTML = '';
+        } else {
+            console.error('Container nicht gefunden.');
+        }
+    });
+
+    // Aufgaben durchgehen und dem richtigen Container hinzufügen
+    tasksArray.forEach(task => {
+        console.log("Aktuelle Aufgabe:", task);
+        if (containers[task.status]) {  // Verwende 'status' für die Zuordnung
+            const taskHTML = generateTodoHTML(task);
+            containers[task.status].innerHTML += taskHTML;
+        } else {
+            console.error(`Container für Status "${todo.status}" nicht gefunden.`);
+        }
+    });
+
+    // Überprüfen, ob die Kategorien leer sind, um leere Aufgaben anzuzeigen
+    ['open', 'progress', 'awaitFeedback', 'closed'].forEach(category => {
+        emptyTasks(category);
+    });
+}
+
+// Funktion, um leere Bereiche mit einem Hinweis zu versehen
+function emptyTasks(category) {
+    let container = document.getElementById(category);
+    let noTasksElement = document.querySelector(`.noTasks[category="${category}"]`);
+
+    if (noTasksElement) {
+        if (container && container.innerHTML.trim() === '') {
+            noTasksElement.style.display = 'block';
+        } else {
+            noTasksElement.style.display = 'none';
+        }
+    } else {
+        console.error(`Element mit category="${category}" nicht gefunden.`);
+    }
+}

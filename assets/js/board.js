@@ -1,5 +1,3 @@
-
-
 let subtask = [];
 let tasksArray = [];
 
@@ -11,7 +9,7 @@ let currentDraggedElement;
 async function fetchTasks(path = '') {
     let response = await fetch(base_URL + path + ".json");
     let userJSON = await response.json();
-    let tasksAsarray= Object.values(userJSON.tasks)
+    let tasksAsarray = Object.values(userJSON.tasks)
 
 
     for (let index = 0; index < tasksAsarray.length; index++) {
@@ -19,21 +17,43 @@ async function fetchTasks(path = '') {
 
         tasksArray.push(
             {
-                Title: task.title,
+                Title: task.Titel,
                 Description: task.description,
                 Assigned: task.AssignedContact,
                 duedate: task.Date,
                 Prio: task.Prio,
                 Category: task.Category,
                 subtask: task.Subtask,
-                status: 'open' ,
+                status: 'open',
             }
         )
-        
+        updateHtml(task);
     }
+
     console.log(tasksArray)
-    updateHTML();
+
 }
+
+
+
+function updateHtml(task) {
+let statusCategories = ['open', 'progress', 'awaitFeedback', 'closed'];
+
+for (let index = 0; index < statusCategories.length; index++) {
+    let categoryies = statusCategories[index];
+
+        let filteredTasks = tasksArray.filter(t => t.status === categoryies);
+        document.getElementById(categoryies).innerHTML = '';
+        filteredTasks.forEach((task, taskIndex) => {
+            document.getElementById(categoryies).innerHTML += generateTodoHTML(task, taskIndex);
+            getassignecontacts(task, taskIndex);
+        });
+    };
+}
+
+
+
+
 
 function openTask() {
     let taskDiv = document.getElementById('boardAddTask');
@@ -45,76 +65,82 @@ function closeTask() {
 }
 
 // Generieren des HTML-Codes für eine Aufgabe
-function generateTodoHTML(task, contactIndex, contactsName = '', contactLastname = '', isSelected, color, backgroundColor, textColor) {
+function generateTodoHTML(task, taskIndex) {
     // Überprüfe, ob das todo-Objekt die erwartete Struktur hat
-    const title = task.Title || 'Kein Titel';
-    const description = task.Description || 'Keine Beschreibung verfügbar';
-    const dueDate = task.duedate || 'Kein Datum festgelegt';
-    const priority = task.Prio || 'low'; // Standardwert 'low'
-    const assignedContacts= task.Assigned|| 'Whole Team';
-    const category= task.Category;
-    const subtask=  task.subtask || 'no Subtasks'
-    
+    let title = task.Title;
+    let description = task.Description;
+    let dueDate = task.duedate;
+    let priority = task.Prio;
+    let assignedContacts =task.Assigned;
+    let category = task.Category;
+    let subtask = task.subtask;
+
+
+
 
    
 
+   
+
+
     // Definiere Prioritäts-Icons
     let priorityIcon = '';
-    switch (priority) {
-        case 'urgent':
-            priorityIcon = './assets/img/PRio_urgent (2).svg';
-            break;
-        case 'medium':
-            priorityIcon = './assets/IMG/Prio_medium (2).svg';
-            break;
-        case 'low':
-            priorityIcon = './assets/IMG/iconLowWhite.svg';
-            break;
-        default:
-            priorityIcon = './assets/img/Prio_Low (2).svg'; // Fallback-Icon
+    if (priority == 'urgent') {
+        priorityIcon = './assets/img/PRio_urgent (2).svg';
+
+    } else if (priority == 'medium') {
+        priorityIcon = './assets/IMG/Prio_medium (2).svg';
+    } else if (priority == 'low') {
+        priorityIcon = './assets/IMG/iconLowWhite.svg';
+
+
+    } else {
+        priorityIcon = './assets/img/Prio_Low (2).svg';
     }
+
+
 
     // Definiere Farben basierend auf der Kategorie
     let categoryColor = '';
-    switch (category) {
-        case 'technicalTask':
-            categoryColor = '#1FD7C1';
-            break;
-        case 'userStory':
-            categoryColor = '#0038FF';
-            break;
-        default:
-            categoryColor = '#CCCCCC'; // Fallback-Farbe
+    if (category == 'Technical Task') {
+        categoryColor = '#1FD7C1';
+    } else {
+        categoryColor = '#0038FF';
+
+    }
+   
+
+  return  `
+    <div class="todo" draggable="true" ondragstart="startDragging(${taskIndex})">
+        <div class="divKategorie" style="background-color: ${categoryColor};">${category}</div>
+        <h3>${title}</h3>
+        <p>${description}</p>
+        <p>Priority: <img src="${priorityIcon}" alt="${priority} Priority"></p>
+        <p>Duedate: ${dueDate}</p>
+        <p id="assignedContacts${taskIndex}">Assigned Contacts:</p>
+        <p>Subtasks: ${subtask}</p>
+    </div>`;
+}
+
+function getassignecontacts(task, taskIndex) {
+    let assignedContacts =task.Assigned;
+
+    let asignedContainer = document.getElementById(`assignedContacts${taskIndex}`);
+    console.log(assignedContacts)
+
+    for (let index = 0; index < assignedContacts.length; index++) {
+        let contact = assignedContacts[index];
+
+        asignedContainer.innerHTML += `<div class="profilebadge">${contact}</div>`;
+
     }
 
-    return /*html*/`
-        <div class="todo" draggable="true" ondragstart="startDragging(${category})">
-            <div class="divKategorie" style="background-color: ${categoryColor};">${category}</div>
-            <h3>${title}</h3>
-            <p>${description}</p>
-            <p>Priority: <img src="${priorityIcon}" alt="${priority} Priority"></p>
-
-            <div onclick="selectContact(${contactIndex})" class="single-contact-box ${isSelected ? 'selected' : ''}" style="background-color:${backgroundColor};">
-                <div class="contact-icon" style="background-color:${color};">
-                    <span style="color: ${textColor};">
-                        ${contactsName.charAt(0).toUpperCase() || ''}${contactLastname.charAt(0).toUpperCase() || ''}
-                    </span>
-                </div>
-                <div class="contact-content">
-                    <span class="contactname" style="color:${textColor};">${contactsName}</span>
-                </div>
-            </div>
-        </div>
-    `;
 }
 
 
 function allowDrop(ev) {
     ev.preventDefault();
-    const target = ev.target.closest('.drag-area');
-    if (target) {
-        highlight(target.id);
-    }
+
 }
 
 function dragLeave(ev) {
@@ -125,17 +151,14 @@ function dragLeave(ev) {
 }
 
 // Überprüfe, ob eine Spalte leer ist, und zeige die Nachricht entsprechend an
-function startDragging(id) {
-    currentDraggedElement = id;
+function startDragging(index) {
+    currentDraggedElement = index;
 }
 
 function moveTo(category) {
-    const draggedTodoIndex = todos.findIndex(todo => todo.id === currentDraggedElement);
-    if (draggedTodoIndex !== -1) {
-        todos[draggedTodoIndex].status = category;  // Aktualisiere den Status auf die neue Kategorie
-        updateHTML();  // Aktualisiere die HTML-Darstellung
-        removeHighlight(category);
-    }
+    tasksArray[currentDraggedElement]['status'] = category;
+    updateHtml();
+
 }
 
 function highlight(id) {
@@ -333,7 +356,5 @@ function getSelectedCategory() {
 }
 
 function generateUniqueId() {
-    return todos.length > 0 ? todos[todos.length - 1].id + 1 : 0;
+    return tasksArray.length > 0 ? tasksArray[tasksArray.length - 1].id + 1 : 0;
 }
-
-
