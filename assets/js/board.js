@@ -39,18 +39,29 @@ async function fetchTasks(path = '') {
 function updateHtml() {
 let statusCategories = ['open', 'progress', 'awaitFeedback', 'closed'];
 
-for (let index = 0; index < statusCategories.length; index++) {
-    let categoryies = statusCategories[index];
-
-        let filteredTasks = tasksArray.filter(t => t.status === categoryies);
+    for (let index = 0; index < statusCategories.length; index++) {
+        let categoryies = statusCategories[index];
+    
+        // Erstelle ein Array für die gefilterten Aufgaben inklusive ihrer originalen Indizes
+        let filteredTasks = [];
+        
+        // Durchlaufe das tasksArray und filtere basierend auf dem Status, ohne den Index zu verlieren
+        for (let taskIndex = 0; taskIndex < tasksArray.length; taskIndex++) {
+            let task = tasksArray[taskIndex];
+            if (task.status === categoryies) {
+                filteredTasks.push({ task, taskIndex });  // Füge die Aufgabe und den ursprünglichen Index hinzu
+            }
+        }
+    
         document.getElementById(categoryies).innerHTML = '';
-        filteredTasks.forEach((task, taskIndex) => {
+    
+        // Verwende den originalen Index der Aufgaben
+        filteredTasks.forEach(({ task, taskIndex }) => {
             document.getElementById(categoryies).innerHTML += generateTodoHTML(task, taskIndex);
-            getassignecontacts(task, taskIndex);
+            getassignecontacts(task, taskIndex);  // Übergib den ursprünglichen Index
         });
-    };
+    }
 }
-
 
 
 
@@ -180,7 +191,7 @@ function startDragging(index) {
 
 function moveTo(category) {
     tasksArray[currentDraggedElement]['status'] = category;
-    generateTodoHTML();
+   updateHtml();
     
 
 }
