@@ -63,6 +63,7 @@ async function init() {
 fetchContacts();
 includeHTML();
 checkIfLoggedIn();
+fetchTasks();
 
    
 }

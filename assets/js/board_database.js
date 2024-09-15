@@ -292,7 +292,7 @@ function showSelectedProfile() {
 
 
 
-function updateHTML() {
+function updateHTMLBoard() {
     console.log("Aktuelle Todos:", tasksArray);
 
     // Container für verschiedene Status
