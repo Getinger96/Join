@@ -192,7 +192,7 @@ function startDragging(index) {
 function moveTo(category) {
     tasksArray[currentDraggedElement]['status'] = category;
     updateHtml();
-   updateHtml();
+  
     
 
 }
