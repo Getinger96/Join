@@ -85,20 +85,23 @@ function showMobileEditContactOverlay(contactIndex) {
 
 
 async function saveEditedContactMobile(contactIndex) {
-    const name = document.getElementById('mobileName').value.trim();
-    const email = document.getElementById('mobileMail').value.trim();
-    const phone = document.getElementById('mobilePhone').value.trim();
+    let name = document.getElementById('mobileName').value.trim();
+    let email = document.getElementById('mobileMail').value.trim();
+    let phone = document.getElementById('mobilePhone').value.trim();
 
     if (name && email && phone) {
-        contactsArray[contactIndex].name = name;
-        contactsArray[contactIndex].email = email;
-        contactsArray[contactIndex].phone = phone;
+        let updatedContact = { name, email, phone };
+        Object.assign(contactsArray[contactIndex], updatedContact);
 
         sortContactsByLetter();
         closeMobileNewContact();
         getContactBig(contactIndex);
+
+        let key = contactsArray[contactIndex].id;
+        await putData(`contacts/${key}`, updatedContact);
     }
 }
+
 
 
 async function deleteContactMobile(contactIndex) {
@@ -110,3 +113,44 @@ async function deleteContactMobile(contactIndex) {
         closeMobileNewContact();
     }
 }
+
+function closeCardContactMobile() {
+    if (window.innerWidth <= 1150) {
+        clearBigContactView(); 
+        document.querySelector('.contactview-container').classList.remove('active');
+    }
+    renderContacts();
+}
+
+async function postData(path = "", data = {}) {
+    let response = await fetch(base_URL + path + ".json", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    });
+
+    return responsASJson = await response.json();
+}
+
+async function deleteData(path = "") {
+    let response = await fetch(base_URL + path + ".json", {
+        method: "DELETE",
+    });
+
+    return responsASJson = await response.json();
+}
+
+async function putData(path = "", data = {}) {
+    let response = await fetch(base_URL + path + ".json", {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    });
+
+    return responsASJson = await response.json();
+}
+

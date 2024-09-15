@@ -1,5 +1,3 @@
-
-
 let subtask = [];
 let tasksArray = [];
 
@@ -29,8 +27,7 @@ async function fetchTasks(path = '') {
                 status: 'open',
             }
         )
-
-        generateTodoHTML(task,index)
+        updateHtml();
     }
 
     console.log(tasksArray)
@@ -38,6 +35,21 @@ async function fetchTasks(path = '') {
 }
 
 
+
+function updateHtml() {
+let statusCategories = ['open', 'progress', 'awaitFeedback', 'closed'];
+
+for (let index = 0; index < statusCategories.length; index++) {
+    let categoryies = statusCategories[index];
+
+        let filteredTasks = tasksArray.filter(t => t.status === categoryies);
+        document.getElementById(categoryies).innerHTML = '';
+        filteredTasks.forEach((task, taskIndex) => {
+            document.getElementById(categoryies).innerHTML += generateTodoHTML(task, taskIndex);
+            getassignecontacts(task, taskIndex);
+        });
+    };
+}
 
 
 
@@ -53,19 +65,21 @@ function closeTask() {
 }
 
 // Generieren des HTML-Codes für eine Aufgabe
-function generateTodoHTML(task,index) {
+function generateTodoHTML(task, taskIndex) {
     // Überprüfe, ob das todo-Objekt die erwartete Struktur hat
-    let title = task.Titel;
+    let title = task.Title;
     let description = task.Description;
-    let dueDate = task.Date;
+    let dueDate = task.duedate;
     let priority = task.Prio;
-    let assignedContacts =task.AssignedContact;
+    let assignedContacts =task.Assigned;
     let category = task.Category;
-    let subtask = task.Subtask;
+    let subtask = task.subtask;
 
 
 
-
+    if (description === undefined ) {
+        description="";
+    }
    
 
    
@@ -98,49 +112,58 @@ function generateTodoHTML(task,index) {
     }
    
 
-    let open = document.getElementById('open')
-    open.innerHTML+=   /*html*/`
-    <div class="todo" draggable="true" ondragstart="startDragging(${index})">
+  return  `
+    <div class="todo" draggable="true" ondragstart="startDragging(${taskIndex})">
         <div class="divKategorie" style="background-color: ${categoryColor};">${category}</div>
-        <h3>${title}</h3>
-        <p>${description}</p>
+        <h3 class="title">${title}</h3>
+        <p class=""description">${description}</p>
         <p>Priority: <img src="${priorityIcon}" alt="${priority} Priority"></p>
         <p>Duedate: ${dueDate}</p>
-        <p id="assignedContacts${index}">Assigned Contacts:</p>
-        <p>Subtaskasks: ${subtask}</p>
-            
-        
-
-     
-    </div>
-   
-       `;
-
-
-getassignecontacts(assignedContacts, index)
-
+        <div class="boardContacts" id="assignedContacts${taskIndex}"></div>
+        <p>Subtasks: ${subtask}</p>
+    </div>`;
 }
 
-function getassignecontacts(assignedContacts, index) {
-    let asignedContainer = document.getElementById(`assignedContacts${index}`);
+function getassignecontacts(task, taskIndex) {
+    let assignedContacts =task.Assigned;
+
+    let asignedContainer = document.getElementById(`assignedContacts${taskIndex}`);
     console.log(assignedContacts)
 
     for (let index = 0; index < assignedContacts.length; index++) {
-        let contact = assignedContacts[index];
+        let contact = assignedContacts[index];  
+            nameParts = contact.split(" ");
 
-        asignedContainer.innerHTML += `<div class="profilebadge">${contact}</div>`;
+          let  firstLetterForName;
+          let  firstLetterLastName;
+
+        if (nameParts.length >= 2) {
+            firstLetterForName = nameParts[0].charAt(0).toUpperCase();
+            firstLetterLastName = nameParts[1].charAt(0).toUpperCase();
+            asignedContainer.innerHTML += `<div class="contact-iconBoard">
+                    <span>${firstLetterForName}${firstLetterLastName} </span>
+                </div>`;
+        } else {
+            firstLetterForName = nameParts[0].charAt(0).toUpperCase();
+            asignedContainer.innerHTML += `<div class="contact-iconBoard">
+                    <span>${firstLetterForName} </span>
+                </div>`;
+        }
 
     }
 
 }
+
+function getLastName(fullName) {
+    let nameParts = fullName.trim().split(' ');
+    return nameParts[nameParts.length - 1];
+}
+
 
 
 function allowDrop(ev) {
     ev.preventDefault();
-    const target = ev.target.closest('.drag-area');
-    if (target) {
-        highlight(target.id);
-    }
+
 }
 
 function dragLeave(ev) {
@@ -359,5 +382,3 @@ function getSelectedCategory() {
 function generateUniqueId() {
     return tasksArray.length > 0 ? tasksArray[tasksArray.length - 1].id + 1 : 0;
 }
-
-

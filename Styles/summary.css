@@ -9,7 +9,6 @@ body {
     display: flex;
     margin-bottom: 120px;
     margin-top: 200px;
-    overflow-y: auto;
     max-height: 80vh;
 }
 
@@ -89,7 +88,7 @@ height: 80px;
 
 
     .kanbanboradtodo:hover {
-        transform: scale(1.15);
+        transform: scale(1.00);
         box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
         background-color: #2A3647;
         cursor: pointer;
@@ -161,7 +160,7 @@ gap: 45px;
 
 
 .kanbanboraddone:hover {
-    transform: scale(1.15);
+    transform: scale(1.00);
     box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
     background-color: #2A3647;
     cursor: pointer;
@@ -222,7 +221,7 @@ font-weight: 400;
 }
 
 .kanbanboardprio:hover {
-    transform: scale(1.15);
+    transform: scale(1.00);
     box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
     background-color: #2A3647;
     cursor: pointer;
@@ -305,7 +304,7 @@ gap:10px
 }
 
 .taskboard:hover {
-    transform: scale(1.15);
+    transform: scale(1.00);
     box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
     background-color: #2A3647;
     cursor: pointer;

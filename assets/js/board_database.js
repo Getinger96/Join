@@ -292,4 +292,55 @@ function showSelectedProfile() {
 
 
 
+function updateHTML() {
+    console.log("Aktuelle Todos:", tasksArray);
 
+    // Container für verschiedene Status
+    const containers = {
+        open: document.getElementById('open'),
+        progress: document.getElementById('progress'),
+        awaitFeedback: document.getElementById('awaitFeedback'),
+        closed: document.getElementById('closed')
+    };
+
+    // Leere alle Container
+    Object.values(containers).forEach(container => {
+        if (container) {
+            container.innerHTML = '';
+        } else {
+            console.error('Container nicht gefunden.');
+        }
+    });
+
+    // Aufgaben durchgehen und dem richtigen Container hinzufügen
+    tasksArray.forEach(task => {
+        console.log("Aktuelle Aufgabe:", task);
+        if (containers[task.status]) {  // Verwende 'status' für die Zuordnung
+            const taskHTML = generateTodoHTML(task);
+            containers[task.status].innerHTML += taskHTML;
+        } else {
+            console.error(`Container für Status "${todo.status}" nicht gefunden.`);
+        }
+    });
+
+    // Überprüfen, ob die Kategorien leer sind, um leere Aufgaben anzuzeigen
+    ['open', 'progress', 'awaitFeedback', 'closed'].forEach(category => {
+        emptyTasks(category);
+    });
+}
+
+// Funktion, um leere Bereiche mit einem Hinweis zu versehen
+function emptyTasks(category) {
+    let container = document.getElementById(category);
+    let noTasksElement = document.querySelector(`.noTasks[category="${category}"]`);
+
+    if (noTasksElement) {
+        if (container && container.innerHTML.trim() === '') {
+            noTasksElement.style.display = 'block';
+        } else {
+            noTasksElement.style.display = 'none';
+        }
+    } else {
+        console.error(`Element mit category="${category}" nicht gefunden.`);
+    }
+}

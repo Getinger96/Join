@@ -2,31 +2,38 @@ let countPrioUrgent = 0;
 let iconsBooleanColorChange = false;
 
 
-async function fetchContacts(path = '') {
+
+async function fetchTasksSummary(path = '') {
     let response = await fetch(base_URL + path + ".json");
     let userJSON = await response.json();
-    let userAsArray = Object.values(userJSON.contacts);
+    let tasksAsarray = Object.values(userJSON.tasks)
 
-    for (let index = 0; index < userAsArray.length; index++) {
-        let contact = userAsArray[index];
 
-            contactsArray.push({
-                email: contact.email,
-                name: contact.name,
-                password: contact.password,
-                phone: contact.phone
-            });
-    
-    }
+    for (let index = 0; index < tasksAsarray.length; index++) {
+        let task = tasksAsarray[index];
 
-    console.log(contactsArray);
+        tasksArray.push(
+            {
+                Title: task.Titel,
+                Description: task.description,
+                Assigned: task.AssignedContact,
+                duedate: task.Date,
+                Prio: task.Prio,
+                Category: task.Category,
+                subtask: task.Subtask,
+                status: 'open',
+            }
+        )
+        loadToDoAtTheKanbanBoard(index);
+        
+}
 
 }
 
 
 
 
-function loadToDoAtTheKanbanBoard() {
+function loadToDoAtTheKanbanBoard(index) {
         let statusCheckopen = 'open';
         let statusCheckprogress = 'progress';
         let statusCheckawaitingfeedback = 'awaitFeedback';
@@ -37,9 +44,8 @@ function loadToDoAtTheKanbanBoard() {
         let countAwaitingFeedback = 0;
         let countDone = 0;
         
-       for (let index = 0; index < todos.length; index++) {
-        let kanbanBoardStatus = todos[index].status;
-        let kanbanBoradPrioUrgent = todos[index].priority;
+        let kanbanBoardStatus = tasksArray[index].status;
+        let kanbanBoradPrioUrgent = tasksArray[index].Prio;
 
  
     if (kanbanBoardStatus === statusCheckopen) {
@@ -53,17 +59,17 @@ function loadToDoAtTheKanbanBoard() {
     }
 
     showAllPrioUrgent(kanbanBoradPrioUrgent);
-    }
+
 
 showKanbanBoardTodo(countOpen);                
 showKanbanBoardTaskProgress(countInProgress);  
 showKanbanBoarTaskAwaitingFeedback(countAwaitingFeedback);  
 showKanbanBoardTaskdone(countDone);                  
-showAllTaskinBoard(todos);          
+showAllTaskinBoard(tasksArray);          
 showTheCurrentDate();    
 checkIfLoggedIn();     
-}
 
+}
 
 
 function showKanbanBoardTodo(countOpen) {
@@ -96,10 +102,10 @@ function showKanbanBoardTaskdone(countDone) {
 }
 
 
-function showAllTaskinBoard(todos) {
+function showAllTaskinBoard(tasksArray) {
     let getAllTask = document.getElementById('allTaskinBoard');
 
-    getAllTask.innerHTML = `${todos.length}`;
+    getAllTask.innerHTML = `${tasksArray.length}`;
     
 }
 
