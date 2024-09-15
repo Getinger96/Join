@@ -372,11 +372,13 @@ async function saveEditedContact(index) {
         contactsArray[index].name = name;
         contactsArray[index].email = email;
         contactsArray[index].phone = phone;
+        let password =contactsArray[index].password;
 
         const newContact = {
             name: name,
             email: email,
-            phone: phone
+            phone: phone,
+            password: password
         };
 
 
