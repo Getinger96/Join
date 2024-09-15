@@ -351,15 +351,30 @@ async function saveEditedContact(index) {
     let phone = document.getElementById('telephone').value.trim();
 
     if (name && email && phone) {
-        let key = contactsArray[index].id; 
-        let updatedContact = { name, email, phone };
-        Object.assign(contactsArray[index], updatedContact);
+        
+
+
+
+        let key= contactsArray[index].id;
+        contactsArray[index].name = name;
+        contactsArray[index].email = email;
+        contactsArray[index].phone = phone;
+        let password =contactsArray[index].password;
+
+        const newContact = {
+            name: name,
+            email: email,
+            phone: phone,
+            password: password
+        };
+
+
 
         sortContactsByLetter();
         closeCardContact();
         getContactBig(index);
 
-        await putData(`contacts/${key}`, updatedContact);
+        await putData(`contacts/${key}`,newContact);
     }
 }
 
