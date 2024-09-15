@@ -21,17 +21,12 @@ async function fetchContacts(path = '') {
     let keysArray = Object.keys(userJSON.contacts);
     let userAsArray = Object.values(userJSON.contacts);
 
-
-
     for (let index = 0; index < userAsArray.length; index++) {
         let contact = userAsArray[index];
         let key = keysArray[index];
 
-
-
         if (contact.email !== "guest@web.de") {
             contactsArray.push({
-                
                 
                 id: key,
                 email: contact.email,
@@ -45,9 +40,6 @@ async function fetchContacts(path = '') {
     console.log(contactsArray);
     sortContactsByLetter();  // Kontakte sortieren
 }
-
-
-
 
 function getLastName(fullName) {
     let nameParts = fullName.trim().split(' ');
@@ -112,7 +104,6 @@ function displayContacts(contactIndex, contactsEmail, contactsName, contactLastn
             </div>`;
 }
 
-
 function selectContact(index) {
     selectedContactIndex = index;
     getContacts();
@@ -141,7 +132,6 @@ function getContactBig(index) {
     let showContacts = document.getElementById('contactViewBig');
     showContacts.innerHTML = showContactBig(contact.name, contact.email, contact.phone, getLastName(contact.name), color);
 }
-
 
 function showContactBig(contactsName, contactsEmail, contactPhone, contactLastname, color) {
     return `<div class="largcontactbox">
@@ -189,7 +179,6 @@ function showContactBig(contactsName, contactsEmail, contactPhone, contactLastna
         </div>
     </div>`;
 }
-
 
 function collectBeginningLetters() {
     beginningLetter = [];
@@ -262,7 +251,6 @@ function addNewContact() {
     };
 }
 
-
 function displayEditContactLogo(contactsName, contactLastname, color) {
     return `
         <div class="edit-contact-logo" style="background-color:${color};">
@@ -307,7 +295,6 @@ function editContact(index) {
     }
 }
 
-
 async function deleteContact(index) {
     let key= contactsArray[index].id;
     if (index > -1) {
@@ -344,12 +331,14 @@ function closeCardContact() {
     document.querySelector('.createContact-button').textContent = 'Create Contact';
     document.querySelector('.addNewContactimg').style.display = 'block';
 
-      if (window.innerWidth <= 1150) {
-        clearBigContactView();
-        document.querySelector('.contactview-container').classList.remove('active');
-        renderContacts();
-    }
+    renderContacts(); 
 }
+
+function handleCloseContact() {
+    closeCardContact();       
+    closeCardContactMobile(); 
+}
+
 
 function clearBigContactView() {
     let showContacts = document.getElementById('contactViewBig');
@@ -357,77 +346,24 @@ function clearBigContactView() {
 }
 
 async function saveEditedContact(index) {
-
-
-    const name = document.getElementById('name').value.trim();
-    const email = document.getElementById('mail').value.trim();
-    const phone = document.getElementById('telephone').value.trim();
+    let name = document.getElementById('name').value.trim();
+    let email = document.getElementById('mail').value.trim();
+    let phone = document.getElementById('telephone').value.trim();
 
     if (name && email && phone) {
-        
-
-
-
-        let key= contactsArray[index].id;
-        contactsArray[index].name = name;
-        contactsArray[index].email = email;
-        contactsArray[index].phone = phone;
-
-        const newContact = {
-            name: name,
-            email: email,
-            phone: phone
-        };
-
-
+        let key = contactsArray[index].id; 
+        let updatedContact = { name, email, phone };
+        Object.assign(contactsArray[index], updatedContact);
 
         sortContactsByLetter();
         closeCardContact();
         getContactBig(index);
-        putData(`contacts/${key}`, newContact)
 
+        await putData(`contacts/${key}`, updatedContact);
     }
-
 }
 
 
-
-
-
-
-
-
-async function postData(path = "", data = {}) {
-    let response = await fetch(base_URL + path + ".json", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-    });
-
-    return responsASJson = await response.json();
-}
-
-async function deleteData(path = "") {
-    let response = await fetch(base_URL + path + ".json", {
-        method: "DELETE",
-    });
-
-    return responsASJson = await response.json();
-}
-
-async function putData(path = "", data = {}) {
-    let response = await fetch(base_URL + path + ".json", {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-    });
-
-    return responsASJson = await response.json();
-}
 
 
 

@@ -9,7 +9,6 @@ body {
     display: flex;
     margin-bottom: 120px;
     margin-top: 200px;
-    overflow-y: auto;
     max-height: 80vh;
 }
 
