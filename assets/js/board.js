@@ -196,13 +196,12 @@ function generateContactsHtml(assignedContacts) {
         let contactFirstname = contactParts[0] || '';  // Der erste Teil ist der Vorname
         let contactLastname = contactParts.slice(1).join(' ') || '';  // Der Rest ist der Nachname
 
-        console.log(`Generating contact HTML for: ${contactFirstname} ${contactLastname}`); // Debugging-Zeile
-
         const color = getRandomColorForContact(); // Farbe für den Kontakt generieren
-        contactsHtml += displayContacts(index, contactFirstname, contactLastname, '', color, true); // true für große Ansicht
+        contactsHtml += getassignecontacts(index, contactFirstname, contactLastname, '', color); // Farbe korrekt übergeben
     });
     return contactsHtml;
 }
+
 
 function createShowCard(task) {
     const title = task.Title || '';
@@ -255,52 +254,31 @@ function closeOverlay() {
 }
 
 
-function getassignecontacts(task, taskIndex) {
-    let assignedContacts = task.Assigned;
+function getassignecontacts(contactIndex, contactFirstname, contactLastname, selectedClass, color) {
+    if (typeof contactFirstname !== 'string') {
+        contactFirstname = String(contactFirstname); // Konvertiere zu einem String, wenn es nötig ist
+    }
+    if (typeof contactLastname !== 'string') {
+        contactLastname = String(contactLastname); // Konvertiere zu einem String, wenn es nötig ist
+    }
 
-    let asignedContainer = document.getElementById(`assignedContacts${taskIndex}`);
-    console.log(assignedContacts)
-
-    for (let index = 0; index < assignedContacts.length; index++) {
-        let contact = assignedContacts[index];
-        nameParts = contact.split(" ");
-
-        let firstLetterForName;
-        let firstLetterLastName;
-
-        if (nameParts.length >= 2) {
-            firstLetterForName = nameParts[0].charAt(0).toUpperCase();
-            firstLetterLastName = nameParts[1].charAt(0).toUpperCase();
-
-            
-            asignedContainer.innerHTML += `<div id="${colorid}"class="contact-iconBoard">
-                    <span>${firstLetterForName}${firstLetterLastName} </span>
-                </div>`;
-        } else {
-            firstLetterForName = nameParts[0].charAt(0).toUpperCase();
-            asignedContainer.innerHTML += `<div id="${colorid}" class="contact-iconBoard">
-                    <span>${firstLetterForName} </span>
-                </div>`;
-
-        }
-        showTheNameInitialInColorBoard(firstLetterForName,colorid);
-}
-if (assignedContacts.length >= 4) {
-    asignedContainer.innerHTML += `<div id="colorName" class="contact-iconBoard">
-    <span> +${remainingContacts} </span>
-</div>`
-}
+    return `<div onclick="selectContact(${contactIndex})" class="single-contact-box ${selectedClass}">
+                <div class="contact-icon" style="background-color:${color};">
+                    <span>${contactFirstname.charAt(0).toUpperCase()}${contactLastname.charAt(0).toUpperCase()}</span>
+                </div>
+                <div class="contact-content">
+                    <span class="contactname">${contactFirstname} ${contactLastname}</span>
+                </div>
+            </div>`;
 }
 
 
 function showTheNameInitialInColorBoard(firstLetterForName, colorid) {
-
-
-    let nameColorContainer  = document.getElementById(colorid);
+    let nameColorContainer = document.getElementById(colorid);
     colorLetter.forEach(colorLetterItem => {
 
         if (firstLetterForName === colorLetterItem.letter) {
-            let currentColor = colorLetterItem.color; 
+            let currentColor = colorLetterItem.color;
             nameColorContainer.style.backgroundColor = currentColor;
         }
     });
@@ -334,7 +312,7 @@ function startDragging(idBoard) {
 function moveTo(category) {
     currentDraggedElement--;
     let task = tasksArray[currentDraggedElement]
-    
+
     // Wenn die Aufgabe gefunden wurde, ändere ihren Status
     if (task) {
         task.status = category;
@@ -481,10 +459,10 @@ function showTasksSearch(search, todos) {
 
 //Add Task leeren
 function clearTask() {
-    document.getElementById('Selection_Container').innerHTML='';
+    document.getElementById('Selection_Container').innerHTML = '';
     getContacts();
 
-    
+
     // Titel-Eingabefeld leeren
     document.getElementById('taskTitle').value = '';
 
@@ -506,11 +484,11 @@ function clearTask() {
     // Datumseingabefeld leeren (falls vorhanden)
     document.querySelector('.inputTitle[type="date"]').value = '';
 
-    document.getElementById('Selected_profiles_Container').innerHTML= '';
+    document.getElementById('Selected_profiles_Container').innerHTML = '';
 
     // Prioritäts-Buttons zurücksetzen
     resetButtons();
-    
+
 }
 function resetPrioButtons() {
     // Hintergrundfarbe und Bild der Prio-Buttons auf den Standard zurücksetzen

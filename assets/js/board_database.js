@@ -182,7 +182,7 @@ function displayContacts(contactIndex, contactFirstname, contactLastname, select
     const isSelected = selectedContactIndices.includes(contactIndex);
     const backgroundColor = isSelected ? '#2A3647' : '';  // Hintergrundfarbe für ausgewählte Kontakte
     const textColor = isSelected ? 'white' : 'black';  // Textfarbe für ausgewählte Kontakte
-   
+
 
     // Bestimme die Anzeige je nach Ansicht (klein/groß)
     if (isLargeView) {
@@ -208,7 +208,7 @@ function displayContacts(contactIndex, contactFirstname, contactLastname, select
 
 
 function selectContact(index) {
-   
+
     const contact = contactsArray[index];
     const selectedIndex = selectedContactIndices.indexOf(index);
 
