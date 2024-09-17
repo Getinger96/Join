@@ -132,38 +132,58 @@ function getassignecontacts(task, taskIndex) {
     let asignedContainer = document.getElementById(`assignedContacts${taskIndex}`);
     console.log(assignedContacts)
 
-    for (let index = 0; index <  Math.min(assignedContacts.length, maxContact); index++) {
+    for (let index = 0; index <  assignedContacts.length; index++) {
+        if (index === maxContact) {
+            break; 
+        }
+
         let contact = assignedContacts[index];  
             nameParts = contact.split(" ");
 
           let  firstLetterForName;
           let  firstLetterLastName;
+          let colorid = `contactIcon_${taskIndex}_${index}`;
 
         if (nameParts.length >= 2) {
             firstLetterForName = nameParts[0].charAt(0).toUpperCase();
             firstLetterLastName = nameParts[1].charAt(0).toUpperCase();
 
             
-            asignedContainer.innerHTML += `<div class="contact-iconBoard">
+            asignedContainer.innerHTML += `<div id="${colorid}"class="contact-iconBoard">
                     <span>${firstLetterForName}${firstLetterLastName} </span>
                 </div>`;
         } else {
             firstLetterForName = nameParts[0].charAt(0).toUpperCase();
-            asignedContainer.innerHTML += `<div class="contact-iconBoard">
+            asignedContainer.innerHTML += `<div id="${colorid}" class="contact-iconBoard">
                     <span>${firstLetterForName} </span>
                 </div>`;
 
         }
-
+        showTheNameInitialInColorBoard(firstLetterForName,colorid);
 }
 if (assignedContacts.length >= 4) {
-    asignedContainer.innerHTML += `<div class="contact-iconBoard">
+    asignedContainer.innerHTML += `<div id="colorName" class="contact-iconBoard">
     <span> +${remainingContacts} </span>
-</div>`;
-
+</div>`
+}
 }
 
+
+function showTheNameInitialInColorBoard(firstLetterForName, colorid) {
+
+
+    let nameColorContainer  = document.getElementById(colorid);
+    colorLetter.forEach(colorLetterItem => {
+
+        if (firstLetterForName === colorLetterItem.letter) {
+            let currentColor = colorLetterItem.color; 
+            nameColorContainer.style.backgroundColor = currentColor;
+        }
+    });
 }
+
+
+
 function getLastName(fullName) {
     let nameParts = fullName.trim().split(' ');
     return nameParts[nameParts.length - 1];
