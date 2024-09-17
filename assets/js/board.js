@@ -5,7 +5,7 @@ let currentTodo = [];
 
 
 let currentDraggedElement;
-
+let id = 0
 
 async function fetchTasks(path = '') {
     let response = await fetch(base_URL + path + ".json");
@@ -15,9 +15,11 @@ async function fetchTasks(path = '') {
 
     for (let index = 0; index < tasksAsarray.length; index++) {
         let task = tasksAsarray[index];
+        id++;
 
         tasksArray.push(
             {
+                idTask: id,
                 Title: task.Titel,
                 Description: task.description,
                 Assigned: task.AssignedContact,
@@ -269,19 +271,42 @@ function getassignecontacts(task, taskIndex) {
         if (nameParts.length >= 2) {
             firstLetterForName = nameParts[0].charAt(0).toUpperCase();
             firstLetterLastName = nameParts[1].charAt(0).toUpperCase();
-            asignedContainer.innerHTML += `<div class="contact-iconBoard">
+
+            
+            asignedContainer.innerHTML += `<div id="${colorid}"class="contact-iconBoard">
                     <span>${firstLetterForName}${firstLetterLastName} </span>
                 </div>`;
         } else {
             firstLetterForName = nameParts[0].charAt(0).toUpperCase();
-            asignedContainer.innerHTML += `<div class="contact-iconBoard">
+            asignedContainer.innerHTML += `<div id="${colorid}" class="contact-iconBoard">
                     <span>${firstLetterForName} </span>
                 </div>`;
+
         }
-
-    }
-
+        showTheNameInitialInColorBoard(firstLetterForName,colorid);
 }
+if (assignedContacts.length >= 4) {
+    asignedContainer.innerHTML += `<div id="colorName" class="contact-iconBoard">
+    <span> +${remainingContacts} </span>
+</div>`
+}
+}
+
+
+function showTheNameInitialInColorBoard(firstLetterForName, colorid) {
+
+
+    let nameColorContainer  = document.getElementById(colorid);
+    colorLetter.forEach(colorLetterItem => {
+
+        if (firstLetterForName === colorLetterItem.letter) {
+            let currentColor = colorLetterItem.color; 
+            nameColorContainer.style.backgroundColor = currentColor;
+        }
+    });
+}
+
+
 
 function getLastName(fullName) {
     let nameParts = fullName.trim().split(' ');
@@ -303,12 +328,19 @@ function dragLeave(ev) {
 }
 
 // Überprüfe, ob eine Spalte leer ist, und zeige die Nachricht entsprechend an
-function startDragging(index) {
-    currentDraggedElement = index;
+function startDragging(idBoard) {
+    currentDraggedElement = idBoard;
 }
-
 function moveTo(category) {
-    tasksArray[currentDraggedElement]['status'] = category;
+    currentDraggedElement--;
+    let task = tasksArray[currentDraggedElement]
+    
+    // Wenn die Aufgabe gefunden wurde, ändere ihren Status
+    if (task) {
+        task.status = category;
+    }
+
+    // Aktualisiere das HTML, um die Änderungen darzustellen
     updateHtml();
 
 
@@ -449,6 +481,10 @@ function showTasksSearch(search, todos) {
 
 //Add Task leeren
 function clearTask() {
+    document.getElementById('Selection_Container').innerHTML='';
+    getContacts();
+
+    
     // Titel-Eingabefeld leeren
     document.getElementById('taskTitle').value = '';
 
@@ -470,10 +506,12 @@ function clearTask() {
     // Datumseingabefeld leeren (falls vorhanden)
     document.querySelector('.inputTitle[type="date"]').value = '';
 
+    document.getElementById('Selected_profiles_Container').innerHTML= '';
+
     // Prioritäts-Buttons zurücksetzen
     resetButtons();
+    
 }
-
 function resetPrioButtons() {
     // Hintergrundfarbe und Bild der Prio-Buttons auf den Standard zurücksetzen
     const prioButtons = ['urgent', 'medium', 'low'];

@@ -182,6 +182,7 @@ function displayContacts(contactIndex, contactFirstname, contactLastname, select
     const isSelected = selectedContactIndices.includes(contactIndex);
     const backgroundColor = isSelected ? '#2A3647' : '';  // Hintergrundfarbe für ausgewählte Kontakte
     const textColor = isSelected ? 'white' : 'black';  // Textfarbe für ausgewählte Kontakte
+   
 
     // Bestimme die Anzeige je nach Ansicht (klein/groß)
     if (isLargeView) {
@@ -207,6 +208,7 @@ function displayContacts(contactIndex, contactFirstname, contactLastname, select
 
 
 function selectContact(index) {
+   
     const contact = contactsArray[index];
     const selectedIndex = selectedContactIndices.indexOf(index);
 
@@ -222,6 +224,7 @@ function selectContact(index) {
 
     getContacts(); // Kontakte neu rendern, um die Markierung zu aktualisieren
 }
+
 
 function letterSorting() {
     contactsArray.forEach(contact => {
@@ -245,19 +248,7 @@ function letterSorting() {
     getContacts();
 }
 
-function selectContact(index) {
-    const selectedIndex = selectedContactIndices.indexOf(index);
 
-    if (selectedIndex > -1) {
-        selectedContactIndices.splice(selectedIndex, 1);
-    } else {
-        selectedContactIndices.push(index);
-    }
-
-    console.log('Selected Contact Indices:', selectedContactIndices);
-    getContacts();
-    showSelectedProfile(); // Aktualisiere die Anzeige der ausgewählten Profile
-}
 
 function deselctedtContact(i, name, firstletters, color) {
     let checkbox = document.getElementById(`checkbox${i}`);
