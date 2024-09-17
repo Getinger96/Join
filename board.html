@@ -23,7 +23,7 @@
 <body onload="init()">
     <section>
         <header>
-            
+
 
             <div w3-include-html="./assets/templates/desktop_template.html"></div>
             <div class="headblock">
@@ -38,12 +38,12 @@
                     <div class="logInUser_Container" onclick="showLogOutSection();">
                         <span class="logInUser" id="loginUserId"></span>
                     </div>
-            
+
                 </div>
             </div>
-            
+
             <div id="logoutId"> </div>
-        
+
         </header>
 
         <nav class="board displayFlex backgrount-color">
@@ -65,6 +65,12 @@
                             <button class="curser addTaskButton">Add task</button>
                             <img src="./assets/img/add (1).png">
                         </div>
+                    </div>
+                </div>
+
+                <div id="overlay" class="overlay d-none">
+                    <div id="todoBig" class="cardbig">
+                        <!-- Hier wird die große ToDo-Anzeige eingefügt -->
                     </div>
                 </div>
 
