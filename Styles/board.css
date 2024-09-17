@@ -70,12 +70,7 @@ h3 {
     justify-content: center;
     align-items: center;
     border: 2px solid white;
-    transform: translateX(-8px);
-}
-
-/* Das erste Icon bleibt an seiner Position */
-.contact-iconBoard:first-child {
-    transform: translateX(0);
+    margin-right: -8px;
 }
 
 
