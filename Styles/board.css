@@ -71,12 +71,7 @@ h3 {
     justify-content: center;
     align-items: center;
     border: 2px solid white;
-    transform: translateX(-8px);
-}
-
-/* Das erste Icon bleibt an seiner Position */
-.contact-iconBoard:first-child {
-    transform: translateX(0);
+    margin-right: -8px;
 }
 
 
@@ -154,10 +149,11 @@ Button {
     background-color: white;
     border-radius: 30px;
     border: 2px solid #e4dedc;
-    width: 1100px;
     display: flex;
     justify-content: center;
     margin-left: 150px;
+    height: 870px;
+    width: 1116px
 }
 
 .widthBoard {
@@ -359,6 +355,8 @@ li {
 
 .closeAddTask {
     background-color: #FFFFFF;
+    margin-top: 70px;
+
 }
 
 .curser {
@@ -516,6 +514,7 @@ span {
 .addTaskTitle {
     display: flex;
     justify-content: space-between;
+    height: 150px;
 }
 
 .divKategorie {

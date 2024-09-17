@@ -1,10 +1,14 @@
 let countPrioUrgent = 0;
+let countOpen = 0;
+let countInProgress = 0;
+let countAwaitingFeedback = 0;
+let countDone = 0;
 let iconsBooleanColorChange = false;
 
 
 
 
-
+updateSummary();
 
 
 function loadToDoAtTheKanbanBoard(index) {

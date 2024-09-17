@@ -5,7 +5,7 @@ let currentTodo = [];
 
 
 let currentDraggedElement;
-
+let id = 0
 
 async function fetchTasks(path = '') {
     let response = await fetch(base_URL + path + ".json");
@@ -15,9 +15,11 @@ async function fetchTasks(path = '') {
 
     for (let index = 0; index < tasksAsarray.length; index++) {
         let task = tasksAsarray[index];
+        id++;
 
         tasksArray.push(
             {
+                idTask: id,
                 Title: task.Titel,
                 Description: task.description,
                 Assigned: task.AssignedContact,
@@ -35,15 +37,17 @@ async function fetchTasks(path = '') {
 
 }
 
+
+
 function updateHtml() {
-    let statusCategories = ['open', 'progress', 'awaitFeedback', 'closed'];
+let statusCategories = ['open', 'progress', 'awaitFeedback', 'closed'];
 
     for (let index = 0; index < statusCategories.length; index++) {
         let categoryies = statusCategories[index];
-
+    
         // Erstelle ein Array für die gefilterten Aufgaben inklusive ihrer originalen Indizes
         let filteredTasks = [];
-
+        
         // Durchlaufe das tasksArray und filtere basierend auf dem Status, ohne den Index zu verlieren
         for (let taskIndex = 0; taskIndex < tasksArray.length; taskIndex++) {
             let task = tasksArray[taskIndex];
@@ -51,9 +55,9 @@ function updateHtml() {
                 filteredTasks.push({ task, taskIndex });  // Füge die Aufgabe und den ursprünglichen Index hinzu
             }
         }
-
+    
         document.getElementById(categoryies).innerHTML = '';
-
+    
         // Verwende den originalen Index der Aufgaben
         filteredTasks.forEach(({ task, taskIndex }) => {
             document.getElementById(categoryies).innerHTML += generateTodoHTML(task, taskIndex);
@@ -83,8 +87,10 @@ function generateTodoHTML(task, taskIndex) {
     let category = task.Category;
     let subtask = task.subtask;
 
-    if (description === undefined) {
-        description = "";
+
+
+    if (description === undefined ) {
+        description="";
     }
 
     // Definiere Prioritäts-Icons
@@ -105,19 +111,20 @@ function generateTodoHTML(task, taskIndex) {
         categoryColor = '#1FD7C1';
     } else {
         categoryColor = '#0038FF';
-    }
 
-    // Füge das onclick-Event hinzu, das die Aufgabe öffnet
-    return `
-        <div class="todo" draggable="true" ondragstart="startDragging(${taskIndex})" onclick="openToDo(${taskIndex})">
-            <div class="divKategorie" style="background-color: ${categoryColor};">${category}</div>
-            <h3 class="title">${title}</h3>
-            <p class="description">${description}</p>
-            <p>Priority: <img src="${priorityIcon}" alt="${priority} Priority"></p>
-            <p>Duedate: ${dueDate}</p>
-            <div class="boardContacts" id="assignedContacts${taskIndex}"></div>
-            <p>Subtasks: ${subtask}</p>
-        </div>`;
+    }
+   
+
+  return  `
+    <div class="todo" draggable="true" ondragstart="startDragging(${taskIndex})">
+        <div class="divKategorie" style="background-color: ${categoryColor};">${category}</div>
+        <h3 class="title">${title}</h3>
+        <p class=""description">${description}</p>
+        <p>Priority: <img src="${priorityIcon}" alt="${priority} Priority"></p>
+        <p>Duedate: ${dueDate}</p>
+        <div class="boardContacts" id="assignedContacts${taskIndex}"></div>
+        <p>Subtasks: ${subtask}</p>
+    </div>`;
 }
 
 // Funktion zum Anzeigen der großen ToDo-Karte im Overlay
@@ -254,34 +261,57 @@ function closeOverlay() {
 
 
 function getassignecontacts(task, taskIndex) {
-    let assignedContacts = task.Assigned;
+    let assignedContacts =task.Assigned;
 
     let asignedContainer = document.getElementById(`assignedContacts${taskIndex}`);
     console.log(assignedContacts)
 
     for (let index = 0; index < assignedContacts.length; index++) {
-        let contact = assignedContacts[index];
-        nameParts = contact.split(" ");
+        let contact = assignedContacts[index];  
+            nameParts = contact.split(" ");
 
-        let firstLetterForName;
-        let firstLetterLastName;
+          let  firstLetterForName;
+          let  firstLetterLastName;
 
         if (nameParts.length >= 2) {
             firstLetterForName = nameParts[0].charAt(0).toUpperCase();
             firstLetterLastName = nameParts[1].charAt(0).toUpperCase();
-            asignedContainer.innerHTML += `<div class="contact-iconBoard">
+
+            
+            asignedContainer.innerHTML += `<div id="${colorid}"class="contact-iconBoard">
                     <span>${firstLetterForName}${firstLetterLastName} </span>
                 </div>`;
         } else {
             firstLetterForName = nameParts[0].charAt(0).toUpperCase();
-            asignedContainer.innerHTML += `<div class="contact-iconBoard">
+            asignedContainer.innerHTML += `<div id="${colorid}" class="contact-iconBoard">
                     <span>${firstLetterForName} </span>
                 </div>`;
+
         }
-
-    }
-
+        showTheNameInitialInColorBoard(firstLetterForName,colorid);
 }
+if (assignedContacts.length >= 4) {
+    asignedContainer.innerHTML += `<div id="colorName" class="contact-iconBoard">
+    <span> +${remainingContacts} </span>
+</div>`
+}
+}
+
+
+function showTheNameInitialInColorBoard(firstLetterForName, colorid) {
+
+
+    let nameColorContainer  = document.getElementById(colorid);
+    colorLetter.forEach(colorLetterItem => {
+
+        if (firstLetterForName === colorLetterItem.letter) {
+            let currentColor = colorLetterItem.color; 
+            nameColorContainer.style.backgroundColor = currentColor;
+        }
+    });
+}
+
+
 
 function getLastName(fullName) {
     let nameParts = fullName.trim().split(' ');
@@ -303,15 +333,22 @@ function dragLeave(ev) {
 }
 
 // Überprüfe, ob eine Spalte leer ist, und zeige die Nachricht entsprechend an
-function startDragging(index) {
-    currentDraggedElement = index;
+function startDragging(idBoard) {
+    currentDraggedElement = idBoard;
 }
-
 function moveTo(category) {
-    tasksArray[currentDraggedElement]['status'] = category;
+    currentDraggedElement--;
+    let task = tasksArray[currentDraggedElement]
+    
+    // Wenn die Aufgabe gefunden wurde, ändere ihren Status
+    if (task) {
+        task.status = category;
+    }
+
+    // Aktualisiere das HTML, um die Änderungen darzustellen
     updateHtml();
-
-
+  
+    
 
 }
 
@@ -449,6 +486,10 @@ function showTasksSearch(search, todos) {
 
 //Add Task leeren
 function clearTask() {
+    document.getElementById('Selection_Container').innerHTML='';
+    getContacts();
+
+    
     // Titel-Eingabefeld leeren
     document.getElementById('taskTitle').value = '';
 
@@ -470,10 +511,12 @@ function clearTask() {
     // Datumseingabefeld leeren (falls vorhanden)
     document.querySelector('.inputTitle[type="date"]').value = '';
 
+    document.getElementById('Selected_profiles_Container').innerHTML= '';
+
     // Prioritäts-Buttons zurücksetzen
     resetButtons();
+    
 }
-
 function resetPrioButtons() {
     // Hintergrundfarbe und Bild der Prio-Buttons auf den Standard zurücksetzen
     const prioButtons = ['urgent', 'medium', 'low'];
