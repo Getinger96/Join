@@ -1,6 +1,7 @@
 let subtask = [];
 let tasksArray = [];
-
+let todoData = [];
+let currentTodo = [];
 
 
 let currentDraggedElement;
@@ -27,24 +28,22 @@ async function fetchTasks(path = '') {
                 status: 'open',
             }
         )
-        
+
     }
     updateHtml();
     console.log(tasksArray)
 
 }
 
-
-
 function updateHtml() {
-let statusCategories = ['open', 'progress', 'awaitFeedback', 'closed'];
+    let statusCategories = ['open', 'progress', 'awaitFeedback', 'closed'];
 
     for (let index = 0; index < statusCategories.length; index++) {
         let categoryies = statusCategories[index];
-    
+
         // Erstelle ein Array für die gefilterten Aufgaben inklusive ihrer originalen Indizes
         let filteredTasks = [];
-        
+
         // Durchlaufe das tasksArray und filtere basierend auf dem Status, ohne den Index zu verlieren
         for (let taskIndex = 0; taskIndex < tasksArray.length; taskIndex++) {
             let task = tasksArray[taskIndex];
@@ -52,9 +51,9 @@ let statusCategories = ['open', 'progress', 'awaitFeedback', 'closed'];
                 filteredTasks.push({ task, taskIndex });  // Füge die Aufgabe und den ursprünglichen Index hinzu
             }
         }
-    
+
         document.getElementById(categoryies).innerHTML = '';
-    
+
         // Verwende den originalen Index der Aufgaben
         filteredTasks.forEach(({ task, taskIndex }) => {
             document.getElementById(categoryies).innerHTML += generateTodoHTML(task, taskIndex);
@@ -62,9 +61,6 @@ let statusCategories = ['open', 'progress', 'awaitFeedback', 'closed'];
         });
     }
 }
-
-
-
 
 function openTask() {
     let taskDiv = document.getElementById('boardAddTask');
@@ -76,42 +72,32 @@ function closeTask() {
 }
 
 // Generieren des HTML-Codes für eine Aufgabe
+// Generieren des HTML-Codes für eine Aufgabe
 function generateTodoHTML(task, taskIndex) {
     // Überprüfe, ob das todo-Objekt die erwartete Struktur hat
     let title = task.Title;
     let description = task.Description;
     let dueDate = task.duedate;
     let priority = task.Prio;
-    let assignedContacts =task.Assigned;
+    let assignedContacts = task.Assigned;
     let category = task.Category;
     let subtask = task.subtask;
 
-
-
-    if (description === undefined ) {
-        description="";
+    if (description === undefined) {
+        description = "";
     }
-   
-
-   
-
 
     // Definiere Prioritäts-Icons
     let priorityIcon = '';
     if (priority == 'urgent') {
-        priorityIcon = './assets/img/PRio_urgent (2).svg';
-
+        priorityIcon = './assets/img/Prio_urgent(2).svg';
     } else if (priority == 'medium') {
-        priorityIcon = './assets/IMG/Prio_medium (2).svg';
+        priorityIcon = './assets/IMG/Prio_medium(2).svg';
     } else if (priority == 'low') {
         priorityIcon = './assets/IMG/iconLowWhite.svg';
-
-
     } else {
-        priorityIcon = './assets/img/Prio_Low (2).svg';
+        priorityIcon = './assets/img/Prio_Low(2).svg';
     }
-
-
 
     // Definiere Farben basierend auf der Kategorie
     let categoryColor = '';
@@ -119,34 +105,166 @@ function generateTodoHTML(task, taskIndex) {
         categoryColor = '#1FD7C1';
     } else {
         categoryColor = '#0038FF';
-
     }
-   
 
-  return  `
-    <div class="todo" draggable="true" ondragstart="startDragging(${taskIndex})">
-        <div class="divKategorie" style="background-color: ${categoryColor};">${category}</div>
-        <h3 class="title">${title}</h3>
-        <p class=""description">${description}</p>
-        <p>Priority: <img src="${priorityIcon}" alt="${priority} Priority"></p>
-        <p>Duedate: ${dueDate}</p>
-        <div class="boardContacts" id="assignedContacts${taskIndex}"></div>
-        <p>Subtasks: ${subtask}</p>
-    </div>`;
+    // Füge das onclick-Event hinzu, das die Aufgabe öffnet
+    return `
+        <div class="todo" draggable="true" ondragstart="startDragging(${taskIndex})" onclick="openToDo(${taskIndex})">
+            <div class="divKategorie" style="background-color: ${categoryColor};">${category}</div>
+            <h3 class="title">${title}</h3>
+            <p class="description">${description}</p>
+            <p>Priority: <img src="${priorityIcon}" alt="${priority} Priority"></p>
+            <p>Duedate: ${dueDate}</p>
+            <div class="boardContacts" id="assignedContacts${taskIndex}"></div>
+            <p>Subtasks: ${subtask}</p>
+        </div>`;
 }
 
+// Funktion zum Anzeigen der großen ToDo-Karte im Overlay
+function showCard(task) {
+    try {
+        if (!task || typeof task !== 'object') {
+            console.error('Invalid task object:', task);
+            return;
+        }
+
+        let todoBig = document.getElementById('todoBig');
+        let showCardHTML = createShowCard(task);  // Funktion zum Erstellen der Detailansicht-HTML
+        todoBig.innerHTML = showCardHTML;
+    } catch (error) {
+        console.error('Error displaying task:', error);
+    }
+}
+
+
+// Funktion zum Öffnen des großen ToDos im Overlay
+function openToDo(taskIndex) {
+    let task = tasksArray[taskIndex];  // Hole die Aufgabe aus dem Array basierend auf dem Index
+    if (!task) {
+        console.error('Task not found at index:', taskIndex);
+        return;
+    }
+
+    console.log('Opening task:', task);  // Ausgabe der Task-Daten zur Überprüfung
+
+    let todoBig = document.getElementById('todoBig');
+    todoBig.classList = 'cardbig';  // Setze CSS-Klasse für das große Div
+    todoBig.innerHTML = '';
+
+    document.body.style.overflow = "hidden";
+    document.getElementById('overlay').classList.remove('d-none');
+
+    showCard(task);  // Übergibt die ausgewählte Aufgabe zur Anzeige
+}
+
+
+// Funktion zum Erstellen des HTML-Inhalts für die große ToDo-Anzeige
+function getPriorityIcon(priority) {
+    // Überprüfe, ob `priority` ein String ist
+    if (typeof priority !== 'string') {
+        console.warn('Priority is not a string:', priority);
+        return './assets/img/Prio_Low(2).svg'; // Standard-Icon im Fehlerfall
+    }
+
+    switch (priority.toLowerCase()) {
+        case 'urgent':
+            return './assets/img/Prio_urgent(2).svg';
+        case 'medium':
+            return './assets/IMG/Prio_medium(2).svg';
+        case 'low':
+            return './assets/IMG/iconLowWhite.svg';
+        default:
+            console.warn('Unknown priority:', priority);
+            return './assets/img/Prio_Low(2).svg'; // Standard-Icon im Fehlerfall
+    }
+}
+
+
+function getCategoryColor(category) {
+    if (category === 'Technical Task') {
+        return '#1FD7C1';
+    }
+    return '#0038FF';
+}
+
+function generateContactsHtml(assignedContacts) {
+    let contactsHtml = '';
+    assignedContacts.forEach((contact, index) => {
+        let contactParts = contact.split(' ');
+        let contactFirstname = contactParts[0] || '';  // Der erste Teil ist der Vorname
+        let contactLastname = contactParts.slice(1).join(' ') || '';  // Der Rest ist der Nachname
+
+        console.log(`Generating contact HTML for: ${contactFirstname} ${contactLastname}`); // Debugging-Zeile
+
+        const color = getRandomColorForContact(); // Farbe für den Kontakt generieren
+        contactsHtml += displayContacts(index, contactFirstname, contactLastname, '', color, true); // true für große Ansicht
+    });
+    return contactsHtml;
+}
+
+function createShowCard(task) {
+    const title = task.Title || '';
+    const description = task.Description || '';
+    const dueDate = task.duedate || '';
+
+    // Überprüfen, ob `task.Prio` ein Array ist und den ersten Wert extrahieren
+    const priority = Array.isArray(task.Prio) ? (task.Prio[0] || '') : (task.Prio || '');
+
+    const assignedContacts = task.Assigned || [];
+    const category = task.Category || '';
+    const subtask = task.subtask || '';
+
+    const priorityIcon = getPriorityIcon(priority);
+    const categoryColor = getCategoryColor(category);
+    const contactsHtml = generateContactsHtml(assignedContacts);
+
+    return /*html*/`
+        <div class="todo-detail">
+            <div>
+                <div class="divKategorie" style="background-color: ${categoryColor};">${category}</div>   
+                <button onclick="closeOverlay()" class="close-button"><img src="./assets/img/iconoir_cancel.png" alt=""></button>
+            </div>
+            <h2>${title}</h2>
+            <p><strong>Description:</strong> ${description}</p>
+            <p><strong>Due Date:</strong> ${dueDate}</p>
+            <p><strong>Priority:</strong> 
+                <span>${priority}</span>  <!-- Zeige das Wort (z.B. urgent, medium, low) -->
+                <img src="${priorityIcon}" alt="${priority} Priority"> <!-- Zeige das Icon passend zur Priorität -->
+            </p>
+            <p><strong>Assigned To:</strong></p>
+            <div class="assigned-contacts">
+                ${contactsHtml}
+            </div>
+            <p><strong>Subtasks:</strong> ${subtask}</p>
+        </div>
+    `;
+}
+
+function getRandomColorForContact() {
+    const colors = ['#FF5733', '#33FF57', '#3357FF', '#FF33A1'];
+    return colors[Math.floor(Math.random() * colors.length)];
+}
+
+
+// Funktion zum Schließen des Overlays
+function closeOverlay() {
+    document.getElementById('overlay').classList.add('d-none');
+    document.body.style.overflow = "auto"; // Scrollen der Seite wieder erlauben
+}
+
+
 function getassignecontacts(task, taskIndex) {
-    let assignedContacts =task.Assigned;
+    let assignedContacts = task.Assigned;
 
     let asignedContainer = document.getElementById(`assignedContacts${taskIndex}`);
     console.log(assignedContacts)
 
     for (let index = 0; index < assignedContacts.length; index++) {
-        let contact = assignedContacts[index];  
-            nameParts = contact.split(" ");
+        let contact = assignedContacts[index];
+        nameParts = contact.split(" ");
 
-          let  firstLetterForName;
-          let  firstLetterLastName;
+        let firstLetterForName;
+        let firstLetterLastName;
 
         if (nameParts.length >= 2) {
             firstLetterForName = nameParts[0].charAt(0).toUpperCase();
@@ -192,8 +310,8 @@ function startDragging(index) {
 function moveTo(category) {
     tasksArray[currentDraggedElement]['status'] = category;
     updateHtml();
-  
-    
+
+
 
 }
 
@@ -243,9 +361,9 @@ function addCurrentSubtask() {
 function resetButtons() {
     // Zurücksetzen aller Buttons
     let buttons = [
-        { id: 'urgent', color: 'initial', imgSrc: './assets/img/PRio_urgent (2).svg' },
-        { id: 'medium', color: 'initial', imgSrc: './assets/IMG/Prio_medium (2).svg' },
-        { id: 'low', color: 'initial', imgSrc: './assets/img/Prio_Low (2).svg' }
+        { id: 'urgent', color: 'initial', imgSrc: './assets/img/Prio_urgent(2).svg' },
+        { id: 'medium', color: 'initial', imgSrc: './assets/IMG/Prio_medium(2).svg' },
+        { id: 'low', color: 'initial', imgSrc: './assets/img/Prio_Low(2).svg' }
     ];
 
     buttons.forEach(button => {
