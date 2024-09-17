@@ -331,6 +331,10 @@ function showTasksSearch(search, todos) {
 
 //Add Task leeren
 function clearTask() {
+    document.getElementById('Selection_Container').innerHTML='';
+    getContacts();
+
+    
     // Titel-Eingabefeld leeren
     document.getElementById('taskTitle').value = '';
 
@@ -352,10 +356,12 @@ function clearTask() {
     // Datumseingabefeld leeren (falls vorhanden)
     document.querySelector('.inputTitle[type="date"]').value = '';
 
+    document.getElementById('Selected_profiles_Container').innerHTML= '';
+
     // Prioritäts-Buttons zurücksetzen
     resetButtons();
+    
 }
-
 function resetPrioButtons() {
     // Hintergrundfarbe und Bild der Prio-Buttons auf den Standard zurücksetzen
     const prioButtons = ['urgent', 'medium', 'low'];

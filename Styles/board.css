@@ -152,10 +152,11 @@ Button {
     background-color: white;
     border-radius: 30px;
     border: 2px solid #e4dedc;
-    width: 1100px;
     display: flex;
     justify-content: center;
     margin-left: 150px;
+    height: 870px;
+    width: 1116px
 }
 
 .widthBoard {
@@ -357,6 +358,8 @@ li {
 
 .closeAddTask {
     background-color: #FFFFFF;
+    margin-top: 70px;
+
 }
 
 .curser {
@@ -514,6 +517,7 @@ span {
 .addTaskTitle {
     display: flex;
     justify-content: space-between;
+    height: 150px;
 }
 
 .divKategorie {
