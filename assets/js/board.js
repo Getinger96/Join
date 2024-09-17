@@ -4,7 +4,7 @@ let tasksArray = [];
 
 
 let currentDraggedElement;
-
+let id = 0
 
 async function fetchTasks(path = '') {
     let response = await fetch(base_URL + path + ".json");
@@ -14,9 +14,11 @@ async function fetchTasks(path = '') {
 
     for (let index = 0; index < tasksAsarray.length; index++) {
         let task = tasksAsarray[index];
+        id++;
 
         tasksArray.push(
             {
+                idTask: id,
                 Title: task.Titel,
                 Description: task.description,
                 Assigned: task.AssignedContact,
@@ -27,30 +29,28 @@ async function fetchTasks(path = '') {
                 status: 'open',
             }
         )
-        updateHtml();
+        
     }
-
+    updateHtml();
     console.log(tasksArray)
 
 }
 
 
-
 function updateHtml() {
-let statusCategories = ['open', 'progress', 'awaitFeedback', 'closed'];
+    let statusCategories = ['open', 'progress', 'awaitFeedback', 'closed'];
+    for (let index = 0; index < statusCategories.length; index++) {
+        let category = statusCategories[index];
+        let filteredTasks = tasksArray.filter(t => t.status === category);
+        document.getElementById(category).innerHTML = ''; // Clear the category
 
-for (let index = 0; index < statusCategories.length; index++) {
-    let categoryies = statusCategories[index];
-
-        let filteredTasks = tasksArray.filter(t => t.status === categoryies);
-        document.getElementById(categoryies).innerHTML = '';
-        filteredTasks.forEach((task, taskIndex) => {
-            document.getElementById(categoryies).innerHTML += generateTodoHTML(task, taskIndex);
-            getassignecontacts(task, taskIndex);
+        filteredTasks.forEach(task => {
+            let taskHTML = generateTodoHTML(task, task.idTask); // Use idTask as a unique identifier
+            document.getElementById(category).innerHTML += taskHTML;
+            getassignecontacts(task, task.idTask); // Use idTask to fetch correct contacts
         });
-    };
+    }
 }
-
 
 
 
@@ -74,7 +74,7 @@ function generateTodoHTML(task, taskIndex) {
     let assignedContacts =task.Assigned;
     let category = task.Category;
     let subtask = task.subtask;
-
+    let idBoard = task.idTask
 
 
     if (description === undefined ) {
@@ -113,9 +113,9 @@ function generateTodoHTML(task, taskIndex) {
    
 
   return  `
-    <div class="todo" draggable="true" ondragstart="startDragging(${taskIndex})">
+    <div class="todo" draggable="true" ondragstart="startDragging(${idBoard})">
         <div class="divKategorie" style="background-color: ${categoryColor};">${category}</div>
-        <h3 class="title">${title}</h3>
+        <h3 class="title">${title} ${idBoard}</h3>
         <p class=""description">${description}</p>
         <p>Priority: <img src="${priorityIcon}" alt="${priority} Priority"></p>
         <p>Duedate: ${dueDate}</p>
@@ -126,11 +126,13 @@ function generateTodoHTML(task, taskIndex) {
 
 function getassignecontacts(task, taskIndex) {
     let assignedContacts =task.Assigned;
+    let maxContact = 4;
+    let remainingContacts = assignedContacts.length - maxContact;
 
     let asignedContainer = document.getElementById(`assignedContacts${taskIndex}`);
     console.log(assignedContacts)
 
-    for (let index = 0; index < assignedContacts.length; index++) {
+    for (let index = 0; index <  Math.min(assignedContacts.length, maxContact); index++) {
         let contact = assignedContacts[index];  
             nameParts = contact.split(" ");
 
@@ -140,6 +142,8 @@ function getassignecontacts(task, taskIndex) {
         if (nameParts.length >= 2) {
             firstLetterForName = nameParts[0].charAt(0).toUpperCase();
             firstLetterLastName = nameParts[1].charAt(0).toUpperCase();
+
+            
             asignedContainer.innerHTML += `<div class="contact-iconBoard">
                     <span>${firstLetterForName}${firstLetterLastName} </span>
                 </div>`;
@@ -148,12 +152,18 @@ function getassignecontacts(task, taskIndex) {
             asignedContainer.innerHTML += `<div class="contact-iconBoard">
                     <span>${firstLetterForName} </span>
                 </div>`;
+
         }
 
-    }
+}
+if (assignedContacts.length >= 4) {
+    asignedContainer.innerHTML += `<div class="contact-iconBoard">
+    <span> +${remainingContacts} </span>
+</div>`;
 
 }
 
+}
 function getLastName(fullName) {
     let nameParts = fullName.trim().split(' ');
     return nameParts[nameParts.length - 1];
@@ -174,14 +184,20 @@ function dragLeave(ev) {
 }
 
 // Überprüfe, ob eine Spalte leer ist, und zeige die Nachricht entsprechend an
-function startDragging(index) {
-    currentDraggedElement = index;
+function startDragging(idBoard) {
+    currentDraggedElement = idBoard;
 }
-
 function moveTo(category) {
-    tasksArray[currentDraggedElement]['status'] = category;
-    updateHtml();
+    currentDraggedElement--;
+    let task = tasksArray[currentDraggedElement]
+    
+    // Wenn die Aufgabe gefunden wurde, ändere ihren Status
+    if (task) {
+        task.status = category;
+    }
 
+    // Aktualisiere das HTML, um die Änderungen darzustellen
+    updateHtml();
 }
 
 function highlight(id) {
