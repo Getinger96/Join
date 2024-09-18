@@ -376,6 +376,8 @@ resetButtons();
 
 // Leert die Liste der ausgewählten Kontakte
 selectedContactIndices = [];
+assignedContacts= [];
+fetchContacts();
 
 getContacts();
 }
