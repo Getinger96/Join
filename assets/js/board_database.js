@@ -348,3 +348,26 @@ function emptyTasks(category) {
         console.error(`Element mit category="${category}" nicht gefunden.`);
     }
 }
+
+function toggleSubtaskButtons(input) {
+    const checkBtn = document.getElementById('subtask-check-btn');
+    const cancelBtn = document.getElementById('subtask-cancel-btn');
+    const addIcon = document.getElementById('add-subtask-icon');
+
+    if (input.value.trim() !== "") {
+        checkBtn.style.display = 'block';
+        cancelBtn.style.display = 'block';
+        addIcon.style.display = 'none'; 
+    } else {
+        checkBtn.style.display = 'none';
+        cancelBtn.style.display = 'none';
+        addIcon.style.display = 'block'; 
+    }
+}
+
+function clearSubtaskInput() {
+    const input = document.getElementById('new-subtask');
+    input.value = '';
+    toggleSubtaskButtons(input);
+}
+

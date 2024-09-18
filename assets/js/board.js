@@ -65,12 +65,34 @@ function updateHtml() {
 }
 
 function openTask() {
-    let taskDiv = document.getElementById('boardAddTask');
-    taskDiv.style.display = taskDiv.style.display === 'none' || taskDiv.style.display === '' ? 'block' : 'none';
+    // Prüfen der Fensterbreite
+    const windowWidth = window.innerWidth;
+
+    // Wenn die Bildschirmbreite kleiner oder gleich 1450px ist, zur add_task.html weiterleiten
+    if (windowWidth <= 1450) {
+        window.location.href = 'add_task.html'; // Redirect zur add_task.html
+    } else {
+        // Standardmäßig das Overlay öffnen
+        let taskDiv = document.getElementById('boardAddTask');
+        let overlay = document.getElementById('darkOverlay');
+
+        if (taskDiv.style.display === 'none' || taskDiv.style.display === '') {
+            taskDiv.style.display = 'block';  // Overlay anzeigen
+            overlay.style.display = 'block';  // Dunklen Hintergrund anzeigen
+            document.body.style.overflow = 'hidden';  // Hauptseite scrollen verhindern
+        } else {
+            taskDiv.style.display = 'none';  // Overlay ausblenden
+            overlay.style.display = 'none';  // Dunklen Hintergrund ausblenden
+            document.body.style.overflow = 'auto';  // Scrollen auf der Hauptseite wieder erlauben
+        }
+    }
 }
+
 
 function closeTask() {
     document.getElementById('boardAddTask').style.display = 'none';
+    document.getElementById('darkOverlay').style.display = 'none';
+    document.body.style.overflow = 'auto';  // Scrollen auf der Hauptseite wieder erlauben
 }
 
 // Generieren des HTML-Codes für eine Aufgabe
@@ -342,17 +364,46 @@ function removeHighlight(id) {
 // Add Subtask
 function addSubtask() {
     let list = document.getElementById('list');
-    list.innerHTML = ''; //Liste wird gelöscht
+    list.innerHTML = ''; // Liste wird gelöscht
     for (let i = 0; i < subtask.length; i++) {
-        let li = document.createElement('li'); //Liste wird wieder hinzugefügt
-        li.innerHTML = subtask[i] + /*html*/` <button class="subtaskList" onclick="deleteItem(' + i +')"><img src="./assets/img/delete.png"></button>`;
+        let li = document.createElement('li');
+        li.classList.add('subtaskListItem'); 
+        li.innerHTML = `
+            <span id="subtask-text-${i}" class="subtaskText">${subtask[i]}</span>
+            <input id="subtask-input-${i}" class="subtaskEditInput" style="display:none;" type="text" value="${subtask[i]}">
+            <div class="subtaskActions">
+                <button class="subtaskList" onclick="editItem(${i})">
+                    <img class="EditSubTaskcheck" src="./assets/img/edit.png" alt="Edit">
+                </button>
+                <button class="subtaskList" onclick="saveItem(${i})" style="display:none;">
+                    <img class="addSubTaskcheck" src="assets/img/check.png" alt="Save">
+                </button>
+                <button class="subtaskList" onclick="deleteItem(${i})">
+                    <img class="deleteSubTaskcheck" src="./assets/img/delete.png" alt="Delete">
+                </button>
+            </div>`;
         list.appendChild(li);
     }
 }
 
-function deleteItem(i) { //Einzelnen Elemente aus der Liste löschen
+// Subtask löschen
+function deleteItem(i) {
     subtask.splice(i, 1);
     addSubtask();
+}
+
+
+function editItem(i) {
+    document.getElementById(`subtask-text-${i}`).style.display = 'none';
+    document.getElementById(`subtask-input-${i}`).style.display = 'inline';
+    document.querySelector(`.subtaskList[onclick="saveItem(${i})"]`).style.display = 'inline';
+    document.querySelector(`.subtaskList[onclick="editItem(${i})"]`).style.display = 'none';
+}
+
+function saveItem(i) {
+    const newValue = document.getElementById(`subtask-input-${i}`).value;
+    subtask[i] = newValue;
+    addSubtask(); // Aktualisiert die Liste nach dem Speichern
 }
 
 function addCurrentSubtask() {
@@ -361,11 +412,11 @@ function addCurrentSubtask() {
         subtask.push(CurrentSubtask);
         document.getElementById('new-subtask').value = ''; // Liste wieder leeren
         addSubtask();
-    }
-    else {
+    } else {
         alert('Genügend Subtasks hinzugefügt!');
     }
 }
+
 
 //Prio Buttons
 function resetButtons() {
