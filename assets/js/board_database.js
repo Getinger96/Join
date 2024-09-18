@@ -179,37 +179,33 @@ function closelist() {
 
 
 function displayContacts(contactIndex, contactsName, contactLastname, selectedClass, color) {
-    
     const isSelected = selectedContactIndices.includes(contactIndex);
     const backgroundColor = isSelected ? '#2A3647' : '';  // Hintergrundfarbe für ausgewählte Kontakte
     const textColor = isSelected ? 'white' : 'black';  // Textfarbe für ausgewählte Kontakte
-   
 
-    return `<div onclick="selectContact(${contactIndex})" class="single-contact-box ${isSelected ? 'selected' : ''}" style="background-color:${backgroundColor};">
+    return `<div id="contact-${contactIndex}" onclick="selectContact(${contactIndex}, '${contactsName}', '${contactLastname}', '${color}')" class="single-contact-box ${isSelected ? 'selected' : ''}" style="background-color:${backgroundColor};">
                 <div class="contact-icon" style="background-color:${color};">
                     <span style="color: ${textColor};">${contactsName.charAt(0).toUpperCase()}${contactLastname.charAt(0).toUpperCase()}</span>
                 </div>
                 <div class="contact-content">
                     <span class="contactname" style="color:${textColor};">${contactsName}</span>
                 </div>
-            </div>`;}
-
-           
-
+            </div>`;
+}
 
 
-function selectContact(index) {
-   
+
+function selectContact(index, name, lastname, color) {
     const contact = contactsArray[index];
     const selectedIndex = selectedContactIndices.indexOf(index);
 
     if (selectedIndex > -1) {
-        // Wenn bereits ausgewählt, dann abwählen und Farbe übergeben
-        deselctedtContact(index, contact.name, `${contact.name.charAt(0).toUpperCase()}${getLastName(contact.name).charAt(0).toUpperCase()}`, contact.color);
-        selectedContactIndices.splice(selectedIndex, 1);
+        // Wenn bereits ausgewählt, dann abwählen und Informationen übergeben
+        deselctedtContact(index, name, lastname, color);
+        selectedContactIndices.splice(selectedIndex, 1); // Entferne den Kontakt aus der ausgewählten Liste
     } else {
         // Wenn noch nicht ausgewählt, dann auswählen
-        selectedContactIndices.push(index);
+        selectedContactIndices.push(index); // Füge den Kontakt zur ausgewählten Liste hinzu
         showSelectedProfile(); // Aktualisiere die Anzeige der ausgewählten Profile
     }
 
@@ -241,23 +237,25 @@ function letterSorting() {
 
 
 
-function deselctedtContact(i, name, firstletters, color) {
-    let checkbox = document.getElementById(`checkbox${i}`);
+function deselctedtContact(index, lastname, color) {
+    const selectedIndex = selectedContactIndices.indexOf(index);
+    if (selectedIndex > -1) {
+        selectedContactIndices.splice(selectedIndex, 1);
+    // Hier verwenden wir die übergebenen Parameter (index, name, lastname, color)
+    let profileContainer = document.getElementById(`contact-${index}`);
+    
+    // Setze die Hintergrundfarbe und Textfarbe auf Standard zurück
+    if (profileContainer) {
+        profileContainer.style.backgroundColor = ''; // Hintergrundfarbe zurücksetzen
+        profileContainer.querySelector('.contact-icon').style.backgroundColor = color; // Iconfarbe bleibt unverändert
+        profileContainer.querySelector('.contactname').style.color = 'black'; // Textfarbe auf Standard zurücksetzen
+        profileContainer.querySelector('.contact-icon span').style.color = 'black'; // Initialen ebenfalls auf Standard
+    }
 
-    checkbox.innerHTML = '';
-    checkbox.innerHTML = `<img onclick="selectedContact(${i},'${name}','${firstletters}')" id="checkImg${i}"  class="check_img" src="assets/IMG/Check button.svg" alt="">`;
+    
 
-    let profileContainer = document.getElementById(`profile_Container${i}`);
-
-    // Setze die Originalfarben zurück
-    profileContainer.style.backgroundColor = '';
-    profileContainer.classList.remove(color);
-    profileContainer.classList.remove('color_white');
-
-    // Entferne den Namen aus der Liste der zugewiesenen Kontakte
-    assignedContacts.splice(assignedContacts.indexOf(name), 1);
-
-    showSelectedProfile(firstletters, i);
+    showSelectedProfile(lastname, index); // Aktualisiere die Anzeige der ausgewählten Profile
+}
 }
 
 function showSelectedProfile() {

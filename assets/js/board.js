@@ -333,38 +333,51 @@ function showTasksSearch(search, todos) {
 }
 
 //Add Task leeren
-function clearTask() {
-    document.getElementById('Selection_Container').innerHTML='';
-    getContacts();
+function clearTask(){
+selectedContactIndices.forEach((contactIndex) => {
+    const contact = contactsArray[contactIndex];
+    deselctedtContact(contactIndex, contact.name, `${contact.name.charAt(0).toUpperCase()}${getLastName(contact.name).charAt(0).toUpperCase()}`, contact.color);
+});
 
-    
-    // Titel-Eingabefeld leeren
-    document.getElementById('taskTitle').value = '';
+// Clear the Selection_Container
+document.getElementById('Selection_Container').innerHTML = '';
 
-    // Beschreibungstextfeld leeren
-    document.getElementById('description').value = '';
+// Kontakte neu rendern
 
-    // Kategorie-Dropdown zurücksetzen
-    document.getElementById('kategorie').selectedIndex = 0;
 
-    // Subtasks-Liste leeren
-    document.getElementById('list').innerHTML = '';
+// Titel-Eingabefeld leeren
+document.getElementById('taskTitle').value = '';
 
-    // Subtask-Eingabefeld leeren
-    document.getElementById('new-subtask').value = '';
+// Beschreibungstextfeld leeren
+document.getElementById('description').value = '';
 
-    // 'Assigned to'-Dropdown zurücksetzen (falls vorhanden)
-    document.getElementById('select_container').selectedIndex = 0;
+// Kategorie-Dropdown zurücksetzen
+document.getElementById('kategorie').selectedIndex = 0;
 
-    // Datumseingabefeld leeren (falls vorhanden)
-    document.querySelector('.inputTitle[type="date"]').value = '';
+// Subtasks-Liste leeren
+document.getElementById('list').innerHTML = '';
 
-    document.getElementById('Selected_profiles_Container').innerHTML= '';
+// Subtask-Eingabefeld leeren
+document.getElementById('new-subtask').value = '';
 
-    // Prioritäts-Buttons zurücksetzen
-    resetButtons();
-    
+// 'Assigned to'-Dropdown zurücksetzen (falls vorhanden)
+document.getElementById('select_container').selectedIndex = 0;
+
+// Datumseingabefeld leeren (falls vorhanden)
+document.querySelector('.inputTitle[type="date"]').value = '';
+
+// Selected profiles container leeren
+document.getElementById('Selected_profiles_Container').innerHTML = '';
+
+// Prioritäts-Buttons zurücksetzen
+resetButtons();
+
+// Leert die Liste der ausgewählten Kontakte
+selectedContactIndices = [];
+
+getContacts();
 }
+
 function resetPrioButtons() {
     // Hintergrundfarbe und Bild der Prio-Buttons auf den Standard zurücksetzen
     const prioButtons = ['urgent', 'medium', 'low'];
