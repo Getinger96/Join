@@ -32,6 +32,7 @@ async function fetchTasks(path = '') {
         )
         
     }
+    id=0;
     updateHtml();
     console.log(tasksArray)
 
