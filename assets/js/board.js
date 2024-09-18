@@ -14,6 +14,7 @@ async function fetchTasks(path = '') {
 
     for (let index = 0; index < tasksAsarray.length; index++) {
         let task = tasksAsarray[index];
+        
         id++;
 
         tasksArray.push(

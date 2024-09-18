@@ -14,6 +14,7 @@ let contactsArray = [];
 let beginningLetter = [];
 let groupedContacts = [];
 let selectedContactIndices = [];
+let assignedContacts = [];
 
 let currentPriority = 'none';
 let currentCategory = 'open';
@@ -23,7 +24,8 @@ let path = "tasks";
 // Funktion, um eine neue Aufgabe hinzuzufügen und in die Firebase-Datenbank zu speichern
 
 
-function createTask() {
+async function createTask(event) {
+    event.preventDefault();
     // Hole die Werte aus den Formularfeldern
     const titleElement = document.getElementById('taskTitle');
     const dueDateElement = document.getElementById('taskDueDate');
@@ -52,26 +54,41 @@ function createTask() {
     const status = validCategories.includes(kategorie) ? kategorie : 'open';
 
     const newTodo = {
-        id: generateUniqueId(),
-        title: title,
-        description: description,
-        dueDate: dueDate,
-        priority: priority,
-        kategorie: kategorie,
-        subtasks: subtasks,
-        status: status
+        
+        Titel: title,
+        Description: description,
+        Date: dueDate,
+        Prio: priority,
+        Category: kategorie,
+        Subtask: subtasks,
+        status: status,
+        AssignedContact: assignedContacts,
     };
+
+    await postData(`tasks`, newTodo);
 
   
    
-
-    // Aktualisiere die HTML-Darstellung
-   
-    // Formular zurücksetzen
-    resetForm();
-
+    tasksArray=[];
+    clearTask();
     // Schließe das Formular
     closeTask();
+    fetchTasks();
+    updateHtml();
+}
+
+
+async function postData(path = "", data = {}) {
+    let response = await fetch(base_URL + path + ".json", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    });
+
+    return responsASJson = await response.json();
+    
 }
 
 
@@ -202,10 +219,12 @@ function selectContact(index, name, lastname, color) {
     if (selectedIndex > -1) {
         // Wenn bereits ausgewählt, dann abwählen und Informationen übergeben
         deselctedtContact(index, name, lastname, color);
-        selectedContactIndices.splice(selectedIndex, 1); // Entferne den Kontakt aus der ausgewählten Liste
+        selectedContactIndices.splice(selectedIndex, 1);
+        assignedContacts.splice(name); // Entferne den Kontakt aus der ausgewählten Liste
     } else {
         // Wenn noch nicht ausgewählt, dann auswählen
-        selectedContactIndices.push(index); // Füge den Kontakt zur ausgewählten Liste hinzu
+        selectedContactIndices.push(index);
+        assignedContacts.push(name); // Füge den Kontakt zur ausgewählten Liste hinzu
         showSelectedProfile(); // Aktualisiere die Anzeige der ausgewählten Profile
     }
 
