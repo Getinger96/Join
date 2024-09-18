@@ -3,7 +3,7 @@
         <div class="boardtitle addTaskBoard">
             <div class="addTaskTitle">
                 <h2>Add Task</h2>
-                <button class="closeAddTask curser" onclick="closeTask()"><img
+                <button class="closeAddTask curser" onclick="closeTask()"><img class="xButton"
                         src="./assets/img/iconoir_cancel.png"></button>
             </div>
             <div class="addTaskContainer">
@@ -13,7 +13,7 @@
                             <p>Title</p>
                             <p class="red">*</p>
                         </div>
-                        <input id="taskTitle" class="inputTitle" type="text" placeholder="enter a title" required>
+                        <input id="taskTitle" class="inputTitle" type="text" placeholder="Enter a title" required>
                     </div>
                     <div class="flexdirection">
                         <label for="description">Description</label>
@@ -47,11 +47,11 @@
                         <p>Prio</p>
                         <div class="marginButtomButton">
                             <button id="urgent" class="buttonContainerPrio curser" onclick="urgent()">Urgent <img
-                                    class="prioButton" id="urgentIcon" src="./assets/img/PRio_urgent (2).svg"></button>
+                                    class="prioButton" id="urgentIcon" src="./assets/img/Prio_urgent(2).svg"></button>
                             <button id="medium" class="buttonContainerPrio curser" onclick="medium()">Medium <img
-                                    class="prioButton" id="mediumIcon" src="./assets/IMG/Prio_medium (2).svg"></button>
+                                    class="prioButton" id="mediumIcon" src="./assets/IMG/Prio_medium(2).svg"></button>
                             <button id="low" class="buttonContainerPrio curser" onclick="low()">Low <img
-                                    class="prioButton" id="lowIcon" src="./assets/img/Prio_Low (2).svg"></button>
+                                    class="prioButton" id="lowIcon" src="./assets/img/Prio_Low(2).svg"></button>
                         </div>
                     </div>
                     <div class="flexdirection">
@@ -68,12 +68,18 @@
                     <div class="divPaddingBottum">
                         <p>Subtasks</p>
                         <div class="inputTitle divSubtask">
-                            <input id="new-subtask" class="subtasksInputfield" type="text">
-                            <button class="subtaskButton curser" onclick="addCurrentSubtask()"><img
-                                    src="assets/IMG/add_subtask_img.svg"></button>
+                            <input id="new-subtask" class="subtasksInputfield" type="text" placeholder="Add new subtask" 
+                                   oninput="toggleSubtaskButtons(this)">
+                            <img class="addSubTaskIcon" id="add-subtask-icon" src="assets/IMG/add_subtask_img.svg" alt="Add Subtask">
+                            <button class="subtaskButton curser" id="subtask-cancel-btn" style="display:none;" onclick="clearSubtaskInput()">
+                                <img class="addSubTask" src="assets/img/iconoir_cancel.png" alt="Cancel">
+                            </button>
+                            <button class="subtaskButton curser" id="subtask-check-btn" style="display:none;" onclick="addCurrentSubtask()">
+                                <img class="addSubTaskcheck" src="assets/img/check.png" alt="Check">
+                            </button>
                         </div>
-                        <ul id="list"></ul>
                     </div>
+<<<<<<< HEAD
                 </div>
             </div>
             <div class="bottomInfo">
@@ -86,8 +92,29 @@
                             src="./assets/IMG/x_icon_clear.svg"></button>
                     <button onclick="createTask(event)" class="buttonContainerdark curser">Create Task <img
                             src="assets/IMG/clear_Img.svg"></button>
+=======
+                    <ul id="list"></ul>
+                    
+                    
+
+
+
+>>>>>>> 0e2e103828835172d71f065566ed207379f61ced
                 </div>
             </div>
         </div>
+        <div class="bottomInfo">
+            <div class="displayFlex">
+                <p class="redrequired">*</p>
+                <p class="required-message">This field is required</p>
+            </div>
+            <div class="divButtonButtom">
+                <button onclick="clearTask()" class="buttonContainerWhite curser">Clear <img
+                        src="./assets/IMG/x_icon_clear.svg"></button>
+                <button onclick="createTask()" class="buttonContainerdark curser">Create Task <img
+                        src="assets/IMG/clear_Img.svg"></button>
+            </div>
+        </div>
+    </div>
     </div>
 </section>

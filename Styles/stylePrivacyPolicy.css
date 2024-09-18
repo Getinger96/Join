@@ -25,6 +25,10 @@ body {
     height: 40px;
 }
 
+.privacyPolicy {
+    margin-top:120px;
+}
+
 @media(max-width: 1450px) {
     .d-none {
         display: block;
@@ -49,5 +53,22 @@ body {
     width: 30px; 
     height: 30px;
     }
+
+}
+
+@media(max-width: 500px) {
+    .privacyPolicy {
+        margin-top:80px;
+    }
+
+    .top-right-img {
+        position: absolute;
+        top: 140px;
+        right: 20px;
+        cursor: pointer; 
+        width: 30px; 
+        height: 30px;
+        }
+
 
 }
