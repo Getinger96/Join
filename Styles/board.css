@@ -214,6 +214,39 @@ h1 {
     font-size: 48px;
 }
 
+.orange {
+    background-color: #FF5733;
+}
+
+.gelb {
+    background-color: #FFC300;
+}
+
+.grün {
+    background-color: #33FF57;
+}
+
+.türkis {
+    background-color: #33FFF3;
+}
+
+.blau {
+    background-color: #3357FF;
+
+}
+
+.lila {
+    background-color: #A133FF;
+}
+
+.pink {
+    background-color: #FF33A1;
+}
+
+.hellorange {
+    background-color: #FF8F33;
+}
+
 /*Add Task*/
 .divBoard {
     margin-left: 350px;

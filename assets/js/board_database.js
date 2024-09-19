@@ -1,12 +1,12 @@
 const colors = [
-    '#FF5733', // Orange
-    '#FFC300', // Gelb
-    '#33FF57', // Grün
-    '#33FFF3', // Türkis
-    '#3357FF', // Blau
-    '#A133FF', // Lila
-    '#FF33A1', // Pink
-    '#FF8F33'  // Hellorange
+    'orange', 
+    'gelb',  
+    'grün', 
+    'türkis', 
+    'blau', 
+    'lila', 
+    'pink',  
+    'hellorange'  
 ];
 
 const base_URL = "https://join-37803-default-rtdb.europe-west1.firebasedatabase.app/";
@@ -127,10 +127,18 @@ async function fetchContacts(path = '') {
 
     for (let index = 0; index < userAsArray.length; index++) {
         let contact = userAsArray[index];
+        let colorIndex = index;
+
+        if (colorIndex >= colors.length) {
+            colorIndex -= colors.length;
+        }
+
+        let color = colors[colorIndex];
 
 
         contactsArray.push({
             name: contact.name,
+            color:color,
         })
 
         letterSorting()
@@ -156,8 +164,8 @@ function getContacts() {
     let groupedContacts = {};
     contactsArray.forEach((contact, index) => {
         let firstLetter = contact.name.charAt(0).toUpperCase();
-        let colorIndex = index % colors.length;
-        let color = colors[colorIndex];
+        
+        let color = contact.color;
 
         if (!groupedContacts[firstLetter]) {
             groupedContacts[firstLetter] = [];
@@ -196,40 +204,22 @@ function closelist() {
 
 
 function displayContacts(contactIndex, contactsName, contactLastname, selectedClass, color) {
-    const isSelected = selectedContactIndices.includes(contactIndex);
-    const backgroundColor = isSelected ? '#2A3647' : '';  // Hintergrundfarbe für ausgewählte Kontakte
-    const textColor = isSelected ? 'white' : 'black';  // Textfarbe für ausgewählte Kontakte
+    
+      
+    
 
-    return `<div id="contact-${contactIndex}" onclick="selectContact(${contactIndex}, '${contactsName}', '${contactLastname}', '${color}')" class="single-contact-box ${isSelected ? 'selected' : ''}" style="background-color:${backgroundColor};">
-                <div class="contact-icon" style="background-color:${color};">
-                    <span style="color: ${textColor};">${contactsName.charAt(0).toUpperCase()}${contactLastname.charAt(0).toUpperCase()}</span>
+    return `<div class="${color}" id="contact-${contactIndex}" onclick="selectContact(${contactIndex}, '${contactsName}', '${contactLastname}', '${color}')">
+                <div class="contact-icon">
+                    <span>${contactsName.charAt(0).toUpperCase()}${contactLastname.charAt(0).toUpperCase()}</span>
                 </div>
                 <div class="contact-content">
-                    <span class="contactname" style="color:${textColor};">${contactsName}</span>
+                    <span class="contactname">${contactsName}</span>
                 </div>
             </div>`;
 }
 
     // Bestimme die Anzeige je nach Ansicht (klein/groß)
-    if (isLargeView) {
-        return `<div onclick="selectContact(${contactIndex})" class="single-contact-box ${selectedClass}" style="background-color:${backgroundColor};">
-                    <div class="contact-icon" style="background-color:${color};">
-                        <span style="color: ${textColor};">${contactFirstname.charAt(0).toUpperCase()}${contactLastname.charAt(0).toUpperCase()}</span>
-                    </div>
-                    <div class="contact-content">
-                        <span class="contactname" style="color:${textColor};">${contactFirstname} ${contactLastname}</span>
-                    </div>
-                </div>`;
-    } else {
-        return `<div onclick="selectContact(${contactIndex})" class="single-contact-box ${selectedClass}" style="background-color:${backgroundColor};">
-                    <div class="contact-icon" style="background-color:${color};">
-                        <span style="color: ${textColor};">${contactFirstname.charAt(0).toUpperCase()}</span>
-                    </div>
-                    <div class="contact-content">
-                        <span class="contactname" style="color:${textColor};">${contactFirstname}</span>
-                    </div>
-                </div>`;
-    }
+   
 
 
 
@@ -242,11 +232,13 @@ function selectContact(index, name, lastname, color) {
         deselctedtContact(index, name, lastname, color);
         selectedContactIndices.splice(selectedIndex, 1);
         assignedContacts.splice(name); // Entferne den Kontakt aus der ausgewählten Liste
+        showSelectedProfile(firstletters, i, color)
     } else {
         // Wenn noch nicht ausgewählt, dann auswählen
         selectedContactIndices.push(index);
         assignedContacts.push(name); // Füge den Kontakt zur ausgewählten Liste hinzu
         showSelectedProfile(); // Aktualisiere die Anzeige der ausgewählten Profile
+        showSelectedProfile(firstletters, i, color)
     }
 
     getContacts(); // Kontakte neu rendern, um die Markierung zu aktualisieren
@@ -287,7 +279,7 @@ function deselctedtContact(index, lastname, color) {
     // Setze die Hintergrundfarbe und Textfarbe auf Standard zurück
     if (profileContainer) {
         profileContainer.style.backgroundColor = ''; // Hintergrundfarbe zurücksetzen
-        profileContainer.querySelector('.contact-icon').style.backgroundColor = color; // Iconfarbe bleibt unverändert
+        
         profileContainer.querySelector('.contactname').style.color = 'black'; // Textfarbe auf Standard zurücksetzen
         profileContainer.querySelector('.contact-icon span').style.color = 'black'; // Initialen ebenfalls auf Standard
     }
@@ -311,12 +303,10 @@ function showSelectedProfile() {
     selectedContactIndices.forEach(index => {
         let contact = contactsArray[index];
         let firstletters = `${contact.name.charAt(0).toUpperCase()}${getLastName(contact.name).charAt(0).toUpperCase()}`;
-
-        let colorIndex = index % colors.length;
-        let color = colors[colorIndex];
-
+        
+        
         selectedProfileContainer.innerHTML += `
-            <div class="contact-icon" style="background-color:${color};">
+            <div class="contact-icon">
                 <div>${firstletters}</div>
             </div>
         `;
