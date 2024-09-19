@@ -200,46 +200,10 @@ function generateSmallContactsHtml(assignedContacts) {
         let contactFirstname = contactParts[0] || '';  // Der erste Teil ist der Vorname
         let contactLastname = contactParts.slice(1).join(' ') || '';  // Der Rest ist der Nachname
 
-        const color = getRandomColorForContact(); // Farbe für den Kontakt generieren
-        contactsHtml += getSmallContactHtml(index, contactFirstname, contactLastname, color); // Zeige nur Initialen
+       
+        contactsHtml += getassignecontacts(index, contactFirstname, contactLastname, '', color); // Farbe korrekt übergeben
     });
     return contactsHtml;
-}
-
-function generateLargeContactsHtml(assignedContacts) {
-    let contactsHtml = '';
-    assignedContacts.forEach((contact, index) => {
-        let contactParts = contact.split(' ');
-        let contactFirstname = contactParts[0] || '';
-        let contactLastname = contactParts.slice(1).join(' ') || '';
-
-        const color = getRandomColorForContact(); // Farbe für den Kontakt generieren
-        contactsHtml += getLargeContactHtml(index, contactFirstname, contactLastname, color); // Zeige vollständige Namen
-    });
-    return contactsHtml;
-}
-
-function getSmallContactHtml(index, firstname, lastname, color) {
-    const initials = `${firstname.charAt(0).toUpperCase()}${lastname.charAt(0).toUpperCase()}`;
-    return `
-        <div class="contactCircle" style="background-color: ${color};">
-            ${initials}
-        </div>
-    `;
-}
-
-function getLargeContactHtml(index, firstname, lastname, color) {
-    const initials = `${firstname.charAt(0).toUpperCase()}${lastname.charAt(0).toUpperCase()}`;
-    return `
-        <div class="contact-box">
-            <div class="contact-icon" style="background-color: ${color};">
-                ${initials}
-            </div>
-            <div class="contact-content">
-                <span class="contactname">${firstname} ${lastname}</span>
-            </div>
-        </div>
-    `;
 }
 
 function createShowCard(task) {
@@ -288,45 +252,59 @@ function createShowCard(task) {
     `;
 }
 
-function getRandomColorForContact() {
-    const colors = ['#FF5733', '#33FF57', '#3357FF', '#FF33A1'];
-    return colors[Math.floor(Math.random() * colors.length)];
-}
 
-// Funktion zum Schließen des Overlays
-function closeOverlay() {
-    document.getElementById('overlay').classList.add('d-none');
-    document.body.style.overflow = "auto"; // Scrollen der Seite wieder erlauben
-}
 
-function getassignecontacts(contactIndex, contactFirstname, contactLastname, selectedClass, color) {
-    if (typeof contactFirstname !== 'string') {
-        contactFirstname = String(contactFirstname); // Konvertiere zu einem String, wenn es nötig ist
-    }
-    if (typeof contactLastname !== 'string') {
-        contactLastname = String(contactLastname); // Konvertiere zu einem String, wenn es nötig ist
-    }
 
-    return `<div onclick="selectContact(${contactIndex})" class="single-contact-box ${selectedClass}">
-                <div class="contact-icon" style="background-color:${color};">
-                    <span>${contactFirstname.charAt(0).toUpperCase()}${contactLastname.charAt(0).toUpperCase()}</span>
-                </div>
-                <div class="contact-content">
-                    <span class="contactname">${contactFirstname} ${contactLastname}</span>
-                </div>
-            </div>`;
-}
 
-function showTheNameInitialInColorBoard(firstLetterForName, colorid) {
-    let nameColorContainer = document.getElementById(colorid);
-    colorLetter.forEach(colorLetterItem => {
 
-        if (firstLetterForName === colorLetterItem.letter) {
-            let currentColor = colorLetterItem.color;
-            nameColorContainer.style.backgroundColor = currentColor;
+
+
+
+function getassignecontacts(task, taskIndex) {
+    let assignedContacts =task.Assigned;
+    let maxContact = 4;
+    let remainingContacts = assignedContacts.length - maxContact;
+    
+
+    let asignedContainer = document.getElementById(`assignedContacts${taskIndex}`);
+    console.log(assignedContacts)
+
+    for (let index = 0; index <  Math.min(assignedContacts.length, maxContact); index++) {
+        let contact = assignedContacts[index];  
+            nameParts = contact.split(" ");
+            let color=  contactsArray[index].color
+
+          let  firstLetterForName;
+          let  firstLetterLastName;
+
+        if (nameParts.length >= 2) {
+            firstLetterForName = nameParts[0].charAt(0).toUpperCase();
+            firstLetterLastName = nameParts[1].charAt(0).toUpperCase();
+
+            
+            asignedContainer.innerHTML += `<div class="contact-iconBoard ${color}">
+                    <span>${firstLetterForName}${firstLetterLastName} </span>
+                </div>`;
+    } else {
+            firstLetterForName = nameParts[0].charAt(0).toUpperCase();
+            asignedContainer.innerHTML += `<div class="contact-iconBoard ${color}">
+                    <span>${firstLetterForName} </span>
+                </div>`;
+
         }
-    });
+
 }
+if (assignedContacts.length >= 4) {
+    asignedContainer.innerHTML += `<div class="contact-iconBoard">
+    <span> +${remainingContacts} </span>
+</div>`;
+
+    }
+};
+
+
+
+
 
 function getLastName(fullName) {
     let nameParts = fullName.trim().split(' ');
