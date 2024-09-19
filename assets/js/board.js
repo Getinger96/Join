@@ -159,8 +159,6 @@ function openToDo(taskIndex) {
 
 // Funktion zum Erstellen des HTML-Inhalts für die große ToDo-Anzeige
 function getPriorityIcon(priority) {
-    console.log('Priority received:', priority);  // Debug-Ausgabe hinzufügen
-
     if (Array.isArray(priority)) {
         priority = priority[0];
     }
@@ -267,7 +265,6 @@ function getassignecontacts(task, taskIndex) {
     
 
     let asignedContainer = document.getElementById(`assignedContacts${taskIndex}`);
-    console.log(assignedContacts)
 
     for (let index = 0; index <  Math.min(assignedContacts.length, maxContact); index++) {
         let contact = assignedContacts[index];  
