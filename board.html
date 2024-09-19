@@ -76,45 +76,45 @@
 
                 <div class="spaceBetween boardtitle">
                     <!-- to do -->
-                    <div class="paddingRight">
+                    <div class="paddingRight widthContainer">
                         <div class="statusButton">
                             <p class="text">To do</p>
                             <img class="curser" onclick="openTask()" src="./assets/img/plus button.png">
                         </div>
                         <div class="noTasks" category="open" style="display: none;">No tasks To do</div>
-                        <div class="drag-area" id="open" ondrop="moveTo('open')" ondragover="allowDrop(event)"
+                        <div class="drag-area" id="open" ondrop="moveTo(event, 'open')" ondragover="allowDrop(event)"
                             ondragleave="removeHighlight('open')"></div>
                     </div>
                     <!-- in progress -->
-                    <div class="paddingRight">
+                    <div class="paddingRight widthContainer">
                         <div class="statusButton">
                             <p class="text">In progress</p>
                             <img class="curser" onclick="openTask()" src="./assets/img/plus button.png">
                         </div>
                         <div class="noTasks" category="progress" style="display: none;">No tasks in progress</div>
-                        <div class="drag-area" id="progress" ondrop="moveTo('progress')" ondragover="allowDrop(event)"
-                            ondragleave="removeHighlight('progress')"></div>
+                        <div class="drag-area" id="progress" ondrop="moveTo(event, 'progress')"
+                            ondragover="allowDrop(event)" ondragleave="removeHighlight('progress')"></div>
                     </div>
                     <!-- await feedback -->
-                    <div class="paddingRight">
+                    <div class="paddingRight widthContainer">
                         <div class="statusButton">
                             <p class="text">Await feedback</p>
                             <img class="curser" onclick="openTask()" src="./assets/img/plus button.png">
                         </div>
                         <div class="noTasks" category="awaitFeedback" style="display: none;">No tasks Await feedback
                         </div>
-                        <div class="drag-area" id="awaitFeedback" ondrop="moveTo('awaitFeedback')"
+                        <div class="drag-area" id="awaitFeedback" ondrop="moveTo(event, 'awaitFeedback')"
                             ondragover="allowDrop(event)" ondragleave="removeHighlight('awaitFeedback')"></div>
                     </div>
                     <!-- done -->
-                    <div class="paddingRight">
+                    <div class="paddingRight widthContainer">
                         <div class="statusButton">
                             <p class="text">Done</p>
                             <img class="curser" onclick="openTask()" src="./assets/img/plus button.png">
                         </div>
                         <div class="noTasks" category="closed" style="display: none;">No tasks Done</div>
-                        <div class="drag-area" id="closed" ondrop="moveTo('closed')" ondragover="allowDrop(event)"
-                            ondragleave="removeHighlight('closed')"></div>
+                        <div class="drag-area" id="closed" ondrop="moveTo(event, 'closed')"
+                            ondragover="allowDrop(event)" ondragleave="removeHighlight('closed')"></div>
                     </div>
                 </div>
             </div>
@@ -130,7 +130,6 @@
         </section>
 
         <div id="darkOverlay" style="display: none;"></div>
-
 
     </section>
 </body>

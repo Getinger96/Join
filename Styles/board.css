@@ -61,6 +61,16 @@ h3 {
     max-width: 120px;
 }
 
+.contactCircle {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+    margin: 2px;
+}
+
 .contact-iconBoard {
     display: inline-flex;
     border-radius: 100%;
@@ -156,7 +166,7 @@ Button {
     display: flex;
     justify-content: space-between;
     position: fixed;
-    max-height:60px;
+    max-height: 60px;
     bottom: 40px;
     left: 40px;
     right: 50px;
@@ -166,22 +176,22 @@ Button {
 }
 
 .required-message {
-    margin-top:-60px;
+    margin-top: -60px;
 }
 
-.redrequired{
-    margin-top:-60px;
-    color:red;
+.redrequired {
+    margin-top: -60px;
+    color: red;
 }
 
 .EditSubTaskcheck {
-    width:22px;
-    height:22px; 
+    width: 22px;
+    height: 22px;
 }
 
 .deleteSubTaskcheck {
-    width:24px;
-    height:24px;
+    width: 24px;
+    height: 24px;
 }
 
 /*Header*/
@@ -256,7 +266,7 @@ h1 {
 .addTaskContainer {
     display: flex;
     justify-content: space-between;
-    margin-top: -100px; 
+    margin-top: -100px;
 }
 
 .noTasks {
@@ -299,7 +309,7 @@ h1 {
     width: 334px;
     display: flex;
     justify-content: space-around;
-    align-items: flex-end; 
+    align-items: flex-end;
 }
 
 .buttonContainerWhite {
@@ -341,7 +351,7 @@ h1 {
 }
 
 .marginButtomButton {
-    margin-bottom: -70px; 
+    margin-bottom: -70px;
 }
 
 
@@ -349,7 +359,7 @@ h1 {
     border: none;
     flex: 1;
     width: 350px;
-    margin-left: 2px; 
+    margin-left: 2px;
     margin-right: 30px;
     height: 40px;
     font-family: 'Inter';
@@ -360,7 +370,7 @@ h1 {
 
 .subtasksInputfield:focus {
     border: none;
-    outline: none; 
+    outline: none;
 }
 
 .subtaskButton {
@@ -396,10 +406,13 @@ ul {
 
 li {
     display: flex;
-    justify-content: space-between; /* Abstand zwischen Subtask-Text und Mülleimer-Button */
-    align-items: center; /* Vertikale Zentrierung */
+    justify-content: space-between;
+    /* Abstand zwischen Subtask-Text und Mülleimer-Button */
+    align-items: center;
+    /* Vertikale Zentrierung */
     position: relative;
-    padding-left: 20px; /* Platz für den Punkt */
+    padding-left: 20px;
+    /* Platz für den Punkt */
 }
 
 .addSubTask {
@@ -410,16 +423,16 @@ li {
 .addSubTaskcheck {
     width: 24px;
     height: 24px;
-    background:black;
+    background: black;
 }
 
-.subtaskEditInput{
-    border:none;
+.subtaskEditInput {
+    border: none;
 }
 
 .subtaskEditInput:focus {
-    border:none;
-    outline:none;
+    border: none;
+    outline: none;
 }
 
 
@@ -550,22 +563,33 @@ li {
     color: #FFFFFF;
 }
 
-.single-contact-box {
+.contact-box {
     display: flex;
-    justify-content: start;
     align-items: center;
+    margin-bottom: 8px;
 }
 
 .contact-icon {
     width: 30px;
-    height: 40px;
+    height: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 5px;
-    padding: 14px;
     border-radius: 50%;
-    height: 26px;
+    margin-right: 8px;
+}
+
+.assigned-contacts {
+    margin-left: 12px;
+}
+
+.contact-content {
+    display: flex;
+    align-items: center;
+}
+
+.contactname {
+    font-size: 14px;
 }
 
 span {
@@ -629,7 +653,7 @@ span {
     background-color: white;
     padding: 20px;
     border-radius: 30px;
-    max-width: 600px;
+    max-width: 400px;
     width: 525px;
     text-align: left;
     position: relative;
@@ -656,7 +680,7 @@ span {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.8);
     z-index: 999;
-    display: none; 
+    display: none;
 }
 
 .separatorTask {
@@ -680,14 +704,38 @@ span {
     right: 65px;
 }
 
+.widthContainer {
+    width: 280px;
+}
+
+.actionBigButton {
+    background-color: white;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.actionBigTodo {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 28px;
+    margin-bottom: 12px;
+}
+
+.iconTodoBig {
+    width: 20px;
+    margin-right: 5px;
+}
 
 @media (max-width: 1450px) {
     #darkOverlay {
-        display: none !important; 
+        display: none !important;
     }
 
     #boardAddTask {
-       display:none !important;
+        display: none !important;
     }
 
     .inputTitle {
@@ -703,7 +751,7 @@ span {
     }
 
     .divSectionAddTask {
-        margin-top: -80px; 
+        margin-top: -80px;
     }
 
     .buttonContainerPrio {
