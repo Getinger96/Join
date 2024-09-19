@@ -210,6 +210,27 @@ function displayContacts(contactIndex, contactsName, contactLastname, selectedCl
             </div>`;
 }
 
+    // Bestimme die Anzeige je nach Ansicht (klein/groß)
+    if (isLargeView) {
+        return `<div onclick="selectContact(${contactIndex})" class="single-contact-box ${selectedClass}" style="background-color:${backgroundColor};">
+                    <div class="contact-icon" style="background-color:${color};">
+                        <span style="color: ${textColor};">${contactFirstname.charAt(0).toUpperCase()}${contactLastname.charAt(0).toUpperCase()}</span>
+                    </div>
+                    <div class="contact-content">
+                        <span class="contactname" style="color:${textColor};">${contactFirstname} ${contactLastname}</span>
+                    </div>
+                </div>`;
+    } else {
+        return `<div onclick="selectContact(${contactIndex})" class="single-contact-box ${selectedClass}" style="background-color:${backgroundColor};">
+                    <div class="contact-icon" style="background-color:${color};">
+                        <span style="color: ${textColor};">${contactFirstname.charAt(0).toUpperCase()}</span>
+                    </div>
+                    <div class="contact-content">
+                        <span class="contactname" style="color:${textColor};">${contactFirstname}</span>
+                    </div>
+                </div>`;
+    }
+
 
 
 function selectContact(index, name, lastname, color) {
