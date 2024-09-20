@@ -1,9 +1,9 @@
 let subtask = [];
 let tasksArray = [];
-let todoData = [];
-let currentTodo = [];
 
-let currentDraggedElement = null;
+
+
+let currentDraggedElement;
 let id = 0
 
 async function fetchTasks(path = '') {
@@ -11,9 +11,9 @@ async function fetchTasks(path = '') {
     let userJSON = await response.json();
     let tasksAsarray = Object.values(userJSON.tasks)
 
+
     for (let index = 0; index < tasksAsarray.length; index++) {
         let task = tasksAsarray[index];
-
         id++;
 
         tasksArray.push(
@@ -29,38 +29,63 @@ async function fetchTasks(path = '') {
                 status: 'open',
             }
         )
-
+        
     }
-    id = 0;
     updateHtml();
+    renderSubtask();
+    console.log(tasksArray)
+
 }
+
+
+function renderSubtask() {
+    let idSubtask = 0
+    for (let index = 0; index < tasksArray.length; index++) {
+        idSubtask++;
+        let subtaskElement = tasksArray[index].subtask;
+
+
+        if (subtaskElement === undefined) {
+            subtaskElement = [];
+
+        }
+
+        subtask.push(
+            {
+              id: idSubtask,
+              subtask: subtaskElement,
+            }
+        )
+
+    
+}
+console.log(subtask);
+
+
+}
+
+
 
 function updateHtml() {
     let statusCategories = ['open', 'progress', 'awaitFeedback', 'closed'];
-
     for (let index = 0; index < statusCategories.length; index++) {
-        let categoryies = statusCategories[index];
+        let category = statusCategories[index];
+        let filteredTasks = tasksArray.filter(t => t.status === category);
+        document.getElementById(category).innerHTML = ''; // Clear the category
 
-        // Erstelle ein Array für die gefilterten Aufgaben inklusive ihrer originalen Indizes
-        let filteredTasks = [];
-
-        // Durchlaufe das tasksArray und filtere basierend auf dem Status, ohne den Index zu verlieren
-        for (let taskIndex = 0; taskIndex < tasksArray.length; taskIndex++) {
-            let task = tasksArray[taskIndex];
-            if (task.status === categoryies) {
-                filteredTasks.push({ task, taskIndex });  // Füge die Aufgabe und den ursprünglichen Index hinzu
-            }
-        }
-
-        document.getElementById(categoryies).innerHTML = '';
-
-        // Verwende den originalen Index der Aufgaben
-        filteredTasks.forEach(({ task, taskIndex }) => {
-            document.getElementById(categoryies).innerHTML += generateTodoHTML(task, taskIndex);
-            getassignecontacts(task, taskIndex);  // Übergib den ursprünglichen Index
+        filteredTasks.forEach(task => {
+            let taskHTML = generateTodoHTML(task, task.idTask); // Use idTask as a unique identifier
+            document.getElementById(category).innerHTML += taskHTML;
+            getassignecontacts(task, task.idTask); // Use idTask to fetch correct contacts
         });
     }
 }
+
+
+
+
+
+
 
 function openTask() {
     // Prüfen der Fensterbreite
@@ -94,59 +119,83 @@ function closeTask() {
 
 // Generieren des HTML-Codes für eine Aufgabe
 function generateTodoHTML(task, taskIndex) {
+    // Überprüfe, ob das todo-Objekt die erwartete Struktur hat
     let title = task.Title;
-    let description = task.Description || '';
+    let description = task.Description;
     let dueDate = task.duedate;
-    let priority = task.Prio || [];  // Stelle sicher, dass dies korrekt ist
-    let assignedContacts = task.Assigned || [];
+    let priority = task.Prio;
+    let assignedContacts = task.Assigned;
     let category = task.Category;
-    let subtask = task.subtask || '';
+    let subtask = task.subtask;
+    let idBoard = task.idTask
+
+    if (description === undefined) {
+        description = "";
+    }
 
     // Definiere Prioritäts-Icons
-    let priorityIcon = getPriorityIcon(priority);  // Korrekte Verarbeitung der Priorität
-    let categoryColor = getCategoryColor(category);
+    let priorityIcon = '';
+    if (priority == 'urgent') {
+        priorityIcon = './assets/img/Prio_urgent(2).svg';
+    } else if (priority == 'medium') {
+        priorityIcon = './assets/IMG/Prio_medium(2).svg';
+    } else if (priority == 'low') {
+        priorityIcon = './assets/IMG/iconLowWhite.svg';
+    } else {
+        priorityIcon = './assets/img/Prio_Low(2).svg';
+    }
 
-    // Erstelle das HTML für die Kontakte
-    let contactsHtml = generateSmallContactsHtml(assignedContacts);
+    // Definiere Farben basierend auf der Kategorie
+    let categoryColor = '';
+    if (category == 'Technical Task') {
+        categoryColor = '#1FD7C1';
+    } else {
+        categoryColor = '#0038FF';
+    }
 
+    // Füge das onclick-Event hinzu, das die Aufgabe öffnet
     return `
-        <div class="todo" draggable="true" ondragstart="startDragging(${taskIndex})" onclick="openToDo(${taskIndex})">
+        <div class="todo" draggable="true" ondragstart="startDragging(${idBoard})" onclick="openToDo(${idBoard})">
             <div class="divKategorie" style="background-color: ${categoryColor};">${category}</div>
             <h3 class="title">${title}</h3>
             <p class="description">${description}</p>
-            <p>Priority: <img src="${priorityIcon}" alt="${priority} Priority"></p>
-            <p>Duedate: ${dueDate}</p>
-            <div class="boardContacts" id="assignedContacts${taskIndex}">
-                ${contactsHtml}
-            </div>
+            <div class="progress-container">
+            <div class="progress-bar">
+            <div class="progress" id="progressbarline" style="width: 0%;"></div>
+        </div>
+        <span id="progress-text"> subtask </span>
+    </div>
+            <div class="boardContacts" id="assignedContacts${taskIndex}"></div>
             <p>Subtasks: ${subtask}</p>
+
+
         </div>`;
 }
 
-// Funktion zum Anzeigen der großen ToDo-Karte im Overlay
-function showCard(task) {
-    try {
-        if (!task || typeof task !== 'object') {
-            console.error('Invalid task object:', task);
-            return;
-        }
 
+function showSubtask() {
+
+    let subtaskProgress = document.getElementById('progress');
+    
+
+    
+}
+
+
+
+
+// Funktion zum Anzeigen der großen ToDo-Karte im Overlay
+function showCard(task, taskIndex) {
         let todoBig = document.getElementById('todoBig');
-        let showCardHTML = createShowCard(task);  // Funktion zum Erstellen der Detailansicht-HTML
+        let showCardHTML = createShowCard(task, taskIndex); 
         todoBig.innerHTML = showCardHTML;
-    } catch (error) {
-        console.error('Error displaying task:', error);
-    }
+
 }
 
 // Funktion zum Öffnen des großen ToDos im Overlay
 function openToDo(taskIndex) {
+    taskIndex--;
     let task = tasksArray[taskIndex];  // Hole die Aufgabe aus dem Array basierend auf dem Index
-    if (!task) {
-        console.error('Task not found at index:', taskIndex);
-        return;
-    }
-
     let todoBig = document.getElementById('todoBig');
     todoBig.classList = 'cardbig';  // Setze CSS-Klasse für das große Div
     todoBig.innerHTML = '';
@@ -154,35 +203,26 @@ function openToDo(taskIndex) {
     document.body.style.overflow = "hidden";
     document.getElementById('overlay').classList.remove('d-none');
 
-    showCard(task);  // Übergibt die ausgewählte Aufgabe zur Anzeige
+    showCard(task, taskIndex );  // Übergibt die ausgewählte Aufgabe zur Anzeige
 }
 
 // Funktion zum Erstellen des HTML-Inhalts für die große ToDo-Anzeige
 function getPriorityIcon(priority) {
-    if (Array.isArray(priority)) {
-        priority = priority[0];
+    // Define priority icons
+    let priorityIcon = '';
+    if (priority === 'urgent') {
+        priorityIcon = './assets/img/Prio_urgent(2).svg';
+    } else if (priority === 'medium') {
+        priorityIcon = './assets/IMG/Prio_medium(2).svg';
+    } else if (priority === 'low') {
+        priorityIcon = './assets/IMG/iconLowWhite.svg';
+    } else {
+        priorityIcon = './assets/img/Prio_Low(2).svg';
     }
-
-    if (priority === undefined || priority === null || typeof priority !== 'string') {
-        console.warn('Priority is not a valid string or is undefined:', priority);
-        return './assets/img/Prio_Low(2).svg';
-    }
-
-    priority = priority.toLowerCase();
-
-    switch (priority) {
-        case 'urgent':
-            return './assets/img/Prio_urgent(2).svg';
-        case 'medium':
-            return './assets/IMG/Prio_medium(2).svg';
-        case 'low':
-            return './assets/IMG/iconLowWhite.svg';
-        default:
-            console.warn('Unknown priority:', priority);
-            return './assets/img/Prio_Low(2).svg';
-    }
+    
+    // Return the determined priority icon
+    return priorityIcon;
 }
-
 
 function getCategoryColor(category) {
     if (category === 'Technical Task') {
@@ -198,24 +238,79 @@ function generateSmallContactsHtml(assignedContacts) {
         let contactFirstname = contactParts[0] || '';  // Der erste Teil ist der Vorname
         let contactLastname = contactParts.slice(1).join(' ') || '';  // Der Rest ist der Nachname
 
-       
-        contactsHtml += getassignecontacts(index, contactFirstname, contactLastname, '', color); // Farbe korrekt übergeben
+        const color = getRandomColorForContact(); // Farbe für den Kontakt generieren
+        contactsHtml += getSmallContactHtml(index, contactFirstname, contactLastname, color); // Zeige nur Initialen
     });
     return contactsHtml;
 }
 
-function createShowCard(task) {
-    const title = task.Title || '';
-    const description = task.Description || '';
-    const dueDate = task.duedate || '';
-    const priority = Array.isArray(task.Prio) ? (task.Prio[0] || '') : (task.Prio || '');
-    const assignedContacts = task.Assigned || [];
-    const category = task.Category || '';
-    const subtask = task.subtask || '';
+function generateLargeContactsHtml(assignedContacts) {
+    let contactsHtml = ''; 
+
+    for (let index = 0; index < assignedContacts.length; index++) {
+        let nameParts = assignedContacts[index].split(' ');
+        let contactFirstname = nameParts[0] || '';  
+        let contactLastname = nameParts.slice(1).join(' ') || '';  
+
+        let firstLetterForName = contactFirstname.charAt(0).toUpperCase();
+        let firstLetterLastName = contactLastname.charAt(0).toUpperCase();
+
+        let color = showTheNameColor(firstLetterForName);
+        
+        contactsHtml += getLargeContactHtml(index, firstLetterForName, firstLetterLastName, contactFirstname, contactLastname, color);
+    }
+  
+    return contactsHtml;  // Gib das komplette generierte HTML zurück
+}
+
+function showTheNameColor(firstLetterForName) {
+    let currentColor = 'gray';
+    colorLetter.forEach(colorLetterItem => {
+
+        if (firstLetterForName === colorLetterItem.letter) {
+            currentColor = colorLetterItem.color; 
+        }
+    });
+    return currentColor
+}
+
+
+
+function getSmallContactHtml(index, firstname, lastname, color) {
+    const initials = `${firstname.charAt(0).toUpperCase()}${lastname.charAt(0).toUpperCase()}`;
+    return `
+        <div class="contactCircle" style="background-color: ${color};">
+            ${initials}
+        </div>
+    `;
+}
+
+function getLargeContactHtml(index, firstLetterForName, firstLetterLastName, contactFirstname, contactLastname, color) {// Zeige vollständige Namen
+
+    return `
+        <div class="contact-box">
+            <div class="contact-icon" style="background-color: ${color};">
+                ${firstLetterForName} ${firstLetterLastName}  
+            </div>
+            <div class="contact-content">
+                <span class="contactname">${contactFirstname} ${contactLastname}</span>
+            </div>
+        </div>
+    `;
+}
+
+function createShowCard(task, taskIndex) {
+    let title = task.Title || '';
+    let description = task.Description || '';
+    let dueDate = task.duedate || '';
+    let priority = task.Prio;
+    let assignedContacts = task.Assigned || [];
+    let category = task.Category || '';
 
     const priorityIcon = getPriorityIcon(priority);
     const categoryColor = getCategoryColor(category);
     const contactsHtml = generateLargeContactsHtml(assignedContacts);
+    const subtasksHtml = generateSubtasksHtml(task.subtask, taskIndex); // Subtasks generieren
 
     return /*html*/`
         <div class="todo-detail">
@@ -234,7 +329,10 @@ function createShowCard(task) {
             <div class="assigned-contacts">
                 ${contactsHtml}
             </div>
-            <p><strong>Subtasks:</strong> ${subtask}</p>
+            <p><strong>Subtasks:</strong></p>
+            <div class="subtasks-container">
+                ${subtasksHtml} <!-- Hier werden die Subtasks eingefügt -->
+            </div>
         </div>
         <div class="actionBigTodo">
             <button class="actionBigButton" onclick="deleteTodo()">
@@ -250,62 +348,115 @@ function createShowCard(task) {
     `;
 }
 
+function closeOverlay() {
+    const todoBig = document.getElementById('todoBig');
+    const overlay = document.getElementById('overlay');
+
+    // Das Overlay und die große ToDo-Karte ausblenden
+    todoBig.classList.add('d-none');
+    overlay.classList.add('d-none');
+
+    // Scrollen auf der Hauptseite wieder erlauben
+    document.body.style.overflow = 'auto';
+}
 
 
+function generateSubtasksHtml(subtasks, taskIndex) {
+    let subtasksHtml = '';
 
+    if (subtasks && subtasks.length > 0) {
+        subtasks.forEach((subtask, index) => {
+            subtasksHtml += `
+                <div class="subtask-item">
+                    <input type="checkbox" id="subtask${index}" onchange="updateProgress(${taskIndex}, ${index})" />
+                    <label for="subtask-${taskIndex}-${index}">${subtask}</label>
+                </div>
+            `;
+        });
+    }
 
+    return subtasksHtml;
+}
 
+function updateProgress(taskId) {
+    const task = tasksArray.find(t => t.idTask === taskId);
+    const subtasks = task.subtask || [];
+    const totalSubtasks = subtasks.length;
 
+    const completedSubtasks = subtasks.filter((_, index) => 
+        document.getElementById(`subtask-${taskId}-${index}`).checked
+    ).length;
 
+    const progressPercentage = totalSubtasks ? (completedSubtasks / totalSubtasks) * 100 : 0;
+    
+    // Hier wird die Fortschrittsanzeige aktualisiert
+    const progressBar = document.getElementById(`progressbarline-${taskId}`);
+    if (progressBar) {
+        progressBar.style.width = `${progressPercentage}%`;
+    }
+
+    const progressText = document.getElementById(`progress-text-${taskId}`);
+    if (progressText) {
+        progressText.innerText = `Subtasks: ${completedSubtasks}/${totalSubtasks}`;
+    }
+}
 
 function getassignecontacts(task, taskIndex) {
     let assignedContacts =task.Assigned;
     let maxContact = 4;
     let remainingContacts = assignedContacts.length - maxContact;
-    
 
     let asignedContainer = document.getElementById(`assignedContacts${taskIndex}`);
+    console.log(assignedContacts)
 
-    for (let index = 0; index <  Math.min(assignedContacts.length, maxContact); index++) {
+    for (let index = 0; index <  assignedContacts.length; index++) {
+        if (index === maxContact) {
+            break; 
+        }
+
         let contact = assignedContacts[index];  
             nameParts = contact.split(" ");
-            let color=  contactsArray[index].color
 
           let  firstLetterForName;
           let  firstLetterLastName;
+          let colorid = `contactIcon_${taskIndex}_${index}`;
 
         if (nameParts.length >= 2) {
             firstLetterForName = nameParts[0].charAt(0).toUpperCase();
             firstLetterLastName = nameParts[1].charAt(0).toUpperCase();
 
             
-            asignedContainer.innerHTML += `<div class="contact-iconBoard ${color}">
+            asignedContainer.innerHTML += `<div id="${colorid}"class="contact-iconBoard">
                     <span>${firstLetterForName}${firstLetterLastName} </span>
                 </div>`;
-    } else {
+        } else {
             firstLetterForName = nameParts[0].charAt(0).toUpperCase();
-            asignedContainer.innerHTML += `<div class="contact-iconBoard ${color}">
+            asignedContainer.innerHTML += `<div id="${colorid}" class="contact-iconBoard">
                     <span>${firstLetterForName} </span>
                 </div>`;
 
         }
-
+        showTheNameInitialInColorBoard(firstLetterForName,colorid);
 }
-if (assignedContacts.length >= 4) {
-    asignedContainer.innerHTML += `<div class="contact-iconBoard">
+if (assignedContacts.length > 4) {
+    asignedContainer.innerHTML += `<div id="colorName" class="contact-iconBoard">
     <span> +${remainingContacts} </span>
-</div>`;
-
-    }
-};
-
+</div>`
+}
+}
 
 
+function showTheNameInitialInColorBoard(firstLetterForName, colorid) {
 
 
-function getLastName(fullName) {
-    let nameParts = fullName.trim().split(' ');
-    return nameParts[nameParts.length - 1];
+    let nameColorContainer  = document.getElementById(colorid);
+    colorLetter.forEach(colorLetterItem => {
+
+        if (firstLetterForName === colorLetterItem.letter) {
+            let currentColor = colorLetterItem.color; 
+            nameColorContainer.style.backgroundColor = currentColor;
+        }
+    });
 }
 
 function allowDrop(ev) {
@@ -320,25 +471,23 @@ function dragLeave(ev) {
 }
 
 // Überprüfe, ob eine Spalte leer ist, und zeige die Nachricht entsprechend an
-function startDragging(taskIndex) {
-    currentDraggedElement = taskIndex;
+function startDragging(idBoard) {
+    currentDraggedElement = idBoard;
 }
-
-function moveTo(ev, category) {
-    ev.preventDefault();
-
-    // Hole den aktuell gezogenen Index
-    const taskIndex = currentDraggedElement;
-    if (taskIndex !== null && tasksArray[taskIndex]) {
-        let task = tasksArray[taskIndex];
-
-        // Setze den neuen Status der Aufgabe
+function moveTo(event, category) {
+    event.preventDefault();
+    currentDraggedElement--;
+    let task = tasksArray[currentDraggedElement]
+    
+    // Wenn die Aufgabe gefunden wurde, ändere ihren Status
+    if (task) {
         task.status = category;
-
-        // HTML aktualisieren
-        updateHtml();
     }
+
+    // Aktualisiere das HTML, um die Änderungen darzustellen
+    updateHtml();
 }
+
 
 function highlight(id) {
     const element = document.getElementById(id);
