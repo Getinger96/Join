@@ -80,6 +80,7 @@ h3 {
     justify-content: center;
     align-items: center;
     border: 2px solid white;
+    margin-right: -8px;
 }
 
 .title {

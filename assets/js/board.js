@@ -1,5 +1,6 @@
 let subtask = [];
 let tasksArray = [];
+let subTaskChecked = [];
 
 
 
@@ -31,8 +32,12 @@ async function fetchTasks(path = '') {
         )
         
     }
+   
+    
+    
     updateHtml();
     renderSubtask();
+  await  initializeAllProgress(); 
     console.log(tasksArray)
 
 }
@@ -73,6 +78,7 @@ function updateHtml() {
         let filteredTasks = tasksArray.filter(t => t.status === category);
         document.getElementById(category).innerHTML = ''; // Clear the category
 
+        
         filteredTasks.forEach(task => {
             let taskHTML = generateTodoHTML(task, task.idTask); // Use idTask as a unique identifier
             document.getElementById(category).innerHTML += taskHTML;
@@ -117,61 +123,44 @@ function closeTask() {
     document.body.style.overflow = 'auto';  // Scrollen auf der Hauptseite wieder erlauben
 }
 
-// Generieren des HTML-Codes für eine Aufgabe
 function generateTodoHTML(task, taskIndex) {
-    // Überprüfe, ob das todo-Objekt die erwartete Struktur hat
+
     let title = task.Title;
-    let description = task.Description;
+    let description = task.Description || "";
     let dueDate = task.duedate;
     let priority = task.Prio;
     let assignedContacts = task.Assigned;
     let category = task.Category;
-    let subtask = task.subtask;
-    let idBoard = task.idTask
+    let subtasks = task.subtask || []; // Ensure subtasks is always an array
+    let idBoard = task.idTask; // Make sure this is passed correctly
 
-    if (description === undefined) {
-        description = "";
-    }
 
-    // Definiere Prioritäts-Icons
-    let priorityIcon = '';
-    if (priority == 'urgent') {
-        priorityIcon = './assets/img/Prio_urgent(2).svg';
-    } else if (priority == 'medium') {
-        priorityIcon = './assets/IMG/Prio_medium(2).svg';
-    } else if (priority == 'low') {
-        priorityIcon = './assets/IMG/iconLowWhite.svg';
-    } else {
-        priorityIcon = './assets/img/Prio_Low(2).svg';
-    }
+    let priorityIcon = getPriorityIcon(priority);
+    let categoryColor = getCategoryColor(category);
 
-    // Definiere Farben basierend auf der Kategorie
-    let categoryColor = '';
-    if (category == 'Technical Task') {
-        categoryColor = '#1FD7C1';
-    } else {
-        categoryColor = '#0038FF';
-    }
+    const totalSubtasks = subtasks.length;
+    const subtaskStatus = JSON.parse(localStorage.getItem(`task-${task.idTask-1}-subtasks`)) || {};
+    const completedSubtasks = Object.values(subtaskStatus).filter(isChecked => isChecked).length;
+    const progressPercentage = totalSubtasks ? (completedSubtasks / totalSubtasks) * 100 : 0;
 
-    // Füge das onclick-Event hinzu, das die Aufgabe öffnet
     return `
-        <div class="todo" draggable="true" ondragstart="startDragging(${idBoard})" onclick="openToDo(${idBoard})">
+        <div class="todo" draggable="true" ondragstart="startDragging(${task.idTask})" onclick="openToDo(${task.idTask})">
             <div class="divKategorie" style="background-color: ${categoryColor};">${category}</div>
             <h3 class="title">${title}</h3>
             <p class="description">${description}</p>
             <div class="progress-container">
-            <div class="progress-bar">
-            <div class="progress" id="progressbarline" style="width: 0%;"></div>
-        </div>
-        <span id="progress-text"> subtask </span>
-    </div>
-            <div class="boardContacts" id="assignedContacts${taskIndex}"></div>
-            <p>Subtasks: ${subtask}</p>
-
-
+                <div class="progress-bar">
+                    <div class="progress" id="progressbarline-${task.idTask-1}" style="width: ${progressPercentage}%;"></div>
+                </div>
+                <span id="progress-text-${task.idTask-1}">Subtasks: ${completedSubtasks}/${totalSubtasks}</span>
+            </div>
+            <div class="boardContacts" id="assignedContacts${task.idTask}"></div>
         </div>`;
 }
 
+function showSubtask() {
+    let subtaskProgress = document.getElementById('progress');
+}
 
 function showSubtask() {
 
@@ -352,23 +341,27 @@ function closeOverlay() {
     const todoBig = document.getElementById('todoBig');
     const overlay = document.getElementById('overlay');
 
-    // Das Overlay und die große ToDo-Karte ausblenden
     todoBig.classList.add('d-none');
     overlay.classList.add('d-none');
 
-    // Scrollen auf der Hauptseite wieder erlauben
     document.body.style.overflow = 'auto';
 }
 
 
+
 function generateSubtasksHtml(subtasks, taskIndex) {
     let subtasksHtml = '';
+    const totalSubtasks = subtasks ? subtasks.length : 0;
 
-    if (subtasks && subtasks.length > 0) {
+    if (totalSubtasks > 0) {
         subtasks.forEach((subtask, index) => {
+            const subtaskStatus = JSON.parse(localStorage.getItem(`task-${taskIndex}-subtasks`)) || {};
+            const isChecked = subtaskStatus[index] || false;  // Standardmäßig auf false setzen
+
             subtasksHtml += `
                 <div class="subtask-item">
-                    <input type="checkbox" id="subtask${index}" onchange="updateProgress(${taskIndex}, ${index})" />
+                    <input type="checkbox" id="subtask-${taskIndex}-${index}" ${isChecked ? 'checked' : ''} 
+                    onchange="subtaskChecked(${taskIndex}, ${index})" />
                     <label for="subtask-${taskIndex}-${index}">${subtask}</label>
                 </div>
             `;
@@ -378,26 +371,51 @@ function generateSubtasksHtml(subtasks, taskIndex) {
     return subtasksHtml;
 }
 
-function updateProgress(taskId) {
-    const task = tasksArray.find(t => t.idTask === taskId);
-    const subtasks = task.subtask || [];
-    const totalSubtasks = subtasks.length;
+function subtaskChecked(taskIndex, subtaskIndex) {
+    const subtaskStatus = JSON.parse(localStorage.getItem(`task-${taskIndex}-subtasks`)) || {};
+    const isChecked = document.getElementById(`subtask-${taskIndex}-${subtaskIndex}`).checked;
+    subtaskStatus[subtaskIndex] = isChecked;
+    localStorage.setItem(`task-${taskIndex}-subtasks`, JSON.stringify(subtaskStatus));
 
-    const completedSubtasks = subtasks.filter((_, index) => 
-        document.getElementById(`subtask-${taskId}-${index}`).checked
-    ).length;
+    updateProgress(taskIndex);
+}
+
+function updateProgress(taskIndex) {
+    let indexTasksArray = taskIndex +1;
+    const task = tasksArray.find(t => t.idTask === indexTasksArray);
+    if (!task || !task.subtask) return;
+
+    const totalSubtasks = task.subtask.length;
+    const subtaskStatus = JSON.parse(localStorage.getItem(`task-${taskIndex}-subtasks`)) || {};
+    const completedSubtasks = Object.values(subtaskStatus).filter(status => status).length;
 
     const progressPercentage = totalSubtasks ? (completedSubtasks / totalSubtasks) * 100 : 0;
-    
-    // Hier wird die Fortschrittsanzeige aktualisiert
-    const progressBar = document.getElementById(`progressbarline-${taskId}`);
-    if (progressBar) {
-        progressBar.style.width = `${progressPercentage}%`;
-    }
+    document.getElementById(`progressbarline-${taskIndex}`).style.width = `${progressPercentage}%`;
+    document.getElementById(`progress-text-${taskIndex}`).innerText = `Subtasks: ${completedSubtasks}/${totalSubtasks}`;
+}
 
-    const progressText = document.getElementById(`progress-text-${taskId}`);
-    if (progressText) {
-        progressText.innerText = `Subtasks: ${completedSubtasks}/${totalSubtasks}`;
+async function initializeAllProgress() {
+    for (let taskIndex = 0; taskIndex < tasksArray.length; taskIndex++) {
+        const tasksArrayElement = tasksArray[taskIndex];
+        const subtaskStatus = JSON.parse(localStorage.getItem(`task-${taskIndex}-subtasks`)) || {};
+
+        if (tasksArrayElement === undefined) {
+            return;
+        }
+
+        // Überprüfen, ob subtasks leer sind
+        if (!tasksArrayElement.subtask || tasksArrayElement.subtask.length === 0) {
+            continue; // Wenn leer, zur nächsten Aufgabe gehen
+        }
+
+        tasksArrayElement.subtask.forEach((_, index) => {
+            const isChecked = subtaskStatus[index] || false;
+            const checkbox = document.getElementById(`subtask-${taskIndex}-${index}`);
+            if (checkbox) {
+                checkbox.checked = isChecked;
+            }
+        });
+        updateProgress(taskIndex);
     }
 }
 
