@@ -48,7 +48,7 @@ async function createTask(event) {
     const descriptionElement = document.getElementById('description');
     const description = descriptionElement ? descriptionElement.value.trim() : '';
     const priority = currentPriority;  // Verwende die aktuelle Priorität
-    const subtasks = Array.from(document.querySelectorAll('#list li')).map(li => li.textContent);
+    const subtasks = Array.from(document.querySelectorAll('#list li')).map(li => li.textContent+"checked");
 
     const validCategories = ['open', 'progress', 'awaitFeedback', 'closed'];
     const status = validCategories.includes(kategorie) ? kategorie : 'open';

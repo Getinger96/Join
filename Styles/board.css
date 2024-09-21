@@ -791,6 +791,13 @@ span {
 
     .drag-area {
         width: 220px;
+        margin-bottom: 70px;
+    }
+
+    .todo {
+       
+        width: 180px;
+        height: 250px;
     }
 }
 

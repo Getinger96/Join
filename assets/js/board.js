@@ -163,7 +163,7 @@ function generateTodoHTML(task, taskIndex) {
             <div class="progress-bar">
             <div class="progress" id="progressbarline" style="width: 0%;"></div>
         </div>
-        <span id="progress-text"> subtask </span>
+        <span id="progress-text${taskIndex}"> subtask </span>
     </div>
             <div class="boardContacts" id="assignedContacts${taskIndex}"></div>
             <p>Subtasks: ${subtask}</p>
@@ -378,13 +378,14 @@ function generateSubtasksHtml(subtasks, taskIndex) {
     return subtasksHtml;
 }
 
-function updateProgress(taskId) {
+function updateProgress(taskId,index) {
+    taskId ++;
     const task = tasksArray.find(t => t.idTask === taskId);
     const subtasks = task.subtask || [];
     const totalSubtasks = subtasks.length;
 
     const completedSubtasks = subtasks.filter((_, index) => 
-        document.getElementById(`subtask-${taskId}-${index}`).checked
+        document.getElementById(`subtask${index}`).checked
     ).length;
 
     const progressPercentage = totalSubtasks ? (completedSubtasks / totalSubtasks) * 100 : 0;
@@ -399,6 +400,7 @@ function updateProgress(taskId) {
     if (progressText) {
         progressText.innerText = `Subtasks: ${completedSubtasks}/${totalSubtasks}`;
     }
+    generateTodoHTML(task,index)
 }
 
 function getassignecontacts(task, taskIndex) {
