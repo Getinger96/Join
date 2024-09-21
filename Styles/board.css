@@ -4,6 +4,14 @@ body {
     background-color: rgb(246, 247, 248);
 }
 
+.Subtasks_Btn {
+    border: none;
+    background-color: #FFFFFF;
+    width: 24px;
+    height: 24px;
+    padding-right: 25px;
+}
+
 h2 {
     font-size: 54px;
 }

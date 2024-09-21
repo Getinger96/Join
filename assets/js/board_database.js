@@ -367,3 +367,45 @@ function emptyTasks(category) {
         console.error(`Element mit category="${category}" nicht gefunden.`);
     }
 }
+
+
+async function deleteData(path = "") {
+    let response = await fetch(base_URL + path + ".json", {
+        method: "DELETE",
+    });
+
+    return responsASJson = await response.json();
+}
+
+
+async function putData(path = "", data = {}) {
+    let response = await fetch(base_URL + path + ".json", {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    });
+
+    return responsASJson = await response.json();
+}
+
+async function deleteTask(task) {
+    task --;
+    let key = tasksArray[task].taskKey;
+
+    await deleteData(`tasks/${key}`);
+    tasksArray.splice(task,1);
+    closeOverlay();
+    updateHtml();
+    
+
+}
+
+async function EditData(task) {
+
+    openTask();
+
+
+
+}

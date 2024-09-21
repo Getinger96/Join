@@ -1,3 +1,5 @@
+let subtasks = [];
+
 let subtask = [];
 let tasksArray = [];
 
@@ -9,15 +11,18 @@ let id = 0
 async function fetchTasks(path = '') {
     let response = await fetch(base_URL + path + ".json");
     let userJSON = await response.json();
+    let keystaskArray= Object.keys(userJSON.tasks);
     let tasksAsarray = Object.values(userJSON.tasks)
 
 
     for (let index = 0; index < tasksAsarray.length; index++) {
         let task = tasksAsarray[index];
+        let taskkey= keystaskArray[index];
         id++;
 
         tasksArray.push(
             {
+                taskKey:taskkey,
                 idTask: id,
                 Title: task.Titel,
                 Description: task.description,
@@ -89,12 +94,11 @@ function updateHtml() {
 
 function openTask() {
     // Prüfen der Fensterbreite
-    const windowWidth = window.innerWidth;
+    
 
     // Wenn die Bildschirmbreite kleiner oder gleich 1450px ist, zur add_task.html weiterleiten
-    if (windowWidth <= 1450) {
-        window.location.href = 'add_task.html'; // Redirect zur add_task.html
-    } else {
+   
+   
         // Standardmäßig das Overlay öffnen
         let taskDiv = document.getElementById('boardAddTask');
         let overlay = document.getElementById('darkOverlay');
@@ -109,7 +113,7 @@ function openTask() {
             document.body.style.overflow = 'auto';  // Scrollen auf der Hauptseite wieder erlauben
         }
     }
-}
+
 
 function closeTask() {
     document.getElementById('boardAddTask').style.display = 'none';
@@ -300,6 +304,8 @@ function getLargeContactHtml(index, firstLetterForName, firstLetterLastName, con
 }
 
 function createShowCard(task, taskIndex) {
+    let taskindex= task.idTask
+    
     let title = task.Title || '';
     let description = task.Description || '';
     let dueDate = task.duedate || '';
@@ -312,7 +318,7 @@ function createShowCard(task, taskIndex) {
     const contactsHtml = generateLargeContactsHtml(assignedContacts);
     const subtasksHtml = generateSubtasksHtml(task.subtask, taskIndex); // Subtasks generieren
 
-    return /*html*/`
+    return `
         <div class="todo-detail">
             <div>
                 <div class="divKategorie" style="background-color: ${categoryColor};">${category}</div>
@@ -335,12 +341,12 @@ function createShowCard(task, taskIndex) {
             </div>
         </div>
         <div class="actionBigTodo">
-            <button class="actionBigButton" onclick="deleteTodo()">
+            <button class="actionBigButton" onclick="deleteTask(${taskindex})">
                 <img class="iconTodoBig" src="./assets/img/delete.png">
                 <p>Delete</p>
             </button>
             <div></div>
-            <button class="actionBigButton" onclick="editTodo()">
+            <button class="actionBigButton" onclick="EditData(${taskindex})">
                 <img class="iconTodoBig" src="./assets/img/edit.png">
                 <p>Edit</p>
             </button>
@@ -400,7 +406,9 @@ function updateProgress(taskId,index) {
     if (progressText) {
         progressText.innerText = `Subtasks: ${completedSubtasks}/${totalSubtasks}`;
     }
-    generateTodoHTML(task,index)
+
+    generateSubtasksHtml(subtasks, index);
+   
 }
 
 function getassignecontacts(task, taskIndex) {
@@ -507,26 +515,30 @@ function removeHighlight(id) {
 
 // Add Subtask
 function addSubtask() {
-    let list = document.getElementById('list');
-    list.innerHTML = ''; // Liste wird gelöscht
-    for (let i = 0; i < subtask.length; i++) {
-        let li = document.createElement('li');
-        li.classList.add('subtaskListItem');
-        li.innerHTML = `
-            <span id="subtask-text-${i}" class="subtaskText">${subtask[i]}</span>
-            <input id="subtask-input-${i}" class="subtaskEditInput" style="display:none;" type="text" value="${subtask[i]}">
-            <div class="subtaskActions">
-                <button class="subtaskList" onclick="editItem(${i})">
-                    <img class="EditSubTaskcheck" src="./assets/img/edit.png" alt="Edit">
-                </button>
-                <button class="subtaskList" onclick="saveItem(${i})" style="display:none;">
-                    <img class="addSubTaskcheck" src="assets/img/check.png" alt="Save">
-                </button>
-                <button class="subtaskList" onclick="deleteItem(${i})">
-                    <img class="deleteSubTaskcheck" src="./assets/img/delete.png" alt="Delete">
-                </button>
-            </div>`;
-        list.appendChild(li);
+    let subtaskContainer= document.getElementById('subtasksContainer');
+    subtaskContainer.innerHTML='';
+    for (let i = 0; i < subtasks.length; i++) {
+       subtaskContainer.innerHTML+= `
+       
+       <div class="li">${subtasks[i]}<button type="button" class="Subtasks_Btn" onclick="deleteItem(${i})"><img src="./assets/img/delete.png"></button></div>`
+           ;
+        
+    }
+}
+
+function addCurrentSubtask() {
+    if (subtasks.length < 5) {
+        let Currentubtask = document.getElementById('new-subtask').value;
+        if (Currentubtask == '') {
+
+        } else {
+            subtasks.push(Currentubtask);
+            document.getElementById('new-subtask').value = ''; // Liste wieder leeren
+            addSubtask();
+        }
+    }
+    else {
+        alert('Genügend Subtasks hinzugefügt!');
     }
 }
 
@@ -549,16 +561,7 @@ function saveItem(i) {
     addSubtask(); // Aktualisiert die Liste nach dem Speichern
 }
 
-function addCurrentSubtask() {
-    if (subtask.length < 5) {
-        let CurrentSubtask = document.getElementById('new-subtask').value;
-        subtask.push(CurrentSubtask);
-        document.getElementById('new-subtask').value = ''; // Liste wieder leeren
-        addSubtask();
-    } else {
-        alert('Genügend Subtasks hinzugefügt!');
-    }
-}
+
 
 //Prio Buttons
 function resetButtons() {
