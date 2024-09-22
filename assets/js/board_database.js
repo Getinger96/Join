@@ -391,7 +391,7 @@ async function putData(path = "", data = {}) {
 }
 
 async function deleteTask(task) {
-    task --;
+  
     let key = tasksArray[task].taskKey;
 
     await deleteData(`tasks/${key}`);
@@ -402,10 +402,22 @@ async function deleteTask(task) {
 
 }
 
-async function EditData(task) {
+async function EditData(index) {
+    index --;
+    let task= tasksArray[index];
+    let title = task.Title;
+    let description = task.Description;
+    let dueDate = task.duedate;
+    let priority = task.Prio;
+    let assignedContacts = task.Assigned;
+    let category = task.Category;
+    let subtask = task.subtask;
+    let idBoard = task.idTask
+   
 
     openTask();
 
-
+    let editedTask={title,description,dueDate,priority,assignedContacts,category,subtask,idBoard}
+    tasksArray.splice(task,1,editedTask);
 
 }

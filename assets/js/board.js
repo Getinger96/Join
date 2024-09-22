@@ -10,16 +10,20 @@ async function fetchTasks(path = '') {
     let response = await fetch(base_URL + path + ".json");
     let userJSON = await response.json();
     let tasksAsarray = Object.values(userJSON.tasks)
+    let keysArrayTask = Object.keys(userJSON.contacts);
 
 
     for (let index = 0; index < tasksAsarray.length; index++) {
         let task = tasksAsarray[index];
+        let keyTask =  keysArrayTask[index];
+
         id++;
 
         let saveTask = task.Filter+
 
         tasksArray.push(
             {
+                taskKey:keyTask,
                 idTask: id,
                 Title: task.Titel,
                 Description: task.description,
@@ -304,7 +308,7 @@ function createShowCard(task, taskIndex) {
     const contactsHtml = generateLargeContactsHtml(assignedContacts);
     const subtasksHtml = generateSubtasksHtml(task.subtask, taskIndex); // Subtasks generieren
 
-    return /*html*/`
+   return `
         <div class="todo-detail">
             <div>
                 <div class="divKategorie" style="background-color: ${categoryColor};">${category}</div>
@@ -327,7 +331,7 @@ function createShowCard(task, taskIndex) {
             </div>
         </div>
         <div class="actionBigTodo">
-            <button class="actionBigButton" onclick="deleteTodo()">
+            <button class="actionBigButton" onclick="deleteTask(${taskIndex})">
                 <img class="iconTodoBig" src="./assets/img/delete.png">
                 <p>Delete</p>
             </button>
