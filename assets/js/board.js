@@ -1,3 +1,4 @@
+let subtasks = [];
 let subtask = [];
 let tasksArray = [];
 let subTaskChecked = [];
@@ -543,28 +544,17 @@ function removeHighlight(id) {
 
 // Add Subtask
 function addSubtask() {
-    let list = document.getElementById('list');
-    list.innerHTML = ''; // Liste wird gelöscht
-    for (let i = 0; i < subtask.length; i++) {
-        let li = document.createElement('li');
-        li.classList.add('subtaskListItem');
-        li.innerHTML = `
-            <span id="subtask-text-${i}" class="subtaskText">${subtask[i]}</span>
-            <input id="subtask-input-${i}" class="subtaskEditInput" style="display:none;" type="text" value="${subtask[i]}">
-            <div class="subtaskActions">
-                <button class="subtaskList" onclick="editItem(${i})">
-                    <img class="EditSubTaskcheck" src="./assets/img/edit.png" alt="Edit">
-                </button>
-                <button class="subtaskList" onclick="saveItem(${i})" style="display:none;">
-                    <img class="addSubTaskcheck" src="assets/img/check.png" alt="Save">
-                </button>
-                <button class="subtaskList" onclick="deleteItem(${i})">
-                    <img class="deleteSubTaskcheck" src="./assets/img/delete.png" alt="Delete">
-                </button>
-            </div>`;
-        list.appendChild(li);
+    let subtaskContainer= document.getElementById('subtasksContainer');
+    subtaskContainer.innerHTML='';
+    for (let i = 0; i < subtasks.length; i++) {
+       subtaskContainer.innerHTML+= `
+       
+       <div class="li">${subtasks[i]}<button type="button" class="Subtasks_Btn" onclick="deleteItem(${i})"><img src="./assets/img/delete.png"></button></div>`
+           ;
+        
     }
 }
+
 
 // Subtask löschen
 function deleteItem(i) {
@@ -572,23 +562,12 @@ function deleteItem(i) {
     addSubtask();
 }
 
-function editItem(i) {
-    document.getElementById(`subtask-text-${i}`).style.display = 'none';
-    document.getElementById(`subtask-input-${i}`).style.display = 'inline';
-    document.querySelector(`.subtaskList[onclick="saveItem(${i})"]`).style.display = 'inline';
-    document.querySelector(`.subtaskList[onclick="editItem(${i})"]`).style.display = 'none';
-}
 
-function saveItem(i) {
-    const newValue = document.getElementById(`subtask-input-${i}`).value;
-    subtask[i] = newValue;
-    addSubtask(); // Aktualisiert die Liste nach dem Speichern
-}
 
 function addCurrentSubtask() {
-    if (subtask.length < 5) {
+    if (subtasks.length < 5) {
         let CurrentSubtask = document.getElementById('new-subtask').value;
-        subtask.push(CurrentSubtask);
+        subtasks.push(CurrentSubtask);
         document.getElementById('new-subtask').value = ''; // Liste wieder leeren
         addSubtask();
     } else {
