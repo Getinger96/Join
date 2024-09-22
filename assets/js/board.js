@@ -558,7 +558,7 @@ function addSubtask() {
 
 // Subtask löschen
 function deleteItem(i) {
-    subtask.splice(i, 1);
+    subtasks.splice(i, 1);
     addSubtask();
 }
 
