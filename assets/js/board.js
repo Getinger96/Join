@@ -5,21 +5,26 @@ let subTaskChecked = [];
 
 let currentDraggedElement;
 let id = 0
+let nr = 0
 
 async function fetchTasks(path = '') {
     let response = await fetch(base_URL + path + ".json");
     let userJSON = await response.json();
     let tasksAsarray = Object.values(userJSON.tasks)
+    let keysArrayTask = Object.keys(userJSON.contacts);
 
 
-    for (let index = 0; index < tasksAsarray.length; index++) {
+    for (let index = nr; index < tasksAsarray.length; index++) {
         let task = tasksAsarray[index];
+        let keyTask =  keysArrayTask[index];
+
         id++;
 
         let saveTask = task.Filter+
 
         tasksArray.push(
             {
+                taskKey:keyTask,
                 idTask: id,
                 Title: task.Titel,
                 Description: task.description,
@@ -35,7 +40,7 @@ async function fetchTasks(path = '') {
     }
    
     
-    loadTasksFromLocalStorage();
+
     updateHtml();
     renderSubtask();
   await  initializeAllProgress(); 
@@ -126,6 +131,9 @@ function closeTask() {
 }
 
 function generateTodoHTML(task, taskIndex) {
+    nr++;
+    console.log(nr);
+    
     let title = task.Title;
     let description = task.Description || "";
     let dueDate = task.duedate;
@@ -304,7 +312,7 @@ function createShowCard(task, taskIndex) {
     const contactsHtml = generateLargeContactsHtml(assignedContacts);
     const subtasksHtml = generateSubtasksHtml(task.subtask, taskIndex); // Subtasks generieren
 
-    return /*html*/`
+   return `
         <div class="todo-detail">
             <div>
                 <div class="divKategorie" style="background-color: ${categoryColor};">${category}</div>
@@ -327,7 +335,7 @@ function createShowCard(task, taskIndex) {
             </div>
         </div>
         <div class="actionBigTodo">
-            <button class="actionBigButton" onclick="deleteTodo()">
+            <button class="actionBigButton" onclick="deleteTask(${taskIndex})">
                 <img class="iconTodoBig" src="./assets/img/delete.png">
                 <p>Delete</p>
             </button>
@@ -502,7 +510,33 @@ function moveTo(event, category) {
     
     if (task) {
         task.status = category;
-        saveTasksToLocalStorage();
+        function moveTo(event, category) {
+            event.preventDefault();
+            currentDraggedElement--;
+            let task = tasksArray[currentDraggedElement]
+            
+            if (task) {
+                task.status = category;
+                putDataTask(task.idTask, { status: category });
+            }
+        
+           
+            updateHtml();
+        }
+        
+        
+        async function putDataTask(path = "", data = {}) {
+            let response = await fetch(base_URL + path + ".json", {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            });
+        
+            return responsASJson = await response.json();
+        }
+        
     }
 
    
@@ -510,6 +544,27 @@ function moveTo(event, category) {
 }
 
 
+async function putDataTask(taskId = "", data = {}) {
+    try {
+        let response = await fetch(`${base_URL}/tasks/${taskId}.json`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),  // JSON-Daten als String senden
+        });
+
+        // Überprüfe, ob die Anfrage erfolgreich war
+        if (!response.ok) {
+            throw new Error(`Fehler beim PUT-Aufruf: ${response.status}`);
+        }
+
+        let responseAsJson = await response.json();  // Antwort als JSON parsen
+        return responseAsJson;  // JSON zurückgeben
+    } catch (error) {
+        console.error("Fehler beim Aktualisieren der Daten:", error);
+    }
+}
 
 
 
