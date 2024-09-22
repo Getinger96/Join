@@ -3,7 +3,6 @@ let tasksArray = [];
 let subTaskChecked = [];
 
 
-
 let currentDraggedElement;
 let id = 0
 
@@ -16,6 +15,8 @@ async function fetchTasks(path = '') {
     for (let index = 0; index < tasksAsarray.length; index++) {
         let task = tasksAsarray[index];
         id++;
+
+        let saveTask = task.filter
 
         tasksArray.push(
             {
@@ -34,7 +35,7 @@ async function fetchTasks(path = '') {
     }
    
     
-    
+    loadTasksFromLocalStorage();
     updateHtml();
     renderSubtask();
   await  initializeAllProgress(); 
@@ -71,7 +72,7 @@ console.log(subtask);
 
 
 
-function updateHtml() {
+async function updateHtml() {
     let statusCategories = ['open', 'progress', 'awaitFeedback', 'closed'];
     for (let index = 0; index < statusCategories.length; index++) {
         let category = statusCategories[index];
@@ -83,6 +84,7 @@ function updateHtml() {
             let taskHTML = generateTodoHTML(task, task.idTask); // Use idTask as a unique identifier
             document.getElementById(category).innerHTML += taskHTML;
             getassignecontacts(task, task.idTask); // Use idTask to fetch correct contacts
+
         });
     }
 }
@@ -124,16 +126,14 @@ function closeTask() {
 }
 
 function generateTodoHTML(task, taskIndex) {
-
     let title = task.Title;
     let description = task.Description || "";
     let dueDate = task.duedate;
     let priority = task.Prio;
     let assignedContacts = task.Assigned;
     let category = task.Category;
-    let subtasks = task.subtask || []; // Ensure subtasks is always an array
-    let idBoard = task.idTask; // Make sure this is passed correctly
-
+    let subtasks = task.subtask || [];
+    let idBoard = task.idTask; 
 
     let priorityIcon = getPriorityIcon(priority);
     let categoryColor = getCategoryColor(category);
@@ -143,31 +143,34 @@ function generateTodoHTML(task, taskIndex) {
     const completedSubtasks = Object.values(subtaskStatus).filter(isChecked => isChecked).length;
     const progressPercentage = totalSubtasks ? (completedSubtasks / totalSubtasks) * 100 : 0;
 
-    return `
-        <div class="todo" draggable="true" ondragstart="startDragging(${task.idTask})" onclick="openToDo(${task.idTask})">
-            <div class="divKategorie" style="background-color: ${categoryColor};">${category}</div>
-            <h3 class="title">${title}</h3>
-            <p class="description">${description}</p>
+
+    let progressHtml = '';
+    if (totalSubtasks > 0) {
+        progressHtml = `
             <div class="progress-container">
                 <div class="progress-bar">
                     <div class="progress" id="progressbarline-${task.idTask-1}" style="width: ${progressPercentage}%;"></div>
                 </div>
                 <span id="progress-text-${task.idTask-1}">Subtasks: ${completedSubtasks}/${totalSubtasks}</span>
             </div>
-            <div class="boardContacts" id="assignedContacts${task.idTask}"></div>
-        </div>`;
-}
+        `;
+    }
 
-function showSubtask() {
-    let subtaskProgress = document.getElementById('progress');
-}
-
-function showSubtask() {
-
-    let subtaskProgress = document.getElementById('progress');
+    return `
+       <div class="todo" id="task_${task.idTask-1}Element" draggable="true" ondragstart="startDragging(${task.idTask})" onclick="openToDo(${task.idTask})">
+    <div class="divKategorie" style="background-color: ${categoryColor};">${category}</div>
+    <h3 id="task_Title${task.idTask-1}" class="title">${title}</h3>
+    <p class="description">${description}</p>
+    ${progressHtml} <!-- Progressbar nur anzeigen, wenn Subtasks vorhanden sind -->
     
-
-    
+    <!-- Wrapper für Kontakte und Prioritäts-Icon -->
+    <div class="task-footer">
+        <div class="boardContacts" id="assignedContacts${task.idTask}"></div>  
+        <div class="priority-icon">
+            <img src="${priorityIcon}" alt="${priority} Priority">
+        </div>
+    </div>
+</div>`;
 }
 
 
@@ -318,7 +321,7 @@ function createShowCard(task, taskIndex) {
             <div class="assigned-contacts">
                 ${contactsHtml}
             </div>
-            <p><strong>Subtasks:</strong></p>
+            <p class="subtaskstext"> <strong>Subtasks:</strong></p>
             <div class="subtasks-container">
                 ${subtasksHtml} <!-- Hier werden die Subtasks eingefügt -->
             </div>
@@ -360,9 +363,9 @@ function generateSubtasksHtml(subtasks, taskIndex) {
 
             subtasksHtml += `
                 <div class="subtask-item">
-                    <input type="checkbox" id="subtask-${taskIndex}-${index}" ${isChecked ? 'checked' : ''} 
+                    <input class="checkbox" type="checkbox" id="subtask-${taskIndex}-${index}" ${isChecked ? 'checked' : ''} 
                     onchange="subtaskChecked(${taskIndex}, ${index})" />
-                    <label for="subtask-${taskIndex}-${index}">${subtask}</label>
+                    <label class="checkboxtext" for="subtask-${taskIndex}-${index}">${subtask}</label>
                 </div>
             `;
         });
@@ -488,7 +491,7 @@ function dragLeave(ev) {
     }
 }
 
-// Überprüfe, ob eine Spalte leer ist, und zeige die Nachricht entsprechend an
+
 function startDragging(idBoard) {
     currentDraggedElement = idBoard;
 }
@@ -497,13 +500,26 @@ function moveTo(event, category) {
     currentDraggedElement--;
     let task = tasksArray[currentDraggedElement]
     
-    // Wenn die Aufgabe gefunden wurde, ändere ihren Status
     if (task) {
         task.status = category;
+        saveTasksToLocalStorage();
     }
 
-    // Aktualisiere das HTML, um die Änderungen darzustellen
+   
     updateHtml();
+}
+
+function saveTasksToLocalStorage() {
+    localStorage.setItem('tasksArray', JSON.stringify(tasksArray)); 
+}
+
+
+function loadTasksFromLocalStorage() {
+    const savedTasks = localStorage.getItem('tasksArray'); 
+    if (savedTasks) {
+        tasksArray = JSON.parse(savedTasks); 
+        updateHtml(); 
+    }
 }
 
 
@@ -640,29 +656,40 @@ function low() {
 }
 
 function search() {
-    let search = document.getElementById('searchInput').value.toLowerCase();
-    let todos = document.querySelectorAll('.todo');
+    let search = document.getElementById('searchInput').value;
+    let searchTask = search.toLowerCase();
 
-    if (search.length >= 3) {
-        showTasksSearch(search, todos);
+    // Prüfen, ob mindestens 3 Zeichen eingegeben wurden
+    if (searchTask.length >= 3) {
+        // Alle Aufgaben durchsuchen
+        tasksArray.forEach((todo, index) => {
+            let todos = document.getElementById(`task_${index}Element`);
+            showTasksSearch(searchTask, todos, todo);
+        });
     } else {
-        for (let i = 0; i < todos.length; i++) {
-            todos[i].style.display = 'block';
-        }
+        // Wenn weniger als 3 Zeichen eingegeben wurden, alle Aufgaben ausblenden
+        tasksArray.forEach((todo, index) => {
+            let todos = document.getElementById(`task_${index}Element`);
+            todos.style.display = 'none';
+        });
+    }
+
+    // Wenn das Suchfeld leer ist, alle Aufgaben anzeigen
+    if (searchTask === '') {
+        tasksArray.forEach((todo, index) => {
+            let todos = document.getElementById(`task_${index}Element`);
+            todos.style.display = 'block';
+        });
     }
 }
+function showTasksSearch(search, todos, todo) {
+    let taskTitle = todo.Title.toLowerCase();
 
-function showTasksSearch(search, todos) {
-    for (let i = 0; i < todos.length; i++) {
-        let todo = todos[i];
-        let titleElement = todo.querySelector('.drag-area'); // Greift auf das `div`-Element zu, das den Titel enthält
-        let title = titleElement ? titleElement.textContent.toLowerCase() : todo.textContent.toLowerCase();
-
-        if (title.includes(search)) {
-            todo.style.display = 'block';
-        } else {
-            todo.style.display = 'none';
-        }
+    // Überprüfen, ob der Titel die Suchzeichenkette enthält
+    if (taskTitle.includes(search)) {
+        todos.style.display = 'block';
+    } else {
+        todos.style.display = 'none';
     }
 }
 

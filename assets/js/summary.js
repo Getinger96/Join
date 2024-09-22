@@ -6,9 +6,20 @@ let countDone = 0;
 let iconsBooleanColorChange = false;
 
 
+function fetchTasksSummary() {
+
+let getTaskArray  = localStorage.getItem('tasksArray'); 
+tasksArray = JSON.parse(getTaskArray); 
 
 
-updateSummary();
+for (let index = 0; index < tasksArray.length; index++) {
+
+    loadToDoAtTheKanbanBoard(index) 
+}
+
+
+}
+
 
 
 function loadToDoAtTheKanbanBoard(index) {
@@ -17,27 +28,24 @@ function loadToDoAtTheKanbanBoard(index) {
         let statusCheckawaitingfeedback = 'awaitFeedback';
         let statusCheckclosed = 'closed';
 
-        let countOpen = 0;
-        let countInProgress = 0;
-        let countAwaitingFeedback = 0;
-        let countDone = 0;
-        
+
         let kanbanBoardStatus = tasksArray[index].status;
         let kanbanBoradPrioUrgent = tasksArray[index].Prio;
 
  
     if (kanbanBoardStatus === statusCheckopen) {
         countOpen++;
-        showKanbanBoardTodo(countOpen);   
+        showKanbanBoardTodo(countOpen);
     } else if (kanbanBoardStatus === statusCheckprogress) {
         countInProgress++;
         showKanbanBoardTaskProgress(countInProgress);  
     } else if (kanbanBoardStatus === statusCheckawaitingfeedback) {
         countAwaitingFeedback++;
+        showKanbanBoarTaskAwaitingFeedback(countAwaitingFeedback)
         showKanbanBoarTaskAwaitingFeedback(countAwaitingFeedback);  
     } else if (kanbanBoardStatus === statusCheckclosed) {       
         countDone++;
-        showKanbanBoarTaskAwaitingFeedback(countAwaitingFeedback);  
+        showKanbanBoardTaskdone(countDone);
     }
 
     showAllPrioUrgent(kanbanBoradPrioUrgent);
@@ -45,12 +53,16 @@ function loadToDoAtTheKanbanBoard(index) {
                 
 showAllTaskinBoard(tasksArray);          
 showTheCurrentDate();    
-
+showKanbanBoardTodo(countOpen);
+showKanbanBoardTaskProgress(countInProgress);  
+showKanbanBoarTaskAwaitingFeedback(countAwaitingFeedback);
+showKanbanBoardTaskdone(countDone);
 }
 
 
 function showKanbanBoardTodo(countOpen) {
     let getTaskOpen = document.getElementById('toDoNumber');
+
 
     getTaskOpen.innerHTML =`${countOpen}`;
 

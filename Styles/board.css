@@ -43,7 +43,6 @@ label {
     border-radius: 24px;
     margin-bottom: 10px;
     padding: 8px;
-    width: 252px;
     height: 263px;
 }
 
@@ -87,6 +86,48 @@ h3 {
     font-size: 16px;
 }
 
+.subtasks-container {
+
+    margin-top: 10px;
+
+}
+
+.subtaskstext {
+    margin-top: 18px;
+}
+
+.checkbox {
+    scale: 1.5;
+}
+.task-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+
+.boardContacts {
+    display: flex;
+}
+
+.priority-icon img {
+    width: 24px; 
+    height: 24px; 
+}
+
+
+.checkboxtext {
+    font-size: 18px;
+}
+
+.subtask-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-right: 5px;
+}
 
 .progress-container {
     display: flex;
@@ -135,9 +176,10 @@ h3 {
 }
 
 .search {
-    border: none;
     height: 32px;
     width: 250px;
+    border: solid 3px black;
+    border-radius: 10px;
 }
 
 .searchContainer {
