@@ -12,10 +12,10 @@ async function fetchTasks(path = '') {
     let response = await fetch(base_URL + path + ".json");
     let userJSON = await response.json();
     let tasksAsarray = Object.values(userJSON.tasks)
-    let keysArrayTask = Object.keys(userJSON.contacts);
+    let keysArrayTask = Object.keys(userJSON.tasks);
 
 
-    for (let index = nr; index < tasksAsarray.length; index++) {
+    for (let index = 0; index < tasksAsarray.length; index++) {
         let task = tasksAsarray[index];
         let keyTask =  keysArrayTask[index];
 
@@ -508,8 +508,12 @@ function startDragging(idBoard) {
 function moveTo(event, category) {
     event.preventDefault();
     
+    
     currentDraggedElement--;
     let task = tasksArray[currentDraggedElement];
+    let key= task.taskKey
+    
+ 
 
     if (task) {
         // Debug-Ausgabe für task.idTask, um sicherzustellen, dass es korrekt ist
@@ -517,66 +521,27 @@ function moveTo(event, category) {
 
         // Wenn task.idTask existiert, update den Status
         if (task.idTask) {
-            task.status = category;
-            putDataTask(task.idTask, { status: category });
+            task.Status = category;
+            putDataTask(`tasks/${key}/Status`,category);
         } else {
             console.error("task.idTask ist undefiniert. Die Aufgabe kann nicht aktualisiert werden.");
         }
     }
 
     // Aktualisiere das HTML nach der Statusänderung
-    updateHtml();
+  updateHtml();
 }
-
 async function putDataTask(path = "", data = {}) {
-    try {
-        // Debug-Ausgabe des gesendeten Daten
-        console.log("Sending data to:", base_URL + path + ".json");
-        console.log("Data:", data);
-        
-        let response = await fetch(base_URL + path + ".json", {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(data)
-        });
+    let response = await fetch(base_URL + path + ".json", {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    });
 
-        if (!response.ok) {
-            // Fehlerbehandlung für den Fall, dass der Request fehlschlägt
-            throw new Error(`Fehler beim PUT-Request: ${response.status}`);
-        }
-
-        let responseAsJson = await response.json();
-        console.log("Server Response:", responseAsJson);  // Debug-Ausgabe der Serverantwort
-        return responseAsJson;
-    } catch (error) {
-        console.error("Fehler beim PUT-Aufruf:", error);
-    }
+    return responsASJson = await response.json();
 }
-
-async function putDataTask(taskId = "", data = {}) {
-    try {
-        let response = await fetch(`${base_URL}/tasks/${taskId}.json`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data),  // JSON-Daten als String senden
-        });
-
-        // Überprüfe, ob die Anfrage erfolgreich war
-        if (!response.ok) {
-            throw new Error(`Fehler beim PUT-Aufruf: ${response.status}`);
-        }
-
-        let responseAsJson = await response.json();  // Antwort als JSON parsen
-        return responseAsJson;  // JSON zurückgeben
-    } catch (error) {
-        console.error("Fehler beim Aktualisieren der Daten:", error);
-    }
-}
-
 
 
 function saveTasksToLocalStorage() {
