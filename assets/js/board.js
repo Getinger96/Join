@@ -1,3 +1,4 @@
+let subtasks = [];
 let subtask = [];
 let tasksArray = [];
 let subTaskChecked = [];
@@ -33,7 +34,7 @@ async function fetchTasks(path = '') {
                 Prio: task.Prio,
                 Category: task.Category,
                 subtask: task.Subtask,
-                status: 'open',
+                status: task.Status,
             }
         )
         
@@ -503,46 +504,56 @@ function dragLeave(ev) {
 function startDragging(idBoard) {
     currentDraggedElement = idBoard;
 }
+
 function moveTo(event, category) {
     event.preventDefault();
-    currentDraggedElement--;
-    let task = tasksArray[currentDraggedElement]
     
+    currentDraggedElement--;
+    let task = tasksArray[currentDraggedElement];
+
     if (task) {
-        task.status = category;
-        function moveTo(event, category) {
-            event.preventDefault();
-            currentDraggedElement--;
-            let task = tasksArray[currentDraggedElement]
-            
-            if (task) {
-                task.status = category;
-                putDataTask(task.idTask, { status: category });
-            }
-        
-           
-            updateHtml();
+        // Debug-Ausgabe für task.idTask, um sicherzustellen, dass es korrekt ist
+        console.log("task.idTask:", task.idTask);
+
+        // Wenn task.idTask existiert, update den Status
+        if (task.idTask) {
+            task.status = category;
+            putDataTask(task.idTask, { status: category });
+        } else {
+            console.error("task.idTask ist undefiniert. Die Aufgabe kann nicht aktualisiert werden.");
         }
-        
-        
-        async function putDataTask(path = "", data = {}) {
-            let response = await fetch(base_URL + path + ".json", {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(data)
-            });
-        
-            return responsASJson = await response.json();
-        }
-        
     }
 
-   
+    // Aktualisiere das HTML nach der Statusänderung
     updateHtml();
 }
 
+async function putDataTask(path = "", data = {}) {
+    try {
+        // Debug-Ausgabe des gesendeten Daten
+        console.log("Sending data to:", base_URL + path + ".json");
+        console.log("Data:", data);
+        
+        let response = await fetch(base_URL + path + ".json", {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        });
+
+        if (!response.ok) {
+            // Fehlerbehandlung für den Fall, dass der Request fehlschlägt
+            throw new Error(`Fehler beim PUT-Request: ${response.status}`);
+        }
+
+        let responseAsJson = await response.json();
+        console.log("Server Response:", responseAsJson);  // Debug-Ausgabe der Serverantwort
+        return responseAsJson;
+    } catch (error) {
+        console.error("Fehler beim PUT-Aufruf:", error);
+    }
+}
 
 async function putDataTask(taskId = "", data = {}) {
     try {
@@ -598,52 +609,30 @@ function removeHighlight(id) {
 
 // Add Subtask
 function addSubtask() {
-    let list = document.getElementById('list');
-    list.innerHTML = ''; // Liste wird gelöscht
-    for (let i = 0; i < subtask.length; i++) {
-        let li = document.createElement('li');
-        li.classList.add('subtaskListItem');
-        li.innerHTML = `
-            <span id="subtask-text-${i}" class="subtaskText">${subtask[i]}</span>
-            <input id="subtask-input-${i}" class="subtaskEditInput" style="display:none;" type="text" value="${subtask[i]}">
-            <div class="subtaskActions">
-                <button class="subtaskList" onclick="editItem(${i})">
-                    <img class="EditSubTaskcheck" src="./assets/img/edit.png" alt="Edit">
-                </button>
-                <button class="subtaskList" onclick="saveItem(${i})" style="display:none;">
-                    <img class="addSubTaskcheck" src="assets/img/check.png" alt="Save">
-                </button>
-                <button class="subtaskList" onclick="deleteItem(${i})">
-                    <img class="deleteSubTaskcheck" src="./assets/img/delete.png" alt="Delete">
-                </button>
-            </div>`;
-        list.appendChild(li);
+    let subtaskContainer= document.getElementById('subtasksContainer');
+    subtaskContainer.innerHTML='';
+    for (let i = 0; i < subtasks.length; i++) {
+       subtaskContainer.innerHTML+= `
+       
+       <div class="li">${subtasks[i]}<button type="button" class="Subtasks_Btn" onclick="deleteItem(${i})"><img src="./assets/img/delete.png"></button></div>`
+           ;
+        
     }
 }
 
+
 // Subtask löschen
 function deleteItem(i) {
-    subtask.splice(i, 1);
+    subtasks.splice(i, 1);
     addSubtask();
 }
 
-function editItem(i) {
-    document.getElementById(`subtask-text-${i}`).style.display = 'none';
-    document.getElementById(`subtask-input-${i}`).style.display = 'inline';
-    document.querySelector(`.subtaskList[onclick="saveItem(${i})"]`).style.display = 'inline';
-    document.querySelector(`.subtaskList[onclick="editItem(${i})"]`).style.display = 'none';
-}
 
-function saveItem(i) {
-    const newValue = document.getElementById(`subtask-input-${i}`).value;
-    subtask[i] = newValue;
-    addSubtask(); // Aktualisiert die Liste nach dem Speichern
-}
 
 function addCurrentSubtask() {
-    if (subtask.length < 5) {
+    if (subtasks.length < 5) {
         let CurrentSubtask = document.getElementById('new-subtask').value;
-        subtask.push(CurrentSubtask);
+        subtasks.push(CurrentSubtask);
         document.getElementById('new-subtask').value = ''; // Liste wieder leeren
         addSubtask();
     } else {
