@@ -310,6 +310,7 @@ async function createTask(event) {
     let date = document.getElementById('dueDate');
     let category = document.getElementById('Category');
     let subtask = subtasks;
+    let status= 'open'
     
 
     let newTask = {
@@ -319,7 +320,10 @@ async function createTask(event) {
         Date: date.value,
         Prio: prio,
         Category: category.value,
-        Subtask: subtask
+        Subtask: subtask,
+        Status:status
+        
+
     };
 
 if (loggedInUser=== guest) {

@@ -208,8 +208,8 @@ function displayContacts(contactIndex, contactsName, contactLastname, selectedCl
       
     
 
-    return `<div class="${color}" id="contact-${contactIndex}" onclick="selectContact(${contactIndex}, '${contactsName}', '${contactLastname}', '${color}')">
-                <div class="contact-icon">
+    return `<div class= "Contact-Container"  id="contact-${contactIndex}" onclick="selectContact(${contactIndex}, '${contactsName}', '${contactLastname}', '${color}')">
+                <div class="contact-icon ${color}">
                     <span>${contactsName.charAt(0).toUpperCase()}${contactLastname.charAt(0).toUpperCase()}</span>
                 </div>
                 <div class="contact-content">

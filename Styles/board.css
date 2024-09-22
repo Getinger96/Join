@@ -4,6 +4,10 @@ body {
     background-color: rgb(246, 247, 248);
 }
 
+.Contact-Container{
+    display: flex;
+}
+
 .Subtasks_Btn {
     border: none;
     background-color: #FFFFFF;
@@ -559,7 +563,7 @@ li {
     line-height: 24px;
     background-color: #FFFFFF;
     padding: 10px;
-    z-index: 1;
+    z-index: 3;
 }
 
 .arrow_drop_downaa {
@@ -581,6 +585,7 @@ li {
     display: flex;
     flex-direction: column;
     overflow-x: hidden;
+    z-index: 2;
 }
 
 .d_none {

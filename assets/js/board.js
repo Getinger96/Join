@@ -33,7 +33,7 @@ async function fetchTasks(path = '') {
                 Prio: task.Prio,
                 Category: task.Category,
                 subtask: task.Subtask,
-                status: 'open',
+                status: task.Status,
             }
         )
         
