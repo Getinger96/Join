@@ -16,7 +16,7 @@ async function fetchTasks(path = '') {
         let task = tasksAsarray[index];
         id++;
 
-        let saveTask = task.filter
+        let saveTask = task.Filter+
 
         tasksArray.push(
             {

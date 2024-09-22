@@ -48,7 +48,7 @@ async function createTask(event) {
     const descriptionElement = document.getElementById('description');
     const description = descriptionElement ? descriptionElement.value.trim() : '';
     const priority = currentPriority;  // Verwende die aktuelle Priorität
-    const subtasks = Array.from(document.querySelectorAll('#list li')).map(li => li.textContent);
+    const subtasks = Array.from(document.querySelectorAll('#list li')).map(li => li.textContent+"checked");
 
     const validCategories = ['open', 'progress', 'awaitFeedback', 'closed'];
     const status = validCategories.includes(kategorie) ? kategorie : 'open';
@@ -366,4 +366,46 @@ function emptyTasks(category) {
     } else {
         console.error(`Element mit category="${category}" nicht gefunden.`);
     }
+}
+
+
+async function deleteData(path = "") {
+    let response = await fetch(base_URL + path + ".json", {
+        method: "DELETE",
+    });
+
+    return responsASJson = await response.json();
+}
+
+
+async function putData(path = "", data = {}) {
+    let response = await fetch(base_URL + path + ".json", {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    });
+
+    return responsASJson = await response.json();
+}
+
+async function deleteTask(task) {
+    task --;
+    let key = tasksArray[task].taskKey;
+
+    await deleteData(`tasks/${key}`);
+    tasksArray.splice(task,1);
+    closeOverlay();
+    updateHtml();
+    
+
+}
+
+async function EditData(task) {
+
+    openTask();
+
+
+
 }
