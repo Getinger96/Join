@@ -135,11 +135,16 @@ async function fetchContacts(path = '') {
 
         let color = colors[colorIndex];
 
+        if (contact.email == 'guest@web.de'){
 
-        contactsArray.push({
-            name: contact.name,
-            color:color,
-        })
+        }else{
+            contactsArray.push({
+                name: contact.name,
+                color:color,
+            })
+
+        }
+       
 
         letterSorting()
 
