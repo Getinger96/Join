@@ -509,6 +509,10 @@ function moveTo(event, category) {
     updateHtml();
 }
 
+
+
+
+
 function saveTasksToLocalStorage() {
     localStorage.setItem('tasksArray', JSON.stringify(tasksArray)); 
 }
