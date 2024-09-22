@@ -6,7 +6,6 @@ let subTaskChecked = [];
 
 let currentDraggedElement;
 let id = 0
-let nr = 0
 
 async function fetchTasks(path = '') {
     let response = await fetch(base_URL + path + ".json");
@@ -15,7 +14,7 @@ async function fetchTasks(path = '') {
     let keysArrayTask = Object.keys(userJSON.contacts);
 
 
-    for (let index = nr; index < tasksAsarray.length; index++) {
+    for (let index = 0; index < tasksAsarray.length; index++) {
         let task = tasksAsarray[index];
         let keyTask =  keysArrayTask[index];
 
@@ -132,8 +131,7 @@ function closeTask() {
 }
 
 function generateTodoHTML(task, taskIndex) {
-    nr++;
-    console.log(nr);
+
     
     let title = task.Title;
     let description = task.Description || "";
@@ -512,30 +510,36 @@ function moveTo(event, category) {
     let task = tasksArray[currentDraggedElement];
 
     if (task) {
-        // Debug-Ausgabe für task.idTask, um sicherzustellen, dass es korrekt ist
+        console.log("Aktueller Task:", task);
         console.log("task.idTask:", task.idTask);
 
-        // Wenn task.idTask existiert, update den Status
         if (task.idTask) {
             task.status = category;
-            putDataTask(task.idTask, { status: category });
+
+            // Pfad anpassen
+            putDataTask(`tasks/${task.idTask}`, { Status: category })
+                .then(() => {
+                    console.log("Status aktualisiert für Task:", task.idTask);
+                    updateHtml();
+                })
+                .catch(error => {
+                    console.error("Fehler beim Aktualisieren des Status:", error);
+                });
         } else {
             console.error("task.idTask ist undefiniert. Die Aufgabe kann nicht aktualisiert werden.");
         }
+    } else {
+        console.error("Kein Task gefunden für den aktuellen Index:", currentDraggedElement);
     }
-
-    // Aktualisiere das HTML nach der Statusänderung
-    updateHtml();
 }
 
 async function putDataTask(path = "", data = {}) {
     try {
-        // Debug-Ausgabe des gesendeten Daten
         console.log("Sending data to:", base_URL + path + ".json");
         console.log("Data:", data);
-        
+
         let response = await fetch(base_URL + path + ".json", {
-            method: "PUT",
+            method: "PATCH",
             headers: {
                 "Content-Type": "application/json"
             },
@@ -543,40 +547,16 @@ async function putDataTask(path = "", data = {}) {
         });
 
         if (!response.ok) {
-            // Fehlerbehandlung für den Fall, dass der Request fehlschlägt
-            throw new Error(`Fehler beim PUT-Request: ${response.status}`);
+            throw new Error(`Fehler beim PATCH-Request: ${response.status}`);
         }
 
         let responseAsJson = await response.json();
-        console.log("Server Response:", responseAsJson);  // Debug-Ausgabe der Serverantwort
+        console.log("Server Response:", responseAsJson);
         return responseAsJson;
     } catch (error) {
-        console.error("Fehler beim PUT-Aufruf:", error);
+        console.error("Fehler beim PATCH-Aufruf:", error);
     }
 }
-
-async function putDataTask(taskId = "", data = {}) {
-    try {
-        let response = await fetch(`${base_URL}/tasks/${taskId}.json`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data),  // JSON-Daten als String senden
-        });
-
-        // Überprüfe, ob die Anfrage erfolgreich war
-        if (!response.ok) {
-            throw new Error(`Fehler beim PUT-Aufruf: ${response.status}`);
-        }
-
-        let responseAsJson = await response.json();  // Antwort als JSON parsen
-        return responseAsJson;  // JSON zurückgeben
-    } catch (error) {
-        console.error("Fehler beim Aktualisieren der Daten:", error);
-    }
-}
-
 
 
 function saveTasksToLocalStorage() {
