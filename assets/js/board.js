@@ -4,6 +4,8 @@ let tasksArray = [];
 let subTaskChecked = [];
 
 
+
+
 let currentDraggedElement;
 let id = 0
 
@@ -11,33 +13,40 @@ async function fetchTasks(path = '') {
     let response = await fetch(base_URL + path + ".json");
     let userJSON = await response.json();
     let tasksAsarray = Object.values(userJSON.tasks)
-    let keysArrayTask = Object.keys(userJSON.contacts);
+    let keysArrayTask = Object.keys(userJSON.tasks);
 
 
     for (let index = 0; index < tasksAsarray.length; index++) {
         let task = tasksAsarray[index];
         let keyTask =  keysArrayTask[index];
-
         id++;
 
-        let saveTask = task.Filter+
 
-        tasksArray.push(
-            {
-                taskKey:keyTask,
+        
+        let saveTask = tasksArray.filter(t => t.Title === task.Titel);
+
+        // Beispielbedingung, die du anpassen kannst
+        if (saveTask.length > 0) {
+            console.log(`Task mit Titel "${task.Titel}" existiert bereits.`);
+    
+        } else {
+          
+            tasksArray.push({
+                taskKey: keyTask,
                 idTask: id,
                 Title: task.Titel,
-                Description: task.description,
+                Description: task.Description,
                 Assigned: task.AssignedContact,
                 duedate: task.Date,
                 Prio: task.Prio,
                 Category: task.Category,
                 subtask: task.Subtask,
                 status: task.Status,
-            }
-        )
-        
+            });
+        }
     }
+        
+    
    
     
 
@@ -91,12 +100,32 @@ async function updateHtml() {
             getassignecontacts(task, task.idTask); // Use idTask to fetch correct contacts
 
         });
+     
     }
+    checkEmptyFields();
 }
 
 
+function checkEmptyFields() {
+    let fields = ["open", "progress", "awaitFeedback", "closed"];
+
+    fields.forEach(fieldId => {
+        let container = document.getElementById(fieldId);
+        if (container && container.children.length === 0) { // children Holen Sie sich eine Sammlung der untergeordneten Elemente
+            container.innerHTML = showEmptyFields();;  // Füge leere Felder zur Liste hinzu
+        }
+    });
 
 
+}
+
+
+function showEmptyFields() {
+    return ` <div class="fiedIsempty"> 
+                                <p> text</p>
+                            </div>`
+    
+}
 
 
 
@@ -181,30 +210,6 @@ function generateTodoHTML(task, taskIndex) {
 }
 
 
-
-
-// Funktion zum Anzeigen der großen ToDo-Karte im Overlay
-function showCard(task, taskIndex) {
-        let todoBig = document.getElementById('todoBig');
-        let showCardHTML = createShowCard(task, taskIndex); 
-        todoBig.innerHTML = showCardHTML;
-
-}
-
-// Funktion zum Öffnen des großen ToDos im Overlay
-function openToDo(taskIndex) {
-    taskIndex--;
-    let task = tasksArray[taskIndex];  // Hole die Aufgabe aus dem Array basierend auf dem Index
-    let todoBig = document.getElementById('todoBig');
-    todoBig.classList = 'cardbig';  // Setze CSS-Klasse für das große Div
-    todoBig.innerHTML = '';
-
-    document.body.style.overflow = "hidden";
-    document.getElementById('overlay').classList.remove('d-none');
-
-    showCard(task, taskIndex );  // Übergibt die ausgewählte Aufgabe zur Anzeige
-}
-
 // Funktion zum Erstellen des HTML-Inhalts für die große ToDo-Anzeige
 function getPriorityIcon(priority) {
     // Define priority icons
@@ -230,204 +235,7 @@ function getCategoryColor(category) {
     return '#0038FF';
 }
 
-function generateSmallContactsHtml(assignedContacts) {
-    let contactsHtml = '';
-    assignedContacts.forEach((contact, index) => {
-        let contactParts = contact.split(' ');
-        let contactFirstname = contactParts[0] || '';  // Der erste Teil ist der Vorname
-        let contactLastname = contactParts.slice(1).join(' ') || '';  // Der Rest ist der Nachname
 
-        const color = getRandomColorForContact(); // Farbe für den Kontakt generieren
-        contactsHtml += getSmallContactHtml(index, contactFirstname, contactLastname, color); // Zeige nur Initialen
-    });
-    return contactsHtml;
-}
-
-function generateLargeContactsHtml(assignedContacts) {
-    let contactsHtml = ''; 
-
-    for (let index = 0; index < assignedContacts.length; index++) {
-        let nameParts = assignedContacts[index].split(' ');
-        let contactFirstname = nameParts[0] || '';  
-        let contactLastname = nameParts.slice(1).join(' ') || '';  
-
-        let firstLetterForName = contactFirstname.charAt(0).toUpperCase();
-        let firstLetterLastName = contactLastname.charAt(0).toUpperCase();
-
-        let color = showTheNameColor(firstLetterForName);
-        
-        contactsHtml += getLargeContactHtml(index, firstLetterForName, firstLetterLastName, contactFirstname, contactLastname, color);
-    }
-  
-    return contactsHtml;  // Gib das komplette generierte HTML zurück
-}
-
-function showTheNameColor(firstLetterForName) {
-    let currentColor = 'gray';
-    colorLetter.forEach(colorLetterItem => {
-
-        if (firstLetterForName === colorLetterItem.letter) {
-            currentColor = colorLetterItem.color; 
-        }
-    });
-    return currentColor
-}
-
-
-
-function getSmallContactHtml(index, firstname, lastname, color) {
-    const initials = `${firstname.charAt(0).toUpperCase()}${lastname.charAt(0).toUpperCase()}`;
-    return `
-        <div class="contactCircle" style="background-color: ${color};">
-            ${initials}
-        </div>
-    `;
-}
-
-function getLargeContactHtml(index, firstLetterForName, firstLetterLastName, contactFirstname, contactLastname, color) {// Zeige vollständige Namen
-
-    return `
-        <div class="contact-box">
-            <div class="contact-icon" style="background-color: ${color};">
-                ${firstLetterForName} ${firstLetterLastName}  
-            </div>
-            <div class="contact-content">
-                <span class="contactname">${contactFirstname} ${contactLastname}</span>
-            </div>
-        </div>
-    `;
-}
-
-function createShowCard(task, taskIndex) {
-    let title = task.Title || '';
-    let description = task.Description || '';
-    let dueDate = task.duedate || '';
-    let priority = task.Prio;
-    let assignedContacts = task.Assigned || [];
-    let category = task.Category || '';
-
-    const priorityIcon = getPriorityIcon(priority);
-    const categoryColor = getCategoryColor(category);
-    const contactsHtml = generateLargeContactsHtml(assignedContacts);
-    const subtasksHtml = generateSubtasksHtml(task.subtask, taskIndex); // Subtasks generieren
-
-   return `
-        <div class="todo-detail">
-            <div>
-                <div class="divKategorie" style="background-color: ${categoryColor};">${category}</div>
-                <button onclick="closeOverlay()" class="close-button"><img src="./assets/img/iconoir_cancel.png" alt=""></button>
-            </div>
-            <h2>${title}</h2>
-            <p><strong>Description:</strong> ${description}</p>
-            <p><strong>Due Date:</strong> ${dueDate}</p>
-            <p><strong>Priority:</strong> 
-                <span>${priority}</span> 
-                <img src="${priorityIcon}" alt="${priority} Priority">
-            </p>
-            <p><strong>Assigned To:</strong></p>
-            <div class="assigned-contacts">
-                ${contactsHtml}
-            </div>
-            <p class="subtaskstext"> <strong>Subtasks:</strong></p>
-            <div class="subtasks-container">
-                ${subtasksHtml} <!-- Hier werden die Subtasks eingefügt -->
-            </div>
-        </div>
-        <div class="actionBigTodo">
-            <button class="actionBigButton" onclick="deleteTask(${taskIndex})">
-                <img class="iconTodoBig" src="./assets/img/delete.png">
-                <p>Delete</p>
-            </button>
-            <div></div>
-            <button class="actionBigButton" onclick="editTodo()">
-                <img class="iconTodoBig" src="./assets/img/edit.png">
-                <p>Edit</p>
-            </button>
-        </div>
-    `;
-}
-
-function closeOverlay() {
-    const todoBig = document.getElementById('todoBig');
-    const overlay = document.getElementById('overlay');
-
-    todoBig.classList.add('d-none');
-    overlay.classList.add('d-none');
-
-    document.body.style.overflow = 'auto';
-}
-
-
-
-function generateSubtasksHtml(subtasks, taskIndex) {
-    let subtasksHtml = '';
-    const totalSubtasks = subtasks ? subtasks.length : 0;
-
-    if (totalSubtasks > 0) {
-        subtasks.forEach((subtask, index) => {
-            const subtaskStatus = JSON.parse(localStorage.getItem(`task-${taskIndex}-subtasks`)) || {};
-            const isChecked = subtaskStatus[index] || false;  // Standardmäßig auf false setzen
-
-            subtasksHtml += `
-                <div class="subtask-item">
-                    <input class="checkbox" type="checkbox" id="subtask-${taskIndex}-${index}" ${isChecked ? 'checked' : ''} 
-                    onchange="subtaskChecked(${taskIndex}, ${index})" />
-                    <label class="checkboxtext" for="subtask-${taskIndex}-${index}">${subtask}</label>
-                </div>
-            `;
-        });
-    }
-
-    return subtasksHtml;
-}
-
-function subtaskChecked(taskIndex, subtaskIndex) {
-    const subtaskStatus = JSON.parse(localStorage.getItem(`task-${taskIndex}-subtasks`)) || {};
-    const isChecked = document.getElementById(`subtask-${taskIndex}-${subtaskIndex}`).checked;
-    subtaskStatus[subtaskIndex] = isChecked;
-    localStorage.setItem(`task-${taskIndex}-subtasks`, JSON.stringify(subtaskStatus));
-
-    updateProgress(taskIndex);
-}
-
-function updateProgress(taskIndex) {
-    let indexTasksArray = taskIndex +1;
-    const task = tasksArray.find(t => t.idTask === indexTasksArray);
-    if (!task || !task.subtask) return;
-
-    const totalSubtasks = task.subtask.length;
-    const subtaskStatus = JSON.parse(localStorage.getItem(`task-${taskIndex}-subtasks`)) || {};
-    const completedSubtasks = Object.values(subtaskStatus).filter(status => status).length;
-
-    const progressPercentage = totalSubtasks ? (completedSubtasks / totalSubtasks) * 100 : 0;
-    document.getElementById(`progressbarline-${taskIndex}`).style.width = `${progressPercentage}%`;
-    document.getElementById(`progress-text-${taskIndex}`).innerText = `Subtasks: ${completedSubtasks}/${totalSubtasks}`;
-}
-
-async function initializeAllProgress() {
-    for (let taskIndex = 0; taskIndex < tasksArray.length; taskIndex++) {
-        const tasksArrayElement = tasksArray[taskIndex];
-        const subtaskStatus = JSON.parse(localStorage.getItem(`task-${taskIndex}-subtasks`)) || {};
-
-        if (tasksArrayElement === undefined) {
-            return;
-        }
-
-        // Überprüfen, ob subtasks leer sind
-        if (!tasksArrayElement.subtask || tasksArrayElement.subtask.length === 0) {
-            continue; // Wenn leer, zur nächsten Aufgabe gehen
-        }
-
-        tasksArrayElement.subtask.forEach((_, index) => {
-            const isChecked = subtaskStatus[index] || false;
-            const checkbox = document.getElementById(`subtask-${taskIndex}-${index}`);
-            if (checkbox) {
-                checkbox.checked = isChecked;
-            }
-        });
-        updateProgress(taskIndex);
-    }
-}
 
 function getassignecontacts(task, taskIndex) {
     let assignedContacts =task.Assigned;
@@ -503,74 +311,71 @@ function startDragging(idBoard) {
     currentDraggedElement = idBoard;
 }
 
-function moveTo(event, category) {
+async function moveTo(event, category) {
     event.preventDefault();
     
-    currentDraggedElement--;
-    let task = tasksArray[currentDraggedElement];
+    currentDraggedElement--; // Reduziere den Index auf 0-basierten Index
+    let task = tasksArray[currentDraggedElement]; // Hole das Task-Objekt
+    let key = task.taskKey;
 
-    if (task) {
-        console.log("Aktueller Task:", task);
-        console.log("task.idTask:", task.idTask);
+    if (task.idTask) {
+        // 1. Ändere den Status der Aufgabe
+        task.Status = category;
 
-        if (task.idTask) {
-            task.status = category;
+    
+      await  putDataTask(`tasks/${key}/Status`, category);
 
-            // Pfad anpassen
-            putDataTask(`tasks/${task.idTask}`, { Status: category })
-                .then(() => {
-                    console.log("Status aktualisiert für Task:", task.idTask);
-                    updateHtml();
-                })
-                .catch(error => {
-                    console.error("Fehler beim Aktualisieren des Status:", error);
-                });
-        } else {
-            console.error("task.idTask ist undefiniert. Die Aufgabe kann nicht aktualisiert werden.");
-        }
-    } else {
-        console.error("Kein Task gefunden für den aktuellen Index:", currentDraggedElement);
-    }
+        
 }
+ updateBoard(category,task,event);
 
+}
 async function putDataTask(path = "", data = {}) {
-    try {
-        console.log("Sending data to:", base_URL + path + ".json");
-        console.log("Data:", data);
+    let response = await fetch(base_URL + path + ".json", {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    });
 
-        let response = await fetch(base_URL + path + ".json", {
-            method: "PATCH",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(data)
-        });
+    return responsASJson = await response.json();
+}
 
-        if (!response.ok) {
-            throw new Error(`Fehler beim PATCH-Request: ${response.status}`);
+
+async function updateBoard(category, task, event) {
+    let taskElement = document.getElementById(`task_${task.idTask-1}Element`);
+    if (taskElement) {
+        taskElement.remove();
+    }
+
+    let newCategoryColumn = document.getElementById(category);
+    let taskHTML = generateTodoHTML(task, task.idTask);
+    newCategoryColumn.innerHTML += taskHTML;
+
+    // Überprüfe die Felder und aktualisiere den Inhalt
+    let fields = ["open", "progress", "awaitFeedback", "closed"];
+
+    fields.forEach(fieldId => {
+        let container = document.getElementById(fieldId);
+        if (container) {
+            if (container.children.length === 0) {
+                // Wenn das Feld leer ist, zeige das leere Feld an
+                container.innerHTML = showEmptyFields();
+            } else {
+                // Wenn das Feld nicht leer ist, entferne das leere Element
+                let emptyField = container.querySelector('.fiedIsempty');
+                if (emptyField) {
+                    emptyField.remove();
+                }
+            }
         }
+    });
 
-        let responseAsJson = await response.json();
-        console.log("Server Response:", responseAsJson);
-        return responseAsJson;
-    } catch (error) {
-        console.error("Fehler beim PATCH-Aufruf:", error);
-    }
+    getassignecontacts(task, task.idTask);
 }
 
 
-function saveTasksToLocalStorage() {
-    localStorage.setItem('tasksArray', JSON.stringify(tasksArray)); 
-}
-
-
-function loadTasksFromLocalStorage() {
-    const savedTasks = localStorage.getItem('tasksArray'); 
-    if (savedTasks) {
-        tasksArray = JSON.parse(savedTasks); 
-        updateHtml(); 
-    }
-}
 
 
 function highlight(id) {
@@ -683,43 +488,6 @@ function low() {
     currentPriority = 'low';  // Setzt die Priorität auf 'low'
 }
 
-function search() {
-    let search = document.getElementById('searchInput').value;
-    let searchTask = search.toLowerCase();
-
-    // Prüfen, ob mindestens 3 Zeichen eingegeben wurden
-    if (searchTask.length >= 3) {
-        // Alle Aufgaben durchsuchen
-        tasksArray.forEach((todo, index) => {
-            let todos = document.getElementById(`task_${index}Element`);
-            showTasksSearch(searchTask, todos, todo);
-        });
-    } else {
-        // Wenn weniger als 3 Zeichen eingegeben wurden, alle Aufgaben ausblenden
-        tasksArray.forEach((todo, index) => {
-            let todos = document.getElementById(`task_${index}Element`);
-            todos.style.display = 'none';
-        });
-    }
-
-    // Wenn das Suchfeld leer ist, alle Aufgaben anzeigen
-    if (searchTask === '') {
-        tasksArray.forEach((todo, index) => {
-            let todos = document.getElementById(`task_${index}Element`);
-            todos.style.display = 'block';
-        });
-    }
-}
-function showTasksSearch(search, todos, todo) {
-    let taskTitle = todo.Title.toLowerCase();
-
-    // Überprüfen, ob der Titel die Suchzeichenkette enthält
-    if (taskTitle.includes(search)) {
-        todos.style.display = 'block';
-    } else {
-        todos.style.display = 'none';
-    }
-}
 
 //Add Task leeren
 function clearTask() {

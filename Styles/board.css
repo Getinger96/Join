@@ -35,7 +35,6 @@ label {
 
 .drag-area {
     flex-grow: 1;
-    min-height: 100px;
     width: 100%;
     margin-bottom: 20px;
     display: flex;
@@ -106,6 +105,16 @@ h3 {
 
 .subtaskstext {
     margin-top: 18px;
+}
+
+.fiedIsempty {
+    border: dotted 5px gray;
+    padding: 10px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #cdc5c5;
 }
 
 .checkbox {
