@@ -130,11 +130,13 @@ function showEmptyFields() {
 
 
 function openTask() {
-    
-   
+    // Prüfen der Fensterbreite
+    const windowWidth = window.innerWidth;
 
     // Wenn die Bildschirmbreite kleiner oder gleich 1450px ist, zur add_task.html weiterleiten
-
+    if (windowWidth <= 1450) {
+        window.location.href = 'add_task.html'; // Redirect zur add_task.html
+    } else {
         // Standardmäßig das Overlay öffnen
         let taskDiv = document.getElementById('boardAddTask');
         let overlay = document.getElementById('darkOverlay');
@@ -148,15 +150,13 @@ function openTask() {
             overlay.style.display = 'none';  // Dunklen Hintergrund ausblenden
             document.body.style.overflow = 'auto';  // Scrollen auf der Hauptseite wieder erlauben
         }
-    
+    }
 }
-
 
 function closeTask() {
     document.getElementById('boardAddTask').style.display = 'none';
     document.getElementById('darkOverlay').style.display = 'none';
     document.body.style.overflow = 'auto';  // Scrollen auf der Hauptseite wieder erlauben
-    clearTask()
 }
 
 function generateTodoHTML(task, taskIndex) {
@@ -236,201 +236,6 @@ function getCategoryColor(category) {
 }
 
 
-<<<<<<< HEAD
-        const color = getRandomColorForContact(); // Farbe für den Kontakt generieren
-        contactsHtml += getSmallContactHtml(index, contactFirstname, contactLastname, color); // Zeige nur Initialen
-    });
-    return contactsHtml;
-}
-
-function generateLargeContactsHtml(assignedContacts) {
-    let contactsHtml = ''; 
-
-    for (let index = 0; index < assignedContacts.length; index++) {
-        let nameParts = assignedContacts[index].split(' ');
-        let contactFirstname = nameParts[0] || '';  
-        let contactLastname = nameParts.slice(1).join(' ') || '';  
-
-        let firstLetterForName = contactFirstname.charAt(0).toUpperCase();
-        let firstLetterLastName = contactLastname.charAt(0).toUpperCase();
-
-        let color = showTheNameColor(firstLetterForName);
-        
-        contactsHtml += getLargeContactHtml(index, firstLetterForName, firstLetterLastName, contactFirstname, contactLastname, color);
-    }
-  
-    return contactsHtml;  // Gib das komplette generierte HTML zurück
-}
-
-function showTheNameColor(firstLetterForName) {
-    let currentColor = 'gray';
-    colorLetter.forEach(colorLetterItem => {
-
-        if (firstLetterForName === colorLetterItem.letter) {
-            currentColor = colorLetterItem.color; 
-        }
-    });
-    return currentColor
-}
-
-
-
-function getSmallContactHtml(index, firstname, lastname, color) {
-    const initials = `${firstname.charAt(0).toUpperCase()}${lastname.charAt(0).toUpperCase()}`;
-    return `
-        <div class="contactCircle" style="background-color: ${color};">
-            ${initials}
-        </div>
-    `;
-}
-
-function getLargeContactHtml(index, firstLetterForName, firstLetterLastName, contactFirstname, contactLastname, color) {// Zeige vollständige Namen
-
-    return `
-        <div class="contact-box">
-            <div class="contact-icon" style="background-color: ${color};">
-                ${firstLetterForName} ${firstLetterLastName}  
-            </div>
-            <div class="contact-content">
-                <span class="contactname">${contactFirstname} ${contactLastname}</span>
-            </div>
-        </div>
-    `;
-}
-
-function createShowCard(task, taskIndex) {
-    let title = task.Title || '';
-    let description = task.Description || '';
-    let dueDate = task.duedate || '';
-    let priority = task.Prio;
-    let assignedContacts = task.Assigned || [];
-    let category = task.Category || '';
-    
-
-    const priorityIcon = getPriorityIcon(priority);
-    const categoryColor = getCategoryColor(category);
-    const contactsHtml = generateLargeContactsHtml(assignedContacts);
-    const subtasksHtml = generateSubtasksHtml(task.subtask, taskIndex); // Subtasks generieren
-
-   return `
-        <div class="todo-detail">
-            <div>
-                <div class="divKategorie" style="background-color: ${categoryColor};">${category}</div>
-                <button onclick="closeOverlay()" class="close-button"><img src="./assets/img/iconoir_cancel.png" alt=""></button>
-            </div>
-            <h2>${title}</h2>
-            <p><strong>Description:</strong> ${description}</p>
-            <p><strong>Due Date:</strong> ${dueDate}</p>
-            <p><strong>Priority:</strong> 
-                <span>${priority}</span> 
-                <img src="${priorityIcon}" alt="${priority} Priority">
-            </p>
-            <p><strong>Assigned To:</strong></p>
-            <div class="assigned-contacts">
-                ${contactsHtml}
-            </div>
-            <p class="subtaskstext"> <strong>Subtasks:</strong></p>
-            <div class="subtasks-container">
-                ${subtasksHtml} <!-- Hier werden die Subtasks eingefügt -->
-            </div>
-        </div>
-        <div class="actionBigTodo">
-            <button class="actionBigButton" onclick="deleteTask(${taskIndex})">
-                <img class="iconTodoBig" src="./assets/img/delete.png">
-                <p>Delete</p>
-            </button>
-            <div></div>
-            <button class="actionBigButton" onclick=" EditData(${taskIndex})">
-                <img class="iconTodoBig" src="./assets/img/edit.png">
-                <p>Edit</p>
-            </button>
-        </div>
-    `;
-}
-
-function closeOverlay() {
-    const todoBig = document.getElementById('todoBig');
-    const overlay = document.getElementById('overlay');
-
-    todoBig.classList.add('d-none');
-    overlay.classList.add('d-none');
-
-    document.body.style.overflow = 'auto';
-}
-
-
-
-function generateSubtasksHtml(subtasks, taskIndex) {
-    let subtasksHtml = '';
-    const totalSubtasks = subtasks ? subtasks.length : 0;
-
-    if (totalSubtasks > 0) {
-        subtasks.forEach((subtask, index) => {
-            const subtaskStatus = JSON.parse(localStorage.getItem(`task-${taskIndex}-subtasks`)) || {};
-            const isChecked = subtaskStatus[index] || false;  // Standardmäßig auf false setzen
-
-            subtasksHtml += `
-                <div class="subtask-item">
-                    <input class="checkbox" type="checkbox" id="subtask-${taskIndex}-${index}" ${isChecked ? 'checked' : ''} 
-                    onchange="subtaskChecked(${taskIndex}, ${index})" />
-                    <label class="checkboxtext" for="subtask-${taskIndex}-${index}">${subtask}</label>
-                </div>
-            `;
-        });
-    }
-
-    return subtasksHtml;
-}
-
-function subtaskChecked(taskIndex, subtaskIndex) {
-    const subtaskStatus = JSON.parse(localStorage.getItem(`task-${taskIndex}-subtasks`)) || {};
-    const isChecked = document.getElementById(`subtask-${taskIndex}-${subtaskIndex}`).checked;
-    subtaskStatus[subtaskIndex] = isChecked;
-    localStorage.setItem(`task-${taskIndex}-subtasks`, JSON.stringify(subtaskStatus));
-
-    updateProgress(taskIndex);
-}
-
-function updateProgress(taskIndex) {
-    let indexTasksArray = taskIndex +1;
-    const task = tasksArray.find(t => t.idTask === indexTasksArray);
-    if (!task || !task.subtask) return;
-
-    const totalSubtasks = task.subtask.length;
-    const subtaskStatus = JSON.parse(localStorage.getItem(`task-${taskIndex}-subtasks`)) || {};
-    const completedSubtasks = Object.values(subtaskStatus).filter(status => status).length;
-
-    const progressPercentage = totalSubtasks ? (completedSubtasks / totalSubtasks) * 100 : 0;
-    document.getElementById(`progressbarline-${taskIndex}`).style.width = `${progressPercentage}%`;
-    document.getElementById(`progress-text-${taskIndex}`).innerText = `Subtasks: ${completedSubtasks}/${totalSubtasks}`;
-}
-
-async function initializeAllProgress() {
-    for (let taskIndex = 0; taskIndex < tasksArray.length; taskIndex++) {
-        const tasksArrayElement = tasksArray[taskIndex];
-        const subtaskStatus = JSON.parse(localStorage.getItem(`task-${taskIndex}-subtasks`)) || {};
-
-        if (tasksArrayElement === undefined) {
-            return;
-        }
-
-        // Überprüfen, ob subtasks leer sind
-        if (!tasksArrayElement.subtask || tasksArrayElement.subtask.length === 0) {
-            continue; // Wenn leer, zur nächsten Aufgabe gehen
-        }
-
-        tasksArrayElement.subtask.forEach((_, index) => {
-            const isChecked = subtaskStatus[index] || false;
-            const checkbox = document.getElementById(`subtask-${taskIndex}-${index}`);
-            if (checkbox) {
-                checkbox.checked = isChecked;
-            }
-        });
-        updateProgress(taskIndex);
-    }
-}
-=======
->>>>>>> 842d514b85f23763d407d7931cd926cfa936a4b9
 
 function getassignecontacts(task, taskIndex) {
     let assignedContacts =task.Assigned;
@@ -686,7 +491,10 @@ function low() {
 
 //Add Task leeren
 function clearTask() {
-  
+    selectedContactIndices.forEach((contactIndex) => {
+        const contact = contactsArray[contactIndex];
+        deselctedtContact(contactIndex, contact.name, `${contact.name.charAt(0).toUpperCase()}${getLastName(contact.name).charAt(0).toUpperCase()}`, contact.color);
+    });
 
     // Clear the Selection_Container
     const selectionContainer = document.getElementById('Selection_Container');
@@ -719,8 +527,10 @@ function clearTask() {
     }
 
     // Subtask-Eingabefeld leeren
-   let subtask = document.getElementById('subtasksContainer');
-   subtask.innerHTML=''
+    const newSubtask = document.getElementById('new-subtask');
+    if (newSubtask) {
+        newSubtask.value = '';
+    }
 
     // 'Assigned to'-Dropdown zurücksetzen (falls vorhanden)
     const selectContainer = document.getElementById('select_container');
@@ -746,7 +556,7 @@ function clearTask() {
     // Leert die Liste der ausgewählten Kontakte
     selectedContactIndices = [];
     assignedContacts = [];
-    
+    fetchContacts();
 
     getContacts();
 }
@@ -785,7 +595,7 @@ function resetPrioButtons() {
 
 // Funktion, um den Wert des select-Elements abzurufen
 function getSelectedCategory() {
-    let categorySelect = document.getElementById('kategorie');
+    const categorySelect = document.getElementById('kategorie');
     if (categorySelect) {
         return categorySelect.value;
     }
