@@ -128,7 +128,7 @@ function createShowCard(task, taskIndex) {
                 <p>Delete</p>
             </button>
             <div></div>
-            <button class="actionBigButton" onclick="editTodo()">
+            <button class="actionBigButton" onclick="EditData(${taskIndex})">
                 <img class="iconTodoBig" src="./assets/img/edit.png">
                 <p>Edit</p>
             </button>

@@ -134,9 +134,8 @@ function openTask() {
     const windowWidth = window.innerWidth;
 
     // Wenn die Bildschirmbreite kleiner oder gleich 1450px ist, zur add_task.html weiterleiten
-    if (windowWidth <= 1450) {
-        window.location.href = 'add_task.html'; // Redirect zur add_task.html
-    } else {
+   
+     
         // Standardmäßig das Overlay öffnen
         let taskDiv = document.getElementById('boardAddTask');
         let overlay = document.getElementById('darkOverlay');
@@ -150,7 +149,7 @@ function openTask() {
             overlay.style.display = 'none';  // Dunklen Hintergrund ausblenden
             document.body.style.overflow = 'auto';  // Scrollen auf der Hauptseite wieder erlauben
         }
-    }
+    
 }
 
 function closeTask() {
@@ -491,11 +490,7 @@ function low() {
 
 //Add Task leeren
 function clearTask() {
-    selectedContactIndices.forEach((contactIndex) => {
-        const contact = contactsArray[contactIndex];
-        deselctedtContact(contactIndex, contact.name, `${contact.name.charAt(0).toUpperCase()}${getLastName(contact.name).charAt(0).toUpperCase()}`, contact.color);
-    });
-
+  
     // Clear the Selection_Container
     const selectionContainer = document.getElementById('Selection_Container');
     if (selectionContainer) {
