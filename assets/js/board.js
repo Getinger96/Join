@@ -4,9 +4,10 @@ let tasksArray = [];
 let subTaskChecked = [];
 
 
+
+
 let currentDraggedElement;
 let id = 0
-let nr = 0
 
 async function fetchTasks(path = '') {
     let response = await fetch(base_URL + path + ".json");
@@ -18,27 +19,34 @@ async function fetchTasks(path = '') {
     for (let index = 0; index < tasksAsarray.length; index++) {
         let task = tasksAsarray[index];
         let keyTask =  keysArrayTask[index];
-
         id++;
 
-        let saveTask = task.Filter+
 
-        tasksArray.push(
-            {
-                taskKey:keyTask,
+        
+        let saveTask = tasksArray.filter(t => t.Title === task.Titel);
+
+        // Beispielbedingung, die du anpassen kannst
+        if (saveTask.length > 0) {
+            console.log(`Task mit Titel "${task.Titel}" existiert bereits.`);
+    
+        } else {
+          
+            tasksArray.push({
+                taskKey: keyTask,
                 idTask: id,
                 Title: task.Titel,
-                Description: task.description,
+                Description: task.Description,
                 Assigned: task.AssignedContact,
                 duedate: task.Date,
                 Prio: task.Prio,
                 Category: task.Category,
                 subtask: task.Subtask,
                 status: task.Status,
-            }
-        )
-        
+            });
+        }
     }
+        
+    
    
     
 
@@ -92,12 +100,32 @@ async function updateHtml() {
             getassignecontacts(task, task.idTask); // Use idTask to fetch correct contacts
 
         });
+     
     }
+    checkEmptyFields();
 }
 
 
+function checkEmptyFields() {
+    let fields = ["open", "progress", "awaitFeedback", "closed"];
+
+    fields.forEach(fieldId => {
+        let container = document.getElementById(fieldId);
+        if (container && container.children.length === 0) { // children Holen Sie sich eine Sammlung der untergeordneten Elemente
+            container.innerHTML = showEmptyFields();;  // Füge leere Felder zur Liste hinzu
+        }
+    });
 
 
+}
+
+
+function showEmptyFields() {
+    return ` <div class="fiedIsempty"> 
+                                <p> text</p>
+                            </div>`
+    
+}
 
 
 
@@ -132,8 +160,7 @@ function closeTask() {
 }
 
 function generateTodoHTML(task, taskIndex) {
-    nr++;
-    console.log(nr);
+
     
     let title = task.Title;
     let description = task.Description || "";
@@ -183,30 +210,6 @@ function generateTodoHTML(task, taskIndex) {
 }
 
 
-
-
-// Funktion zum Anzeigen der großen ToDo-Karte im Overlay
-function showCard(task, taskIndex) {
-        let todoBig = document.getElementById('todoBig');
-        let showCardHTML = createShowCard(task, taskIndex); 
-        todoBig.innerHTML = showCardHTML;
-
-}
-
-// Funktion zum Öffnen des großen ToDos im Overlay
-function openToDo(taskIndex) {
-    taskIndex--;
-    let task = tasksArray[taskIndex];  // Hole die Aufgabe aus dem Array basierend auf dem Index
-    let todoBig = document.getElementById('todoBig');
-    todoBig.classList = 'cardbig';  // Setze CSS-Klasse für das große Div
-    todoBig.innerHTML = '';
-
-    document.body.style.overflow = "hidden";
-    document.getElementById('overlay').classList.remove('d-none');
-
-    showCard(task, taskIndex );  // Übergibt die ausgewählte Aufgabe zur Anzeige
-}
-
 // Funktion zum Erstellen des HTML-Inhalts für die große ToDo-Anzeige
 function getPriorityIcon(priority) {
     // Define priority icons
@@ -232,13 +235,8 @@ function getCategoryColor(category) {
     return '#0038FF';
 }
 
-function generateSmallContactsHtml(assignedContacts) {
-    let contactsHtml = '';
-    assignedContacts.forEach((contact, index) => {
-        let contactParts = contact.split(' ');
-        let contactFirstname = contactParts[0] || '';  // Der erste Teil ist der Vorname
-        let contactLastname = contactParts.slice(1).join(' ') || '';  // Der Rest ist der Nachname
 
+<<<<<<< HEAD
         const color = getRandomColorForContact(); // Farbe für den Kontakt generieren
         contactsHtml += getSmallContactHtml(index, contactFirstname, contactLastname, color); // Zeige nur Initialen
     });
@@ -431,6 +429,8 @@ async function initializeAllProgress() {
         updateProgress(taskIndex);
     }
 }
+=======
+>>>>>>> 842d514b85f23763d407d7931cd926cfa936a4b9
 
 function getassignecontacts(task, taskIndex) {
     let assignedContacts =task.Assigned;
@@ -506,31 +506,24 @@ function startDragging(idBoard) {
     currentDraggedElement = idBoard;
 }
 
-function moveTo(event, category) {
+async function moveTo(event, category) {
     event.preventDefault();
     
+    currentDraggedElement--; // Reduziere den Index auf 0-basierten Index
+    let task = tasksArray[currentDraggedElement]; // Hole das Task-Objekt
+    let key = task.taskKey;
+
+    if (task.idTask) {
+        // 1. Ändere den Status der Aufgabe
+        task.Status = category;
+
     
-    currentDraggedElement--;
-    let task = tasksArray[currentDraggedElement];
-    let key= task.taskKey
-    
- 
+      await  putDataTask(`tasks/${key}/Status`, category);
 
-    if (task) {
-        // Debug-Ausgabe für task.idTask, um sicherzustellen, dass es korrekt ist
-        console.log("task.idTask:", task.idTask);
+        
+}
+ updateBoard(category,task,event);
 
-        // Wenn task.idTask existiert, update den Status
-        if (task.idTask) {
-            task.Status = category;
-            putDataTask(`tasks/${key}/Status`,category);
-        } else {
-            console.error("task.idTask ist undefiniert. Die Aufgabe kann nicht aktualisiert werden.");
-        }
-    }
-
-    // Aktualisiere das HTML nach der Statusänderung
-  updateHtml();
 }
 async function putDataTask(path = "", data = {}) {
     let response = await fetch(base_URL + path + ".json", {
@@ -545,18 +538,39 @@ async function putDataTask(path = "", data = {}) {
 }
 
 
-function saveTasksToLocalStorage() {
-    localStorage.setItem('tasksArray', JSON.stringify(tasksArray)); 
-}
-
-
-function loadTasksFromLocalStorage() {
-    const savedTasks = localStorage.getItem('tasksArray'); 
-    if (savedTasks) {
-        tasksArray = JSON.parse(savedTasks); 
-        updateHtml(); 
+async function updateBoard(category, task, event) {
+    let taskElement = document.getElementById(`task_${task.idTask-1}Element`);
+    if (taskElement) {
+        taskElement.remove();
     }
+
+    let newCategoryColumn = document.getElementById(category);
+    let taskHTML = generateTodoHTML(task, task.idTask);
+    newCategoryColumn.innerHTML += taskHTML;
+
+    // Überprüfe die Felder und aktualisiere den Inhalt
+    let fields = ["open", "progress", "awaitFeedback", "closed"];
+
+    fields.forEach(fieldId => {
+        let container = document.getElementById(fieldId);
+        if (container) {
+            if (container.children.length === 0) {
+                // Wenn das Feld leer ist, zeige das leere Feld an
+                container.innerHTML = showEmptyFields();
+            } else {
+                // Wenn das Feld nicht leer ist, entferne das leere Element
+                let emptyField = container.querySelector('.fiedIsempty');
+                if (emptyField) {
+                    emptyField.remove();
+                }
+            }
+        }
+    });
+
+    getassignecontacts(task, task.idTask);
 }
+
+
 
 
 function highlight(id) {
@@ -669,43 +683,6 @@ function low() {
     currentPriority = 'low';  // Setzt die Priorität auf 'low'
 }
 
-function search() {
-    let search = document.getElementById('searchInput').value;
-    let searchTask = search.toLowerCase();
-
-    // Prüfen, ob mindestens 3 Zeichen eingegeben wurden
-    if (searchTask.length >= 3) {
-        // Alle Aufgaben durchsuchen
-        tasksArray.forEach((todo, index) => {
-            let todos = document.getElementById(`task_${index}Element`);
-            showTasksSearch(searchTask, todos, todo);
-        });
-    } else {
-        // Wenn weniger als 3 Zeichen eingegeben wurden, alle Aufgaben ausblenden
-        tasksArray.forEach((todo, index) => {
-            let todos = document.getElementById(`task_${index}Element`);
-            todos.style.display = 'none';
-        });
-    }
-
-    // Wenn das Suchfeld leer ist, alle Aufgaben anzeigen
-    if (searchTask === '') {
-        tasksArray.forEach((todo, index) => {
-            let todos = document.getElementById(`task_${index}Element`);
-            todos.style.display = 'block';
-        });
-    }
-}
-function showTasksSearch(search, todos, todo) {
-    let taskTitle = todo.Title.toLowerCase();
-
-    // Überprüfen, ob der Titel die Suchzeichenkette enthält
-    if (taskTitle.includes(search)) {
-        todos.style.display = 'block';
-    } else {
-        todos.style.display = 'none';
-    }
-}
 
 //Add Task leeren
 function clearTask() {

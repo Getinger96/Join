@@ -6,17 +6,50 @@ let countDone = 0;
 let iconsBooleanColorChange = false;
 
 
-function fetchTasksSummary() {
+async function fetchTasksSummary(path = '') {
+    tasksArray = []; // Leere das Array vor dem Hinzufügen neuer Einträge
+    let response = await fetch(base_URL + path + ".json");
+    let userJSON = await response.json();
+    let tasksAsArray = Object.values(userJSON.tasks);
+    let keysArrayTask = Object.keys(userJSON.tasks);
 
-let getTaskArray  = localStorage.getItem('tasksArray'); 
-tasksArray = JSON.parse(getTaskArray); 
+    for (let index = 0; index < tasksAsArray.length; index++) {
+        let task = tasksAsArray[index];
+        let keyTask = keysArrayTask[index];
+        id++;
 
+        let saveTask = tasksArray.filter(t => t.Title === task.Titel);
 
-for (let index = 0; index < tasksArray.length; index++) {
-
-    loadToDoAtTheKanbanBoard(index) 
+        // Beispielbedingung, die du anpassen kannst
+        if (saveTask.length > 0) {
+            console.log(`Task mit Titel "${task.Titel}" existiert bereits.`);
+    
+        } else {
+          
+            tasksArray.push({
+                taskKey: keyTask,
+                idTask: id,
+                Title: task.Titel,
+                Description: task.Description,
+                Assigned: task.AssignedContact,
+                duedate: task.Date,
+                Prio: task.Prio,
+                Category: task.Category,
+                subtask: task.Subtask,
+                status: task.Status,
+            });
+    }
+}
+renderSummarySite();
 }
 
+
+function renderSummarySite() {
+
+for (let index = 0; index < tasksArray.length; index++) {
+    loadToDoAtTheKanbanBoard(index)
+    
+}
 
 }
 
