@@ -156,6 +156,7 @@ function closeTask() {
     document.getElementById('boardAddTask').style.display = 'none';
     document.getElementById('darkOverlay').style.display = 'none';
     document.body.style.overflow = 'auto';  // Scrollen auf der Hauptseite wieder erlauben
+    clearTask()
 }
 
 function generateTodoHTML(task, taskIndex) {
@@ -549,9 +550,9 @@ function clearTask() {
     resetButtons();
 
     // Leert die Liste der ausgewählten Kontakte
-    selectedContactIndices = [];
+    
     assignedContacts = [];
-    fetchContacts();
+    
 
     getContacts();
 }
