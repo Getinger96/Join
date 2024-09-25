@@ -162,6 +162,7 @@ function showSelectedProfile(firstletters, i, contactColour) {
 
     let selectedProfileContainer = document.getElementById('Selected_profiles_Container');
     let profilebadgeassign = document.getElementById(`profile_Badge_assign${i}`)
+    selectedProfileContainer.innerHTML='';
 
     if (profilebadgeassign) {
         profilebadgeassign.remove();

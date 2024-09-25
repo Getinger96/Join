@@ -1,19 +1,19 @@
 const colors = [
-    'orange', 
-    'gelb',  
-    'grün', 
-    'türkis', 
-    'blau', 
-    'lila', 
-    'pink',  
-    'hellorange'  
+    'orange',
+    'gelb',
+    'grün',
+    'türkis',
+    'blau',
+    'lila',
+    'pink',
+    'hellorange'
 ];
 
 const base_URL = "https://join-37803-default-rtdb.europe-west1.firebasedatabase.app/";
 let contactsArray = [];
 let beginningLetter = [];
 let groupedContacts = [];
-let selectedContactIndices = [];
+
 let assignedContacts = [];
 
 let currentPriority = 'none';
@@ -48,13 +48,13 @@ async function createTask(event) {
     const descriptionElement = document.getElementById('description');
     const description = descriptionElement ? descriptionElement.value.trim() : '';
     const priority = currentPriority;  // Verwende die aktuelle Priorität
-    const subtasks = Array.from(document.querySelectorAll('#list li')).map(li => li.textContent+"checked");
+    const subtasks = Array.from(document.querySelectorAll('#list li')).map(li => li.textContent + "checked");
 
     const validCategories = ['open', 'progress', 'awaitFeedback', 'closed'];
     const status = validCategories.includes(kategorie) ? kategorie : 'open';
 
     const newTodo = {
-        
+
         Titel: title,
         Description: description,
         Date: dueDate,
@@ -67,9 +67,9 @@ async function createTask(event) {
 
     await postData(`tasks`, newTodo);
 
-  
-   
-    tasksArray=[];
+
+
+    tasksArray = [];
     clearTask();
     // Schließe das Formular
     closeTask();
@@ -88,7 +88,7 @@ async function postData(path = "", data = {}) {
     });
 
     return responsASJson = await response.json();
-    
+
 }
 
 
@@ -135,16 +135,16 @@ async function fetchContacts(path = '') {
 
         let color = colors[colorIndex];
 
-        if (contact.email == 'guest@web.de'){
+        if (contact.email == 'guest@web.de') {
 
-        }else{
+        } else {
             contactsArray.push({
                 name: contact.name,
-                color:color,
+                color: color,
             })
 
         }
-       
+
 
         letterSorting()
 
@@ -169,7 +169,7 @@ function getContacts() {
     let groupedContacts = {};
     contactsArray.forEach((contact, index) => {
         let firstLetter = contact.name.charAt(0).toUpperCase();
-        
+
         let color = contact.color;
 
         if (!groupedContacts[firstLetter]) {
@@ -209,12 +209,12 @@ function closelist() {
 
 
 function displayContacts(contactIndex, contactsName, contactLastname, selectedClass, color) {
-    
-      
-    
 
-    return `<div class= "Contact-Container"  id="contact-${contactIndex}" onclick="selectContact(${contactIndex}, '${contactsName}', '${contactLastname}', '${color}')">
-                <div class="contact-icon ${color}">
+
+
+
+    return `<div class= "Contact-Container"  id="profile-${contactIndex}" onclick="selectedContact(${contactIndex}, '${color}', '${contactsName}')">
+                <div class="contact-icon ${color} profilebadge">
                     <span>${contactsName.charAt(0).toUpperCase()}${contactLastname.charAt(0).toUpperCase()}</span>
                 </div>
                 <div class="contact-content">
@@ -223,32 +223,28 @@ function displayContacts(contactIndex, contactsName, contactLastname, selectedCl
             </div>`;
 }
 
-    // Bestimme die Anzeige je nach Ansicht (klein/groß)
+
+
+
+
+
+function selectedContact(index,color,name) {
+    const contact = contactsArray[index];
+
+    if (assignedContacts.includes(name)) {
+        deselctedtContact(index,color,name)
+        
+    }else{
+        let contactContainer = document.getElementById(`profile-${index}`);
+        contactContainer.classList.add('bg_color');
+        contactContainer.classList.add('color_white');
+        assignedContacts.push(name);
+        showSelectedProfile(color,name,index)
+    }
+   
    
 
-
-
-function selectContact(index, name, lastname, color) {
-    const contact = contactsArray[index];
-    const selectedIndex = selectedContactIndices.indexOf(index);
-
-    if (selectedIndex > -1) {
-        // Wenn bereits ausgewählt, dann abwählen und Informationen übergeben
-        deselctedtContact(index, name, lastname, color);
-        selectedContactIndices.splice(selectedIndex, 1);
-        assignedContacts.splice(name); // Entferne den Kontakt aus der ausgewählten Liste
-        showSelectedProfile(firstletters, i, color)
-    } else {
-        // Wenn noch nicht ausgewählt, dann auswählen
-        selectedContactIndices.push(index);
-        assignedContacts.push(name); // Füge den Kontakt zur ausgewählten Liste hinzu
-        showSelectedProfile(); // Aktualisiere die Anzeige der ausgewählten Profile
-        showSelectedProfile(firstletters, i, color)
-    }
-
-    getContacts(); // Kontakte neu rendern, um die Markierung zu aktualisieren
 }
-
 
 function letterSorting() {
     contactsArray.forEach(contact => {
@@ -274,155 +270,177 @@ function letterSorting() {
 
 
 
-function deselctedtContact(index, lastname, color) {
-    const selectedIndex = selectedContactIndices.indexOf(index);
-    if (selectedIndex > -1) {
-        selectedContactIndices.splice(selectedIndex, 1);
-    // Hier verwenden wir die übergebenen Parameter (index, name, lastname, color)
-    let profileContainer = document.getElementById(`contact-${index}`);
-    
-    // Setze die Hintergrundfarbe und Textfarbe auf Standard zurück
-    if (profileContainer) {
-        profileContainer.style.backgroundColor = ''; // Hintergrundfarbe zurücksetzen
-        
-        profileContainer.querySelector('.contactname').style.color = 'black'; // Textfarbe auf Standard zurücksetzen
-        profileContainer.querySelector('.contact-icon span').style.color = 'black'; // Initialen ebenfalls auf Standard
-    }
-
-    
-
-    showSelectedProfile(lastname, index); // Aktualisiere die Anzeige der ausgewählten Profile
-}
+function deselctedtContact(index,color,name) {
+    let contactContainer = document.getElementById(`profile-${index}`);
+    contactContainer.classList.remove('bg_color');
+    contactContainer.classList.remove('color_white');
+    assignedContacts.splice(name,1);
+    showSelectedProfile(color,name,index)
 }
 
-function showSelectedProfile() {
+function showSelectedProfile(color, name, index) {
     let selectedProfileContainer = document.getElementById('Selected_profiles_Container');
-    selectedProfileContainer.innerHTML = '';
+    let profile_Badge_assign=document.getElementById(`profilebadge_Assign${index}`)
+    
+    let contact = contactsArray[index];
+        let firstletters = `${contact.name.charAt(0).toUpperCase()}${getLastName(contact.name) .charAt(0).toUpperCase()}`;
+if (profile_Badge_assign) {
+    profile_Badge_assign.remove();
+    
+}else{
+    selectedProfileContainer.innerHTML += `
+    <div id="profilebadge_Assign${index}" class="contact-icon${index} ${color} profilebadge">
+        <div>${firstletters}</div>
+    </div>
+`;
 
-    if (selectedContactIndices.length === 0) {
-        selectedProfileContainer.style.display = 'none'; // Verstecke, wenn keine Kontakte ausgewählt sind
-        return;
-    }
 
-    selectedProfileContainer.style.display = 'flex'; // Stelle sicher, dass der Container sichtbar ist
-    selectedContactIndices.forEach(index => {
-        let contact = contactsArray[index];
-        let firstletters = `${contact.name.charAt(0).toUpperCase()}${getLastName(contact.name).charAt(0).toUpperCase()}`;
-        
-        
-        selectedProfileContainer.innerHTML += `
-            <div class="contact-icon">
-                <div>${firstletters}</div>
-            </div>
-        `;
-    });
 }
+ 
+   }
+       
 
 
-
-function updateHTMLBoard() {
-    console.log("Aktuelle Todos:", tasksArray);
-
-    // Container für verschiedene Status
-    const containers = {
-        open: document.getElementById('open'),
-        progress: document.getElementById('progress'),
-        awaitFeedback: document.getElementById('awaitFeedback'),
-        closed: document.getElementById('closed')
-    };
-
-    // Leere alle Container
-    Object.values(containers).forEach(container => {
-        if (container) {
-            container.innerHTML = '';
-        } else {
-            console.error('Container nicht gefunden.');
-        }
-    });
-
-    // Aufgaben durchgehen und dem richtigen Container hinzufügen
-    tasksArray.forEach(task => {
-        console.log("Aktuelle Aufgabe:", task);
-        if (containers[task.status]) {  // Verwende 'status' für die Zuordnung
-            const taskHTML = generateTodoHTML(task);
-            containers[task.status].innerHTML += taskHTML;
-        } else {
-            console.error(`Container für Status "${todo.status}" nicht gefunden.`);
-        }
-    });
-
-    // Überprüfen, ob die Kategorien leer sind, um leere Aufgaben anzuzeigen
-    ['open', 'progress', 'awaitFeedback', 'closed'].forEach(category => {
-        emptyTasks(category);
-    });
-}
-
-// Funktion, um leere Bereiche mit einem Hinweis zu versehen
-function emptyTasks(category) {
-    let container = document.getElementById(category);
-    let noTasksElement = document.querySelector(`.noTasks[category="${category}"]`);
-
-    if (noTasksElement) {
-        if (container && container.innerHTML.trim() === '') {
-            noTasksElement.style.display = 'block';
-        } else {
-            noTasksElement.style.display = 'none';
-        }
-    } else {
-        console.error(`Element mit category="${category}" nicht gefunden.`);
-    }
-}
-
-
-async function deleteData(path = "") {
-    let response = await fetch(base_URL + path + ".json", {
-        method: "DELETE",
-    });
-
-    return responsASJson = await response.json();
-}
-
-
-async function putData(path = "", data = {}) {
-    let response = await fetch(base_URL + path + ".json", {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-    });
-
-    return responsASJson = await response.json();
-}
-
-async function deleteTask(task) {
-  
-    let key = tasksArray[task].taskKey;
-
-    await deleteData(`tasks/${key}`);
-    tasksArray.splice(task,1);
-    closeOverlay();
-    updateHtml();
+      
     
 
-}
 
-async function EditData(index) {
-    index --;
-    let task= tasksArray[index];
-    let title = task.Title;
-    let description = task.Description;
-    let dueDate = task.duedate;
-    let priority = task.Prio;
-    let assignedContacts = task.Assigned;
-    let category = task.Category;
-    let subtask = task.subtask;
-    let idBoard = task.idTask
-   
 
-    openTask();
 
-    let editedTask={title,description,dueDate,priority,assignedContacts,category,subtask,idBoard}
-    tasksArray.splice(task,1,editedTask);
+    function updateHTMLBoard() {
+        console.log("Aktuelle Todos:", tasksArray);
 
-}
+        // Container für verschiedene Status
+        const containers = {
+            open: document.getElementById('open'),
+            progress: document.getElementById('progress'),
+            awaitFeedback: document.getElementById('awaitFeedback'),
+            closed: document.getElementById('closed')
+        };
+
+        // Leere alle Container
+        Object.values(containers).forEach(container => {
+            if (container) {
+                container.innerHTML = '';
+            } else {
+                console.error('Container nicht gefunden.');
+            }
+        });
+
+        // Aufgaben durchgehen und dem richtigen Container hinzufügen
+        tasksArray.forEach(task => {
+            console.log("Aktuelle Aufgabe:", task);
+            if (containers[task.status]) {  // Verwende 'status' für die Zuordnung
+                const taskHTML = generateTodoHTML(task);
+                containers[task.status].innerHTML += taskHTML;
+            } else {
+                console.error(`Container für Status "${todo.status}" nicht gefunden.`);
+            }
+        });
+
+        // Überprüfen, ob die Kategorien leer sind, um leere Aufgaben anzuzeigen
+        ['open', 'progress', 'awaitFeedback', 'closed'].forEach(category => {
+            emptyTasks(category);
+        });
+    }
+
+    // Funktion, um leere Bereiche mit einem Hinweis zu versehen
+    function emptyTasks(category) {
+        let container = document.getElementById(category);
+        let noTasksElement = document.querySelector(`.noTasks[category="${category}"]`);
+
+        if (noTasksElement) {
+            if (container && container.innerHTML.trim() === '') {
+                noTasksElement.style.display = 'block';
+            } else {
+                noTasksElement.style.display = 'none';
+            }
+        } else {
+            console.error(`Element mit category="${category}" nicht gefunden.`);
+        }
+    }
+
+
+    async function deleteData(path = "") {
+        let response = await fetch(base_URL + path + ".json", {
+            method: "DELETE",
+        });
+
+        return responsASJson = await response.json();
+    }
+
+
+    async function putData(path = "", data = {}) {
+        let response = await fetch(base_URL + path + ".json", {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        });
+
+        return responsASJson = await response.json();
+    }
+
+    async function deleteTask(task) {
+
+        let key = tasksArray[task].taskKey;
+
+        await deleteData(`tasks/${key}`);
+        tasksArray.splice(task, 1);
+        closeOverlay();
+        updateHtml();
+
+
+    }
+
+    async function EditData(index) {
+
+        let task = tasksArray[index];
+        let title = task.Title;
+        let description = task.Description;
+        let dueDate = task.duedate;
+        let priority = task.Prio;
+        let assignedContacts = task.Assigned;
+        let category = task.Category;
+        let subtask = task.subtask;
+        let idBoard = task.idTaskS
+        
+        
+
+       
+      for (let indexcon = 0;indexcon < assignedContacts.length; indexcon++) {
+        let contact= assignedContacts[indexcon];
+        let color =  contactsArray[indexcon].color;  // Die Farbe des Kontakts
+         
+        let contactContainer = document.getElementById(`profile-${indexcon}`);
+        contactContainer.classList.add('bg_color');
+        contactContainer.classList.add('color_white');
+        showSelectedProfile(color, contact, indexcon)
+      }
+        openTask();
+        let tasktitle = document.getElementById('taskTitle').value;
+        let taskdescription = document.getElementById('description').value;
+        let taskDAte= document.getElementById('taskDueDate').value;
+       
+
+       if (priority=='urgent') {
+        urgent()
+        
+       } 
+       if (priority=='medium') {
+        medium()
+        
+       } 
+       if (priority=='low') {
+        low()
+        
+       } 
+
+       let taskCategory= document.getElementById('kategorie')
+       taskCategory.value=category;
+        
+       
+
+       
+    }

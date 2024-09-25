@@ -102,13 +102,11 @@ async function updateHtml() {
 
 
 function openTask() {
-    // Prüfen der Fensterbreite
-    const windowWidth = window.innerWidth;
+    
+   
 
     // Wenn die Bildschirmbreite kleiner oder gleich 1450px ist, zur add_task.html weiterleiten
-    if (windowWidth <= 1450) {
-        window.location.href = 'add_task.html'; // Redirect zur add_task.html
-    } else {
+
         // Standardmäßig das Overlay öffnen
         let taskDiv = document.getElementById('boardAddTask');
         let overlay = document.getElementById('darkOverlay');
@@ -122,13 +120,15 @@ function openTask() {
             overlay.style.display = 'none';  // Dunklen Hintergrund ausblenden
             document.body.style.overflow = 'auto';  // Scrollen auf der Hauptseite wieder erlauben
         }
-    }
+    
 }
+
 
 function closeTask() {
     document.getElementById('boardAddTask').style.display = 'none';
     document.getElementById('darkOverlay').style.display = 'none';
     document.body.style.overflow = 'auto';  // Scrollen auf der Hauptseite wieder erlauben
+    clearTask()
 }
 
 function generateTodoHTML(task, taskIndex) {
@@ -307,6 +307,7 @@ function createShowCard(task, taskIndex) {
     let priority = task.Prio;
     let assignedContacts = task.Assigned || [];
     let category = task.Category || '';
+    
 
     const priorityIcon = getPriorityIcon(priority);
     const categoryColor = getCategoryColor(category);
@@ -341,7 +342,7 @@ function createShowCard(task, taskIndex) {
                 <p>Delete</p>
             </button>
             <div></div>
-            <button class="actionBigButton" onclick="editTodo()">
+            <button class="actionBigButton" onclick=" EditData(${taskIndex})">
                 <img class="iconTodoBig" src="./assets/img/edit.png">
                 <p>Edit</p>
             </button>
@@ -708,10 +709,7 @@ function showTasksSearch(search, todos, todo) {
 
 //Add Task leeren
 function clearTask() {
-    selectedContactIndices.forEach((contactIndex) => {
-        const contact = contactsArray[contactIndex];
-        deselctedtContact(contactIndex, contact.name, `${contact.name.charAt(0).toUpperCase()}${getLastName(contact.name).charAt(0).toUpperCase()}`, contact.color);
-    });
+  
 
     // Clear the Selection_Container
     const selectionContainer = document.getElementById('Selection_Container');
@@ -744,10 +742,8 @@ function clearTask() {
     }
 
     // Subtask-Eingabefeld leeren
-    const newSubtask = document.getElementById('new-subtask');
-    if (newSubtask) {
-        newSubtask.value = '';
-    }
+   let subtask = document.getElementById('subtasksContainer');
+   subtask.innerHTML=''
 
     // 'Assigned to'-Dropdown zurücksetzen (falls vorhanden)
     const selectContainer = document.getElementById('select_container');
@@ -773,7 +769,7 @@ function clearTask() {
     // Leert die Liste der ausgewählten Kontakte
     selectedContactIndices = [];
     assignedContacts = [];
-    fetchContacts();
+    
 
     getContacts();
 }
@@ -812,7 +808,7 @@ function resetPrioButtons() {
 
 // Funktion, um den Wert des select-Elements abzurufen
 function getSelectedCategory() {
-    const categorySelect = document.getElementById('kategorie');
+    let categorySelect = document.getElementById('kategorie');
     if (categorySelect) {
         return categorySelect.value;
     }

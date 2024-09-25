@@ -6,6 +6,7 @@ body {
 
 .Contact-Container{
     display: flex;
+    border-radius: 10px;
 }
 
 .Subtasks_Btn {
@@ -102,6 +103,12 @@ h3 {
 
     margin-top: 10px;
 
+}
+.color_white{
+    color: white;
+}
+.bg_color{
+    background-color: #2A3647;
 }
 
 .subtaskstext {
@@ -594,7 +601,7 @@ li {
 
 .Selected_profiles_Container {
     display: flex;
-}
+    align-items: center;}
 
 .profile_Container {
     display: flex;
@@ -647,7 +654,7 @@ li {
     margin-bottom: 8px;
 }
 
-.contact-icon {
+.profilebadge {
     width: 30px;
     height: 30px;
     display: flex;
@@ -808,13 +815,9 @@ span {
 }
 
 @media (max-width: 1450px) {
-    #darkOverlay {
-        display: none !important;
-    }
+   
 
-    #boardAddTask {
-        display: none !important;
-    }
+    
 
     .inputTitle {
         width: 340px;
