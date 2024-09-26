@@ -104,7 +104,7 @@ function createShowCard(task, taskIndex) {
         <div class="todo-detail">
             <div>
                 <div class="divKategorie" style="background-color: ${categoryColor};">${category}</div>
-                <button onclick="closeOverlay()" class="close-button"><img src="./assets/img/iconoir_cancel.png" alt=""></button>
+                <button onclick="closeOverlay(${taskIndex})" class="close-button"><img src="./assets/img/iconoir_cancel.png" alt=""></button>
             </div>
             <h2>${title}</h2>
             <p><strong>Description:</strong> ${description}</p>
@@ -136,12 +136,15 @@ function createShowCard(task, taskIndex) {
     `;
 }
 
-function closeOverlay() {
+function closeOverlay(taskIndex) {
     const todoBig = document.getElementById('todoBig');
     const overlay = document.getElementById('overlay');
+    let selectedProfileContainer = document.getElementById('Selected_profiles_Container');
 
     todoBig.classList.add('d-none');
     overlay.classList.add('d-none');
+    selectedProfileContainer.innerHTML = '';
+
 
     document.body.style.overflow = 'auto';
 }
@@ -257,3 +260,5 @@ function showTasksSearch(search, todos, todo) {
         todos.style.display = 'none';
     }
 }
+
+

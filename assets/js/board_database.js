@@ -1,4 +1,4 @@
-const colors = [
+let colorsBoard = [
     'orange',
     'gelb',
     'grün',
@@ -396,6 +396,8 @@ if (profile_Badge_assign) {
 
     async function EditData(index) {
 
+
+        openTask();
         let task = tasksArray[index];
         let title = task.Title;
         let description = task.Description;
@@ -418,7 +420,7 @@ if (profile_Badge_assign) {
         contactContainer.classList.add('color_white');
         showSelectedProfile(color, contact, indexcon)
       }
-        openTask();
+      
         let tasktitle = document.getElementById('taskTitle').value;
         let taskdescription = document.getElementById('description').value;
         let taskDAte= document.getElementById('taskDueDate').value;
