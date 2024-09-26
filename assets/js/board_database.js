@@ -445,9 +445,12 @@ if (profile_Badge_assign) {
         showSelectedProfileEdit(contact, indexcon)
       }
         openTask();
-        let tasktitle = document.getElementById('taskTitle').value;
-        let taskdescription = document.getElementById('description').value;
-        let taskDAte= document.getElementById('taskDueDate').value;
+        let tasktitle = document.getElementById('taskTitle');
+        tasktitle.value=title;
+        let taskdescription = document.getElementById('description');
+        taskdescription.value=description;
+        let taskDAte= document.getElementById('taskDueDate');
+        taskDAte.value=dueDate;
        
 
        if (priority=='urgent') {
@@ -463,7 +466,7 @@ if (profile_Badge_assign) {
         
        } 
    
-       let taskCategory= document.getElementById('kategorie')
+       let taskCategory= document.getElementById('kategorie');
        taskCategory.value=category;
 
        subtasks=subtask;
