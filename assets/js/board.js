@@ -523,9 +523,10 @@ function clearTask() {
     }
 
     // Subtask-Eingabefeld leeren
-    const newSubtask = document.getElementById('new-subtask');
-    if (newSubtask) {
-        newSubtask.value = '';
+    let subtaskContainer= document.getElementById('subtasksContainer');
+    
+    if (subtaskContainer) {
+        subtaskContainer.innerHTML = '';
     }
 
     // 'Assigned to'-Dropdown zurücksetzen (falls vorhanden)
@@ -552,6 +553,7 @@ function clearTask() {
     // Leert die Liste der ausgewählten Kontakte
     
     assignedContacts = [];
+    subtasks= [];
     
 
     getContacts();
