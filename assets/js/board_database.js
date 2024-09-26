@@ -61,7 +61,7 @@ async function createTask(event) {
         Prio: priority,
         Category: kategorie,
         Subtask: subtasks,
-        status: status,
+        Status: status,
         AssignedContact: assignedContacts,
     };
 
@@ -314,6 +314,7 @@ if (profile_Badge_assign) {
     profile_Badge_assign.remove();
     
 }else{
+    
     selectedProfileContainer.innerHTML += `
     <div id="profilebadge_Assign${index}" class="contact-icon${index} ${color} profilebadge">
         <div>${firstletters}</div>
@@ -396,7 +397,7 @@ if (profile_Badge_assign) {
     }
 
 
-    async function putData(path = "", data = {}) {
+    async function putDataEdit(path = "", data = {}) {
         let response = await fetch(base_URL + path + ".json", {
             method: "PUT",
             headers: {
@@ -420,6 +421,17 @@ if (profile_Badge_assign) {
 
     }
 
+    function changeAddtaskButton(index) {
+        let buttonaddtask= document.getElementById('DibButtomAddtask');
+        buttonaddtask.innerHTML=`
+          <button onclick="clearTask()" class="buttonContainerWhite curser">Clear <img
+                            src="./assets/IMG/x_icon_clear.svg"></button>
+                    <button  onclick="createEdittask(${index})" class="buttonContainerdark curser">Edit Task <img
+                            src="assets/IMG/clear_Img.svg"></button>`
+
+
+    }
+
     async function EditData(index) {
 
 
@@ -433,6 +445,8 @@ if (profile_Badge_assign) {
         let category = task.Category;
         let subtask = task.subtask;
         let idBoard = task.idTask;
+       
+        let status= task.Status
         
         
 
@@ -473,12 +487,44 @@ if (profile_Badge_assign) {
 
        subtasks=subtask;
        addSubtask();
-       
-       
-
-      
-        
-       
 
        
+
+
+changeAddtaskButton(index,)
+
+
+       
+};
+
+function createEdittask(index) {
+    let tasktitle = document.getElementById('taskTitle');
+    
+    let taskdescription = document.getElementById('description');
+    
+    let taskDAte= document.getElementById('taskDueDate');
+
+
+  
+
+    let taskCategory= document.getElementById('kategorie');
+    let task = tasksArray[index];
+    let status= task.Status;
+    let key = task.taskKey;
+    let assignedContacts = task.Assigned;
+
+
+    let editedTASk={
+
+        Titel:tasktitle.value,
+        Description:taskdescription.value,
+        AssignedContact: assignedContacts,
+        Date:  taskDAte.value,
+        Prio :currentPriority,
+        Category: taskCategory.value,
+        Subtask: subtask,
+        Status:status,
     }
+    putDataEdit(`tasks/${key}`,editedTASk)
+
+}
