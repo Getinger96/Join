@@ -1,4 +1,4 @@
-let colorsBoard = [
+let colors = [
     'orange',
     'gelb',
     'grün',
@@ -194,7 +194,7 @@ function getContacts() {
 function openList() {
     let selecCon = document.getElementById('Selection_Container');
     let arrowCon = document.getElementById('arrow_img_container');
-    arrowCon.innerHTML = `<img onclick="closelist()"class="arrow_drop_downaa" src="assets/IMG/arrow_drop_up.svg" alt="">`;
+    arrowCon.innerHTML = `<img onclick="closelist()"class="arrow_drop_downaa" src="./assets/IMG/arrow_drop_up.svg" alt="">`;
     selecCon.classList.remove('d_none');
 
 }
@@ -203,7 +203,7 @@ function closelist() {
     let selecCon = document.getElementById('Selection_Container');
     let arrowCon = document.getElementById('arrow_img_container');
     arrowCon.innerHTML = '';
-    arrowCon.innerHTML = `<img onclick="openList()"class="arrow_drop_downaa" src="assets/IMG/arrow_drop_downaa.svg" alt="">`;
+    arrowCon.innerHTML = `<img onclick="openList()"class="arrow_drop_downaa" src="./assets/IMG/arrow_drop_downaa.svg" alt="">`;
     selecCon.classList.add('d_none');
 }
 

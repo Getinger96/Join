@@ -60,7 +60,7 @@ function func1(event) {
 function openList() {
     let selecCon = document.getElementById('Selection_Container');
     let arrowCon = document.getElementById('arrow_img_container');
-    arrowCon.innerHTML = `<img onclick="closelist()"class="arrow_drop_downaa" src="assets/IMG/arrow_drop_up.svg" alt="">`;
+    arrowCon.innerHTML = `<img onclick="closelist()"class="arrow_drop_downaa" src="./assets/IMG/arrow_drop_up.svg" alt="">`;
     selecCon.classList.remove('d_none');
 }
 
@@ -68,7 +68,7 @@ function closelist() {
     let selecCon = document.getElementById('Selection_Container');
     let arrowCon = document.getElementById('arrow_img_container');
     arrowCon.innerHTML = '';
-    arrowCon.innerHTML = `<img onclick="openList()"class="arrow_drop_downaa" src="assets/IMG/arrow_drop_downaa.svg" alt="">`;
+    arrowCon.innerHTML = `<img onclick="openList()"class="arrow_drop_downaa" src="./assets/IMG/arrow_drop_downaa.svg" alt="">`;
     selecCon.classList.add('d_none');
 }
 
@@ -77,7 +77,7 @@ function openCategoryLIst() {
     let seleCon = document.getElementById('Selection_Container_Category');
     let arrowcona = document.getElementById('arrow_img_container_Category');
     arrowcona.innerHTML = '';
-    arrowcona.innerHTML = `<img onclick="closelistCategory()"class="arrow_drop_downaa" src="assets/IMG/arrow_drop_up.svg" alt="">`;
+    arrowcona.innerHTML = `<img onclick="closelistCategory()"class="arrow_drop_downaa" src="./assets/IMG/arrow_drop_up.svg" alt="">`;
     seleCon.classList.remove('d_none');
     seleCon.innerHTML = `  <div onclick="choosedUserStory()" id="userStory" class= "userStory">User Story</div>
                         <div onclick="choosedTechnicalTask()" id="technichalTask" class= "technical_TAsk">Technical Task</div>
@@ -88,7 +88,7 @@ function closelistCategory() {
     let selecCon = document.getElementById('Selection_Container_Category');
     let arrowCon = document.getElementById('arrow_img_container_Category');
     arrowCon.innerHTML = '';
-    arrowCon.innerHTML = `<img onclick="openCategoryLIst()"class="arrow_drop_downaa" src="assets/IMG/arrow_drop_downaa.svg" alt="">`;
+    arrowCon.innerHTML = `<img onclick="openCategoryLIst()"class="arrow_drop_downaa" src="./assets/IMG/arrow_drop_downaa.svg" alt="">`;
     selecCon.classList.add('d_none');
 }
 
@@ -127,7 +127,7 @@ function renderContacts(i,contactColour,firstletters,name) {
           <div>${name}</div>
          </div>
           <div id="checkbox${i}">
-          <img onclick="selectedContact(${i},'${name}','${firstletters}','${contactColour}')"  class="check_img " src="assets/IMG/Check button.svg" alt="">
+          <img onclick="selectedContact(${i},'${name}','${firstletters}','${contactColour}')"  class="check_img " src="./assets/IMG/Check button.svg" alt="">
          </div>
         </div>`
 
@@ -136,7 +136,7 @@ function renderContacts(i,contactColour,firstletters,name) {
 function selectedContact(i, name, firstletters, contactColour) {
     let checkbox = document.getElementById(`checkbox${i}`);
     checkbox.innerHTML = '';
-    checkbox.innerHTML = `<img onclick="deselctedtContact(${i},'${name}','${firstletters}','${contactColour}')"  class="checked_img" src="assets/IMG/Checked button.svg" alt="">`
+    checkbox.innerHTML = `<img onclick="deselctedtContact(${i},'${name}','${firstletters}','${contactColour}')"  class="checked_img" src="./assets/IMG/Checked button.svg" alt="">`
 
     let profileContainer = document.getElementById(`profile_Container${i}`);
     profileContainer.classList.add('bg_color');
@@ -182,12 +182,12 @@ function renderPrioButtons() {
     let prioButtonContainer = document.getElementById('Prio_btn_Container');
     prioButtonContainer.innerHTML = `
                         <button onclick="chossedurgent()" type="button" id="urgent"  class="Prio_Btn">Urgent <img
-                                id="urgentIcon" src="assets/IMG/Prio_urgent(2).svg" alt=""></button>
+                                id="urgentIcon" src="./assets/IMG/Prio_urgent(2).svg" alt=""></button>
                                  <button type="button" id="medium" onclick="choossedmedium()" class="Prio_Btn">Medium <img
-                                id="mediumIcon" src="assets/IMG/Prio_medium(2).svg" alt="">
+                                id="mediumIcon" src="./assets/IMG/Prio_medium(2).svg" alt="">
                         </button>
                         <button type="button" id="low" onclick="choosedlow()" class="Prio_Btn">Low
-                            <img id="lowIcon" src="assets/IMG/Prio_Low(2).svg" alt=""></button>
+                            <img id="lowIcon" src="./assets/IMG/Prio_Low(2).svg" alt=""></button>
                              `;
 }
 
@@ -198,7 +198,7 @@ function chossedurgent() {
     urgent.innerHTML =
         `
      Urgent
-     <img src="assets/IMG/Prio_urgent_WHITE.svg" alt="">
+     <img src="./assets/IMG/Prio_urgent_WHITE.svg" alt="">
      `;
 
     urgent.classList.add('bg_urgent_selected');
@@ -229,7 +229,7 @@ function choosedlow() {
     low.innerHTML =
         `
     Low
-    <img src="assets/IMG/Prio_LOW_WHITE.svg" alt="">
+    <img src="./assets/IMG/Prio_LOW_WHITE.svg" alt="">
     `;
 
     low.classList.add('color_white');
@@ -244,7 +244,7 @@ function addSubtask() {
 
     for (let i = 0; i < subtasks.length; i++) {
        
-        list.innerHTML += `<div class="li">${subtasks[i]}<button type="button" class="Subtasks_Btn" onclick="deleteItem(${i})"><img src="./assets/img/delete.png"></button></div>`;
+        list.innerHTML += `<div class="li">${subtasks[i]}<button type="button" class="Subtasks_Btn" onclick="deleteItem(${i})"><img src="./assets/IMG/delete.png"></button></div>`;
     }
 }
 

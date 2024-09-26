@@ -104,7 +104,7 @@ function createShowCard(task, taskIndex) {
         <div class="todo-detail">
             <div>
                 <div class="divKategorie" style="background-color: ${categoryColor};">${category}</div>
-                <button onclick="closeOverlay(${taskIndex})" class="close-button"><img src="./assets/img/iconoir_cancel.png" alt=""></button>
+                <button onclick="closeOverlay(${taskIndex})" class="close-button"><img src="./assets/IMG/iconoir_cancel.png" alt=""></button>
             </div>
             <h2>${title}</h2>
             <p><strong>Description:</strong> ${description}</p>
@@ -190,9 +190,10 @@ function updateProgress(taskIndex) {
     const totalSubtasks = task.subtask.length;
     const subtaskStatus = JSON.parse(localStorage.getItem(`task-${taskIndex}-subtasks`)) || {};
     const completedSubtasks = Object.values(subtaskStatus).filter(status => status).length;
+    let progressLine = document.getElementById(`progressbarline-${taskIndex}`);
 
     const progressPercentage = totalSubtasks ? (completedSubtasks / totalSubtasks) * 100 : 0;
-    document.getElementById(`progressbarline-${taskIndex}`).style.width = `${progressPercentage}%`;
+    progressLine.style.width = `${progressPercentage}%`;
     document.getElementById(`progress-text-${taskIndex}`).innerText = `Subtasks: ${completedSubtasks}/${totalSubtasks}`;
 }
 

@@ -50,9 +50,8 @@ async function fetchTasks(path = '') {
    
     
 
-    updateHtml();
+  await  updateHtml();
     renderSubtask();
-  await  initializeAllProgress(); 
     console.log(tasksArray)
 
 }
@@ -103,6 +102,7 @@ async function updateHtml() {
      
     }
     checkEmptyFields();
+    await  initializeAllProgress(); 
 }
 
 
@@ -217,13 +217,13 @@ function getPriorityIcon(priority) {
     // Define priority icons
     let priorityIcon = '';
     if (checkPriority === 'urgent') {
-        priorityIcon = './assets/img/Prio_urgent(2).svg';
+        priorityIcon = './assets/IMG/Priority symbols (1).png';
     } else if (checkPriority === 'medium') {
         priorityIcon = './assets/IMG/Prio_medium(2).svg';
     } else if (checkPriority === 'low') {
         priorityIcon = './assets/IMG/iconLowWhite.svg';
     } else {
-        priorityIcon = './assets/img/Prio_Low(2).svg';
+        priorityIcon = './assets/IMG/Priority symbols.png';
     }
     
     // Return the determined priority icon
@@ -284,24 +284,17 @@ if (assignedContacts.length > 4) {
 }
 
 
-function showTheNameInitialInColorBoard(colorid, index) {
-    let nameColorContainer = document.getElementById(colorid);
+function showTheNameInitialInColorBoard(firstLetterForName, colorid) {
 
-    for (let indexColor = 0; indexColor < colorsBoard.length; indexColor++) {
-        let colorItem = colorsBoard[indexColor];
 
-        if (indexColor === index) {
-            let currentColor = colorItem; 
+    let nameColorContainer  = document.getElementById(colorid);
+    colorLetter.forEach(colorLetterItem => {
+
+        if (firstLetterForName === colorLetterItem.letter) {
+            let currentColor = colorLetterItem.color; 
             nameColorContainer.style.backgroundColor = currentColor;
-            break;
         }
-    }
-
-    if (index >= colorsBoard.length) {
-        let fallbackColorIndex = colorsBoard.length -7;
-        let fallbackColor = colorsBoard[fallbackColorIndex];
-        nameColorContainer.style.backgroundColor = fallbackColor;
-    }
+    });
 }
 
 function allowDrop(ev) {
@@ -408,7 +401,7 @@ function addSubtask() {
     for (let i = 0; i < subtasks.length; i++) {
        subtaskContainer.innerHTML+= `
        
-       <div class="li">${subtasks[i]}<button type="button" class="Subtasks_Btn" onclick="deleteItem(${i})"><img src="./assets/img/delete.png"></button></div>`
+       <div class="li">${subtasks[i]}<button type="button" class="Subtasks_Btn" onclick="deleteItem(${i})"><img src="./assets/IMG/delete.png"></button></div>`
            ;
         
     }
@@ -438,9 +431,9 @@ function addCurrentSubtask() {
 function resetButtons() {
     // Zurücksetzen aller Buttons
     let buttons = [
-        { id: 'urgent', color: 'initial', imgSrc: './assets/img/Prio_urgent(2).svg' },
+        { id: 'urgent', color: 'initial', imgSrc: './assets/IMG/Prio_urgent(2).svg' },
         { id: 'medium', color: 'initial', imgSrc: './assets/IMG/Prio_medium(2).svg' },
-        { id: 'low', color: 'initial', imgSrc: './assets/img/Prio_Low(2).svg' }
+        { id: 'low', color: 'initial', imgSrc: './assets/IMG/Prio_Low(2).svg' }
     ];
 
     buttons.forEach(button => {
@@ -590,13 +583,13 @@ function resetPrioButtons() {
         // Icon-Bild zurücksetzen
         switch (id) {
             case 'urgent':
-                icon.src = './assets/img/Prio_Urgent.svg';
+                icon.src = './assets/IMG/Prio_Urgent.svg';
                 break;
             case 'medium':
                 icon.src = './assets/IMG/Prio_Medium.svg';
                 break;
             case 'low':
-                icon.src = './assets/img/Prio_LOw.svg';
+                icon.src = './assets/IMG/Prio_LOw.svg';
                 break;
         }
     });
