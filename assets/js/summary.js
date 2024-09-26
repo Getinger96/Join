@@ -132,10 +132,11 @@ function showAllTaskinBoard(tasksArray) {
 }
 
 function showAllPrioUrgent(kanbanBoradPrioUrgent) {
+     let checkPriority = kanbanBoradPrioUrgent[0];
 
     let numberOfPrioUrgent = document.getElementById('prioUrgentId');
     
-    if (kanbanBoradPrioUrgent === "urgent") {
+    if (checkPriority === "urgent") {
     countPrioUrgent++;
     numberOfPrioUrgent.innerHTML = `${countPrioUrgent}`;
 }

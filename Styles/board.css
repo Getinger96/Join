@@ -85,7 +85,6 @@ h3 {
 .contact-iconBoard {
     display: inline-flex;
     border-radius: 100%;
-    background-color: red;
     width: 32px;
     height: 32px;
     justify-content: center;

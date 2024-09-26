@@ -1,4 +1,4 @@
-const colors = [
+let colorsBoard = [
     'orange',
     'gelb',
     'grün',
@@ -434,6 +434,8 @@ if (profile_Badge_assign) {
 
     async function EditData(index) {
 
+
+        openTask();
         let task = tasksArray[index];
         let title = task.Title;
         let description = task.Description;

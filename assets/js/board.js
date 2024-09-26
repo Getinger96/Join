@@ -134,8 +134,9 @@ function openTask() {
     const windowWidth = window.innerWidth;
 
     // Wenn die Bildschirmbreite kleiner oder gleich 1450px ist, zur add_task.html weiterleiten
-   
-     
+    if (windowWidth <= 1450) {
+        window.location.href = 'add_task.html'; // Redirect zur add_task.html
+    } else {
         // Standardmäßig das Overlay öffnen
         let taskDiv = document.getElementById('boardAddTask');
         let overlay = document.getElementById('darkOverlay');
@@ -149,7 +150,7 @@ function openTask() {
             overlay.style.display = 'none';  // Dunklen Hintergrund ausblenden
             document.body.style.overflow = 'auto';  // Scrollen auf der Hauptseite wieder erlauben
         }
-    
+    }
 }
 
 function closeTask() {
@@ -212,13 +213,14 @@ function generateTodoHTML(task, taskIndex) {
 
 // Funktion zum Erstellen des HTML-Inhalts für die große ToDo-Anzeige
 function getPriorityIcon(priority) {
+    let checkPriority = priority[0];
     // Define priority icons
     let priorityIcon = '';
-    if (priority === 'urgent') {
+    if (checkPriority === 'urgent') {
         priorityIcon = './assets/img/Prio_urgent(2).svg';
-    } else if (priority === 'medium') {
+    } else if (checkPriority === 'medium') {
         priorityIcon = './assets/IMG/Prio_medium(2).svg';
-    } else if (priority === 'low') {
+    } else if (checkPriority === 'low') {
         priorityIcon = './assets/IMG/iconLowWhite.svg';
     } else {
         priorityIcon = './assets/img/Prio_Low(2).svg';
@@ -282,17 +284,24 @@ if (assignedContacts.length > 4) {
 }
 
 
-function showTheNameInitialInColorBoard(firstLetterForName, colorid) {
+function showTheNameInitialInColorBoard(colorid, index) {
+    let nameColorContainer = document.getElementById(colorid);
 
+    for (let indexColor = 0; indexColor < colorsBoard.length; indexColor++) {
+        let colorItem = colorsBoard[indexColor];
 
-    let nameColorContainer  = document.getElementById(colorid);
-    colorLetter.forEach(colorLetterItem => {
-
-        if (firstLetterForName === colorLetterItem.letter) {
-            let currentColor = colorLetterItem.color; 
+        if (indexColor === index) {
+            let currentColor = colorItem; 
             nameColorContainer.style.backgroundColor = currentColor;
+            break;
         }
-    });
+    }
+
+    if (index >= colorsBoard.length) {
+        let fallbackColorIndex = colorsBoard.length -7;
+        let fallbackColor = colorsBoard[fallbackColorIndex];
+        nameColorContainer.style.backgroundColor = fallbackColor;
+    }
 }
 
 function allowDrop(ev) {
@@ -491,7 +500,11 @@ function low() {
 
 //Add Task leeren
 function clearTask() {
-  
+    selectedContactIndices.forEach((contactIndex) => {
+        const contact = contactsArray[contactIndex];
+        deselctedtContact(contactIndex, contact.name, `${contact.name.charAt(0).toUpperCase()}${getLastName(contact.name).charAt(0).toUpperCase()}`, contact.color);
+    });
+
     // Clear the Selection_Container
     const selectionContainer = document.getElementById('Selection_Container');
     if (selectionContainer) {
