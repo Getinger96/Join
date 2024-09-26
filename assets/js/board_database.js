@@ -298,6 +298,32 @@ if (profile_Badge_assign) {
 }
  
    }
+
+   function showSelectedProfileEdit(name) {
+    let selectedProfileContainer = document.getElementById('Selected_profiles_Container');
+    let findcontact= contactsArray.find(co=>co.name===name);
+
+    let color= findcontact.color;
+    let index  = contactsArray.indexOf(findcontact);
+     
+    let profile_Badge_assign=document.getElementById(`profilebadge_Assign${index}`)
+  
+    
+        let firstletters = `${name.charAt(0).toUpperCase()}${getLastName(name) .charAt(0).toUpperCase()}`;
+if (profile_Badge_assign) {
+    profile_Badge_assign.remove();
+    
+}else{
+    selectedProfileContainer.innerHTML += `
+    <div id="profilebadge_Assign${index}" class="contact-icon${index} ${color} profilebadge">
+        <div>${firstletters}</div>
+    </div>
+`;
+
+
+}
+ 
+   }
        
 
 
@@ -406,24 +432,27 @@ if (profile_Badge_assign) {
         let assignedContacts = task.Assigned;
         let category = task.Category;
         let subtask = task.subtask;
-        let idBoard = task.idTaskS
+        let idBoard = task.idTask;
         
         
 
        
       for (let indexcon = 0;indexcon < assignedContacts.length; indexcon++) {
         let contact= assignedContacts[indexcon];
-        let color =  contactsArray[indexcon].color;  // Die Farbe des Kontakts
+          // Die Farbe des Kontakts
          
         let contactContainer = document.getElementById(`profile-${indexcon}`);
         contactContainer.classList.add('bg_color');
         contactContainer.classList.add('color_white');
-        showSelectedProfile(color, contact, indexcon)
+        showSelectedProfileEdit(contact, indexcon)
       }
-      
-        let tasktitle = document.getElementById('taskTitle').value;
-        let taskdescription = document.getElementById('description').value;
-        let taskDAte= document.getElementById('taskDueDate').value;
+        openTask();
+        let tasktitle = document.getElementById('taskTitle');
+        tasktitle.value=title;
+        let taskdescription = document.getElementById('description');
+        taskdescription.value=description;
+        let taskDAte= document.getElementById('taskDueDate');
+        taskDAte.value=dueDate;
        
 
        if (priority=='urgent') {
@@ -438,9 +467,16 @@ if (profile_Badge_assign) {
         low()
         
        } 
-
-       let taskCategory= document.getElementById('kategorie')
+   
+       let taskCategory= document.getElementById('kategorie');
        taskCategory.value=category;
+
+       subtasks=subtask;
+       addSubtask();
+       
+       
+
+      
         
        
 
