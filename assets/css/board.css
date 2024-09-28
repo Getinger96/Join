@@ -28,6 +28,13 @@
     padding-right: 10px;
 }
 
+.contact-icon {
+    border: 2px solid white;
+    border-radius: 100%;
+    width: 32px;
+    height: 32px;
+}
+
 .addTask {
     display: flex;
     justify-content: center;

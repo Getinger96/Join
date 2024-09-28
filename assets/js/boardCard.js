@@ -43,7 +43,7 @@ function generateLargeContactsHtml(assignedContacts) {
         let firstLetterForName = contactFirstname.charAt(0).toUpperCase();
         let firstLetterLastName = contactLastname.charAt(0).toUpperCase();
 
-        let color = showTheNameColor(firstLetterForName);
+        let color = showTheNameColor(index);
         
         contactsHtml += getLargeContactHtml(index, firstLetterForName, firstLetterLastName, contactFirstname, contactLastname, color);
     }
@@ -51,12 +51,13 @@ function generateLargeContactsHtml(assignedContacts) {
     return contactsHtml;  // Gib das komplette generierte HTML zurück
 }
 
-function showTheNameColor(firstLetterForName) {
+function showTheNameColor(index) {
     let currentColor = 'gray';
-    colorLetter.forEach(colorLetterItem => {
+    colorsBoard.forEach(indexColor => {
 
-        if (firstLetterForName === colorLetterItem.letter) {
-            currentColor = colorLetterItem.color; 
+        if (indexColor.index === index) {
+            currentColor = indexColor.color; 
+
         }
     });
     return currentColor
@@ -191,6 +192,8 @@ function updateProgress(taskIndex) {
     const subtaskStatus = JSON.parse(localStorage.getItem(`task-${taskIndex}-subtasks`)) || {};
     const completedSubtasks = Object.values(subtaskStatus).filter(status => status).length;
     let progressLine = document.getElementById(`progressbarline-${taskIndex}`);
+    if (!progressLine) return;  // Exit if progress bar doesn't exist
+
 
     const progressPercentage = totalSubtasks ? (completedSubtasks / totalSubtasks) * 100 : 0;
     progressLine.style.width = `${progressPercentage}%`;

@@ -2,19 +2,29 @@ let subtasks = [];
 let subtask = [];
 let tasksArray = [];
 let subTaskChecked = [];
+let currentTaskIndex = null;
 
-
-
-
+const colorsBoard = [
+    { index: 0, color: 'orange' },
+    { index: 1, color: 'yellow' },
+    { index: 2, color: 'green' },
+    { index: 3, color: 'turquoise' },
+    { index: 4, color: 'blue' },
+    { index: 5, color: 'purple' },
+    { index: 6, color: 'pink' },
+    { index: 7, color: 'light orange' }
+];
 let currentDraggedElement;
 let id = 0
 
 async function fetchTasks(path = '') {
+    tasksArray = [];
     let response = await fetch(base_URL + path + ".json");
     let userJSON = await response.json();
     let tasksAsarray = Object.values(userJSON.tasks)
     let keysArrayTask = Object.keys(userJSON.tasks);
-
+    currentDraggedElement = 0;
+    id = 0
 
     for (let index = 0; index < tasksAsarray.length; index++) {
         let task = tasksAsarray[index];
@@ -49,11 +59,18 @@ async function fetchTasks(path = '') {
     
    
     
-
+         removeAllElement(); 
   await  updateHtml();
+
     renderSubtask();
     console.log(tasksArray)
 
+}
+
+
+function removeAllElement () {
+    let allElements = document.querySelectorAll('.drag-area');
+    allElements.forEach(element => element.innerHTML = '');
 }
 
 
@@ -129,8 +146,8 @@ function showEmptyFields() {
 
 
 
-function openTask() {
-    // Prüfen der Fensterbreite
+function openTask(taskIndex) {
+    currentTaskIndex = taskIndex;
     const windowWidth = window.innerWidth;
 
     // Wenn die Bildschirmbreite kleiner oder gleich 1450px ist, zur add_task.html weiterleiten
@@ -159,6 +176,14 @@ function closeTask() {
     document.body.style.overflow = 'auto';  // Scrollen auf der Hauptseite wieder erlauben
     clearTask()
 }
+
+function closeTaskUpdate() {
+    document.getElementById('boardAddTask').style.display = 'none';
+    document.getElementById('darkOverlay').style.display = 'none';
+    document.body.style.overflow = 'auto';  // Scrollen auf der Hauptseite wieder erlauben
+}
+
+
 
 function generateTodoHTML(task, taskIndex) {
 
@@ -274,7 +299,7 @@ function getassignecontacts(task, taskIndex) {
                 </div>`;
 
         }
-        showTheNameInitialInColorBoard(firstLetterForName,colorid);
+        showTheNameInitialInColorBoard(index,colorid);
 }
 if (assignedContacts.length > 4) {
     asignedContainer.innerHTML += `<div id="colorName" class="contact-iconBoard">
@@ -284,14 +309,14 @@ if (assignedContacts.length > 4) {
 }
 
 
-function showTheNameInitialInColorBoard(firstLetterForName, colorid) {
-
-
+function showTheNameInitialInColorBoard(index, colorid) {
     let nameColorContainer  = document.getElementById(colorid);
-    colorLetter.forEach(colorLetterItem => {
 
-        if (firstLetterForName === colorLetterItem.letter) {
-            let currentColor = colorLetterItem.color; 
+
+    colorsBoard.forEach(indexColor => {
+
+        if (indexColor.index === index) {
+            let currentColor = indexColor.color; 
             nameColorContainer.style.backgroundColor = currentColor;
         }
     });
@@ -356,8 +381,14 @@ async function updateBoard(category, task, event) {
     newCategoryColumn.innerHTML += taskHTML;
 
     // Überprüfe die Felder und aktualisiere den Inhalt
-    let fields = ["open", "progress", "awaitFeedback", "closed"];
 
+    checkEmptyFieldsMoveToUpdate();
+    getassignecontacts(task, task.idTask);
+
+}
+
+function checkEmptyFieldsMoveToUpdate() {
+    let fields = ["open", "progress", "awaitFeedback", "closed"];
     fields.forEach(fieldId => {
         let container = document.getElementById(fieldId);
         if (container) {
@@ -373,11 +404,24 @@ async function updateBoard(category, task, event) {
             }
         }
     });
-
-    getassignecontacts(task, task.idTask);
+    updateFields();
 }
 
 
+function updateFields() {
+    const allElements = document.querySelectorAll('.drag-area');
+
+allElements.forEach((div) => {
+    const hasTodo = div.querySelector('.todo');
+    if(!hasTodo) {
+        div.innerHTML = `
+        <div class="fiedIsempty"> 
+            <p> text</p>
+        </div>
+        `;
+    }
+});
+}
 
 
 function highlight(id) {
@@ -396,30 +440,75 @@ function removeHighlight(id) {
 
 // Add Subtask
 function addSubtask() {
-    let subtaskContainer= document.getElementById('subtasksContainer');
-    subtaskContainer.innerHTML='';
-    for (let i = 0; i < subtasks.length; i++) {
-       subtaskContainer.innerHTML+= `
-       
-       <div class="li">${subtasks[i]}<button type="button" class="Subtasks_Btn" onclick="deleteItem(${i})"><img src="./assets/IMG/delete.png"></button></div>`
-           ;
-        
+    // Ensure 'subtasks' is initialized as an array if it's not already
+    if (!Array.isArray(subtasks)) {
+        subtasks = [];
+    }
+
+    // Get the container for subtasks
+    let subtaskContainer = document.getElementById('subtasksContainer');
+
+    // Clear previous subtasks displayed in the container
+    subtaskContainer.innerHTML = '';
+
+    // Check if subtasks array has any items
+    if (subtasks.length === 0) {
+        return;
+    }
+
+    // Loop through the subtasks array and render each subtask
+    for (let i = 1; i < subtasks.length; i++) {
+        subtaskContainer.innerHTML += `
+            <div class="li">
+                ${subtasks[i]}
+                <button type="button" class="Subtasks_Btn" onclick="deleteItem(${i})">
+                    <img src="./assets/IMG/delete.png" alt="Delete">
+                </button>
+            </div>`;
     }
 }
 
 
-// Subtask löschen
 function deleteItem(i) {
+    // Entferne die Subtask aus dem Array
     subtasks.splice(i, 1);
+
+    // Aktualisiere den Task im tasksArray
+    let taskIndex = currentTaskIndex; // Stelle sicher, dass du den aktuellen Task-Index hast
+    tasksArray[taskIndex].subtask = subtasks; // Aktualisiere die Subtask-Liste im tasksArray
+
+    // Aktualisiere den gespeicherten Status der Subtasks in localStorage
+    const subtaskStatus = JSON.parse(localStorage.getItem(`task-${taskIndex}-subtasks`)) || {};
+
+    // Entferne die Subtask auch aus dem gespeicherten Status
+    delete subtaskStatus[i];
+
+    // Speichere den neuen Subtask-Status zurück in den localStorage
+    localStorage.setItem(`task-${taskIndex}-subtasks`, JSON.stringify(subtaskStatus));
+
+    // Aktualisiere die Anzeige der Subtasks und die Progress-Bar
     addSubtask();
+    updateProgress(taskIndex);  // Aktualisiere den Fortschritt für die gelöschte Subtask
 }
 
 
 
 function addCurrentSubtask() {
-    if (subtasks.length < 5) {
-        let CurrentSubtask = document.getElementById('new-subtask').value;
-        subtasks.push(CurrentSubtask);
+
+    if (!subtasks) {
+        subtasks = [];
+    }
+
+        let currentSubtask = document.getElementById('new-subtask').value;
+
+        if (currentSubtask === "") {
+            alert('Bitte geben Sie eine gültige Subtask ein.'); // Prompt user to input valid subtask
+            return;
+        }
+
+        if (subtasks.length < 5) {
+
+        subtasks.push(currentSubtask);
         document.getElementById('new-subtask').value = ''; // Liste wieder leeren
         addSubtask();
     } else {
@@ -493,10 +582,12 @@ function low() {
 
 //Add Task leeren
 function clearTask() {
-    selectedContactIndices.forEach((contactIndex) => {
-        const contact = contactsArray[contactIndex];
+
+    for (let contactIndex = 0; contactIndex < contactsArray.length; contactIndex++) {
+        let contact = contactsArray[contactIndex];
         deselctedtContact(contactIndex, contact.name, `${contact.name.charAt(0).toUpperCase()}${getLastName(contact.name).charAt(0).toUpperCase()}`, contact.color);
-    });
+    }
+
 
     // Clear the Selection_Container
     const selectionContainer = document.getElementById('Selection_Container');
