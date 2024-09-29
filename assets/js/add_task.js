@@ -165,20 +165,27 @@ function deselctedtContact(i, name, firstletters, contactColour) {
     let index = assignedContacts.indexOf(name);
 
      assignedContacts.splice(index, 1); // Kontakt korrekt entfernen
+     console.log(assignedContacts)
     // UI aktualisieren
     showSelectedProfile(firstletters, i, contactColour);
 }
+
 function showSelectedProfile(firstletters, i, contactColour) {
     let selectedProfileContainer = document.getElementById('Selected_profiles_Container');
     let profilebadgeassign = document.getElementById(`profile_Badge_assign${i}`);
 
     // Vermeide das Zurücksetzen des Containers, füge nur neue Profile hinzu
-    if (!profilebadgeassign) {
+    if (profilebadgeassign) {
+        profilebadgeassign.remove()
+       ;
+    }else {
         selectedProfileContainer.innerHTML += `
-            <div id="profile_Badge_assign${i}" class="profile_Badge_assign ${contactColour}">${firstletters}</div>
-        `;
+        <div id="profile_Badge_assign${i}" class="profile_Badge_assign ${contactColour}">${firstletters}</div>
+    `
+       
     }
 }
+
 
 function dateinput() {
     let duedate = document.getElementById('dueDate');

@@ -457,52 +457,94 @@ if (profile_Badge_assign) {
 
         getContacts();
 
-      for (let indexcon = 0;indexcon < assignedContacts.length; indexcon++) {
-        let contact= assignedContacts[indexcon];
-          // Die Farbe des Kontakts
-
-        let contactContainer = document.getElementById(`profile-${indexcon}`);
-        contactContainer.classList.add('bg_color');
-        contactContainer.classList.add('color_white');
-        showSelectedProfileEdit(contact, indexcon)
-      }
+        if (assignedContacts==undefined) {
+            let tasktitle = document.getElementById('taskTitle');
+            tasktitle.value=title;
+            let taskdescription = document.getElementById('description');
+            taskdescription.value=description;
+            let taskDAte= document.getElementById('taskDueDate');
+            taskDAte.value=dueDate;
     
-        let tasktitle = document.getElementById('taskTitle');
-        tasktitle.value=title;
-        let taskdescription = document.getElementById('description');
-        taskdescription.value=description;
-        let taskDAte= document.getElementById('taskDueDate');
-        taskDAte.value=dueDate;
-
-
-       if (priority=='urgent') {
-        urgent()
-
-       } 
-       if (priority=='medium') {
-        medium()
-
-       } 
-       if (priority=='low') {
-        low()
-
-       } 
-
-       let taskCategory= document.getElementById('kategorie');
-       taskCategory.value=category;
-
-       subtasks=subtask;
-       addSubtask();
+    
+           if (priority=='urgent') {
+            urgent()
+    
+           } 
+           if (priority=='medium') {
+            medium()
+    
+           } 
+           if (priority=='low') {
+            low()
+    
+           } 
+    
+           let taskCategory= document.getElementById('kategorie');
+           taskCategory.value=category;
+    
+           subtasks=subtask;
+           addSubtask();
+        
+    
+    
+    
+    
+    changeAddtaskButton(index);
     
 
+        
+
+            
+        }else{ for (let indexcon = 0;indexcon < assignedContacts.length; indexcon++) {
+            let contact= assignedContacts[indexcon];
+              // Die Farbe des Kontakts
+    
+            let contactContainer = document.getElementById(`profile-${indexcon}`);
+            contactContainer.classList.add('bg_color');
+            contactContainer.classList.add('color_white');
+            showSelectedProfileEdit(contact, indexcon)
+          }
+        
+            let tasktitle = document.getElementById('taskTitle');
+            tasktitle.value=title;
+            let taskdescription = document.getElementById('description');
+            taskdescription.value=description;
+            let taskDAte= document.getElementById('taskDueDate');
+            taskDAte.value=dueDate;
+    
+    
+           if (priority=='urgent') {
+            urgent()
+    
+           } 
+           if (priority=='medium') {
+            medium()
+    
+           } 
+           if (priority=='low') {
+            low()
+    
+           } 
+    
+           let taskCategory= document.getElementById('kategorie');
+           taskCategory.value=category;
+    
+           subtasks=subtask;
+           addSubtask();
+        
+    
+    
+    
+    
+    changeAddtaskButton(index);
+    
+
+        
+
+     
 
 
-
-changeAddtaskButton(index);
-
-
-
-};
+}};
 
 async function createEdittask(index) {
     let tasktitle = document.getElementById('taskTitle');
