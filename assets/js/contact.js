@@ -100,7 +100,7 @@ function displayContacts(contactIndex, contactsEmail, contactsName, contactLastn
                     <span class="contactname" style="color:${selectedClass ? 'white' : 'black'};">${contactsName}</span>
                     <a class="contactmail" href="mailto:${contactsEmail}">${contactsEmail}</a>
                 </div>
-             <img src="assets/IMG/Secondary mobile contact V1.png" alt="Add Contact" class="add-contact-button" onclick="mobileAddContact(event)">
+             <img src="./assets/IMG/Secondary mobile contact V1.png" alt="Add Contact" class="add-contact-button" onclick="mobileAddContact(event)">
             </div>`;
 }
 
@@ -147,7 +147,7 @@ function showContactBig(contactsName, contactsEmail, contactPhone, contactLastna
                         <span class="edit">Edit</span>
                     </div>
                     <div class="deletecontent" onclick="deleteContact(selectedContactIndex)">
-                        <img class="deleteicon" src="assets/IMG/delete.png" alt="">
+                        <img class="deleteicon" src="./assets/IMG/delete.png" alt="">
                         <span class="delete">Delete</span>
                     </div>
                 </div>
@@ -164,16 +164,16 @@ function showContactBig(contactsName, contactsEmail, contactPhone, contactLastna
                 <a class="contactphone" href="tel:${contactPhone}">${contactPhone}</a>
             </div>
         </div>
-        <img src="assets/IMG/arrow-left-line.png" alt="backButton" onclick="closeDetailView()" class="back-button">
-        <img src="assets/IMG/Menu Contact options.png" alt="Menu button" class="menu-button-img" onclick="toggleMenu()">
+        <img src="./assets/IMG/arrow-left-line.png" alt="backButton" onclick="closeDetailView()" class="back-button">
+        <img src="./assets/IMG/Menu Contact options.png" alt="Menu button" class="menu-button-img" onclick="toggleMenu()">
         <!-- Hier ist das Toggle-Menü für mobile Geräte -->
         <div id="contextMenu" class="context-menu">
             <div onclick="editContact(selectedContactIndex)" class="menu-item">
-                <img src="assets/IMG/edit.svg" alt="Edit" class="menu-icon">
+                <img src="./assets/IMG/edit.svg" alt="Edit" class="menu-icon">
                 <span>Edit</span>
             </div>
             <div onclick="deleteContact(selectedContactIndex)" class="menu-item">
-                <img src="assets/IMG/delete.png" alt="Delete" class="menu-icon">
+                <img src="./assets/IMG/delete.png" alt="Delete" class="menu-icon">
                 <span>Delete</span>
             </div>
         </div>
@@ -266,7 +266,7 @@ function htmlEditForm(index) {
     document.getElementById('name').value = contact.name;
     document.getElementById('mail').value = contact.email;
     document.getElementById('telephone').value = contact.phone;
-    document.querySelector('.createContact-button').innerHTML = 'Save <img src="assets/IMG/check.svg" alt="Save Icon" class="button-icon" style="margin-left: 8px;">';
+    document.querySelector('.createContact-button').innerHTML = 'Save <img src="./assets/IMG/check.svg" alt="Save Icon" class="button-icon" style="margin-left: 8px;">';
     document.querySelector('.addNewContactimg').style.display = 'none';
 
     let newContactOverlay = document.getElementById('newContact');

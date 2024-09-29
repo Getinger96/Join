@@ -2,18 +2,31 @@ let subtasks = [];
 let subtask = [];
 let tasksArray = [];
 let subTaskChecked = [];
+let currentTaskIndex = null;
 
-
-
-
+const colorsBoard = [
+    { index: 0, color: 'orange' },
+    { index: 1, color: 'yellow' },
+    { index: 2, color: 'green' },
+    { index: 3, color: 'turquoise' },
+    { index: 4, color: 'blue' },
+    { index: 5, color: 'purple' },
+    { index: 6, color: 'pink' },
+    { index: 7, color: 'light orange' }
+];
 let currentDraggedElement;
 let id = 0
 
 async function fetchTasks(path = '') {
+    tasksArray = [];
+    
     let response = await fetch(base_URL + path + ".json");
     let userJSON = await response.json();
     let tasksAsarray = Object.values(userJSON.tasks)
     let keysArrayTask = Object.keys(userJSON.tasks);
+    currentDraggedElement = 0;
+    id = 0
+    localStorage.removeItem(`task-${id}-subtasks`);   
 
 
     for (let index = 0; index < tasksAsarray.length; index++) {
@@ -22,7 +35,6 @@ async function fetchTasks(path = '') {
         id++;
 
 
-        
         let saveTask = tasksArray.filter(t => t.Title === task.Titel);
 
         // Beispielbedingung, die du anpassen kannst
@@ -43,18 +55,26 @@ async function fetchTasks(path = '') {
                 subtask: task.Subtask,
                 status: task.Status,
             });
+
+    
         }
     }
         
     
    
     
+         removeAllElement(); 
+  await  updateHtml();
 
-    updateHtml();
     renderSubtask();
-  await  initializeAllProgress(); 
     console.log(tasksArray)
 
+}
+
+
+function removeAllElement () {
+    let allElements = document.querySelectorAll('.drag-area');
+    allElements.forEach(element => element.innerHTML = '');
 }
 
 
@@ -63,7 +83,7 @@ function renderSubtask() {
     for (let index = 0; index < tasksArray.length; index++) {
         idSubtask++;
         let subtaskElement = tasksArray[index].subtask;
-
+        localStorage.removeItem(`task-${id}-subtasks`);   
 
         if (subtaskElement === undefined) {
             subtaskElement = [];
@@ -103,6 +123,7 @@ async function updateHtml() {
      
     }
     checkEmptyFields();
+    await  initializeAllProgress(); 
 }
 
 
@@ -122,15 +143,15 @@ function checkEmptyFields() {
 
 function showEmptyFields() {
     return ` <div class="fiedIsempty"> 
-                                <p> text</p>
+                                <p> Field is empty </p>
                             </div>`
     
 }
 
 
 
-function openTask() {
-    // Prüfen der Fensterbreite
+function openTask(taskIndex) {
+    currentTaskIndex = taskIndex;
     const windowWidth = window.innerWidth;
 
     // Wenn die Bildschirmbreite kleiner oder gleich 1450px ist, zur add_task.html weiterleiten
@@ -153,12 +174,53 @@ function openTask() {
     }
 }
 
+
+function openTaskBoard() {
+    const windowWidth = window.innerWidth;
+
+    // Wenn die Bildschirmbreite kleiner oder gleich 1450px ist, zur add_task.html weiterleiten
+    if (windowWidth <= 1450) {
+        window.location.href = 'add_task.html'; // Redirect zur add_task.html
+    } else {
+        // Standardmäßig das Overlay öffnen
+        let taskDiv = document.getElementById('boardAddTask');
+        let overlay = document.getElementById('darkOverlay');
+
+        if (taskDiv.style.display === 'none' || taskDiv.style.display === '') {
+            taskDiv.style.display = 'block';  // Overlay anzeigen
+            overlay.style.display = 'block';  // Dunklen Hintergrund anzeigen
+            document.body.style.overflow = 'hidden';  // Hauptseite scrollen verhindern
+            setCreateTaskButton();
+        } else {
+            taskDiv.style.display = 'none';  // Overlay ausblenden
+            overlay.style.display = 'none';  // Dunklen Hintergrund ausblenden
+            document.body.style.overflow = 'auto';  // Scrollen auf der Hauptseite wieder erlauben
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
 function closeTask() {
     document.getElementById('boardAddTask').style.display = 'none';
     document.getElementById('darkOverlay').style.display = 'none';
     document.body.style.overflow = 'auto';  // Scrollen auf der Hauptseite wieder erlauben
     clearTask()
 }
+
+function closeTaskUpdate() {
+    document.getElementById('boardAddTask').style.display = 'none';
+    document.getElementById('darkOverlay').style.display = 'none';
+    document.body.style.overflow = 'auto';  // Scrollen auf der Hauptseite wieder erlauben
+}
+
+
 
 function generateTodoHTML(task, taskIndex) {
 
@@ -167,7 +229,7 @@ function generateTodoHTML(task, taskIndex) {
     let description = task.Description || "";
     let dueDate = task.duedate;
     let priority = task.Prio;
-    let assignedContacts = task.Assigned;
+    let assignedContacts = task.Assigned || "";
     let category = task.Category;
     let subtasks = task.subtask || [];
     let idBoard = task.idTask; 
@@ -188,7 +250,7 @@ function generateTodoHTML(task, taskIndex) {
                 <div class="progress-bar">
                     <div class="progress" id="progressbarline-${task.idTask-1}" style="width: ${progressPercentage}%;"></div>
                 </div>
-                <span id="progress-text-${task.idTask-1}">Subtasks: ${completedSubtasks}/${totalSubtasks}</span>
+                <span class="progresstext" id="progress-text-${task.idTask-1}">Subtasks ${completedSubtasks}/${totalSubtasks}</span>
             </div>
         `;
     }
@@ -197,7 +259,9 @@ function generateTodoHTML(task, taskIndex) {
        <div class="todo" id="task_${task.idTask-1}Element" draggable="true" ondragstart="startDragging(${task.idTask})" onclick="openToDo(${task.idTask})">
     <div class="divKategorie" style="background-color: ${categoryColor};">${category}</div>
     <h3 id="task_Title${task.idTask-1}" class="title">${title}</h3>
+    <div>
     <p class="description">${description}</p>
+    </div>
     ${progressHtml} <!-- Progressbar nur anzeigen, wenn Subtasks vorhanden sind -->
     
     <!-- Wrapper für Kontakte und Prioritäts-Icon -->
@@ -213,17 +277,17 @@ function generateTodoHTML(task, taskIndex) {
 
 // Funktion zum Erstellen des HTML-Inhalts für die große ToDo-Anzeige
 function getPriorityIcon(priority) {
-    let checkPriority = priority[0];
+    let checkPriority = priority;
     // Define priority icons
     let priorityIcon = '';
     if (checkPriority === 'urgent') {
-        priorityIcon = './assets/img/Prio_urgent(2).svg';
+        priorityIcon = './assets/IMG/Priority symbols (1).png';
     } else if (checkPriority === 'medium') {
-        priorityIcon = './assets/IMG/Prio_medium(2).svg';
+        priorityIcon = './assets/IMG/Priority symbols (2).png';
     } else if (checkPriority === 'low') {
-        priorityIcon = './assets/IMG/iconLowWhite.svg';
+        priorityIcon = './assets/IMG/Priority symbols.png';
     } else {
-        priorityIcon = './assets/img/Prio_Low(2).svg';
+        priorityIcon = './assets/IMG/Priority symbols.png';
     }
     
     // Return the determined priority icon
@@ -241,6 +305,9 @@ function getCategoryColor(category) {
 
 function getassignecontacts(task, taskIndex) {
     let assignedContacts =task.Assigned;
+    if (assignedContacts === undefined) {
+        return
+    }
     let maxContact = 4;
     let remainingContacts = assignedContacts.length - maxContact;
 
@@ -274,7 +341,7 @@ function getassignecontacts(task, taskIndex) {
                 </div>`;
 
         }
-        showTheNameInitialInColorBoard(firstLetterForName,colorid);
+        showTheNameInitialInColorBoard(index,colorid);
 }
 if (assignedContacts.length > 4) {
     asignedContainer.innerHTML += `<div id="colorName" class="contact-iconBoard">
@@ -284,24 +351,17 @@ if (assignedContacts.length > 4) {
 }
 
 
-function showTheNameInitialInColorBoard(colorid, index) {
-    let nameColorContainer = document.getElementById(colorid);
+function showTheNameInitialInColorBoard(index, colorid) {
+    let nameColorContainer  = document.getElementById(colorid);
 
-    for (let indexColor = 0; indexColor < colorsBoard.length; indexColor++) {
-        let colorItem = colorsBoard[indexColor];
 
-        if (indexColor === index) {
-            let currentColor = colorItem; 
+    colorsBoard.forEach(indexColor => {
+
+        if (indexColor.index === index) {
+            let currentColor = indexColor.color; 
             nameColorContainer.style.backgroundColor = currentColor;
-            break;
         }
-    }
-
-    if (index >= colorsBoard.length) {
-        let fallbackColorIndex = colorsBoard.length -7;
-        let fallbackColor = colorsBoard[fallbackColorIndex];
-        nameColorContainer.style.backgroundColor = fallbackColor;
-    }
+    });
 }
 
 function allowDrop(ev) {
@@ -329,7 +389,7 @@ async function moveTo(event, category) {
 
     if (task.idTask) {
         // 1. Ändere den Status der Aufgabe
-        task.Status = category;
+        task.status = category;
 
     
       await  putDataTask(`tasks/${key}/Status`, category);
@@ -363,8 +423,14 @@ async function updateBoard(category, task, event) {
     newCategoryColumn.innerHTML += taskHTML;
 
     // Überprüfe die Felder und aktualisiere den Inhalt
-    let fields = ["open", "progress", "awaitFeedback", "closed"];
 
+    checkEmptyFieldsMoveToUpdate();
+    getassignecontacts(task, task.idTask);
+
+}
+
+function checkEmptyFieldsMoveToUpdate() {
+    let fields = ["open", "progress", "awaitFeedback", "closed"];
     fields.forEach(fieldId => {
         let container = document.getElementById(fieldId);
         if (container) {
@@ -380,11 +446,24 @@ async function updateBoard(category, task, event) {
             }
         }
     });
-
-    getassignecontacts(task, task.idTask);
+    updateFields();
 }
 
 
+function updateFields() {
+    const allElements = document.querySelectorAll('.drag-area');
+
+allElements.forEach((div) => {
+    const hasTodo = div.querySelector('.todo');
+    if(!hasTodo) {
+        div.innerHTML = `
+        <div class="fiedIsempty"> 
+            <p> text</p>
+        </div>
+        `;
+    }
+});
+}
 
 
 function highlight(id) {
@@ -403,30 +482,75 @@ function removeHighlight(id) {
 
 // Add Subtask
 function addSubtask() {
-    let subtaskContainer= document.getElementById('subtasksContainer');
-    subtaskContainer.innerHTML='';
+    // Ensure 'subtasks' is initialized as an array if it's not already
+    if (!Array.isArray(subtasks)) {
+        subtasks = [];
+    }
+
+    // Get the container for subtasks
+    let subtaskContainer = document.getElementById('subtasksContainer');
+
+    // Clear previous subtasks displayed in the container
+    subtaskContainer.innerHTML = '';
+
+    // Check if subtasks array has any items
+    if (subtasks.length === 0) {
+        return;
+    }
+
+    // Loop through the subtasks array and render each subtask
     for (let i = 0; i < subtasks.length; i++) {
-       subtaskContainer.innerHTML+= `
-       
-       <div class="li">${subtasks[i]}<button type="button" class="Subtasks_Btn" onclick="deleteItem(${i})"><img src="./assets/img/delete.png"></button></div>`
-           ;
-        
+        subtaskContainer.innerHTML += `
+            <div class="li">
+                ${subtasks[i]}
+                <button type="button" class="Subtasks_Btn" onclick="deleteItem(${i})">
+                    <img src="./assets/IMG/delete.png" alt="Delete">
+                </button>
+            </div>`;
     }
 }
 
 
-// Subtask löschen
 function deleteItem(i) {
+    // Entferne die Subtask aus dem Array
     subtasks.splice(i, 1);
+
+    // Aktualisiere den Task im tasksArray
+    let taskIndex = currentTaskIndex; // Stelle sicher, dass du den aktuellen Task-Index hast
+    tasksArray[taskIndex].subtask = subtasks; // Aktualisiere die Subtask-Liste im tasksArray
+
+    // Aktualisiere den gespeicherten Status der Subtasks in localStorage
+    const subtaskStatus = JSON.parse(localStorage.getItem(`task-${taskIndex}-subtasks`)) || {};
+
+    // Entferne die Subtask auch aus dem gespeicherten Status
+    delete subtaskStatus[i];
+
+    // Speichere den neuen Subtask-Status zurück in den localStorage
+    localStorage.setItem(`task-${taskIndex}-subtasks`, JSON.stringify(subtaskStatus));
+
+    // Aktualisiere die Anzeige der Subtasks und die Progress-Bar
     addSubtask();
+    updateProgress(taskIndex);  // Aktualisiere den Fortschritt für die gelöschte Subtask
 }
 
 
 
 function addCurrentSubtask() {
-    if (subtasks.length < 5) {
-        let CurrentSubtask = document.getElementById('new-subtask').value;
-        subtasks.push(CurrentSubtask);
+
+    if (!subtasks) {
+        subtasks = [];
+    }
+
+        let currentSubtask = document.getElementById('new-subtask').value;
+
+        if (currentSubtask === "") {
+            alert('Bitte geben Sie eine gültige Subtask ein.'); // Prompt user to input valid subtask
+            return;
+        }
+
+        if (subtasks.length < 5) {
+
+        subtasks.push(currentSubtask);
         document.getElementById('new-subtask').value = ''; // Liste wieder leeren
         addSubtask();
     } else {
@@ -438,9 +562,9 @@ function addCurrentSubtask() {
 function resetButtons() {
     // Zurücksetzen aller Buttons
     let buttons = [
-        { id: 'urgent', color: 'initial', imgSrc: './assets/img/Prio_urgent(2).svg' },
-        { id: 'medium', color: 'initial', imgSrc: './assets/IMG/Prio_medium(2).svg' },
-        { id: 'low', color: 'initial', imgSrc: './assets/img/Prio_Low(2).svg' }
+        { id: 'urgent', color: 'initial', imgSrc: './assets/IMG/Priority symbols (1).png' },
+        { id: 'medium', color: 'initial', imgSrc: './assets/IMG/Priority symbols (2).png' },
+        { id: 'low', color: 'initial', imgSrc: './assets/IMG/Priority symbols.png' }
     ];
 
     buttons.forEach(button => {
@@ -478,7 +602,7 @@ function medium() {
     // Setze die neuen Styles und das Bild
     mediumButton.style.backgroundColor = "orange";
     mediumButton.style.color = "white";
-    mediumIcon.src = "./assets/IMG/iconMediumWhite.svg";
+    mediumIcon.src = "./assets/IMG/Priority symbols (2).png";
 
     currentPriority = 'medium';  // Setzt die Priorität auf 'medium'
 }
@@ -492,7 +616,7 @@ function low() {
     // Setze die neuen Styles und das Bild
     lowButton.style.backgroundColor = "limegreen";
     lowButton.style.color = "white";
-    lowIcon.src = "./assets/IMG/iconLowWhite.svg";
+    lowIcon.src = "./assets/IMG/Priority symbols.png";
 
     currentPriority = 'low';  // Setzt die Priorität auf 'low'
 }
@@ -500,10 +624,12 @@ function low() {
 
 //Add Task leeren
 function clearTask() {
-    selectedContactIndices.forEach((contactIndex) => {
-        const contact = contactsArray[contactIndex];
+
+    for (let contactIndex = 0; contactIndex < contactsArray.length; contactIndex++) {
+        let contact = contactsArray[contactIndex];
         deselctedtContact(contactIndex, contact.name, `${contact.name.charAt(0).toUpperCase()}${getLastName(contact.name).charAt(0).toUpperCase()}`, contact.color);
-    });
+    }
+
 
     // Clear the Selection_Container
     const selectionContainer = document.getElementById('Selection_Container');
@@ -589,13 +715,13 @@ function resetPrioButtons() {
         // Icon-Bild zurücksetzen
         switch (id) {
             case 'urgent':
-                icon.src = './assets/img/Prio_Urgent.svg';
+                icon.src = './assets/IMG/Priority symbols (1).png';
                 break;
             case 'medium':
-                icon.src = './assets/IMG/Prio_Medium.svg';
+                icon.src = './assets/IMG/Priority symbols (2).png';
                 break;
             case 'low':
-                icon.src = './assets/img/Prio_LOw.svg';
+                icon.src = './assets/IMG/Priority symbols.png';
                 break;
         }
     });

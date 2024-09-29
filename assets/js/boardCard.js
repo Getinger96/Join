@@ -43,7 +43,7 @@ function generateLargeContactsHtml(assignedContacts) {
         let firstLetterForName = contactFirstname.charAt(0).toUpperCase();
         let firstLetterLastName = contactLastname.charAt(0).toUpperCase();
 
-        let color = showTheNameColor(firstLetterForName);
+        let color = showTheNameColor(index);
         
         contactsHtml += getLargeContactHtml(index, firstLetterForName, firstLetterLastName, contactFirstname, contactLastname, color);
     }
@@ -51,12 +51,13 @@ function generateLargeContactsHtml(assignedContacts) {
     return contactsHtml;  // Gib das komplette generierte HTML zurück
 }
 
-function showTheNameColor(firstLetterForName) {
+function showTheNameColor(index) {
     let currentColor = 'gray';
-    colorLetter.forEach(colorLetterItem => {
+    colorsBoard.forEach(indexColor => {
 
-        if (firstLetterForName === colorLetterItem.letter) {
-            currentColor = colorLetterItem.color; 
+        if (indexColor.index === index) {
+            currentColor = indexColor.color; 
+
         }
     });
     return currentColor
@@ -104,14 +105,22 @@ function createShowCard(task, taskIndex) {
         <div class="todo-detail">
             <div>
                 <div class="divKategorie" style="background-color: ${categoryColor};">${category}</div>
-                <button onclick="closeOverlay(${taskIndex})" class="close-button"><img src="./assets/img/iconoir_cancel.png" alt=""></button>
+                <button onclick="closeOverlay(${taskIndex})" class="close-button"><img src="./assets/IMG/iconoir_cancel.png" alt=""></button>
             </div>
+            <div>
             <h2>${title}</h2>
+            </div>
+            <div>
             <p><strong>Description:</strong> ${description}</p>
+            </div>
             <p><strong>Due Date:</strong> ${dueDate}</p>
+         <div class="prioicon">
             <p><strong>Priority:</strong> 
                 <span>${priority}</span> 
+               <div class="prioicon-imgSection">
                 <img src="${priorityIcon}" alt="${priority} Priority">
+               </div> 
+         </div>
             </p>
             <p><strong>Assigned To:</strong></p>
             <div class="assigned-contacts">
@@ -124,12 +133,12 @@ function createShowCard(task, taskIndex) {
         </div>
         <div class="actionBigTodo">
             <button class="actionBigButton" onclick="deleteTask(${taskIndex})">
-                <img class="iconTodoBig" src="./assets/img/delete.png">
+                <img class="iconTodoBig" src="./assets/IMG/delete.png">
                 <p>Delete</p>
             </button>
             <div></div>
             <button class="actionBigButton" onclick="EditData(${taskIndex})">
-                <img class="iconTodoBig" src="./assets/img/edit.png">
+                <img class="iconTodoBig" src="./assets/IMG/edit.png">
                 <p>Edit</p>
             </button>
         </div>
@@ -190,9 +199,12 @@ function updateProgress(taskIndex) {
     const totalSubtasks = task.subtask.length;
     const subtaskStatus = JSON.parse(localStorage.getItem(`task-${taskIndex}-subtasks`)) || {};
     const completedSubtasks = Object.values(subtaskStatus).filter(status => status).length;
+    let progressLine = document.getElementById(`progressbarline-${taskIndex}`);
+    if (!progressLine) return;  // Exit if progress bar doesn't exist
+
 
     const progressPercentage = totalSubtasks ? (completedSubtasks / totalSubtasks) * 100 : 0;
-    document.getElementById(`progressbarline-${taskIndex}`).style.width = `${progressPercentage}%`;
+    progressLine.style.width = `${progressPercentage}%`;
     document.getElementById(`progress-text-${taskIndex}`).innerText = `Subtasks: ${completedSubtasks}/${totalSubtasks}`;
 }
 

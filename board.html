@@ -16,9 +16,10 @@
     <script src="./assets/js/script.js"></script>
     <script src="./assets/js/board_database.js"></script>
     <script src="./assets/js/summary.js"> </script>
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
 
 
-    <link rel="icon" type="image/x-icon" href="./assets/img/Capa 2.png" />
+    <link rel="icon" type="image/x-icon" href="./assets/IMG/Capa 2.png" />
 </head>
 
 <body onload="init()">
@@ -26,7 +27,7 @@
         <header>
 
 
-            <div w3-include-html="./assets/templates/Desktop_template.html"></div>
+            <div w3-include-html="./assets/templates/desktop_template.html"></div>
             <div class="headblock">
                 <div class="title">
                     <span class="kanbanBoardTitle">Kanban Projekt Management Tool</span>
@@ -53,18 +54,18 @@
                     <div class="titleButtonBoard">
                         <h1>Board</h1>
                         <div onclick="openTask()" class="buttonContainerSmall curser">
-                            <img class="imgButton" src="./assets/img/add (1).png">
+                            <img class="imgButton" src="./assets/IMG/add (1).png">
                         </div>
                     </div>
                     <div class="displayFlex alignCenter">
                         <div class="displayFlex searchContainer addTask">
                             <input onkeyup="search()" id="searchInput" class="search" type="text">
                             <div class="separator"></div>
-                            <img class="curser" src="./assets/img/Frame 122.png">
+                            <img class="curser" src="./assets/IMG/Frame 122.png">
                         </div>
-                        <div onclick="openTask()" class="displayFlex button-d-none addTask buttonContainer curser">
+                        <div onclick="openTaskBoard()" class="displayFlex button-d-none addTask buttonContainer curser">
                             <button class="curser addTaskButton">Add task</button>
-                            <img src="./assets/img/add (1).png">
+                            <img src="./assets/IMG/add (1).png">
                         </div>
                     </div>
                 </div>
@@ -80,7 +81,7 @@
                     <div class="paddingRight widthContainer">
                         <div class="statusButton">
                             <p class="text">To do</p>
-                            <img class="curser" onclick="openTask()" src="./assets/img/plus button.png">
+                            <img class="curser" onclick="openTaskBoard()" src="./assets/IMG/plus button.png">
                         </div>
                         <div class="noTasks" category="open" style="display: none;">No tasks To do</div>
                         <div class="drag-area" id="open" ondrop="moveTo(event, 'open')" ondragover="allowDrop(event)"
@@ -91,7 +92,7 @@
                     <div class="paddingRight widthContainer">
                         <div class="statusButton">
                             <p class="text">In progress</p>
-                            <img class="curser" onclick="openTask()" src="./assets/img/plus button.png">
+                            <img class="curser" onclick="openTaskBoard()" src="./assets/IMG/plus button.png">
                         </div>
                         <div class="noTasks" category="progress" style="display: none;">No tasks in progress</div>
                         <div class="drag-area" id="progress" ondrop="moveTo(event, 'progress')"
@@ -101,7 +102,7 @@
                     <div class="paddingRight widthContainer">
                         <div class="statusButton">
                             <p class="text">Await feedback</p>
-                            <img class="curser" onclick="openTask()" src="./assets/img/plus button.png">
+                            <img class="curser" onclick="openTaskBoard()" src="./assets/IMG/plus button.png">
                         </div>
                         <div class="noTasks" category="awaitFeedback" style="display: none;">No tasks Await feedback
                         </div>
@@ -112,7 +113,7 @@
                     <div class="paddingRight widthContainer">
                         <div class="statusButton">
                             <p class="text">Done</p>
-                            <img class="curser" onclick="openTask()" src="./assets/img/plus button.png">
+                            <img class="curser" onclick="openTaskBoard()" src="./assets/IMG/plus button.png">
                         </div>
                         <div class="noTasks" category="closed" style="display: none;">No tasks Done</div>
                         <div class="drag-area" id="closed" ondrop="moveTo(event, 'closed')"
@@ -123,12 +124,12 @@
         </nav>
 
         <section>
-            <div w3-include-html="assets/Templates/board_add_task.html"></div>
+            <div w3-include-html="./assets/templates/board_add_task.html"></div>
         </section>
 
 
         <section>
-            <div w3-include-html="assets/Templates/mobile_version.html"></div>
+            <div w3-include-html="./assets/templates/mobile_version.html"></div>
         </section>
 
         <div id="darkOverlay" style="display: none;"></div>

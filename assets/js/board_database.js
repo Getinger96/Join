@@ -1,4 +1,5 @@
-let colorsBoard = [
+
+let colors = [
     'orange',
     'gelb',
     'grün',
@@ -19,7 +20,7 @@ let assignedContacts = [];
 let currentPriority = 'none';
 let currentCategory = 'open';
 let path = "tasks";
-
+let currentStatus;
 
 // Funktion, um eine neue Aufgabe hinzuzufügen und in die Firebase-Datenbank zu speichern
 
@@ -48,7 +49,7 @@ async function createTask(event) {
     const descriptionElement = document.getElementById('description');
     const description = descriptionElement ? descriptionElement.value.trim() : '';
     const priority = currentPriority;  // Verwende die aktuelle Priorität
-    const subtasks = Array.from(document.querySelectorAll('#list li')).map(li => li.textContent + "checked");
+    let subtask = subtasks;
 
     const validCategories = ['open', 'progress', 'awaitFeedback', 'closed'];
     const status = validCategories.includes(kategorie) ? kategorie : 'open';
@@ -60,7 +61,7 @@ async function createTask(event) {
         Date: dueDate,
         Prio: priority,
         Category: kategorie,
-        Subtask: subtasks,
+        Subtask: subtask,
         Status: status,
         AssignedContact: assignedContacts,
     };
@@ -70,11 +71,8 @@ async function createTask(event) {
 
 
     tasksArray = [];
-    clearTask();
-    // Schließe das Formular
-    closeTask();
+    closeTaskUpdate();
     fetchTasks();
-    updateHtml();
 }
 
 
@@ -196,6 +194,7 @@ function openList() {
     let arrowCon = document.getElementById('arrow_img_container');
     arrowCon.innerHTML = `<img onclick="closelist()"class="arrow_drop_downaa" src="assets/IMG/arrow_drop_up.svg" alt="">`;
     selecCon.classList.remove('d_none');
+    getContacts();
 
 }
 
@@ -233,7 +232,7 @@ function selectedContact(index,color,name) {
 
     if (assignedContacts.includes(name)) {
         deselctedtContact(index,color,name)
-        
+
     }else{
         let contactContainer = document.getElementById(`profile-${index}`);
         contactContainer.classList.add('bg_color');
@@ -241,8 +240,8 @@ function selectedContact(index,color,name) {
         assignedContacts.push(name);
         showSelectedProfile(color,name,index)
     }
-   
-   
+
+
 
 }
 
@@ -281,12 +280,12 @@ function deselctedtContact(index,color,name) {
 function showSelectedProfile(color, name, index) {
     let selectedProfileContainer = document.getElementById('Selected_profiles_Container');
     let profile_Badge_assign=document.getElementById(`profilebadge_Assign${index}`)
-    
+
     let contact = contactsArray[index];
         let firstletters = `${contact.name.charAt(0).toUpperCase()}${getLastName(contact.name) .charAt(0).toUpperCase()}`;
 if (profile_Badge_assign) {
     profile_Badge_assign.remove();
-    
+
 }else{
     selectedProfileContainer.innerHTML += `
     <div id="profilebadge_Assign${index}" class="contact-icon${index} ${color} profilebadge">
@@ -296,7 +295,7 @@ if (profile_Badge_assign) {
 
 
 }
- 
+
    }
 
    function showSelectedProfileEdit(name) {
@@ -305,16 +304,16 @@ if (profile_Badge_assign) {
 
     let color= findcontact.color;
     let index  = contactsArray.indexOf(findcontact);
-     
+
     let profile_Badge_assign=document.getElementById(`profilebadge_Assign${index}`)
-  
-    
+
+
         let firstletters = `${name.charAt(0).toUpperCase()}${getLastName(name) .charAt(0).toUpperCase()}`;
 if (profile_Badge_assign) {
     profile_Badge_assign.remove();
-    
+
 }else{
-    
+
     selectedProfileContainer.innerHTML += `
     <div id="profilebadge_Assign${index}" class="contact-icon${index} ${color} profilebadge">
         <div>${firstletters}</div>
@@ -323,13 +322,13 @@ if (profile_Badge_assign) {
 
 
 }
- 
+
    }
-       
 
 
-      
-    
+
+
+
 
 
 
@@ -432,10 +431,17 @@ if (profile_Badge_assign) {
 
     }
 
+    function setCreateTaskButton() {
+        let buttonaddtask = document.getElementById('DibButtomAddtask');
+        buttonaddtask.innerHTML = `
+            <button onclick="clearTask()" class="buttonContainerWhite curser">Clear <img
+                src="./assets/IMG/x_icon_clear.svg"></button>
+            <button onclick="createTask(event)" class="buttonContainerdark curser">Create Task <img
+                src="assets/IMG/clear_Img.svg"></button>`;
+    }
+
     async function EditData(index) {
-
-
-        openTask();
+        openTask(index);
         let task = tasksArray[index];
         let title = task.Title;
         let description = task.Description;
@@ -445,43 +451,43 @@ if (profile_Badge_assign) {
         let category = task.Category;
         let subtask = task.subtask;
         let idBoard = task.idTask;
-       
-        let status= task.Status
-        
-        
 
-       
+        let status= task.status ;
+        currentCategory = status;
+
+        getContacts();
+
       for (let indexcon = 0;indexcon < assignedContacts.length; indexcon++) {
         let contact= assignedContacts[indexcon];
           // Die Farbe des Kontakts
-         
+
         let contactContainer = document.getElementById(`profile-${indexcon}`);
         contactContainer.classList.add('bg_color');
         contactContainer.classList.add('color_white');
         showSelectedProfileEdit(contact, indexcon)
       }
-        openTask();
+    
         let tasktitle = document.getElementById('taskTitle');
         tasktitle.value=title;
         let taskdescription = document.getElementById('description');
         taskdescription.value=description;
         let taskDAte= document.getElementById('taskDueDate');
         taskDAte.value=dueDate;
-       
+
 
        if (priority=='urgent') {
         urgent()
-        
+
        } 
        if (priority=='medium') {
         medium()
-        
+
        } 
        if (priority=='low') {
         low()
-        
+
        } 
-   
+
        let taskCategory= document.getElementById('kategorie');
        taskCategory.value=category;
 
@@ -489,28 +495,30 @@ if (profile_Badge_assign) {
        addSubtask();
     
 
-       
+
 
 
 changeAddtaskButton(index);
 
 
-       
+
 };
 
-function createEdittask(index) {
+async function createEdittask(index) {
     let tasktitle = document.getElementById('taskTitle');
-    
+
     let taskdescription = document.getElementById('description');
-    
+
     let taskDAte= document.getElementById('taskDueDate');
 
+    	
 
-  
-
+    console.log(currentCategory);
+    
     let taskCategory= document.getElementById('kategorie');
     let task = tasksArray[index];
-    let status= task.Status;
+
+    let status= task.status
     let key = task.taskKey;
     let assignedContacts = task.Assigned;
 
@@ -523,9 +531,12 @@ function createEdittask(index) {
         Date:  taskDAte.value,
         Prio :currentPriority,
         Category: taskCategory.value,
-        Subtask: subtask,
+        Subtask: task.subtask,
         Status:status,
     }
-    putDataEdit(`tasks/${key}`,editedTASk)
+    await putDataEdit(`tasks/${key}`,editedTASk)
+    closeTask();
+    closeOverlay();
+    await fetchTasks();
 
 }

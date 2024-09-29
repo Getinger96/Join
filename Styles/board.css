@@ -18,10 +18,9 @@ body {
 }
 
 h2 {
-    font-size: 54px;
+    font-size: 40px;
 }
 
-p,
 label {
     font-size: 16px;
     margin-bottom: 8px;
@@ -50,12 +49,15 @@ label {
 }
 
 .todo {
-    background-color: white;
-    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.35), 0px 3px 5px rgba(0, 0, 0, 0.5);
-    border-radius: 24px;
-    margin-bottom: 10px;
-    padding: 8px;
-    height: 263px;
+        background-color: white;
+        box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.35), 0px 3px 5px rgba(0, 0, 0, 0.5);
+        border-radius: 24px;
+        margin-bottom: 10px;
+        padding: 16px;
+        min-height: 263px;
+        word-break: break-word;
+    
+    
 }
 
 .todo:hover {
@@ -70,6 +72,17 @@ h3 {
 .boardContacts {
     display: flex;
     max-width: 120px;
+}
+
+.todo-detail p {
+        white-space: normal;
+        word-wrap: break-word;
+        max-width: 100%;
+    
+}
+
+.todo-detail {
+    display: block;
 }
 
 .contactCircle {
@@ -91,8 +104,19 @@ h3 {
     align-items: center;
     border: 2px solid white;
     margin-right: -8px;
+    background-color: #3357FF;
 }
 
+t
+.contact-icon {
+    justify-content: center;
+    border: 2px solid white;
+    border-radius: 100%;
+    width: 33px;
+    height: 33px;
+    display: flex;
+    align-items: center;
+}
 .title {
     font-size: 16px;
 }
@@ -113,14 +137,17 @@ h3 {
     margin-top: 18px;
 }
 
+.text {
+    font-size: 24px;
+    font-weight: bolder;
+}
 .fiedIsempty {
-    border: dotted 5px gray;
-    padding: 10px;
-    border-radius: 20px;
+    border: dotted 1px gray;
+    border-radius: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #cdc5c5;
+    background-color: #E7E7E7;
 }
 
 .checkbox {
@@ -143,6 +170,23 @@ h3 {
     height: 24px; 
 }
 
+.prioicon {
+display: flex;
+}
+
+.prioicon-imgSection {
+    display: flex;
+}
+
+.contact-icon {
+border-radius: 100%;
+width: 32px;
+height: 32px;
+justify-content: center;
+align-items: center;
+border: 2px solid white;
+display: flex;
+}
 
 .checkboxtext {
     font-size: 18px;
@@ -156,6 +200,10 @@ h3 {
     margin-right: 5px;
 }
 
+#subtasksContainer {
+    display: flex;
+    cursor: pointer;
+}
 .progress-container {
     display: flex;
     align-items: center;
@@ -391,6 +439,11 @@ h1 {
     margin-bottom: 24px;
     font-size: 20px;
     font-family: 'Inter';
+}
+
+.description {
+    font-weight: 300;
+    color: #A8A8A8;
 }
 
 .marginTop {
@@ -685,10 +738,12 @@ li {
     font-size: 14px;
 }
 
-span {
+.priospan {
     font-size: 16px;
 }
-
+.progresstext {
+    font-size: 12px;
+}
 .letter {
     margin: 0;
     font-size: 42px;
@@ -861,10 +916,9 @@ span {
         margin-bottom: 70px;
     }
 
-    .todo {
-       
-        width: 180px;
-        height: 250px;
+    .progress-bar {
+        width: 145px;
+
     }
 }
 
@@ -876,6 +930,7 @@ span {
 
     .text {
         font-weight: bold;
+        font-size: 20px;
     }
 
     .drag-area {
@@ -931,10 +986,6 @@ span {
 
     .separatorTask {
         display: none;
-    }
-
-    h2 {
-        font-size: 48px;
     }
 
     .buttonContainerWhite {
@@ -1030,7 +1081,7 @@ span {
 
 @media(max-width: 430px) {
     h2 {
-        font-size: 36px;
+        font-size: 32px;
     }
 
     p,
