@@ -487,9 +487,9 @@ if (profile_Badge_assign) {
 
        subtasks=subtask;
        addSubtask();
+    
 
        
-
 
 
 changeAddtaskButton(index);
