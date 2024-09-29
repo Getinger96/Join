@@ -5,29 +5,29 @@ function showCard(task, taskIndex) {
 
 }
 
-// Funktion zum Öffnen des großen ToDos im Overlay
+
 function openToDo(taskIndex) {
 taskIndex--;
-let task = tasksArray[taskIndex];  // Hole die Aufgabe aus dem Array basierend auf dem Index
+let task = tasksArray[taskIndex];  
 let todoBig = document.getElementById('todoBig');
-todoBig.classList = 'cardbig';  // Setze CSS-Klasse für das große Div
+todoBig.classList = 'cardbig'; 
 todoBig.innerHTML = '';
 
 document.body.style.overflow = "hidden";
 document.getElementById('overlay').classList.remove('d-none');
 
-showCard(task, taskIndex );  // Übergibt die ausgewählte Aufgabe zur Anzeige
+showCard(task, taskIndex );  
 }
 
 function generateSmallContactsHtml(assignedContacts) {
     let contactsHtml = '';
     assignedContacts.forEach((contact, index) => {
         let contactParts = contact.split(' ');
-        let contactFirstname = contactParts[0] || '';  // Der erste Teil ist der Vorname
-        let contactLastname = contactParts.slice(1).join(' ') || '';  // Der Rest ist der Nachname
+        let contactFirstname = contactParts[0] || '';  
+        let contactLastname = contactParts.slice(1).join(' ') || '';  
 
-        const color = getRandomColorForContact(); // Farbe für den Kontakt generieren
-        contactsHtml += getSmallContactHtml(index, contactFirstname, contactLastname, color); // Zeige nur Initialen
+        const color = getRandomColorForContact(); 
+        contactsHtml += getSmallContactHtml(index, contactFirstname, contactLastname, color); 
     });
     return contactsHtml;
 }
@@ -48,7 +48,7 @@ function generateLargeContactsHtml(assignedContacts) {
         contactsHtml += getLargeContactHtml(index, firstLetterForName, firstLetterLastName, contactFirstname, contactLastname, color);
     }
   
-    return contactsHtml;  // Gib das komplette generierte HTML zurück
+    return contactsHtml;  
 }
 
 function showTheNameColor(index) {
@@ -99,7 +99,7 @@ function createShowCard(task, taskIndex) {
     const priorityIcon = getPriorityIcon(priority);
     const categoryColor = getCategoryColor(category);
     const contactsHtml = generateLargeContactsHtml(assignedContacts);
-    const subtasksHtml = generateSubtasksHtml(task.subtask, taskIndex); // Subtasks generieren
+    const subtasksHtml = generateSubtasksHtml(task.subtask, taskIndex);
 
    return `
         <div class="todo-detail">
@@ -116,7 +116,7 @@ function createShowCard(task, taskIndex) {
             <p><strong>Due Date:</strong> ${dueDate}</p>
          <div class="prioicon">
             <p><strong>Priority:</strong> 
-                <span>${priority}</span> 
+                <span class="">${priority}</span> 
                <div class="prioicon-imgSection">
                 <img src="${priorityIcon}" alt="${priority} Priority">
                </div> 
@@ -200,7 +200,7 @@ function updateProgress(taskIndex) {
     const subtaskStatus = JSON.parse(localStorage.getItem(`task-${taskIndex}-subtasks`)) || {};
     const completedSubtasks = Object.values(subtaskStatus).filter(status => status).length;
     let progressLine = document.getElementById(`progressbarline-${taskIndex}`);
-    if (!progressLine) return;  // Exit if progress bar doesn't exist
+    if (!progressLine) return;  
 
 
     const progressPercentage = totalSubtasks ? (completedSubtasks / totalSubtasks) * 100 : 0;
@@ -216,10 +216,8 @@ async function initializeAllProgress() {
         if (tasksArrayElement === undefined) {
             return;
         }
-
-        // Überprüfen, ob subtasks leer sind
         if (!tasksArrayElement.subtask || tasksArrayElement.subtask.length === 0) {
-            continue; // Wenn leer, zur nächsten Aufgabe gehen
+            continue; 
         }
 
         tasksArrayElement.subtask.forEach((_, index) => {
@@ -239,22 +237,21 @@ function search() {
     let search = document.getElementById('searchInput').value;
     let searchTask = search.toLowerCase();
 
-    // Prüfen, ob mindestens 3 Zeichen eingegeben wurden
+   
     if (searchTask.length >= 3) {
-        // Alle Aufgaben durchsuchen
+       
         tasksArray.forEach((todo, index) => {
             let todos = document.getElementById(`task_${index}Element`);
             showTasksSearch(searchTask, todos, todo);
         });
     } else {
-        // Wenn weniger als 3 Zeichen eingegeben wurden, alle Aufgaben ausblenden
+       
         tasksArray.forEach((todo, index) => {
             let todos = document.getElementById(`task_${index}Element`);
             todos.style.display = 'none';
         });
     }
 
-    // Wenn das Suchfeld leer ist, alle Aufgaben anzeigen
     if (searchTask === '') {
         tasksArray.forEach((todo, index) => {
             let todos = document.getElementById(`task_${index}Element`);
@@ -265,7 +262,6 @@ function search() {
 function showTasksSearch(search, todos, todo) {
     let taskTitle = todo.Title.toLowerCase();
 
-    // Überprüfen, ob der Titel die Suchzeichenkette enthält
     if (taskTitle.includes(search)) {
         todos.style.display = 'block';
     } else {
