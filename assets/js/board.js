@@ -177,9 +177,7 @@ function openTaskBoard() {
     const windowWidth = window.innerWidth;
 
     // Wenn die Bildschirmbreite kleiner oder gleich 1450px ist, zur add_task.html weiterleiten
-    if (windowWidth <= 1450) {
-        window.location.href = 'add_task.html'; // Redirect zur add_task.html
-    } else {
+   
         // Standardmäßig das Overlay öffnen
         let taskDiv = document.getElementById('boardAddTask');
         let overlay = document.getElementById('darkOverlay');
@@ -194,7 +192,7 @@ function openTaskBoard() {
             overlay.style.display = 'none';  // Dunklen Hintergrund ausblenden
             document.body.style.overflow = 'auto';  // Scrollen auf der Hauptseite wieder erlauben
         }
-    }
+    
 }
 
 

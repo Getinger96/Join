@@ -323,7 +323,7 @@ if (profile_Badge_assign) {
 
 }
 
-   }
+   };
 
 
 
@@ -562,6 +562,7 @@ async function createEdittask(index) {
 
     let status= task.status
     let key = task.taskKey;
+   
     let asignedContacts= task.Assigned;
     let updatedAssigendContacts;
 
