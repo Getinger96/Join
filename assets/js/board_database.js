@@ -323,7 +323,7 @@ if (profile_Badge_assign) {
 
 }
 
-   }
+   };
 
 
 
@@ -562,7 +562,9 @@ async function createEdittask(index) {
 
     let status= task.status
     let key = task.taskKey;
+   
     let asignedContacts= task.Assigned;
+
    let updatedAssigendContacts= [...asignedContacts, ...assignedContacts];//Die drei Punkte (...), die du in JavaScript gesehen hast, werden als Spread-Operator bezeichnet. Der Spread-Operator wird verwendet, um Elemente eines Arrays, Objekts oder anderen iterierbaren Wertes (wie z.B. Strings oder Sets) zu "entpacken" oder zu "kopieren". Dadurch kannst du auf einfache Weise Arrays kombinieren, Objekte erweitern oder Daten kopieren.
  
 
