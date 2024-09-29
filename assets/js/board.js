@@ -196,20 +196,6 @@ function openTaskBoard() {
 }
 
 
-
-
-
-
-
-
-
-function closeTask() {
-    document.getElementById('boardAddTask').style.display = 'none';
-    document.getElementById('darkOverlay').style.display = 'none';
-    document.body.style.overflow = 'auto';  // Scrollen auf der Hauptseite wieder erlauben
-    clearTask()
-}
-
 function closeTaskUpdate() {
     document.getElementById('boardAddTask').style.display = 'none';
     document.getElementById('darkOverlay').style.display = 'none';
