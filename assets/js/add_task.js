@@ -136,40 +136,47 @@ function renderContacts(i,contactColour,firstletters,name) {
 function selectedContact(i, name, firstletters, contactColour) {
     let checkbox = document.getElementById(`checkbox${i}`);
     checkbox.innerHTML = '';
-    checkbox.innerHTML = `<img onclick="deselctedtContact(${i},'${name}','${firstletters}','${contactColour}')"  class="checked_img" src="./assets/IMG/Checked button.svg" alt="">`
+    checkbox.innerHTML = `<img onclick="deselctedtContact(${i},'${name}','${firstletters}','${contactColour}')" class="checked_img" src="./assets/IMG/Checked button.svg" alt="">`
 
     let profileContainer = document.getElementById(`profile_Container${i}`);
     profileContainer.classList.add('bg_color');
     profileContainer.classList.add('color_white');
-    assignedContacts.push(name)
+    
+    // Kontakt nur hinzufügen, wenn er noch nicht vorhanden ist
+    if (!assignedContacts.includes(name)) {
+        assignedContacts.push(name);
+    }
+
+    // UI aktualisieren
     showSelectedProfile(firstletters, i, contactColour);
 }
 
+// Aktualisierte Funktion für das Deselektieren eines Kontakts
 function deselctedtContact(i, name, firstletters, contactColour) {
-
     let checkbox = document.getElementById(`checkbox${i}`);
     checkbox.innerHTML = '';
-    checkbox.innerHTML = `<img onclick="selectedContact(${i},'${name}','${firstletters}','${contactColour}')" id="checkImg${i}"  class="check_img  " src="assets/IMG/Check button.svg" alt="">`
+    checkbox.innerHTML = `<img onclick="selectedContact(${i},'${name}','${firstletters}','${contactColour}')" id="checkImg${i}" class="check_img" src="assets/IMG/Check button.svg" alt="">`
+
     let profileContainer = document.getElementById(`profile_Container${i}`);
     profileContainer.classList.remove('bg_color');
     profileContainer.classList.remove('color_white');
-    assignedContacts.splice(name, 1)
 
+    // Kontakt aus assignedContacts Array entfernen
+    let index = assignedContacts.indexOf(name);
+
+     assignedContacts.splice(index, 1); // Kontakt korrekt entfernen
+    // UI aktualisieren
     showSelectedProfile(firstletters, i, contactColour);
 }
-
 function showSelectedProfile(firstletters, i, contactColour) {
-
     let selectedProfileContainer = document.getElementById('Selected_profiles_Container');
-    let profilebadgeassign = document.getElementById(`profile_Badge_assign${i}`)
-    selectedProfileContainer.innerHTML='';
+    let profilebadgeassign = document.getElementById(`profile_Badge_assign${i}`);
 
-    if (profilebadgeassign) {
-        profilebadgeassign.remove();
-    } else {
+    // Vermeide das Zurücksetzen des Containers, füge nur neue Profile hinzu
+    if (!profilebadgeassign) {
         selectedProfileContainer.innerHTML += `
-    <div id="profile_Badge_assign${i}" class="profile_Badge_assign ${contactColour}">${firstletters}</div>
-    `;
+            <div id="profile_Badge_assign${i}" class="profile_Badge_assign ${contactColour}">${firstletters}</div>
+        `;
     }
 }
 
@@ -198,13 +205,12 @@ function chossedurgent() {
     urgent.innerHTML =
         `
      Urgent
-     <img src="./assets/IMG/Prio_urgent_WHITE.svg" alt="">
+     <img src="./assets/IMG/Priority symbols (1).png" alt="">
      `;
 
     urgent.classList.add('bg_urgent_selected');
     urgent.classList.add('color_white')
-    prio = [];
-    prio.push('urgent');
+    prio= 'urgent';
 
 };
 
@@ -214,13 +220,12 @@ function choossedmedium() {
     medium.innerHTML =
         `
     Medium
-    <img src="assets/IMG/PRio_Medium_WHITE.svg" alt="">
+    <img src="assets/IMG/Priority symbols (2).png" alt="">
     `;
 
     medium.classList.add('color_white');
     medium.classList.add('bg_Medium');
-    prio = [];
-    prio.push('medium');
+    prio= 'medium';
 }
 
 function choosedlow() {
@@ -229,13 +234,12 @@ function choosedlow() {
     low.innerHTML =
         `
     Low
-    <img src="./assets/IMG/Prio_LOW_WHITE.svg" alt="">
+    <img src="./assets/IMG/Priority symbols.png" alt="">
     `;
 
     low.classList.add('color_white');
     low.classList.add('bg_Low');
-    prio = [];
-    prio.push('low');
+    prio= 'low';
 }
 
 function addSubtask() {

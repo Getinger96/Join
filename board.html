@@ -63,7 +63,7 @@
                             <div class="separator"></div>
                             <img class="curser" src="./assets/IMG/Frame 122.png">
                         </div>
-                        <div onclick="openTask()" class="displayFlex button-d-none addTask buttonContainer curser">
+                        <div onclick="openTaskBoard()" class="displayFlex button-d-none addTask buttonContainer curser">
                             <button class="curser addTaskButton">Add task</button>
                             <img src="./assets/IMG/add (1).png">
                         </div>
@@ -81,7 +81,7 @@
                     <div class="paddingRight widthContainer">
                         <div class="statusButton">
                             <p class="text">To do</p>
-                            <img class="curser" onclick="openTask()" src="./assets/IMG/plus button.png">
+                            <img class="curser" onclick="openTaskBoard()" src="./assets/IMG/plus button.png">
                         </div>
                         <div class="noTasks" category="open" style="display: none;">No tasks To do</div>
                         <div class="drag-area" id="open" ondrop="moveTo(event, 'open')" ondragover="allowDrop(event)"
@@ -92,7 +92,7 @@
                     <div class="paddingRight widthContainer">
                         <div class="statusButton">
                             <p class="text">In progress</p>
-                            <img class="curser" onclick="openTask()" src="./assets/IMG/plus button.png">
+                            <img class="curser" onclick="openTaskBoard()" src="./assets/IMG/plus button.png">
                         </div>
                         <div class="noTasks" category="progress" style="display: none;">No tasks in progress</div>
                         <div class="drag-area" id="progress" ondrop="moveTo(event, 'progress')"
@@ -102,7 +102,7 @@
                     <div class="paddingRight widthContainer">
                         <div class="statusButton">
                             <p class="text">Await feedback</p>
-                            <img class="curser" onclick="openTask()" src="./assets/IMG/plus button.png">
+                            <img class="curser" onclick="openTaskBoard()" src="./assets/IMG/plus button.png">
                         </div>
                         <div class="noTasks" category="awaitFeedback" style="display: none;">No tasks Await feedback
                         </div>
@@ -113,7 +113,7 @@
                     <div class="paddingRight widthContainer">
                         <div class="statusButton">
                             <p class="text">Done</p>
-                            <img class="curser" onclick="openTask()" src="./assets/IMG/plus button.png">
+                            <img class="curser" onclick="openTaskBoard()" src="./assets/IMG/plus button.png">
                         </div>
                         <div class="noTasks" category="closed" style="display: none;">No tasks Done</div>
                         <div class="drag-area" id="closed" ondrop="moveTo(event, 'closed')"

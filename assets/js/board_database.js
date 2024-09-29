@@ -20,7 +20,7 @@ let assignedContacts = [];
 let currentPriority = 'none';
 let currentCategory = 'open';
 let path = "tasks";
-
+let currentStatus;
 
 // Funktion, um eine neue Aufgabe hinzuzufügen und in die Firebase-Datenbank zu speichern
 
@@ -194,6 +194,7 @@ function openList() {
     let arrowCon = document.getElementById('arrow_img_container');
     arrowCon.innerHTML = `<img onclick="closelist()"class="arrow_drop_downaa" src="assets/IMG/arrow_drop_up.svg" alt="">`;
     selecCon.classList.remove('d_none');
+    getContacts();
 
 }
 
@@ -430,8 +431,17 @@ if (profile_Badge_assign) {
 
     }
 
-    async function EditData(index) {
+    function setCreateTaskButton() {
+        let buttonaddtask = document.getElementById('DibButtomAddtask');
+        buttonaddtask.innerHTML = `
+            <button onclick="clearTask()" class="buttonContainerWhite curser">Clear <img
+                src="./assets/IMG/x_icon_clear.svg"></button>
+            <button onclick="createTask(event)" class="buttonContainerdark curser">Create Task <img
+                src="assets/IMG/clear_Img.svg"></button>`;
+    }
 
+    async function EditData(index) {
+        openTask(index);
         let task = tasksArray[index];
         let title = task.Title;
         let description = task.Description;
@@ -442,10 +452,10 @@ if (profile_Badge_assign) {
         let subtask = task.subtask;
         let idBoard = task.idTask;
 
-        let status= task.status
+        let status= task.status ;
+        currentCategory = status;
 
-
-
+        getContacts();
 
       for (let indexcon = 0;indexcon < assignedContacts.length; indexcon++) {
         let contact= assignedContacts[indexcon];
@@ -456,7 +466,7 @@ if (profile_Badge_assign) {
         contactContainer.classList.add('color_white');
         showSelectedProfileEdit(contact, indexcon)
       }
-        openTask(index);
+    
         let tasktitle = document.getElementById('taskTitle');
         tasktitle.value=title;
         let taskdescription = document.getElementById('description');
@@ -500,12 +510,14 @@ async function createEdittask(index) {
 
     let taskDAte= document.getElementById('taskDueDate');
 
+    	
 
-
-
+    console.log(currentCategory);
+    
     let taskCategory= document.getElementById('kategorie');
     let task = tasksArray[index];
-    let status= task.status;
+
+    let status= task.status
     let key = task.taskKey;
     let assignedContacts = task.Assigned;
 

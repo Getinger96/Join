@@ -107,12 +107,20 @@ function createShowCard(task, taskIndex) {
                 <div class="divKategorie" style="background-color: ${categoryColor};">${category}</div>
                 <button onclick="closeOverlay(${taskIndex})" class="close-button"><img src="./assets/IMG/iconoir_cancel.png" alt=""></button>
             </div>
+            <div>
             <h2>${title}</h2>
+            </div>
+            <div>
             <p><strong>Description:</strong> ${description}</p>
+            </div>
             <p><strong>Due Date:</strong> ${dueDate}</p>
+         <div class="prioicon">
             <p><strong>Priority:</strong> 
                 <span>${priority}</span> 
+               <div class="prioicon-imgSection">
                 <img src="${priorityIcon}" alt="${priority} Priority">
+               </div> 
+         </div>
             </p>
             <p><strong>Assigned To:</strong></p>
             <div class="assigned-contacts">
@@ -125,12 +133,12 @@ function createShowCard(task, taskIndex) {
         </div>
         <div class="actionBigTodo">
             <button class="actionBigButton" onclick="deleteTask(${taskIndex})">
-                <img class="iconTodoBig" src="./assets/img/delete.png">
+                <img class="iconTodoBig" src="./assets/IMG/delete.png">
                 <p>Delete</p>
             </button>
             <div></div>
             <button class="actionBigButton" onclick="EditData(${taskIndex})">
-                <img class="iconTodoBig" src="./assets/img/edit.png">
+                <img class="iconTodoBig" src="./assets/IMG/edit.png">
                 <p>Edit</p>
             </button>
         </div>
