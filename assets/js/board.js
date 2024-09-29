@@ -530,10 +530,7 @@ function clearTask() {
     }
 
     // Subtasks-Liste leeren
-    const list = document.getElementById('list');
-    if (list) {
-        list.innerHTML = '';
-    }
+    
 
     // Subtask-Eingabefeld leeren
     let subtaskContainer= document.getElementById('subtasksContainer');

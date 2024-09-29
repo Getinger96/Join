@@ -491,7 +491,8 @@ if (profile_Badge_assign) {
        
 
 
-changeAddtaskButton(index,)
+
+changeAddtaskButton(index);
 
 
        
