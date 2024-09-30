@@ -18,11 +18,9 @@ let currentPriority = 'none';
 let currentCategory = 'open';
 let path = "tasks";
 let currentStatus;
-// Funktion, um eine neue Aufgabe hinzuzufügen und in die Firebase-Datenbank zu speichern
 
 async function createTask(event) {
     event.preventDefault();
-    // Hole die Werte aus den Formularfeldern
     const titleElement = document.getElementById('taskTitle');
     const dueDateElement = document.getElementById('taskDueDate');
     const kategorieElement = document.getElementById('kategorie');
@@ -42,7 +40,7 @@ async function createTask(event) {
 
     const descriptionElement = document.getElementById('description');
     const description = descriptionElement ? descriptionElement.value.trim() : '';
-    const priority = currentPriority;  // Verwende die aktuelle Priorität
+    const priority = currentPriority;
     let subtask = subtasks;
     const validCategories = ['open', 'progress', 'awaitFeedback', 'closed'];
     const status = validCategories.includes(kategorie) ? kategorie : 'open';
@@ -188,7 +186,7 @@ function updateHTMLBoard() {
 
     tasksArray.forEach(task => {
         console.log("Aktuelle Aufgabe:", task);
-        if (containers[task.status]) {  // Verwende 'status' für die Zuordnung
+        if (containers[task.status]) {
             const taskHTML = generateTodoHTML(task);
             containers[task.status].innerHTML += taskHTML;
         } else {
