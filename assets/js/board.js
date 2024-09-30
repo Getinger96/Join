@@ -59,12 +59,10 @@ async function fetchTasks(path = '') {
 
 }
 
-
 function removeAllElement() {
     let allElements = document.querySelectorAll('.drag-area');
     allElements.forEach(element => element.innerHTML = '');
 }
-
 
 function renderSubtask() {
     let idSubtask = 0
@@ -74,9 +72,7 @@ function renderSubtask() {
         localStorage.removeItem(`task-${id}-subtasks`);
         if (subtaskElement === undefined) {
             subtaskElement = [];
-
         }
-
         subtask.push(
             {
                 id: idSubtask,
@@ -119,7 +115,6 @@ function checkEmptyFields() {
             container.innerHTML = showEmptyFields();;  // Füge leere Felder zur Liste hinzu
         }
     });
-
 }
 
 function showEmptyFields() {
@@ -149,8 +144,6 @@ function closeTaskUpdate() {
     document.getElementById('darkOverlay').style.display = 'none';
     document.body.style.overflow = 'auto';
 }
-
-
 
 function generateTodoHTML(task, taskIndex) {
 
@@ -369,153 +362,4 @@ function removeHighlight(id) {
     if (element) {
         element.classList.remove('drag-area-highlight');
     }
-}
-
-function addSubtask() {
-
-    if (!Array.isArray(subtasks)) {
-        subtasks = [];
-    }
-    let subtaskContainer = document.getElementById('subtasksContainer');
-    subtaskContainer.innerHTML = '';
-    if (subtasks.length === 0) {
-        return;
-    }
-
-    for (let i = 0; i < subtasks.length; i++) {
-        subtaskContainer.innerHTML += `
-            <div class="li">
-                ${subtasks[i]}
-                <button type="button" class="Subtasks_Btn" onclick="deleteItem(${i})">
-                    <img src="./assets/IMG/delete.png" alt="Delete">
-                </button>
-            </div>`;
-    }
-}
-
-
-function deleteItem(i) {
-    subtasks.splice(i, 1);
-    let taskIndex = currentTaskIndex;
-    tasksArray[taskIndex].subtask = subtasks;
-    const subtaskStatus = JSON.parse(localStorage.getItem(`task-${taskIndex}-subtasks`)) || {};
-    delete subtaskStatus[i];
-    localStorage.setItem(`task-${taskIndex}-subtasks`, JSON.stringify(subtaskStatus));
-    addSubtask();
-    updateProgress(taskIndex);
-}
-
-
-
-function addCurrentSubtask() {
-    if (!subtasks) {
-        subtasks = [];
-    }
-    let currentSubtask = document.getElementById('new-subtask').value;
-    if (currentSubtask === "") {
-        alert('Bitte geben Sie eine gültige Subtask ein.');
-        return;
-    }
-    if (subtasks.length < 5) {
-        subtasks.push(currentSubtask);
-        document.getElementById('new-subtask').value = '';
-        addSubtask();
-    } else {
-        alert('Genügend Subtasks hinzugefügt!');
-    }
-}
-
-function resetButtons() {
-    let buttons = [
-        { id: 'urgent', color: 'initial', imgSrc: './assets/IMG/Priority symbols (1).png' },
-        { id: 'medium', color: 'initial', imgSrc: './assets/IMG/Priority symbols (2).png' },
-        { id: 'low', color: 'initial', imgSrc: './assets/IMG/Priority symbols.png' }
-    ];
-
-    buttons.forEach(button => {
-        let btnElement = document.getElementById(button.id);
-        let iconElement = document.getElementById(button.id + "Icon");
-        btnElement.style.backgroundColor = button.color;
-        btnElement.style.color = 'initial';
-        iconElement.src = button.imgSrc;
-    });
-    currentPriority = 'none';
-}
-
-function urgent() {
-    resetButtons();
-
-    let urgentButton = document.getElementById("urgent");
-    let urgentIcon = document.getElementById("urgentIcon");
-    urgentButton.style.backgroundColor = "red";
-    urgentButton.style.color = "white";
-    urgentIcon.src = "./assets/IMG/iconUrgentWhite.svg";
-    currentPriority = 'urgent';
-}
-
-function medium() {
-    resetButtons();
-
-    let mediumButton = document.getElementById("medium");
-    let mediumIcon = document.getElementById("mediumIcon");
-    mediumButton.style.backgroundColor = "orange";
-    mediumButton.style.color = "white";
-    mediumIcon.src = "./assets/IMG/Priority symbols (2).png";
-    currentPriority = 'medium';
-}
-
-function low() {
-    resetButtons();
-
-    let lowButton = document.getElementById("low");
-    let lowIcon = document.getElementById("lowIcon");
-    lowButton.style.backgroundColor = "limegreen";
-    lowButton.style.color = "white";
-    lowIcon.src = "./assets/IMG/Priority symbols.png";
-    currentPriority = 'low';
-}
-
-function clearTask() {
-
-    for (let contactIndex = 0; contactIndex < contactsArray.length; contactIndex++) {
-        let contact = contactsArray[contactIndex];
-        deselctedtContact(contactIndex, contact.name, `${contact.name.charAt(0).toUpperCase()}${getLastName(contact.name).charAt(0).toUpperCase()}`, contact.color);
-    }
-
-    const selectionContainer = document.getElementById('Selection_Container');
-    if (selectionContainer) {
-        selectionContainer.innerHTML = '';
-    }
-    const taskTitle = document.getElementById('taskTitle');
-    if (taskTitle) {
-        taskTitle.value = '';
-    }
-    const description = document.getElementById('description');
-    if (description) {
-        description.value = '';
-    }
-    const kategorie = document.getElementById('kategorie');
-    if (kategorie) {
-        kategorie.selectedIndex = 0;
-    }
-    let subtaskContainer = document.getElementById('subtasksContainer');
-    if (subtaskContainer) {
-        subtaskContainer.innerHTML = '';
-    }
-    const selectContainer = document.getElementById('select_container');
-    if (selectContainer) {
-        selectContainer.selectedIndex = 0;
-    }
-    const dateInput = document.querySelector('.inputTitle[type="date"]');
-    if (dateInput) {
-        dateInput.value = '';
-    }
-    const selectedProfilesContainer = document.getElementById('Selected_profiles_Container');
-    if (selectedProfilesContainer) {
-        selectedProfilesContainer.innerHTML = '';
-    }
-    resetPrioButtons();
-    assignedContacts = [];
-    subtasks = [];
-    getContacts();
 }
