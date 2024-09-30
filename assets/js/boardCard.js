@@ -93,12 +93,13 @@ function createShowCard(task, taskIndex) {
     let description = task.Description || '';
     let dueDate = task.duedate || '';
     let priority = task.Prio;
-    let assignedContacts = task.Assigned || [];
+    let assignedContacts1 = task.Assigned || [];
     let category = task.Category || '';
+    assignedContacts.push(...assignedContacts1)
 
     const priorityIcon = getPriorityIcon(priority);
     const categoryColor = getCategoryColor(category);
-    const contactsHtml = generateLargeContactsHtml(assignedContacts);
+    const contactsHtml = generateLargeContactsHtml(assignedContacts1);
     const subtasksHtml = generateSubtasksHtml(task.subtask, taskIndex);
 
    return `

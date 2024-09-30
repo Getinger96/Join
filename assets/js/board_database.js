@@ -228,9 +228,11 @@ function displayContacts(contactIndex, contactsName, contactLastname, selectedCl
 
 
 function selectedContact(index,color,name) {
-    
 
-    if (assignedContacts.includes(name)) {
+
+    let includedName= assignedContacts.includes(name)
+
+    if (includedName) {
         deselctedtContact(index,color,name)
 
     }else{
@@ -457,45 +459,18 @@ if (profile_Badge_assign) {
 
         getContacts();
 
-        if (assignedContacts==undefined) {
-            let tasktitle = document.getElementById('taskTitle');
-            tasktitle.value=title;
-            let taskdescription = document.getElementById('description');
-            taskdescription.value=description;
-            let taskDAte= document.getElementById('taskDueDate');
-            taskDAte.value=dueDate;
-    
-    
-           if (priority=='urgent') {
-            urgent()
-    
-           } 
-           if (priority=='medium') {
-            medium()
-    
-           } 
-           if (priority=='low') {
-            low()
-    
-           } 
-    
-           let taskCategory= document.getElementById('kategorie');
-           taskCategory.value=category;
-    
-           subtasks=subtask;
-           addSubtask();
-        
+       
     
     
     
     
-    changeAddtaskButton(index);
+    
     
 
         
 
             
-        }else{ for (let indexcon = 0;indexcon < assignedContacts.length; indexcon++) {
+         for (let indexcon = 0;indexcon < assignedContacts.length; indexcon++) {
             let contact= assignedContacts[indexcon];
               // Die Farbe des Kontakts
     
@@ -544,7 +519,7 @@ if (profile_Badge_assign) {
      
 
 
-}};
+};
 
 async function createEdittask(index) {
     let tasktitle = document.getElementById('taskTitle');
@@ -562,22 +537,16 @@ async function createEdittask(index) {
 
     let status= task.status
     let key = task.taskKey;
-    let asignedContacts= task.Assigned;
-    let updatedAssigendContacts;
+   
+    
 
-    if (asignedContacts === undefined) {
-        updatedAssigendContacts = [...assignedContacts];
-    }  else {
-
-
-   updatedAssigendContacts= [...asignedContacts, ...assignedContacts];//Die drei Punkte (...), die du in JavaScript gesehen hast, werden als Spread-Operator bezeichnet. Der Spread-Operator wird verwendet, um Elemente eines Arrays, Objekts oder anderen iterierbaren Wertes (wie z.B. Strings oder Sets) zu "entpacken" oder zu "kopieren". Dadurch kannst du auf einfache Weise Arrays kombinieren, Objekte erweitern oder Daten kopieren.
-    }
+   
 
     let editedTASk={
 
         Titel:tasktitle.value,
         Description:taskdescription.value,
-        AssignedContact:   updatedAssigendContacts,
+        AssignedContact:   assignedContacts,
         Date:  taskDAte.value,
         Prio :currentPriority,
         Category: taskCategory.value,
