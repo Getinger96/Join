@@ -454,7 +454,7 @@ allElements.forEach((div) => {
     if(!hasTodo) {
         div.innerHTML = `
         <div class="fiedIsempty"> 
-            <p> text</p>
+            <p> Field is empty</p>
         </div>
         `;
     }
@@ -497,13 +497,48 @@ function addSubtask() {
     // Loop through the subtasks array and render each subtask
     for (let i = 0; i < subtasks.length; i++) {
         subtaskContainer.innerHTML += `
-            <div class="li">
+            <div class="editSubtaskheadlineContainer" >
+            <div class="editSubtask" id="subTaskValueId${i}">
                 ${subtasks[i]}
+                </div>
+            <div class="subtaskEditDiv">
                 <button type="button" class="Subtasks_Btn" onclick="deleteItem(${i})">
                     <img src="./assets/IMG/delete.png" alt="Delete">
                 </button>
+
+            
+              <button type="button" id="changeImgEdit${i}" class="EditSubtaskButton" onclick="editSubtask(${i})">
+                    <img src="./assets/IMG/edit.png" alt="Delete">
+                </button>
+            </div>
             </div>`;
     }
+}
+
+function editSubtask(i) {
+
+    document.getElementById(`subTaskValueId${i}`).innerHTML = `
+    <input id="subtaskValue${i}" class="subTaskInptu" type="text" placeholder="${subtasks[i]}">`
+
+    document.getElementById(`changeImgEdit${i}`).innerHTML = `
+   <button type="button" class="EditSubtaskButton" onclick="enterNewSubtask(${i})">
+                    <img class="imgCheckedIcon" id="changeImgEdit${i}" src="./assets/IMG/checkAddTask.png" alt="check">
+                </button>`;
+
+
+
+}
+
+
+function enterNewSubtask(i) {
+
+   let newSubTask = document.getElementById(`subtaskValue${i}`).value
+
+   subtasks[i] =newSubTask;
+   document.getElementById(`changeImgEdit${i}`).innerHTML =
+
+    addSubtask();
+    
 }
 
 

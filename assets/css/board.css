@@ -53,6 +53,8 @@
 .prioicon {
     display: flex;
 }
+
+
 .addTask {
     display: flex;
     justify-content: center;

@@ -454,7 +454,8 @@ if (profile_Badge_assign) {
 
         let status= task.status ;
         currentCategory = status;
-
+        closeOverlay(index);
+    
         getContacts();
 
         if (assignedContacts==undefined) {
@@ -484,7 +485,7 @@ if (profile_Badge_assign) {
     
            subtasks=subtask;
            addSubtask();
-        
+           closeOverlay(index);
     
     
     
@@ -548,43 +549,41 @@ if (profile_Badge_assign) {
 
 async function createEdittask(index) {
     let tasktitle = document.getElementById('taskTitle');
-
     let taskdescription = document.getElementById('description');
-
-    let taskDAte= document.getElementById('taskDueDate');
-
-    	
-
-    console.log(currentCategory);
+    let taskDAte = document.getElementById('taskDueDate');
     
-    let taskCategory= document.getElementById('kategorie');
+    // Assuming currentCategory is set somewhere else
+    console.log(currentCategory);
+
+    let taskCategory = document.getElementById('kategorie');
     let task = tasksArray[index];
 
-    let status= task.status
+    let status = task.status;
     let key = task.taskKey;
-   
-    let asignedContacts= task.Assigned;
-    let updatedAssigendContacts;
 
-    if (asignedContacts === undefined) {
-        updatedAssigendContacts = [...assignedContacts];
-    }  else {
+    // Handle assigned contacts
+    let assignedContacts = task.Assigned;
+    let updatedAssignedContacts;
 
-
-   updatedAssigendContacts= [...asignedContacts, ...assignedContacts];//Die drei Punkte (...), die du in JavaScript gesehen hast, werden als Spread-Operator bezeichnet. Der Spread-Operator wird verwendet, um Elemente eines Arrays, Objekts oder anderen iterierbaren Wertes (wie z.B. Strings oder Sets) zu "entpacken" oder zu "kopieren". Dadurch kannst du auf einfache Weise Arrays kombinieren, Objekte erweitern oder Daten kopieren.
+    if (assignedContacts === undefined) {
+        updatedAssignedContacts = [...assignedContacts];
+    } else {
+        updatedAssignedContacts = [...assignedContacts, ...assignedContacts];
     }
 
-    let editedTASk={
+    let updatedSubtasks = subtasks
 
-        Titel:tasktitle.value,
-        Description:taskdescription.value,
-        AssignedContact:   updatedAssigendContacts,
-        Date:  taskDAte.value,
-        Prio :currentPriority,
+    
+    let editedTASk = {
+        Titel: tasktitle.value,
+        Description: taskdescription.value,
+        AssignedContact: updatedAssignedContacts,
+        Date: taskDAte.value,
+        Prio: currentPriority,
         Category: taskCategory.value,
-        Subtask: task.subtask,
-        Status:status,
-    }
+        Subtask: updatedSubtasks,  
+        Status: status,
+    };
     await putDataEdit(`tasks/${key}`,editedTASk)
     closeTask();
     closeOverlay();

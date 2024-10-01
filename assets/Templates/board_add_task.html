@@ -37,13 +37,13 @@
                 <div class="separatorTask"></div>
                 <div class="divSectionAddTask marginTop">
                     <div class="flexdirection">
-                        <div class="displayFlex">
-                            <p>Due date</p>
+                        <div class="dateEdit">
+                            <p class="dueDateEdit">Due date</p>
                             <p class="red">*</p>
                         </div>
-                        <input id="taskDueDate" class="inputTitle curser" type="date" required>
+                        <input id="taskDueDate" class="inputTitleDate curser" type="date" required>
                     </div>
-                    <div>
+                    <div class="prioEditSection">
                         <p>Prio</p>
                         <div class="marginButtomButton">
                             <button id="urgent" class="buttonContainerPrio curser" onclick="urgent()">Urgent <img
@@ -55,7 +55,7 @@
                         </div>
                     </div>
                     <div class="flexdirection">
-                        <div class="displayFlex alaignItems">
+                        <div class="categoryEdit alaignItems">
                             <label id="kategorieLabel">Category</label> <!-- Geänderte ID -->
                             <p class="red">*</p>
                         </div>
@@ -78,7 +78,7 @@
                 </div>
             </div>
             <div class="bottomInfo">
-                <div class="displayFlex">
+                <div class="bottomInfoEdit">
                     <p class="redrequired">*</p>
                     <p class="required-message">This field is required</p>
                 </div>
