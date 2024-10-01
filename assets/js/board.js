@@ -137,7 +137,9 @@ function openTask(taskIndex) {
         overlay.style.display = 'none'; 
         document.body.style.overflow = 'auto';
     }
+    
 }
+
 
 function closeTaskUpdate() {
     document.getElementById('boardAddTask').style.display = 'none';

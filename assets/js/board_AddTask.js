@@ -1,4 +1,4 @@
-function openTaskBoard() {
+function openTaskBoard() {ask
     const windowWidth = window.innerWidth;
 
     // Wenn die Bildschirmbreite kleiner oder gleich 1450px ist, zur add_task.html weiterleiten
@@ -36,6 +36,7 @@ function closelist() {
 }
 
 function displayContacts(contactIndex, contactsName, contactLastname, selectedClass, color) {
+   
 
     return `<div class= "Contact-Container"  id="profile-${contactIndex}" onclick="selectedContact(${contactIndex}, '${color}', '${contactsName}')">
                 <div class="contact-icon ${color} profilebadge">
@@ -45,34 +46,48 @@ function displayContacts(contactIndex, contactsName, contactLastname, selectedCl
                     <span class="contactname">${contactsName}</span>
                 </div>
             </div>`;
+            
+
+}
+function showSelectedContainer(name,index) {
+    let includedName = assignedContacts.includes(name)
+    let contactContainer = document.getElementById(`profile-${index}`);
+    if (includedName) {
+        contactContainer.classList.add('bg_color');
+        contactContainer.classList.add('color_white');
+        
+    }else {
+        contactContainer.classList.remove('bg_color');
+        contactContainer.classList.remove('color_white');
+    }
 }
 
-
 function selectedContact(index, color, name) {
-
+    showSelectedContainer(name,index);
     let includedName = assignedContacts.includes(name)
 
     if (includedName) {
         deselctedtContact(index, color, name)
 
     } else {
-        let contactContainer = document.getElementById(`profile-${index}`);
-        contactContainer.classList.add('bg_color');
-        contactContainer.classList.add('color_white');
+       
+        
         assignedContacts.push(name);
         showSelectedProfile(color, name, index)
     }
 }
 
+
+
 function deselctedtContact(index, color, name) {
-    let contactContainer = document.getElementById(`profile-${index}`);
-    contactContainer.classList.remove('bg_color');
-    contactContainer.classList.remove('color_white');
+   
+    showSelectedContainer(name,index)
     assignedContacts.splice(name, 1);
     showSelectedProfile(color, name, index)
 }
 
 function showSelectedProfile(color, name, index) {
+    
     let selectedProfileContainer = document.getElementById('Selected_profiles_Container');
     let profile_Badge_assign = document.getElementById(`profilebadge_Assign${index}`)
 
