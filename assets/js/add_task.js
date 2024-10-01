@@ -9,13 +9,11 @@ const colors = [
     'hellorange'
 ];
 
-
 const base_URL = "https://join-37803-default-rtdb.europe-west1.firebasedatabase.app/";
 let contacts = [];
 let subtasks = [];
 let assignedContacts = [];
 let prio = [];
-
 
 async function fetchContacts(path = '') {
     let response = await fetch(base_URL + path + ".json");
@@ -28,15 +26,11 @@ async function fetchContacts(path = '') {
         let key = keysArray[index];
         let colorIndex = index;
        
-
         if (colorIndex >= colors.length) {
             colorIndex -= colors.length;
         }
-
         let color = colors[colorIndex];
-
         if (contact.email == 'guest@web.de') {
-
 
         } else {
             contacts.push({
@@ -72,7 +66,6 @@ function closelist() {
     selecCon.classList.add('d_none');
 }
 
-
 function openCategoryLIst() {
     let seleCon = document.getElementById('Selection_Container_Category');
     let arrowcona = document.getElementById('arrow_img_container_Category');
@@ -104,7 +97,6 @@ function renderSelectionContainer() {
         return;
     }
     profiles.innerHTML = ' ';
-
     for (let i = 0; i < contacts.length; i++) {
         let contact = contacts[i];
         let name = contact.name;
@@ -142,16 +134,13 @@ function selectedContact(i, name, firstletters, contactColour) {
     profileContainer.classList.add('bg_color');
     profileContainer.classList.add('color_white');
     
-    // Kontakt nur hinzufügen, wenn er noch nicht vorhanden ist
     if (!assignedContacts.includes(name)) {
         assignedContacts.push(name);
     }
 
-    // UI aktualisieren
     showSelectedProfile(firstletters, i, contactColour);
 }
 
-// Aktualisierte Funktion für das Deselektieren eines Kontakts
 function deselctedtContact(i, name, firstletters, contactColour) {
     let checkbox = document.getElementById(`checkbox${i}`);
     checkbox.innerHTML = '';
@@ -160,32 +149,25 @@ function deselctedtContact(i, name, firstletters, contactColour) {
     let profileContainer = document.getElementById(`profile_Container${i}`);
     profileContainer.classList.remove('bg_color');
     profileContainer.classList.remove('color_white');
-
-    // Kontakt aus assignedContacts Array entfernen
     let index = assignedContacts.indexOf(name);
 
-     assignedContacts.splice(index, 1); // Kontakt korrekt entfernen
+     assignedContacts.splice(index, 1);
      console.log(assignedContacts)
-    // UI aktualisieren
     showSelectedProfile(firstletters, i, contactColour);
 }
 
 function showSelectedProfile(firstletters, i, contactColour) {
     let selectedProfileContainer = document.getElementById('Selected_profiles_Container');
     let profilebadgeassign = document.getElementById(`profile_Badge_assign${i}`);
-
-    // Vermeide das Zurücksetzen des Containers, füge nur neue Profile hinzu
     if (profilebadgeassign) {
         profilebadgeassign.remove()
        ;
     }else {
         selectedProfileContainer.innerHTML += `
         <div id="profile_Badge_assign${i}" class="profile_Badge_assign ${contactColour}">${firstletters}</div>
-    `
-       
+    ` 
     }
 }
-
 
 function dateinput() {
     let duedate = document.getElementById('dueDate');
@@ -207,7 +189,6 @@ function renderPrioButtons() {
 
 function chossedurgent() {
     renderPrioButtons();
-
     let urgent = document.getElementById('urgent');
     urgent.innerHTML =
         `
@@ -218,7 +199,6 @@ function chossedurgent() {
     urgent.classList.add('bg_urgent_selected');
     urgent.classList.add('color_white')
     prio= 'urgent';
-
 };
 
 function choossedmedium() {
@@ -229,7 +209,6 @@ function choossedmedium() {
     Medium
     <img src="assets/IMG/Priority symbols (2).png" alt="">
     `;
-
     medium.classList.add('color_white');
     medium.classList.add('bg_Medium');
     prio= 'medium';
@@ -243,7 +222,6 @@ function choosedlow() {
     Low
     <img src="./assets/IMG/Priority symbols.png" alt="">
     `;
-
     low.classList.add('color_white');
     low.classList.add('bg_Low');
     prio= 'low';
@@ -252,7 +230,6 @@ function choosedlow() {
 function addSubtask() {
     let list = document.getElementById('ul_subtasks');
     list.innerHTML='';
-
     for (let i = 0; i < subtasks.length; i++) {
        
         list.innerHTML += `<div class="li">${subtasks[i]}<button type="button" class="Subtasks_Btn" onclick="deleteItem(${i})"><img src="./assets/IMG/delete.png"></button></div>`;
@@ -268,7 +245,6 @@ function addCurrentSubtask() {
     if (subtasks.length < 5) {
         let Currentubtask = document.getElementById('input_Subtasks').value;
         if (Currentubtask == '') {
-
         } else {
             subtasks.push(Currentubtask);
             document.getElementById('input_Subtasks').value = ''; // Liste wieder leeren
@@ -294,8 +270,6 @@ function choosedTechnicalTask() {
     closelistCategory();
 }
 
-
-
 async function postData(path = "", data = {}) {
     let response = await fetch(base_URL + path + ".json", {
         method: "POST",
@@ -304,9 +278,7 @@ async function postData(path = "", data = {}) {
         },
         body: JSON.stringify(data)
     });
-
     return responsASJson = await response.json();
-    
 }
 
 
@@ -324,7 +296,6 @@ async function createTask(event) {
     let subtask = subtasks;
     let status= 'open'
     
-
     let newTask = {
         Titel: titel.value,
         Description: description.value,
@@ -334,8 +305,6 @@ async function createTask(event) {
         Category: category.value,
         Subtask: subtask,
         Status:status
-        
-
     };
 
 if (loggedInUser=== guest) {
@@ -347,18 +316,11 @@ if (loggedInUser=== guest) {
         return;
     }else {
         console.log(newTask);
-        
         await postData(`tasks`, newTask);
         clearTask();
-    
     }
-   
-
 }
-
-
 }
-
 
 function clearTask() {
     for (let i = 0; i < contacts.length; i++) {
@@ -373,23 +335,16 @@ function clearTask() {
         let firstletters = forNAmebig + firstletterlastnameBIG;
         deselctedtContact(i, name, firstletters, contactColour)
     }
-
     let selectedProfileContainer = document.getElementById('Selected_profiles_Container');
     selectedProfileContainer.innerHTML = '';
-
     let inpuSubtask = document.getElementById('input_Subtasks');
     inpuSubtask.value = "";
-
-
     let list = document.getElementById('ul_subtasks');
     list.innerHTML = '';
-
     let titel = document.getElementById('title');
     let description = document.getElementById('Description')
-
     let date = document.getElementById('dueDate');
     let category = document.getElementById('Category');
-
     titel.value = "";
     description.value = "";
     assignedContacts = [];
@@ -398,7 +353,6 @@ function clearTask() {
     subtasks = [];
     prio = [];
     renderPrioButtons();
-
 }
 
 

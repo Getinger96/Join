@@ -26,7 +26,6 @@ function includeHTML() {
     }
 };
 
-
 function init() {
     includeHTML();
 }
