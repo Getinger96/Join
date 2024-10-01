@@ -248,28 +248,70 @@ function deleteItem(i) {
     const subtaskStatus = JSON.parse(localStorage.getItem(`task-${taskIndex}-subtasks`)) || {};
     delete subtaskStatus[i];
     localStorage.setItem(`task-${taskIndex}-subtasks`, JSON.stringify(subtaskStatus));
-    addSubtask();
+    addSubtask(event);
     updateProgress(taskIndex);
 }
 
 function addSubtask() {
-
+    // Ensure 'subtasks' is initialized as an array if it's not already
     if (!Array.isArray(subtasks)) {
         subtasks = [];
     }
+
+    // Get the container for subtasks
     let subtaskContainer = document.getElementById('subtasksContainer');
+
+    // Clear previous subtasks displayed in the container
     subtaskContainer.innerHTML = '';
+
+    // Check if subtasks array has any items
     if (subtasks.length === 0) {
         return;
     }
 
+    // Loop through the subtasks array and render each subtask
     for (let i = 0; i < subtasks.length; i++) {
         subtaskContainer.innerHTML += `
-            <div class="li">
+            <div class="editSubtaskheadlineContainer" >
+            <div class="editSubtask" id="subTaskValueId${i}">
                 ${subtasks[i]}
-                <button type="button" class="Subtasks_Btn" onclick="deleteItem(${i})">
+                </div>
+            <div class="subtaskEditDiv">
+                <button type="button" class="Subtasks_Btn" onclick="deleteItem(${i}, ${event})">
                     <img src="./assets/IMG/delete.png" alt="Delete">
                 </button>
+
+            
+              <button type="button" id="changeImgEdit${i}" class="EditSubtaskButton" onclick="editSubtask(${i})">
+                    <img src="./assets/IMG/edit.png" alt="Delete">
+                </button>
+            </div>
             </div>`;
     }
+}
+
+function editSubtask(i) {
+
+    document.getElementById(`subTaskValueId${i}`).innerHTML = `
+    <input id="subtaskValue${i}" class="subTaskInput" type="text" placeholder="${subtasks[i]}">`
+
+    document.getElementById(`changeImgEdit${i}`).innerHTML = `
+   <button type="button" class="EditSubtaskButton" onclick="enterNewSubtask(${i})">
+                    <img class="imgCheckedIcon" id="changeImgEdit${i}" src="./assets/IMG/checkAddTask.png" alt="check">
+                </button>`;
+
+
+
+}
+
+
+function enterNewSubtask(i) {
+    event.stopPropagation();
+   let newSubTask = document.getElementById(`subtaskValue${i}`).value
+
+   subtasks[i] =newSubTask;
+   document.getElementById(`changeImgEdit${i}`).innerHTML =
+
+    addSubtask();
+    
 }

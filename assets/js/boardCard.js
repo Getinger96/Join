@@ -111,7 +111,7 @@ function createShowCard(task, taskIndex) {
             <div>
             <h2>${title}</h2>
             </div>
-            <div>
+            <div class="responsiveDescription">
             <p><strong>Description:</strong> ${description}</p>
             </div>
             <p><strong>Due Date:</strong> ${dueDate}</p>

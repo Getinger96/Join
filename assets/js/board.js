@@ -345,7 +345,7 @@ function updateFields() {
         if (!hasTodo) {
             div.innerHTML = `
         <div class="fiedIsempty"> 
-            <p> text</p>
+            <p> Field is empty</p>
         </div>
         `;
         }
@@ -365,3 +365,4 @@ function removeHighlight(id) {
         element.classList.remove('drag-area-highlight');
     }
 }
+

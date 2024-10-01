@@ -267,6 +267,7 @@ function setCreateTaskButton() {
                 src="assets/IMG/clear_Img.svg"></button>`;
 }
 
+ 
 async function EditData(index) {
     openTask(index);
     let task = tasksArray[index];
@@ -280,6 +281,7 @@ async function EditData(index) {
     let status = task.status;
     currentCategory = status;
     getContacts();
+    closeOverlay(index);
 
     for (let indexcon = 0; indexcon < assignedContacts.length; indexcon++) {
         let contact = assignedContacts[indexcon];
@@ -307,7 +309,7 @@ async function EditData(index) {
     let taskCategory = document.getElementById('kategorie');
     taskCategory.value = category;
     subtasks = subtask;
-    addSubtask();
+    addSubtask(event);
     changeAddtaskButton(index);
 };
 
@@ -337,3 +339,5 @@ async function createEdittask(index) {
     closeOverlay();
     await fetchTasks();
 }
+
+    
