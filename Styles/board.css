@@ -331,6 +331,12 @@ Button {
 
 }
 
+.subTaskInput{
+    width: 250px;
+    border: solid 2px black;
+    border-radius: 10px;
+}
+
 .boardAddTask {
     background-color: white;
     border-radius: 30px;
@@ -837,7 +843,7 @@ li {
 }
 
 .responsiveDescription {
-    height: 160px;
+    max-height: 160px;
     overflow: auto;
 }
 .overlay {
@@ -868,6 +874,8 @@ li {
     position: relative;
     border: 2px solid #e9e7df;
     overflow: auto;
+    scrollbar-width: none;
+
 }
 
 .close-button {

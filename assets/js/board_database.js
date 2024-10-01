@@ -302,7 +302,7 @@ async function EditData(index) {
     let taskCategory = document.getElementById('kategorie');
     taskCategory.value = category;
     subtasks = subtask;
-    addSubtask();
+    addSubtask(event);
     changeAddtaskButton(index);
 };
 
