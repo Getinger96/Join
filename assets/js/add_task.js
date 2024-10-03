@@ -50,13 +50,29 @@ async function fetchContacts(path = '') {
 function func1(event) {
     event.stopPropagation();
 }
-
 function openList() {
     let selecCon = document.getElementById('Selection_Container');
     let arrowCon = document.getElementById('arrow_img_container');
-    arrowCon.innerHTML = `<img onclick="closelist()"class="arrow_drop_downaa" src="./assets/IMG/arrow_drop_up.svg" alt="">`;
+    arrowCon.innerHTML = `<img onclick="closelist()" class="arrow_drop_downaa" src="assets/IMG/arrow_drop_up.svg" alt="">`;
     selecCon.classList.remove('d_none');
+    getContacts();
+
+    for (let i = 0; i < contactsArray.length; i++) {
+        let contact = contactsArray[i];
+        let contactContainer = document.getElementById(`profile-${i}`);
+
+        if (assignedContacts.includes(contact.name)) {
+            contactContainer.classList.add('bg_color');
+            contactContainer.classList.add('color_white');
+        } else {
+            contactContainer.classList.remove('bg_color');
+            contactContainer.classList.remove('color_white');
+        }
+    }
+
 }
+
+
 
 function closelist() {
     let selecCon = document.getElementById('Selection_Container');
