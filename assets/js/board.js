@@ -106,25 +106,49 @@ async function updateHtml() {
             getassignecontacts(task, task.idTask); // Use idTask to fetch correct contacts
         });
     }
-    checkEmptyFields();
+    updateAndCheckEmptyFields();
     await initializeAllProgress();
 }
 
-function checkEmptyFields() {
-    let fields = ["open", "progress", "awaitFeedback", "closed"];
-    fields.forEach(fieldId => {
-        let container = document.getElementById(fieldId);
-        if (container && container.children.length === 0) { // children Holen Sie sich eine Sammlung der untergeordneten Elemente
-            container.innerHTML = showEmptyFields();;  // Füge leere Felder zur Liste hinzu
+function updateAndCheckEmptyFields() {
+    let fields = [
+        { id: "open", text: "No tasks open" },
+        { id: "progress", text: "No tasks in progress" },
+        { id: "awaitFeedback", text: "No tasks awaiting feedback" },
+        { id: "closed", text: "No tasks done" }
+    ];
+
+    fields.forEach(field => {
+        let container = document.getElementById(field.id);
+        let hasTodo = container.querySelector('.todo');
+        let emptyMessage = container.querySelector('.fiedIsempty');
+
+        if (!hasTodo) {
+            if (!emptyMessage) {
+                container.innerHTML = `
+                    <div class="fiedIsempty"> 
+                        <p>${field.text}</p>
+                    </div>`;
+            } else {
+                emptyMessage.style.display = 'flex'; 
+            }
+        } else {
+            if (emptyMessage) {
+                emptyMessage.style.display = 'none';
+            }
         }
     });
 }
 
-function showEmptyFields() {
-    return ` <div class="fiedIsempty"> 
-                                <p> Field is empty </p>
-                            </div>`
+
+function showEmptyFields(text) {
+    return ` 
+    <div class="fiedIsempty"> 
+        <p>${text}</p>
+           </div>`;
 }
+
+
 
 function openTask(taskIndex) {
     currentTaskIndex = taskIndex;
@@ -298,7 +322,9 @@ async function moveTo(event, category) {
         await putDataTask(`tasks/${key}/Status`, category);
     }
     updateBoard(category, task, event);
+    updateAndCheckEmptyFields();
 }
+
 async function putDataTask(path = "", data = {}) {
     let response = await fetch(base_URL + path + ".json", {
         method: "PUT",
@@ -318,7 +344,7 @@ async function updateBoard(category, task, event) {
     let newCategoryColumn = document.getElementById(category);
     let taskHTML = generateTodoHTML(task, task.idTask);
     newCategoryColumn.innerHTML += taskHTML;
-    checkEmptyFieldsMoveToUpdate();
+    updateAndCheckEmptyFields();
     getassignecontacts(task, task.idTask);
 }
 
@@ -338,22 +364,9 @@ function checkEmptyFieldsMoveToUpdate() {
         }
     });
     updateFields();
+    updateAndCheckEmptyFields();
 }
 
-function updateFields() {
-    const allElements = document.querySelectorAll('.drag-area');
-
-    allElements.forEach((div) => {
-        const hasTodo = div.querySelector('.todo');
-        if (!hasTodo) {
-            div.innerHTML = `
-        <div class="fiedIsempty"> 
-            <p> Field is empty</p>
-        </div>
-        `;
-        }
-    });
-}
 
 function highlight(id) {
     const element = document.getElementById(id);
