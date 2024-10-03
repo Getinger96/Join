@@ -80,8 +80,7 @@ function selectedContact(index, color, name) {
     let includedName = assignedContacts.includes(name);
 
     if (includedName) {
-       
-
+        deselctedtContact(index, color, name);
     } else {
         assignedContacts.push(name);
         showSelectedProfile(color, name, index);
@@ -91,6 +90,7 @@ function selectedContact(index, color, name) {
         contactContainer.classList.add('color_white');
     }
 }
+
 
 
 
@@ -112,6 +112,23 @@ function deselctedtContact(index, color, name) {
 
 
 }
+
+function showSelectedProfile(color, name, index) {
+    let selectedProfileContainer = document.getElementById('Selected_profiles_Container');
+    let profile_Badge_assign = document.getElementById(`profilebadge_Assign${index}`);
+
+    let contact = contactsArray[index];
+    let firstletters = `${contact.name.charAt(0).toUpperCase()}${getLastName(contact.name).charAt(0).toUpperCase()}`;
+    if (profile_Badge_assign) {
+        profile_Badge_assign.remove();
+    } else {
+        selectedProfileContainer.innerHTML += `
+    <div id="profilebadge_Assign${index}" class="contact-icon${index} ${color} profilebadge">
+        <div>${firstletters}</div>
+    </div>`;
+    }
+}
+
 
 function showSelectedProfileEdit(name) {
     let selectedProfileContainer = document.getElementById('Selected_profiles_Container');
