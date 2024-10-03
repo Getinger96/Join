@@ -52,16 +52,21 @@ function generateLargeContactsHtml(assignedContacts) {
 }
 
 function showTheNameColor(index) {
-    let currentColor = 'gray';
-    colorsBoard.forEach(indexColor => {
 
-        if (indexColor.index === index) {
-            currentColor = indexColor.color; 
+    for (let indexColor = 0; indexColor < colorsBoard.length; indexColor++) {
+        let colorNameCard = colorsBoard[indexColor].color;
 
+        if (index === indexColor) {
+            let currentColor = colorNameCard;
+            return currentColor
+    
         }
-    });
-    return currentColor
+    }
+   
+
 }
+
+
 
 
 
