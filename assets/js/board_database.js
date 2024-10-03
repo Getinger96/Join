@@ -141,10 +141,17 @@ function getContacts() {
         let letter = beginningLetter[index];
         showContacts.innerHTML += `<h2 class="letter">${letter}</h2>`;
         groupedContacts[letter].forEach(contact => {
-            showContacts.innerHTML += displayContacts(contact.index, contact.name, getLastName(contact.name), '', contact.color);
+            showContacts.innerHTML += displayContacts(contact.index, contact.name, getLastName(contact.name), '', contact.color)
+            showSelectedContainer(contact.name,contact.index);
         });
-    }
+       
 }
+    }
+    
+
+
+
+
 
 function letterSorting() {
     contactsArray.forEach(contact => {
