@@ -1,3 +1,8 @@
+body {
+    margin: 0;
+    font-family: 'Inter';
+    font-weight: 400;
+}
 .sideblock {
     width: 232px;
     background-color: #2A3647;

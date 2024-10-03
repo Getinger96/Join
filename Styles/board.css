@@ -97,6 +97,8 @@ scrollbar-width:  none;
     
 }
 
+
+
 .todo-detail {
     display: block;
 }
@@ -189,6 +191,10 @@ t
     justify-content: center;
     align-items: center;
     background-color: #E7E7E7;
+}
+
+.dateEdit{
+    display: flex;
 }
 
 .checkbox {
@@ -336,8 +342,8 @@ Button {
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
-    gap: 20px;
-
+    gap: 10px;
+    flex-direction: column;
 }
 
 .subTaskInput{
@@ -352,7 +358,7 @@ Button {
     border: 2px solid #e4dedc;
     display: flex;
     justify-content: center;
-    height: 870px;
+    height: 740px;
     width: 1116px;
 }
 
@@ -374,12 +380,14 @@ Button {
     padding: 10px;
 }
 
-.required-message {
-    margin-top: -60px;
+.bottomInfoEdit{
+    display: flex;
 }
 
+
+
 .redrequired {
-    margin-top: -60px;
+    
     color: red;
 }
 
@@ -395,7 +403,7 @@ Button {
 
 /*Header*/
 .kanbanBoardTitle {
-    font-size: 18px;
+    font-size: 20px;
 }
 
 nav ul {
@@ -670,6 +678,7 @@ li {
 
 .closeAddTask {
     background-color: #FFFFFF;
+    margin-top: 50px;
 }
 
 .curser {
@@ -717,7 +726,7 @@ li {
 
 .Selection_Container {
     width: 448px;
-    height: 300px;
+    height: 200px;
     background-color: #FFFFFF;
     position: absolute;
     margin-top: 74px;
@@ -738,7 +747,9 @@ li {
 
 .Selected_profiles_Container {
     display: flex;
-    align-items: center;}
+    align-items: center;
+    margin-bottom: 20px
+    ;}
 
 .profile_Container {
     display: flex;
@@ -832,6 +843,7 @@ li {
 .addTaskTitle {
     display: flex;
     justify-content: space-between;
+    
 }
 
 .divKategorie {
@@ -978,6 +990,13 @@ li {
 
 
 }
+.divSectionAddTask2 {
+    margin-top: 100px;
+}
+
+.categoryEdit{
+    display: flex;
+}
 
 @media (max-width: 1550px) {
 
@@ -991,7 +1010,13 @@ li {
 }
 
 @media (max-width: 1450px) {
+    .addTaskTitle {
+        margin-bottom: 100px;
+    }
 
+    .divSectionAddTask2 {
+        margin-top: 10px;
+    };
 
     .divBoard {
         margin-left: 30px;
