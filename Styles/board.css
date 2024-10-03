@@ -61,7 +61,7 @@ label {
 }
 
 .todo:hover {
-    transform: rotate(5deg);
+    transform: rotate(3deg);
     cursor: pointer;
 }
 
@@ -169,6 +169,12 @@ t
 .editSubtaskheadlineContainer {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+}
+
+.subtaskEditDiv {
+    display: flex;
+    align-items: center;
 }
 
 
@@ -291,6 +297,8 @@ display: flex;
     width: 250px;
     border: solid 3px black;
     border-radius: 10px;
+    font-size: 20px;
+   font-weight: bolder;
 }
 
 .searchContainer {
@@ -305,6 +313,7 @@ display: flex;
     height: 31px;
     width: 1px;
     background-color: #D1D1D1;
+    margin-left: 15px;
 }
 
 .buttonContainer {
@@ -332,9 +341,9 @@ Button {
 }
 
 .subTaskInput{
-    width: 250px;
-    border: solid 2px black;
-    border-radius: 10px;
+    border: none;
+    font-size: 18px;
+    border-bottom: 3px solid #29ABE2;
 }
 
 .boardAddTask {
@@ -406,6 +415,11 @@ nav ul {
 }
 
 .displayFlex {
+    display: flex;
+    margin-top: 140px;
+}
+
+.HeadContainerBoard {
     display: flex;
     margin-top: 140px;
 }
@@ -491,7 +505,6 @@ h1 {
     font-family: 'Inter';
 }
 
-
 .inputDescription {
     width: 440px;
     height: 120px;
@@ -505,6 +518,8 @@ h1 {
 .description {
     font-weight: 300;
     color: #A8A8A8;
+    overflow: auto;
+    max-height: 170px;
 }
 
 .marginTop {
@@ -516,7 +531,11 @@ h1 {
     display: flex;
     justify-content: space-around;
     align-items: flex-end;
+    margin-top: 40px;
 }
+
+
+
 
 .buttonContainerWhite {
     height: 56px;
@@ -593,7 +612,7 @@ h1 {
 
 .divSubtask {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
 }
 
@@ -612,14 +631,9 @@ ul {
 }
 
 li {
-    display: flex;
-    justify-content: space-between;
-    /* Abstand zwischen Subtask-Text und Mülleimer-Button */
-    align-items: center;
-    /* Vertikale Zentrierung */
-    position: relative;
+ 
     padding-left: 20px;
-    /* Platz für den Punkt */
+
 }
 
 .addSubTask {
@@ -804,7 +818,7 @@ li {
     font-size: 16px;
 }
 .progresstext {
-    font-size: 12px;
+    font-size: 16px;
 }
 .letter {
     margin: 0;
@@ -858,6 +872,7 @@ li {
     align-items: center;
     z-index: 1000;
     overflow-y: auto;
+    transition: right 5s ease;
 }
 
 .overlay.d-none {
@@ -875,8 +890,22 @@ li {
     border: 2px solid #e9e7df;
     overflow: auto;
     scrollbar-width: none;
+    animation: slideRight 0.5s ease-out forwards;
+    
 
 }
+
+
+@keyframes slideRight {
+    0% {
+      transform: translateX(100vw);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
 
 .close-button {
     position: absolute;
@@ -945,9 +974,32 @@ li {
 .iconTodoBig {
     width: 20px;
     margin-right: 5px;
+
+
+
+}
+
+@media (max-width: 1550px) {
+
+
+
+    .displayFlex {
+        margin-top: 100px;
+    }
+
+
 }
 
 @media (max-width: 1450px) {
+
+
+    .divBoard {
+        margin-left: 30px;
+        flex-direction: column;
+        justify-content: flex-start;
+        display: flex;
+        align-items: flex-start;
+    }
    
 
     
@@ -977,13 +1029,24 @@ li {
 
 @media(max-width: 1220px) {
 
+    .redrequired {
+        display: none;
+    }
+    .divBoard {
+        margin-left: 5px;
 
+    }
+
+    .curser {
+        margin-right: 45px;
+    }
+
+    
     .required-message {
         display: none;
     } 
     
     .divBoard {
-        margin-left: 60px;
         width: 1000px;
     }
 
@@ -999,6 +1062,13 @@ li {
 }
 
 @media(max-width: 1090px) {
+
+
+    .divBoard {
+        margin-left: 45px;
+
+    }
+
 
     .boardAddTask {
         top: 45%;
@@ -1095,7 +1165,9 @@ li {
         overflow: auto;
     }
 
-
+    .progresstext {
+        font-size: 13px;
+    }
 
     .text {
         font-weight: bold;
@@ -1194,6 +1266,14 @@ li {
 
 @media(max-width: 750px) {
 
+    ul {
+        width: 200px;
+    }
+
+    Button {
+        font-size: 16px;
+    }
+
 
     .widthBoard {
         margin-left: 15px;
@@ -1205,8 +1285,9 @@ li {
 
 
     .buttonContainerPrio {
-        width: 60px;
+        width: 70px;
         padding: 10px;
+        margin-right: 10px;
     }
 
     Button  {
@@ -1219,7 +1300,13 @@ li {
     .profilebadge {
         font-size: 15px;
     }
-
+    
+    ul {
+        width: 150px;
+    }
+    .editSubtaskheadlineContainer {
+        justify-content: flex-start;
+    }
 
     #urgentIcon {
         width: 25px;
@@ -1232,7 +1319,7 @@ li {
     }
 
     #lowIcon {
-        width: 25px;
+        width: 30px;
         height: 25px;
     }
 
@@ -1245,7 +1332,7 @@ li {
         font-size: 15px;
     }
     .inputTitle {
-        width: 200px;
+        width: 335px;
         font-size: 16px;
     }
 
@@ -1288,10 +1375,7 @@ li {
         width: 70px;
     }
 
-    ul {
-        width: 300px;
-        font-size: 20px;
-    }
+  
 
     .AssignedTO_Container {
         width: 300px;
@@ -1302,7 +1386,7 @@ li {
     }
 
     .checkboxtext {
-        font-size: 12px;
+        font-size: 18px;
     }
 
 
@@ -1314,6 +1398,11 @@ li {
 
 
 @media(max-width: 490px) {
+
+
+    .inputTitle {
+        width: 240px;
+    }
 
     .boardAddTask {
         width: 280px;
@@ -1379,6 +1468,11 @@ li {
 @media(max-width: 430px) {
 
 
+    .inputTitle {
+        width: 250px;
+    }
+
+
     .inputDescription {
         width: 250px;
         font-size: 15px;
@@ -1435,15 +1529,12 @@ li {
     }
 
     .buttonContainerPrio {
-        width: 80px;
+        height: 40px;
+        width: 60px;
         font-size: 14px;
     }
 
-    .buttonContainerPrio {
-        height: 40px;
-        width: 80px;
-    }
-
+    
 
 
     .subtasksInputfield {
@@ -1456,6 +1547,11 @@ li {
 }
 
 @media(max-width: 400px) {
+
+    .boardAddTask {
+        height: 580px;
+    }
+    
     h1 {
         font-size: 48px;
     }

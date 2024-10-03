@@ -12,7 +12,10 @@ const colorsBoard = [
     { index: 4, color: 'blue' },
     { index: 5, color: 'purple' },
     { index: 6, color: 'pink' },
-    { index: 7, color: 'light orange' }
+    { index: 7, color: 'light orange' },
+    { index: 8, color: 'lime green' },
+    { index: 9, color: 'crimson' },
+    { index: 10, color: 'brown' }
 ];
 let currentDraggedElement;
 let id = 0
@@ -87,9 +90,9 @@ function closeTask() {
     document.getElementById('boardAddTask').style.display = 'none';
     document.getElementById('darkOverlay').style.display = 'none';
     document.body.style.overflow = 'auto';  // Scrollen auf der Hauptseite wieder erlauben
-    clearTask()
-}
-
+    clearTask();
+    closelist();
+} 
 async function updateHtml() {
     let statusCategories = ['open', 'progress', 'awaitFeedback', 'closed'];
     for (let index = 0; index < statusCategories.length; index++) {

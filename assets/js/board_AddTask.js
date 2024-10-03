@@ -22,9 +22,22 @@ function openTaskBoard() {
 function openList() {
     let selecCon = document.getElementById('Selection_Container');
     let arrowCon = document.getElementById('arrow_img_container');
-    arrowCon.innerHTML = `<img onclick="closelist()"class="arrow_drop_downaa" src="assets/IMG/arrow_drop_up.svg" alt="">`;
+    arrowCon.innerHTML =`<img onclick="closelist()" class="arrow_drop_downaa" src="assets/IMG/arrow_drop_up.svg" alt="">`;
     selecCon.classList.remove('d_none');
     getContacts();
+
+    for (let i = 0; i < contactsArray.length; i++) {
+        let contact = contactsArray[i];
+        let contactContainer = document.getElementById(`profile-${i}`);
+
+        if (assignedContacts.includes(contact.name)) {
+            contactContainer.classList.add('bg_color');
+            contactContainer.classList.add('color_white');
+        } else {
+            contactContainer.classList.remove('bg_color');
+            contactContainer.classList.remove('color_white');
+        }
+    }
 }
 
 function closelist() {
@@ -63,47 +76,43 @@ function showSelectedContainer(name,index) {
 }
 
 function selectedContact(index, color, name) {
-    showSelectedContainer(name,index);
-    let includedName = assignedContacts.includes(name)
+    showSelectedContainer(name, index);
+    let includedName = assignedContacts.includes(name);
 
     if (includedName) {
        
 
     } else {
-       
-        
         assignedContacts.push(name);
-        showSelectedProfile(color, name, index)
+        showSelectedProfile(color, name, index);
+
+        let contactContainer = document.getElementById(`profile-${index}`);
+        contactContainer.classList.add('bg_color');
+        contactContainer.classList.add('color_white');
     }
 }
 
 
 
 function deselctedtContact(index, color, name) {
-   
-    showSelectedContainer(name,index)
-    assignedContacts.splice(name, 1);
-    showSelectedProfile(color, name, index)
+    showSelectedContainer(name, index);
+    let contactIndex = assignedContacts.indexOf(name);
+    if (contactIndex !== -1) {
+        assignedContacts.splice(contactIndex, 1);
+    }
+
+    let contactContainer = document.getElementById(`profile-${index}`);
+    contactContainer.classList.remove('bg_color');
+    contactContainer.classList.remove('color_white');
+
+    let profileBadge = document.getElementById(`profilebadge_Assign${index}`);
+    if (profileBadge) {
+        profileBadge.remove();
+    }
+
+
 }
 
-function showSelectedProfile(color, name, index) {
-    
-    let selectedProfileContainer = document.getElementById('Selected_profiles_Container');
-    let profile_Badge_assign = document.getElementById(`profilebadge_Assign${index}`)
-
-    let contact = contactsArray[index];
-    let firstletters = `${contact.name.charAt(0).toUpperCase()}${getLastName(contact.name).charAt(0).toUpperCase()}`;
-    if (profile_Badge_assign) {
-        profile_Badge_assign.remove();
-
-    } else {
-        selectedProfileContainer.innerHTML += `
-    <div id="profilebadge_Assign${index}" class="contact-icon${index} ${color} profilebadge">
-        <div>${firstletters}</div>
-    </div>
-`;
-    }
-};
 function showSelectedProfileEdit(name) {
     let selectedProfileContainer = document.getElementById('Selected_profiles_Container');
     let findcontact = contactsArray.find(co => co.name === name);
@@ -242,13 +251,14 @@ function addCurrentSubtask() {
 }
 
 function deleteItem(i) {
+    event.stopPropagation();
     subtasks.splice(i, 1);
     let taskIndex = currentTaskIndex;
     tasksArray[taskIndex].subtask = subtasks;
     const subtaskStatus = JSON.parse(localStorage.getItem(`task-${taskIndex}-subtasks`)) || {};
     delete subtaskStatus[i];
     localStorage.setItem(`task-${taskIndex}-subtasks`, JSON.stringify(subtaskStatus));
-    addSubtask(event);
+    addSubtask();
     updateProgress(taskIndex);
 }
 
@@ -274,10 +284,12 @@ function addSubtask() {
         subtaskContainer.innerHTML += `
             <div class="editSubtaskheadlineContainer" >
             <div class="editSubtask" id="subTaskValueId${i}">
-                ${subtasks[i]}
+                <ul>
+                <li>${subtasks[i]}</li>
+                </ul>
                 </div>
             <div class="subtaskEditDiv">
-                <button type="button" class="Subtasks_Btn" onclick="deleteItem(${i}, ${event})">
+                <button type="button" class="Subtasks_Btn" onclick="deleteItem(${i})">
                     <img src="./assets/IMG/delete.png" alt="Delete">
                 </button>
 
@@ -293,7 +305,9 @@ function addSubtask() {
 function editSubtask(i) {
 
     document.getElementById(`subTaskValueId${i}`).innerHTML = `
-    <input id="subtaskValue${i}" class="subTaskInput" type="text" placeholder="${subtasks[i]}">`
+    <li>
+    <input id="subtaskValue${i}" class="subTaskInput" type="text" value="${subtasks[i]}">
+    </li>`
 
     document.getElementById(`changeImgEdit${i}`).innerHTML = `
    <button type="button" class="EditSubtaskButton" onclick="enterNewSubtask(${i})">
