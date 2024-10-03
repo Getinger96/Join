@@ -1,4 +1,4 @@
-function openTaskBoard() {ask
+function openTaskBoard() {
     const windowWidth = window.innerWidth;
 
     // Wenn die Bildschirmbreite kleiner oder gleich 1450px ist, zur add_task.html weiterleiten
@@ -67,7 +67,7 @@ function selectedContact(index, color, name) {
     let includedName = assignedContacts.includes(name)
 
     if (includedName) {
-        deselctedtContact(index, color, name)
+       
 
     } else {
        
