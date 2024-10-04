@@ -234,7 +234,7 @@ function medium() {
     let mediumIcon = document.getElementById("mediumIcon");
     mediumButton.style.backgroundColor = "orange";
     mediumButton.style.color = "white";
-    mediumIcon.src = "./assets/IMG/Priority symbols (2).png";
+    mediumIcon.src = "./assets/IMG/Prio media.png";
     currentPriority = 'medium';
 }
 
@@ -245,7 +245,7 @@ function low() {
     let lowIcon = document.getElementById("lowIcon");
     lowButton.style.backgroundColor = "limegreen";
     lowButton.style.color = "white";
-    lowIcon.src = "./assets/IMG/Priority symbols.png";
+    lowIcon.src = "./assets/IMG/Prio_LOW_WHITE.svg";
     currentPriority = 'low';
 }
 

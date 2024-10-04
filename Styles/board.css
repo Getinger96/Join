@@ -358,7 +358,7 @@ Button {
     border: 2px solid #e4dedc;
     display: flex;
     justify-content: center;
-    height: 740px;
+    height: 870px;
     width: 1116px;
 }
 
@@ -424,7 +424,16 @@ nav ul {
 
 .displayFlex {
     display: flex;
-    margin-top: 140px;
+    margin-top: 94px;
+}
+
+.Titleleft {
+    display:flex;
+    margin-top:94px;
+}
+
+.divPaddingBottum {
+    margin-top:-10px;
 }
 
 .HeadContainerBoard {
@@ -573,15 +582,19 @@ h1 {
     align-items: center;
 }
 
-.buttonContainerPrio {
-    height: 56px;
-    width: 136px;
-    border-radius: 10px;
-    background-color: white;
-    color: black;
-    border-radius: 10px;
-    border: 1px solid #eceef2;
-}
+    .buttonContainerPrio {
+        display: flex;
+        justify-content: center; 
+        align-items: center;
+        height: 56px; 
+        width: 136px; 
+        border-radius: 10px; 
+        gap:10px;
+        background-color: white; 
+        color: black; 
+        border: 1px solid #eceef2; 
+    }
+    
 
 .marginButtomButton {
     display: flex;
@@ -944,7 +957,7 @@ li {
 
 .separatorTask {
     width: 2px;
-    height: 424px;
+    height: 440px;
     margin-top: 115px;
     background-color: #e4dedc;
 }
@@ -1026,8 +1039,19 @@ li {
         align-items: flex-start;
     }
    
+  
+    .divSectionAddTask {
+        margin-top: -80px;
+    }
 
-    
+    .buttonContainerPrio {
+        width: 110px;
+    }
+
+    .boardAddTask {
+        height:750px;
+        width:1000px;
+    }
 
     .inputTitle {
         width: 340px;
@@ -1041,59 +1065,57 @@ li {
         width: 328px;
     }
 
-    .divSectionAddTask {
-        margin-top: -80px;
+    .inputTitleDate {
+        width:340px;
     }
 
-    .buttonContainerPrio {
-        width: 110px;
+    .marginButtomButton {
+        gap:2px;
     }
 
-}
-
-
-@media(max-width: 1220px) {
-
-    .redrequired {
-        display: none;
-    }
-    .divBoard {
-        margin-left: 5px;
-
+    .addTaskContainer {
+        justify-content:center;
     }
 
-    .curser {
-        margin-right: 45px;
+    .separatorTask {
+        display:none;
     }
 
-    
-    .required-message {
-        display: none;
-    } 
-    
-    .divBoard {
-        width: 1000px;
+    .bottomInfo{
+        left:94px;
+        right:90px;
     }
 
-    .drag-area {
-        width: 220px;
-        margin-bottom: 70px;
+    .dateEdit {
+        margin-top:-30px;
     }
 
-    .progress-bar {
-        width: 145px;
-
+    .Titleleft {
+        margin-top:53px;
+    }
+    .positionTask{
+        top:47%;
     }
 }
+
 
 @media(max-width: 1090px) {
-
+.Titleleft {
+    margin-top:119px;
+}
 
     .divBoard {
         margin-left: 45px;
 
     }
 
+    .redrequired{
+        display:none;
+    }
+
+    .required-message{
+        display:none;
+    }
 
     .boardAddTask {
         top: 45%;
@@ -1119,14 +1141,16 @@ li {
 
     .inputTitleDate {
         margin-top: 185px;
+        margin-top:80px;
+        
     }
 
     .bottomInfo {
         position: relative;
         max-height: 120px; 
-        top:0;
+        top:-15px;
         right: 0;
-        left: 0;
+        left: -176px;
         bottom: 0;
     }
 
@@ -1171,8 +1195,9 @@ li {
         margin-bottom: 40px;
     }
     .boardAddTask {
-        height: 870px;
-        width: 870px;
+        height: 670px;
+        width: 560px;
+        overflow: auto;
     }
 
     .xButton {
@@ -1184,11 +1209,6 @@ li {
         font-size: 35px;
     }
 
-    .boardAddTask {
-        height: 890px;
-        width: 560px;
-        overflow: auto;
-    }
 
     .progresstext {
         font-size: 13px;
@@ -1280,7 +1300,7 @@ li {
 
     .buttonContainerWhite {
         height: 56px;
-        width: 100px;
+    
     }
 
     .buttonContainerdark {
@@ -1309,14 +1329,17 @@ li {
     }
 
 
-    .buttonContainerPrio {
-        width: 70px;
-        padding: 10px;
-        margin-right: 10px;
-    }
-
     Button  {
         font-size: 15px;
+    }
+
+    .buttonContainerWhite {
+        display:none;
+    
+    }
+
+    .buttonContainerdark {
+        margin-left: 136px;
     }
 }
 
@@ -1361,11 +1384,6 @@ li {
         font-size: 16px;
     }
 
-    .buttonContainerPrio {
-        width: 50px;
-        padding: 0;
-
-    }
     .divBoard {
         width: 400px;
     }
@@ -1416,9 +1434,9 @@ li {
 
 
     .buttonContainerdark {
-        height: 40px;
-        width: 100px;
+        margin-left: 136px;
     }
+
 }
 
 
@@ -1488,167 +1506,29 @@ li {
         margin-right: 0px;
     }
 
-}
-
-@media(max-width: 430px) {
-
-
-    .inputTitle {
-        width: 250px;
-    }
-
-
-    .inputDescription {
-        width: 250px;
-        font-size: 15px;
-    }
-    .inputTitle {
-        width: 200px;
-        font-size: 16px;
-    }
-    p,
-    label {
-        font-size: 13px;
-    }
-
-    .inputTitle {
-        font-size: 16px;
-    }
-
-    .inputDescription {
-        font-size: 16px;
-    }
-
-    .Assign_Header {
-        font-size: 16px;
-    }
-
-    span {
-        font-size: 16px;
-    }
-
-    .buttonContainerWhite {
-        display: none;
-    }
-
     .buttonContainerdark {
-        height: 56px;
-        width: 123px;
-        font-size: 16px;
+        margin-left: 168px;
+        height:40px;
     }
 
-    .inputTitle {
-        width: 250px;
+    .buttonContainerPrio{
+        width:80px;
     }
 
-    .inputDescription {
-        width: 250px;
+    #urgentIcon{
+        width:16px;
+        height:16px;
     }
 
-    .select_container {
-        width: 230px;
-    }
-    .cardbig {
-        max-width: 210px;
-        height: 550px;
+    #mediumIcon {
+        width:16px;
+        height:16px;
     }
 
-    .buttonContainerPrio {
-        height: 40px;
-        width: 60px;
-        font-size: 14px;
-    }
-
-    
-
-
-    .subtasksInputfield {
-        width: 200px;
-    }
-
-    .divSectionAddTask {
-        width: 250px;
+    #lowIcon{
+        width:16px;
+        height:16px;
     }
 }
 
-@media(max-width: 400px) {
 
-    .boardAddTask {
-        height: 580px;
-    }
-    
-    h1 {
-        font-size: 48px;
-    }
-
-    .imgButton {
-        display: block;
-        height: 30px;
-    }
-
-    p,
-    label {
-        font-size: 18px;
-    }
-
-    .divBoard {
-        margin-left: 30px;
-    }
-}
-
-@media(max-width: 350px) {
-    .widthBoard {
-        width: 86%;
-        margin-left: 14px;
-    }
-
-    .divSectionAddTask {
-        width: 230px;
-    }
-
-    .inputTitle {
-        width: 190px;
-    }
-
-    .inputDescription {
-        width: 190px;
-    }
-
-    .select_container {
-        width: 170px;
-    }
-
-    span {
-        font-size: 12px;
-    }
-
-    p,
-    label {
-        font-size: 14px;
-    }
-
-    .subtasksInputfield {
-        width: 100px;
-    }
-
-    .buttonContainerdark {
-        height: 48px;
-        width: 112px;
-        font-size: 14px;
-    }
-
-    .buttonContainerPrio {
-        height: 44px;
-        width: 62px;
-        margin-right: 4px;
-    }
-
-    .marginButtomButton {
-        margin-bottom: 28px;
-        display: flex;
-    }
-
-    .AssignedTO_Container {
-        margin-bottom: 24px;
-    }
-}
