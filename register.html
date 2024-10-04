@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,6 +14,7 @@
 
     <title>Registrierung </title>
 </head>
+
 <body onload="loadUsers(path = '')">
 
     <header>
@@ -20,7 +22,7 @@
         <div class="loginheadline">
             <img class="loginlogo" src="assets/IMG/Join_logo.svg" alt="">
 
-            </div>
+        </div>
 
         </div>
 
@@ -28,47 +30,53 @@
 
     </header>
     <div class="middle-section">
-    <section class="register">
-
-        <h1 class="login-headline"> Sign up </h1>
-        <hr class="signuphr">
-        <form onsubmit="checkRegistration(); return false;" novalidate>
-            <div class="inputenamesection">
-                <input  id="username" class="inputname" type="text" required placeholder="Name"> 
-                <img  class="mailicon"src="assets/IMG/person.png" alt="">
-            </div>
-    
-            <div class="inputemailsection">
-                <input id="usermail" class="inputemail" type="email" required placeholder="E-Mail"> 
-                <img  class="mailicon"src="assets/IMG/mail.png" alt="">
-            </div>
-    
+        <section class="register">
+            <img src="assets/IMG/arrow-left-line.png" alt="Back Button" class="back-button" onclick="goBackToLogin()">
+            <h1 class="login-headline"> Sign up </h1>
             
-            <div class="inputpasswordsection">
-                <input id="userpassword" class="inputpassword" type="password"  onclick="passwordvisbility()"required placeholder="Password">
-                <img id="visbilityimg" src="assets/IMG/lock.png" alt="" onclick="showVisbility()">
-            </div>
-    
-            <div class="inputpasswordsection">
-                <input id="userconfirmpassword" class="inputconfirmpassword" type="password" onclick="passwordconfirmvisbility()" required placeholder=" Confrim Password">
-                <img id="visbilityimgconfirm" src="assets/IMG/lock.png" alt="" onclick="showVisbilityconfirmpassword()">
-            </div>
+            <hr class="signuphr">
             
-            <span id="signupinfotext" class="signupinfotextstyle"></span>
+            <form onsubmit="checkRegistration(); return false;" novalidate>
+                <div class="inputenamesection">
+                    <input id="username" class="inputname" type="text" required placeholder="Name">
+                    <img class="mailicon" src="assets/IMG/person.png" alt="">
+                </div>
+
+                <div class="inputemailsection">
+                    <input id="usermail" class="inputemail" type="email" required placeholder="E-Mail">
+                    <img class="mailicon" src="assets/IMG/mail.png" alt="">
+                </div>
 
 
-        <div class="checkboxsection">
-        <input id="checkbox" class="checkbox" type="checkbox" onclick="checkFormCompletion()"> 
-        <span class="Rememberme"> I accept the <a class="privacy_policlink" href="privacy_policy_login.html"> Privacy policy</a>  </span>
-        </div>
+                <div class="inputpasswordsection">
+                    <input id="userpassword" class="inputpassword" type="password" onclick="passwordvisbility()"
+                        required placeholder="Password">
+                    <img id="visbilityimg" src="assets/IMG/lock.png" alt="" onclick="showVisbility()">
+                </div>
 
-        <div class="loginandgustbutton"> 
-            <button id="signUpButton" class="loginbutton disabledbutton" disabled>Sign Up</button>
-        </div>
-        </form>
+                <div class="inputpasswordsection">
+                    <input id="userconfirmpassword" class="inputconfirmpassword" type="password"
+                        onclick="passwordconfirmvisbility()" required placeholder=" Confrim Password">
+                    <img id="visbilityimgconfirm" src="assets/IMG/lock.png" alt=""
+                        onclick="showVisbilityconfirmpassword()">
+                </div>
+
+                <span id="signupinfotext" class="signupinfotextstyle"></span>
 
 
-    </section>
+                <div class="checkboxsection">
+                    <input id="checkbox" class="checkbox" type="checkbox" onclick="checkFormCompletion()">
+                    <span class="Rememberme"> I accept the <a class="privacy_policlink"
+                            href="privacy_policy_login.html"> Privacy policy</a> </span>
+                </div>
+
+                <div class="loginandgustbutton">
+                    <button id="signUpButton" class="loginbutton disabledbutton" disabled>Sign Up</button>
+                </div>
+            </form>
+
+
+        </section>
     </div>
 
     <div id="Signedupsuccessfully"></div>
@@ -91,6 +99,7 @@
 
     </footer>
 
-    
+
 </body>
+
 </html>

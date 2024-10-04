@@ -222,3 +222,7 @@ function emailIsAlreadyAvailable() {
 return `Attention, the email already exists!!!`
 
 }
+
+function goBackToLogin() {
+    window.location.href = "login.html";
+}

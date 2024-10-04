@@ -53,6 +53,8 @@ body {
     }
     
     .register {
+        position:relative;
+        overflow:hidden;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -75,8 +77,8 @@ body {
 
     
         .signuphr {
-            border: 2px solid blue;
-            width: 25%;
+            border: 2px solid #29ABE2;
+            width: 150px;
             margin-block-start: 0;
     
         }
@@ -97,7 +99,17 @@ body {
             border-radius: 20px;
             margin-top: 20px;
             cursor: pointer;
+            font-family: "inter", sans-serif;
+            font-size: 20px;
         }
+        
+        .inputemailsection:has(input:focus),
+        .inputpasswordsection:has(input:focus),
+        .inputenamesection:has(input:focus),
+        .inputconfirmpassword:has(input:focus) {
+            border: 1px solid #29ABE2;
+        }
+
     
     
         .inputpasswordsection {
@@ -109,6 +121,7 @@ body {
             border-radius: 20px;
             margin-top: 20px;
             cursor: pointer;
+            
         
         }
 
@@ -122,32 +135,37 @@ body {
             border-radius: 20px;
             margin-top: 20px;
             cursor: pointer;
-        
+            font-family: "inter", sans-serif;
+            font-size:20px;
         }
     
     
             .inputname {
                 border: none;
+                outline:none;
                 padding: 5px;
                 width: 100%;
                 cursor: pointer;
-                font-size: 16px;
+                font-size: 20px;
             }
-    
+
+           
             .inputemail {
                 border: none;
+                outline:none;
                 padding: 5px;
                 width: 100%;
                 cursor: pointer;
-                font-size: 16px;
+                font-size: 20px;
                 }
                 
                 .inputconfirmpassword {
                     border: none;
+                    outline:none;
                     padding: 5px;
                     width: 100%;
                     cursor: pointer;
-                    font-size: 16px;
+                    font-size: 20px;
                     }
                     
                     
@@ -161,7 +179,7 @@ body {
                     }
 
                     .enabledbutton:hover {
-                        background-color: #0068fa;
+                        background-color: #29ABE2;
                 font-weight: bolder;
                 cursor: pointer;
                 font-size: 20px;
@@ -170,10 +188,11 @@ body {
             
             .inputpassword {
                 border: none;
+                outline:none;
                 padding: 5px;
                 width: 100%;
                 cursor: pointer;
-                font-size: 16px;
+                font-size: 20px;
                 }
     
                 .mailicon {
@@ -287,7 +306,7 @@ body {
 
 
             .privacypolicyandlegalnotice:hover {
-                color: #0068fa;
+                color: #29ABE2;
                 font-weight: bolder;
             }
 
@@ -299,11 +318,17 @@ body {
             margin-top: 20px;
             }
 
+            .back-button {
+                position: absolute;
+                top: 60px;
+                left: 30px;
+                width: 32px;
+                height: 32px;
+                cursor: pointer;
+            }
 
 
-
-
-            @media (max-width:530px)  {
+            @media (max-width:950px)  {
 
                 .loginlogo {
                     width: 70px;
@@ -339,6 +364,8 @@ body {
             .register {
                 padding: 0px 30px 15px 30px;
                 cursor: pointer;
+                margin-top:50px;
+                margin-bottom:50px;
                 
             }
 

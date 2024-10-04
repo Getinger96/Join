@@ -386,7 +386,7 @@ input[type="tel"] {
     .add-contact-button {
         display: block;
         position: fixed;
-        top: 450px;
+        top: 700px;
         right: 20px;
         width: 56px;
         height: 56px;
@@ -440,7 +440,7 @@ input[type="tel"] {
         position: absolute;
         width: 56px;
         height: 56px;
-        top: 490px;
+        top: 650px;
         right: 10px;
         display: block;
     }
