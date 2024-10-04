@@ -312,11 +312,19 @@ function addSubtask() {
 
             
               <button type="button" id="changeImgEdit${i}" class="EditSubtaskButton" onclick="editSubtask(${i})">
-                    <img src="./assets/IMG/edit.png" alt="Delete">
+                    <img src="./assets/IMG/edit.png" alt="Edit">
                 </button>
             </div>
             </div>`;
     }
+}
+
+function emptySubtask() {
+
+
+    let currentSubtask = document.getElementById('new-subtask')
+
+    currentSubtask.value='';
 }
 
 function editSubtask(i) {

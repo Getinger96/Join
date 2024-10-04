@@ -73,6 +73,11 @@
 }
 
 @media(max-width:500px) {
+
+
+    li {
+        display: flex;
+    }
     .addTask_Container {
         padding: 0px;
     }

@@ -9,6 +9,11 @@ body {
     border-radius: 10px;
 }
 
+.emptySubtaskicon {
+    width: 25px;
+    height: 30px;
+}
+
 .Subtasks_Btn {
     border: none;
     background-color: #FFFFFF;
@@ -97,7 +102,10 @@ scrollbar-width:  none;
     
 }
 
-
+.subtaskImgContent {
+    display: flex; 
+    margin-left: 0px;
+}
 
 .todo-detail {
     display: block;
@@ -153,7 +161,7 @@ t
     background-color: #FFFFFF;
     width: 24px;
     height: 24px;
-    padding-right: 25px;
+    padding-right: 40px;
 
 }
 .bg_color{
@@ -161,8 +169,8 @@ t
 }
 
 .imgCheckedIcon {
-    width: 25px;
-    height: 25px;
+    width: 22px;
+    height: 22px;
 }
 .subtaskstext {
     margin-top: 18px;
@@ -177,6 +185,7 @@ t
 .subtaskEditDiv {
     display: flex;
     align-items: center;
+    margin-left: 0px;
 }
 
 
@@ -251,6 +260,10 @@ display: flex;
     display: flex;
     cursor: pointer;
     flex-direction: column;
+    max-height: 90px;
+    overflow-y: auto;
+    height: 400px;
+    scrollbar-width: none;
 }
 .progress-container {
     display: flex;
@@ -434,6 +447,11 @@ nav ul {
 
 .divPaddingBottum {
     margin-top:-10px;
+}
+
+.editSubtask {
+    word-break: break-word;
+    display: flex;
 }
 
 .HeadContainerBoard {
@@ -649,6 +667,8 @@ h1 {
 ul {
     width: 400px;
     font-size: 20px;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
 }
 
 li {
@@ -714,6 +734,14 @@ li {
     line-height: 24px;
     width: 112px;
     height: 24px;
+}
+
+.separatorSubtask {
+    height: 31px;
+    width: 1px;
+    background-color: #D1D1D1;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 .select_container {
@@ -1014,6 +1042,9 @@ li {
 @media (max-width: 1550px) {
 
 
+ 
+
+
 
     .displayFlex {
         margin-top: 100px;
@@ -1023,6 +1054,16 @@ li {
 }
 
 @media (max-width: 1450px) {
+
+    .divBoard {
+        margin-left: 50px;
+    }
+
+
+    .subtaskImgContent {
+        margin-left: -10px;
+    }
+
     .addTaskTitle {
         margin-bottom: 100px;
     }
@@ -1049,12 +1090,12 @@ li {
     }
 
     .boardAddTask {
-        height:750px;
+        height: 800px;
         width:1000px;
     }
 
     .inputTitle {
-        width: 340px;
+        width: 375px;
     }
 
     .inputDescription {
@@ -1100,9 +1141,15 @@ li {
 
 
 @media(max-width: 1090px) {
+
+
+    .widthContainer {
+        margin-bottom: 100px;
+    } 
 .Titleleft {
     margin-top:119px;
 }
+
 
     .divBoard {
         margin-left: 45px;
@@ -1182,7 +1229,7 @@ li {
 
     .displayFlex {
         display: flex;
-        margin-top: 100px;
+        margin-top: 0px;
     }
     
     .dueDateEdit {
@@ -1311,6 +1358,12 @@ li {
 
 @media(max-width: 750px) {
 
+
+
+    .subtaskImgContent {
+        margin-right: 15x;
+    }
+
     ul {
         width: 200px;
     }
@@ -1345,12 +1398,24 @@ li {
 
 @media(max-width: 580px) {
 
+
+
+    .HeadContainerBoard {
+        margin-top: 80px;
+    }
+   
+    .subtasksInputfield {
+        width: 140px;
+    }      
+
+
     .profilebadge {
         font-size: 15px;
     }
     
     ul {
         width: 150px;
+        padding-inline-start: 25px;
     }
     .editSubtaskheadlineContainer {
         justify-content: flex-start;
@@ -1380,7 +1445,7 @@ li {
         font-size: 15px;
     }
     .inputTitle {
-        width: 335px;
+        width: 365px;
         font-size: 16px;
     }
 
@@ -1405,7 +1470,7 @@ li {
 
 
     .widthBoard {
-        width: 90%;
+        width: 100%;
         margin-left: 10px;
     }
 
@@ -1442,6 +1507,29 @@ li {
 
 @media(max-width: 490px) {
 
+    .divBoard {
+        margin-left: 25px;  
+    }
+
+
+
+    .subTaskInput {
+        width: 170px;
+    }
+    .flexdirection  {
+        margin-top: 20px;
+    }
+
+    li {
+        display: block;
+        padding-left: 0px;
+    }
+
+    .bottomInfo {
+        top: 0px;
+        left: -120px;
+    }
+  
 
     .inputTitle {
         width: 240px;
