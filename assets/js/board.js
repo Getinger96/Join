@@ -253,13 +253,15 @@ function getassignecontacts(task, taskIndex) {
     let remainingContacts = assignedContacts.length - maxContact;
 
     let asignedContainer = document.getElementById(`assignedContacts${taskIndex}`);
-    console.log(assignedContacts)
+
 
     for (let index = 0; index < assignedContacts.length; index++) {
         if (index === maxContact) {
             break;
         }
         let contact = assignedContacts[index];
+        let checkIndexarray = contactsArray.findIndex(c => c.name === contact);
+  
         nameParts = contact.split(" ");
         let firstLetterForName;
         let firstLetterLastName;
@@ -277,7 +279,7 @@ function getassignecontacts(task, taskIndex) {
                     <span>${firstLetterForName} </span>
                 </div>`;
         }
-        showTheNameInitialInColorBoard(index, colorid);
+        showTheNameInitialInColorBoard(checkIndexarray, colorid);
     }
     if (assignedContacts.length > 4) {
         asignedContainer.innerHTML += `<div id="colorName" class="contact-iconBoard">
@@ -286,14 +288,12 @@ function getassignecontacts(task, taskIndex) {
     }
 }
 
-function showTheNameInitialInColorBoard(index, colorid) {
+function showTheNameInitialInColorBoard(checkIndexarray, colorid) {
     let nameColorContainer = document.getElementById(colorid);
-    colorsBoard.forEach(indexColor => {
-        if (indexColor.index === index) {
-            let currentColor = indexColor.color;
-            nameColorContainer.style.backgroundColor = currentColor;
-        }
-    });
+    let contactColor = contactsArray[checkIndexarray].color
+    
+            nameColorContainer.style.backgroundColor = contactColor;
+  
 }
 
 function allowDrop(ev) {
