@@ -20,6 +20,22 @@ body {
     line-height: 73.2px;
 }
 
+.EditSubtaskButton {
+    border: none;
+    background-color: #F6F7F8;
+    width: 24px;
+    height: 24px;
+    padding-right: 5px;
+}
+
+.separatorSubtask {
+    height: 31px;
+    width: 1px;
+    background-color: #D1D1D1;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
 .header_COntainer {
     display: flex;
     justify-content: center;
@@ -229,6 +245,7 @@ body {
 
 }
 
+
 .lila {
     background-color: #A133FF;
 }
@@ -419,14 +436,38 @@ body {
 .ul_subtasks {
     display: flex;
     flex-wrap: wrap;
-    gap: 25px;
+    gap: 10px;
+    flex-direction: column;
 }
 
+.imgCheckedIcon {
+    height: 22px;
+    width: 22px;
+}
+.subTaskInput {
+    border: none;
+    font-size: 18px;
+    border-bottom: 3px solid #29ABE2;
+    background-color: #F6F7F8;
+}
 .li{
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
 
+.ChangeSubtask {
+    display: flex;
+    justify-content: space-between;
+}
+ 
+.changeButtonDeleteAndEdit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    background-color: #F6F7F8;
+}
 .deleteSubtask {
     border: none;
 }
@@ -500,10 +541,10 @@ body {
 
 .Subtasks_Btn {
     border: none;
-    background-color: #FFFFFF;
+    background-color: #F6F7F8;
     width: 24px;
     height: 24px;
-    padding-right: 25px;
+    padding-right: 10px;
 }
 
 input:focus {

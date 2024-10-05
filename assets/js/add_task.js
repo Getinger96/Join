@@ -245,13 +245,24 @@ function choosedlow() {
 
 function addSubtask() {
     let list = document.getElementById('ul_subtasks');
-    list.innerHTML='';
+    list.innerHTML = ''; // Clear the list before adding updated subtasks
     for (let i = 0; i < subtasks.length; i++) {
-       
-        list.innerHTML += `<div class="li">${subtasks[i]}<button type="button" class="Subtasks_Btn" onclick="deleteItem(${i})"><img src="./assets/IMG/delete.png"></button></div>`;
+
+        list.innerHTML += `
+        <div class="ChangeSubtask">
+            <div id="subTaskValueId${i}" class="li">${subtasks[i]}
+            </div>
+                <div class="changeButtonDeleteAndEdit">
+                    <button type="button" class="Subtasks_Btn" onclick="deleteItem(${i})">
+                        <img src="./assets/IMG/delete.png">
+                    </button>
+                    <button type="button" id="changeImgEdit${i}"  class="EditSubtaskButton" onclick="editSubtask(${i})">
+                        <img  src="./assets/IMG/edit.png" alt="Edit">
+                    </button>
+                </div>            
+            </div>`;
     }
 }
-
 function deleteItem(i) { //Einzelnen Elemente aus der Liste löschen
     subtasks.splice(i, 1);
     addSubtask();
@@ -271,6 +282,31 @@ function addCurrentSubtask() {
         alert('Genügend Subtasks hinzugefügt!');
     }
 }
+
+function editSubtask(i) {
+    document.getElementById(`subTaskValueId${i}`).innerHTML = `
+    <li>
+        <input id="subtaskValue${i}" class="subTaskInput" type="text" value="${subtasks[i]}">
+    </li>`;
+
+   let change =  document.getElementById(`changeImgEdit${i}`) 
+   
+   
+    change.innerHTML = `<img class="imgCheckedIcon" src="./assets/IMG/checkAddTask.png" alt="check" onclick="enterNewSubtask(${i})">`;
+}
+
+
+function enterNewSubtask(i) {
+    event.stopPropagation();
+   let newSubTask = document.getElementById(`subtaskValue${i}`).value
+
+   subtasks[i] =newSubTask;
+   document.getElementById(`changeImgEdit${i}`).innerHTML =
+
+    addSubtask();
+    
+}
+
 
 function choosedUserStory() {
     let userStory = document.getElementById('Category');
@@ -372,4 +408,11 @@ function clearTask() {
 }
 
 
+function emptySubtask() {
+
+
+    let currentSubtask = document.getElementById('input_Subtasks')
+
+    currentSubtask.value='';
+}
 
