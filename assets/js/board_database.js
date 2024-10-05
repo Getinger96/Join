@@ -56,12 +56,8 @@ async function createTask(event) {
     };
     await postData(`tasks`, newTodo);
     tasksArray = [];
-<<<<<<< HEAD
-    closeTaskUpdate();
-    assignedContacts=[];
-=======
     await closeTaskUpdate();
->>>>>>> 5e396c6050edc753f502aac56469a3141cbaeba8
+    assignedContacts=[];
     fetchTasks();
 }
 
@@ -287,7 +283,8 @@ async function EditData(index) {
     let status = task.status;
     currentCategory = status;
     getContacts();
-    closeOverlay(index);
+    closeoverlayedit(index);
+    
 
     for (let indexcon = 0; indexcon < assignedContacts.length; indexcon++) {
         let contact = assignedContacts[indexcon];

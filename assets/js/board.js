@@ -89,8 +89,7 @@ function closeTask() {
     document.getElementById('boardAddTask').style.display = 'none';
     document.getElementById('darkOverlay').style.display = 'none';
     document.body.style.overflow = 'auto';  // Scrollen auf der Hauptseite wieder erlauben
-    clearTask();
-    closelist();
+ clearTask();
 } 
 async function updateHtml() {
     let statusCategories = ['open', 'progress', 'awaitFeedback', 'closed'];
@@ -260,12 +259,8 @@ function getassignecontacts(task, taskIndex) {
             break;
         }
         let contact = assignedContacts[index];
-<<<<<<< HEAD
-       
-=======
         let checkIndexarray = contactsArray.findIndex(c => c.name === contact);
   
->>>>>>> 5e396c6050edc753f502aac56469a3141cbaeba8
         nameParts = contact.split(" ");
         let firstLetterForName;
         let firstLetterLastName;

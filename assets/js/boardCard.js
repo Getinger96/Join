@@ -99,6 +99,8 @@ function createShowCard(task, taskIndex) {
     let priority = task.Prio;
     let assignedContacts1 = task.Assigned || [];
     let category = task.Category || '';
+    assignedContacts.push(...assignedContacts1);
+
     
 
 
@@ -162,11 +164,20 @@ function closeOverlay(taskIndex) {
 
 
     document.body.style.overflow = 'auto';
-<<<<<<< HEAD
-    
-=======
->>>>>>> 5e396c6050edc753f502aac56469a3141cbaeba8
     clearTask();
+}
+
+function closeoverlayedit(taskIndex) {
+    const todoBig = document.getElementById('todoBig');
+    const overlay = document.getElementById('overlay');
+    let selectedProfileContainer = document.getElementById('Selected_profiles_Container');
+
+    todoBig.classList.add('d-none');
+    overlay.classList.add('d-none');
+    selectedProfileContainer.innerHTML = '';
+
+
+    document.body.style.overflow = 'auto';
 }
 
 
