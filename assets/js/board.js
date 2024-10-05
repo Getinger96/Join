@@ -28,13 +28,12 @@ async function fetchTasks(path = '') {
     let keysArrayTask = Object.keys(userJSON.tasks);
     currentDraggedElement = 0;
     id = 0
-    localStorage.removeItem(`task-${id}-subtasks`);
 
     for (let index = 0; index < tasksAsarray.length; index++) {
         let task = tasksAsarray[index];
         let keyTask = keysArrayTask[index];
         id++;
-        let saveTask = tasksArray.filter(t => t.Title === task.Titel);
+        let saveTask = tasksArray.filter(t => t.Title === task.Titel && t.Description === task.Description);
         if (saveTask.length > 0) {
             console.log(`Task mit Titel "${task.Titel}" existiert bereits.`);
 
@@ -291,10 +290,28 @@ function getassignecontacts(task, taskIndex) {
 function showTheNameInitialInColorBoard(checkIndexarray, colorid) {
     let nameColorContainer = document.getElementById(colorid);
     let contactColor = contactsArray[checkIndexarray].color
+    contactColor = convertToValidColor(contactColor);
     
             nameColorContainer.style.backgroundColor = contactColor;
   
 }
+
+
+function convertToValidColor(color) {
+    const colorMap = {
+        "hellorange": "#FFA07A",
+        "türkis": "#40E0D0",
+        "gelb": "#FFFF00",
+        "grün": "#008000",
+        "blau": "#0000FF",
+        "pink": "#FF33A1",
+        "orange": "#FFA500"
+    };
+
+
+    return colorMap[color]; //colorMap[color] verwendet den Wert der Variable color, um den richtigen Schlüssel im Objekt zu finden.
+    //colorMap.color sucht immer nach einer Eigenschaft mit dem festen Namen color, unabhängig vom Inhalt der Variable
+} 
 
 function allowDrop(ev) {
     ev.preventDefault();

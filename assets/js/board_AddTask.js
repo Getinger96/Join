@@ -280,23 +280,23 @@ function deleteItem(i) {
 }
 
 function addSubtask() {
-    // Ensure 'subtasks' is initialized as an array if it's not already
+
     if (!Array.isArray(subtasks)) {
         subtasks = [];
     }
 
-    // Get the container for subtasks
+
     let subtaskContainer = document.getElementById('subtasksContainer');
 
-    // Clear previous subtasks displayed in the container
+
     subtaskContainer.innerHTML = '';
 
-    // Check if subtasks array has any items
+  
     if (subtasks.length === 0) {
         return;
     }
 
-    // Loop through the subtasks array and render each subtask
+ 
     for (let i = 0; i < subtasks.length; i++) {
         subtaskContainer.innerHTML += `
             <div class="editSubtaskheadlineContainer" >

@@ -331,7 +331,7 @@ async function createEdittask(index) {
         Date: taskDAte.value,
         Prio: currentPriority,
         Category: taskCategory.value,
-        Subtask: task.subtask,
+        Subtask: subtasks,
         Status: status,
     }
     await putDataEdit(`tasks/${key}`, editedTASk)
