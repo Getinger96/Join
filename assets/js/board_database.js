@@ -57,6 +57,7 @@ async function createTask(event) {
     await postData(`tasks`, newTodo);
     tasksArray = [];
     closeTaskUpdate();
+    assignedContacts=[];
     fetchTasks();
 }
 

@@ -162,6 +162,8 @@ function closeOverlay(taskIndex) {
 
 
     document.body.style.overflow = 'auto';
+    
+    clearTask();
 }
 
 

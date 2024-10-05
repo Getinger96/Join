@@ -260,6 +260,7 @@ function getassignecontacts(task, taskIndex) {
             break;
         }
         let contact = assignedContacts[index];
+       
         nameParts = contact.split(" ");
         let firstLetterForName;
         let firstLetterLastName;
