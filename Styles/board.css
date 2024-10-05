@@ -260,11 +260,13 @@ display: flex;
     display: flex;
     cursor: pointer;
     flex-direction: column;
-    max-height: 90px;
+    max-height: 200px;
     overflow-y: auto;
-    height: 400px;
+    height: auto;
     scrollbar-width: none;
+    
 }
+
 .progress-container {
     display: flex;
     align-items: center;
@@ -1143,6 +1145,11 @@ li {
 @media(max-width: 1090px) {
 
 
+    ul {
+        margin-block-start: 1em;
+        margin-block-end: 1em; 
+    }
+
     .widthContainer {
         margin-bottom: 100px;
     } 
@@ -1194,10 +1201,10 @@ li {
 
     .bottomInfo {
         position: relative;
-        max-height: 120px; 
-        top:-15px;
+        max-height: 120px;
+        top: 0px;
         right: 0;
-        left: -176px;
+        left: 0;
         bottom: 0;
     }
 

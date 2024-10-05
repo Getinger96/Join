@@ -28,13 +28,12 @@ async function fetchTasks(path = '') {
     let keysArrayTask = Object.keys(userJSON.tasks);
     currentDraggedElement = 0;
     id = 0
-    localStorage.removeItem(`task-${id}-subtasks`);
 
     for (let index = 0; index < tasksAsarray.length; index++) {
         let task = tasksAsarray[index];
         let keyTask = keysArrayTask[index];
         id++;
-        let saveTask = tasksArray.filter(t => t.Title === task.Titel);
+        let saveTask = tasksArray.filter(t => t.Title === task.Titel && t.Description === task.Description);
         if (saveTask.length > 0) {
             console.log(`Task mit Titel "${task.Titel}" existiert bereits.`);
 
@@ -168,10 +167,11 @@ function openTask(taskIndex) {
 }
 
 
-function closeTaskUpdate() {
+async function closeTaskUpdate() {
     document.getElementById('boardAddTask').style.display = 'none';
     document.getElementById('darkOverlay').style.display = 'none';
     document.body.style.overflow = 'auto';
+    clearTask();
 }
 
 function generateTodoHTML(task, taskIndex) {
@@ -253,14 +253,19 @@ function getassignecontacts(task, taskIndex) {
     let remainingContacts = assignedContacts.length - maxContact;
 
     let asignedContainer = document.getElementById(`assignedContacts${taskIndex}`);
-    console.log(assignedContacts)
+
 
     for (let index = 0; index < assignedContacts.length; index++) {
         if (index === maxContact) {
             break;
         }
         let contact = assignedContacts[index];
+<<<<<<< HEAD
        
+=======
+        let checkIndexarray = contactsArray.findIndex(c => c.name === contact);
+  
+>>>>>>> 5e396c6050edc753f502aac56469a3141cbaeba8
         nameParts = contact.split(" ");
         let firstLetterForName;
         let firstLetterLastName;
@@ -278,7 +283,7 @@ function getassignecontacts(task, taskIndex) {
                     <span>${firstLetterForName} </span>
                 </div>`;
         }
-        showTheNameInitialInColorBoard(index, colorid);
+        showTheNameInitialInColorBoard(checkIndexarray, colorid);
     }
     if (assignedContacts.length > 4) {
         asignedContainer.innerHTML += `<div id="colorName" class="contact-iconBoard">
@@ -287,15 +292,31 @@ function getassignecontacts(task, taskIndex) {
     }
 }
 
-function showTheNameInitialInColorBoard(index, colorid) {
+function showTheNameInitialInColorBoard(checkIndexarray, colorid) {
     let nameColorContainer = document.getElementById(colorid);
-    colorsBoard.forEach(indexColor => {
-        if (indexColor.index === index) {
-            let currentColor = indexColor.color;
-            nameColorContainer.style.backgroundColor = currentColor;
-        }
-    });
+    let contactColor = contactsArray[checkIndexarray].color
+    contactColor = convertToValidColor(contactColor);
+    
+            nameColorContainer.style.backgroundColor = contactColor;
+  
 }
+
+
+function convertToValidColor(color) {
+    const colorMap = {
+        "hellorange": "#FFA07A",
+        "türkis": "#40E0D0",
+        "gelb": "#FFFF00",
+        "grün": "#008000",
+        "blau": "#0000FF",
+        "pink": "#FF33A1",
+        "orange": "#FF5733"
+    };
+
+
+    return colorMap[color]; //colorMap[color] verwendet den Wert der Variable color, um den richtigen Schlüssel im Objekt zu finden.
+    //colorMap.color sucht immer nach einer Eigenschaft mit dem festen Namen color, unabhängig vom Inhalt der Variable
+} 
 
 function allowDrop(ev) {
     ev.preventDefault();

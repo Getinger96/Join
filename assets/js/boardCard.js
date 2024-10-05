@@ -36,14 +36,18 @@ function generateLargeContactsHtml(assignedContacts) {
     let contactsHtml = ''; 
 
     for (let index = 0; index < assignedContacts.length; index++) {
+
+        let contact = assignedContacts[index];
         let nameParts = assignedContacts[index].split(' ');
         let contactFirstname = nameParts[0] || '';  
         let contactLastname = nameParts.slice(1).join(' ') || '';  
 
+        let checkIndexarray = contactsArray.findIndex(c => c.name === contact);
+
         let firstLetterForName = contactFirstname.charAt(0).toUpperCase();
         let firstLetterLastName = contactLastname.charAt(0).toUpperCase();
 
-        let color = showTheNameColor(index);
+        let color = showTheNameColor(checkIndexarray);
         
         contactsHtml += getLargeContactHtml(index, firstLetterForName, firstLetterLastName, contactFirstname, contactLastname, color);
     }
@@ -51,18 +55,13 @@ function generateLargeContactsHtml(assignedContacts) {
     return contactsHtml;  
 }
 
-function showTheNameColor(index) {
+function showTheNameColor(checkIndexarray) {
 
-    for (let indexColor = 0; indexColor < colorsBoard.length; indexColor++) {
-        let colorNameCard = colorsBoard[indexColor].color;
-
-        if (index === indexColor) {
-            let currentColor = colorNameCard;
-            return currentColor
+    let contactColor = contactsArray[checkIndexarray].color
+    contactColor = convertToValidColor(contactColor);
     
-        }
-    }
-   
+    
+    return contactColor;
 
 }
 
@@ -100,7 +99,8 @@ function createShowCard(task, taskIndex) {
     let priority = task.Prio;
     let assignedContacts1 = task.Assigned || [];
     let category = task.Category || '';
-    assignedContacts.push(...assignedContacts1)
+    
+
 
     const priorityIcon = getPriorityIcon(priority);
     const categoryColor = getCategoryColor(category);
@@ -162,7 +162,10 @@ function closeOverlay(taskIndex) {
 
 
     document.body.style.overflow = 'auto';
+<<<<<<< HEAD
     
+=======
+>>>>>>> 5e396c6050edc753f502aac56469a3141cbaeba8
     clearTask();
 }
 

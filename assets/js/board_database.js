@@ -56,8 +56,12 @@ async function createTask(event) {
     };
     await postData(`tasks`, newTodo);
     tasksArray = [];
+<<<<<<< HEAD
     closeTaskUpdate();
     assignedContacts=[];
+=======
+    await closeTaskUpdate();
+>>>>>>> 5e396c6050edc753f502aac56469a3141cbaeba8
     fetchTasks();
 }
 
@@ -243,6 +247,7 @@ async function putDataEdit(path = "", data = {}) {
 }
 
 async function deleteTask(task) {
+    localStorage.removeItem(`task-${task}-subtasks`);
     let key = tasksArray[task].taskKey;
     await deleteData(`tasks/${key}`);
     tasksArray.splice(task, 1);
@@ -332,7 +337,7 @@ async function createEdittask(index) {
         Date: taskDAte.value,
         Prio: currentPriority,
         Category: taskCategory.value,
-        Subtask: task.subtask,
+        Subtask: subtasks,
         Status: status,
     }
     await putDataEdit(`tasks/${key}`, editedTASk)

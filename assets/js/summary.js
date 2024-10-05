@@ -18,7 +18,7 @@ async function fetchTasksSummary(path = '') {
         let keyTask = keysArrayTask[index];
         id++;
 
-        let saveTask = tasksArray.filter(t => t.Title === task.Titel);
+        let saveTask = tasksArray.filter(t => t.Title === task.Titel && t.Description === task.Description);
 
         // Beispielbedingung, die du anpassen kannst
         if (saveTask.length > 0) {
