@@ -275,7 +275,7 @@ async function EditData(index) {
     let description = task.Description;
     let dueDate = task.duedate;
     let priority = task.Prio;
-    let assignedContacts = task.Assigned;
+    let assignedContacts = task.Assigned || '';
     let category = task.Category;
     let subtask = task.subtask;
     let status = task.status;
