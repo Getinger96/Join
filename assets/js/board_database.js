@@ -56,7 +56,7 @@ async function createTask(event) {
     };
     await postData(`tasks`, newTodo);
     tasksArray = [];
-    closeTaskUpdate();
+    await closeTaskUpdate();
     fetchTasks();
 }
 
@@ -242,6 +242,7 @@ async function putDataEdit(path = "", data = {}) {
 }
 
 async function deleteTask(task) {
+    localStorage.removeItem(`task-${task}-subtasks`);
     let key = tasksArray[task].taskKey;
     await deleteData(`tasks/${key}`);
     tasksArray.splice(task, 1);

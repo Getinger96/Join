@@ -99,7 +99,8 @@ function createShowCard(task, taskIndex) {
     let priority = task.Prio;
     let assignedContacts1 = task.Assigned || [];
     let category = task.Category || '';
-    assignedContacts.push(...assignedContacts1)
+    
+
 
     const priorityIcon = getPriorityIcon(priority);
     const categoryColor = getCategoryColor(category);
@@ -161,6 +162,7 @@ function closeOverlay(taskIndex) {
 
 
     document.body.style.overflow = 'auto';
+    clearTask();
 }
 
 

@@ -167,10 +167,11 @@ function openTask(taskIndex) {
 }
 
 
-function closeTaskUpdate() {
+async function closeTaskUpdate() {
     document.getElementById('boardAddTask').style.display = 'none';
     document.getElementById('darkOverlay').style.display = 'none';
     document.body.style.overflow = 'auto';
+    clearTask();
 }
 
 function generateTodoHTML(task, taskIndex) {
@@ -305,7 +306,7 @@ function convertToValidColor(color) {
         "grün": "#008000",
         "blau": "#0000FF",
         "pink": "#FF33A1",
-        "orange": "#FFA500"
+        "orange": "#FF5733"
     };
 
 
