@@ -133,7 +133,7 @@ scrollbar-width:  none;
     background-color: #3357FF;
 }
 
-t
+
 .contact-icon {
     justify-content: center;
     border: 2px solid white;
@@ -303,10 +303,16 @@ display: flex;
     justify-content: center;
     align-items: center;
 }
-
 .spaceBetween {
     display: flex;
     justify-content: space-between;
+    
+}
+
+.spaceBetween1 {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 100px;
 }
 
 .alignCenter {
@@ -1055,7 +1061,7 @@ li {
 
 }
 
-@media (max-width: 1450px) {
+@media (max-width: 1528px) {
 
     .divBoard {
         margin-left: 50px;
@@ -1142,7 +1148,7 @@ li {
 }
 
 
-@media(max-width: 1090px) {
+@media(max-width: 1230px) {
 
 
     ul {
@@ -1323,6 +1329,107 @@ li {
     height: 30px;
 
 }
+.HeadContainerBoard {
+    margin-top: 80px;
+}
+
+.subtasksInputfield {
+    width: 140px;
+}      
+
+
+.profilebadge {
+    font-size: 15px;
+}
+
+ul {
+    width: 150px;
+    padding-inline-start: 25px;
+}
+.editSubtaskheadlineContainer {
+    justify-content: flex-start;
+}
+
+#urgentIcon {
+    width: 25px;
+    height: 25px;
+}
+
+#mediumIcon {
+    width: 25px;
+    height: 25px;
+}
+
+#lowIcon {
+    width: 30px;
+    height: 25px;
+}
+
+.select_container {
+    width: 250px;
+    font-size: 15px;
+}
+.inputDescription {
+    width: 250px;
+    font-size: 15px;
+}
+.inputTitle {
+    width: 365px;
+    font-size: 16px;
+}
+
+.divBoard {
+    width: 400px;
+}
+
+
+.responsiveDescription {
+height: 100px;
+overflow: auto;
+}
+.assigned-contacts {
+    margin-left: 12px;
+    height: 150px;
+    overflow: auto;
+}
+
+.noTasks {
+    width: 350px;
+}
+
+
+.widthBoard {
+    width: 100%;
+    margin-left: 10px;
+}
+
+.select_container {
+    width: 290px;
+}
+
+.buttonContainerWhite {
+    height: 40px;
+    width: 70px;
+}
+
+
+
+.AssignedTO_Container {
+    width: 300px;
+}
+
+.cardbig {
+    max-width: 270px;
+}
+
+.checkboxtext {
+    font-size: 18px;
+}
+
+
+.buttonContainerdark {
+    margin-left: 136px;
+}
 
 
 }
@@ -1361,11 +1468,6 @@ li {
         height: 56px;
         width: 136px;
     }
-}
-
-@media(max-width: 750px) {
-
-
 
     .subtaskImgContent {
         margin-right: 15x;
@@ -1403,111 +1505,30 @@ li {
     }
 }
 
+@media(max-width:1000px){
+    .spaceBetween1 {
+      
+        flex-direction: column;
+    }
+
+    .HeadContainerBoard {
+       
+        justify-content: center;
+    }
+}
+
+@media(max-width: 750px) {
+
+
+
+    
+}
+
 @media(max-width: 580px) {
 
 
 
-    .HeadContainerBoard {
-        margin-top: 80px;
-    }
    
-    .subtasksInputfield {
-        width: 140px;
-    }      
-
-
-    .profilebadge {
-        font-size: 15px;
-    }
-    
-    ul {
-        width: 150px;
-        padding-inline-start: 25px;
-    }
-    .editSubtaskheadlineContainer {
-        justify-content: flex-start;
-    }
-
-    #urgentIcon {
-        width: 25px;
-        height: 25px;
-    }
-
-    #mediumIcon {
-        width: 25px;
-        height: 25px;
-    }
-
-    #lowIcon {
-        width: 30px;
-        height: 25px;
-    }
-
-    .select_container {
-        width: 250px;
-        font-size: 15px;
-    }
-    .inputDescription {
-        width: 250px;
-        font-size: 15px;
-    }
-    .inputTitle {
-        width: 365px;
-        font-size: 16px;
-    }
-
-    .divBoard {
-        width: 400px;
-    }
-
-
-    .responsiveDescription {
-    height: 100px;
-    overflow: auto;
-}
-    .assigned-contacts {
-        margin-left: 12px;
-        height: 150px;
-        overflow: auto;
-    }
-
-    .noTasks {
-        width: 350px;
-    }
-
-
-    .widthBoard {
-        width: 100%;
-        margin-left: 10px;
-    }
-
-    .select_container {
-        width: 290px;
-    }
-
-    .buttonContainerWhite {
-        height: 40px;
-        width: 70px;
-    }
-
-  
-
-    .AssignedTO_Container {
-        width: 300px;
-    }
-
-    .cardbig {
-        max-width: 270px;
-    }
-
-    .checkboxtext {
-        font-size: 18px;
-    }
-
-
-    .buttonContainerdark {
-        margin-left: 136px;
-    }
 
 }
 
@@ -1515,7 +1536,7 @@ li {
 @media(max-width: 490px) {
 
     .divBoard {
-        margin-left: 25px;  
+        margin-left: 20px;  
     }
 
 
