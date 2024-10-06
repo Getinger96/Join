@@ -1,15 +1,7 @@
 @media (max-width: 1550px) {
-
-
- 
-
-
-
     .displayFlex {
         margin-top: 100px;
     }
-
-
 }
 
 @media (max-width: 1528px) {
@@ -17,7 +9,6 @@
     .divBoard {
         margin-left: 50px;
     }
-
 
     .subtaskImgContent {
         margin-left: -10px;
@@ -29,7 +20,7 @@
 
     .divSectionAddTask2 {
         margin-top: 10px;
-    };
+    }
 
     .divBoard {
         margin-left: 30px;
@@ -38,8 +29,7 @@
         display: flex;
         align-items: flex-start;
     }
-   
-  
+
     .divSectionAddTask {
         margin-top: -80px;
     }
@@ -50,7 +40,7 @@
 
     .boardAddTask {
         height: 800px;
-        width:1000px;
+        width: 1000px;
     }
 
     .inputTitle {
@@ -66,66 +56,76 @@
     }
 
     .inputTitleDate {
-        width:340px;
+        width: 340px;
     }
 
     .marginButtomButton {
-        gap:2px;
+        gap: 2px;
     }
 
     .addTaskContainer {
-        justify-content:center;
+        justify-content: center;
     }
 
     .separatorTask {
-        display:none;
+        display: none;
     }
 
-    .bottomInfo{
-        left:94px;
-        right:90px;
+    .bottomInfo {
+        left: 94px;
+        right: 90px;
     }
 
     .dateEdit {
-        margin-top:-30px;
+        margin-top: -30px;
     }
 
     .Titleleft {
-        margin-top:53px;
+        margin-top: 53px;
     }
-    .positionTask{
-        top:47%;
+
+    .positionTask {
+        top: 47%;
+    }
+    .spaceBetween {
+        display: flex;
+        justify-content: space-between;
+        gap: 530px;
     }
 }
 
-
 @media(max-width: 1230px) {
-
 
     ul {
         margin-block-start: 1em;
-        margin-block-end: 1em; 
+        margin-block-end: 1em;
     }
 
     .widthContainer {
         margin-bottom: 100px;
-    } 
-.Titleleft {
-    margin-top:119px;
-}
+    }
 
+    .Titleleft {
+        margin-top: 119px;
+    }
 
     .divBoard {
-        margin-left: 45px;
-
+        width: 400px;
+        margin-left: 500px;
+    }
+    .spaceBetween1 {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 100px;
+        flex-direction: column;
     }
 
-    .redrequired{
-        display:none;
+    .redrequired {
+        display: none;
     }
 
-    .required-message{
-        display:none;
+    .required-message {
+        display: none;
     }
 
     .boardAddTask {
@@ -135,25 +135,29 @@
     .EditSubtaskButton {
         padding-right: 50px;
     }
+
     .imgCheckedIcon {
         width: 20px;
         height: 20px;
+    }
+    .spaceBetween1 {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 100px;
+        flex-direction: column;
     }
 
     .red {
         display: none;
     }
 
-
     .inputTitleDate {
-        margin-top: 0; 
+        margin-top: 0;
     }
-
 
     .inputTitleDate {
         margin-top: 185px;
-        margin-top:80px;
-        
+        margin-top: 80px;
     }
 
     .bottomInfo {
@@ -165,17 +169,18 @@
         bottom: 0;
     }
 
-    .categoryEdit  {
+    .categoryEdit {
         margin-top: 40px;
     }
 
     .separatorTask {
         display: none;
-        
     }
-    #kategorieLabel{
+
+    #kategorieLabel {
         display: none;
     }
+
     .Selection_Container {
         height: 190px;
         margin-top: 80px;
@@ -186,25 +191,29 @@
         justify-content: space-between;
         flex-direction: column;
     }
+
     .spaceBetween {
         flex-direction: column;
         align-items: stretch;
+        gap: 0px;
+        margin-left: -70px;
     }
 
     .displayFlex {
         display: flex;
         margin-top: 0px;
     }
-    
+
     .dueDateEdit {
         display: none;
     }
-    
+
     .addTaskTitle {
         display: flex;
         justify-content: space-between;
         margin-bottom: 40px;
     }
+
     .boardAddTask {
         height: 670px;
         width: 560px;
@@ -213,13 +222,11 @@
 
     .xButton {
         top: 20px;
-
     }
 
     h2 {
         font-size: 35px;
     }
-
 
     .progresstext {
         font-size: 13px;
@@ -273,120 +280,118 @@
         justify-content: flex-end;
         align-items: center;
         margin-top: 0px;
-}
+    }
 
-.profilebadge {
-    width: 30px;
-    height: 30px;
+    .profilebadge {
+        width: 30px;
+        height: 30px;
 
-}
-.HeadContainerBoard {
-    margin-top: 80px;
-}
+    }
 
-.subtasksInputfield {
-    width: 140px;
-}      
+    .HeadContainerBoard {
+        margin-top: 80px;
+    }
+
+    .subtasksInputfield {
+        width: 140px;
+    }
+
+    .profilebadge {
+        font-size: 15px;
+    }
+
+    ul {
+        width: 150px;
+        padding-inline-start: 25px;
+    }
+
+    .editSubtaskheadlineContainer {
+        justify-content: flex-start;
+    }
+
+    #urgentIcon {
+        width: 25px;
+        height: 25px;
+    }
+
+    #mediumIcon {
+        width: 25px;
+        height: 25px;
+    }
+
+    #lowIcon {
+        width: 30px;
+        height: 25px;
+    }
+
+    .select_container {
+        width: 250px;
+        font-size: 15px;
+    }
+
+    .inputDescription {
+        width: 250px;
+        font-size: 15px;
+    }
+
+    .inputTitle {
+        width: 365px;
+        font-size: 16px;
+    }
+
+    .divBoard {
+        width: 400px;
+    }
+
+    .responsiveDescription {
+        height: 100px;
+        overflow: auto;
+    }
+
+    .assigned-contacts {
+        margin-left: 12px;
+        height: 150px;
+        overflow: auto;
+    }
+
+    .noTasks {
+        width: 350px;
+    }
+
+    .widthBoard {
+        width: 100%;
+        margin-left: 10px;
+    }
+
+    .select_container {
+        width: 290px;
+    }
+
+    .buttonContainerWhite {
+        height: 40px;
+        width: 70px;
+    }
+
+    .AssignedTO_Container {
+        width: 300px;
+    }
+
+    .cardbig {
+        max-width: 270px;
+    }
+
+    .checkboxtext {
+        font-size: 18px;
+    }
 
 
-.profilebadge {
-    font-size: 15px;
-}
-
-ul {
-    width: 150px;
-    padding-inline-start: 25px;
-}
-.editSubtaskheadlineContainer {
-    justify-content: flex-start;
-}
-
-#urgentIcon {
-    width: 25px;
-    height: 25px;
-}
-
-#mediumIcon {
-    width: 25px;
-    height: 25px;
-}
-
-#lowIcon {
-    width: 30px;
-    height: 25px;
-}
-
-.select_container {
-    width: 250px;
-    font-size: 15px;
-}
-.inputDescription {
-    width: 250px;
-    font-size: 15px;
-}
-.inputTitle {
-    width: 365px;
-    font-size: 16px;
-}
-
-.divBoard {
-    width: 400px;
-}
-
-
-.responsiveDescription {
-height: 100px;
-overflow: auto;
-}
-.assigned-contacts {
-    margin-left: 12px;
-    height: 150px;
-    overflow: auto;
-}
-
-.noTasks {
-    width: 350px;
-}
-
-
-.widthBoard {
-    width: 100%;
-    margin-left: 10px;
-}
-
-.select_container {
-    width: 290px;
-}
-
-.buttonContainerWhite {
-    height: 40px;
-    width: 70px;
-}
-
-
-
-.AssignedTO_Container {
-    width: 300px;
-}
-
-.cardbig {
-    max-width: 270px;
-}
-
-.checkboxtext {
-    font-size: 18px;
-}
-
-
-.buttonContainerdark {
-    margin-left: 136px;
-}
-
+    .buttonContainerdark {
+        margin-left: 136px;
+    }
 
 }
 
 @media(max-width: 920px) {
-
 
     .cardbig {
         height: 600px;
@@ -395,16 +400,16 @@ overflow: auto;
     .boardAddTask {
         border-radius: 20px;
     }
+
     .inputTitleDate {
         width: 250px;
     }
+
     .addTaskContainer {
         display: flex;
         justify-content: space-between;
         flex-direction: column;
     }
-
-   
 
     .separatorTask {
         display: none;
@@ -412,7 +417,7 @@ overflow: auto;
 
     .buttonContainerWhite {
         height: 56px;
-    
+
     }
 
     .buttonContainerdark {
@@ -436,19 +441,19 @@ overflow: auto;
     .widthBoard {
         margin-left: 15px;
     }
-    
+
     .boardAddTask {
         width: 400px;
     }
 
 
-    Button  {
+    Button {
         font-size: 15px;
     }
 
     .buttonContainerWhite {
-        display:none;
-    
+        display: none;
+
     }
 
     .buttonContainerdark {
@@ -456,46 +461,37 @@ overflow: auto;
     }
 }
 
-@media(max-width:1000px){
+@media(max-width:1000px) {
     .spaceBetween1 {
-      
+
         flex-direction: column;
     }
 
     .HeadContainerBoard {
-       
+
         justify-content: center;
     }
-}
-
-@media(max-width: 750px) {
-
-
-
-    
-}
-
-@media(max-width: 580px) {
-
-
-
-   
-
-}
-
-
-@media(max-width: 490px) {
-
     .divBoard {
-        margin-left: 20px;  
+        
+        margin-left: 0px;
+    }
+}
+
+@media(max-width: 630px) {
+    .spaceBetween {
+        
+        margin-left: 0px;
     }
 
-
+    .divBoard {
+        margin-left: 20px;
+    }
 
     .subTaskInput {
         width: 170px;
     }
-    .flexdirection  {
+
+    .flexdirection {
         margin-top: 20px;
     }
 
@@ -508,7 +504,6 @@ overflow: auto;
         top: 0px;
         left: -120px;
     }
-  
 
     .inputTitle {
         width: 240px;
@@ -526,11 +521,13 @@ overflow: auto;
     }
 
     .prioEditSection {
-        gap:10px
+        gap: 10px
     }
+
     .marginButtomButton {
-        gap:10px
+        gap: 10px
     }
+
     .subtasksInputfield {
         font-size: 16px;
     }
@@ -538,6 +535,7 @@ overflow: auto;
     .inputTitleDate {
         font-size: 16px;
     }
+
     .divBoard {
         width: 250px;
     }
@@ -549,6 +547,7 @@ overflow: auto;
     h2 {
         font-size: 25px;
     }
+
     .search {
         border: none;
         height: 32px;
@@ -575,25 +574,25 @@ overflow: auto;
 
     .buttonContainerdark {
         margin-left: 168px;
-        height:40px;
+        height: 40px;
     }
 
-    .buttonContainerPrio{
-        width:80px;
+    .buttonContainerPrio {
+        width: 80px;
     }
 
-    #urgentIcon{
-        width:16px;
-        height:16px;
+    #urgentIcon {
+        width: 16px;
+        height: 16px;
     }
 
     #mediumIcon {
-        width:16px;
-        height:16px;
+        width: 16px;
+        height: 16px;
     }
 
-    #lowIcon{
-        width:16px;
-        height:16px;
+    #lowIcon {
+        width: 16px;
+        height: 16px;
     }
 }
