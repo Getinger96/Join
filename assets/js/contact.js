@@ -16,6 +16,7 @@ let groupedContacts = [];
 let selectedContactIndex = null;
 
 async function fetchContacts(path = '') {
+    contactsArray = []; 
     let response = await fetch(base_URL + path + ".json");
     let userJSON = await response.json();
     let keysArray = Object.keys(userJSON.contacts);
@@ -25,7 +26,9 @@ async function fetchContacts(path = '') {
         let contact = userAsArray[index];
         let key = keysArray[index];
 
-        if (contact.email !== "guest@web.de") {
+        let checkMailContact = userAsArray.filter(c => c.email === contact.email);
+
+        if (contact.email !== "guest@web.de" && checkMailContact.length > 0) {
             contactsArray.push({
                 
                 id: key,
@@ -215,16 +218,28 @@ async function createContact() {
     const email = document.getElementById('mail').value.trim();
     const phone = document.getElementById('telephone').value.trim();
 
+    if (!validateContact(name, email, phone)) {
+        return;
+    }
+
+
     const newContact = {
         name: name,
         email: email,
         phone: phone
     };
 
-    contactsArray.push(newContact);
-    await postData('contacts', newContact);
-    sortContactsByLetter();
+    let response = await postData('contacts', newContact);
+    let generatedKey = response.name;
+
+    contactsArray.push({
+        ...newContact,
+        id: generatedKey
+    });
+
+
     closeCardContact();
+    await fetchContacts();
 }
 
 
@@ -241,14 +256,9 @@ function addNewContact() {
 
     const createButton = document.querySelector('.createContact-button');
     createButton.onclick = function () {
-        const form = document.getElementById('contactForm');
-        if (form.checkValidity()) {
-            createContact();
-            closeCardContact();
-        } else {
-            form.reportValidity();
-        }
-    };
+        createContact();
+}
+
 }
 
 function displayEditContactLogo(contactsName, contactLastname, color) {
@@ -346,20 +356,21 @@ function clearBigContactView() {
 }
 
 async function saveEditedContact(index) {
+    let oldName = contactsArray[index].name;  
     let name = document.getElementById('name').value.trim();
     let email = document.getElementById('mail').value.trim();
     let phone = document.getElementById('telephone').value.trim();
 
     if (name && email && phone) {
-        
+        if (!validateContact(name, email, phone)) {
+            return;
+        }
 
-
-
-        let key= contactsArray[index].id;
+        let key = contactsArray[index].id;
         contactsArray[index].name = name;
         contactsArray[index].email = email;
         contactsArray[index].phone = phone;
-        let password =contactsArray[index].password;
+        let password = contactsArray[index].password;
 
         const newContact = {
             name: name,
@@ -368,20 +379,126 @@ async function saveEditedContact(index) {
             password: password
         };
 
+        await putData(`contacts/${key}`, newContact);
 
+       
+        let editedContact = {
+            oldName: oldName,
+            newName: name
+        };
 
-        sortContactsByLetter();
+       if (!updateContactInTasks(editedContact)) {
+        await fetchTasks(); 
         closeCardContact();
-        getContactBig(index);
-
-        await putData(`contacts/${key}`,newContact);
+       }
+       else {
+        await updateContactInTasks(editedContact);  
+        await fetchTasks();  
+        await fetchContacts();
+    
     }
+    closeCardContact();
+}
+}
+
+function validateContact(name, email, phone) {
+   
+    if (!nameIsNotValid(name) || name.length < 3 || name.length > 30) {
+        wrongTextValidation();
+        changeColorText();
+        return false; 
+    } else {
+        document.getElementById("wrongText").innerHTML = '';
+        document.getElementById("textInput").style.border = "";
+    }
+
+   
+    if (!emailIsNotCorrect(email)) {
+        wrongEmailValidation();
+        changeColorMail();
+        return false; 
+    } else {
+        document.getElementById("wrongEmail").innerHTML = '';
+        document.getElementById("mailInput").style.border = "";
+    }
+
+    
+    if (!phoneNumberIsNotCorrect(phone) || phone.length < 6 || phone.length > 15 || phone[0] !== '0') {
+        wrongPhoneValidation(); 
+        changeColorPhone();
+        return false; 
+    } else {
+        document.getElementById("wrongPhone").innerHTML = '';
+        document.getElementById("phoneInput").style.border = "";
+    }
+
+    return true; 
 }
 
 
+async function updateContactInTasks(editedContact) {
+    let response = await fetch(base_URL + "/tasks.json");  // Alle Tasks von Firebase holen
+    let tasksData = await response.json();
+    let tasks = Object.entries(tasksData);
+
+    for (let [taskId, task] of tasks) {
+        let assignedContacts = task.AssignedContact || [];
+        
+        let contactIndex = assignedContacts.findIndex(contact => contact === editedContact.oldName);
+
+        if (contactIndex !== -1) {
+        
+            assignedContacts[contactIndex] = editedContact.newName;
+            
+        
+            await updateTaskInFirebase(taskId, task);
+        }
+    }
+}
+
+async function updateTaskInFirebase(taskId, updatedTask) {
+    await fetch(base_URL + `/tasks/${taskId}.json`, {
+        method: 'PUT',
+        body: JSON.stringify(updatedTask),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+}
 
 
+async function fetchTasks(path = '') {
+    tasksArray = [];
+    let response = await fetch(base_URL + path + ".json");
+    let userJSON = await response.json();
+    let tasksAsarray = Object.values(userJSON.tasks)
+    let keysArrayTask = Object.keys(userJSON.tasks);
+    currentDraggedElement = 0;
+    id = 0
 
+    for (let index = 0; index < tasksAsarray.length; index++) {
+        let task = tasksAsarray[index];
+        let keyTask = keysArrayTask[index];
+        id++;
+        let saveTask = tasksArray.filter(t => t.Title === task.Titel && t.Description === task.Description);
+        if (saveTask.length > 0) {
+            console.log(`Task mit Titel "${task.Titel}" existiert bereits.`);
 
+        } else {
 
+            tasksArray.push({
+                taskKey: keyTask,
+                idTask: id,
+                Title: task.Titel,
+                Description: task.Description,
+                Assigned: task.AssignedContact,
+                duedate: task.Date,
+                Prio: task.Prio,
+                Category: task.Category,
+                subtask: task.Subtask,
+                status: task.Status,
+            });
+        }
+    }
 
+}

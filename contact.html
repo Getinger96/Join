@@ -14,6 +14,8 @@
     <script src="./assets/js/script.js"></script>
     <script src="./assets/js/contact.js"></script>
     <script src="./assets/js/contact_mobile.js"></script>
+    <script src="./assets/js/contactFormValidation.js"></script>
+
 
     <link rel="icon" type="image/x-icon" href="./assets/IMG/Capa 2.png" />
 
@@ -92,18 +94,29 @@
 
                     <form onsubmit="return false;" id="contactForm">
                         <div class="input-container">
-                            <div class="input-field name-icon">
+
+
+                            <div class="input-field name-icon" id="textInput">
                                 <input type="text" id="name" name="Name" placeholder="Name" required>
                                 <img src="assets/IMG/person.svg" alt="Person Icon" class="input-icon">
                             </div>
-                            <div class="input-field mail-icon">
+                            <div id="wrongText"></div>
+
+
+                    
+                            <div class="input-fieldmail mail-icon" id="mailInput">
                                 <input type="email" id="mail" name="Email" placeholder="Email" required>
                                 <img src="assets/IMG/mail.svg" alt="Mail Icon" class="input-icon">
                             </div>
-                            <div class="input-field phone-icon">
+                            <div id="wrongEmail"></div>
+                
+
+
+                            <div class="input-fieldphone phone-icon" id="phoneInput">
                                 <input type="tel" id="telephone" name="Phone" placeholder="Phone" required>
                                 <img src="assets/IMG/call.svg" alt="Call Icon" class="input-icon">
                             </div>
+                            <div id="wrongPhone"></div>
                         </div>
                         <div class="two-buttons">
                             <button type="button" class="cancel-button" onclick="cancel()">Cancel<img class="close-button"
