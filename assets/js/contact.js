@@ -41,7 +41,7 @@ async function fetchContacts(path = '') {
     };
 
     console.log(contactsArray);
-    sortContactsByLetter();  // Kontakte sortieren
+    sortContactsByLetter(); 
 }
 
 function getLastName(fullName) {
@@ -51,7 +51,7 @@ function getLastName(fullName) {
 
 function groupContacts() {
     groupedContacts = {};
-
+                 
     contactsArray.forEach((contact, index) => {
         let firstLetter = contact.name.charAt(0).toUpperCase();
         let colorIndex = index;
@@ -114,6 +114,8 @@ function selectContact(index) {
 
     const detailView = document.querySelector('.contactview-container');
     detailView.classList.add('active');
+
+
 }
 
 function closeDetailView() {
@@ -387,118 +389,11 @@ async function saveEditedContact(index) {
             newName: name
         };
 
-       if (!updateContactInTasks(editedContact)) {
-        await fetchTasks(); 
-        closeCardContact();
-       }
-       else {
         await updateContactInTasks(editedContact);  
         await fetchTasks();  
         await fetchContacts();
-    
-    }
-    closeCardContact();
+
+        closeCardContact();
+        getContactBig(index);
 }
-}
-
-function validateContact(name, email, phone) {
-   
-    if (!nameIsNotValid(name) || name.length < 3 || name.length > 30) {
-        wrongTextValidation();
-        changeColorText();
-        return false; 
-    } else {
-        document.getElementById("wrongText").innerHTML = '';
-        document.getElementById("textInput").style.border = "";
-    }
-
-   
-    if (!emailIsNotCorrect(email)) {
-        wrongEmailValidation();
-        changeColorMail();
-        return false; 
-    } else {
-        document.getElementById("wrongEmail").innerHTML = '';
-        document.getElementById("mailInput").style.border = "";
-    }
-
-    
-    if (!phoneNumberIsNotCorrect(phone) || phone.length < 6 || phone.length > 15 || phone[0] !== '0') {
-        wrongPhoneValidation(); 
-        changeColorPhone();
-        return false; 
-    } else {
-        document.getElementById("wrongPhone").innerHTML = '';
-        document.getElementById("phoneInput").style.border = "";
-    }
-
-    return true; 
-}
-
-
-async function updateContactInTasks(editedContact) {
-    let response = await fetch(base_URL + "/tasks.json");  // Alle Tasks von Firebase holen
-    let tasksData = await response.json();
-    let tasks = Object.entries(tasksData);
-
-    for (let [taskId, task] of tasks) {
-        let assignedContacts = task.AssignedContact || [];
-        
-        let contactIndex = assignedContacts.findIndex(contact => contact === editedContact.oldName);
-
-        if (contactIndex !== -1) {
-        
-            assignedContacts[contactIndex] = editedContact.newName;
-            
-        
-            await updateTaskInFirebase(taskId, task);
-        }
-    }
-}
-
-async function updateTaskInFirebase(taskId, updatedTask) {
-    await fetch(base_URL + `/tasks/${taskId}.json`, {
-        method: 'PUT',
-        body: JSON.stringify(updatedTask),
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    });
-}
-
-
-async function fetchTasks(path = '') {
-    tasksArray = [];
-    let response = await fetch(base_URL + path + ".json");
-    let userJSON = await response.json();
-    let tasksAsarray = Object.values(userJSON.tasks)
-    let keysArrayTask = Object.keys(userJSON.tasks);
-    currentDraggedElement = 0;
-    id = 0
-
-    for (let index = 0; index < tasksAsarray.length; index++) {
-        let task = tasksAsarray[index];
-        let keyTask = keysArrayTask[index];
-        id++;
-        let saveTask = tasksArray.filter(t => t.Title === task.Titel && t.Description === task.Description);
-        if (saveTask.length > 0) {
-            console.log(`Task mit Titel "${task.Titel}" existiert bereits.`);
-
-        } else {
-
-            tasksArray.push({
-                taskKey: keyTask,
-                idTask: id,
-                Title: task.Titel,
-                Description: task.Description,
-                Assigned: task.AssignedContact,
-                duedate: task.Date,
-                Prio: task.Prio,
-                Category: task.Category,
-                subtask: task.Subtask,
-                status: task.Status,
-            });
-        }
-    }
-
 }

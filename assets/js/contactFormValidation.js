@@ -1,5 +1,5 @@
 function nameIsNotValid(name) {
-    const nameCheck = /^[A-Za-zäöüÄÖÜß\s]+$/; // Nur Buchstaben und Leerzeichen
+    const nameCheck = /^[A-Za-zäöüÄÖÜß]+\s[A-Za-zäöüÄÖÜß]+$/;
     return nameCheck.test(name);
 
 }
@@ -46,7 +46,8 @@ function wrongTextValidation() {
     let showEmailMistake = document.getElementById("wrongText")
     
     showEmailMistake.innerHTML = `<div>
-                                     <span class="mistakeInput"> Der Name muss aus 3-30 Buchstaben bestehen. und darf keine Zahlen enthalten !!!</span>
+                                     <span class="mistakeInput"> Der Name muss aus 3-30 Buchstaben bestehen. und darf keine Zahlen enthalten 
+                                     Zusätzlich dürfen Sie nur einen vollständigen Namen eintragen mit einen Leerzeichen !!!</span>
                                 </div>`;
         
         }
@@ -70,3 +71,105 @@ function changeColorPhone() {
     document.getElementById("phoneInput").style.border= "2px solid red";
 }
 
+function validateContact(name, email, phone) {
+   
+    if (!nameIsNotValid(name) || name.length < 3 || name.length > 30) {
+        wrongTextValidation();
+        changeColorText();
+        return false; 
+    } else {
+        document.getElementById("wrongText").innerHTML = '';
+        document.getElementById("textInput").style.border = "";
+    }
+
+   
+    if (!emailIsNotCorrect(email)) {
+        wrongEmailValidation();
+        changeColorMail();
+        return false; 
+    } else {
+        document.getElementById("wrongEmail").innerHTML = '';
+        document.getElementById("mailInput").style.border = "";
+    }
+
+    
+    if (!phoneNumberIsNotCorrect(phone) || phone.length < 6 || phone.length > 15 || phone[0] !== '0') {
+        wrongPhoneValidation(); 
+        changeColorPhone();
+        return false; 
+    } else {
+        document.getElementById("wrongPhone").innerHTML = '';
+        document.getElementById("phoneInput").style.border = "";
+    }
+
+    return true; 
+}
+
+
+async function updateContactInTasks(editedContact) {
+    let response = await fetch(base_URL + "/tasks.json");  // Alle Tasks von Firebase holen
+    let tasksData = await response.json();
+    let keys = Object.keys(tasksData);
+    let tasks = Object.values(tasksData);
+
+    for (let index = 0; index < tasks.length; index++) {
+        let assignedContacts = tasks[index].AssignedContact || [];
+        
+        let contactIndex = assignedContacts.findIndex(contact => contact === editedContact.oldName);
+
+        if (contactIndex !== -1) {
+        
+            assignedContacts[contactIndex] = editedContact.newName;
+            let taskId = keys[index];
+        
+            await updateTaskInFirebase(taskId, tasks[index]);
+        }
+    }
+}
+
+async function updateTaskInFirebase(taskId, updatedTask) {
+    await fetch(base_URL + `/tasks/${taskId}.json`, {
+        method: 'PUT',
+        body: JSON.stringify(updatedTask),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+}
+
+
+async function fetchTasks(path = '') {
+    tasksArray = [];
+    let response = await fetch(base_URL + path + ".json");
+    let userJSON = await response.json();
+    let tasksAsarray = Object.values(userJSON.tasks)
+    let keysArrayTask = Object.keys(userJSON.tasks);
+    currentDraggedElement = 0;
+    id = 0
+
+    for (let index = 0; index < tasksAsarray.length; index++) {
+        let task = tasksAsarray[index];
+        let keyTask = keysArrayTask[index];
+        id++;
+        let saveTask = tasksArray.filter(t => t.Title === task.Titel && t.Description === task.Description);
+        if (saveTask.length > 0) {
+            console.log(`Task mit Titel "${task.Titel}" existiert bereits.`);
+
+        } else {
+
+            tasksArray.push({
+                taskKey: keyTask,
+                idTask: id,
+                Title: task.Titel,
+                Description: task.Description,
+                Assigned: task.AssignedContact,
+                duedate: task.Date,
+                Prio: task.Prio,
+                Category: task.Category,
+                subtask: task.Subtask,
+                status: task.Status,
+            });
+        }
+    }
+
+}

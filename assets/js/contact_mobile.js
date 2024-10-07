@@ -85,6 +85,7 @@ function showMobileEditContactOverlay(contactIndex) {
 
 
 async function saveEditedContactMobile(contactIndex) {
+    let oldName = contactsArray[contactIndex].name;  
     let name = document.getElementById('mobileName').value.trim();
     let email = document.getElementById('mobileMail').value.trim();
     let phone = document.getElementById('mobilePhone').value.trim();
@@ -93,19 +94,38 @@ async function saveEditedContactMobile(contactIndex) {
 
 
     if (name && email && phone) {
-        let updatedContact = { name, email, phone };
-        Object.assign(contactsArray[contactIndex], updatedContact);
-
-        sortContactsByLetter();
-        closeMobileNewContact();
-        getContactBig(contactIndex);
-
-        let key = contactsArray[contactIndex].id;
-        await putData(`contacts/${key}`, updatedContact);
-    }
+        if (!validateContact(name, email, phone)) {
+            return;
+        }
+            let key = contactsArray[contactIndex].id;
+            contactsArray[contactIndex].name = name;
+            contactsArray[contactIndex].email = email;
+            contactsArray[contactIndex].phone = phone;
+            let password = contactsArray[contactIndex].password;
+    
+            const newContact = {
+                name: name,
+                email: email,
+                phone: phone,
+                password: password
+            };
+    
+            await putData(`contacts/${key}`, newContact);
+    
+           
+            let editedContact = {
+                oldName: oldName,
+                newName: name
+            };
+    
+            await updateContactInTasks(editedContact);  
+            await fetchTasks();  
+            await fetchContacts();
+    
+            closeMobileNewContact();
+            getContactBig(contactIndex);
 }
-
-
+}
 
 async function deleteContactMobile(contactIndex) {
     if (contactIndex > -1) {
