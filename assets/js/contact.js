@@ -16,7 +16,7 @@ let groupedContacts = [];
 let selectedContactIndex = null;
 
 async function fetchContacts(path = '') {
-    contactsArray = []; 
+    contactsArray = [];
     let response = await fetch(base_URL + path + ".json");
     let userJSON = await response.json();
     let keysArray = Object.keys(userJSON.contacts);
@@ -30,7 +30,7 @@ async function fetchContacts(path = '') {
 
         if (contact.email !== "guest@web.de" && checkMailContact.length > 0) {
             contactsArray.push({
-                
+
                 id: key,
                 email: contact.email,
                 name: contact.name,
@@ -41,7 +41,7 @@ async function fetchContacts(path = '') {
     };
 
     console.log(contactsArray);
-    sortContactsByLetter(); 
+    sortContactsByLetter();
 }
 
 function getLastName(fullName) {
@@ -51,7 +51,7 @@ function getLastName(fullName) {
 
 function groupContacts() {
     groupedContacts = {};
-                 
+
     contactsArray.forEach((contact, index) => {
         let firstLetter = contact.name.charAt(0).toUpperCase();
         let colorIndex = index;
@@ -139,7 +139,8 @@ function getContactBig(index) {
 }
 
 function showContactBig(contactsName, contactsEmail, contactPhone, contactLastname, color) {
-    return `<div class="largcontactbox">
+    return `
+    <div class="largcontactbox">
         <div class="largsingle-contact-box">
             <div class="largcontact-icon" style="background-color:${color};">
                 <span>${contactsName.charAt(0).toUpperCase()}${contactLastname.charAt(0).toUpperCase()}</span>
@@ -171,7 +172,8 @@ function showContactBig(contactsName, contactsEmail, contactPhone, contactLastna
         </div>
         <img src="./assets/IMG/arrow-left-line.png" alt="backButton" onclick="closeDetailView()" class="back-button">
         <img src="./assets/IMG/Menu Contact options.png" alt="Menu button" class="menu-button-img" onclick="toggleMenu()">
-        <!-- Hier ist das Toggle-Menü für mobile Geräte -->
+        
+        <!-- Kontextmenü -->
         <div id="contextMenu" class="context-menu">
             <div onclick="editContact(selectedContactIndex)" class="menu-item">
                 <img src="./assets/IMG/edit.svg" alt="Edit" class="menu-icon">
@@ -182,8 +184,10 @@ function showContactBig(contactsName, contactsEmail, contactPhone, contactLastna
                 <span>Delete</span>
             </div>
         </div>
-    </div>`;
+    </div>
+`;
 }
+
 
 function collectBeginningLetters() {
     beginningLetter = [];
@@ -259,7 +263,7 @@ function addNewContact() {
     const createButton = document.querySelector('.createContact-button');
     createButton.onclick = function () {
         createContact();
-}
+    }
 
 }
 
@@ -308,13 +312,13 @@ function editContact(index) {
 }
 
 async function deleteContact(index) {
-    let key= contactsArray[index].id;
+    let key = contactsArray[index].id;
     if (index > -1) {
-        
+
         await deleteData(`contacts/${key}`);
         contactsArray.splice(index, 1);
         sortContactsByLetter();
-        
+
         if (window.innerWidth <= 1150) {
             closeDetailView();
         } else {
@@ -322,7 +326,7 @@ async function deleteContact(index) {
         }
 
         getContacts();
-        
+
     } else {
         console.error("Invalid index for deletion:", index);
     }
@@ -343,12 +347,12 @@ function closeCardContact() {
     document.querySelector('.createContact-button').textContent = 'Create Contact';
     document.querySelector('.addNewContactimg').style.display = 'block';
 
-    renderContacts(); 
+    renderContacts();
 }
 
 function handleCloseContact() {
-    closeCardContact();       
-    closeCardContactMobile(); 
+    closeCardContact();
+    closeCardContactMobile();
 }
 
 
@@ -358,7 +362,7 @@ function clearBigContactView() {
 }
 
 async function saveEditedContact(index) {
-    let oldName = contactsArray[index].name;  
+    let oldName = contactsArray[index].name;
     let name = document.getElementById('name').value.trim();
     let email = document.getElementById('mail').value.trim();
     let phone = document.getElementById('telephone').value.trim();
@@ -383,17 +387,17 @@ async function saveEditedContact(index) {
 
         await putData(`contacts/${key}`, newContact);
 
-       
+
         let editedContact = {
             oldName: oldName,
             newName: name
         };
 
-        await updateContactInTasks(editedContact);  
-        await fetchTasks();  
+        await updateContactInTasks(editedContact);
+        await fetchTasks();
         await fetchContacts();
 
         closeCardContact();
         getContactBig(index);
-}
+    }
 }

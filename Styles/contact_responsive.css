@@ -386,11 +386,11 @@ input[type="tel"] {
     .add-contact-button {
         display: block;
         position: fixed;
-        top: 700px;
-        right: 20px;
+        top: 690px;
+        right: 10px;
         width: 56px;
         height: 56px;
-        z-index: 100;
+        z-index: 1001;
     }
   
 
@@ -437,11 +437,13 @@ input[type="tel"] {
     }
 
     .menu-button-img {
-        position: absolute;
+        position: fixed;
         width: 56px;
         height: 56px;
-        top: 650px;
+        top: 750px;
         right: 10px;
+        bottom:80px;
+        z-index:1001;
         display: block;
     }
 
@@ -529,6 +531,10 @@ input[type="tel"] {
             letter-spacing: -2px;
             white-space: normal;
         }
+
+        .middle-Section {
+            margin-top: 80px;
+        }
     }
 
 
@@ -561,5 +567,48 @@ input[type="tel"] {
     .overlay-add-contact-profile-img-mobile {
         top: 270px;
     }
+}
 
+@media (max-height: 850px) {
+    .add-contact-button,  .menu-button-img {
+        top: 690px;
+    }
+}
+
+@media (max-height: 750px) {
+    .add-contact-button,  .menu-button-img {
+        top: 580px;
+    }
+}
+
+@media (max-height: 670px) {
+    .add-contact-button, .menu-button-img {
+        top: 520px;
+    }
+}
+
+@media (min-height: 890px) {
+    .add-contact-button, .menu-button-img {
+        top: 755px;
+    }
+}
+
+@media (min-height: 900px) {
+    .add-contact-button, .menu-button-img {
+        top: 775px;
+    }
+}
+
+@media (min-height: 1100px) {
+    .add-contact-button, .menu-button-img {
+        top: 1020px;
+        right:20px;
+    }
+}
+
+@media (min-height: 1300px) {
+    .add-contact-button, .menu-button-img {
+        top: 1200px;
+        right:20px;
+    }
 }
