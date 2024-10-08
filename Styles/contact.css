@@ -45,13 +45,20 @@ h2 {
 
 .contact-details-container {
     padding: 20px;
+   
+   
+    
 }
+
+
+
 
 .contactview {
     display: flex;
     flex-direction: column;
     width: 461px;
     height: 364px;
+   
 }
 
 .middle-Section {
@@ -186,6 +193,26 @@ h2 {
     display: flex;
     gap: 54px;
     align-items: center;
+   
+    
+}
+
+.largcontactbox{
+    height: 500px;
+    width: 600px;
+position: relative;
+    animation: slide 0.5s ;
+}
+
+
+@keyframes slide {
+    from {
+        left:700px;
+    }
+
+    to {
+        left: 0px;
+    }
 }
 
 .largcontact-icon {

@@ -101,9 +101,11 @@ body {
     cursor: pointer;
     width: 150px;
     height: 160px;
-    border-radius: 40px 0px 11px 10px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
     top: 135px;
-    right: 38px;
+    right: 0px;
     padding: 5px;
 }
 
@@ -111,7 +113,7 @@ body {
 .logoutsectionlink {
   
 text-decoration: none;
-color: white;
+color:  #CDCDCD;
 margin-top: 20px;
 font-size: 16px;
 
@@ -124,7 +126,7 @@ font-size: 16px;
 
 .logoutsectionlinklogouttext {
     text-decoration: none;
-    color: white;
+    color: #CDCDCD;
     margin-bottom: 20px;
     font-size: 16px;    
     margin-top: 20px;
@@ -285,6 +287,10 @@ a:hover {
 
     .kanbanBoardTitle {
         margin-left: 0;
+    }
+
+    .logoutSection {
+        top: 120px; 
     }
 }
 
