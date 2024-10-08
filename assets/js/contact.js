@@ -332,6 +332,7 @@ async function deleteContact(index) {
     }
 }
 
+
 function closeCardContact() {
     const newContactOverlay = document.getElementById('newContact');
     newContactOverlay.style.display = 'none';

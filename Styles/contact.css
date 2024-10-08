@@ -404,6 +404,7 @@ position: relative;
     gap: 15px;
     height: 215px;
     width: 422px;
+    margin-top:60px;
 }
 
 .addcontactheadline {
@@ -419,7 +420,6 @@ position: relative;
     font-weight: 400;
     display: flex;
     justify-content: center;
-    letter-spacing: 1px;
 }
 
 .hrnewcontact {
@@ -511,7 +511,7 @@ input:not(:placeholder-shown) {
 .two-buttons {
     display: flex;
     gap: 24px;
-    margin-top: 120px;
+    margin-top: 80px;
 }
 
 .mistakeInput {
@@ -628,4 +628,18 @@ input:not(:placeholder-shown) {
 
 .transition-in-from-right {
     animation: slide-in-from-right 300ms forwards ease-in-out;
+}
+
+.cancel-button::after {
+    content: url('assets/IMG/iconoir_cancel.png');
+    display: inline-block;
+    margin-left: 8px;
+    vertical-align: middle;
+}
+
+.createContact-button::after {
+    content: url('assets/IMG/check.svg');
+    display: inline-block;
+    margin-left: 8px;
+    vertical-align: middle;
 }

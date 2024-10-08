@@ -1,12 +1,41 @@
 function toggleMenu() {
-    const menu = document.getElementById("contextMenu");
+    const menuButton = document.querySelector('.menu-button-img');
+    const contextMenu = document.querySelector('#contextMenu');
+    const isMenuVisible = contextMenu.classList.contains('show');
 
-    if (menu.style.display === "block") {
-        menu.style.display = "none";
+    if (isMenuVisible) {
+        hideMenu(menuButton, contextMenu);
     } else {
-        menu.style.display = "block";
+        showMenu(menuButton, contextMenu);
     }
 }
+
+function showMenu(menuButton, contextMenu) {
+    contextMenu.style.display = "block";
+    contextMenu.classList.add('show');
+    menuButton.style.display = "none";
+}
+
+function hideMenu(menuButton, contextMenu) {
+    contextMenu.classList.remove('show');
+    contextMenu.classList.add('hide');
+    setTimeout(() => {
+        contextMenu.style.display = "none";
+        contextMenu.classList.remove('hide');
+        menuButton.style.display = "block";
+    }, 300); 
+}
+
+document.addEventListener('click', function(event) {
+    const menuButton = document.querySelector('.menu-button-img');
+    const contextMenu = document.querySelector('#contextMenu');
+
+    if (contextMenu && menuButton && !contextMenu.contains(event.target) && !menuButton.contains(event.target) && contextMenu.classList.contains('show')) {
+        hideMenu(menuButton, contextMenu);
+    }
+});
+
+
 
 
 
