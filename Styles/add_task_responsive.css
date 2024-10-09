@@ -1,8 +1,16 @@
-@media(max-width: 1450px) {
+
+@media(max-width: 1530px) {
 
     .add_task_content {
         margin-left: 0px;
     }
+
+
+
+}
+
+@media(max-width: 1450px) {
+
 
     .headline_addTask {
         padding: 16px;
