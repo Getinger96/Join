@@ -1,3 +1,6 @@
+.d-none {
+    display: none !important;
+}
 
 .mobileNewContactOverlay {
     position: fixed;
@@ -11,6 +14,14 @@
     align-items: center;
     z-index: 9999;
     display: none;
+}
+
+.sideblock {
+    display: flex;
+}
+
+.menu-button-img {
+    display: none !important;
 }
 
 .mobileNewContactOverlay-hidden {
@@ -106,7 +117,7 @@
     border: 1px solid #d1d1d1;
     border-radius: 10px;
     height: 41px;
-    padding-left:5px;
+    padding-left: 5px;
 }
 
 .input-icon-mobile {
@@ -201,12 +212,31 @@ input[type="tel"] {
 }
 
 .menu-item {
-    display:none;
+    display: none;
 }
+
+@media (max-width: 1528px) {
+    .headblock {
+        height: 96px !important;
+        padding: 20px 40px !important;
+        left: 230px !important;
+    }
+
+    .kanbanBoardTitle {
+        margin-left: 60px;
+    }
+}
+
 
 @media(max-width: 1450px) {
     .sideblock {
         display: flex;
+    }
+
+    .headblock {
+        height: 96px !important;
+        padding: 20px 40px !important;
+        left: 0px !important;
     }
 
     .d-none {
@@ -322,6 +352,7 @@ input[type="tel"] {
 
     .single-contact-box {
         width: 265px;
+        gap:10px;
     }
 
     .contactlist {
@@ -342,6 +373,7 @@ input[type="tel"] {
     body {
         overflow-x: hidden;
     }
+
     .contactview-container {
         display: none;
     }
@@ -392,7 +424,7 @@ input[type="tel"] {
         height: 56px;
         z-index: 1001;
     }
-  
+
 
     #mobileNewContactOverlay {
         display: none;
@@ -430,8 +462,8 @@ input[type="tel"] {
 
 
     .back-button {
-        position: absolute;
-        top: 70px;
+        position: fixed;
+        top: 180px;
         right: 20px;
         display: block;
     }
@@ -442,9 +474,9 @@ input[type="tel"] {
         height: 56px;
         top: 750px;
         right: 10px;
-        bottom:80px;
-        z-index:1001;
-        display: block;
+        bottom: 80px;
+        z-index: 1001;
+        display: block !important;
     }
 
     .headline-contacts h2 {
@@ -478,15 +510,32 @@ input[type="tel"] {
     }
 
     .context-menu {
+        position: fixed;
         display: none;
-        position: absolute;
+        top: 750px;
+        right: 10px;
         background-color: white;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         border-radius: 8px;
-        z-index: 1000;
-        right: 1px;
-        top: 390px;
+        z-index: 1002;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
     }
+
+    .context-menu.show {
+        display: block;
+        animation: slideIn 0.3s forwards; /* Startet das Einblenden */
+    }
+    
+    .context-menu.hide {
+        animation: slideOut 0.3s forwards; /* Startet das Ausblenden */
+    }
+
+
+    #contextMenu {
+        display: none;
+    }
+
 
     .menu-item {
         display: flex;
@@ -509,33 +558,45 @@ input[type="tel"] {
     }
 }
 
-    @media(max-width: 500px) {
-        h2 {
-            text-align: left;
-        }
-
-        .contactview-container.active {
-            top: 40px;
-        }
-
-        .contactlist {
-            padding: 0;
-            padding-bottom: 122px;
-        }
-
-        .largsingle-contact-box {
-            gap: 18px;
-        }
-
-        .largcontactname {
-            letter-spacing: -2px;
-            white-space: normal;
-        }
-
-        .middle-Section {
-            margin-top: 80px;
-        }
+@media(max-width: 500px) {
+    h2 {
+        text-align: left;
     }
+
+    .contactview-container.active {
+        top: 40px;
+    }
+
+    .contactlist {
+        padding: 0;
+        padding-bottom: 122px;
+    }
+
+    .largsingle-contact-box {
+        gap: 18px;
+    }
+
+    .largcontactname {
+        letter-spacing: -2px;
+        white-space: normal;
+    }
+
+    .middle-Section {
+        margin-top: 80px;
+    }
+
+    .headblock {
+        padding: 20px 30px 20px 30px !important;
+        height: 40px !important;
+        justify-content: space-between !important;
+        padding: 20px 16px !important;
+    }
+
+    .back-button {
+        top: 120px;
+    }
+    
+}
 
 
 @media(max-width: 450px) {
@@ -570,45 +631,120 @@ input[type="tel"] {
 }
 
 @media (max-height: 850px) {
-    .add-contact-button,  .menu-button-img {
+
+    .add-contact-button,
+    .menu-button-img {
         top: 690px;
+    }
+
+    .context-menu {
+        top: 660px;
     }
 }
 
 @media (max-height: 750px) {
-    .add-contact-button,  .menu-button-img {
+
+    .add-contact-button,
+    .menu-button-img {
         top: 580px;
+    }
+
+    .context-menu {
+        top: 550px;
     }
 }
 
+
 @media (max-height: 670px) {
-    .add-contact-button, .menu-button-img {
+
+    .add-contact-button,
+    .menu-button-img {
         top: 520px;
+    }
+
+    .context-menu {
+        top: 490px;
+    }
+}
+
+@media (min-height: 850px) {
+
+    .add-contact-button,
+    .menu-button-img {
+        top: 710px;
+    }
+
+    .context-menu {
+        top: 680px;
     }
 }
 
 @media (min-height: 890px) {
-    .add-contact-button, .menu-button-img {
+
+    .add-contact-button,
+    .menu-button-img {
         top: 755px;
+    }
+
+    .context-menu {
+        top: 725px;
     }
 }
 
 @media (min-height: 900px) {
-    .add-contact-button, .menu-button-img {
+
+    .add-contact-button,
+    .menu-button-img {
         top: 775px;
+    }
+
+    .context-menu {
+        top: 745px;
     }
 }
 
 @media (min-height: 1100px) {
-    .add-contact-button, .menu-button-img {
+
+    .add-contact-button,
+    .menu-button-img {
         top: 1020px;
-        right:20px;
+        right: 20px;
+    }
+
+    .context-menu {
+        top: 990px;
+        right: 20px;
     }
 }
 
 @media (min-height: 1300px) {
-    .add-contact-button, .menu-button-img {
+
+    .add-contact-button,
+    .menu-button-img {
         top: 1200px;
-        right:20px;
+        right: 20px;
+    }
+
+    .context-menu {
+        top: 1170px;
+        right: 20px;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%); 
+    }
+    to {
+        transform: translateX(0); 
+    }
+}
+
+@keyframes slideOut {
+    from {
+        transform: translateX(0); 
+    }
+    to {
+        transform: translateX(100%);
     }
 }
