@@ -137,6 +137,39 @@ async function updateTaskInFirebase(taskId, updatedTask) {
     });
 }
 
+async function deleteContactInBoard(index) {
+    let currenContact = contactsArray[index].name;
+    let response = await fetch(base_URL + "/tasks.json");
+    let userJSON = await response.json();
+    let tasksAsArray = Object.values(userJSON);
+    let keysArrayTask = Object.keys(userJSON);
+
+    for (let indexTask = 0; indexTask < tasksAsArray.length; indexTask++) {
+        let task = tasksAsArray[indexTask];
+        let assignedContacts = task.AssignedContact;
+        let keyTask = keysArrayTask[indexTask];
+
+        let contactIndex = assignedContacts.findIndex(contact => contact === currenContact);
+
+        if (contactIndex !== -1) {
+            assignedContacts.splice(contactIndex, 1);
+
+        
+            await updateAssignedContactsInFirebase(`tasks/${keyTask}/AssignedContact`, assignedContacts);
+        }
+    }
+}
+async function updateAssignedContactsInFirebase(path, updatedContacts) {
+    let response = await fetch(base_URL + path + ".json", {
+        method: "PUT",
+        body: JSON.stringify(updatedContacts)
+    });
+
+    return response.json();
+}
+
+
+
 
 async function fetchTasks(path = '') {
     tasksArray = [];

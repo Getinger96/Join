@@ -4,19 +4,6 @@ let tasksArray = [];
 let subTaskChecked = [];
 let currentTaskIndex = null;
 
-const colorsBoard = [
-    { index: 0, color: 'orange' },
-    { index: 1, color: 'yellow' },
-    { index: 2, color: 'green' },
-    { index: 3, color: 'turquoise' },
-    { index: 4, color: 'blue' },
-    { index: 5, color: 'purple' },
-    { index: 6, color: 'pink' },
-    { index: 7, color: 'light orange' },
-    { index: 8, color: 'lime green' },
-    { index: 9, color: 'crimson' },
-    { index: 10, color: 'brown' }
-];
 let currentDraggedElement;
 let id = 0
 
@@ -305,7 +292,8 @@ function convertToValidColor(color) {
         "grün": "#008000",
         "blau": "#0000FF",
         "pink": "#FF33A1",
-        "orange": "#FF5733"
+        "orange": "#FF5733",
+        "lila":  "#A133FF"
     };
 
 

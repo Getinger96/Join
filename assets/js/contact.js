@@ -227,8 +227,6 @@ async function createContact() {
     if (!validateContact(name, email, phone)) {
         return;
     }
-
-
     const newContact = {
         name: name,
         email: email,
@@ -237,13 +235,10 @@ async function createContact() {
 
     let response = await postData('contacts', newContact);
     let generatedKey = response.name;
-
     contactsArray.push({
         ...newContact,
         id: generatedKey
     });
-
-
     closeCardContact();
     await fetchContacts();
 }
@@ -342,6 +337,7 @@ async function deleteContact(index) {
     if (index > -1) {
 
         await deleteData(`contacts/${key}`);
+        deleteContactInBoard(index);
         contactsArray.splice(index, 1);
         sortContactsByLetter();
 
