@@ -294,11 +294,11 @@ a:hover {
 
 @keyframes slideLogout {
     from {
-        left:700px;
+        transform: translateX(100%);
     }
 
     to {
-        left: 313px;
+        transform: translateX(0);
     }
 }
 
