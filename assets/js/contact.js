@@ -295,11 +295,37 @@ function editFunctionAction(index) {
     cancelButton.textContent = 'Delete';
     cancelButton.style.display = 'block';
     cancelButton.onclick = function () { deleteContact(index); };
+
     const saveButton = document.querySelector('.createContact-button');
     saveButton.onclick = function () {
         saveEditedContact(index);
     };
 }
+
+function closeCardContact() {
+    const newContactOverlay = document.getElementById('newContact');
+    newContactOverlay.style.display = 'none';
+    newContactOverlay.classList.remove('transition-in-from-right');
+
+    const cancelButton = document.querySelector('.cancel-button');
+    cancelButton.innerHTML = 'Cancel <img src="assets/IMG/iconoir_cancel.png" alt="Cancel Icon" class="close-button" style="margin-left: 8px;">';
+    cancelButton.onclick = closeCardContact;
+    cancelButton.style.display = 'flex';
+
+    document.querySelector('.addcontactheadline').textContent = 'Add Contact';
+    document.querySelector('.addcontactsecondline').style.display = 'flex';
+    document.getElementById('name').value = '';
+    document.getElementById('mail').value = '';
+    document.getElementById('telephone').value = '';
+
+    const createButton = document.querySelector('.createContact-button');
+    createButton.innerHTML = 'Create Contact <img src="assets/IMG/check.svg" alt="Create Icon" class="button-icon" style="margin-left: 8px;">';
+
+    document.querySelector('.addNewContactimg').style.display = 'block';
+
+    renderContacts();
+}
+
 
 function editContact(index) {
     if (window.innerWidth <= 1150) {
@@ -333,23 +359,7 @@ async function deleteContact(index) {
 }
 
 
-function closeCardContact() {
-    const newContactOverlay = document.getElementById('newContact');
-    newContactOverlay.style.display = 'none';
-    newContactOverlay.classList.remove('transition-in-from-right');
 
-    document.querySelector('.cancel-button').textContent = 'Cancel';
-    document.querySelector('.cancel-button').onclick = closeCardContact;
-    document.querySelector('.addcontactheadline').textContent = 'Add Contact';
-    document.querySelector('.addcontactsecondline').style.display = 'flex';
-    document.getElementById('name').value = '';
-    document.getElementById('mail').value = '';
-    document.getElementById('telephone').value = '';
-    document.querySelector('.createContact-button').textContent = 'Create Contact';
-    document.querySelector('.addNewContactimg').style.display = 'block';
-
-    renderContacts();
-}
 
 function handleCloseContact() {
     closeCardContact();

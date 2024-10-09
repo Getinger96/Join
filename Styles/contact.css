@@ -525,7 +525,8 @@ input:not(:placeholder-shown) {
     font-size: 20px;
 }
 
-.cancel-button {
+.cancel-button,
+.delete-button {
     width: 126px;
     height: 56px;
     background-color: white;
@@ -535,7 +536,8 @@ input:not(:placeholder-shown) {
     display: flex;
 }
 
-.cancel-button:hover {
+.cancel-button:hover,
+.delete-button:hover {
     background-color: white;
     color: #5EC0E9;
     border-color: #5EC0E9;
