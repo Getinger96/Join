@@ -347,6 +347,12 @@ async function createTask(event) {
     let category = document.getElementById('Category');
     let subtask = subtasks;
     let status= 'open'
+
+
+    if (!validateTask(titel, description,category, date)) {
+        return;
+    }
+
     
     let newTask = {
         Titel: titel.value,
@@ -362,17 +368,16 @@ async function createTask(event) {
 if (loggedInUser=== guest) {
     localStorage.setItem('guestTasks',JSON.stringify(newTask))
     clearTask();
-}else{
-    if (titel.value==='' || date.value===''|| category.value==='') {
-        alert("Bitte fülle alle erforderlichen Felder aus.");
-        return;
-    }else {
+
+}
+
         console.log(newTask);
+        clearMissingFieldContent();
         await postData(`tasks`, newTask);
         clearTask();
-    }
+   
 }
-}
+
 
 function clearTask() {
     for (let i = 0; i < contacts.length; i++) {

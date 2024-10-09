@@ -346,6 +346,12 @@ function closeCardContact() {
     document.getElementById('telephone').value = '';
     document.querySelector('.createContact-button').textContent = 'Create Contact';
     document.querySelector('.addNewContactimg').style.display = 'block';
+    document.getElementById("wrongEmail").innerHTML = '';
+    document.getElementById("wrongPhone").innerHTML ='';
+    document.getElementById("wrongText").innerHTML ='';
+    document.getElementById("mailInput").style.border ='';
+    document.getElementById("phoneInput").style.border = '';
+    document.getElementById("textInput").style.border= '';
 
     renderContacts();
 }

@@ -25,17 +25,17 @@ function wrongEmailValidation() {
 let showEmailMistake = document.getElementById("wrongEmail")
 
 showEmailMistake.innerHTML = `<div>
-                                <span class="mistakeInput"> Achtung eine richtige Mail Adresse muss angegeben !!!</span>
+                                <span class="mistakeInput"> Attention, a correct email address must be provided!!!</span>
                             </div>`;
 
 }
 
 function wrongPhoneValidation() {
 
-    let showEmailMistake = document.getElementById("wrongPhone")
+    let showPhoneMistake = document.getElementById("wrongPhone")
     
-    showEmailMistake.innerHTML = `<div>
-                                    <span class="mistakeInput"> Die Telefonnummer muss aus 6-15 Zahlen bestehen .!!!</span>
+    showPhoneMistake.innerHTML = `<div>
+                                    <span class="mistakeInput"> The phone number must consist of 6-15 numbers.!!!</span>
                                 </div>`;
     
     }
@@ -43,11 +43,11 @@ function wrongPhoneValidation() {
 
 function wrongTextValidation() {
 
-    let showEmailMistake = document.getElementById("wrongText")
+    let showTextMistake = document.getElementById("wrongText")
     
-    showEmailMistake.innerHTML = `<div>
-                                     <span class="mistakeInput"> Der Name muss aus 3-30 Buchstaben bestehen. und darf keine Zahlen enthalten 
-                                     Zusätzlich dürfen Sie nur einen vollständigen Namen eintragen mit einen Leerzeichen !!!</span>
+    showTextMistake.innerHTML = `<div>
+                                     <span class="mistakeInput"> The name must consist of 3-30 letters. and must not contain any numbers 
+                                     In addition, you may only enter a full name with a space!!!</span>
                                 </div>`;
         
         }

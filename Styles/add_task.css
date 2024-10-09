@@ -611,6 +611,12 @@ input:focus {
     width: 24px;
 }
 
+.missingInput {
+    color: red;
+    font-size: 18px;
+    font-weight: bolder;
+}
+
 .create_icon {
     height: 24px;
     width: 24px;

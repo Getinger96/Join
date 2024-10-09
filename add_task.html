@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="Styles/add_task_responsive.css">
     <script src="./assets/js/add_task.js"></script>
     <script src="./assets/js/script.js"></script>
-    
+    <script src="./assets/js/add_taskValidation.js"></script>
 
     <link rel="icon" type="image/x-icon" href="./assets/IMG/Capa 2.png" />
 
@@ -57,6 +57,7 @@
                     <span class="Title_Header">Title<span class="red">*</span></span>
                     <textarea id="title" placeholder="Enter a Title" class="input_Title" required
                         type="text"></textarea>
+                        <div id="titleMissing"></div>
                 </div>
                 <div class="Description_Container">
                     <span class="Description_Header">Description</span>
@@ -97,11 +98,12 @@
                 </div>
                 <div onclick="func1(event)" class="cataegory_Container">
                     <span class="category_Header">Category <span class="red">*</span></span>
-                    <div id="select_container" class="select_container">
+                    <div id="select_containerId" class="select_container">
                         <input id="Category" class="Category_Input" placeholder="Select Category" type="text" required>
                         <div id="arrow_img_container_Category"> <img onclick="openCategoryLIst()"
                                 class="arrow_drop_downaa" src="assets/IMG/arrow_drop_downaa.svg" alt=""></div>
                     </div>
+                    <div id="InputFieldsMissing"></div>
                     <div id="Selection_Container_Category" class="Selection_Container_Category d_none">
                     </div>
                     <div class="Subtasks_Container">
