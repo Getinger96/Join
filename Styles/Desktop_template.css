@@ -3,6 +3,7 @@ body {
     font-family: 'Inter';
     font-weight: 400;
 }
+
 .sideblock {
     width: 232px;
     background-color: #2A3647;
@@ -16,6 +17,10 @@ body {
     position: fixed;
     z-index: 10;
     top: 0;
+}
+
+.d_none {
+    display: none;
 }
 
 .headblock {
@@ -32,7 +37,7 @@ body {
     line-height: 24px;
     font-family: 'Inter';
     font-weight: 400;
-    top:0;
+    top: 0;
     right: 0;
     bottom: 0;
     left: 0;
@@ -111,12 +116,25 @@ body {
 
 
 .logoutsectionlink {
-  
-text-decoration: none;
-color:  #CDCDCD;
-margin-top: 20px;
-font-size: 16px;
 
+    text-decoration: none;
+    color: #CDCDCD;
+    margin-top: 20px;
+    font-size: 16px;
+
+}
+
+.logoutsectionlinkHelp {
+
+    text-decoration: none;
+    color: #CDCDCD;
+    margin-top: 20px;
+    font-size: 16px;
+
+}
+
+.logoutsectionlinkHelp:hover {
+    background-color: #405169;
 }
 
 .logoutsectionlink:hover {
@@ -128,7 +146,7 @@ font-size: 16px;
     text-decoration: none;
     color: #CDCDCD;
     margin-bottom: 20px;
-    font-size: 16px;    
+    font-size: 16px;
     margin-top: 20px;
 }
 
@@ -239,7 +257,7 @@ font-size: 16px;
 .bottom_Side_Block {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 16px;
     margin-bottom: 150px;
 }
 
@@ -263,15 +281,25 @@ a:hover {
 
 .help-link {
     background-color: transparent !important;
-    border: none; 
-    padding: 0; 
-    margin: 0; 
+    border: none;
+    padding: 0;
+    margin: 0;
     display: inline-block;
 }
 
 .help-link img {
     background-color: transparent;
-    display: block; 
+    display: block;
+}
+
+@keyframes slideLogout {
+    from {
+        left:700px;
+    }
+
+    to {
+        left: 313px;
+    }
 }
 
 
@@ -289,9 +317,7 @@ a:hover {
         margin-left: 0;
     }
 
-    .logoutSection {
-        top: 120px; 
-    }
+
 }
 
 @media(max-width: 1220px) {
@@ -304,23 +330,49 @@ a:hover {
 
 }
 
-@media (max-width: 650px) {
+@media(max-width: 1150px){
     .logoutSection {
-        width: 120px;
-        height: 120px;
-        top: 130px;
+        top: 100px;
+        z-index: 999;
     }
-
-    .logInUser {
-        padding:0;
-    }
-
-
 }
 
+
+
 @media(max-width: 500px) {
+
+    .logInUser {
+         padding: 0px;
+    }
+
+    .logoutSection {
+        top: 63px;
+       animation: slideLogout 1.5s ;
+    }
+
+    .logoutsectionlink {
+    
+        margin-top: 10px;
+       
+    }
+
+    .logoutsectionlinklogouttext {
+        text-decoration: none;
+        color: #CDCDCD;
+        margin-bottom: 10px;
+        font-size: 16px;
+        margin-top: 10px;
+    }
+
+    .logoutsectionlinkHelp {
+        margin-top: 10px;
+    }
     .kanbanBoardTitle {
         display: none;
+    }
+
+    .logoutsectionlinkHelp {
+        display: block;
     }
 
     .headUserContainer img[src*="help.png"] {

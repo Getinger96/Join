@@ -52,20 +52,20 @@ async function includeHTML() {
             xhttp.send();
             /* Exit the function: */
             return
-        } 
+        }
     }
 };
 
 
 async function init() {
-   
-    
-fetchContacts();
-includeHTML();
-checkIfLoggedIn();
-fetchTasks();
 
-   
+
+    fetchContacts();
+    includeHTML();
+    checkIfLoggedIn();
+    fetchTasks();
+
+
 }
 
 
@@ -74,52 +74,61 @@ logOutVisibleBoolean = false;
 
 function showLogOutSection() {
 
-let toggleLogout = document.getElementById('logoutId');
+    let toggleLogout = document.getElementById('logoutId');
 
 
-if (logOutVisibleBoolean) {
-    toggleLogout.innerHTML ='';
 
-} else {
-    toggleLogout.innerHTML = `<div class="logoutSection">
+    if (logOutVisibleBoolean) {
+        toggleLogout.innerHTML = '';
 
-    <a class="logoutsectionlink" href="legal_notes.html"> Legal Notice </a>
-    <a class="logoutsectionlink" href="privacy_policy.html"> Privacy Policy</a>
-    <a  class="logoutsectionlinklogouttext"  href="login.html"> Log out </a>
+    } else {
 
-</div>
-`;
+
+
+        toggleLogout.innerHTML = `<div class="logoutSection">
+            <a class="logoutsectionlinkHelp d_none" href="help.html"> Help </a>
+            <a class="logoutsectionlink" href="legal_notes.html"> Legal Notice </a>
+            <a class="logoutsectionlink" href="privacy_policy.html"> Privacy Policy</a>
+            <a  class="logoutsectionlinklogouttext"  href="login.html"> Log out </a>
+        
+         </div>
+                        `;
+
+
+    }
+
+
+
+    logOutVisibleBoolean = !logOutVisibleBoolean;
+
 
 }
 
-logOutVisibleBoolean =!logOutVisibleBoolean;
-
-}
 
 
 async function showTheNameInitial(loggedInUser) {
-    
 
-   let userSign = document.getElementById('loginUserId');
 
-   let fullName = loggedInUser.name; 
+    let userSign = document.getElementById('loginUserId');
 
-   let nameParts = fullName.split(" ");
+    let fullName = loggedInUser.name;
 
-   let firstName;
+    let nameParts = fullName.split(" ");
 
-   if (nameParts.length >= 2) {
-    firstName = nameParts[0].charAt(0).toUpperCase();  
-    let lastName = nameParts[1].charAt(0).toUpperCase();
-    userSign.innerHTML = `${firstName} ${lastName}`;
+    let firstName;
 
-    
-   } else {
-    firstName = nameParts[0].charAt(0).toUpperCase();  
-    userSign.innerHTML = `${firstName}`;
-   }
+    if (nameParts.length >= 2) {
+        firstName = nameParts[0].charAt(0).toUpperCase();
+        let lastName = nameParts[1].charAt(0).toUpperCase();
+        userSign.innerHTML = `${firstName} ${lastName} `;
 
-   showTheNameInitialInColor(firstName);
+
+    } else {
+        firstName = nameParts[0].charAt(0).toUpperCase();
+        userSign.innerHTML = `${firstName} `;
+    }
+
+    showTheNameInitialInColor(firstName);
 }
 
 function showTheNameInitialInColor(firstName) {
@@ -127,24 +136,24 @@ function showTheNameInitialInColor(firstName) {
     let userSign = document.getElementById('loginUserId');
     colorLetter.forEach(colorLetterItem => {
 
-    
+
 
         if (firstName === colorLetterItem.letter) {
-            let currentColor = colorLetterItem.color; 
+            let currentColor = colorLetterItem.color;
             userSign.style.color = currentColor;
         }
     });
 }
 
 
- function checkIfLoggedIn() {
-    let loggedInUser = localStorage.getItem('loggedInUser'); 
+function checkIfLoggedIn() {
+    let loggedInUser = localStorage.getItem('loggedInUser');
     if (loggedInUser) {
-        loggedInUser = JSON.parse(loggedInUser); 
+        loggedInUser = JSON.parse(loggedInUser);
         console.log(loggedInUser);
-       showTheNameInitial(loggedInUser);
-     
-      
+        showTheNameInitial(loggedInUser);
+
+
     } else {
         console.log('Kein Benutzer ist eingeloggt');
     }
@@ -152,10 +161,10 @@ function showTheNameInitialInColor(firstName) {
 
 
 function goToSummary() {
-    window.location.href = 'summary.html'; 
+    window.location.href = 'summary.html';
 }
 
 function goToLogin() {
     window.location.href = 'login.html';
-    localStorage.clear(); 
+    localStorage.clear();
 }
