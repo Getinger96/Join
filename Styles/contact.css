@@ -629,17 +629,3 @@ input:not(:placeholder-shown) {
 .transition-in-from-right {
     animation: slide-in-from-right 300ms forwards ease-in-out;
 }
-
-.cancel-button::after {
-    content: url('assets/IMG/iconoir_cancel.png');
-    display: inline-block;
-    margin-left: 8px;
-    vertical-align: middle;
-}
-
-.createContact-button::after {
-    content: url('assets/IMG/check.svg');
-    display: inline-block;
-    margin-left: 8px;
-    vertical-align: middle;
-}
