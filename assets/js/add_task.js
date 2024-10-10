@@ -25,7 +25,7 @@ async function fetchContacts(path = '') {
         let contact = userAsArray[index];
         let key = keysArray[index];
         let colorIndex = index;
-       
+
         if (colorIndex >= colors.length) {
             colorIndex -= colors.length;
         }
@@ -50,24 +50,21 @@ async function fetchContacts(path = '') {
 function func1(event) {
     event.stopPropagation();
 }
+let d_none = true;
 function openList() {
+
     let selecCon = document.getElementById('Selection_Container');
     let arrowCon = document.getElementById('arrow_img_container');
-    arrowCon.innerHTML = `<img onclick="closelist()" class="arrow_drop_downaa" src="assets/IMG/arrow_drop_up.svg" alt="">`;
-    selecCon.classList.remove('d_none');
-    getContacts();
 
-    for (let i = 0; i < contactsArray.length; i++) {
-        let contact = contactsArray[i];
-        let contactContainer = document.getElementById(`profile-${i}`);
+    selecCon.classList.toggle('d_none');
 
-        if (assignedContacts.includes(contact.name)) {
-            contactContainer.classList.add('bg_color');
-            contactContainer.classList.add('color_white');
-        } else {
-            contactContainer.classList.remove('bg_color');
-            contactContainer.classList.remove('color_white');
-        }
+    if (d_none == true) {
+        arrowCon.innerHTML = `<img class="arrow_drop_up" src="assets/IMG/arrow_drop_up.svg" alt="">`;
+        d_none = false;
+    } else {
+        arrowCon.innerHTML = `<img class="arrow_drop_downaa" src="./assets/IMG/arrow_drop_downaa.svg" alt="">`;
+        d_none = true;
+
     }
 
 }
@@ -78,7 +75,7 @@ function closelist() {
     let selecCon = document.getElementById('Selection_Container');
     let arrowCon = document.getElementById('arrow_img_container');
     arrowCon.innerHTML = '';
-    arrowCon.innerHTML = `<img onclick="openList()"class="arrow_drop_downaa" src="./assets/IMG/arrow_drop_downaa.svg" alt="">`;
+
     selecCon.classList.add('d_none');
 }
 
@@ -123,19 +120,19 @@ function renderSelectionContainer() {
         let firstletterlastname = lastname.charAt(0);
         let firstletterlastnameBIG = firstletterlastname.toUpperCase();
         let firstletters = forNAmebig + firstletterlastnameBIG;
-        profiles.innerHTML += renderContacts(i,contactColour,firstletters,name) ;
+        profiles.innerHTML += renderContacts(i, contactColour, firstletters, name);
     }
 }
 
-function renderContacts(i,contactColour,firstletters,name) {
+function renderContacts(i, contactColour, firstletters, name) {
     return `
-       <div id="profile_Container${i}" class="profile_Container">
+       <div  onclick="selectedContact(${i},'${name}','${firstletters}','${contactColour}')" id="profile_Container${i}" class="profile_Container">
          <div class="profile_container_header">
           <div class="profile_Badge_assign ${contactColour}">${firstletters}</div>
           <div>${name}</div>
          </div>
           <div id="checkbox${i}">
-          <img onclick="selectedContact(${i},'${name}','${firstletters}','${contactColour}')"  class="check_img " src="./assets/IMG/Check button.svg" alt="">
+          <img  class="check_img " src="./assets/IMG/Check button.svg" alt="">
          </div>
         </div>`
 
@@ -144,31 +141,33 @@ function renderContacts(i,contactColour,firstletters,name) {
 function selectedContact(i, name, firstletters, contactColour) {
     let checkbox = document.getElementById(`checkbox${i}`);
     checkbox.innerHTML = '';
-    checkbox.innerHTML = `<img onclick="deselctedtContact(${i},'${name}','${firstletters}','${contactColour}')" class="checked_img" src="./assets/IMG/Checked button.svg" alt="">`
+    checkbox.innerHTML = `<img  class="checked_img" src="./assets/IMG/Checked button.svg" alt="">`
 
     let profileContainer = document.getElementById(`profile_Container${i}`);
-    profileContainer.classList.add('bg_color');
-    profileContainer.classList.add('color_white');
+    profileContainer.classList.toggle('bg_color');
+    profileContainer.classList.toggle('color_white');
+    profileContainer.classList.toggle('profile_Containerselected');
+        
     
+
     if (!assignedContacts.includes(name)) {
-        assignedContacts.push(name);
+        assignedContacts.push(name)
+        showSelectedProfile(firstletters, i, contactColour)
+       
+    }else{
+        deselctedtContact(i, name, firstletters, contactColour)
     }
-
-    showSelectedProfile(firstletters, i, contactColour);
 }
-
+   
 function deselctedtContact(i, name, firstletters, contactColour) {
     let checkbox = document.getElementById(`checkbox${i}`);
     checkbox.innerHTML = '';
-    checkbox.innerHTML = `<img onclick="selectedContact(${i},'${name}','${firstletters}','${contactColour}')" id="checkImg${i}" class="check_img" src="assets/IMG/Check button.svg" alt="">`
+    checkbox.innerHTML = `<img  id="checkImg${i}" class="check_img" src="assets/IMG/Check button.svg" alt="">`
 
-    let profileContainer = document.getElementById(`profile_Container${i}`);
-    profileContainer.classList.remove('bg_color');
-    profileContainer.classList.remove('color_white');
     let index = assignedContacts.indexOf(name);
 
-     assignedContacts.splice(index, 1);
-     console.log(assignedContacts)
+    assignedContacts.splice(index, 1);
+    console.log(assignedContacts)
     showSelectedProfile(firstletters, i, contactColour);
 }
 
@@ -177,11 +176,11 @@ function showSelectedProfile(firstletters, i, contactColour) {
     let profilebadgeassign = document.getElementById(`profile_Badge_assign${i}`);
     if (profilebadgeassign) {
         profilebadgeassign.remove()
-       ;
-    }else {
+            ;
+    } else {
         selectedProfileContainer.innerHTML += `
         <div id="profile_Badge_assign${i}" class="profile_Badge_assign ${contactColour}">${firstletters}</div>
-    ` 
+    `
     }
 }
 
@@ -209,12 +208,12 @@ function chossedurgent() {
     urgent.innerHTML =
         `
      Urgent
-     <img src="./assets/IMG/Priority symbols (1).png" alt="">
+     <img src="./assets/IMG/Prio_urgent_WHITE.svg" alt="">
      `;
 
     urgent.classList.add('bg_urgent_selected');
     urgent.classList.add('color_white')
-    prio= 'urgent';
+    prio = 'urgent';
 };
 
 function choossedmedium() {
@@ -223,11 +222,11 @@ function choossedmedium() {
     medium.innerHTML =
         `
     Medium
-    <img src="assets/IMG/Priority symbols (2).png" alt="">
+    <img src="assets/IMG/PRio_Medium_WHITE.svg" alt="">
     `;
     medium.classList.add('color_white');
     medium.classList.add('bg_Medium');
-    prio= 'medium';
+    prio = 'medium';
 }
 
 function choosedlow() {
@@ -236,11 +235,11 @@ function choosedlow() {
     low.innerHTML =
         `
     Low
-    <img src="./assets/IMG/Priority symbols.png" alt="">
+    <img src="./assets/IMG/Prio_LOW_WHITE.svg" alt="">
     `;
     low.classList.add('color_white');
     low.classList.add('bg_Low');
-    prio= 'low';
+    prio = 'low';
 }
 
 function addSubtask() {
@@ -289,22 +288,22 @@ function editSubtask(i) {
         <input id="subtaskValue${i}" class="subTaskInput" type="text" value="${subtasks[i]}">
     </li>`;
 
-   let change =  document.getElementById(`changeImgEdit${i}`) 
-   
-   
+    let change = document.getElementById(`changeImgEdit${i}`)
+
+
     change.innerHTML = `<img class="imgCheckedIcon" src="./assets/IMG/checkAddTask.png" alt="check" onclick="enterNewSubtask(${i})">`;
 }
 
 
 function enterNewSubtask(i) {
     event.stopPropagation();
-   let newSubTask = document.getElementById(`subtaskValue${i}`).value
+    let newSubTask = document.getElementById(`subtaskValue${i}`).value
 
-   subtasks[i] =newSubTask;
-   document.getElementById(`changeImgEdit${i}`).innerHTML =
+    subtasks[i] = newSubTask;
+    document.getElementById(`changeImgEdit${i}`).innerHTML =
 
-    addSubtask();
-    
+        addSubtask();
+
 }
 
 
@@ -336,24 +335,24 @@ async function postData(path = "", data = {}) {
 
 async function createTask(event) {
     event.preventDefault();
-    let loggedInUser = localStorage.getItem('loggedInUser'); 
+    let loggedInUser = localStorage.getItem('loggedInUser');
     loggedInUser = JSON.parse(loggedInUser);
-    let guest = {"email":"guest@web.de","name":"guest","password":"guest123456"}
-    
+    let guest = { "email": "guest@web.de", "name": "guest", "password": "guest123456" }
+
     let titel = document.getElementById('title');
     let description = document.getElementById('Description');
     let assignedContact = assignedContacts;
     let date = document.getElementById('dueDate');
     let category = document.getElementById('Category');
     let subtask = subtasks;
-    let status= 'open'
+    let status = 'open'
 
 
-    if (!validateTask(titel, description,category, date)) {
+    if (!validateTask(titel, description, category, date)) {
         return;
     }
 
-    
+
     let newTask = {
         Titel: titel.value,
         Description: description.value,
@@ -362,20 +361,20 @@ async function createTask(event) {
         Prio: prio,
         Category: category.value,
         Subtask: subtask,
-        Status:status
+        Status: status
     };
 
-if (loggedInUser=== guest) {
-    localStorage.setItem('guestTasks',JSON.stringify(newTask))
+    if (loggedInUser === guest) {
+        localStorage.setItem('guestTasks', JSON.stringify(newTask))
+        clearTask();
+
+    }
+
+    console.log(newTask);
+    clearMissingFieldContent();
+    await postData(`tasks`, newTask);
     clearTask();
 
-}
-
-        console.log(newTask);
-        clearMissingFieldContent();
-        await postData(`tasks`, newTask);
-        clearTask();
-   
 }
 
 
@@ -418,6 +417,6 @@ function emptySubtask() {
 
     let currentSubtask = document.getElementById('input_Subtasks')
 
-    currentSubtask.value='';
+    currentSubtask.value = '';
 }
 

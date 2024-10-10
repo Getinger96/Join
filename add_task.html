@@ -55,20 +55,20 @@
             <div class="input_Task_Container_left">
                 <div class="Title_Container">
                     <span class="Title_Header">Title<span class="red">*</span></span>
-                    <textarea id="title" placeholder="Enter a Title" class="input_Title" required
-                        type="text"></textarea>
+                    <input id="title" placeholder="Enter a Title" class="input_Title" required
+                        type="text">
                         <div id="titleMissing"></div>
                 </div>
                 <div class="Description_Container">
                     <span class="Description_Header">Description</span>
-                    <textarea id="Description" class="input_Description" placeholder="Enter a Description"
-                        type="text"></textarea>
+                    <input id="Description" class="input_Description" placeholder="Enter a Description"
+                        type="text">
                 </div>
                 <div onclick="func1(event)" class="AssignedTO_Container">
                     <span class="Assign_Header">Assigned to</span>
-                    <div id="select_container" class="select_container">
+                    <div onclick="openList()" id="select_container" class="select_container">
                         <span>Select contacts to assign </span>
-                        <div id="arrow_img_container"> <img onclick="openList()" class="arrow_drop_downaa"
+                        <div id="arrow_img_container"> <img  class="arrow_drop_downaa"
                                 src="assets/IMG/arrow_drop_downaa.svg" alt=""></div>
                     </div>
                     <div id="Selection_Container" class="Selection_Container d_none">

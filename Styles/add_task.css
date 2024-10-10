@@ -181,18 +181,38 @@ body {
     height: 56px;
     justify-content: space-between;
     align-items: center;
+    border-radius: 10px;
+    padding-right: 8px;
+    border: 1px solid rgba(255, 255, 255, 0);
+   
 }
 
 .bg_color {
     background-color: #2A3647;
+    ;
+    
 }
 
 .color_white {
     color: #FFFFFF;
 }
 
+
+
+.profile_Containerselected{
+    
+}
+.profile_Containerselected:hover {
+    background-color: #091931;
+    
+    
+}
+
 .profile_Container:hover {
     border: 1px solid rgba(0, 0, 0, 0.1);
+   
+   
+    
 }
 
 .profile_container_header {
