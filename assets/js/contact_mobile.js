@@ -119,9 +119,6 @@ async function saveEditedContactMobile(contactIndex) {
     let email = document.getElementById('mobileMail').value.trim();
     let phone = document.getElementById('mobilePhone').value.trim();
 
-
-
-
     if (name && email && phone) {
         if (!validateContact(name, email, phone)) {
             return;
@@ -193,8 +190,6 @@ async function deleteData(path = "") {
 
     return responsASJson = await response.json();
 }
-
-
 
 async function putData(path = "", data = {}) {
     let response = await fetch(base_URL + path + ".json", {

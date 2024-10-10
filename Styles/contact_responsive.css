@@ -558,6 +558,14 @@ input[type="tel"] {
     }
 }
 
+@media (max-width: 700px) {
+    .largcontactname {
+        white-space: normal;
+        max-width: 98%; 
+        display: block;
+    }
+}
+
 @media(max-width: 500px) {
     h2 {
         text-align: left;
@@ -628,7 +636,10 @@ input[type="tel"] {
     .overlay-add-contact-profile-img-mobile {
         top: 270px;
     }
+
+    
 }
+
 
 @media (max-height: 850px) {
 
@@ -665,6 +676,23 @@ input[type="tel"] {
     .context-menu {
         top: 490px;
     }
+
+    
+    .contactmailsection {
+        padding-top: 20px;
+    }
+    .contact-details-container {
+        padding-top: 40px;
+    }
+
+    .contactinfo {
+        padding: 30px 0px;
+    }
+
+    .headline-contacts {
+        padding: 70px 28px 28px 10px;
+    }
+    
 }
 
 @media (min-height: 850px) {
