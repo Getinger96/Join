@@ -143,18 +143,24 @@
             
             <div class="overlay-add-contact-mobile-bottom">
                 <div class="input-fields-add-contact-mobile">
-                    <div class="input-field-mobile name-icon-mobile">
+                    <div class="input-field-mobile name-icon-mobile" id="textInputMobile">
                         <input type="text" id="mobileName" placeholder="Name" required>
                         <img src="./assets/IMG/person.svg" alt="Person Icon" class="input-icon-mobile">
                     </div>
-                    <div class="input-field-mobile mail-icon-mobile">
+                    <div id="wrongTextMobile"></div>
+
+                    
+                    <div class="input-field-mobile mail-icon-mobile" id="mailInputMobile">
                         <input type="email" id="mobileMail" placeholder="Email" required>
                         <img src="./assets/IMG/mail.svg" alt="Mail Icon" class="input-icon-mobile">
                     </div>
-                    <div class="input-field-mobile phone-icon-mobile">
+                    <div id="wrongEmailMobile"></div>
+
+                    <div class="input-field-mobile phone-icon-mobile" id="phoneInputMobile">
                         <input type="tel" id="mobilePhone" placeholder="Phone" required>
                         <img src="./assets/IMG/call.svg" alt="Call Icon" class="input-icon-mobile">
                     </div>
+                    <div id="wrongPhoneMobile"></div>
                     <div class="mobile-form-buttons">
                         <button type="button" class="createContact-mobile-button" onclick="createContactMobile()">
                             Create Contact

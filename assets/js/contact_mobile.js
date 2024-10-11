@@ -69,6 +69,11 @@ async function createContactMobile() {
     const email = document.getElementById('mobileMail').value.trim();
     const phone = document.getElementById('mobilePhone').value.trim();
 
+    if (!validateContactMobileVersion(name, email, phone)) {
+        return;
+    }
+
+
     const newContact = {
         name: name,
         email: email,
@@ -120,7 +125,7 @@ async function saveEditedContactMobile(contactIndex) {
     let phone = document.getElementById('mobilePhone').value.trim();
 
     if (name && email && phone) {
-        if (!validateContact(name, email, phone)) {
+        if (!validateContactMobileVersion(name, email, phone)) {
             return;
         }
             let key = contactsArray[contactIndex].id;

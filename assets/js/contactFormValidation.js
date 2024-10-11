@@ -13,7 +13,7 @@ function emailIsNotCorrect(email) {
 }
 
 function phoneNumberIsNotCorrect(phone) {
-    let phoneCheck = /^\d*$/;
+    let phoneCheck = /^\d+$/
     return phoneCheck.test(phone); 
 
 
@@ -25,7 +25,7 @@ function wrongEmailValidation() {
 let showEmailMistake = document.getElementById("wrongEmail")
 
 showEmailMistake.innerHTML = `<div>
-                                <span class="mistakeInput"> Attention, a correct email address must be provided!!!</span>
+                                <span class="mistakeInput"> Attention, a correct email address must be provided</span>
                             </div>`;
 
 }
@@ -35,7 +35,7 @@ function wrongPhoneValidation() {
     let showPhoneMistake = document.getElementById("wrongPhone")
     
     showPhoneMistake.innerHTML = `<div>
-                                    <span class="mistakeInput"> The phone number must consist of 6-15 numbers.!!!</span>
+                                    <span class="mistakeInput"> The phone number must consist of 6-15 numbers.</span>
                                 </div>`;
     
     }
@@ -46,12 +46,45 @@ function wrongTextValidation() {
     let showTextMistake = document.getElementById("wrongText")
     
     showTextMistake.innerHTML = `<div>
-                                     <span class="mistakeInput"> The name must consist of 3-30 letters. and must not contain any numbers 
-                                     In addition, you may only enter a full name with a space!!!</span>
+                                     <span class="mistakeInput"> Please enter a full name of 3-30 letters</span>
                                 </div>`;
         
         }
 
+
+
+ function wrongEmailValidationMobile() {
+    
+    let showEmailMistake = document.getElementById("wrongEmailMobile")
+            
+         showEmailMistake.innerHTML = `<div>
+         <span class="mistakeInput"> Attention, a correct email address must be provided</span>
+                                </div>`;
+            
+            }
+            
+function wrongPhoneValidationMobile() {
+            
+    let showPhoneMistake = document.getElementById("wrongPhoneMobile")
+                
+    showPhoneMistake.innerHTML = `<div>
+    <span class="mistakeInput"> The phone number must consist of 6-15 numbers.</span>
+                              </div>`;
+                
+                }
+            
+            
+function wrongTextValidationMobile() {
+            
+     let showTextMistake = document.getElementById("wrongTextMobile")
+                
+        showTextMistake.innerHTML = `<div>
+        <span class="mistakeInput"> Please enter a full name of 3-30 letters</span>
+                                </div>`;
+                    
+                    }
+            
+            
 
 function changeColorMail() {
 
@@ -63,8 +96,6 @@ function changeColorText() {
 
     document.getElementById("textInput").style.border= "2px solid red";
 }
-
-
 
 function changeColorPhone() {
 
@@ -103,6 +134,59 @@ function validateContact(name, email, phone) {
     }
 
     return true; 
+}
+
+
+function validateContactMobileVersion(name, email, phone) {
+   
+    if (!nameIsNotValid(name) || name.length < 3 || name.length > 30) {
+        wrongTextValidationMobile();
+        changeColorTextMobile();
+        return false; 
+    } else {
+        document.getElementById("wrongTextMobile").innerHTML = '';
+        document.getElementById("textInputMobile").style.border = "";
+    }
+
+   
+    if (!emailIsNotCorrect(email)) {
+        wrongEmailValidationMobile();
+        changeColorMailMobile();
+        return false; 
+    } else {
+        document.getElementById("wrongEmailMobile").innerHTML = '';
+        document.getElementById("mailInputMobile").style.border = "";
+    }
+
+    
+    if (!phoneNumberIsNotCorrect(phone) || phone.length < 6 || phone.length > 15 ) {
+        wrongPhoneValidationMobile(); 
+        changeColorPhoneMobile();
+        return false; 
+    } else {
+        document.getElementById("wrongPhoneMobile").innerHTML = '';
+        document.getElementById("phoneInputMobile").style.border = "";
+    }
+
+    return true; 
+}
+
+
+
+function changeColorPhoneMobile() {
+
+    document.getElementById("phoneInputMobile").style.border= "2px solid red";
+}
+
+function changeColorMailMobile() {
+
+    document.getElementById("mailInputMobile").style.border= "2px solid red";
+}
+
+
+function changeColorTextMobile() {
+
+    document.getElementById("textInputMobile").style.border= "2px solid red";
 }
 
 

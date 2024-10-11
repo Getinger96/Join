@@ -519,6 +519,7 @@ input:not(:placeholder-shown) {
 
 .mistakeInput {
     color: red;
+    font-size: 13px;
 }
 
 .cancel-button,

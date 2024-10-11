@@ -116,7 +116,7 @@
     align-items: center;
     border: 1px solid #d1d1d1;
     border-radius: 10px;
-    height: 41px;
+    height: 28px;
     padding-right:40px;
     padding-left: 5px;
 }
@@ -141,7 +141,7 @@ input[type="tel"] {
 .createContact-mobile-button {
     width: 202px;
     height: 51px;
-    margin-top: 30px;
+    margin-top: 20px;
     font-size: 21px;
     border-radius: 8px;
     background-color: #2A3647;
@@ -568,6 +568,13 @@ input[type="tel"] {
 }
 
 @media(max-width: 500px) {
+
+
+    .input-fields-add-contact-mobile {
+        margin: 60px auto 0 auto;
+
+
+    }
     h2 {
         text-align: left;
     }
