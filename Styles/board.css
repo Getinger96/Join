@@ -459,6 +459,7 @@ nav ul {
 .editSubtask {
     word-break: break-word;
     display: flex;
+    flex-direction: column;
 }
 
 .HeadContainerBoard {
@@ -945,6 +946,25 @@ li {
     overflow: auto;
     scrollbar-width: none;
     animation: slideRight 0.5s ease-out forwards;
+}
+
+
+.subtasksValidation {
+    display: flex;
+    margin-left: 48px;
+    color: red;
+    text-decoration: underline;
+    font-size: 13px;
+}
+
+
+.showShubtaskError {
+    display: flex;
+    margin-left: 48px;
+    color: red;
+    text-decoration: underline;
+    font-size: 13px;
+    font-weight: bolder;
 }
 
 @keyframes slideRight {

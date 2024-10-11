@@ -20,7 +20,7 @@ function allInputFieldMissing() {
     let showTileMissing = document.getElementById("InputFieldsMissing")
     
     showTileMissing.innerHTML = `<div>
-                                     <span class="missingInput"> Please fill in or select the marked fields !!!</span>
+                                     <span class="missingInput"> Please fill in or select the marked fields</span>
                                 </div>`;
         
 

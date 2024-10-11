@@ -332,7 +332,8 @@ function editSubtask(i) {
     document.getElementById(`subTaskValueId${i}`).innerHTML = `
     <li>
     <input id="subtaskValue${i}" class="subTaskInput" type="text" value="${subtasks[i]}">
-    </li>`
+    </li>
+    <div id="subtasksValidation"></div> `
 
     document.getElementById(`changeImgEdit${i}`).innerHTML = `
    <button type="button" class="EditSubtaskButton" onclick="enterNewSubtask(${i})">
@@ -348,9 +349,22 @@ function enterNewSubtask(i) {
     event.stopPropagation();
    let newSubTask = document.getElementById(`subtaskValue${i}`).value
 
+
+   if (newSubTask.length == 0) {
+        pleaseEnterASubtask();
+        document.getElementById(`subtaskValue${i}`).style.border= "1px solid red";
+        return;
+   }
+
    subtasks[i] =newSubTask;
    document.getElementById(`changeImgEdit${i}`).innerHTML =
 
     addSubtask();
     
+}
+
+
+function pleaseEnterASubtask() {
+    
+    document.getElementById("subtasksValidation").innerHTML =`<span class="showShubtaskError">Please Enter a full subtask`;
 }

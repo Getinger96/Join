@@ -474,6 +474,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-direction: column;
 }
 
 .ChangeSubtask {
@@ -609,6 +610,29 @@ input:focus {
     font-size: 20px;
     line-height: 24px;
 }
+
+
+.subtasksValidation {
+    display: flex;
+    margin-left: 48px;
+    color: red;
+    text-decoration: underline;
+    font-size: 13px;
+}
+
+.subtaskError {
+    display: flex;
+    flex-direction: column;
+}
+
+.showShubtaskError {
+    display: flex;
+    margin-left: 48px;
+    color: red;
+    text-decoration: underline;
+    font-size: 13px;
+}
+
 
 .Create_Btn {
     width: 183px;
