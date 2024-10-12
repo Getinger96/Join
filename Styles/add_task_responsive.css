@@ -141,6 +141,10 @@
 
 
 @media(max-width:500px) {
+    .profile_container_header {
+    padding: 7px 0px 7px 7px;
+}
+
 
 
     .ForwardingBoard {

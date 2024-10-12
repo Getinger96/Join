@@ -105,7 +105,7 @@
 .input-fields-add-contact-mobile {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 13px;
     width: 364px;
     margin: 80px auto 0 auto;
 }
@@ -116,7 +116,7 @@
     align-items: center;
     border: 1px solid #d1d1d1;
     border-radius: 10px;
-    height: 28px;
+    height: 37px;
     padding-right:40px;
     padding-left: 5px;
 }
@@ -569,12 +569,6 @@ input[type="tel"] {
 
 @media(max-width: 500px) {
 
-
-    .input-fields-add-contact-mobile {
-        margin: 60px auto 0 auto;
-
-
-    }
     h2 {
         text-align: left;
     }
@@ -616,6 +610,9 @@ input[type="tel"] {
 
 
 @media(max-width: 450px) {
+    .input-fields-add-contact-mobile {
+        margin-top:70px;
+    }
     .overlay-add-contact-mobile {
         width: 336px;
     }
@@ -638,14 +635,28 @@ input[type="tel"] {
     input[type="text"],
     input[type="email"],
     input[type="tel"] {
-        width: 270px;
+        width: 250px;
     }
 
     .overlay-add-contact-profile-img-mobile {
         top: 270px;
     }
 
-    
+    .mobile-form-buttons {
+       position:absolute;
+       top:570px;
+       display:flex;
+       justify-content:center;
+       margin-left:-17px;
+    }
+
+    .input-fields-add-contact-mobile {
+        gap: 8px;
+    }
+
+    .createContact-mobile-button {
+        height: 41px;
+    }
 }
 
 

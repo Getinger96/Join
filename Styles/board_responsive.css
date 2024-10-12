@@ -396,7 +396,8 @@
 @media(max-width: 920px) {
 
     .cardbig {
-        height: 600px;
+        height: 580px;
+        margin-top:-80px;
     }
 
     .boardAddTask {
@@ -596,5 +597,12 @@
     #lowIcon {
         width: 16px;
         height: 16px;
+    }
+}
+
+@media(max-height: 670px) {
+    .cardbig {
+        height: 450px;
+        margin-top:-80px;
     }
 }
