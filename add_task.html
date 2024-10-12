@@ -119,14 +119,16 @@
                                 alt="Add Subtask">
                         </div>
                     </div>
+                    <div id="subtaskHeadContainer">
                     <div id="ul_subtasks" class="ul_subtasks">
                     </div>
                 </div>
             </div>
+        </div>   
         </form>
         <div class="Btn_Container">
             <div class="required_info_Container"><span class="red">*</span><span>This field is required</span></div>
-            <div class="clear_COntainer">
+            <div class="clear_COntainer" id="createNewTask">
             <button onclick="clearTask()" class="clear_Btn">Clear <img class="clear-icon"
                     src="assets/IMG/x_icon_clear.svg" alt=""></button>
             <button type="submit" form="form_addtask" onclick="createTask(event)" class="Create_Btn">Create Task <img
@@ -134,6 +136,9 @@
         </div>
     </div>
     <section>
+        <div id="newTaskIsReady"></div>
+          
+        
         <div w3-include-html="./assets/templates/mobile_version.html"></div>
     </section>
 </body>

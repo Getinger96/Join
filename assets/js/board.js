@@ -20,7 +20,7 @@ async function fetchTasks(path = '') {
         let task = tasksAsarray[index];
         let keyTask = keysArrayTask[index];
         id++;
-        let saveTask = tasksArray.filter(t => t.Title === task.Titel && t.Description === task.Description);
+        let saveTask = tasksArray.filter(t => keyTask === t.taskKey);
         if (saveTask.length > 0) {
             console.log(`Task mit Titel "${task.Titel}" existiert bereits.`);
 

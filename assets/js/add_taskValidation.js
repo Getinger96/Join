@@ -90,3 +90,23 @@ async function fetchTasks(path = '') {
     }
 
 }
+
+
+function gotoBoard() {
+
+    let showTaskIsCreated = document.getElementById('newTaskIsReady');
+
+
+
+    showTaskIsCreated.innerHTML = `<div class="ForwardingBoard">
+    <span> Task added to board</span>
+    <img src="./assets/IMG/Icons (3).png" alt="">
+</div>`;
+
+
+setTimeout(() => { window.location.href = "board.html";
+            
+}, 2000);
+
+
+}

@@ -247,9 +247,14 @@ function addSubtask() {
     list.innerHTML = ''; // Clear the list before adding updated subtasks
     for (let i = 0; i < subtasks.length; i++) {
 
+
+        if (subtasks.length < 0) {
+            document.getElementById(`createNewTask${i}`).style.marginTop = "50px";
+        }
+
         list.innerHTML += `
-        <div class="ChangeSubtask">
-            <div id="subTaskValueId${i}" class="li">${subtasks[i]}
+        <div class="ChangeSubtask" id="changeColorId${i}">
+            <div id="subTaskValueId${i}" class="li subtaskError">${subtasks[i]}
             </div>
                 <div class="changeButtonDeleteAndEdit">
                     <button type="button" class="Subtasks_Btn" onclick="deleteItem(${i})">
@@ -268,12 +273,15 @@ function deleteItem(i) { //Einzelnen Elemente aus der Liste löschen
 }
 
 function addCurrentSubtask() {
+
+
+
     if (subtasks.length < 5) {
         let Currentubtask = document.getElementById('input_Subtasks').value;
         if (Currentubtask == '') {
         } else {
             subtasks.push(Currentubtask);
-            document.getElementById('input_Subtasks').value = ''; // Liste wieder leeren
+            document.getElementById('input_Subtasks').value = '';
             addSubtask();
         }
     }
@@ -303,7 +311,8 @@ function enterNewSubtask(i) {
     
     if (newSubTask.length == 0) {
         pleaseEnterASubtask();
-        document.getElementById(`subtaskValue${i}`).style.border= "1px solid red";
+        document.getElementById(`changeColorId${i}`).style.border= "1px solid red";
+        document.getElementById(`subtaskValue${i}`).style.borderBottom = "3px solid red";
         return;
    }
 
@@ -389,11 +398,12 @@ async function createTask(event) {
     clearMissingFieldContent();
     await postData(`tasks`, newTask);
     clearTask();
+    gotoBoard();
 
 }
 
 
-function clearTask() {
+async function clearTask() {
     for (let i = 0; i < contacts.length; i++) {
         let contact = contacts[i];
         let contactColour = contacts[i].color;

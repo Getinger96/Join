@@ -5,12 +5,30 @@
         margin-left: 0px;
     }
 
+    .ForwardingBoard {
+        left: 38%;
+    }
 
 
 }
 
 @media(max-width: 1450px) {
 
+
+
+    .addTask_Container {
+        margin-top: 5px;
+    }
+   
+
+        .clear_COntainer {
+            margin-top: 115px;
+        }
+
+        .add_task_content {
+            margin-left: 0px;
+        }
+    
 
     .headline_addTask {
         padding: 16px;
@@ -19,8 +37,9 @@
         line-height: 56.4px;
     }
 
-    .addTask_Container {
-        padding: 16px;
+    .add_task_content {
+        margin-top: 130px;
+
     }
 
     .Btn_Container {
@@ -31,9 +50,28 @@
     }
 }
 
+
+
+@media(max-width:1100px) {
+
+
+    .ForwardingBoard {
+        left: 35%;
+    }
+
+
+}
+
+
 @media(max-width:1005px) {
 
-  
+
+
+
+    .clear_COntainer {
+        margin-top: 105px;
+    }
+    
 
     .addTask_Container {
         display: flex;
@@ -77,10 +115,48 @@
         margin-top: 0px;
         margin-bottom: 0px;
         margin-right: 0px;
+        margin-top: 80px;
     }
 }
 
+@media(max-width:800px) {
+
+
+    .ForwardingBoard  {
+        left: 30%;
+    }
+}
+
+
+
+
+@media(max-width:650px) {
+
+
+    .ForwardingBoard  {
+        left: 20%;
+    }
+}
+
+
+
 @media(max-width:500px) {
+
+
+    .ForwardingBoard {
+        width: 240px;
+        height: 65px;
+        gap: 20px;
+    }
+
+
+    .clear_COntainer {
+        margin-top: 75px;
+    }
+
+    .subTaskInput {
+        width: 120px;
+    }
 
 
     li {
@@ -214,4 +290,23 @@
     .Category_Input {
         font-size: 16px;
     }
+}
+
+
+@media(max-width:400px) {
+
+
+    .ForwardingBoard {
+        left: 15%;
+    }
+
+
+    .ForwardingBoard {
+        width: 206px;
+        height: 55px;
+        gap: 20px;
+        font-size: 14px;
+    }
+
+
 }
