@@ -47,6 +47,7 @@ label {
     padding: 10px;
     box-sizing: border-box;
     overflow: hidden;
+    height: 100%;
 }
 
 .drag-area-highlight {

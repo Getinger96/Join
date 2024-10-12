@@ -279,6 +279,11 @@ function deleteItem(i) {
     updateProgress(taskIndex);
 }
 
+function deleteSubtask(i){
+    subtasks.splice(i, 1);
+    addSubtask();
+}
+
 function addSubtask() {
 
     if (!Array.isArray(subtasks)) {
@@ -306,7 +311,7 @@ function addSubtask() {
                 </ul>
                 </div>
             <div class="subtaskEditDiv">
-                <button type="button" class="Subtasks_Btn" onclick="deleteItem(${i})">
+                <button type="button" class="Subtasks_Btn" onclick="deleteSubtask(${i})">
                     <img src="./assets/IMG/delete.png" alt="Delete">
                 </button>
 

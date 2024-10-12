@@ -34,7 +34,7 @@ a {
     height: 40px;
 }
 
-@media(max-width: 1450px) {
+@media(max-width: 1530px) {
     .d-none {
         display: block;
     }

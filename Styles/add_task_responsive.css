@@ -1,8 +1,8 @@
-
 @media(max-width: 1530px) {
 
     .add_task_content {
         margin-left: 0px;
+        margin-top: 116px;
     }
 
     .ForwardingBoard {
@@ -19,16 +19,13 @@
     .addTask_Container {
         margin-top: 5px;
     }
-   
 
-        .clear_COntainer {
-            margin-top: 115px;
-        }
 
-        .add_task_content {
-            margin-left: 0px;
-        }
-    
+
+    .add_task_content {
+        margin-left: 0px;
+    }
+
 
     .headline_addTask {
         padding: 16px;
@@ -46,7 +43,7 @@
         margin-left: 0px;
         display: flex;
         gap: 16px;
-        margin-top: 80px;
+        margin-top: 135px
     }
 }
 
@@ -71,7 +68,7 @@
     .clear_COntainer {
         margin-top: 105px;
     }
-    
+
 
     .addTask_Container {
         display: flex;
@@ -122,7 +119,7 @@
 @media(max-width:800px) {
 
 
-    .ForwardingBoard  {
+    .ForwardingBoard {
         left: 30%;
     }
 }
@@ -133,7 +130,7 @@
 @media(max-width:650px) {
 
 
-    .ForwardingBoard  {
+    .ForwardingBoard {
         left: 20%;
     }
 }
@@ -142,8 +139,8 @@
 
 @media(max-width:500px) {
     .profile_container_header {
-    padding: 7px 0px 7px 7px;
-}
+        padding: 7px 0px 7px 7px;
+    }
 
 
 
@@ -166,6 +163,7 @@
     li {
         display: flex;
     }
+
     .addTask_Container {
         padding: 0px;
     }
@@ -211,7 +209,7 @@
     }
 
     .profile_Container {
-      width: auto;
+        width: auto;
     }
 
     .date_Container {
@@ -262,7 +260,7 @@
         font-size: 12px;
     }
 
-  
+
 
     .Btn_Container {
         margin-top: 100px;
