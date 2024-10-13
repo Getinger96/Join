@@ -346,7 +346,7 @@
     }
 
     .responsiveDescription {
-        height: 100px;
+        height: 60px;
         overflow: auto;
     }
 
@@ -396,7 +396,7 @@
 @media(max-width: 920px) {
 
     .cardbig {
-        height: 580px;
+        height: 680px;
         margin-top:-80px;
     }
 
@@ -604,5 +604,32 @@
     .cardbig {
         height: 450px;
         margin-top:-80px;
+    }
+}
+
+@media(min-height: 671px) {
+    .cardbig {
+        height: 590px;
+        margin-top:-80px;
+    }
+}
+
+@media(min-height: 781px) {
+    .cardbig {
+        height: 710px;
+        margin-top:-80px;
+    }
+}
+
+@media(min-height: 1000px) {
+    .cardbig {
+        height: 810px;
+        margin-top:-80px;
+    }
+}
+
+@media(min-width: 1525px) {
+    .cardbig {
+        margin-top:0px;
     }
 }
