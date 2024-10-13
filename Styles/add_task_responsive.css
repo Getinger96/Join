@@ -142,7 +142,10 @@
         padding: 7px 0px 7px 7px;
     }
 
+    .showShubtaskError  {
+        margin-left: 29px;
 
+    }
 
     .ForwardingBoard {
         width: 240px;
@@ -206,6 +209,7 @@
     .Selected_profiles_Container {
         display: flex;
         flex-wrap: wrap;
+        width: 260px;
     }
 
     .profile_Container {

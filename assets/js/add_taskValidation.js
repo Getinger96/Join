@@ -1,19 +1,23 @@
 
 
-function validateTask(titel, description,category, date) {
+function validateTask(titel,category, date) {
 
 
-    if (titel.value === '' || description.value === '' || category.value === '' || date.value === '' ||  assignedContacts.length === 0  || prio.length === 0 ) {
+    let selectedDate = new Date(date);
+    let currentDate = new Date(); 
+
+    currentDate.setHours(0, 0, 0, 0);
+
+    if (titel.value === '' ||category.value === '' || date.value === ''  || selectedDate < currentDate ||  assignedContacts.length === 0   ) {
         allInputFieldMissing();
+        showInvalidDateMessage();
         changeColorBorder();
         return false;
     }
 
 
-    return true
-    
+ return true;
 }
-
 
 function allInputFieldMissing() {
 
@@ -22,9 +26,18 @@ function allInputFieldMissing() {
     showTileMissing.innerHTML = `<div>
                                      <span class="missingInput"> Please fill in or select the marked fields</span>
                                 </div>`;
-        
+    
+}
 
+function showInvalidDateMessage() {
 
+    
+    let showWrongCurrentDate = document.getElementById("WrongCurrentDateId")
+    
+    showWrongCurrentDate.innerHTML = `<div>
+                                     <span class="missingInput"> No date in the past may be specified</span>
+                                </div>`;
+    
 }
 
 function changeColorBorder() {
@@ -32,26 +45,20 @@ function changeColorBorder() {
 
     document.getElementById("title").style.border = "2px solid red";
     document.getElementById("dueDate").style.border = "2px solid red";
-    document.getElementById("Description").style.border = "2px solid red";
     document.getElementById("select_containerId").style.border = "2px solid red";
     document.getElementById("select_container").style.border = "2px solid red";
-    document.getElementById("urgent").style.border = "2px solid red";
-    document.getElementById("medium").style.border = "2px solid red";
-    document.getElementById("low").style.border = "2px solid red";
+  
 }
 
 
 function clearMissingFieldContent() {
     document.getElementById("title").style.border= '';
     document.getElementById("dueDate").style.border= '';
-    document.getElementById("Description").style.border = '';
     document.getElementById("select_containerId").style.border= '';
     document.getElementById("select_container").style.border = '';
     document.getElementById("InputFieldsMissing").innerHTML = '';
 
-    document.getElementById("urgent").style.border = '';
-    document.getElementById("medium").style.border = '';
-    document.getElementById("low").style.border = '';
+  
 }
 
 

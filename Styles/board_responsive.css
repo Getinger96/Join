@@ -98,6 +98,28 @@
 
 @media(max-width: 1230px) {
 
+    .cardbig {
+        height: 630px;
+
+    }
+    .buttonContainerdark { 
+        height: 60px;
+        width: 130px;
+
+    }
+
+    .divButtonButtom {
+        width: auto;
+        margin-right: 50px;
+
+    }
+
+    .buttonContainerWhite  {
+        height: 60px;
+        width: 72px;
+        padding: 5px
+    }
+
     ul {
         margin-block-start: 1em;
         margin-block-end: 1em;
@@ -281,7 +303,7 @@
         display: flex;
         justify-content: flex-end;
         align-items: center;
-        margin-top: 0px;
+        margin-top: 15px;
     }
 
     .profilebadge {
@@ -352,7 +374,7 @@
 
     .assigned-contacts {
         margin-left: 12px;
-        height: 150px;
+        height: 100px;
         overflow: auto;
     }
 
@@ -367,11 +389,6 @@
 
     .select_container {
         width: 230px;
-    }
-
-    .buttonContainerWhite {
-        height: 40px;
-        width: 70px;
     }
 
     .AssignedTO_Container {
@@ -396,7 +413,7 @@
 @media(max-width: 920px) {
 
     .cardbig {
-        height: 680px;
+        height: 630px;
         margin-top:-80px;
     }
 
@@ -478,9 +495,28 @@
         
         margin-left: 0px;
     }
+
+    .divButtonButtom {
+        margin-top: 10px;
+    
+    }
 }
 
 @media(max-width: 630px) {
+
+    ul {
+        padding-inline-start: 0px;
+        width: 150px;        
+    }
+
+
+    .editSubtaskheadlineContainer {
+        width: 230px;
+    }
+
+    #subtasksContainer {
+        padding: 0px;
+    }
     .spaceBetween {
         
         margin-left: 0px;
@@ -491,7 +527,7 @@
     }
 
     .subTaskInput {
-        width: 170px;
+        width: 160px;
     }
 
     .flexdirection {
@@ -616,9 +652,24 @@
 
 @media(min-height: 781px) {
     .cardbig {
-        height: 710px;
+        height: 630px;
         margin-top:-80px;
     }
+}
+
+@media(max-width: 450px) {
+    .boardAddTask {
+    height: 500px;
+
+}
+
+.EditSubtaskButton {
+    padding-right: 30px;
+}
+
+.showShubtaskError  {
+    font-size: 11px;
+}
 }
 
 @media(min-height: 1000px) {

@@ -181,6 +181,10 @@ h3 {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 300px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    min-height: 20px;
 }
 
 .subtaskEditDiv {
@@ -263,10 +267,11 @@ h3 {
     display: flex;
     cursor: pointer;
     flex-direction: column;
-    max-height: 200px;
+    height: 99px;
     overflow-y: auto;
-    height: auto;
     scrollbar-width: none;
+    padding: 5px;
+    gap: 10px;
 }
 
 .progress-container {
@@ -374,6 +379,8 @@ Button {
     border: none;
     font-size: 18px;
     border-bottom: 3px solid #29ABE2;
+    padding-block: 0px;
+    padding-inline: 0px;
 }
 
 .boardAddTask {
@@ -669,16 +676,21 @@ h1 {
     background-color: #FFFFFF;
     width: 30px;
 }
+::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.5); /* Dunkler Balken */
+    border-radius: 10px;
+}
 
 ul {
-    width: 400px;
     font-size: 20px;
     margin-block-start: 0em;
     margin-block-end: 0em;
+    padding-inline-start: 10px;
 }
 
 li {
-    padding-left: 20px;
+    padding-left: 0px;
+    display: flex;
 }
 
 .addSubTask {
@@ -962,7 +974,7 @@ li {
 
 .showShubtaskError {
     display: flex;
-    margin-left: 48px;
+    margin-left: 0px;
     color: red;
     text-decoration: underline;
     font-size: 13px;
@@ -1056,4 +1068,10 @@ li {
 
 .categoryEdit {
     display: flex;
+}
+
+@media(max-height: 450px) {
+    .boardAddTask {
+    height: 500px;
+}
 }

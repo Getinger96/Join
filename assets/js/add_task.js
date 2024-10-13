@@ -366,22 +366,24 @@ async function createTask(event) {
     let titel = document.getElementById('title');
     let description = document.getElementById('Description');
     let assignedContact = assignedContacts;
-    let date = document.getElementById('dueDate');
+    let date = document.getElementById('dueDate').value;
     let category = document.getElementById('Category');
     let subtask = subtasks;
     let status = 'open'
 
 
-    if (!validateTask(titel, description, category, date)) {
+    if (!validateTask(titel, category, date)) {
         return;
-    }
+    } else
 
+    document.getElementById("InputFieldsMissing").innerHTML ='';
+    document.getElementById("WrongCurrentDateId").innerHTML ='';
 
     let newTask = {
         Titel: titel.value,
         Description: description.value,
         AssignedContact: assignedContact,
-        Date: date.value,
+        Date: date,
         Prio: prio,
         Category: category.value,
         Subtask: subtask,

@@ -304,7 +304,7 @@ function addSubtask() {
  
     for (let i = 0; i < subtasks.length; i++) {
         subtaskContainer.innerHTML += `
-            <div class="editSubtaskheadlineContainer" >
+            <div class="editSubtaskheadlineContainer" id="boderSubtaskId${i}">
             <div class="editSubtask" id="subTaskValueId${i}">
                 <ul>
                 <li>${subtasks[i]}</li>
@@ -357,7 +357,8 @@ function enterNewSubtask(i) {
 
    if (newSubTask.length == 0) {
         pleaseEnterASubtask();
-        document.getElementById(`subtaskValue${i}`).style.border= "1px solid red";
+        document.getElementById(`boderSubtaskId${i}`).style.border= "1px solid red";
+        document.getElementById(`subtaskValue${i}`).style.borderBottom= "1px solid red";
         return;
    }
 
