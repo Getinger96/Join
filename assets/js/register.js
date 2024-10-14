@@ -47,36 +47,10 @@ async function  checkRegistration() {
     let user = contacts.find(u => u.email === usermail.value);
 
 
-    if (user) {
-        sigUpInfo.innerHTML = emailIsAlreadyAvailable();
-        emptyTheInputFields(username, usermail, userpassword, userconfirmpassword, checkbox);
-        ButtonDisabledSet();
+    if (!sigUpValidation(user, username, usermail, userpassword, userconfirmpassword, checkbox)) {
         return;
     }
-
-
-
-    if (userpassword.value.length <= 5) {
-        sigUpInfo.innerHTML = passwordToShort();
-        emptyTheInputFields(username, usermail, userpassword, userconfirmpassword, checkbox);
-        ButtonDisabledSet();
-        return;
-    }
-
-
-    if (userpassword.value !== userconfirmpassword.value) {
-        sigUpInfo.innerHTML = passwordNoMatch();
-        emptyTheInputFields(username, usermail, userpassword, userconfirmpassword, checkbox);
-        ButtonDisabledSet();
-        return;
-    }
-
-    if (!checkbox.checked) {
-        sigUpInfo.innerHTML = checkboxNoChecked();
-        emptyTheInputFields(username, usermail, userpassword, userconfirmpassword, checkbox);
-        ButtonDisabledSet();
-        return;
-    }
+    sigUpInfo.innerHTML= '';
 
     addNewUser(username, usermail, userpassword, userconfirmpassword, checkbox)
 }
@@ -225,4 +199,91 @@ return `Attention, the email already exists!!!`
 
 function goBackToLogin() {
     window.location.href = "login.html";
+}
+
+
+
+
+function nameIsNotValid(username) {
+    const nameCheck = /^[A-Za-zäöüÄÖÜß]+\s[A-Za-zäöüÄÖÜß]+$/;
+    return nameCheck.test(username);
+
+}
+
+
+function emailIsNotCorrect(usermail) {
+        let emailCheck = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailCheck.test(usermail); 
+    
+
+}
+
+function wrongEmailValidation() {
+    return `
+    Attention, a correct email address must be provided !!!`;
+
+}
+
+
+function wrongTextValidation() {           
+    return `
+      Please enter a full name of 3-30 letters`;
+                   
+                   }
+
+
+
+
+function sigUpValidation(user, username, usermail, userpassword, userconfirmpassword, checkbox) {
+
+    let sigUpInfo = document.getElementById('signupinfotext');
+
+
+     if (user) {
+        sigUpInfo.innerHTML = emailIsAlreadyAvailable();
+        emptyTheInputFields(username, usermail, userpassword, userconfirmpassword, checkbox);
+        ButtonDisabledSet();
+        return;
+    }
+
+
+    if (!nameIsNotValid(username.value) || username.value.length < 3 ||  username.value.length > 30) {
+        sigUpInfo.innerHTML = wrongTextValidation();
+        emptyTheInputFields(username, usermail, userpassword, userconfirmpassword, checkbox);
+        ButtonDisabledSet();
+        return false;
+    }
+
+
+    if (!emailIsNotCorrect(usermail.value)) {
+        sigUpInfo.innerHTML = wrongEmailValidation();
+        emptyTheInputFields(username, usermail, userpassword, userconfirmpassword, checkbox);
+        ButtonDisabledSet();
+        return false;
+    }
+
+
+
+    if (userpassword.value.length <= 5) {
+        sigUpInfo.innerHTML = passwordToShort();
+        emptyTheInputFields(username, usermail, userpassword, userconfirmpassword, checkbox);
+        ButtonDisabledSet();
+        return false;
+    }
+
+
+    if (userpassword.value !== userconfirmpassword.value) {
+        sigUpInfo.innerHTML = passwordNoMatch();
+        emptyTheInputFields(username, usermail, userpassword, userconfirmpassword, checkbox);
+        ButtonDisabledSet();
+        return false;
+    }
+
+    if (!checkbox.checked) {
+        sigUpInfo.innerHTML = checkboxNoChecked();
+        emptyTheInputFields(username, usermail, userpassword, userconfirmpassword, checkbox);
+        ButtonDisabledSet();
+        return false;
+    }
+    return true
 }

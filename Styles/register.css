@@ -359,7 +359,11 @@ body {
                 padding: 20px 0px 24px 20px;
             }
             
-        
+            
+            .inputname, .inputemail, .inputconfirmpassword, .inputpassword {
+                font-size: 15px;
+                width: auto;
+            }
 
             .register {
                 padding: 0px 30px 15px 30px;
@@ -371,6 +375,10 @@ body {
 
             footer {
                 margin: 0;
+            }
+
+            .mailicon {
+                margin-left: 0;
             }
 
         }

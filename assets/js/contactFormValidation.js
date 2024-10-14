@@ -124,7 +124,7 @@ function validateContact(name, email, phone) {
     }
 
     
-    if (!phoneNumberIsNotCorrect(phone) || phone.length < 6 || phone.length > 15 || phone[0] !== '0') {
+    if (!phoneNumberIsNotCorrect(phone) || phone.length < 6 || phone.length > 15 ) {
         wrongPhoneValidation(); 
         changeColorPhone();
         return false; 

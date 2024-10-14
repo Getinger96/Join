@@ -54,16 +54,13 @@ function groupContacts() {
 
     contactsArray.forEach((contact, index) => {
         let firstLetter = contact.name.charAt(0).toUpperCase();
-        let colorIndex = index;
-
-        if (colorIndex >= colors.length) {
-            colorIndex -= colors.length;
-        }
+      
+        let colorIndex = index % colors.length;
 
         let color = colors[colorIndex];
 
         if (!groupedContacts[firstLetter]) {
-            groupedContacts[firstLetter] = [];
+        groupedContacts[firstLetter] = [];
         }
 
         groupedContacts[firstLetter].push({ ...contact, index, color });
@@ -128,12 +125,9 @@ function getContactBig(index) {
     let contact = contactsArray[index];
     console.log('Selected Contact:', contact);
 
-    let colorIndex = index;
-    if (colorIndex >= colors.length) {
-        colorIndex -= colors.length;
-    }
+    let colorIndex = index % colors.length;
     let color = colors[colorIndex];
-
+    
     let showContacts = document.getElementById('contactViewBig');
     showContacts.innerHTML = showContactBig(contact.name, contact.email, contact.phone, getLastName(contact.name), color);
 }
