@@ -8,11 +8,11 @@ body {
     margin-left: 328px;
     display: flex;
     margin-top: 150px;
-    max-height: 80vh;
+    height: auto;
 }
 
 .kanbanBoardSection {
-    margin-bottom: 120px;
+    margin-bottom: 60px;
 }
 
 
@@ -27,6 +27,7 @@ body {
     display: flex;
     align-items: center;
     gap: 30px;
+    margin-top:20px;
 }
 
 
@@ -53,8 +54,8 @@ height: 80px;
 
     .kanbanboradtodo {    
         display: flex;
-        margin-top: 75px;
-        height: 170px;
+        margin-top: 50px;
+        height: 168px;
         border: solid 1px;
         background-color: white;
         border-radius: 25px;
@@ -82,6 +83,7 @@ height: 80px;
     font-size: 47px;
     font-weight: bolder;
     position: absolute;
+    top:530px;
 
 }
 
@@ -141,8 +143,8 @@ gap: 45px;
 
 .kanbanboraddone {    
     display: flex;
-    margin-top: 75px;
-    height: 170px;
+    margin-top: 50px;
+    height: 168px;
     border: solid 1px;
     background-color: white;
     border-radius: 25px;
@@ -203,14 +205,14 @@ font-weight: 400;
 
 .kanbanboardprio {
     display: flex;
-    margin-top: 30px;
-    height: 170px;
+    margin-top: 29px;
+    height: 168px;
     border: solid 1px;
     background-color: white;
     border-radius: 25px;
     text-align: center;
     justify-content: flex-start;
-    max-width: 560px;
+    max-width: 555px;
     border-color: white;
     box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.1), 11px 27px 30px rgba(0, 0, 0, 0.5);
     background: #FFFFFF;
@@ -287,8 +289,8 @@ gap:10px
 
 .taskboard {
     display: flex;
-    margin-top: 30px;
-    height: 170px;
+    margin-top: 29px;
+    height: 168px;
     border: solid 1px;
     background-color: white;
     border-radius: 25px;
@@ -339,15 +341,75 @@ gap:10px
 }
 
 
+@media (max-width: 1528px) {
+
+    .sideblock {
+        display: flex;
+    }
+    .headblock {
+        height: 96px;
+        padding: 20px 40px ;
+        left: 230px ;
+    }
+
+    .kanbanBoardTitle {
+        margin-left: 60px;
+    }
+}
+
 @media (max-width:1450px) {
     
+    .sideblock {
+        display: flex;
+    }
+
+    .d-none {
+        display: none !important;
+    }
+
+    .kanbanboardprio:hover {
+        transform: scale(1.05);
+    }
     
+}
+
+@media (max-width:1250px){
+.loginstylesuccessfully {
+    display:none;
+
+}
+
+    .greetingTheContact {
+        display:none
+    }
+
+}
+
+
+@media (max-width:950px){
+    .sideblock {
+        display: none;
+    }
+
+    .d-none {
+        display: block !important;
+    }
+
     .middle-SectionSummary {
         margin-left: 0;
         overflow-x: hidden;
         display: block;
     }
 
+    .headblock {
+        padding: 20px 16px 20px 16px;
+        height: 80px;
+        left:0px;
+    }
+
+    .kanbanBoardTitle {
+        margin-left: 0;
+    }
 
 
     .greetingTheContact {
@@ -360,17 +422,6 @@ gap:10px
         flex-direction: column;
         padding: 20px;
     }
-
-
-    .kanbanboardprio:hover {
-        transform: scale(1.05);
-    }
-    
-}
-
-
-
-@media (max-width:650px) {
 
 .summary_hr {
     display: none;
@@ -388,7 +439,7 @@ margin-block-start: 10px;
 
 }
 .kanbanBoardSection {
-    align-items: flex-start;
+    align-items: center;
 }   
 
 .newhr {
@@ -398,14 +449,16 @@ margin-block-start: 10px;
     border: 2.5px solid #29abe2;
     border-radius: 3px;
     width: 300px;
-
-
 }
 
+.thridsectionsummary {
+    display: flex;
+    gap:30px
+}
 
 .kanbanboradtodoanddone {
     display: flex;
-    gap: 22px;
+    gap: 26px;
 }
 
 .kanbanboradtodo {
@@ -434,11 +487,6 @@ margin-block-start: 10px;
 .todotext {
     font-size: 14px;
 }
-
-
-
-
-
 
 .kanbanboraddone {
     height: 110px;
@@ -471,7 +519,7 @@ margin-block-start: 10px;
 
 .kanbanboardprio {
     height: 110px;
-    width: 450px;
+    width: 425px;
 }
 
 .prioimg {
@@ -488,8 +536,6 @@ margin-block-start: 10px;
 .priotext {
     font-size: 16px;  
 }
-
-
 
     .prioimgsection {
     padding: 15px;
@@ -543,16 +589,102 @@ margin-block-start: 10px;
     font-size: 14px;
 }
 
+}
+
+@media (max-width: 650px) {
+    .kanbanBoardSection {
+        align-items: flex-start;
+    }
+}
+@media (max-width:500px) {
+
+    .summary_headline {
+        align-items:flex-start;
+    }
+
+    .summary_title_big {
+        font-size: 40px; 
+    }
 
 
+    .summary_secondline {
+        font-size: 18px;
+    }
 
+
+    .summary_headline {
+        flex-direction: column;
+        display: flex;
+        margin-top: 10px;
+        gap: 0px;
+    }
+
+    .newhr {
+        width: 200px; 
+    }     
+
+
+    .kanbanboradtodo {
+    width: 186px;
+    }
+
+    .imgtodo {
+        width: 45px;
+        height: 45px;
+    }
+
+
+    .kanbanboraddone {
+        width: 186px;
+        }
+    
+        .imgdone {
+            width: 45px;
+            height: 45px;
+        }
+    
+        .kanbanboardprio {
+        width: 400px;
+
+}
+
+.headblock {
+    padding: 20px 30px 20px 30px;
+    height: 40px;
+    justify-content: space-between;
+    padding: 20px 16px;
 
 }
 
 
 
-@media (max-width:500px) {
 
+.prioimg {
+    width: 45px;
+    height: 45px;
+}
+
+
+
+.datekanbanboard {
+    font-size: 18px;
+}
+
+
+
+.taskboard {
+    width: 110px;
+}
+
+
+
+.kanbanBoardSection {
+    padding: 10px;
+    position: absolute;
+        top: 120px;
+}
+
+@media (max-width:420px) {
 
 
     .summary_title_big {
@@ -575,31 +707,31 @@ margin-block-start: 10px;
 
 
     .newhr {
-        width: 200px; 
+        width: 180px; 
     }     
 
 
     .kanbanboradtodo {
-    width: 130px;
+    width: 166px;
     }
 
     .imgtodo {
-        width: 45px;
-        height: 45px;
+        width: 35px;
+        height: 35px;
     }
 
 
     .kanbanboraddone {
-        width: 130px;
+        width: 166px;
         }
     
         .imgdone {
-            width: 45px;
-            height: 45px;
+            width: 35px;
+            height: 35px;
         }
     
         .kanbanboardprio {
-        width: 300px;
+        width: 360px;
 
 }
 
@@ -607,8 +739,8 @@ margin-block-start: 10px;
 
 
 .prioimg {
-    width: 45px;
-    height: 45px;
+    width: 35px;
+    height: 35px;
 }
 
 
@@ -620,18 +752,36 @@ margin-block-start: 10px;
 
 
 .taskboard {
-    width: 90px;
+    width: 99px;
 }
 
 
 
 .kanbanBoardSection {
     padding: 10px;
+    position: absolute;
+        top: 120px;
 }
+}}
 
+@media (max-height: 680px) {
+    .kanbanBoardSection {
+        padding: 6px;
+        position: absolute;
+        top: 50px;
+    }
 
+    .summary_headline {
+        margin-top: 30px;
+    }
 
+    .kanbanboradtodo {
+        margin-top:30px;
+    }
+    
+    .kanbanboraddone {
+        margin-top:30px;
+    }
 
-
-
+    
 }
