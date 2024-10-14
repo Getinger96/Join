@@ -94,13 +94,9 @@ async function fetchContacts(path = '') {
 
     for (let index = 0; index < userAsArray.length; index++) {
         let contact = userAsArray[index];
-        let colorIndex = index;
+        let colorIndex = index % colors.length;
 
-        if (colorIndex >= colors.length) {
-            colorIndex -= colors.length;
-        }
-
-        let color = colors[colorIndex];
+        let color = colors[colorIndex]
 
         if (contact.email == 'guest@web.de') {
 
