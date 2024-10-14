@@ -972,6 +972,14 @@ li {
 }
 
 
+
+.dragging-over {
+    border: 2px dotted #868080;
+    border-radius: 15px;
+    background-color: #e1e1e1;
+}
+
+
 .showShubtaskError {
     display: flex;
     margin-left: 0px;

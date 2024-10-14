@@ -244,7 +244,7 @@ async function deleteTask(task) {
     await deleteData(`tasks/${key}`);
     tasksArray.splice(task, 1);
     closeOverlay();
-    updateHtml();
+    fetchTasks();
 }
 
 function changeAddtaskButton(index) {

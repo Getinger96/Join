@@ -283,8 +283,9 @@ function search() {
 }
 function showTasksSearch(search, todos, todo) {
     let taskTitle = todo.Title.toLowerCase();
+    let taskdescription= todo.Description.toLowerCase();
 
-    if (taskTitle.includes(search)) {
+    if (taskTitle.includes(search)  || taskdescription.includes(search) ) {
         todos.style.display = 'block';
     } else {
         todos.style.display = 'none';

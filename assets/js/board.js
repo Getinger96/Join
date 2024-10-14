@@ -297,8 +297,7 @@ function convertToValidColor(color) {
     };
 
 
-    return colorMap[color]; //colorMap[color] verwendet den Wert der Variable color, um den richtigen Schlüssel im Objekt zu finden.
-    //colorMap.color sucht immer nach einer Eigenschaft mit dem festen Namen color, unabhängig vom Inhalt der Variable
+    return colorMap[color]; 
 } 
 
 function allowDrop(ev) {
@@ -341,6 +340,22 @@ async function putDataTask(path = "", data = {}) {
     return responsASJson = await response.json();
 }
 
+
+function addHoverEffect(categoryId) {
+    const dragArea = document.getElementById(categoryId);
+    if (dragArea) {
+        dragArea.classList.add('dragging-over'); // Add a class for hover effect
+    }
+}
+
+function removeHoverEffect(categoryId) {
+    const dragArea = document.getElementById(categoryId);
+    if (dragArea) {
+        dragArea.classList.remove('dragging-over'); // Remove the hover class
+    }
+}
+
+
 async function updateBoard(category, task, event) {
     let taskElement = document.getElementById(`task_${task.idTask - 1}Element`);
     if (taskElement) {
@@ -348,7 +363,7 @@ async function updateBoard(category, task, event) {
     }
     let newCategoryColumn = document.getElementById(category);
     let taskHTML = generateTodoHTML(task, task.idTask);
-    newCategoryColumn.innerHTML += taskHTML;
+    newCategoryColumn.insertAdjacentHTML('afterbegin', taskHTML);
     updateAndCheckEmptyFields();
     getassignecontacts(task, task.idTask);
 }

@@ -85,8 +85,8 @@
                             <img class="curser" onclick="openTaskBoard()" src="./assets/IMG/plus button.png">
                         </div>
                         <div class="noTasks" category="open" style="display: none;">No tasks To do</div>
-                        <div class="drag-area" id="open" ondrop="moveTo(event, 'open')" ondragover="allowDrop(event)"
-                            ondragleave="removeHighlight('open')"></div>
+                        <div class="drag-area" id="open" ondrop="moveTo(event, 'open'), handleDrop(event, 'open')" ondragover="allowDrop(event), handleDragOver(event, 'open')" 
+                            ondragleave="removeHighlight('open'), handleDragLeave('open')" ></div>
                            
                     </div>
                     <!-- in progress -->
@@ -96,8 +96,8 @@
                             <img class="curser" onclick="openTaskBoard()" src="./assets/IMG/plus button.png">
                         </div>
                         <div class="noTasks" category="progress" style="display: none;">No tasks in progress</div>
-                        <div class="drag-area" id="progress" ondrop="moveTo(event, 'progress')"
-                            ondragover="allowDrop(event)" ondragleave="removeHighlight('progress')"></div>
+                        <div class="drag-area" id="progress" ondrop="moveTo(event, 'progress'), handleDrop(event, 'progress')" ondragover="allowDrop(event), handleDragOver(event, 'progress')" 
+                         ondragleave="removeHighlight('progress'), handleDragLeave('progress')" ></div>
                     </div>
                     <!-- await feedback -->
                     <div class="paddingRight widthContainer">
@@ -107,8 +107,8 @@
                         </div>
                         <div class="noTasks" category="awaitFeedback" style="display: none;">No tasks Await feedback
                         </div>
-                        <div class="drag-area" id="awaitFeedback" ondrop="moveTo(event, 'awaitFeedback')"
-                            ondragover="allowDrop(event)" ondragleave="removeHighlight('awaitFeedback')"></div>
+                        <div class="drag-area" id="awaitFeedback" ondrop="moveTo(event, 'awaitFeedback'), handleDrop(event, 'awaitFeedback')" ondragover="allowDrop(event), handleDragOver(event, 'awaitFeedback')"
+                        ondragleave="removeHighlight('awaitFeedback'), handleDragLeave('awaitFeedback')" ></div>
                     </div>
                     <!-- done -->
                     <div class="paddingRight widthContainer">
@@ -117,8 +117,8 @@
                             <img class="curser" onclick="openTaskBoard()" src="./assets/IMG/plus button.png">
                         </div>
                         <div class="noTasks" category="closed" style="display: none;">No tasks Done</div>
-                        <div class="drag-area" id="closed" ondrop="moveTo(event, 'closed')"
-                            ondragover="allowDrop(event)" ondragleave="removeHighlight('closed')"></div>
+                        <div class="drag-area" id="closed" ondrop="moveTo(event, 'closed'), handleDrop(event, 'closed')" ondragover="allowDrop(event), handleDragOver(event, 'closed')"
+                        ondragleave="removeHighlight('closed'), handleDragLeave('closed')" ></div>
                     </div>
                 </div>
             </div>
