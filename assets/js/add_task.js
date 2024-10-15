@@ -273,7 +273,7 @@ function addCurrentSubtask() {
 
 
 
-    if (subtasks.length < 6) {
+    if (subtasks.length < 10) {
         let Currentubtask = document.getElementById('input_Subtasks').value;
         if (Currentubtask == '') {
         } else {
