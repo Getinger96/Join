@@ -1,12 +1,7 @@
 function openTaskBoard() {
-    const windowWidth = window.innerWidth;
-
-     
-      if (windowWidth <= 1350) {
+    
         window.location.href = 'add_task.html'; 
-        return; 
-    }
-
+   
     
     let taskDiv = document.getElementById('boardAddTask');
     let overlay = document.getElementById('darkOverlay');
