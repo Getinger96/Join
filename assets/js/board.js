@@ -75,7 +75,7 @@ function renderSubtask() {
 function closeTask() {
     document.getElementById('boardAddTask').style.display = 'none';
     document.getElementById('darkOverlay').style.display = 'none';
-    document.body.style.overflow = 'auto';  // Scrollen auf der Hauptseite wieder erlauben
+    document.body.style.overflow = 'auto';  
  clearTask();
 } 
 async function updateHtml() {
@@ -83,17 +83,18 @@ async function updateHtml() {
     for (let index = 0; index < statusCategories.length; index++) {
         let category = statusCategories[index];
         let filteredTasks = tasksArray.filter(t => t.status === category);
-        document.getElementById(category).innerHTML = ''; // Clear the category
+        document.getElementById(category).innerHTML = ''; 
 
         filteredTasks.forEach(task => {
-            let taskHTML = generateTodoHTML(task, task.idTask); // Use idTask as a unique identifier
-            document.getElementById(category).innerHTML += taskHTML;
-            getassignecontacts(task, task.idTask); // Use idTask to fetch correct contacts
+            let taskHTML = generateTodoHTML(task, task.idTask); 
+            document.getElementById(category).insertAdjacentHTML('afterbegin', taskHTML);
+            getassignecontacts(task, task.idTask); 
         });
     }
     updateAndCheckEmptyFields();
     await initializeAllProgress();
 }
+
 
 function updateAndCheckEmptyFields() {
     let fields = [
@@ -327,6 +328,7 @@ async function moveTo(event, category) {
     }
     updateBoard(category, task, event);
     updateAndCheckEmptyFields();
+    removeHighlight(category);
 }
 
 async function putDataTask(path = "", data = {}) {
@@ -341,18 +343,18 @@ async function putDataTask(path = "", data = {}) {
 }
 
 
-function addHoverEffect(categoryId) {
-    const dragArea = document.getElementById(categoryId);
-    if (dragArea) {
-        dragArea.classList.add('dragging-over'); // Add a class for hover effect
-    }
+function handleDragOver(categoryId) {
+    let dragArea = document.getElementById(categoryId);
+        dragArea.classList.add('dragging-over'); 
+
 }
 
-function removeHoverEffect(categoryId) {
-    const dragArea = document.getElementById(categoryId);
-    if (dragArea) {
-        dragArea.classList.remove('dragging-over'); // Remove the hover class
-    }
+function removeHighlight(categoryId) {
+    let dragArea = document.getElementById(categoryId);
+    dragArea.classList.remove('dragging-over'); 
+
+
+
 }
 
 
@@ -395,10 +397,4 @@ function highlight(id) {
     }
 }
 
-function removeHighlight(id) {
-    const element = document.getElementById(id);
-    if (element) {
-        element.classList.remove('drag-area-highlight');
-    }
-}
 

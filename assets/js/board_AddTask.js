@@ -258,12 +258,12 @@ function addCurrentSubtask() {
         alert('Bitte geben Sie eine gültige Subtask ein.');
         return;
     }
-    if (subtasks.length < 5) {
+    if (subtasks.length <= 6) {
         subtasks.push(currentSubtask);
         document.getElementById('new-subtask').value = '';
         addSubtask();
     } else {
-        alert('Genügend Subtasks hinzugefügt!');
+        document.getElementById('SubtaskLengthReached').innerHTML = ' <span class="missingInput"> No date in the past may be specified</span>';
     }
 }
 
