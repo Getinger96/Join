@@ -116,7 +116,7 @@
 
     .buttonContainerWhite  {
         height: 60px;
-        width: 72px;
+        width: 120px;
         padding: 5px
     }
 
@@ -405,7 +405,7 @@
 
 
     .buttonContainerdark {
-        margin-left: 136px;
+        margin-left: 50px;
     }
 
 }
@@ -442,7 +442,7 @@
 
     .buttonContainerdark {
         height: 56px;
-        width: 136px;
+        width: 120px;
     }
 
     .subtaskImgContent {
@@ -682,5 +682,18 @@
 @media(min-width: 1525px) {
     .cardbig {
         margin-top:0px;
+    }
+}
+
+@media (min-width: 600px) and (max-width: 1024px) {
+    #subtasksContainer {
+        height: 120px; 
+    }
+}
+
+
+@media (max-width: 600px) {
+    #subtasksContainer {
+        height: 150px;
     }
 }

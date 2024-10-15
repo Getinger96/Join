@@ -273,7 +273,7 @@ function addCurrentSubtask() {
 
 
 
-    if (subtasks.length < 5) {
+    if (subtasks.length < 6) {
         let Currentubtask = document.getElementById('input_Subtasks').value;
         if (Currentubtask == '') {
         } else {
@@ -283,7 +283,7 @@ function addCurrentSubtask() {
         }
     }
     else {
-        alert('Genügend Subtasks hinzugefügt!');
+        document.getElementById('SubtaskLengthReached').innerHTML = ' <span class="tomanySubtask"> maximum number of subtasks has been reached</span>';
     }
 }
 
@@ -293,7 +293,7 @@ function editSubtask(i) {
         <input id="subtaskValue${i}" class="subTaskInput" type="text" value="${subtasks[i]}">
     </li>
     <div>
-    <div id="subtasksValidation"></div> 
+    <div id="subtasksValidation${i}"></div> 
      </div>`;
     let change = document.getElementById(`changeImgEdit${i}`)
 
@@ -307,7 +307,7 @@ function enterNewSubtask(i) {
     let newSubTask = document.getElementById(`subtaskValue${i}`).value
     
     if (newSubTask.length == 0) {
-        pleaseEnterASubtask();
+        pleaseEnterASubtask(i);
         document.getElementById(`changeColorId${i}`).style.border= "1px solid red";
         document.getElementById(`subtaskValue${i}`).style.borderBottom = "3px solid red";
         return;
@@ -321,9 +321,9 @@ function enterNewSubtask(i) {
 }
 
 
-function pleaseEnterASubtask() {
+function pleaseEnterASubtaski() {
     
-    document.getElementById("subtasksValidation").innerHTML =`<span class="showShubtaskError">Please Enter a full subtask`;
+    document.getElementById(`subtasksValidation${i}`).innerHTML =`<span class="showShubtaskError">Please Enter a full subtask`;
 }
 
 

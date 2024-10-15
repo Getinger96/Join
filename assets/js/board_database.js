@@ -316,11 +316,11 @@ async function createEdittask(index) {
     let tasktitle = document.getElementById('taskTitle');
     let taskdescription = document.getElementById('description');
     let taskDAte = document.getElementById('taskDueDate');
-    console.log(currentCategory);
     let taskCategory = document.getElementById('kategorie');
     let task = tasksArray[index];
     let status = task.status
     let key = task.taskKey;
+
 
     let editedTASk = {
 
@@ -338,5 +338,3 @@ async function createEdittask(index) {
     closeOverlay();
     await fetchTasks();
 }
-
-    

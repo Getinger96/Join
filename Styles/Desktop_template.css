@@ -50,6 +50,7 @@ body {
 
 .logInUser_Container {
     display: flex;
+    cursor: pointer;
 }
 
 .logInUser {

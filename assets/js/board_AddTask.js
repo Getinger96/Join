@@ -1,21 +1,25 @@
 function openTaskBoard() {
     const windowWidth = window.innerWidth;
 
-    // Wenn die Bildschirmbreite kleiner oder gleich 1450px ist, zur add_task.html weiterleiten
+     
+      if (windowWidth <= 1350) {
+        window.location.href = 'add_task.html'; 
+        return; 
+    }
 
-    // Standardmäßig das Overlay öffnen
+    
     let taskDiv = document.getElementById('boardAddTask');
     let overlay = document.getElementById('darkOverlay');
 
     if (taskDiv.style.display === 'none' || taskDiv.style.display === '') {
-        taskDiv.style.display = 'block';  // Overlay anzeigen
-        overlay.style.display = 'block';  // Dunklen Hintergrund anzeigen
-        document.body.style.overflow = 'hidden';  // Hauptseite scrollen verhindern
+        taskDiv.style.display = 'block';  
+        overlay.style.display = 'block';  
+        document.body.style.overflow = 'hidden';  
         setCreateTaskButton();
     } else {
-        taskDiv.style.display = 'none';  // Overlay ausblenden
-        overlay.style.display = 'none';  // Dunklen Hintergrund ausblenden
-        document.body.style.overflow = 'auto';  // Scrollen auf der Hauptseite wieder erlauben
+        taskDiv.style.display = 'none';  
+        overlay.style.display = 'none';  
+        document.body.style.overflow = 'auto'; 
     }
 }
 
@@ -65,6 +69,11 @@ function displayContacts(contactIndex, contactsName, contactLastname, selectedCl
 function showSelectedContainer(name,index) {
     let includedName = assignedContacts.includes(name)
     let contactContainer = document.getElementById(`profile-${index}`);
+
+    if (!contactContainer) {
+        return
+    }
+
     if (includedName) {
         contactContainer.classList.add('bg_color');
         contactContainer.classList.add('color_white');
@@ -202,7 +211,7 @@ function clearTask() {
     if (selectContainer) {
         selectContainer.selectedIndex = 0;
     }
-    const dateInput = document.querySelector('.inputTitle[type="date"]');
+    const dateInput = document.querySelector('.inputTitleDate');
     if (dateInput) {
         dateInput.value = '';
     }
@@ -255,7 +264,7 @@ function addCurrentSubtask() {
     }
     let currentSubtask = document.getElementById('new-subtask').value;
     if (currentSubtask === "") {
-        alert('Bitte geben Sie eine gültige Subtask ein.');
+        document.getElementById('SubtaskLengthReached').innerHTML = ' <span class="tomanySubtask"> Please enter a valid subtask</span>';
         return;
     }
     if (subtasks.length <= 6) {
@@ -263,7 +272,7 @@ function addCurrentSubtask() {
         document.getElementById('new-subtask').value = '';
         addSubtask();
     } else {
-        document.getElementById('SubtaskLengthReached').innerHTML = ' <span class="missingInput"> No date in the past may be specified</span>';
+        document.getElementById('SubtaskLengthReached').innerHTML = ' <span class="tomanySubtask"> maximum number of subtasks has been reached</span>';
     }
 }
 
@@ -338,7 +347,7 @@ function editSubtask(i) {
     <li>
     <input id="subtaskValue${i}" class="subTaskInput" type="text" value="${subtasks[i]}">
     </li>
-    <div id="subtasksValidation"></div> `
+    <div id="subtasksValidation${i}"></div> `
 
     document.getElementById(`changeImgEdit${i}`).innerHTML = `
    <button type="button" class="EditSubtaskButton" onclick="enterNewSubtask(${i})">
@@ -356,7 +365,7 @@ function enterNewSubtask(i) {
 
 
    if (newSubTask.length == 0) {
-        pleaseEnterASubtask();
+        pleaseEnterASubtask(i);
         document.getElementById(`boderSubtaskId${i}`).style.border= "1px solid red";
         document.getElementById(`subtaskValue${i}`).style.borderBottom= "1px solid red";
         return;
@@ -370,7 +379,7 @@ function enterNewSubtask(i) {
 }
 
 
-function pleaseEnterASubtask() {
+function pleaseEnterASubtask(i) {
     
-    document.getElementById("subtasksValidation").innerHTML =`<span class="showShubtaskError">Please Enter a full subtask`;
+    document.getElementById(`subtasksValidation${i}`).innerHTML =`<span class="showShubtaskError">Please Enter a full subtask`;
 }

@@ -20,6 +20,12 @@ body {
     line-height: 73.2px;
 }
 
+.tomanySubtask {
+    font-size: 14px;
+    color: red;
+    font-weight: bolder;
+}
+
 .EditSubtaskButton {
     border: none;
     background-color: #F6F7F8;
