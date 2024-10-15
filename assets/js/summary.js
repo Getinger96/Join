@@ -22,7 +22,6 @@ async function fetchTasksSummary(path = '') {
 
         // Beispielbedingung, die du anpassen kannst
         if (saveTask.length > 0) {
-            console.log(`Task mit Titel "${task.Titel}" existiert bereits.`);
     
         } else {
           
@@ -41,6 +40,7 @@ async function fetchTasksSummary(path = '') {
     }
 }
 renderSummarySite();
+showTheCurrentDate();
 }
 
 
@@ -52,8 +52,6 @@ for (let index = 0; index < tasksArray.length; index++) {
 }
 
 }
-
-
 
 function loadToDoAtTheKanbanBoard(index) {
         let statusCheckopen = 'open';
@@ -146,25 +144,35 @@ function showAllPrioUrgent(kanbanBoradPrioUrgent) {
     
 
 function showTheCurrentDate() {
-let date = new Date()
+    let urgentTasks = tasksArray.filter(task => task.Prio === 'urgent');
     
-    let monthNames = [
-        "January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"
-    ];
-    
-     let month = monthNames[date.getMonth()]; 
-     let day = date.getDate();               
-     let year = date.getFullYear();  
-    
-    
-    let getCurrentDay = `${month} ${day},   ${year} `;
-
-document.getElementById('currentDate').innerHTML = `${getCurrentDay}`;
+    if (urgentTasks.length > 0) {
+        let nextUrgentTask = urgentTasks.reduce((earliest, current) => {
+            let earliestDate = new Date(earliest.duedate);
+            let currentDate = new Date(current.duedate);
+            if (currentDate < earliestDate) {
+                return current;
+            } else {
+                return earliest;
+            }
+        });
+        
+        document.getElementById('currentDate').innerHTML = formatDate(nextUrgentTask.duedate);
+    } else {
+        document.getElementById('currentDate').innerHTML = "No upcoming urgent tasks";
+    }
 
     showTheCurrentTime();
 }
 
+function formatDate(dueDate) {
+    let date = new Date(dueDate);
+    let monthNames = [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    ];
+    return `${monthNames[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
+}
 
 function  showTheCurrentTime(){
 
@@ -177,7 +185,6 @@ if (currentTime < 12) {
   
 } else if (currentTime < 18) {
     greetingText.innerHTML = "Good Afternoon !!!"; 
-  console.log(greetingText);
 } else {
     greetingText.innerHTML = "Good Evening !!!"; 
 

@@ -350,6 +350,7 @@ h3 {
     border-radius: 10px;
     font-size: 20px;
     font-weight: bolder;
+    cursor:pointer;
 }
 
 .searchContainer {
@@ -470,6 +471,7 @@ nav ul {
 .displayFlex {
     display: flex;
     margin-top: 94px;
+    cursor:pointer;
 }
 
 .Titleleft {
