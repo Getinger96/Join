@@ -83,8 +83,15 @@ async function updateHtml() {
     for (let index = 0; index < statusCategories.length; index++) {
         let category = statusCategories[index];
         let filteredTasks = tasksArray.filter(t => t.status === category);
-        document.getElementById(category).innerHTML = ''; 
 
+       let currentCategoryElement = document.getElementById(category)
+
+        if (!currentCategoryElement) {
+            return
+            }
+
+            currentCategoryElement.innerHTML ='';
+            
         filteredTasks.forEach(task => {
             let taskHTML = generateTodoHTML(task, task.idTask); 
             document.getElementById(category).insertAdjacentHTML('afterbegin', taskHTML);

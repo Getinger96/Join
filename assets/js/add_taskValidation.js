@@ -8,14 +8,30 @@ function validateTask(titel,category, date) {
 
     currentDate.setHours(0, 0, 0, 0);
 
-    if (titel.value === '' ||category.value === '' || date.value === ''  || selectedDate < currentDate ||  assignedContacts.length === 0   ) {
+
+    if (titel.value === '' ||category.value === '' || date.value === '' ||   prio.length == 0 ) {
         allInputFieldMissing();
-        showInvalidDateMessage();
         changeColorBorder();
+        showInvalidDateMessage();
         return false;
+    } else {
+        document.getElementById("title").style.border= '';
+        document.getElementById("select_containerId").style.border= '';
+        document.getElementById("InputFieldsMissing").innerHTML = '';
+        document.getElementById("urgent").style.border = '';
+        document.getElementById("medium").style.border = '';
+        document.getElementById("low").style.border = '';
     }
 
 
+
+    if (selectedDate < currentDate ) {
+        showInvalidDateMessage();
+        return false;
+    }
+
+    document.getElementById("WrongCurrentDateId").innerHTML = '';
+    document.getElementById("dueDate").style.border = '';
  return true;
 }
 
@@ -46,8 +62,10 @@ function changeColorBorder() {
     document.getElementById("title").style.border = "2px solid red";
     document.getElementById("dueDate").style.border = "2px solid red";
     document.getElementById("select_containerId").style.border = "2px solid red";
-    document.getElementById("select_container").style.border = "2px solid red";
-  
+    document.getElementById("urgent").style.border = "2px solid red";
+    document.getElementById("medium").style.border = "2px solid red";
+    document.getElementById("low").style.border = "2px solid red";
+
 }
 
 
@@ -55,12 +73,19 @@ function clearMissingFieldContent() {
     document.getElementById("title").style.border= '';
     document.getElementById("dueDate").style.border= '';
     document.getElementById("select_containerId").style.border= '';
-    document.getElementById("select_container").style.border = '';
     document.getElementById("InputFieldsMissing").innerHTML = '';
 
   
 }
 
+
+function clearWarningField() {
+    document.getElementById("title").style.border= '';
+    document.getElementById("dueDate").style.border= '';
+    document.getElementById("select_containerId").style.border= '';
+    document.getElementById("InputFieldsMissing").innerHTML = '';
+
+}
 
 async function fetchTasks(path = '') {
     tasksArray = [];

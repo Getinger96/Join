@@ -190,7 +190,7 @@ function renderPrioButtons() {
     let prioButtonContainer = document.getElementById('Prio_btn_Container');
     prioButtonContainer.innerHTML = `
                         <button onclick="chossedurgent()" type="button" id="urgent"  class="Prio_Btn">Urgent <img
-                                id="urgentIcon" src="./assets/IMG/Prio_urgent(2).svg" alt=""></button>
+                                id="urgentIcon" src="./assets/IMG/Priority symbols (1).png" alt=""></button>
                                  <button type="button" id="medium" onclick="choossedmedium()" class="Prio_Btn">Medium <img
                                 id="mediumIcon" src="./assets/IMG/Prio_medium(2).svg" alt="">
                         </button>
@@ -433,6 +433,8 @@ async function clearTask() {
     subtasks = [];
     prio = [];
     renderPrioButtons();
+    clearMissingFieldContent(); 
+    clearWarningField();
 }
 
 

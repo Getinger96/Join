@@ -119,7 +119,6 @@ function getContacts() {
     let showContacts = document.getElementById('Selection_Container');
 
     if (!showContacts) {
-        console.error("Element with ID 'Selection_Container' not found.");
         return;
     }
     showContacts.innerHTML = '';

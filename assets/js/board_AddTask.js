@@ -262,7 +262,7 @@ function addCurrentSubtask() {
         document.getElementById('SubtaskLengthReached').innerHTML = ' <span class="tomanySubtask"> Please enter a valid subtask</span>';
         return;
     }
-    if (subtasks.length <= 6) {
+    if (subtasks.length <= 10) {
         subtasks.push(currentSubtask);
         document.getElementById('new-subtask').value = '';
         addSubtask();
