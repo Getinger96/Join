@@ -44,7 +44,7 @@ async function fetchTasks(path = '') {
     removeAllElement();
     await updateHtml();
     renderSubtask();
-    console.log(tasksArray)
+    
 
 }
 
@@ -69,7 +69,7 @@ function renderSubtask() {
             }
         )
     }
-    console.log(subtask);
+   
 }
 
 function closeTask() {

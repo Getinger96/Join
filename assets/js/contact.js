@@ -40,7 +40,7 @@ async function fetchContacts(path = '') {
         }
     };
 
-    console.log(contactsArray);
+    
     sortContactsByLetter();
 }
 
@@ -123,7 +123,7 @@ function closeDetailView() {
 
 function getContactBig(index) {
     let contact = contactsArray[index];
-    console.log('Selected Contact:', contact);
+   
 
     let colorIndex = index % colors.length;
     let color = colors[colorIndex];
