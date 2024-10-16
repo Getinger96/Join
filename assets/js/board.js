@@ -256,7 +256,7 @@ function getassignecontacts(task, taskIndex) {
         let contact = assignedContacts[index];
         let checkIndexarray = contactsArray.findIndex(c => c.name === contact);
   
-        nameParts = contact.split(" ");
+        nameParts = contact.split("");
         let firstLetterForName;
         let firstLetterLastName;
         let colorid = `contactIcon_${taskIndex}_${index}`;
@@ -265,12 +265,12 @@ function getassignecontacts(task, taskIndex) {
             firstLetterForName = nameParts[0].charAt(0).toUpperCase();
             firstLetterLastName = nameParts[1].charAt(0).toUpperCase();
             asignedContainer.innerHTML += `<div id="${colorid}"class="contact-iconBoard">
-                    <span>${firstLetterForName}${firstLetterLastName} </span>
+                    <span>${firstLetterForName}${firstLetterLastName}</span>
                 </div>`;
         } else {
             firstLetterForName = nameParts[0].charAt(0).toUpperCase();
             asignedContainer.innerHTML += `<div id="${colorid}" class="contact-iconBoard">
-                    <span>${firstLetterForName} </span>
+                    <span>${firstLetterForName}</span>
                 </div>`;
         }
         showTheNameInitialInColorBoard(checkIndexarray, colorid);

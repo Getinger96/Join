@@ -83,7 +83,7 @@ function getLargeContactHtml(index, firstLetterForName, firstLetterLastName, con
     return `
         <div class="contact-box">
             <div class="contact-icon" style="background-color: ${color};">
-                ${firstLetterForName} ${firstLetterLastName}  
+                ${firstLetterForName}${firstLetterLastName}  
             </div>
             <div class="contact-content">
                 <span class="contactname">${contactFirstname} ${contactLastname}</span>

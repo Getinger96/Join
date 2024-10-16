@@ -42,6 +42,15 @@ async function fetchContacts(path = '') {
     }
     renderSelectionContainer()
     renderPrioButtons()
+    let medium = document.getElementById('medium');
+    medium.innerHTML =
+        `
+    Medium
+    <img src="assets/IMG/PRio_Medium_WHITE.svg" alt="">
+    `;
+    medium.classList.add('color_white');
+    medium.classList.add('bg_Medium');
+    prio = 'medium';
 }
 
 function func1(event) {
