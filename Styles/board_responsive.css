@@ -50,19 +50,19 @@
     }
 
     .inputDescription {
-        width: 340px;
+        width: 375px;
     }
 
     .select_container {
-        width: 328px;
+        width: 360px;
     }
 
     .inputTitleDate {
-        width: 340px;
+        width: 375px;
     }
 
     .marginButtomButton {
-        gap: 2px;
+        gap: 22px;
     }
 
     .addTaskContainer {
@@ -78,9 +78,7 @@
         right: 90px;
     }
 
-    .dateEdit {
-        margin-top: -30px;
-    }
+  
 
     .Titleleft {
         margin-top: 53px;
@@ -94,9 +92,16 @@
         justify-content: space-between;
         gap: 530px;
     }
+
+    .Selection_Container {
+        width: 376px;
+     
+    }
 }
 
 @media(max-width: 1230px) {
+
+    
 
     .cardbig {
         height: 630px;
@@ -171,18 +176,9 @@
         flex-direction: column;
     }
 
-    .red {
-        display: none;
-    }
+   
 
-    .inputTitleDate {
-        margin-top: 0;
-    }
-
-    .inputTitleDate {
-        margin-top: 185px;
-        margin-top: 80px;
-    }
+  
 
     .bottomInfo {
         position: relative;
@@ -208,6 +204,11 @@
     .Selection_Container {
         height: 190px;
         margin-top: 80px;
+        width: 370px;
+    }
+
+    .boardtitle{
+        margin-left: 88px;
     }
 
     .addTaskContainer {
@@ -228,10 +229,7 @@
         margin-top: 0px;
     }
 
-    .dueDateEdit {
-        display: none;
-    }
-
+  
     .addTaskTitle {
         display: flex;
         justify-content: space-between;
@@ -333,20 +331,7 @@
         justify-content: flex-start;
     }
 
-    #urgentIcon {
-        width: 25px;
-        height: 25px;
-    }
-
-    #mediumIcon {
-        width: 25px;
-        height: 25px;
-    }
-
-    #lowIcon {
-        width: 30px;
-        height: 25px;
-    }
+   
 
     .select_container {
         width: 230px;
@@ -354,7 +339,7 @@
     }
 
     .inputDescription {
-        width: 250px;
+        width: 365px;
         font-size: 15px;
     }
 
@@ -388,11 +373,12 @@
     }
 
     .select_container {
-        width: 230px;
+        width: 350px;
     }
 
     .AssignedTO_Container {
         width: 300px;
+        margin-bottom: 16px
     }
 
     .cardbig {
@@ -417,12 +403,38 @@
         margin-top:-80px;
     }
 
+    .boardtitle {
+        margin-left: 54px;
+    }
+
+    .inputTitle {
+        width: 300px;
+        
+    }
+
+    .inputDescription {
+        width: 300px;
+        
+    }
+    .select_container {
+        width: 288px;
+    }
+
+    .Selection_Container {
+       
+        width: 308px;
+    }
+
     .boardAddTask {
         border-radius: 20px;
     }
 
     .inputTitleDate {
-        width: 250px;
+        width: 308px;
+    }
+
+    .marginButtomButton {
+        gap: 0px;
     }
 
     .addTaskContainer {
@@ -503,6 +515,22 @@
 }
 
 @media(max-width: 630px) {
+
+    .boardtitle {
+        margin-left: 0px;
+    }
+
+    .select_container {
+        width: 234px;
+    }
+
+    .Selection_Container {
+        width: 254px;
+    }
+
+    .inputTitleDate {
+        width: 254px;
+    }
 
     ul {
         padding-inline-start: 0px;
@@ -618,22 +646,11 @@
 
     .buttonContainerPrio {
         width: 80px;
+        font-size: 12px;
+        gap: 6px;
     }
 
-    #urgentIcon {
-        width: 16px;
-        height: 16px;
-    }
-
-    #mediumIcon {
-        width: 16px;
-        height: 16px;
-    }
-
-    #lowIcon {
-        width: 16px;
-        height: 16px;
-    }
+   
 }
 
 @media(max-height: 670px) {

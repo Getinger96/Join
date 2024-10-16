@@ -1,4 +1,4 @@
-<section id="boardAddTask" class="boardAddTask positionTask">
+<section onresize="redirect()" id="boardAddTask" class="boardAddTask positionTask">
     <div class="widthBoard">
         <div class="boardtitle addTaskBoard">
             <div class="addTaskTitle">
@@ -18,15 +18,15 @@
                     <div id="InputFieldsMissing"></div>
                     <div class="flexdirection">
                         <label for="description">Description</label>
-                        <textarea class="inputDescription marginTop" id="description" type="text"
-                            placeholder="Enter a Description"></textarea>
+                        <input class="inputDescription marginTop" id="description" type="text"
+                            placeholder="Enter a Description">
                     </div>
                     <div id="InputFieldsMissing"></div>
                     <div class="AssignedTO_Container">
                         <span class="Assign_Header">Assigned to</span>
-                        <div id="select_container" class="select_container">
+                        <div onclick="openList()" id="select_container" class="select_container">
                             <span>Select contacts to assign</span>
-                            <div id="arrow_img_container"> <img onclick="openList()" class="arrow_drop_downaa curser"
+                            <div id="arrow_img_container"> <img  class="arrow_drop_downaa curser"
                                     src="assets/IMG/arrow_drop_downaa.svg" alt=""></div>
                         </div>
                         <div id="Selection_Container" class="Selection_Container d_none">

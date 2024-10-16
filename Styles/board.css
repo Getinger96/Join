@@ -217,6 +217,7 @@ h3 {
 
 .dateEdit {
     display: flex;
+    margin-top: 40px;
 }
 
 .checkbox {
@@ -277,10 +278,10 @@ h3 {
     cursor: pointer;
     flex-direction: column;
     height: 99px;
-    overflow-y: auto;
+    overflow-y: scroll;
     padding: 5px;
     gap: 10px;
-    scrollbar-width: thin;
+    
     scrollbar-color: #888 #e0e0e0;
 }
 

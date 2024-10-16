@@ -1,5 +1,7 @@
 function openTaskBoard() {
-    
+  
+
+ 
        
     let mediumButton = document.getElementById("medium");
     let mediumIcon = document.getElementById("mediumIcon");
@@ -16,18 +18,36 @@ function openTaskBoard() {
         overlay.style.display = 'block';  
         document.body.style.overflow = 'hidden';  
         setCreateTaskButton();
+    
     } else {
         taskDiv.style.display = 'none';  
         overlay.style.display = 'none';  
         document.body.style.overflow = 'auto'; 
     }
+   
 }
 
+function redirect() {
+    let width=window.innerWidth;
+    if (width < 1230) {
+        window.location="http://127.0.0.1:5500/add_task.html"
+         
+     }
+}
+
+let d_none = true;
 function openList() {
     let selecCon = document.getElementById('Selection_Container');
     let arrowCon = document.getElementById('arrow_img_container');
-    arrowCon.innerHTML =`<img onclick="closelist()" class="arrow_drop_downaa" src="assets/IMG/arrow_drop_up.svg" alt="">`;
-    selecCon.classList.remove('d_none');
+    selecCon.classList.toggle('d_none');
+    if (d_none == true) {
+        arrowCon.innerHTML = `<img class="arrow_drop_up" src="assets/IMG/arrow_drop_up.svg" alt="">`;
+        d_none = false;
+    } else {
+        arrowCon.innerHTML = `<img class="arrow_drop_downaa" src="./assets/IMG/arrow_drop_downaa.svg" alt="">`;
+        d_none = true;
+
+    }
     getContacts();
 
     for (let i = 0; i < contactsArray.length; i++) {
@@ -44,13 +64,7 @@ function openList() {
     }
 }
 
-function closelist() {
-    let selecCon = document.getElementById('Selection_Container');
-    let arrowCon = document.getElementById('arrow_img_container');
-    arrowCon.innerHTML = '';
-    arrowCon.innerHTML = `<img onclick="openList()"class="arrow_drop_downaa" src="assets/IMG/arrow_drop_downaa.svg" alt="">`;
-    selecCon.classList.add('d_none');
-}
+
 
 function displayContacts(contactIndex, contactsName, contactLastname, selectedClass, color) {
    
