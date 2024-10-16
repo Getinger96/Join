@@ -322,21 +322,36 @@ async function createEdittask(index) {
     let task = tasksArray[index];
     let status = task.status
     let key = task.taskKey;
+    
+    if (!validateTask(tasktitle, taskCategory, taskDAte)) {
+        return;
+    } else{
 
-
-    let editedTASk = {
-
-        Titel: tasktitle.value,
-        Description: taskdescription.value,
-        AssignedContact: assignedContacts,
-        Date: taskDAte.value,
-        Prio: currentPriority,
-        Category: taskCategory.value,
-        Subtask: subtasks,
-        Status: status,
+   
+            let editedTASk = {
+    
+                Titel: tasktitle.value,
+                Description: taskdescription.value,
+                AssignedContact: assignedContacts,
+                Date: taskDAte.value,
+                Prio: currentPriority,
+                Category: taskCategory.value,
+                Subtask: subtasks,
+                Status: status,
+            }
+            await putDataEdit(`tasks/${key}`, editedTASk)
+            closeTask();
+            closeOverlay();
+            await fetchTasks();
+        }
     }
-    await putDataEdit(`tasks/${key}`, editedTASk)
-    closeTask();
-    closeOverlay();
-    await fetchTasks();
-}
+        
+    
+
+    
+
+
+  
+
+
+
