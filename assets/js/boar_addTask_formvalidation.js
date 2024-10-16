@@ -22,13 +22,6 @@ function validateTask(titel,category, date) {
         return false;
     }
 
-
-    if (currentPriority =='none' ) {
-        changColorPrioIcons();
-        allInputFieldMissing();
-        return false;
-    }
-    returnColorPrioIcons();
     document.getElementById("taskDueDate").style.border= '';
     document.getElementById("WrongCurrentDateId").innerHTML = '';
 
