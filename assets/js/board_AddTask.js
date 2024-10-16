@@ -187,6 +187,13 @@ function clearTask() {
         deselctedtContact(contactIndex, contact.name, `${contact.name.charAt(0).toUpperCase()}${getLastName(contact.name).charAt(0).toUpperCase()}`, contact.color);
     }
 
+
+    let taskIndex = currentTaskIndex;
+    if (taskIndex !== undefined && tasksArray[taskIndex]) {
+        tasksArray[taskIndex].subtask = [];
+        localStorage.removeItem(`task-${taskIndex}-subtasks`);
+    }
+
     const selectionContainer = document.getElementById('Selection_Container');
     if (selectionContainer) {
         selectionContainer.innerHTML = '';
@@ -223,6 +230,8 @@ function clearTask() {
     assignedContacts = [];
     subtasks = [];
     getContacts();
+    clearMissingFieldContent();
+    returnColorPrioIcons();
 }
 
 function urgent() {
@@ -371,8 +380,10 @@ function enterNewSubtask(i) {
         return;
    }
 
+   document.getElementById(`subtasksValidation${i}`).innerHTML='';
+
+
    subtasks[i] =newSubTask;
-   document.getElementById(`changeImgEdit${i}`).innerHTML =
 
     addSubtask();
     

@@ -9,7 +9,7 @@ function validateTask(titel,category, date) {
     currentDate.setHours(0, 0, 0, 0);
 
 
-    if (titel.value === '' ||category.value === '' || date.value === '' ||   prio.length == 0 ) {
+    if (titel.value === '' ||category.value === '' || date === '') {
         allInputFieldMissing();
         changeColorBorder();
         showInvalidDateMessage();
@@ -18,9 +18,6 @@ function validateTask(titel,category, date) {
         document.getElementById("title").style.border= '';
         document.getElementById("select_containerId").style.border= '';
         document.getElementById("InputFieldsMissing").innerHTML = '';
-        document.getElementById("urgent").style.border = '';
-        document.getElementById("medium").style.border = '';
-        document.getElementById("low").style.border = '';
     }
 
 
@@ -62,9 +59,7 @@ function changeColorBorder() {
     document.getElementById("title").style.border = "2px solid red";
     document.getElementById("dueDate").style.border = "2px solid red";
     document.getElementById("select_containerId").style.border = "2px solid red";
-    document.getElementById("urgent").style.border = "2px solid red";
-    document.getElementById("medium").style.border = "2px solid red";
-    document.getElementById("low").style.border = "2px solid red";
+
 
 }
 
@@ -75,6 +70,14 @@ function clearMissingFieldContent() {
     document.getElementById("select_containerId").style.border= '';
     document.getElementById("InputFieldsMissing").innerHTML = '';
 
+    let SubtaskLengthReachedElement = document.getElementById('SubtaskLengthReached')
+
+    if (SubtaskLengthReachedElement) {
+        SubtaskLengthReachedElement.innerHTML ='';
+    }
+ 
+    
+
   
 }
 
@@ -84,7 +87,7 @@ function clearWarningField() {
     document.getElementById("dueDate").style.border= '';
     document.getElementById("select_containerId").style.border= '';
     document.getElementById("InputFieldsMissing").innerHTML = '';
-
+    document.getElementById("WrongCurrentDateId").innerHTML = '';
 }
 
 async function fetchTasks(path = '') {

@@ -77,6 +77,8 @@ function closeTask() {
     document.getElementById('darkOverlay').style.display = 'none';
     document.body.style.overflow = 'auto';  
  clearTask();
+ clearMissingFieldContent();
+ returnColorPrioIcons();
 } 
 async function updateHtml() {
     let statusCategories = ['open', 'progress', 'awaitFeedback', 'closed'];
@@ -91,7 +93,7 @@ async function updateHtml() {
             }
 
             currentCategoryElement.innerHTML ='';
-            
+
         filteredTasks.forEach(task => {
             let taskHTML = generateTodoHTML(task, task.idTask); 
             document.getElementById(category).insertAdjacentHTML('afterbegin', taskHTML);
@@ -166,6 +168,7 @@ async function closeTaskUpdate() {
     document.getElementById('darkOverlay').style.display = 'none';
     document.body.style.overflow = 'auto';
     clearTask();
+    clearMissingFieldContent();
 }
 
 function generateTodoHTML(task, taskIndex) {

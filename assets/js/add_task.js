@@ -267,7 +267,7 @@ function addSubtask() {
                         <img src="./assets/IMG/delete.png">
                     </button>
                     <button type="button" id="changeImgEdit${i}"  class="EditSubtaskButton" onclick="editSubtask(${i})">
-                        <img  src="./assets/IMG/edit.png" alt="Edit">
+                        <img  src="./assets/IMG/edit.png" class="deleteButton" alt="Edit">
                     </button>
                 </div>            
             </div>`;
@@ -285,6 +285,8 @@ function addCurrentSubtask() {
     if (subtasks.length < 10) {
         let Currentubtask = document.getElementById('input_Subtasks').value;
         if (Currentubtask == '') {
+            document.getElementById('SubtaskLengthReached').innerHTML = ' <span class="tomanySubtask"> Please enter a valid subtask</span>';
+            return;
         } else {
             subtasks.push(Currentubtask);
             document.getElementById('input_Subtasks').value = '';
@@ -322,8 +324,8 @@ function enterNewSubtask(i) {
         return;
    }
 
-    subtasks[i] = newSubTask;
-    document.getElementById(`changeImgEdit${i}`).innerHTML =
+   document.getElementById(`subtasksValidation${i}`).innerHTML ='';
+   subtasks[i] = newSubTask;
 
         addSubtask();
 
