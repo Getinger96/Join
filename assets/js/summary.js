@@ -7,7 +7,7 @@ let iconsBooleanColorChange = false;
 
 
 async function fetchTasksSummary(path = '') {
-    tasksArray = []; // Leere das Array vor dem Hinzufügen neuer Einträge
+    tasksArray = [];
     let response = await fetch(base_URL + path + ".json");
     let userJSON = await response.json();
     let tasksAsArray = Object.values(userJSON.tasks);
@@ -20,7 +20,7 @@ async function fetchTasksSummary(path = '') {
 
         let saveTask = tasksArray.filter(t => t.Title === task.Titel && t.Description === task.Description);
 
-        // Beispielbedingung, die du anpassen kannst
+       
         if (saveTask.length > 0) {
     
         } else {

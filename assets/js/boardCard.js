@@ -189,7 +189,7 @@ function generateSubtasksHtml(subtasks, taskIndex) {
     if (totalSubtasks > 0) {
         subtasks.forEach((subtask, index) => {
             const subtaskStatus = JSON.parse(localStorage.getItem(`task-${taskIndex}-subtasks`)) || {};
-            const isChecked = subtaskStatus[index] || false;  // Standardmäßig auf false setzen
+            const isChecked = subtaskStatus[index] || false; 
 
             subtasksHtml += `
                 <div class="subtask-item">

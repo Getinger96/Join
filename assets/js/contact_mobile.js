@@ -54,7 +54,7 @@ function closeMobileNewContact() {
 }
 
 function mobileAddContact(event) {
-    event.stopPropagation();  // Verhindert, dass das übergeordnete div ausgewählt wird
+    event.stopPropagation(); 
 
     if (window.innerWidth <= 1150) {
         showMobileNewContactOverlay();
