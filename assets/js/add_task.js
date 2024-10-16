@@ -446,6 +446,7 @@ async function clearTask() {
     renderPrioButtons();
     clearMissingFieldContent(); 
     clearWarningField();
+    choossedmedium();
 }
 
 

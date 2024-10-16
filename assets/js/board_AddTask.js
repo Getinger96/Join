@@ -232,6 +232,7 @@ function clearTask() {
     getContacts();
     clearMissingFieldContent();
     returnColorPrioIcons();
+    medium();
 }
 
 function urgent() {
