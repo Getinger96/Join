@@ -37,7 +37,7 @@ async function fetchContacts(path = '') {
                 password: contact.password,
                 color: color,
             })
-            console.log(contacts);
+            
         }
     }
     renderSelectionContainer()
@@ -173,8 +173,9 @@ function deselctedtContact(i, name, firstletters, contactColour) {
     let index = assignedContacts.indexOf(name);
 
     assignedContacts.splice(index, 1);
-    console.log(assignedContacts)
+    
     showSelectedProfile(firstletters, i, contactColour);
+    
 }
 
 function showSelectedProfile(firstletters, i, contactColour) {
@@ -404,7 +405,7 @@ async function createTask(event) {
 
     }
 
-    console.log(newTask);
+    
     clearMissingFieldContent();
     await postData(`tasks`, newTask);
     clearTask();
@@ -424,7 +425,7 @@ async function clearTask() {
         let firstletterlastname = lastname.charAt(0);
         let firstletterlastnameBIG = firstletterlastname.toUpperCase();
         let firstletters = forNAmebig + firstletterlastnameBIG;
-        deselctedtContact(i, name, firstletters, contactColour)
+       
     }
     let selectedProfileContainer = document.getElementById('Selected_profiles_Container');
     selectedProfileContainer.innerHTML = '';
@@ -447,6 +448,7 @@ async function clearTask() {
     clearMissingFieldContent(); 
     clearWarningField();
     choossedmedium();
+    renderSelectionContainer();
 }
 
 

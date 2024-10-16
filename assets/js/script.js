@@ -150,7 +150,7 @@ function checkIfLoggedIn() {
     let loggedInUser = localStorage.getItem('loggedInUser');
     if (loggedInUser) {
         loggedInUser = JSON.parse(loggedInUser);
-        console.log(loggedInUser);
+       
         showTheNameInitial(loggedInUser);
 
 
