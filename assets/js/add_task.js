@@ -251,7 +251,7 @@ function choosedlow() {
 
 function addSubtask() {
     let list = document.getElementById('ul_subtasks');
-    list.innerHTML = ''; // Clear the list before adding updated subtasks
+    list.innerHTML = ''; 
     for (let i = 0; i < subtasks.length; i++) {
 
 
@@ -274,7 +274,7 @@ function addSubtask() {
             </div>`;
     }
 }
-function deleteItem(i) { //Einzelnen Elemente aus der Liste löschen
+function deleteItem(i) { 
     subtasks.splice(i, 1);
     addSubtask();
 }

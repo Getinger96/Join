@@ -191,7 +191,7 @@ function changeColorTextMobile() {
 
 
 async function updateContactInTasks(editedContact) {
-    let response = await fetch(base_URL + "/tasks.json");  // Alle Tasks von Firebase holen
+    let response = await fetch(base_URL + "/tasks.json");  
     let tasksData = await response.json();
     let keys = Object.keys(tasksData);
     let tasks = Object.values(tasksData);

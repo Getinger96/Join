@@ -1,12 +1,12 @@
 const colors = [
     '#FF5733', // Orange
-    '#FFC300', // Gelb
-    '#33FF57', // Grün
+    '#FFC300', // Yellow
+    '#33FF57', // Green
     '#33FFF3', // Türkis
-    '#3357FF', // Blau
-    '#A133FF', // Lila
+    '#3357FF', // Blue
+    '#A133FF', // Purple
     '#FF33A1', // Pink
-    '#FF8F33'  // Hellorange
+    '#FF8F33'  // brightorange
 ];
 
 const base_URL = "https://join-37803-default-rtdb.europe-west1.firebasedatabase.app/";
