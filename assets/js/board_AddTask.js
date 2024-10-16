@@ -1,7 +1,12 @@
 function openTaskBoard() {
     
-        window.location.href = 'add_task.html'; 
-   
+       
+    let mediumButton = document.getElementById("medium");
+    let mediumIcon = document.getElementById("mediumIcon");
+    mediumButton.style.backgroundColor = "orange";
+    mediumButton.style.color = "white";
+    mediumIcon.src = "./assets/IMG/Prio media.png";
+    currentPriority = 'medium';
     
     let taskDiv = document.getElementById('boardAddTask');
     let overlay = document.getElementById('darkOverlay');

@@ -642,7 +642,7 @@ animation-fill-mode: forwards;
 .Btn_Container {
     display: flex;
     gap: 16px;
-    margin-top: 170px;
+    margin-top: 130px;
     align-items: center;
     justify-content: space-around;
     

@@ -15,11 +15,13 @@
                         </div>
                         <input id="taskTitle" class="inputTitle" type="text" placeholder="Enter a title" required>
                     </div>
+                    <div id="InputFieldsMissing"></div>
                     <div class="flexdirection">
                         <label for="description">Description</label>
                         <textarea class="inputDescription marginTop" id="description" type="text"
                             placeholder="Enter a Description"></textarea>
                     </div>
+                    <div id="InputFieldsMissing"></div>
                     <div class="AssignedTO_Container">
                         <span class="Assign_Header">Assigned to</span>
                         <div id="select_container" class="select_container">
@@ -30,6 +32,7 @@
                         <div id="Selection_Container" class="Selection_Container d_none">
 
                         </div>
+                        <div id="InputFieldsMissing"></div>
                         <div id="Selected_profiles_Container" class="Selected_profiles_Container">
                         </div>
                     </div>
@@ -42,6 +45,7 @@
                             <p class="red">*</p>
                         </div>
                         <input id="taskDueDate" class="inputTitleDate curser" type="date" required>
+                        <div id="WrongCurrentDateId"> </div>
                     </div>
                     <div class="prioEditSection">
                         <p>Prio</p>
@@ -63,6 +67,7 @@
                             <option value="Technical Task">Technical Task</option>
                             <option value="User Story">User Story</option>
                         </select>
+                        
                     </div>
 
                     <div class="divPaddingBottum">

@@ -52,6 +52,8 @@ label {
     height: 100%;
 }
 
+
+
 .drag-area-highlight {
     background-color: rgba(0, 0, 0, 0.2);
 }
@@ -981,6 +983,11 @@ li {
     overflow: auto;
     scrollbar-width: none;
     animation: slideRight 0.5s ease-out forwards;
+}
+.missingInput {
+    color: red;
+    font-size: 18px;
+    font-weight: bolder;
 }
 
 

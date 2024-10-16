@@ -24,20 +24,22 @@ async function createTask(event) {
     const titleElement = document.getElementById('taskTitle');
     const dueDateElement = document.getElementById('taskDueDate');
     const kategorieElement = document.getElementById('kategorie');
-
-    if (!titleElement || !dueDateElement || !kategorieElement) {
-        alert("Bitte füllen Sie alle Pflichtfelder aus.");
+    
+    if (!validateTask(titleElement, kategorieElement,dueDateElement)) {
         return;
-    }
+    }else{
+
+    document.getElementById("InputFieldsMissing").innerHTML ='';
+    document.getElementById("WrongCurrentDateId").innerHTML ='';
+
+
+
+    
     const title = titleElement.value.trim();
     const dueDate = dueDateElement.value.trim();
     const kategorie = kategorieElement.value.trim();
 
-    if (!title || !dueDate || !kategorie) {
-        alert("Bitte füllen Sie alle Pflichtfelder aus.");
-        return;
-    }
-
+  
     const descriptionElement = document.getElementById('description');
     const description = descriptionElement ? descriptionElement.value.trim() : '';
     const priority = currentPriority;
@@ -58,7 +60,7 @@ async function createTask(event) {
     tasksArray = [];
     await closeTaskUpdate();
     assignedContacts=[];
-    fetchTasks();
+    fetchTasks();}
 }
 
 async function postData(path = "", data = {}) {
