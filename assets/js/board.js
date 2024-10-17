@@ -7,6 +7,8 @@ let currentTaskIndex = null;
 let currentDraggedElement;
 let id = 0
 
+let addtask=false;
+
 async function fetchTasks(path = '') {
     tasksArray = [];
     let response = await fetch(base_URL + path + ".json");

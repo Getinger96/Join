@@ -86,9 +86,10 @@ body {
     margin-left: 50px;
 }
 
-.navlinkBackgroundcolor{
-    background-color: #59687c
-}
+
+    
+
+
 
 .navLink_Summary {
 
@@ -171,6 +172,7 @@ body {
     height: 46px;
 }
 
+
 .navLink_Add_Task {
     text-decoration: none;
     color: #FFFFFF;
@@ -187,7 +189,13 @@ body {
     gap: 8px;
     padding: 8px 56px 8px 56px;
     align-items: center;
+    
 }
+.active {
+    background-color: #405169;
+}
+
+
 
 .sidelink {
     width: 232px;

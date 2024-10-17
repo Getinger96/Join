@@ -1,6 +1,6 @@
 function openTaskBoard() {
   
-
+    let =addtask=true;
  
        
     let mediumButton = document.getElementById("medium");
@@ -27,12 +27,16 @@ function openTaskBoard() {
    
 }
 
+
 function redirect() {
     let width=window.innerWidth;
-    if (width < 1230) {
-        window.location="http://127.0.0.1:5500/add_task.html"
-         
-     }
+    if (addtask==true) {
+        if (width < 1230) {
+            window.location="http://127.0.0.1:5500/add_task.html"
+             
+         }
+    }
+   
 }
 
 let d_none = true;
