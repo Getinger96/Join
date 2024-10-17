@@ -54,6 +54,7 @@ async function includeHTML() {
             return
         }
     }
+    setActiveLink();
 };
 
 
