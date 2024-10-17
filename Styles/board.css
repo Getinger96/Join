@@ -588,6 +588,7 @@ h1 {
     border: 1px solid #D1D1D1;
     margin-bottom: 24px;
     font-size: 20px;
+    resize: none !important;
     font-family: 'Inter';
 }
 
