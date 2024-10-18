@@ -63,7 +63,7 @@ height: 80px;
         justify-content: flex-start;
         max-width: 268px;
         border-color: white;
-        box-shadow: 0px 0px 38px rgba(0, 0, 0, 0.35), 18px 10px 23px rgba(0, 0, 0, 0.5);
+        box-shadow: 0px 0px 38px rgba(0, 0, 0, 0.1), 18px 10px 23px rgba(0, 0, 0, 0.1);
         background: #FFFFFF;
         animation-timing-function: ease-out;
         animation-duration: 80ms;
@@ -90,7 +90,7 @@ height: 80px;
 
     .kanbanboradtodo:hover {
         transform: scale(1.00);
-        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
         background-color: #2A3647;
         cursor: pointer;
         color: white;
@@ -152,7 +152,7 @@ gap: 45px;
     justify-content: flex-start;
     max-width: 268px;
     border-color: white;
-    box-shadow: 0px 0px 38px rgba(0, 0, 0, 0.35), 18px 10px 23px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 0px 38px rgba(0, 0, 0, 0.1), 18px 10px 23px rgba(0, 0, 0, 0.1);
     background: #FFFFFF;
     animation-timing-function: ease-out;
     animation-duration: 80ms;
@@ -162,7 +162,7 @@ gap: 45px;
 
 .kanbanboraddone:hover {
     transform: scale(1.00);
-    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
     background-color: #2A3647;
     cursor: pointer;
     color: white;
@@ -214,7 +214,7 @@ font-weight: 400;
     justify-content: flex-start;
     max-width: 555px;
     border-color: white;
-    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.1), 11px 27px 30px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.1), 11px 27px 30px rgba(0, 0, 0, 0.1);
     background: #FFFFFF;
 
 
@@ -223,7 +223,7 @@ font-weight: 400;
 
 .kanbanboardprio:hover {
     transform: scale(1.00);
-    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
     background-color: #2A3647;
     cursor: pointer;
     color: white;
@@ -298,7 +298,7 @@ gap:10px
     justify-content: flex-start;
     max-width: 170px;
     border-color: white;
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.35), 18px 10px 23px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1), 18px 10px 23px rgba(0, 0, 0, 0.1);
     background: #FFFFFF;
 
 
@@ -306,7 +306,7 @@ gap:10px
 
 .taskboard:hover {
     transform: scale(1.00);
-    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
     background-color: #2A3647;
     cursor: pointer;
     color: white;
@@ -423,21 +423,32 @@ gap:10px
         padding: 20px;
     }
 
-.summary_hr {
-    display: none;
-}
+    .summary_headline {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start; 
+        margin-top: -55px; 
+    }
 
-.summary_headline {
-    display: block;
-    margin-top: 10px;
-}
+    .summary_title_big {
+        order: 1;
+    }
 
-.summary_secondline {
-    
-margin-block-start: 10px;
+    .summary_secondline {
+        order: 2;
+        margin-block-start: -30px;
+    }
 
+    .summary_hr {
+        order: 3;
+        width: 0px;
+        transform: rotate(-90deg); 
+        transform-origin: left; 
+        margin-left: 50px;
+        margin-bottom: -57px;
+        margin-top: -55px;
+    }
 
-}
 .kanbanBoardSection {
     align-items: center;
 }   
@@ -558,9 +569,6 @@ margin-block-start: 10px;
     font-size: 14px;
 }
 
-
-
-
 .taskboard {
     height: 110px; 
     text-align: center;
@@ -593,14 +601,10 @@ margin-block-start: 10px;
 
 @media (max-width: 650px) {
     .kanbanBoardSection {
-        align-items: flex-start;
+        align-items: center;
     }
 }
 @media (max-width:500px) {
-
-    .summary_headline {
-        align-items:flex-start;
-    }
 
     .summary_title_big {
         font-size: 40px; 
@@ -615,8 +619,8 @@ margin-block-start: 10px;
     .summary_headline {
         flex-direction: column;
         display: flex;
-        margin-top: 10px;
-        gap: 0px;
+        margin-top: -40px;
+        gap: 30px;
     }
 
     .newhr {
@@ -680,7 +684,6 @@ margin-block-start: 10px;
 
 .kanbanBoardSection {
     padding: 10px;
-    position: absolute;
         top: 120px;
 }
 
@@ -700,8 +703,8 @@ margin-block-start: 10px;
     .summary_headline {
         flex-direction: column;
         display: flex;
-        margin-top: 10px;
-        gap: 0px;
+        margin-top: -40px;
+        gap: 30px;
     }
 
 
@@ -759,7 +762,6 @@ margin-block-start: 10px;
 
 .kanbanBoardSection {
     padding: 10px;
-    position: absolute;
         top: 120px;
 }
 }}
@@ -767,8 +769,8 @@ margin-block-start: 10px;
 @media (max-height: 680px) {
     .kanbanBoardSection {
         padding: 6px;
-        position: absolute;
-        top: 50px;
+        position: fixed;
+        top: 20px;
     }
 
     .summary_headline {

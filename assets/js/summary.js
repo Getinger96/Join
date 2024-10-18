@@ -226,18 +226,16 @@ function changeImageToDoDefault(boolean) {
     
 }
 
-function changeImageDoneDefault(boolean) {
-    
+function changeImageDoneDefault(isHovered) {
     let imgIconKanbanBoardDone = document.getElementById('iconBoardDone');
 
-
-    if (boolean) {
+    if (isHovered) {
         imgIconKanbanBoardDone.src = './assets/IMG/frameimgwhitetwo.png';
-
     } else {
-        imgIconKanbanBoardDone.src = './assets/IMG/Frame 59 (1).png'
+        imgIconKanbanBoardDone.src = './assets/IMG/Frame 59 (1).png';
     }
 }
+
 
 
 

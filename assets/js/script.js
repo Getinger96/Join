@@ -106,6 +106,16 @@ function showLogOutSection() {
 
 }
 
+document.addEventListener('click', function(event) {
+    let toggleLogout = document.getElementById('logoutId');
+    let loginUser = document.querySelector('.logInUser_Container');
+
+    if (!loginUser.contains(event.target) && !toggleLogout.contains(event.target)) {
+        toggleLogout.innerHTML = '';
+        logOutVisibleBoolean = false;
+    }
+});
+
 
 
 async function showTheNameInitial(loggedInUser) {
