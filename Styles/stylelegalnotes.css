@@ -35,7 +35,6 @@ a {
 .privacyPolicy {
     margin-top:120px;
 }
-
 @media(max-width: 1450px) {
     .d-none {
         display: block;
@@ -49,6 +48,15 @@ a {
     overflow-x: hidden;
 }
 
+.top-right-img {
+    position: absolute;
+    top: 160px;
+    right: 40px;
+    cursor: pointer; 
+    width: 40px;
+    height: 40px;
+    }
+
 }
 
 @media(max-width: 800px) {
@@ -57,26 +65,101 @@ a {
     top: 140px;
     right: 40px;
     cursor: pointer; 
-    width: 30px; 
-    height: 30px;
+    width: 40px;
+    height: 40px;
     }
 
+}
 
-    @media(max-width: 500px) {
-        .privacyPolicy {
-            margin-top:80px;
+@media(max-width: 540px) {
+    .privacyPolicy {
+        margin-top:120px;
+    }
+
+    .top-right-img {
+        position: absolute;
+        top: 140px;
+        right: 20px;
+        cursor: pointer; 
+        width: 40px;
+        height: 40px;
         }
 
-        .top-right-img {
-            position: absolute;
-            top: 140px;
-            right: 20px;
-            cursor: pointer; 
-            width: 30px; 
-            height: 30px;
-            }
-    
+
+}
+
+
+@media(max-width: 650px) {
+    .top-right-img {
+        position: absolute;
+        top: 146px;
+        right: 24px;
+        cursor: pointer;
+        width: 40px;
+        height: 40px;
     }
+
+    .middle-Section-Privacy h1 {
+       font-size: 40px;
+
+}
+
+.middle-Section-Privacy h1 {
+    font-size: 35px;
+}
+
+
+}
+
+@media(max-width: 480px) {
+    .top-right-img {
+        position: absolute;
+        top: 145px;
+        right: 24px;
+        cursor: pointer;
+        width: 35px;
+        height: 35px;
+    }
+
+.middle-Section-Privacy h1 {
+   font-size: 32px;
+
+}
+}
+
+@media(max-width: 450px) {
+
+    .middle-Section-Privacy h1 {
+        font-size: 28px;
+     
+     }
+
+     h2 {
+        font-size: 22px;
+     }
+}
+
+
+@media(max-width: 400px) {
+    .top-right-img {
+        position: absolute;
+        top: 140px;
+        right: 20px;
+        cursor: pointer;
+        width: 30px;
+        height: 30px;
+    }
+
+
+    .middle-Section-Privacy h1 {
+        font-size: 23px;
+    }
+
+    h2 {
+        font-size: 20px;
+     }
+
+
 }
 
 .d-none {

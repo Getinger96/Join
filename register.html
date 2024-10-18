@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="./assets/IMG/Capa 2.png" />
+    <link rel="icon" type="image/x-icon" href="./assets/IMG/ 2.png" />
     <link rel="stylesheet" href="./Styles/fontStyles.css">
     <link rel="stylesheet" href="./Styles/register.css">
     <script src="./assets/js/register.js"></script>
@@ -37,26 +37,28 @@
             <hr class="signuphr">
             
             <form onsubmit="checkRegistration(); return false;" novalidate>
-                <div class="inputenamesection">
-                    <input id="username" class="inputname" type="text" required placeholder="Name">
+
+
+                <div class="inputenamesection" id="inputenamesectionId">
+                    <input id="username" class="inputname" type="text" required placeholder="Name" onblur="validateUsername()">
                     <img class="mailicon" src="assets/IMG/person.png" alt="">
                 </div>
 
-                <div class="inputemailsection">
-                    <input id="usermail" class="inputemail" type="email" required placeholder="E-Mail">
+                <div class="inputemailsection" id="inputemailsectionId">
+                    <input id="usermail" class="inputemail" type="email" required placeholder="E-Mail"  onblur="validateEmail()">
                     <img class="mailicon" src="assets/IMG/mail.png" alt="">
                 </div>
 
 
-                <div class="inputpasswordsection">
+                <div class="inputpasswordsection" id="inputpasswordsectionId">
                     <input id="userpassword" class="inputpassword" type="password" onclick="passwordvisbility()"
-                        required placeholder="Password">
+                        required placeholder="Password" onblur="validatePassword()">
                     <img id="visbilityimg" src="assets/IMG/lock.png" alt="" onclick="showVisbility()">
                 </div>
 
-                <div class="inputpasswordsection">
+                <div class="inputpasswordconfirmsection" id="inputpasswordconfirmsectionId">
                     <input id="userconfirmpassword" class="inputconfirmpassword" type="password"
-                        onclick="passwordconfirmvisbility()" required placeholder=" Confrim Password">
+                        onclick="passwordconfirmvisbility()" required placeholder=" Confrim Password"  onblur="validateConfirmPassword()">
                     <img id="visbilityimgconfirm" src="assets/IMG/lock.png" alt=""
                         onclick="showVisbilityconfirmpassword()">
                 </div>

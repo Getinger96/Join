@@ -105,6 +105,7 @@ body {
         
         .inputemailsection:has(input:focus),
         .inputpasswordsection:has(input:focus),
+        .inputpasswordconfirmsection:has(input:focus),
         .inputenamesection:has(input:focus),
         .inputconfirmpassword:has(input:focus) {
             border: 1px solid #29ABE2;
@@ -125,6 +126,16 @@ body {
         
         }
 
+        .inputpasswordconfirmsection {
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            padding: 11px 11px;
+            border: 1px solid gray;
+            border-radius: 20px;
+            margin-top: 20px;
+            cursor: pointer;
+        }
 
         .inputenamesection {
             display: flex;
@@ -349,7 +360,7 @@ body {
             }
         
 
-            .inputenamesection, .inputenamesection, .inputpasswordsection, .inputemailsection  {
+            .inputenamesection, .inputenamesection, .inputpasswordsection, .inputpasswordconfirmsection  .inputemailsection  {
 
                 width: 250px;
             }

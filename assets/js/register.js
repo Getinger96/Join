@@ -81,6 +81,13 @@ async function  checkRegistration() {
 }
 
 
+function validateUsername() {
+
+
+    
+}
+
+
 function ButtonDisabledSet() {
     let signUpButton = document.getElementById('signUpButton');
     signUpButton.classList.remove('enabledbutton');
@@ -164,6 +171,78 @@ function showVisbilityconfirmpassword() {
 }
 
 
+function validateUsername() {
+    let username = document.getElementById('username').value.trim();
+    if (!nameIsNotValid(username) || username.length < 3 || username.length > 30) {
+        document.getElementById('signupinfotext').innerText = wrongTextValidation();
+        changeBorderName();
+    } else {
+        document.getElementById('signupinfotext').innerText = '';
+        document.getElementById("inputenamesectionId").style.border= '';
+    }
+    checkFormCompletion();
+}
+
+function validateEmail() {
+    let usermail = document.getElementById('usermail').value.trim();
+    if (!emailIsNotCorrect(usermail)) {
+        document.getElementById('signupinfotext').innerText = wrongEmailValidation();
+        changeBorderEmail();
+    } else {
+        document.getElementById('signupinfotext').innerText = '';
+        document.getElementById("inputemailsectionId").style.border= '';
+    }
+    checkFormCompletion();
+}
+
+function validatePassword() {
+    let userpassword = document.getElementById('userpassword').value.trim();
+    if (userpassword.length <= 5) {
+        document.getElementById('signupinfotext').innerText = passwordToShort();
+        changeBorderPassword();
+    } else {
+        document.getElementById('signupinfotext').innerText = '';
+        document.getElementById("inputpasswordsectionId").style.border= '';
+    }
+    checkFormCompletion();
+}
+
+function validateConfirmPassword() {
+    let userpassword = document.getElementById('userpassword').value.trim();
+    let userconfirmpassword = document.getElementById('userconfirmpassword').value.trim();
+    if (userpassword !== userconfirmpassword) {
+        document.getElementById('signupinfotext').innerText = passwordNoMatch();
+        changeBorderConfirmPassword();
+    } else {
+        document.getElementById('signupinfotext').innerText = '';
+        document.getElementById("inputpasswordconfirmsectionId").style.border= '';
+    }
+    checkFormCompletion();
+}
+
+
+function changeBorderName() {
+    document.getElementById("inputenamesectionId").style.border= "3px solid red";
+
+}
+
+function changeBorderEmail() {
+    document.getElementById("inputemailsectionId").style.border= "3px solid red";
+
+}
+
+
+function changeBorderPassword() {
+    document.getElementById("inputpasswordsectionId").style.border= "3px solid red";
+
+}
+
+function changeBorderConfirmPassword() {
+    document.getElementById("inputpasswordconfirmsectionId").style.border= "3px solid red";
+
+}
+
+
 function passwordToShort() {
     return `
     Passwords must have maximal 6 characters !!!`;
@@ -241,7 +320,6 @@ function sigUpValidation(user, username, usermail, userpassword, userconfirmpass
 
      if (user) {
         sigUpInfo.innerHTML = emailIsAlreadyAvailable();
-        emptyTheInputFields(username, usermail, userpassword, userconfirmpassword, checkbox);
         ButtonDisabledSet();
         return;
     }
@@ -249,7 +327,6 @@ function sigUpValidation(user, username, usermail, userpassword, userconfirmpass
 
     if (!nameIsNotValid(username.value) || username.value.length < 3 ||  username.value.length > 30) {
         sigUpInfo.innerHTML = wrongTextValidation();
-        emptyTheInputFields(username, usermail, userpassword, userconfirmpassword, checkbox);
         ButtonDisabledSet();
         return false;
     }
@@ -257,7 +334,6 @@ function sigUpValidation(user, username, usermail, userpassword, userconfirmpass
 
     if (!emailIsNotCorrect(usermail.value)) {
         sigUpInfo.innerHTML = wrongEmailValidation();
-        emptyTheInputFields(username, usermail, userpassword, userconfirmpassword, checkbox);
         ButtonDisabledSet();
         return false;
     }
@@ -266,7 +342,6 @@ function sigUpValidation(user, username, usermail, userpassword, userconfirmpass
 
     if (userpassword.value.length <= 5) {
         sigUpInfo.innerHTML = passwordToShort();
-        emptyTheInputFields(username, usermail, userpassword, userconfirmpassword, checkbox);
         ButtonDisabledSet();
         return false;
     }
@@ -274,14 +349,12 @@ function sigUpValidation(user, username, usermail, userpassword, userconfirmpass
 
     if (userpassword.value !== userconfirmpassword.value) {
         sigUpInfo.innerHTML = passwordNoMatch();
-        emptyTheInputFields(username, usermail, userpassword, userconfirmpassword, checkbox);
         ButtonDisabledSet();
         return false;
     }
 
     if (!checkbox.checked) {
         sigUpInfo.innerHTML = checkboxNoChecked();
-        emptyTheInputFields(username, usermail, userpassword, userconfirmpassword, checkbox);
         ButtonDisabledSet();
         return false;
     }
