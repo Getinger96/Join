@@ -50,7 +50,7 @@ body {
 .addTask_Container {
     display: flex;
     justify-content: center;
-    margin-top: 30px;
+    margin-top: 15px;
 }
 
 .input_Task_Container_left {
@@ -282,8 +282,14 @@ body {
     background-color: #FF8F33;
 }
 
+.required_info_Container {
+    margin-top: 25px;
+}
+
 .Selected_profiles_Container {
     display: flex;
+    max-width: 430px;
+    flex-wrap: wrap;
 }
 
 .separatorTask {
@@ -608,7 +614,7 @@ input:focus {
 .clear_COntainer {
     display: flex;
     gap: 16px;
-    margin-top: 75px;
+    margin-top: 145px;
 }
 
 .ForwardingBoard {

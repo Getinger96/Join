@@ -398,6 +398,11 @@
 
 @media(max-width: 920px) {
 
+
+    .dueDateEdit {
+        margin-top: 90px;
+    }
+
     .cardbig {
         height: 630px;
         margin-top:-80px;
@@ -431,6 +436,7 @@
 
     .inputTitleDate {
         width: 308px;
+        margin-top: 5px;
     }
 
     .marginButtomButton {

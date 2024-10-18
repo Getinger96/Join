@@ -19,7 +19,7 @@ body {
 .top-right-img {
     position: absolute;
     top: 210px;
-    right: 190px;
+    right: 40px;
     cursor: pointer;
     width: 40px;
     height: 40px;
@@ -158,6 +158,21 @@ body {
 
 }
 
+
+@media(max-width: 340px) {
+    .top-right-img {
+        position: absolute;
+        top: 140px;
+        right: 5px;
+        cursor: pointer;
+        width: 30px;
+        height: 30px;
+    }
+
+    .middle-Section-Privacy h1 {
+        font-size: 21px;
+    }
+}
 
 .d-none {
     display: none !important;

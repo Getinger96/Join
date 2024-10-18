@@ -830,6 +830,8 @@ li {
     display: flex;
     align-items: center;
     margin-bottom: 20px;
+    max-width: 350px;
+    flex-wrap: wrap;
 }
 
 .profile_Container {
