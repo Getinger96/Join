@@ -286,7 +286,9 @@ h3 {
     overflow-x: hidden;
 }
 
-
+.blue{
+    background-color: blue;
+}
 
 .progress-container {
     display: flex;
