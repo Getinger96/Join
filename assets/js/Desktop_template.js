@@ -24,7 +24,7 @@ function setActiveLink() {
       board.classList.add("active");
     } else if (currentUrl.includes("contact.html")) {
        let contact= document.getElementById("navlinkContact");
-       let contactMobile=documnet.getElementById('navlinkContactMobile')
+       let contactMobile=document.getElementById('navlinkContactMobile')
        contactMobile.classList.add("active");
        contact.classList.add("active");
       }

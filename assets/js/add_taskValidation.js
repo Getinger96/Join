@@ -27,15 +27,11 @@ function validateTask(titel,category, date) {
         return false;
     }
 
-    if (currentPriority =='none' ) {
-        changColorPrioIcons();
-        allInputFieldMissing();
-        return false;
-    }
+   
 
     document.getElementById("WrongCurrentDateId").innerHTML = '';
     document.getElementById("dueDate").style.border = '';
-    returnColorPrioIcons();
+    
  return true;
 }
 
