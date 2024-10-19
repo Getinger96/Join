@@ -360,7 +360,7 @@ function enterNewSubtask(i) {
 }
 
 
-function pleaseEnterASubtaski() {
+function pleaseEnterASubtask(i) {
     
     document.getElementById(`subtasksValidation${i}`).innerHTML =`<span class="showShubtaskError">Please Enter a full subtask`;
 }

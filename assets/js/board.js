@@ -81,6 +81,7 @@ function closeTask() {
  clearTask();
  clearMissingFieldContent();
  returnColorPrioIcons();
+ location.reload();
 } 
 async function updateHtml() {
     let statusCategories = ['open', 'progress', 'awaitFeedback', 'closed'];
