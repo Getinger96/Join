@@ -186,7 +186,7 @@ function showSelectedProfile(firstletters, i, contactColour) {
             profilebadgeassign.remove()
                 ;
         } else {
-            if (assignedContacts.length > 5) {
+            if (assignedContacts.length > 4) {
                 
             }else{
                 selectedProfileContainer.innerHTML += `
@@ -196,8 +196,8 @@ function showSelectedProfile(firstletters, i, contactColour) {
            
         }
         let extraContactsBadge = document.getElementById('extra_Contacts_Badge');
-        if (assignedContacts.length > 5) {
-            let extraCount = assignedContacts.length - 5;
+        if (assignedContacts.length > 4) {
+            let extraCount = assignedContacts.length - 4;
             
             // Falls das Badge für extra Kontakte bereits existiert, aktualisiere die Zahl
             if (extraContactsBadge) {
