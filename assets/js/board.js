@@ -262,7 +262,7 @@ function getassignecontacts(task, taskIndex) {
         let contact = assignedContacts[index];
         let checkIndexarray = contactsArray.findIndex(c => c.name === contact);
   
-        nameParts = contact.split("");
+        nameParts = contact.split(" ");
         let firstLetterForName;
         let firstLetterLastName;
         let colorid = `contactIcon_${taskIndex}_${index}`;

@@ -189,7 +189,6 @@ h3 {
     align-items: center;
     width: 300px;
     border: 1px solid #ddd;
-    padding: 10px;
     min-height: 20px;
 }
 
@@ -277,7 +276,7 @@ h3 {
     display: flex;
     cursor: pointer;
     flex-direction: column;
-    height: 99px;
+    height: 90px;
     overflow-y: scroll;
     padding: 5px;
     gap: 10px;
@@ -294,7 +293,7 @@ h3 {
 }
 
 .tomanySubtask {
-    font-size: 13px;
+    font-size: 15px;
     color: red;
     font-weight: bolder;
 }
@@ -410,7 +409,7 @@ Button {
     border: 2px solid #e4dedc;
     display: flex;
     justify-content: center;
-    height: 870px;
+    height: 890px;
     width: 1116px;
     overflow-x: hidden;
 }
@@ -1020,15 +1019,15 @@ li {
     font-size: 13px;
     font-weight: bolder;
     color: red;
+    margin-top: 5px;
 }
 
 .showShubtaskError {
     display: flex;
-    margin-left: 0px;
-    color: red;
-    text-decoration: underline;
     font-size: 13px;
     font-weight: bolder;
+    color: red;
+    margin-top: 5px;
 }
 
 @keyframes slideRight {
