@@ -90,7 +90,7 @@
                 <div class="date_Container">
                     <span class="Date_header">Due date <span class="red">*</span></span>
                     <input onclick="dateinput()" id="dueDate" placeholder="dd/mm/yyyy" class="input_date" required
-                        type="date">
+                        type="date" onblur="checkValidationDate()">
                 </div>
                 <div id="WrongCurrentDateId"> </div>
                 
@@ -111,7 +111,7 @@
                     </div>
                     <div class="Subtasks_Container">
                         <span class="Subtasks_Header">Subtasks</span>
-                        <div class="Subtask_Inputfield_Container">
+                        <div class="Subtask_Inputfield_Container" id="subtaskBorderInputchange">
                             <input id="input_Subtasks" placeholder="Add new Subtask" class="Subtasks_Inputfield"
                                 type="text">
                             <button id="add_Subtask" type="button" onclick="addCurrentSubtask()"

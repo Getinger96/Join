@@ -1,3 +1,25 @@
+function checkValidationDate() {
+    
+    
+    let date = document.getElementById('taskDueDate').value;
+
+    let selectedDate = new Date(date);
+    let currentDate = new Date(); 
+
+    currentDate.setHours(0, 0, 0, 0);
+
+
+    if (selectedDate < currentDate ) {
+        document.getElementById("taskDueDate").style.border = "2px solid red";
+        showInvalidDateMessage();
+        return false;
+    }
+
+    document.getElementById("WrongCurrentDateId").innerHTML = '';
+    document.getElementById("taskDueDate").style.border = '';
+}
+
+
 function validateTask(titel,category, date) {
 
 
@@ -85,4 +107,198 @@ function clearMissingFieldContent() {
 
   
 }
+function addCurrentSubtask() {
+    let currentSubtask = document.getElementById('new-subtask').value;
+    let subtaskInfoText =  document.getElementById('SubtaskLengthReached');
 
+
+    if (!subtasks) {
+        subtasks = [];
+    }
+
+    if (currentSubtask == '') {
+        subtaskInfoText.innerHTML = ' <span class="tomanySubtask"> Please enter a valid subtask</span>';
+        changeColorSubtaskInputField();
+        return; 
+
+        } else if (subtasks.length < 10) {
+            subtasks.push(currentSubtask);
+            document.getElementById('new-subtask').value = '';
+            subtaskInfoText.innerHTML = '';
+            removeColorSubtaskInputField();
+            addSubtask();
+            
+        } else {
+            subtaskInfoText.innerHTML = ' <span class="tomanySubtask"> maximum number of subtasks has been reached</span>';
+            changeColorSubtaskInputField();
+    }
+
+}
+
+function deleteItem(i) {
+    event.stopPropagation();
+    subtasks.splice(i, 1);
+    let taskIndex = currentTaskIndex;
+    tasksArray[taskIndex].subtask = subtasks;
+    const subtaskStatus = JSON.parse(localStorage.getItem(`task-${taskIndex}-subtasks`)) || {};
+    delete subtaskStatus[i];
+    localStorage.setItem(`task-${taskIndex}-subtasks`, JSON.stringify(subtaskStatus));
+    addSubtask();
+    updateProgress(taskIndex);
+}
+
+function deleteSubtask(i){
+    subtasks.splice(i, 1);
+    addSubtask();
+}
+
+function addSubtask() {
+
+    if (!Array.isArray(subtasks)) {
+        subtasks = [];
+    }
+
+
+    let subtaskContainer = document.getElementById('subtasksContainer');
+
+
+    subtaskContainer.innerHTML = '';
+
+  
+    if (subtasks.length === 0) {
+        return;
+    }
+
+ 
+    for (let i = 0; i < subtasks.length; i++) {
+        subtaskContainer.innerHTML += `
+            <div class="editSubtaskheadlineContainer" id="boderSubtaskId${i}">
+            <div class="editSubtask" id="subTaskValueId${i}">
+                <ul>
+                <li>${subtasks[i]}</li>
+                </ul>
+                </div>
+            <div class="subtaskEditDiv">
+                <button type="button" class="Subtasks_Btn" onclick="deleteSubtask(${i})">
+                    <img src="./assets/IMG/delete.png" alt="Delete">
+                </button>
+
+            
+              <button type="button" id="changeImgEdit${i}" class="EditSubtaskButton" onclick="editSubtask(${i})">
+                    <img src="./assets/IMG/edit.png" alt="Edit">
+                </button>
+            </div>
+            </div>`;
+    }
+}
+
+function emptySubtask() {
+
+
+    let currentSubtask = document.getElementById('new-subtask')
+
+    currentSubtask.value='';
+}
+
+function editSubtask(i) {
+
+    document.getElementById(`subTaskValueId${i}`).innerHTML = `
+    <li>
+    <input id="subtaskValue${i}" class="subTaskInput" type="text" value="${subtasks[i]}"
+    onblur="validateSubtask(${i})">
+    </li>
+    <div id="subtasksValidation${i}"></div> `
+
+    document.getElementById(`changeImgEdit${i}`).innerHTML = `
+   <button type="button" class="EditSubtaskButton" onclick="enterNewSubtask(${i})">
+                    <img class="imgCheckedIcon" id="changeImgEdit${i}" src="./assets/IMG/checkAddTask.png" alt="check">
+                </button>`;
+
+
+
+}
+
+
+function enterNewSubtask(i) {
+    event.stopPropagation();
+   let newSubTask = document.getElementById(`subtaskValue${i}`).value
+
+
+   if (newSubTask.length == 0) {
+        pleaseEnterASubtask(i);
+        document.getElementById(`boderSubtaskId${i}`).style.border= "1px solid red";
+        document.getElementById(`subtaskValue${i}`).style.borderBottom= "1px solid red";
+        return;
+   }
+
+   document.getElementById(`subtasksValidation${i}`).innerHTML='';
+
+
+   subtasks[i] =newSubTask;
+
+   updateSubtaskElement(i);
+
+}
+
+
+function validateSubtask(i) {
+    let newSubTask = document.getElementById(`subtaskValue${i}`).value
+        
+    if (newSubTask.length == 0) {
+        subtasks.splice(i, 1);
+        pleaseEnterASubtask();
+        document.getElementById(`boderSubtaskId${i}`).style.border= "1px solid red";
+        document.getElementById(`subtaskValue${i}`).style.borderBottom = "3px solid red";
+        return;
+    }
+    
+    document.getElementById(`subtasksValidation${i}`).innerHTML ='';
+    subtasks[i] = newSubTask;
+    
+    updateSubtaskElement(i);
+    
+    }
+
+function updateSubtaskElement(i) {
+    let subtaskElement = document.getElementById(`boderSubtaskId${i}`);
+    
+    subtaskElement.innerHTML = `
+           <div class="editSubtaskheadlineContainer" id="boderSubtaskId${i}">
+            <div class="editSubtask" id="subTaskValueId${i}">
+                <ul>
+                <li>${subtasks[i]}</li>
+                </ul>
+                </div>
+            <div class="subtaskEditDiv">
+                <button type="button" class="Subtasks_Btn" onclick="deleteSubtask(${i})">
+                    <img src="./assets/IMG/delete.png" alt="Delete">
+                </button>
+
+            
+              <button type="button" id="changeImgEdit${i}" class="EditSubtaskButton" onclick="editSubtask(${i})">
+                    <img src="./assets/IMG/edit.png" alt="Edit">
+                </button>
+            </div>
+            </div>`;
+    }
+
+
+function pleaseEnterASubtask() {
+    
+    document.getElementById(`SubtaskLengthReached`).innerHTML =`<span class="showShubtaskError">Please Enter a full subtask`;
+}
+
+
+
+function changeColorSubtaskInputField() {
+
+    document.getElementById(`subtaskBorderInputchange`).style.border= "3px solid red";
+    
+    }
+    
+    function removeColorSubtaskInputField() {
+    
+        document.getElementById(`subtaskBorderInputchange`).style.border= "";
+        
+        }
+    

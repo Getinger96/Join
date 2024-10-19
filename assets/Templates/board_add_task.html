@@ -43,7 +43,7 @@
                             <p class="dueDateEdit">Due date</p>
                             <p class="red">*</p>
                         </div>
-                        <input id="taskDueDate" class="inputTitleDate curser" type="date" required>
+                        <input id="taskDueDate" class="inputTitleDate curser" type="date" required onblur="checkValidationDate()">
                         <div id="WrongCurrentDateId"> </div>
                     </div>
                     <div class="prioEditSection">
@@ -71,7 +71,7 @@
 
                     <div class="divPaddingBottum">
                         <p>Subtasks</p>
-                        <div class="inputTitle divSubtask">
+                        <div class="inputTitle divSubtask"id="subtaskBorderInputchange">
                             <input id="new-subtask" class="subtasksInputfield" type="text" placeholder="Add new subtask">
                     
                     <div class="subtaskImgContent">

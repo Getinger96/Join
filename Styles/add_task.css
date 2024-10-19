@@ -21,7 +21,7 @@ body {
 }
 
 .tomanySubtask {
-    font-size: 14px;
+    font-size: 15px;
     color: red;
     font-weight: bolder;
 }
@@ -617,9 +617,13 @@ input:focus {
 .clear_COntainer {
     display: flex;
     gap: 16px;
-    
+    margin-top: 20px;
 }
 
+#SubtaskLengthReached {
+    margin-left: 10px;
+    margin-top: 4px;  
+}
 .ForwardingBoard {
 position: absolute;
 bottom: -70px;
@@ -700,10 +704,8 @@ animation-fill-mode: forwards;
 
 .showShubtaskError {
     display: flex;
-    margin-left: 48px;
     color: red;
-    text-decoration: underline;
-    font-size: 13px;
+    font-size: 15px;
     font-weight: bolder;
 }
 
