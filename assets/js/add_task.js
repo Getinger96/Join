@@ -37,7 +37,7 @@ async function fetchContacts(path = '') {
                 password: contact.password,
                 color: color,
             })
-            
+
         }
     }
     renderSelectionContainer()
@@ -153,18 +153,18 @@ function selectedContact(i, name, firstletters, contactColour) {
     profileContainer.classList.toggle('bg_color');
     profileContainer.classList.toggle('color_white');
     profileContainer.classList.toggle('profile_Containerselected');
-        
-    
+
+
 
     if (!assignedContacts.includes(name)) {
         assignedContacts.push(name)
         showSelectedProfile(firstletters, i, contactColour)
-       
-    }else{
+
+    } else {
         deselctedtContact(i, name, firstletters, contactColour)
     }
 }
-   
+
 function deselctedtContact(i, name, firstletters, contactColour) {
     let checkbox = document.getElementById(`checkbox${i}`);
     checkbox.innerHTML = '';
@@ -173,14 +173,15 @@ function deselctedtContact(i, name, firstletters, contactColour) {
     let index = assignedContacts.indexOf(name);
 
     assignedContacts.splice(index, 1);
-    
+
     showSelectedProfile(firstletters, i, contactColour);
-    
+
 }
 
 function showSelectedProfile(firstletters, i, contactColour) {
     let selectedProfileContainer = document.getElementById('Selected_profiles_Container');
     let profilebadgeassign = document.getElementById(`profile_Badge_assign${i}`);
+<<<<<<< HEAD
   
     // Entferne das Profil, wenn es existiert (bei Deselect)
     if (profilebadgeassign) {
@@ -215,6 +216,44 @@ function showSelectedProfile(firstletters, i, contactColour) {
 }
 
    
+=======
+
+    if (profilebadgeassign) {
+        profilebadgeassign.remove()
+            ;
+    } else {
+        if (assignedContacts.length > 4) {
+           
+         
+
+        } else {
+            selectedProfileContainer.innerHTML += `
+                    <div id="profile_Badge_assign${i}" class="profile_Badge_assign ${contactColour}">${firstletters}</div>
+                `
+    }
+    let extraContactsBadge = document.getElementById('extra_Contacts_Badge');
+    if (assignedContacts.length > 4) {
+        let extraCount = assignedContacts.length - 4;
+       
+
+        // Falls das Badge für extra Kontakte bereits existiert, aktualisiere die Zahl
+        if (extraContactsBadge) {
+            extraContactsBadge.textContent = `+${extraCount}`;
+        } else {
+            // Erstelle ein neues Badge für extra Kontakte in Blau
+            selectedProfileContainer.innerHTML += `
+                    <div id="extra_Contacts_Badge" class="profile_Badge_assign gray">+${extraCount}</div>
+                `;
+        }
+    } else if (extraContactsBadge) {
+        // Falls es keine zusätzlichen Kontakte mehr gibt, entferne das extra Badge
+        extraContactsBadge.remove();
+    }
+
+
+}}
+
+>>>>>>> 15dfdc40c7f3cfa044a10f5f135f8036835f3caa
 
 
 function dateinput() {
@@ -321,8 +360,8 @@ async function createTask(event) {
         return;
     } else
 
-    document.getElementById("InputFieldsMissing").innerHTML ='';
-    document.getElementById("WrongCurrentDateId").innerHTML ='';
+        document.getElementById("InputFieldsMissing").innerHTML = '';
+    document.getElementById("WrongCurrentDateId").innerHTML = '';
 
     let newTask = {
         Titel: titel.value,
@@ -341,7 +380,7 @@ async function createTask(event) {
 
     }
 
-    
+
     clearMissingFieldContent();
     await postData(`tasks`, newTask);
     clearTask();
@@ -361,7 +400,7 @@ async function clearTask() {
         let firstletterlastname = lastname.charAt(0);
         let firstletterlastnameBIG = firstletterlastname.toUpperCase();
         let firstletters = forNAmebig + firstletterlastnameBIG;
-       
+
     }
     let selectedProfileContainer = document.getElementById('Selected_profiles_Container');
     selectedProfileContainer.innerHTML = '';
@@ -381,7 +420,7 @@ async function clearTask() {
     subtasks = [];
     prio = [];
     renderPrioButtons();
-    clearMissingFieldContent(); 
+    clearMissingFieldContent();
     clearWarningField();
     choossedmedium();
     renderSelectionContainer();
