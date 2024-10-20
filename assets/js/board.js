@@ -7,12 +7,18 @@ let currentTaskIndex = null;
 let currentDraggedElement;
 let id = 0
 
-let addtask=false;
+let addtask = false;
 
 async function fetchTasks(path = '') {
     tasksArray = [];
     let response = await fetch(base_URL + path + ".json");
     let userJSON = await response.json();
+    if (!userJSON.tasks) {
+       
+
+        return;
+        
+    }
     let tasksAsarray = Object.values(userJSON.tasks)
     let keysArrayTask = Object.keys(userJSON.tasks);
     currentDraggedElement = 0;
@@ -50,6 +56,9 @@ async function fetchTasks(path = '') {
 
 }
 
+
+
+
 function removeAllElement() {
     let allElements = document.querySelectorAll('.drag-area');
     allElements.forEach(element => element.innerHTML = '');
@@ -71,36 +80,36 @@ function renderSubtask() {
             }
         )
     }
-   
+
 }
 
 function closeTask() {
     document.getElementById('boardAddTask').style.display = 'none';
     document.getElementById('darkOverlay').style.display = 'none';
-    document.body.style.overflow = 'auto';  
- clearTask();
- clearMissingFieldContent();
- returnColorPrioIcons();
- location.reload();
-} 
+    document.body.style.overflow = 'auto';
+    clearTask();
+    clearMissingFieldContent();
+    returnColorPrioIcons();
+    location.reload();
+}
 async function updateHtml() {
     let statusCategories = ['open', 'progress', 'awaitFeedback', 'closed'];
     for (let index = 0; index < statusCategories.length; index++) {
         let category = statusCategories[index];
         let filteredTasks = tasksArray.filter(t => t.status === category);
 
-       let currentCategoryElement = document.getElementById(category)
+        let currentCategoryElement = document.getElementById(category)
 
         if (!currentCategoryElement) {
             return
-            }
+        }
 
-            currentCategoryElement.innerHTML ='';
+        currentCategoryElement.innerHTML = '';
 
         filteredTasks.forEach(task => {
-            let taskHTML = generateTodoHTML(task, task.idTask); 
+            let taskHTML = generateTodoHTML(task, task.idTask);
             document.getElementById(category).insertAdjacentHTML('afterbegin', taskHTML);
-            getassignecontacts(task, task.idTask); 
+            getassignecontacts(task, task.idTask);
         });
     }
     updateAndCheckEmptyFields();
@@ -128,7 +137,7 @@ function updateAndCheckEmptyFields() {
                         <p>${field.text}</p>
                     </div>`;
             } else {
-                emptyMessage.style.display = 'flex'; 
+                emptyMessage.style.display = 'flex';
             }
         } else {
             if (emptyMessage) {
@@ -159,10 +168,10 @@ function openTask(taskIndex) {
         document.body.style.overflow = 'hidden';
     } else {
         taskDiv.style.display = 'none';
-        overlay.style.display = 'none'; 
+        overlay.style.display = 'none';
         document.body.style.overflow = 'auto';
     }
-    
+
 }
 
 
@@ -261,7 +270,7 @@ function getassignecontacts(task, taskIndex) {
         }
         let contact = assignedContacts[index];
         let checkIndexarray = contactsArray.findIndex(c => c.name === contact);
-  
+
         nameParts = contact.split(" ");
         let firstLetterForName;
         let firstLetterLastName;
@@ -292,9 +301,9 @@ function showTheNameInitialInColorBoard(checkIndexarray, colorid) {
     let nameColorContainer = document.getElementById(colorid);
     let contactColor = contactsArray[checkIndexarray].color
     contactColor = convertToValidColor(contactColor);
-    
-            nameColorContainer.style.backgroundColor = contactColor;
-  
+
+    nameColorContainer.style.backgroundColor = contactColor;
+
 }
 
 
@@ -307,12 +316,12 @@ function convertToValidColor(color) {
         "blau": "#0000FF",
         "pink": "#FF33A1",
         "orange": "#FF5733",
-        "lila":  "#A133FF"
+        "lila": "#A133FF"
     };
 
 
-    return colorMap[color]; 
-} 
+    return colorMap[color];
+}
 
 function allowDrop(ev) {
     ev.preventDefault();
@@ -358,13 +367,13 @@ async function putDataTask(path = "", data = {}) {
 
 function handleDragOver(categoryId) {
     let dragArea = document.getElementById(categoryId);
-        dragArea.classList.add('dragging-over'); 
+    dragArea.classList.add('dragging-over');
 
 }
 
 function removeHighlight(categoryId) {
     let dragArea = document.getElementById(categoryId);
-    dragArea.classList.remove('dragging-over'); 
+    dragArea.classList.remove('dragging-over');
 
 
 
