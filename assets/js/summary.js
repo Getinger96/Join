@@ -10,6 +10,10 @@ async function fetchTasksSummary(path = '') {
     tasksArray = [];
     let response = await fetch(base_URL + path + ".json");
     let userJSON = await response.json();
+    if (!userJSON.tasks) {
+       
+        return;
+    }
     let tasksAsArray = Object.values(userJSON.tasks);
     let keysArrayTask = Object.keys(userJSON.tasks);
 
@@ -20,11 +24,11 @@ async function fetchTasksSummary(path = '') {
 
         let saveTask = tasksArray.filter(t => t.Title === task.Titel && t.Description === task.Description);
 
-       
+
         if (saveTask.length > 0) {
-    
+
         } else {
-          
+
             tasksArray.push({
                 taskKey: keyTask,
                 idTask: id,
@@ -37,57 +41,57 @@ async function fetchTasksSummary(path = '') {
                 subtask: task.Subtask,
                 status: task.Status,
             });
+        }
     }
-}
-renderSummarySite();
-showTheCurrentDate();
+    renderSummarySite();
+    showTheCurrentDate();
 }
 
 
 function renderSummarySite() {
 
-for (let index = 0; index < tasksArray.length; index++) {
-    loadToDoAtTheKanbanBoard(index)
-    
-}
+    for (let index = 0; index < tasksArray.length; index++) {
+        loadToDoAtTheKanbanBoard(index)
+
+    }
 
 }
 
 function loadToDoAtTheKanbanBoard(index) {
-        let statusCheckopen = 'open';
-        let statusCheckprogress = 'progress';
-        let statusCheckawaitingfeedback = 'awaitFeedback';
-        let statusCheckclosed = 'closed';
+    let statusCheckopen = 'open';
+    let statusCheckprogress = 'progress';
+    let statusCheckawaitingfeedback = 'awaitFeedback';
+    let statusCheckclosed = 'closed';
 
 
-        let kanbanBoardStatus = tasksArray[index].status;
-        let kanbanBoradPrioUrgent = tasksArray[index].Prio;
+    let kanbanBoardStatus = tasksArray[index].status;
+    let kanbanBoradPrioUrgent = tasksArray[index].Prio;
 
- 
+
     if (kanbanBoardStatus === statusCheckopen) {
         countOpen++;
         showKanbanBoardTodo(countOpen);
     } else if (kanbanBoardStatus === statusCheckprogress) {
         countInProgress++;
-        showKanbanBoardTaskProgress(countInProgress);  
+        showKanbanBoardTaskProgress(countInProgress);
     } else if (kanbanBoardStatus === statusCheckawaitingfeedback) {
         countAwaitingFeedback++;
         showKanbanBoarTaskAwaitingFeedback(countAwaitingFeedback)
-        showKanbanBoarTaskAwaitingFeedback(countAwaitingFeedback);  
-    } else if (kanbanBoardStatus === statusCheckclosed) {       
+        showKanbanBoarTaskAwaitingFeedback(countAwaitingFeedback);
+    } else if (kanbanBoardStatus === statusCheckclosed) {
         countDone++;
         showKanbanBoardTaskdone(countDone);
     }
 
     showAllPrioUrgent(kanbanBoradPrioUrgent);
 
-                
-showAllTaskinBoard(tasksArray);          
-showTheCurrentDate();    
-showKanbanBoardTodo(countOpen);
-showKanbanBoardTaskProgress(countInProgress);  
-showKanbanBoarTaskAwaitingFeedback(countAwaitingFeedback);
-showKanbanBoardTaskdone(countDone);
+
+    showAllTaskinBoard(tasksArray);
+    showTheCurrentDate();
+    showKanbanBoardTodo(countOpen);
+    showKanbanBoardTaskProgress(countInProgress);
+    showKanbanBoarTaskAwaitingFeedback(countAwaitingFeedback);
+    showKanbanBoardTaskdone(countDone);
 }
 
 
@@ -95,7 +99,7 @@ function showKanbanBoardTodo(countOpen) {
     let getTaskOpen = document.getElementById('toDoNumber');
 
 
-    getTaskOpen.innerHTML =`${countOpen}`;
+    getTaskOpen.innerHTML = `${countOpen}`;
 
 }
 
@@ -103,7 +107,7 @@ function showKanbanBoardTodo(countOpen) {
 function showKanbanBoardTaskProgress(countInProgress) {
     let getTaskInProgress = document.getElementById('taskInProgress');
 
-    getTaskInProgress.innerHTML =`${countInProgress}`;
+    getTaskInProgress.innerHTML = `${countInProgress}`;
 }
 
 
@@ -111,14 +115,14 @@ function showKanbanBoardTaskProgress(countInProgress) {
 function showKanbanBoarTaskAwaitingFeedback(countAwaitingFeedback) {
     let getTaskAwaitingFeedback = document.getElementById('taskAwaitingFeedback');
 
-    getTaskAwaitingFeedback.innerHTML =`${countAwaitingFeedback}`;
+    getTaskAwaitingFeedback.innerHTML = `${countAwaitingFeedback}`;
 }
 
 
 function showKanbanBoardTaskdone(countDone) {
     let getTaskDone = document.getElementById('accomplishedTask');
 
-    getTaskDone.innerHTML =`${countDone}`;
+    getTaskDone.innerHTML = `${countDone}`;
 }
 
 
@@ -126,26 +130,26 @@ function showAllTaskinBoard(tasksArray) {
     let getAllTask = document.getElementById('allTaskinBoard');
 
     getAllTask.innerHTML = `${tasksArray.length}`;
-    
+
 }
 
 function showAllPrioUrgent(kanbanBoradPrioUrgent) {
-     let checkPriority = kanbanBoradPrioUrgent;
+    let checkPriority = kanbanBoradPrioUrgent;
 
     let numberOfPrioUrgent = document.getElementById('prioUrgentId');
-    
+
     if (checkPriority === "urgent") {
-    countPrioUrgent++;
-    numberOfPrioUrgent.innerHTML = `${countPrioUrgent}`;
-}
+        countPrioUrgent++;
+        numberOfPrioUrgent.innerHTML = `${countPrioUrgent}`;
+    }
 
 
 }
-    
+
 
 function showTheCurrentDate() {
     let urgentTasks = tasksArray.filter(task => task.Prio === 'urgent');
-    
+
     if (urgentTasks.length > 0) {
         let nextUrgentTask = urgentTasks.reduce((earliest, current) => {
             let earliestDate = new Date(earliest.duedate);
@@ -156,7 +160,7 @@ function showTheCurrentDate() {
                 return earliest;
             }
         });
-        
+
         document.getElementById('currentDate').innerHTML = formatDate(nextUrgentTask.duedate);
     } else {
         document.getElementById('currentDate').innerHTML = "No upcoming urgent tasks";
@@ -174,21 +178,21 @@ function formatDate(dueDate) {
     return `${monthNames[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
 }
 
-function  showTheCurrentTime(){
+function showTheCurrentTime() {
 
 
-let currentTime = new Date().getHours();
-let greetingText = document.getElementById('showTheRightTime');
+    let currentTime = new Date().getHours();
+    let greetingText = document.getElementById('showTheRightTime');
 
-if (currentTime < 12) {
-  greetingText.innerHTML = "Good Morning !!!"; 
-  
-} else if (currentTime < 18) {
-    greetingText.innerHTML = "Good Afternoon !!!"; 
-} else {
-    greetingText.innerHTML = "Good Evening !!!"; 
+    if (currentTime < 12) {
+        greetingText.innerHTML = "Good Morning !!!";
 
-}
+    } else if (currentTime < 18) {
+        greetingText.innerHTML = "Good Afternoon !!!";
+    } else {
+        greetingText.innerHTML = "Good Evening !!!";
+
+    }
 
 }
 
@@ -199,9 +203,9 @@ function summaryScreenWidth() {
 
     if (screenWidth <= 900) {
         getNewHrLine.classList.add('newhr')
-        
+
     }
-    
+
 }
 
 
@@ -223,7 +227,7 @@ function changeImageToDoDefault(boolean) {
     } else {
         imgIconKanbanBoardToDo.src = './assets/IMG/Frame 59.png'
     }
-    
+
 }
 
 function changeImageDoneDefault(isHovered) {
