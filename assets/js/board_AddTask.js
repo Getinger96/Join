@@ -198,13 +198,14 @@ function showSelectedProfileEdit(name) {
         profile_Badge_assign.remove();
 
     } else {
-
+      
         selectedProfileContainer.innerHTML += `
     <div id="profilebadge_Assign${index}" class="contact-icon${index} ${color} profilebadge">
         <div>${firstletters}</div>
     </div>
 `;
     }
+
 
 
 
