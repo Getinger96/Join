@@ -245,7 +245,8 @@ function editSubtask(i) {
 
 function validateSubtask(i) {
 let newSubTask = document.getElementById(`subtaskValue${i}`).value
-document.getElementById(`SubtaskLengthReached`).innerHTML ='';    
+document.getElementById(`SubtaskLengthReached`).innerHTML =''; 
+removeColorSubtaskInputField();   
 if (newSubTask.length == 0) {
     subtasks.splice(i, 1);
     pleaseEnterASubtask();
@@ -264,6 +265,7 @@ updateSubtaskElement(i);
 
 function enterNewSubtask(i) {
     event.stopPropagation();
+    removeColorSubtaskInputField();
     let newSubTask = document.getElementById(`subtaskValue${i}`).value
     
     if (newSubTask.length == 0) {
