@@ -238,6 +238,7 @@ function enterNewSubtask(i) {
    subtasks[i] =newSubTask;
 
    updateSubtaskElement(i);
+   removeColorSubtaskInputField()
 
 }
 
