@@ -201,7 +201,7 @@ function emptySubtask() {
 }
 
 function editSubtask(i) {
-
+    document.getElementById(`SubtaskLengthReached`).innerHTML ='';    
     document.getElementById(`subTaskValueId${i}`).innerHTML = `
     <li>
     <input id="subtaskValue${i}" class="subTaskInput" type="text" value="${subtasks[i]}"
@@ -222,6 +222,7 @@ function editSubtask(i) {
 function enterNewSubtask(i) {
     event.stopPropagation();
    let newSubTask = document.getElementById(`subtaskValue${i}`).value
+   document.getElementById(`SubtaskLengthReached`).innerHTML ='';    
 
 
    if (newSubTask.length == 0) {
@@ -243,6 +244,7 @@ function enterNewSubtask(i) {
 
 function validateSubtask(i) {
     let newSubTask = document.getElementById(`subtaskValue${i}`).value
+    document.getElementById(`subtasksValidation${i}`).innerHTML='';
         
     if (newSubTask.length == 0) {
         subtasks.splice(i, 1);
@@ -253,33 +255,30 @@ function validateSubtask(i) {
     }
     
     document.getElementById(`subtasksValidation${i}`).innerHTML ='';
+    document.getElementById(`boderSubtaskId${i}`).style.border= "";
+    document.getElementById(`SubtaskLengthReached`).innerHTML ='';   
     subtasks[i] = newSubTask;
     
     updateSubtaskElement(i);
     
     }
 
-function updateSubtaskElement(i) {
-    let subtaskElement = document.getElementById(`boderSubtaskId${i}`);
-    
-    subtaskElement.innerHTML = `
-           <div class="editSubtaskheadlineContainer" id="boderSubtaskId${i}">
-            <div class="editSubtask" id="subTaskValueId${i}">
-                <ul>
+    function updateSubtaskElement(i) {
+        let subTaskValueId = document.getElementById(`subTaskValueId${i}`);
+        
+        subTaskValueId.innerHTML = `
+            <ul>
                 <li>${subtasks[i]}</li>
-                </ul>
-                </div>
-            <div class="subtaskEditDiv">
-                <button type="button" class="Subtasks_Btn" onclick="deleteSubtask(${i})">
-                    <img src="./assets/IMG/delete.png" alt="Delete">
-                </button>
-
-            
-              <button type="button" id="changeImgEdit${i}" class="EditSubtaskButton" onclick="editSubtask(${i})">
-                    <img src="./assets/IMG/edit.png" alt="Edit">
-                </button>
-            </div>
-            </div>`;
+            </ul>
+        `;
+    
+        let changeImgEdit = document.getElementById(`changeImgEdit${i}`);
+        
+        changeImgEdit.innerHTML = `
+            <button type="button" class="EditSubtaskButton" onclick="editSubtask(${i})">
+                <img src="./assets/IMG/edit.png" alt="Edit">
+            </button>
+        `;
     }
 
 
@@ -292,7 +291,7 @@ function pleaseEnterASubtask() {
 
 function changeColorSubtaskInputField() {
 
-    document.getElementById(`subtaskBorderInputchange`).style.border= "3px solid red";
+    document.getElementById(`subtaskBorderInputchange`).style.border= "4px solid red";
     
     }
     
