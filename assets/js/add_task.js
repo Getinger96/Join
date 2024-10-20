@@ -182,39 +182,38 @@ function showSelectedProfile(firstletters, i, contactColour) {
     let selectedProfileContainer = document.getElementById('Selected_profiles_Container');
     let profilebadgeassign = document.getElementById(`profile_Badge_assign${i}`);
   
-        if (profilebadgeassign) {
-            profilebadgeassign.remove()
-                ;
-        } else {
-            if (assignedContacts.length > 4) {
-                
-            }else{
-                selectedProfileContainer.innerHTML += `
+    // Entferne das Profil, wenn es existiert (bei Deselect)
+    if (profilebadgeassign) {
+        profilebadgeassign.remove();
+    } else {
+        // Füge das Profil hinzu, wenn weniger als 5 Kontakte ausgewählt sind
+        if (assignedContacts.length <= 4) {
+            selectedProfileContainer.innerHTML += `
                 <div id="profile_Badge_assign${i}" class="profile_Badge_assign ${contactColour}">${firstletters}</div>
-            `
-            }
-           
+            `;
         }
-        let extraContactsBadge = document.getElementById('extra_Contacts_Badge');
-        if (assignedContacts.length > 4) {
-            let extraCount = assignedContacts.length - 4;
-            
-            // Falls das Badge für extra Kontakte bereits existiert, aktualisiere die Zahl
-            if (extraContactsBadge) {
-                extraContactsBadge.textContent = `+${extraCount}`;
-            } else {
-                // Erstelle ein neues Badge für extra Kontakte in Blau
-                selectedProfileContainer.innerHTML += `
-                    <div id="extra_Contacts_Badge" class="profile_Badge_assign gray">+${extraCount}</div>
-                `;
-            }
-        } else if (extraContactsBadge) {
-            // Falls es keine zusätzlichen Kontakte mehr gibt, entferne das extra Badge
-            extraContactsBadge.remove();
-        }
-    
-    
     }
+
+    let extraContactsBadge = document.getElementById('extra_Contacts_Badge');
+    if (assignedContacts.length > 4) {
+        let extraCount = assignedContacts.length - 4;
+        
+        // Falls das Badge für extra Kontakte bereits existiert, aktualisiere die Zahl
+        if (extraContactsBadge) {
+            extraContactsBadge.textContent = `+${extraCount}`;
+        } else {
+            // Erstelle ein neues Badge für extra Kontakte in Grau
+            selectedProfileContainer.innerHTML += `
+                <div id="extra_Contacts_Badge" class="profile_Badge_assign gray">+${extraCount}</div>
+            `;
+        }
+    } else if (extraContactsBadge) {
+        // Entferne das extra Badge, wenn weniger als 5 Kontakte ausgewählt sind
+        extraContactsBadge.remove();
+    }
+    renderContacts(i, contactColour, firstletters, name)
+}
+
    
 
 
