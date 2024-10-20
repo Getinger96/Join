@@ -101,7 +101,10 @@
 
 @media(max-width: 1230px) {
 
-    
+    ul {
+        font-size: 17px;   
+
+    }
 
     .cardbig {
         height: 630px;
@@ -162,7 +165,7 @@
     }
 
     .EditSubtaskButton {
-        padding-right: 50px;
+        padding-right: 30px;
     }
 
     .imgCheckedIcon {
@@ -398,6 +401,10 @@
 
 @media(max-width: 920px) {
 
+    .editSubtaskheadlineContainer {
+        width: 290px;
+    }
+
 
     .dueDateEdit {
         margin-top: 90px;
@@ -518,6 +525,8 @@
         margin-top: 10px;
     
     }
+
+
 }
 
 @media(max-width: 630px) {

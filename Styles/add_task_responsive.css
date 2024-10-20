@@ -31,7 +31,7 @@
         padding: 16px;
         margin-top: 0px;
         font-size: 47px;
-        line-height: 56.4px;
+        line-height: 28.4px;
     }
 
     .add_task_content {
@@ -66,7 +66,7 @@
 
 
     .clear_COntainer {
-        margin-top: 105px;
+        margin-top: 145px;
     }
 
 
@@ -155,8 +155,9 @@
 
 
     .clear_COntainer {
-        margin-top: 75px;
+        margin-top: 130px;
     }
+
 
     .subTaskInput {
         width: 120px;

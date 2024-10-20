@@ -227,6 +227,8 @@ function addCurrentSubtask() {
 }
 
 function editSubtask(i) {
+
+
     document.getElementById(`subTaskValueId${i}`).innerHTML = `
     <li>
         <input id="subtaskValue${i}" class="subTaskInput" type="text" value="${subtasks[i]}"
@@ -243,7 +245,7 @@ function editSubtask(i) {
 
 function validateSubtask(i) {
 let newSubTask = document.getElementById(`subtaskValue${i}`).value
-    
+document.getElementById(`SubtaskLengthReached`).innerHTML ='';    
 if (newSubTask.length == 0) {
     subtasks.splice(i, 1);
     pleaseEnterASubtask();
@@ -253,6 +255,7 @@ if (newSubTask.length == 0) {
 }
 
 document.getElementById(`subtasksValidation${i}`).innerHTML ='';
+document.getElementById(`changeColorId${i}`).style.border= '';
 subtasks[i] = newSubTask;
 
 updateSubtaskElement(i);
@@ -272,6 +275,7 @@ function enterNewSubtask(i) {
    }
 
    document.getElementById(`subtasksValidation${i}`).innerHTML ='';
+   document.getElementById(`SubtaskLengthReached`).innerHTML ='';
    subtasks[i] = newSubTask;
 
    updateSubtaskElement(i);
