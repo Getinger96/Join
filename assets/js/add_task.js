@@ -205,7 +205,7 @@ function showSelectedProfile(firstletters, i, contactColour) {
             } else {
                 // Erstelle ein neues Badge für extra Kontakte in Blau
                 selectedProfileContainer.innerHTML += `
-                    <div id="extra_Contacts_Badge" class="profile_Badge_assign blue">+${extraCount}</div>
+                    <div id="extra_Contacts_Badge" class="profile_Badge_assign gray">+${extraCount}</div>
                 `;
             }
         } else if (extraContactsBadge) {

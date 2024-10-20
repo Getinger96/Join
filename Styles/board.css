@@ -427,7 +427,7 @@ Button {
     justify-content: space-between;
     position: fixed;
     max-height: 60px;
-    bottom: 12px;
+   
     left: 40px;
     right: 50px;
     background-color: white;
