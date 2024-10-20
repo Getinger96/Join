@@ -127,6 +127,7 @@ function deselctedtContact(index, color, name) {
     if (contactIndex !== -1) {
         assignedContacts.splice(contactIndex, 1);
     }
+    showSelectedProfile(color, name, index)
 
     let contactContainer = document.getElementById(`profile-${index}`);
     contactContainer.classList.remove('bg_color');
@@ -135,9 +136,9 @@ function deselctedtContact(index, color, name) {
     let profileBadge = document.getElementById(`profilebadge_Assign${index}`);
     if (profileBadge) {
         profileBadge.remove();
-    }
+    } 
 
-
+    
 }
 
 function showSelectedProfile(color, name, index) {
@@ -149,11 +150,36 @@ function showSelectedProfile(color, name, index) {
     if (profile_Badge_assign) {
         profile_Badge_assign.remove();
     } else {
-        selectedProfileContainer.innerHTML += `
-    <div id="profilebadge_Assign${index}" class="contact-icon${index} ${color} profilebadge">
-        <div>${firstletters}</div>
-    </div>`;
-    }
+        if (assignedContacts.length>4) {
+            
+        }else{
+            selectedProfileContainer.innerHTML += `
+            <div id="profilebadge_Assign${index}" class="contact-icon${index} ${color} profilebadge">
+                <div>${firstletters}</div>
+            </div>
+
+        
+     `;
+
+    }}
+    let extraContactsBadge = document.getElementById('extra_Contacts_Badge');
+        if (assignedContacts.length > 4) {
+            let extraCount = assignedContacts.length - 4;
+            
+            // Falls das Badge für extra Kontakte bereits existiert, aktualisiere die Zahl
+            if (extraContactsBadge) {
+                extraContactsBadge.textContent = `+${extraCount}`;
+            } else {
+                // Erstelle ein neues Badge für extra Kontakte in Blau
+                selectedProfileContainer.innerHTML += `
+                    <div id="extra_Contacts_Badge" class="profilebadge blue">+${extraCount}</div>
+                `;
+            }
+        } else if (extraContactsBadge) {
+            // Falls es keine zusätzlichen Kontakte mehr gibt, entferne das extra Badge
+            extraContactsBadge.remove();
+        }
+
 }
 
 
@@ -179,6 +205,9 @@ function showSelectedProfileEdit(name) {
     </div>
 `;
     }
+
+
+
 };
 
 function resetButtons() {
