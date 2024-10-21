@@ -66,8 +66,14 @@ body {
         justify-content: center;
     
     }
-
-
+    
+    .showMistakeValidation {
+        display: flex;
+        margin-inline: 20px;
+        font-size: 13px;
+        margin-block-start: -15px;
+        color: red;
+    }
      
     .middle-section     {
         display: flex;
@@ -101,6 +107,7 @@ body {
             cursor: pointer;
             font-family: "inter", sans-serif;
             font-size: 20px;
+            width: 420px;
         }
         
         .inputemailsection:has(input:focus),
@@ -122,7 +129,7 @@ body {
             border-radius: 20px;
             margin-top: 20px;
             cursor: pointer;
-            
+            width: 420px;
         
         }
 
@@ -135,6 +142,7 @@ body {
             border-radius: 20px;
             margin-top: 20px;
             cursor: pointer;
+            width: 420px;
         }
 
         .inputenamesection {
@@ -148,6 +156,7 @@ body {
             cursor: pointer;
             font-family: "inter", sans-serif;
             font-size:20px;
+            width: 420px;
         }
     
     
@@ -207,8 +216,18 @@ body {
                 }
     
                 .mailicon {
-                    margin-left: 120px;
+                    margin-left: 0px;
                     cursor: pointer;
+                    margin-right: 10px;
+                    
+
+                }
+
+                .visbilityimg {
+                    margin-left: 0px;
+                    cursor: pointer;
+                    margin-right: 10px;
+
                 }
     
                 .checkboxsection {
@@ -360,10 +379,10 @@ body {
             }
         
 
-            .inputenamesection, .inputenamesection, .inputpasswordsection, .inputpasswordconfirmsection  .inputemailsection  {
+        
 
-                width: 250px;
-            }
+
+
 
 
             .checkboxsection {
@@ -391,6 +410,25 @@ body {
             .mailicon {
                 margin-left: 0;
             }
+
+
+            .inputenamesection {
+                width: 300px;
+            }
+
+            .inputemailsection {
+                width: 300px;
+            }
+
+            .inputpasswordsection {
+                width: 300px;
+            }
+
+            .inputpasswordconfirmsection {
+                width: 300px;
+            }
+
+
 
         }
 

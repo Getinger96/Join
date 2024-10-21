@@ -43,25 +43,28 @@
                     <input id="username" class="inputname" type="text" required placeholder="Name" onblur="validateUsername()">
                     <img class="mailicon" src="assets/IMG/person.png" alt="">
                 </div>
+                <div class="showMistakeValidation" id="inputNameMistake"></div>
 
                 <div class="inputemailsection" id="inputemailsectionId">
                     <input id="usermail" class="inputemail" type="email" required placeholder="E-Mail"  onblur="validateEmail()">
                     <img class="mailicon" src="assets/IMG/mail.png" alt="">
                 </div>
-
+                <div  class="showMistakeValidation" id="inputEmailMistake"></div>
 
                 <div class="inputpasswordsection" id="inputpasswordsectionId">
                     <input id="userpassword" class="inputpassword" type="password" onclick="passwordvisbility()"
                         required placeholder="Password" onblur="validatePassword()">
-                    <img id="visbilityimg" src="assets/IMG/lock.png" alt="" onclick="showVisbility()">
+                    <img class="visbilityimg"  id="visbilityimg" src="assets/IMG/lock.png" alt="" onclick="showVisbility()">
                 </div>
+                <div class="showMistakeValidation" id="inputPasswordMistake"></div>
 
                 <div class="inputpasswordconfirmsection" id="inputpasswordconfirmsectionId">
                     <input id="userconfirmpassword" class="inputconfirmpassword" type="password"
                         onclick="passwordconfirmvisbility()" required placeholder=" Confrim Password"  onblur="validateConfirmPassword()">
-                    <img id="visbilityimgconfirm" src="assets/IMG/lock.png" alt=""
+                    <img class="visbilityimg" id="visbilityimgconfirm" src="assets/IMG/lock.png" alt=""
                         onclick="showVisbilityconfirmpassword()">
                 </div>
+                <div class="showMistakeValidation" id="inputConfirmPasswordMistake"></div>
 
                 <span id="signupinfotext" class="signupinfotextstyle"></span>
 

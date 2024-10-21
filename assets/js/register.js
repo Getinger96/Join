@@ -174,10 +174,10 @@ function showVisbilityconfirmpassword() {
 function validateUsername() {
     let username = document.getElementById('username').value.trim();
     if (!nameIsNotValid(username) || username.length < 3 || username.length > 30) {
-        document.getElementById('signupinfotext').innerText = wrongTextValidation();
+        document.getElementById('inputNameMistake').innerText = wrongTextValidation();
         changeBorderName();
     } else {
-        document.getElementById('signupinfotext').innerText = '';
+        document.getElementById('inputNameMistake').innerText = '';
         document.getElementById("inputenamesectionId").style.border= '';
     }
     checkFormCompletion();
@@ -186,10 +186,10 @@ function validateUsername() {
 function validateEmail() {
     let usermail = document.getElementById('usermail').value.trim();
     if (!emailIsNotCorrect(usermail)) {
-        document.getElementById('signupinfotext').innerText = wrongEmailValidation();
+        document.getElementById('inputEmailMistake').innerText = wrongEmailValidation();
         changeBorderEmail();
     } else {
-        document.getElementById('signupinfotext').innerText = '';
+        document.getElementById('inputEmailMistake').innerText = '';
         document.getElementById("inputemailsectionId").style.border= '';
     }
     checkFormCompletion();
@@ -198,10 +198,10 @@ function validateEmail() {
 function validatePassword() {
     let userpassword = document.getElementById('userpassword').value.trim();
     if (userpassword.length <= 5) {
-        document.getElementById('signupinfotext').innerText = passwordToShort();
+        document.getElementById('inputPasswordMistake').innerText = passwordToShort();
         changeBorderPassword();
     } else {
-        document.getElementById('signupinfotext').innerText = '';
+        document.getElementById('inputPasswordMistake').innerText = '';
         document.getElementById("inputpasswordsectionId").style.border= '';
     }
     checkFormCompletion();
@@ -211,10 +211,10 @@ function validateConfirmPassword() {
     let userpassword = document.getElementById('userpassword').value.trim();
     let userconfirmpassword = document.getElementById('userconfirmpassword').value.trim();
     if (userpassword !== userconfirmpassword) {
-        document.getElementById('signupinfotext').innerText = passwordNoMatch();
+        document.getElementById('inputConfirmPasswordMistake').innerText = passwordNoMatch();
         changeBorderConfirmPassword();
     } else {
-        document.getElementById('signupinfotext').innerText = '';
+        document.getElementById('inputConfirmPasswordMistake').innerText = '';
         document.getElementById("inputpasswordconfirmsectionId").style.border= '';
     }
     checkFormCompletion();
