@@ -65,10 +65,10 @@ function openList() {
     selecCon.classList.toggle('d_none');
 
     if (d_none == true) {
-        arrowCon.innerHTML = `<img class="arrow_drop_up" src="assets/IMG/arrow_drop_up.svg" alt="">`;
+        arrowCon.innerHTML = `<img class="arrow_drop_downaa" src="assets/IMG/arrow_drop_up.svg" alt="">`;
         d_none = false;
     } else {
-        arrowCon.innerHTML = `<img class="arrow_drop_downaa" src="./assets/IMG/arrow_drop_downaa.svg" alt="">`;
+        arrowCon.innerHTML = `<img class="arrow_drop_up" src="./assets/IMG/arrow_drop_downaa.svg" alt="">`;
         d_none = true;
 
     }
@@ -81,8 +81,10 @@ function closelist() {
     let selecCon = document.getElementById('Selection_Container');
     let arrowCon = document.getElementById('arrow_img_container');
     arrowCon.innerHTML = '';
+    arrowCon.innerHTML = `<img class="arrow_drop_downaa" src="assets/IMG/arrow_drop_downaa.svg" alt="">`;
 
     selecCon.classList.add('d_none');
+    d_none=true;
 }
 
 function openCategoryLIst() {
