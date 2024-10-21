@@ -246,13 +246,11 @@ function pleaseEnterASubtask() {
 function editSubtask(i) {
     let subtaskElement = document.getElementById(`subTaskValueId${i}`);
 
-    // Setze das Subtask-Feld in den Bearbeiten-Modus
     subtaskElement.innerHTML = `
         <input id="subtaskValue${i}" class="subTaskInput" type="text" value="${subtasks[i]}">
         <div id="subtasksValidation${i}" class="subtaskError"></div>  <!-- Platz für Fehlermeldung -->
     `;
-    
-    // Ändere den Bearbeiten-Button auf ein "Häkchen" zum Speichern
+
     let change = document.getElementById(`changeImgEdit${i}`);
     change.innerHTML = `<img class="imgCheckedIcon" src="./assets/IMG/checkAddTask.png" alt="check" onclick="enterNewSubtask(${i})">`;
 }
@@ -260,25 +258,21 @@ function editSubtask(i) {
 
 
 function enterNewSubtask(i) {
-    // Hole den neuen Wert der Subtask aus dem bearbeitbaren Eingabefeld
+    event.stopPropagation();
     let newSubTask = document.getElementById(`subtaskValue${i}`).value.trim();
 
-    // Fehlermeldungselement definieren
     let errorMessageElement = document.getElementById(`subtasksValidation${i}`);
 
-    // Überprüfen, ob die Subtask leer ist
     if (newSubTask === '') {
         errorMessageElement.innerHTML = '<span style="color:red;">Subtask cannot be empty</span>';  // Zeige Fehlermeldung in rot
         return;
     }
 
-    // Speichere die Subtask im Array
     subtasks[i] = newSubTask;
 
-    // Fehlermeldung entfernen
     errorMessageElement.innerHTML = '';
 
-    // Setze die Subtask-Anzeige wieder auf die normale Ansicht zurück
+
     updateSubtaskElement(i);
 }
 
@@ -286,7 +280,6 @@ function enterNewSubtask(i) {
 function updateSubtaskElement(i) {
     let subtaskElement = document.getElementById(`changeColorId${i}`);
 
-    // Setze die Subtask-Anzeige zurück zur normalen Ansicht
     subtaskElement.innerHTML = `
         <div id="subTaskValueId${i}" class="li">${subtasks[i]}</div>
         <div class="changeButtonDeleteAndEdit">

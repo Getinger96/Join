@@ -579,7 +579,7 @@ cursor:pointer;
 
 .Subtasks_Btn {
     border: none;
-    background-color: white;
+    background-color: transparent;
     width: 24px;
     height: 24px;
     padding-right: 10px;

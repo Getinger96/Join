@@ -202,6 +202,7 @@ function emptySubtask() {
 
 function editSubtask(i) {
     document.getElementById(`SubtaskLengthReached`).innerHTML ='';    
+    removeColorSubtaskInputField();
     document.getElementById(`subTaskValueId${i}`).innerHTML = `
     <li>
     <input id="subtaskValue${i}" class="subTaskInput" type="text" value="${subtasks[i]}"

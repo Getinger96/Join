@@ -135,6 +135,8 @@ h3 {
     border: 2px solid white;
     margin-right: -8px;
     background-color: #3357FF;
+    color: white;
+    font-weight: 300;
 }
 
 
@@ -146,6 +148,8 @@ h3 {
     height: 33px;
     display: flex;
     align-items: center;
+    color: white;
+    font-weight: 300;
 }
 
 .title {
@@ -953,6 +957,7 @@ li {
     border: 2px solid #FFFFFF;
     justify-content: center;
     align-items: center;
+    color: white;
 }
 
 .responsiveDescription {

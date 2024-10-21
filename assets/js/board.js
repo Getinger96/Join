@@ -311,7 +311,7 @@ function convertToValidColor(color) {
     const colorMap = {
         "hellorange": "#FFA07A",
         "türkis": "#40E0D0",
-        "gelb": "#FFFF00",
+        "gelb": "#FFC300",
         "grün": "#008000",
         "blau": "#0000FF",
         "pink": "#FF33A1",
