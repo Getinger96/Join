@@ -188,8 +188,8 @@ function addSubtask() {
             <div id="subTaskValueId${i}" class="li subtaskError">${subtasks[i]}
             </div>
                 <div class="changeButtonDeleteAndEdit">
-                    <button type="button" class="Subtasks_Btn" onclick="deleteItem(${i})">
-                        <img src="./assets/IMG/delete.png">
+                    <button type="button" class="deleteSubtask_Btn" onclick="deleteItem(${i})">
+                        <img src="./assets/IMG/delete.png" class=deleteButton>
                     </button>
                     <button type="button" id="changeImgEdit${i}"  class="EditSubtaskButton" onclick="editSubtask(${i})">
                         <img  src="./assets/IMG/edit.png" class="deleteButton" alt="Edit">

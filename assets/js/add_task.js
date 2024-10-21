@@ -88,23 +88,31 @@ function closelist() {
 }
 
 function openCategoryLIst() {
+    // Toggle the visibility of the category selection container
     let seleCon = document.getElementById('Selection_Container_Category');
-    let arrowcona = document.getElementById('arrow_img_container_Category');
-    arrowcona.innerHTML = '';
-    arrowcona.innerHTML = `<img onclick="closelistCategory()"class="arrow_drop_downaa" src="./assets/IMG/arrow_drop_up.svg" alt="">`;
-    seleCon.classList.remove('d_none');
-    seleCon.innerHTML = `  <div onclick="choosedUserStory()" id="userStory" class= "userStory">User Story</div>
-                        <div onclick="choosedTechnicalTask()" id="technichalTask" class= "technical_TAsk">Technical Task</div>
-                         `;
+    seleCon.classList.toggle('d_none');
+}
+
+function choosedUserStory() {
+    // Set the selected category as "User Story"
+    let userStory = document.getElementById('Category');
+    userStory.textContent = "User Story";
+    closelistCategory();
+}
+
+function choosedTechnicalTask() {
+    // Set the selected category as "Technical Task"
+    let technicalTask = document.getElementById('Category');
+    technicalTask.textContent = "Technical Task";
+    closelistCategory();
 }
 
 function closelistCategory() {
-    let selecCon = document.getElementById('Selection_Container_Category');
-    let arrowCon = document.getElementById('arrow_img_container_Category');
-    arrowCon.innerHTML = '';
-    arrowCon.innerHTML = `<img onclick="openCategoryLIst()"class="arrow_drop_downaa" src="./assets/IMG/arrow_drop_downaa.svg" alt="">`;
-    selecCon.classList.add('d_none');
+    // Hide the category selection container
+    let seleCon = document.getElementById('Selection_Container_Category');
+    seleCon.classList.add('d_none');
 }
+
 
 function getLastName(name) {
     let lastName = name.trim().split(' ');
@@ -175,44 +183,41 @@ function deselctedtContact(i, name, firstletters, contactColour) {
     
 }
 
-function showSelectedProfile(firstletters, i, contactColour) {
+function showSelectedProfile() {
     let selectedProfileContainer = document.getElementById('Selected_profiles_Container');
-    let profilebadgeassign = document.getElementById(`profile_Badge_assign${i}`);
+    selectedProfileContainer.innerHTML = '';  // Leere den Container
 
-    if (profilebadgeassign) {
-        // Entferne das Badge, wenn der Kontakt abgewählt wird
-        profilebadgeassign.remove();
-    } else {
-        if (assignedContacts.length <= 4) {
+    for (let index = 0; index < assignedContacts.length; index++) {
+        if (index < 4) {  // Zeige nur die ersten 4 Kontakte an
+            let contactName = assignedContacts[index];
+            let contact = contacts.find(c => c.name === contactName); // Finde den Kontakt in der 'contacts'-Liste, um die richtige Farbe zu verwenden
 
-            if (firstletters && contactColour) {
+            if (contact) {
+                let contactColour = contact.color;
+                let firstletters = contactName.charAt(0).toUpperCase() + getLastName(contactName).charAt(0).toUpperCase();
+
                 selectedProfileContainer.innerHTML += `
-                    <div id="profile_Badge_assign${i}" class="profile_Badge_assign ${contactColour}">${firstletters}</div>
+                    <div id="profile_Badge_assign${index}" class="profile_Badge_assign ${contactColour}">${firstletters}</div>
                 `;
             }
         }
     }
 
+    // Verwalte das Badge für zusätzliche Kontakte
     let extraContactsBadge = document.getElementById('extra_Contacts_Badge');
     if (assignedContacts.length > 4) {
         let extraCount = assignedContacts.length - 4;
-
-        // Falls das Badge für extra Kontakte bereits existiert, aktualisiere die Zahl
         if (extraContactsBadge) {
             extraContactsBadge.textContent = `+${extraCount}`;
         } else {
-            // Erstelle ein neues Badge für extra Kontakte in Grau
             selectedProfileContainer.innerHTML += `
                 <div id="extra_Contacts_Badge" class="profile_Badge_assign gray">+${extraCount}</div>
             `;
         }
     } else if (extraContactsBadge) {
-        // Falls es keine zusätzlichen Kontakte mehr gibt, entferne das extra Badge
         extraContactsBadge.remove();
     }
 }
-
-   
 
 
 function dateinput() {
@@ -273,20 +278,6 @@ function choosedlow() {
     prio = 'low';
 }
 
-
-function choosedUserStory() {
-    let userStory = document.getElementById('Category');
-    userStory.innerHTML = "";
-    userStory.value = "User Story"
-    closelistCategory();
-}
-
-function choosedTechnicalTask() {
-    let userStory = document.getElementById('Category');
-    userStory.innerHTML = "";
-    userStory.value = "Technical Task";
-    closelistCategory();
-}
 
 async function postData(path = "", data = {}) {
     let response = await fetch(base_URL + path + ".json", {
