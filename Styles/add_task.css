@@ -682,6 +682,12 @@ animation-fill-mode: forwards;
     cursor: pointer;
 }
 
+.clear_Btn:hover {
+    border-color:  #29ABE2;
+    color: #29ABE2;
+}
+
+
 
 .subtasksValidation {
     display: flex;
@@ -720,6 +726,12 @@ animation-fill-mode: forwards;
     color: #FFFFFF;
     cursor: pointer;
 }
+
+.Create_Btn:hover {
+    background-color:  #29ABE2;
+    border-color:  #29ABE2;
+}
+
 
 .clear-icon {
     height: 24px;
