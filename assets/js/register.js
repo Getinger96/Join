@@ -175,10 +175,12 @@ function validateUsername() {
     let username = document.getElementById('username').value.trim();
     if (!nameIsNotValid(username) || username.length < 3 || username.length > 30) {
         document.getElementById('inputNameMistake').innerText = wrongTextValidation();
+        document.getElementById('inputNameMistake').style.display ='flex';
         changeBorderName();
     } else {
         document.getElementById('inputNameMistake').innerText = '';
         document.getElementById("inputenamesectionId").style.border= '';
+        document.getElementById('inputNameMistake').style.display ='none';
     }
     checkFormCompletion();
 }
@@ -187,10 +189,12 @@ function validateEmail() {
     let usermail = document.getElementById('usermail').value.trim();
     if (!emailIsNotCorrect(usermail)) {
         document.getElementById('inputEmailMistake').innerText = wrongEmailValidation();
+        document.getElementById('inputEmailMistake').style.display ='flex';
         changeBorderEmail();
     } else {
         document.getElementById('inputEmailMistake').innerText = '';
         document.getElementById("inputemailsectionId").style.border= '';
+        document.getElementById('inputEmailMistake').style.display ='none';
     }
     checkFormCompletion();
 }
@@ -200,9 +204,11 @@ function validatePassword() {
     if (userpassword.length <= 5) {
         document.getElementById('inputPasswordMistake').innerText = passwordToShort();
         changeBorderPassword();
+        document.getElementById('inputPasswordMistake').style.display ='flex';
     } else {
         document.getElementById('inputPasswordMistake').innerText = '';
         document.getElementById("inputpasswordsectionId").style.border= '';
+        document.getElementById('inputPasswordMistake').style.display ='none';
     }
     checkFormCompletion();
 }
@@ -210,12 +216,14 @@ function validatePassword() {
 function validateConfirmPassword() {
     let userpassword = document.getElementById('userpassword').value.trim();
     let userconfirmpassword = document.getElementById('userconfirmpassword').value.trim();
-    if (userpassword !== userconfirmpassword) {
+    if (userpassword !== userconfirmpassword || userconfirmpassword== '') {
         document.getElementById('inputConfirmPasswordMistake').innerText = passwordNoMatch();
+        document.getElementById('inputConfirmPasswordMistake').style.display ='flex';
         changeBorderConfirmPassword();
     } else {
         document.getElementById('inputConfirmPasswordMistake').innerText = '';
         document.getElementById("inputpasswordconfirmsectionId").style.border= '';
+        document.getElementById('inputConfirmPasswordMistake').style.display ='none';
     }
     checkFormCompletion();
 }

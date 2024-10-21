@@ -68,7 +68,7 @@ body {
     }
     
     .showMistakeValidation {
-        display: flex;
+        display: none;
         margin-inline: 20px;
         font-size: 13px;
         margin-block-start: -15px;
@@ -408,9 +408,12 @@ body {
             }
 
             .mailicon {
-                margin-left: 0;
+                margin-left: 60px;
             }
 
+            .visbilityimg {
+                margin-left: 60px;
+            }
 
             .inputenamesection {
                 width: 300px;
@@ -436,6 +439,10 @@ body {
             .register {
                 padding: 0px 10px 15px 10px;
             }
+
+            .loginandgustbutton {
+                padding: 0px 25px 10px 0px;
+            }
         
             .Signedupsuccessfully img {
                 width: 220px;
@@ -446,4 +453,34 @@ body {
                 font-size: 12px;
 
             }
+            .register {
+                margin-bottom: 20px;   
+                margin-top: 30px;
+
+            }
+            .mailicon {
+                margin-left: 10px;
+            }
+
+            .visbilityimg {
+                margin-left: 10px;
+            }
+
+            
+            .inputenamesection {
+                width: 230px;
+            }
+
+            .inputemailsection {
+                width: 230px;
+            }
+
+            .inputpasswordsection {
+                width: 230px;
+            }
+
+            .inputpasswordconfirmsection {
+                width: 230px;
+            }
+
         }
