@@ -245,6 +245,8 @@ function showMoveTheElements(idTask) {
     event.stopPropagation();
     
     document.getElementById(`fields_${idTask}`).innerHTML = `<div class="showsmallFieldBar">
+        <div class="headlsmallField">  </div>
+            <span class="statusField"> todo </span>
             <span class="statusField"> Progress </<span>
             <span class="statusField"> awaitFeedback </span
            <span class="statusField"> done </span>
