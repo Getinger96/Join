@@ -149,7 +149,7 @@
 
     .divBoard {
         width: 400px;
-        margin-left: 500px;
+        margin-left: 316px;
     }
     .spaceBetween1 {
         display: flex;
@@ -216,9 +216,7 @@
         width: 370px;
     }
 
-    .boardtitle{
-        margin-left: 88px;
-    }
+   
 
     .addTaskContainer {
         display: flex;
