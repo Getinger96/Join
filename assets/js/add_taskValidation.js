@@ -33,7 +33,7 @@ function validateTask(titel,category, date) {
     currentDate.setHours(0, 0, 0, 0);
 
 
-    if (titel.value === '' ||category.value === '' || date === '') {
+    if (titel.value === '' ||category === '' || date === '') {
         allInputFieldMissing();
         changeColorBorder();
         showInvalidDateMessage();
@@ -121,6 +121,12 @@ async function fetchTasks(path = '') {
     tasksArray = [];
     let response = await fetch(base_URL + path + ".json");
     let userJSON = await response.json();
+    if (!userJSON.tasks) {
+       
+
+        return;
+        
+    }
     let tasksAsarray = Object.values(userJSON.tasks)
     let keysArrayTask = Object.keys(userJSON.tasks);
     currentDraggedElement = 0;
@@ -154,7 +160,7 @@ async function fetchTasks(path = '') {
 }
 
 
-function gotoBoard() {
+ function gotoBoard() {
 
     let showTaskIsCreated = document.getElementById('newTaskIsReady');
 

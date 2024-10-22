@@ -37,7 +37,7 @@ async function fetchContacts(path = '') {
                 password: contact.password,
                 color: color,
             })
-            
+
         }
     }
     renderSelectionContainer()
@@ -84,7 +84,7 @@ function closelist() {
     arrowCon.innerHTML = `<img class="arrow_drop_downaa" src="assets/IMG/arrow_drop_downaa.svg" alt="">`;
 
     selecCon.classList.add('d_none');
-    d_none=true;
+    d_none = true;
 }
 
 function openCategoryLIst() {
@@ -162,25 +162,25 @@ function selectedContact(i, name, firstletters, contactColour) {
     profileContainer.classList.toggle('bg_color');
     profileContainer.classList.toggle('color_white');
     profileContainer.classList.toggle('profile_Containerselected');
-        
+
     if (!assignedContacts.includes(name)) {
         assignedContacts.push(name)
         showSelectedProfile(firstletters, i, contactColour)
-       
-    }else{
+
+    } else {
         deselctedtContact(i, name)
     }
     showSelectedProfile();
 }
-   
+
 function deselctedtContact(i, name, firstletters, contactColour) {
     let checkbox = document.getElementById(`checkbox${i}`);
     checkbox.innerHTML = `<img  id="checkImg${i}" class="check_img" src="assets/IMG/Check button.svg" alt="">`
 
     assignedContacts = assignedContacts.filter(contact => contact !== name);
-    
+
     showSelectedProfile(firstletters, i, contactColour);
-    
+
 }
 
 function showSelectedProfile() {
@@ -301,7 +301,7 @@ async function createTask(event) {
     let description = document.getElementById('Description');
     let assignedContact = assignedContacts;
     let date = document.getElementById('dueDate').value;
-    let category = document.getElementById('Category');
+    let category = document.getElementById('Category').innerHTML;
     let subtask = subtasks;
     let status = 'open'
 
@@ -310,8 +310,8 @@ async function createTask(event) {
         return;
     } else
 
-    document.getElementById("InputFieldsMissing").innerHTML ='';
-    document.getElementById("WrongCurrentDateId").innerHTML ='';
+        document.getElementById("InputFieldsMissing").innerHTML = '';
+    document.getElementById("WrongCurrentDateId").innerHTML = '';
 
     let newTask = {
         Titel: titel.value,
@@ -319,7 +319,7 @@ async function createTask(event) {
         AssignedContact: assignedContact,
         Date: date,
         Prio: prio,
-        Category: category.value,
+        Category: category,
         Subtask: subtask,
         Status: status
     };
@@ -330,7 +330,7 @@ async function createTask(event) {
 
     }
 
-    
+
     clearMissingFieldContent();
     await postData(`tasks`, newTask);
     clearTask();
@@ -350,7 +350,7 @@ async function clearTask() {
         let firstletterlastname = lastname.charAt(0);
         let firstletterlastnameBIG = firstletterlastname.toUpperCase();
         let firstletters = forNAmebig + firstletterlastnameBIG;
-       
+
     }
     let selectedProfileContainer = document.getElementById('Selected_profiles_Container');
     selectedProfileContainer.innerHTML = '';
@@ -366,14 +366,16 @@ async function clearTask() {
     description.value = "";
     assignedContacts = [];
     date.value = "";
-    category.value = "";
+    category.innerHTML = "Select Category";
     subtasks = [];
     prio = [];
     renderPrioButtons();
-    clearMissingFieldContent(); 
+    clearMissingFieldContent();
     clearWarningField();
     choossedmedium();
     renderSelectionContainer();
+    
+
 }
 
 
