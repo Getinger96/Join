@@ -961,8 +961,10 @@ li {
     z-index: 100;
     padding: 8px;
     width: 150px;
-    display: block;
-    padding: 10px 5px 14px 22px;
+    display: flex; 
+    flex-direction: column; 
+    justify-content: space-between;
+    padding: 0px 5px 14px 22px;
     margin-top: -50px;
     margin-left: 10px;
     color: white;
@@ -995,6 +997,7 @@ li {
     width: 130px;
 }
 .iconcategorybar {
+    display:none;
     width: 40px;
     height: 40px;
 }

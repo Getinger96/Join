@@ -243,16 +243,46 @@ function generateTodoHTML(task, taskIndex) {
 
 function showMoveTheElements(idTask) {
     event.stopPropagation();
-    
-    document.getElementById(`fields_${idTask}`).innerHTML = `<div class="showsmallFieldBar">
-        <div class="headlsmallField">  </div>
-            <span class="statusField"> todo </span>
-            <span class="statusField"> Progress </<span>
-            <span class="statusField"> awaitFeedback </span
-           <span class="statusField"> done </span>
-        
-         </div>`;
+
+    if (window.innerWidth <= 630) {
+        let fieldsContainer = document.getElementById(`fields_${idTask}`);
+        let existingMenu = fieldsContainer.querySelector('.showsmallFieldBar');
+
+        if (existingMenu) {
+            fieldsContainer.innerHTML = ''; 
+        } else {
+            fieldsContainer.innerHTML = `
+            <div class="showsmallFieldBar">
+                <div class="headlsmallField"></div>
+                <span class="statusField" onclick="moveTaskTo(${idTask}, 'open', event)">todo</span>
+                <span class="statusField" onclick="moveTaskTo(${idTask}, 'progress', event)">Progress</span>
+                <span class="statusField" onclick="moveTaskTo(${idTask}, 'awaitFeedback', event)">awaitFeedback</span>
+                <span class="statusField" onclick="moveTaskTo(${idTask}, 'closed', event)">done</span>
+            </div>`;
+        }
+    }
 }
+
+function moveTaskTo(idTask, newStatus, event) {
+    event.stopPropagation();  
+    
+    // Finde die genaue Position des Tasks im Array basierend auf der idTask
+    let taskIndex = tasksArray.findIndex(task => task.idTask === idTask);
+    
+    if (taskIndex !== -1) {
+        tasksArray[taskIndex].status = newStatus;  // Status der gefundenen Task ändern
+        
+        // Board neu rendern, um die Verschiebung anzuzeigen
+        updateBoard(newStatus, tasksArray[taskIndex]);
+    }
+
+    // Schließe das Dropdown-Menü nach der Auswahl
+    document.getElementById(`fields_${idTask}`).innerHTML = '';
+}
+
+
+
+    
 
 
 
@@ -414,12 +444,20 @@ async function updateBoard(category, task, event) {
     if (taskElement) {
         taskElement.remove();
     }
+    
     let newCategoryColumn = document.getElementById(category);
     let taskHTML = generateTodoHTML(task, task.idTask);
+    
+    // Task in die neue Kategorie einfügen
     newCategoryColumn.insertAdjacentHTML('afterbegin', taskHTML);
-    updateAndCheckEmptyFields();
+    
+    // Kontakte der Task aktualisieren
     getassignecontacts(task, task.idTask);
+    
+    // Überprüfen, ob leere Felder nach dem Verschieben korrekt sind
+    updateAndCheckEmptyFields();
 }
+
 
 function checkEmptyFieldsMoveToUpdate() {
     let fields = ["open", "progress", "awaitFeedback", "closed"];
