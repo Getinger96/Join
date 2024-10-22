@@ -8,9 +8,7 @@
 
 @media (max-width: 1528px) {
 
-    .divBoard {
-        margin-left: 50px;
-    }
+  
 
     .subtaskImgContent {
         margin-left: -10px;
@@ -25,7 +23,7 @@
     }
 
     .divBoard {
-        margin-left: 30px;
+        margin-left: 243px;
         flex-direction: column;
         justify-content: flex-start;
         display: flex;
@@ -99,8 +97,16 @@
     }
 }
 
-@media(max-width: 1230px) {
+@media(max-width: 1410px) {
+  
 
+    .divBoard {
+       
+        margin-left: 20px;
+    }
+}
+
+@media(max-width: 1230px) {
     ul {
         font-size: 17px;   
 

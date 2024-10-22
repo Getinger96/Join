@@ -343,9 +343,7 @@ gap:10px
 
 @media (max-width: 1528px) {
 
-    .sideblock {
-        display: flex;
-    }
+   
     .headblock {
         height: 96px;
         padding: 20px 40px ;
@@ -356,16 +354,17 @@ gap:10px
         margin-left: 60px;
     }
 }
-
+@media (max-width:1410px) {
+    .headblock {
+      
+        left: 0px ;
+    }
+}
 @media (max-width:1450px) {
     
-    .sideblock {
-        display: flex;
-    }
+   
 
-    .d-none {
-        display: none !important;
-    }
+   
 
     .kanbanboardprio:hover {
         transform: scale(1.05);
@@ -386,14 +385,12 @@ gap:10px
 }
 
 
-@media (max-width:950px){
+@media (max-width:1410px){
     .sideblock {
         display: none;
     }
 
-    .d-none {
-        display: block !important;
-    }
+   
 
     .middle-SectionSummary {
         margin-left: 0;

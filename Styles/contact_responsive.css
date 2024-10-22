@@ -1,5 +1,5 @@
 .d-none {
-    display: none !important;
+    display: none ;
 }
 
 .mobileNewContactOverlay {
@@ -16,9 +16,6 @@
     display: none;
 }
 
-.sideblock {
-    display: flex;
-}
 
 .menu-button-img {
     display: none !important;
@@ -228,11 +225,18 @@ input[type="tel"] {
     }
 }
 
+@media (max-width: 1410px)
+    
+{
+    .middle-Section {
+     margin-left: 0px;
+      
+    }
+}
+
 
 @media(max-width: 1450px) {
-    .sideblock {
-        display: flex;
-    }
+   
 
     .headblock {
         height: 96px !important;
@@ -240,9 +244,7 @@ input[type="tel"] {
         left: 0px !important;
     }
 
-    .d-none {
-        display: none !important;
-    }
+    
 
     .kanbanBoardTitle {
         margin-left: 300px !important;
@@ -431,14 +433,8 @@ input[type="tel"] {
         display: none;
     }
 
-    .sideblock {
-        display: none;
-    }
-
-    .d-none {
-        display: block !important;
-    }
-
+    
+   
     .kanbanBoardTitle {
         margin-left: 0px !important;
     }

@@ -42,11 +42,13 @@
     display: none;
 }
 
-@media(max-width:1528px) {
-    .d-none {
+@media(max-width: 1410px){
+    .sideblockMobil{
         display: block;
     }
 }
+
+
 
 @media(max-width: 400px) {
 
