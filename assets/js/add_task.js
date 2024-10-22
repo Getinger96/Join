@@ -366,7 +366,7 @@ async function clearTask() {
     description.value = "";
     assignedContacts = [];
     date.value = "";
-    category.innerHTML = "Select Category";
+    category.innerHTML = "";
     subtasks = [];
     prio = [];
     renderPrioButtons();

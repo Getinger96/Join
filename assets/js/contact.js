@@ -98,7 +98,7 @@ function displayContacts(contactIndex, contactsEmail, contactsName, contactLastn
                 </div>
                 <div class="contact-content">
                     <span class="contactname" style="color:${selectedClass ? 'white' : 'black'};">${contactsName}</span>
-                    <a class="contactmail" href="mailto:${contactsEmail}">${contactsEmail}</a>
+                   
                 </div>
              <img src="./assets/IMG/Secondary mobile contact V1.png" alt="Add Contact" class="add-contact-button" onclick="mobileAddContact(event)">
             </div>`;

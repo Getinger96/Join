@@ -33,7 +33,7 @@ function validateTask(titel,category, date) {
     currentDate.setHours(0, 0, 0, 0);
 
 
-    if (titel.value === '' ||category === '' || date === '') {
+    if (titel.value === '' ||category.value === '' || date === '') {
         allInputFieldMissing();
         changeColorBorder();
         showInvalidDateMessage();
