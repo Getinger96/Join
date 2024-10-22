@@ -214,11 +214,20 @@ function generateTodoHTML(task, taskIndex) {
 
     return `
        <div class="todo" id="task_${task.idTask - 1}Element" draggable="true" ondragstart="startDragging(${task.idTask})" onclick="openToDo(${task.idTask})">
-    <div class="divKategorie" style="background-color: ${categoryColor};">${category}</div>
-    <h3 id="task_Title${task.idTask - 1}" class="title">${title}</h3>
+    <div class="boardCardheadlinesmall">  
     <div>
-    <p class="description">${description}</p>
+    <div class="divKategorie"> 
+    <div class="categoryheadline" style="background-color: ${categoryColor}";>
+    <span>${category} </span>
     </div>
+    <div class="mobileCategory" onclick="showMoveTheElements(${task.idTask - 1})"> <img  class="iconcategorybar" src="./assets/IMG/Menu Contact options.png" alt=""> </div>
+    <div id="fields_${task.idTask - 1}"> </div> 
+    </div>
+    </div>
+    </div>
+
+    <h3 id="task_Title${task.idTask - 1}" class="title">${title}</h3>
+    <p class="description">${description}</p>
     ${progressHtml} <!-- Progressbar nur anzeigen, wenn Subtasks vorhanden sind -->
     
     <!-- Wrapper für Kontakte und Prioritäts-Icon -->
@@ -230,6 +239,23 @@ function generateTodoHTML(task, taskIndex) {
     </div>
 </div>`;
 }
+
+function showMoveTheElements(idTask) {
+    event.stopPropagation();
+    
+    document.getElementById(`fields_${idTask}`).innerHTML = `<div class="showsmallFieldBar">
+            <span class="statusField"> Progress </<span>
+            <span class="statusField"> awaitFeedback </span
+           <span class="statusField"> done </span>
+        
+         </div>`;
+}
+
+
+
+
+
+
 
 function getPriorityIcon(priority) {
     let checkPriority = priority;

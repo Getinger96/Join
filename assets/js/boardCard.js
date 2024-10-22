@@ -112,7 +112,7 @@ function createShowCard(task, taskIndex) {
    return `
         <div class="todo-detail">
             <div>
-                <div class="divKategorie" style="background-color: ${categoryColor};">${category}</div>
+                <div class="divKategorieCard" style="background-color: ${categoryColor};">${category}</div>
                 <button onclick="closeOverlay(${taskIndex})" class="close-button"><img src="./assets/IMG/iconoir_cancel.png" alt=""></button>
             </div>
             <div>
