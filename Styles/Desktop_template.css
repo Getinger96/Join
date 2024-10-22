@@ -324,15 +324,16 @@ a:hover {
         height: 80px;
     }
 
-    .kanbanBoardTitle {
-        margin-left: 0;
-    }
-
+   
 
 }
 @media(max-width: 1410px) {
     .sideblock {
         display: none;
+    }
+
+    .kanbanBoardTitle{
+        margin-left: 0px;
     }
 
   
