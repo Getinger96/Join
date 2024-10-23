@@ -102,6 +102,9 @@
        margin-left: 0px;
         
     }
+    .iconcategorybar {
+        display:block;
+    }
 
    
 }
@@ -577,9 +580,7 @@
         gap: 6px;
     }
 
-    .iconcategorybar {
-        display:block;
-    }
+    
 
 
    
@@ -657,5 +658,10 @@
 
     .paddingRight {
         padding-right: 0px;
+    }
+    .showsmallFieldBar {
+        
+        margin-left: 38px;
+     
     }
 }

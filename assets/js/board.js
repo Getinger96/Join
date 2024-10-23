@@ -245,15 +245,16 @@ function showMoveTheElements(idTask) {
     event.stopPropagation();
    
 
-    if (window.innerWidth <= 630) {
+    if (window.innerWidth <= 1410) {
         let fieldsContainer = document.getElementById(`fields_${idTask}`);
-        let existingMenu = fieldsContainer.querySelector('.showsmallFieldBar');
+        let existingMenu = fieldsContainer.querySelector('showsmallFieldBar');
+        
 
         if (existingMenu) {
             fieldsContainer.innerHTML = ''; 
         } else {
             fieldsContainer.innerHTML = `
-            <div class="showsmallFieldBar">
+            <div id="existingmenu" class="showsmallFieldBar">
                 <div class="headlsmallField"></div>
                 <span class="statusField" onclick="moveTaskTo(${idTask}, 'open', event)">todo</span>
                 <span class="statusField" onclick="moveTaskTo(${idTask}, 'progress', event)">Progress</span>
@@ -263,6 +264,9 @@ function showMoveTheElements(idTask) {
         }
     }
 }
+
+
+
 
  async function moveTaskTo(idTask, newStatus, event) {
     event.stopPropagation();  
