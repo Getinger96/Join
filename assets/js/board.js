@@ -220,7 +220,7 @@ function generateTodoHTML(task, taskIndex) {
     <div class="categoryheadline" style="background-color: ${categoryColor}";>
     <span>${category} </span>
     </div>
-    <div class="mobileCategory" onclick="showMoveTheElements(${task.idTask - 1})"> 
+    <div class="mobileCategory" onclick="showMoveTheElements(${task.idTask-1})"> 
     <img  class="iconcategorybar" src="./assets/IMG/Menu Contact options.png" alt=""> 
     </div>
     </div>
@@ -243,6 +243,7 @@ function generateTodoHTML(task, taskIndex) {
 
 function showMoveTheElements(idTask) {
     event.stopPropagation();
+   
 
     if (window.innerWidth <= 630) {
         let fieldsContainer = document.getElementById(`fields_${idTask}`);
@@ -263,21 +264,20 @@ function showMoveTheElements(idTask) {
     }
 }
 
-function moveTaskTo(idTask, newStatus, event) {
+ async function moveTaskTo(idTask, newStatus, event) {
     event.stopPropagation();  
-    
+    idTask++;
     // Finde die genaue Position des Tasks im Array basierend auf der idTask
     let taskIndex = tasksArray.findIndex(task => task.idTask === idTask);
     
     if (taskIndex !== -1) {
         tasksArray[taskIndex].status = newStatus;  // Status der gefundenen Task ändern
-        
+        let key =tasksArray[taskIndex].taskKey;
+        await putDataTask(`tasks/${key}/Status`, newStatus);
         // Board neu rendern, um die Verschiebung anzuzeigen
         updateBoard(newStatus, tasksArray[taskIndex]);
     }
-
-    // Schließe das Dropdown-Menü nach der Auswahl
-    document.getElementById(`fields_${idTask}`).innerHTML = '';
+    
 }
 
 
