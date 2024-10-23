@@ -1191,3 +1191,12 @@ li {
     height: 500px;
 }
 }
+
+
+
+@media(max-height: 350px) {
+.buttonContainerWhite {
+    width: 50px;
+}
+
+}
