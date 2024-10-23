@@ -3,10 +3,8 @@ let subtask = [];
 let tasksArray = [];
 let subTaskChecked = [];
 let currentTaskIndex = null;
-
 let currentDraggedElement;
 let id = 0
-
 let addtask = false;
 
 async function fetchTasks(path = '') {
@@ -52,11 +50,7 @@ async function fetchTasks(path = '') {
     removeAllElement();
     await updateHtml();
     renderSubtask();
-    
-
 }
-
-
 
 
 function removeAllElement() {
@@ -80,7 +74,6 @@ function renderSubtask() {
             }
         )
     }
-
 }
 
 function closeTask() {
@@ -147,16 +140,12 @@ function updateAndCheckEmptyFields() {
     });
 }
 
-
 function showEmptyFields(text) {
     return ` 
     <div class="fiedIsempty"> 
         <p>${text}</p>
            </div>`;
 }
-
-
-
 function openTask(taskIndex) {
     currentTaskIndex = taskIndex;
     const windowWidth = window.innerWidth;
@@ -242,31 +231,51 @@ function generateTodoHTML(task, taskIndex) {
 }
 
 function showMoveTheElements(idTask) {
-    event.stopPropagation();
-   
+    event.stopPropagation(); 
 
     if (window.innerWidth <= 1410) {
         let fieldsContainer = document.getElementById(`fields_${idTask}`);
-        let existingMenu = fieldsContainer.querySelector('showsmallFieldBar');
+        let existingMenu = fieldsContainer.querySelector('.showsmallFieldBar');
         
 
         if (existingMenu) {
-            fieldsContainer.innerHTML = ''; 
+            fieldsContainer.innerHTML = '';
         } else {
+    
             fieldsContainer.innerHTML = `
-            <div id="existingmenu" class="showsmallFieldBar">
+            <div id="existingmenu" class="showsmallFieldBar" onclick="event.stopPropagation()">
                 <div class="headlsmallField"></div>
-                <span class="statusField" onclick="moveTaskTo(${idTask}, 'open', event)">todo</span>
-                <span class="statusField" onclick="moveTaskTo(${idTask}, 'progress', event)">Progress</span>
-                <span class="statusField" onclick="moveTaskTo(${idTask}, 'awaitFeedback', event)">awaitFeedback</span>
-                <span class="statusField" onclick="moveTaskTo(${idTask}, 'closed', event)">done</span>
+                <div class="fieldElement"> <span class="statusField" onclick="moveTaskTo(${idTask}, 'open', event)">todo</span></div>
+                <div class="fieldElement"> <span class="statusField" onclick="moveTaskTo(${idTask}, 'progress', event)">Progress</span></div>
+                <div class="fieldElement"> <span class="statusField" onclick="moveTaskTo(${idTask}, 'awaitFeedback', event)">awaitFeedback</span></div>
+                <div class="fieldElement"> <span class="statusField" onclick="moveTaskTo(${idTask}, 'closed', event)">done</span></div>
             </div>`;
         }
     }
+   else if (window.innerWidth > 1410 && window.innerWidth <= 1420) 
+    if (existingMenu) {
+        fieldsContainer.innerHTML = '';
+}
 }
 
+document.addEventListener('click', function(event) {
+    const openMenu = document.querySelector('.showsmallFieldBar');
+    if (openMenu && !openMenu.contains(event.target)) {
+        openMenu.remove();
+    }
+});
 
 
+function handleResize() {
+    const windowWidth = window.innerWidth;
+    const openMenu = document.querySelector('.showsmallFieldBar');
+
+    if (windowWidth > 1410) {
+        if (openMenu) {
+            openMenu.remove();
+        }
+    }
+}
 
  async function moveTaskTo(idTask, newStatus, event) {
     event.stopPropagation();  
@@ -283,17 +292,6 @@ function showMoveTheElements(idTask) {
     }
     
 }
-
-
-
-    
-
-
-
-
-
-
-
 function getPriorityIcon(priority) {
     let checkPriority = priority;
     let priorityIcon = '';

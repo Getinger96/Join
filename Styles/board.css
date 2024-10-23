@@ -66,11 +66,23 @@ label {
     padding: 16px;
     min-height: 263px;
     word-break: break-word;
+    position: relative;
 }
 
 .todo:hover {
     transform: rotate(3deg);
     cursor: pointer;
+}
+
+.fieldElement {
+    transition: all 0.3s ease;
+    margin: 12px;
+}
+
+
+.fieldElement:hover {
+    background-color: #2A3A51;
+    height: 50px;
 }
 
 h3 {
@@ -961,12 +973,12 @@ li {
     z-index: 100;
     padding: 8px;
     width: 150px;
-    display: flex; 
-    flex-direction: column; 
+    display: flex;
+    flex-direction: column;
     justify-content: space-between;
-    padding: 0px 5px 14px 22px;
-    margin-top: -68px;
-    margin-left: 140px;
+    padding: 0px 8px 25px 25px;
+    margin-top: -40px;
+    margin-left: 2px;
     color: white;
 }
 
