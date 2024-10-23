@@ -447,12 +447,28 @@
 
 }
 
+@media(max-width: 920px){
+    .drag-area {
+       
+        width: 700px;
+       
+    }
+}
+
+@media(max-width: 820px){
+    .drag-area {
+       
+        width: 600px;
+       
+    }
+}
+
 
 @media(max-width: 630px) {
 
 
     .drag-area {
-        width: 501px;
+        width: 401px;
 
     }
 
@@ -615,6 +631,8 @@
         height: 630px;
         margin-top:-80px;
     }
+      
+    
 }
 
 @media(max-width: 450px) {
@@ -677,11 +695,21 @@
     }
 }
 
+@media(max-width:740px){
+    .drag-area {
+           
+        width: 500px
+}}
+
 @media (max-width: 550px) {
 
     .showsmallFieldBar {
         height: 160px;
 
+    }
+
+    .drag-area {
+        width: 300px;
     }
 }
 
@@ -692,6 +720,9 @@
     .fiedIsempty {
         width: 330px;
         height: 60px;
+    }
+    .drag-area {
+        width: 250px;
     }
 
 }
