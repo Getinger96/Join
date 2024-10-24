@@ -129,7 +129,11 @@ function deselctedtContact(index, color, name) {
     }
     showSelectedProfile(color, name, index)
 
+
+
+
     let contactContainer = document.getElementById(`profile-${index}`);
+    
     contactContainer.classList.remove('bg_color');
     contactContainer.classList.remove('color_white');
 
