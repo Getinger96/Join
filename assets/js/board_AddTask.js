@@ -133,6 +133,10 @@ function deselctedtContact(index, color, name) {
 
 
     let contactContainer = document.getElementById(`profile-${index}`);
+
+    if (!contactContainer) {
+        return;
+    }
     
     contactContainer.classList.remove('bg_color');
     contactContainer.classList.remove('color_white');

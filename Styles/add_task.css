@@ -10,14 +10,13 @@ body {
     display: flex;
     flex-direction: column;
     margin-left: 328px;
-    margin-top: 150px;
+    margin-top: 200px;
 }
 
 .headline_addTask {
     display: flex;
     gap: 1px;
     font-size: 61px;
-    line-height: 73.2px;
 }
 
 .tomanySubtask {

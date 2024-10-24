@@ -61,6 +61,7 @@ async function loginAction() {
         changeColorHrAndBorderMistake();
     }
 
+    emptyTheInputFields(loginMail,loginPassword);
 }
 
 
@@ -70,6 +71,7 @@ function guestLogin() {
     
     loginMail.value = "guest@web.de";  
     loginPassword.value = "guest123456";  
+
 
 
 }

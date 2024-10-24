@@ -10,6 +10,10 @@
 }
 
 @media(max-width: 1410px) {
+
+    .clear_COntainer {
+        margin-top: 119px;
+    }
    
     .add_task_content {
         margin-left: 220px;
