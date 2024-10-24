@@ -40,19 +40,19 @@
 
 
                 <div class="inputenamesection" id="inputenamesectionId">
-                    <input id="username" class="inputname" type="text" required placeholder="Name" onblur="validateUsername()">
+                    <input id="username" class="inputname" type="text" required placeholder="Name"  autocomplete="username"  onblur="validateUsername()">
                     <img class="mailicon" src="assets/IMG/person.png" alt="">
                 </div>
                 <div class="showMistakeValidation" id="inputNameMistake"></div>
 
                 <div class="inputemailsection" id="inputemailsectionId">
-                    <input id="usermail" class="inputemail" type="email" required placeholder="E-Mail"  onblur="validateEmail()">
+                    <input id="usermail" class="inputemail" type="email" required placeholder="E-Mail" autocomplete="email"  onblur="validateEmail()">
                     <img class="mailicon" src="assets/IMG/mail.png" alt="">
                 </div>
                 <div  class="showMistakeValidation" id="inputEmailMistake"></div>
 
                 <div class="inputpasswordsection" id="inputpasswordsectionId">
-                    <input id="userpassword" class="inputpassword" type="password" onclick="passwordvisbility()"
+                    <input id="userpassword"  class="inputpassword" type="password" autocomplete="new-password" onclick="passwordvisbility()"
                         required placeholder="Password" onblur="validatePassword()">
                     <img class="visbilityimg"  id="visbilityimg" src="assets/IMG/lock.png" alt="" onclick="showVisbility()">
                 </div>
@@ -60,7 +60,7 @@
 
                 <div class="inputpasswordconfirmsection" id="inputpasswordconfirmsectionId">
                     <input id="userconfirmpassword" class="inputconfirmpassword" type="password"
-                        onclick="passwordconfirmvisbility()" required placeholder=" Confrim Password"  onblur="validateConfirmPassword()">
+                        onclick="passwordconfirmvisbility()" autocomplete="new-password" required placeholder=" Confrim Password"  onblur="validateConfirmPassword()">
                     <img class="visbilityimg" id="visbilityimgconfirm" src="assets/IMG/lock.png" alt=""
                         onclick="showVisbilityconfirmpassword()">
                 </div>

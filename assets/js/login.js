@@ -74,8 +74,42 @@ function guestLogin() {
 
 }
 
+function validateEmailLogin() {
+    let loginMail = document.getElementById('emaillogin');
+
+    let loginInfo = document.getElementById('validateEmail');
 
 
+    if (!emailIsCorrect(loginMail.value)) {
+        loginInfo.innerText = 'Please enter a valid email address!';
+        return; 
+    }
+
+    loginInfo.innerText ='';
+}
+
+
+
+function validatePasswordLogin() {
+    let loginPassword = document.getElementById('passwordlogin');
+
+    let loginInfo = document.getElementById('validatePassword');
+
+    if (loginPassword.value.length <= 5) {
+        loginInfo.innerHTML = passwordToShort();
+    
+        return ;
+    }
+
+    loginInfo.innerText ='';
+}
+
+
+function passwordToShort() {
+    return `
+    Passwords must have maximal 6 characters !!!`;
+    
+    }
 
 function loginUpSuccessfully() {
     document.getElementById('loginupsuccessfully').innerHTML =`  <div class="loginUpsuccessfully">
