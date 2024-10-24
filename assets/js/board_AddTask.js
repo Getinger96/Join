@@ -121,13 +121,13 @@ function selectedContact(index, color, name) {
 
 
 
-function deselctedtContact(index, color, name) {
-    showSelectedContainer(name, index);
-    let contactIndex = assignedContacts.indexOf(name);
+function deselctedtContact(index, name,nameletter,color) {
+    showSelectedContainer(nameletter, index);
+    let contactIndex = assignedContacts.indexOf(nameletter);
     if (contactIndex !== -1) {
         assignedContacts.splice(contactIndex, 1);
     }
-    showSelectedProfile(color, name, index)
+    showSelectedProfile(color, name, index,color)
 
 
 
