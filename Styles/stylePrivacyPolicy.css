@@ -32,15 +32,13 @@ body {
 @media(max-width:1528px){
     .middle-Section-Privacy {
        
-        margin-left: 37px;
+        margin-left: 260px;
         
 }
 }
 
-@media(max-width: 1450px) {
-    .d-none {
-        display: block;
-    }
+@media(max-width: 1410px) {
+   
 
 .middle-Section-Privacy {
     margin-left: 20px;

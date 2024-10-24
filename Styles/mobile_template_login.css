@@ -46,11 +46,13 @@
     display: none;
 }
 
-.legalnotesContent {
 
-}
 
 @media(max-width:1528px) {
+   
+}
+
+@media(max-width:1410px) {
     .d-none {
         display: block;
     }
