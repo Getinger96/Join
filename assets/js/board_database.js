@@ -274,7 +274,7 @@ async function EditData(index) {
     let description = task.Description;
     let dueDate = task.duedate;
     let priority = task.Prio;
-    let assignedContacts = task.Assigned || '';
+    let assignedContacts = task.Assigned || [];
     let category = task.Category;
     let subtask = task.subtask;
     let status = task.status;
@@ -282,13 +282,25 @@ async function EditData(index) {
     getContacts();
     closeoverlayedit(index);
     
+    
+    let selectedProfileContainer = document.getElementById('Selected_profiles_Container');
+    selectedProfileContainer.innerHTML = '';
 
-    for (let indexcon = 0; indexcon < assignedContacts.length; indexcon++) {
+    for (let indexcon = 0; indexcon < assignedContacts.length && indexcon < 4; indexcon++) {
         let contact = assignedContacts[indexcon];
         let contactContainer = document.getElementById(`profile-${indexcon}`);
-        contactContainer.classList.add('bg_color');
-        contactContainer.classList.add('color_white');
-        showSelectedProfileEdit(contact, indexcon)
+        if (contactContainer) {
+            contactContainer.classList.add('bg_color');
+            contactContainer.classList.add('color_white');
+        }
+        showSelectedProfileEdit(contact); 
+    }
+
+    if (assignedContacts.length > 4) {
+        let extraCount = assignedContacts.length - 4;
+        selectedProfileContainer.innerHTML += `
+            <div id="extra_Contacts_Badge" class="profile_Badge_assign gray">+${extraCount}</div>
+        `;
     }
 
     let tasktitle = document.getElementById('taskTitle');
@@ -297,21 +309,25 @@ async function EditData(index) {
     taskdescription.value = description;
     let taskDAte = document.getElementById('taskDueDate');
     taskDAte.value = dueDate;
+
     if (priority == 'urgent') {
-        urgent()
+        urgent();
+    } else if (priority == 'medium') {
+        medium();
+    } else if (priority == 'low') {
+        low();
     }
-    if (priority == 'medium') {
-        medium()
-    }
-    if (priority == 'low') {
-        low()
-    }
+
+   
     let taskCategory = document.getElementById('kategorie');
     taskCategory.value = category;
+
     subtasks = subtask;
     addSubtask(event);
+
     changeAddtaskButton(index);
-};
+}
+
 
 async function createEdittask(index) {
     let tasktitle = document.getElementById('taskTitle');
