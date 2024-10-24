@@ -1,8 +1,4 @@
-@media (max-width: 1550px) {
-    .displayFlex {
-        margin-top: 100px;
-    }
-}
+
 
 
 
@@ -23,7 +19,7 @@
     }
 
     .divBoard {
-        margin-left: 234px;
+        margin-left: 250px;
         flex-direction: column;
         justify-content: flex-start;
         display: flex;
@@ -88,7 +84,7 @@
     .spaceBetween {
         display: flex;
         justify-content: space-between;
-        gap: 530px;
+        gap: 400px;
     }
 
     .Selection_Container {
@@ -99,7 +95,7 @@
 
 @media(max-width: 1410px) {
     .divBoard {
-       margin-left: 0px;
+       margin-left: 100px;
         
     }
     .iconcategorybar {
@@ -108,6 +104,19 @@
 
    
 }
+
+@media(max-width: 1320px) {
+    .divBoard {
+       margin-left: 60px;
+        
+    }
+    .iconcategorybar {
+        display:block;
+    }
+
+   
+}
+
 
 @media(max-width: 1230px) {
     ul {
@@ -151,7 +160,7 @@
     }
 
     .divBoard {
-        width: 400px;
+        width: 300px;
         
     }
     .spaceBetween1 {
@@ -188,10 +197,6 @@
         flex-direction: column;
     }
 
-   
-
-  
-
     .bottomInfo {
         position: relative;
         max-height: 120px;
@@ -219,8 +224,6 @@
         width: 370px;
     }
 
-   
-
     .addTaskContainer {
         display: flex;
         justify-content: space-between;
@@ -233,7 +236,6 @@
         gap: 0px;
         margin-left: -70px;
     }
-
     .displayFlex {
         display: flex;
         margin-top: 0px;
