@@ -44,12 +44,12 @@ body {
 
 .header_COntainer {
     display: flex;
-    justify-content: center;
+   
 }
 
 .addTask_Container {
     display: flex;
-    justify-content: center;
+    
     margin-top: 15px;
 }
 
