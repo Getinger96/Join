@@ -82,8 +82,8 @@ async function createContactMobile() {
 
     contactsArray.push(newContact);
     await postData('contacts', newContact);
-    sortContactsByLetter();
     closeMobileNewContact();
+    await fetchContacts();
 }
 
 
