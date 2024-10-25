@@ -234,7 +234,6 @@
         flex-direction: column;
         align-items: stretch;
         gap: 0px;
-        margin-left: -70px;
     }
     .displayFlex {
         display: flex;
@@ -334,7 +333,7 @@
     }
 
     .HeadContainerBoard {
-        margin-top: 80px;
+        margin-top: 110px;
     }
 
     .subtasksInputfield {
@@ -430,7 +429,7 @@
     }
 
     .divBoard {
-        margin-left: 100px;
+        margin-left: 50px;
     }
 
     .spaceBetween1 {
@@ -700,7 +699,23 @@
 @media(max-width:740px){
     .drag-area {
            
-        width: 500px
+        width: 600px
+}}
+
+
+
+@media(max-width:700px){
+    .drag-area {
+           
+        width: 520px
+}}
+
+
+
+@media(max-width:600px){
+    .drag-area {
+           
+        width: 490px
 }}
 
 @media (max-width: 550px) {
@@ -711,12 +726,19 @@
     }
 
     .drag-area {
-        width: 300px;
+        width: 460px;
     }
 }
 
 
+@media (max-width: 450px) {
 
+
+    .drag-area {
+        width: 360px;
+    }
+
+}
 @media (max-width: 400px) {
 
     .fiedIsempty {
@@ -724,7 +746,7 @@
         height: 60px;
     }
     .drag-area {
-        width: 250px;
+        width: 300px;
     }
 
 

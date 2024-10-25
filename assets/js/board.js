@@ -450,13 +450,10 @@ async function updateBoard(category, task, event) {
     let newCategoryColumn = document.getElementById(category);
     let taskHTML = generateTodoHTML(task, task.idTask);
     
-    // Task in die neue Kategorie einfügen
     newCategoryColumn.insertAdjacentHTML('afterbegin', taskHTML);
     
-    // Kontakte der Task aktualisieren
     getassignecontacts(task, task.idTask);
     
-    // Überprüfen, ob leere Felder nach dem Verschieben korrekt sind
     updateAndCheckEmptyFields();
 }
 

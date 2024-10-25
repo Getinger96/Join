@@ -353,7 +353,6 @@ h3 {
 .spaceBetween {
     display: flex;
     justify-content: space-between;
-    width: 1130px;
 }
 
 .spaceBetween1 {
