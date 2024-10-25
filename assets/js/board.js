@@ -173,25 +173,55 @@ async function closeTaskUpdate() {
 }
 
 function generateTodoHTML(task, taskIndex) {
-
     let title = task.Title;
     let description = task.Description || "";
     let dueDate = task.duedate;
     let priority = task.Prio;
     let assignedContacts = task.Assigned || "";
     let category = task.Category;
-    let subtasks = task.subtask || [];
     let idBoard = task.idTask;
     let priorityIcon = getPriorityIcon(priority);
     let categoryColor = getCategoryColor(category);
+    const progressHtml = generateProgressHtml(task);
+
+    return `
+       <div class="todo" id="task_${task.idTask - 1}Element" draggable="true" ondragstart="startDragging(${task.idTask})" onclick="openToDo(${task.idTask})">
+           <div class="boardCardheadlinesmall">  
+               <div>
+                   <div class="divKategorie"> 
+                       <div class="categoryheadline" style="background-color: ${categoryColor};">
+                           <span>${category} </span>
+                       </div>
+                       <div class="mobileCategory" onclick="showMoveTheElements(${task.idTask - 1})"> 
+                           <img class="iconcategorybar" src="./assets/IMG/Menu Contact options.png" alt=""> 
+                       </div>
+                   </div>
+                   <div id="fields_${task.idTask - 1}"></div> 
+               </div>
+           </div>
+           <h3 id="task_Title${task.idTask - 1}" class="title">${title}</h3>
+           <p class="description">${description}</p>
+           ${progressHtml} <!-- Fortschritts-HTML wird hier eingefügt -->
+           
+           <!-- Wrapper für Kontakte und Prioritäts-Icon -->
+           <div class="task-footer">
+               <div class="boardContacts" id="assignedContacts${task.idTask}"></div>  
+               <div class="priority-icon">
+                   <img src="${priorityIcon}" alt="${priority} Priority">
+               </div>
+           </div>
+       </div>`;
+}
+
+function generateProgressHtml(task) {
+    const subtasks = task.subtask || [];
     const totalSubtasks = subtasks.length;
     const subtaskStatus = JSON.parse(localStorage.getItem(`task-${task.idTask - 1}-subtasks`)) || {};
     const completedSubtasks = Object.values(subtaskStatus).filter(isChecked => isChecked).length;
     const progressPercentage = totalSubtasks ? (completedSubtasks / totalSubtasks) * 100 : 0;
 
-    let progressHtml = '';
     if (totalSubtasks > 0) {
-        progressHtml = `
+        return `
             <div class="progress-container">
                 <div class="progress-bar">
                     <div class="progress" id="progressbarline-${task.idTask - 1}" style="width: ${progressPercentage}%;"></div>
@@ -200,34 +230,7 @@ function generateTodoHTML(task, taskIndex) {
             </div>
         `;
     }
-
-    return `
-       <div class="todo" id="task_${task.idTask - 1}Element" draggable="true" ondragstart="startDragging(${task.idTask})" onclick="openToDo(${task.idTask})">
-    <div class="boardCardheadlinesmall">  
-    <div>
-    <div class="divKategorie"> 
-    <div class="categoryheadline" style="background-color: ${categoryColor}";>
-    <span>${category} </span>
-    </div>
-    <div class="mobileCategory" onclick="showMoveTheElements(${task.idTask-1})"> 
-    <img  class="iconcategorybar" src="./assets/IMG/Menu Contact options.png" alt=""> 
-    </div>
-    </div>
-    <div id="fields_${task.idTask - 1}"> </div> 
-    </div>
-    </div>
-    <h3 id="task_Title${task.idTask - 1}" class="title">${title}</h3>
-    <p class="description">${description}</p>
-    ${progressHtml} <!-- Progressbar nur anzeigen, wenn Subtasks vorhanden sind -->
-    
-    <!-- Wrapper für Kontakte und Prioritäts-Icon -->
-    <div class="task-footer">
-        <div class="boardContacts" id="assignedContacts${task.idTask}"></div>  
-        <div class="priority-icon">
-            <img src="${priorityIcon}" alt="${priority} Priority">
-        </div>
-    </div>
-</div>`;
+    return '';
 }
 
 function showMoveTheElements(idTask) {

@@ -9,7 +9,6 @@
     margin-top: 119px;
   }
 
-<<<<<<< HEAD
     .clear_COntainer {
         margin-top: 100px;
     }
@@ -22,12 +21,6 @@
     .required_info_Container {
         margin-top: 137px;
     }
-=======
-  .add_task_content {
-    margin-left: 220px;
-    margin-top: 116px;
-  }
->>>>>>> 3016da563f15613b562714888076a0fc21c24237
 
   .addTask_Container {
     margin-top: 5px;
@@ -41,15 +34,7 @@
     line-height: 28.4px;
   }
 
-  .add_task_content {
-    margin-top: 170px;
-  }
-
-<<<<<<< HEAD
-
-   
-
-
+  
     .headline_addTask {
         padding: 16px;
         margin-top: 0px;
@@ -66,14 +51,6 @@
         margin-top: 16px;
         
     }
-=======
-  .Btn_Container {
-    margin-left: 0px;
-    display: flex;
-    gap: 16px;
-    margin-top: 16px;
-  }
->>>>>>> 3016da563f15613b562714888076a0fc21c24237
 }
 
 @media (max-width: 1230px) {
