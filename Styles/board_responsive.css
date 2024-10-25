@@ -124,6 +124,10 @@
 
     }
 
+    .search {
+        width:100%;
+    }
+
     .cardbig {
         height: 630px;
 
@@ -159,10 +163,6 @@
         margin-top: 119px;
     }
 
-    .divBoard {
-        width: 300px;
-        
-    }
     .spaceBetween1 {
         display: flex;
         justify-content: space-between;
@@ -238,6 +238,8 @@
     .displayFlex {
         display: flex;
         margin-top: 0px;
+        padding-right:0px;
+        padding-left:0px;
     }
 
   
@@ -274,7 +276,7 @@
         min-height: 100px;
         display: flex;
         flex-direction: row;
-        width: 800px;
+        width: 1050px;
         gap: 10px;
         overflow: auto;
 
@@ -303,12 +305,14 @@
         justify-content: center;
         align-items: center;
         border-radius: 10px;
+        margin-right:10px;
     }
 
     .titleButtonBoard {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        width:1050px;
     }
 
     .button-d-none {
@@ -316,7 +320,12 @@
     }
 
     .searchContainer {
-        width: 450px;
+        width: 100%;
+        margin-right:10px;
+    }
+
+    .separator {
+        width:0px;
     }
 
     .actionBigTodo {
@@ -371,8 +380,7 @@
     }
 
     .divBoard {
-        width: 400px;
-        margin-left: 200px;
+        margin-left: 40px;
     }
 
     .responsiveDescription {
@@ -418,9 +426,24 @@
     }
 
 }
+@media(max-width:1130px) {
 
+.titleButtonBoard {
+    width:950px;
+}
 
+.drag-area {
+    width: 950px;
+}
 
+.todo {
+    max-width: 190px;
+}
+
+.divBoard {
+    margin-left: 40px;
+}
+}
 @media(max-width:1000px) {
 
     .fiedIsempty  {
@@ -429,7 +452,19 @@
     }
 
     .divBoard {
-        margin-left: 50px;
+        margin-left: 30px;
+    }
+
+    .titleButtonBoard {
+        width:850px;
+    }
+    
+    .drag-area {
+        width: 850px;
+    }
+    
+    .todo {
+        max-width: 190px;
     }
 
     .spaceBetween1 {
@@ -449,18 +484,27 @@
 }
 
 @media(max-width: 920px){
+    .titleButtonBoard {
+        width:750px;
+    }
+    
     .drag-area {
-       
-        width: 700px;
-       
+        width: 750px;
     }
 }
 
-@media(max-width: 820px){
+@media(max-width: 800px){
     .drag-area {
        
-        width: 600px;
-       
+        width: 650px;
+    }
+
+    .divBoard {
+        margin-left: 10px;
+    }
+
+    .titleButtonBoard {
+        width:650px;
     }
 }
 
@@ -477,9 +521,13 @@
 
 
     .drag-area {
-        width: 401px;
-
+        width: 550px;
     }
+
+    .titleButtonBoard {
+        width:550px;
+    }
+    
 
     .boardtitle {
         margin-left: 0px;
@@ -568,9 +616,6 @@
         font-size: 16px;
     }
 
-    .divBoard {
-        width: 250px;
-    }
 
     .noTasks {
         width: 150px;
@@ -707,7 +752,7 @@
 @media(max-width:740px){
     .drag-area {
            
-        width: 600px
+        width: 650px
 }}
 
 
