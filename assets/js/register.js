@@ -2,7 +2,6 @@
 const base_URL = "https://join-37803-default-rtdb.europe-west1.firebasedatabase.app/";
 let contacts = [];
 
-
 async function loadUsers(path = '') {
     let response = await fetch(base_URL + path + ".json");
     let userJSON = await response.json();
@@ -20,7 +19,6 @@ async function loadUsers(path = '') {
 }
 
 }
-
 
 async function postData(path="", data={}) {
     let response = await fetch(base_URL + path + ".json", {

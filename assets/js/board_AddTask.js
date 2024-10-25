@@ -119,8 +119,6 @@ function selectedContact(index, color, name) {
 }
 
 
-
-
 function deselctedtContact(index, name,nameletter,color) {
     showSelectedContainer(nameletter, index);
     let contactIndex = assignedContacts.indexOf(nameletter);
@@ -128,9 +126,6 @@ function deselctedtContact(index, name,nameletter,color) {
         assignedContacts.splice(contactIndex, 1);
     }
     showSelectedProfile(color, name, index,color)
-
-
-
 
     let contactContainer = document.getElementById(`profile-${index}`);
 
@@ -209,9 +204,6 @@ function showSelectedProfileEdit(name) {
     </div>
 `;
     }
-
-
-
 
 };
 

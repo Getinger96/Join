@@ -280,14 +280,12 @@ function handleResize() {
  async function moveTaskTo(idTask, newStatus, event) {
     event.stopPropagation();  
     idTask++;
-    // Finde die genaue Position des Tasks im Array basierend auf der idTask
     let taskIndex = tasksArray.findIndex(task => task.idTask === idTask);
     
     if (taskIndex !== -1) {
-        tasksArray[taskIndex].status = newStatus;  // Status der gefundenen Task ändern
+        tasksArray[taskIndex].status = newStatus;
         let key =tasksArray[taskIndex].taskKey;
         await putDataTask(`tasks/${key}/Status`, newStatus);
-        // Board neu rendern, um die Verschiebung anzuzeigen
         updateBoard(newStatus, tasksArray[taskIndex]);
     }
     
@@ -314,7 +312,7 @@ function getCategoryColor(category) {
     return '#0038FF';
 }
 
-function getassignecontacts(task, taskIndex) {
+async function getassignecontacts(task, taskIndex) {
     let assignedContacts = task.Assigned;
     if (assignedContacts === undefined) {
         return
@@ -330,6 +328,11 @@ function getassignecontacts(task, taskIndex) {
             break;
         }
         let contact = assignedContacts[index];
+
+        if (contactsArray.length === 0) {
+            await fetchContacts();
+        }   
+    
         let checkIndexarray = contactsArray.findIndex(c => c.name === contact);
 
         nameParts = contact.split(" ");
@@ -383,106 +386,4 @@ function convertToValidColor(color) {
 
     return colorMap[color];
 }
-
-function allowDrop(ev) {
-    ev.preventDefault();
-}
-
-function dragLeave(ev) {
-    const target = ev.target.closest('.drag-area');
-    if (target) {
-        removeHighlight(target.id);
-    }
-}
-
-function startDragging(idBoard) {
-    currentDraggedElement = idBoard;
-}
-
-async function moveTo(event, category) {
-    event.preventDefault();
-    currentDraggedElement--;
-    let task = tasksArray[currentDraggedElement];
-    let key = task.taskKey;
-
-    if (task.idTask) {
-        task.status = category;
-        await putDataTask(`tasks/${key}/Status`, category);
-    }
-    updateBoard(category, task, event);
-    updateAndCheckEmptyFields();
-    removeHighlight(category);
-}
-
-async function putDataTask(path = "", data = {}) {
-    let response = await fetch(base_URL + path + ".json", {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-    });
-    return responsASJson = await response.json();
-}
-
-
-function handleDragOver(categoryId) {
-    let dragArea = document.getElementById(categoryId);
-    dragArea.classList.add('dragging-over');
-
-}
-
-function removeHighlight(categoryId) {
-    let dragArea = document.getElementById(categoryId);
-    dragArea.classList.remove('dragging-over');
-
-
-
-}
-
-
-async function updateBoard(category, task, event) {
-    let taskElement = document.getElementById(`task_${task.idTask - 1}Element`);
-    if (taskElement) {
-        taskElement.remove();
-    }
-    
-    let newCategoryColumn = document.getElementById(category);
-    let taskHTML = generateTodoHTML(task, task.idTask);
-    
-    newCategoryColumn.insertAdjacentHTML('afterbegin', taskHTML);
-    
-    getassignecontacts(task, task.idTask);
-    
-    updateAndCheckEmptyFields();
-}
-
-
-function checkEmptyFieldsMoveToUpdate() {
-    let fields = ["open", "progress", "awaitFeedback", "closed"];
-    fields.forEach(fieldId => {
-        let container = document.getElementById(fieldId);
-        if (container) {
-            if (container.children.length === 0) {
-                container.innerHTML = showEmptyFields();
-            } else {
-                let emptyField = container.querySelector('.fiedIsempty');
-                if (emptyField) {
-                    emptyField.remove();
-                }
-            }
-        }
-    });
-    updateFields();
-    updateAndCheckEmptyFields();
-}
-
-
-function highlight(id) {
-    const element = document.getElementById(id);
-    if (element) {
-        element.classList.add('drag-area-highlight');
-    }
-}
-
 
