@@ -83,7 +83,6 @@
   }
 }
 
-<<<<<<< HEAD
 @media(max-width: 1410px) {
     .divBoard {
        margin-left: 100px;
@@ -97,15 +96,6 @@
         margin-top: 80px;
     }
    
-=======
-@media (max-width: 1410px) {
-  .divBoard {
-    margin-left: 100px;
-  }
-  .iconcategorybar {
-    display: block;
-  }
->>>>>>> 3016da563f15613b562714888076a0fc21c24237
 }
 
 @media (max-width: 1320px) {
