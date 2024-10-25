@@ -2,6 +2,7 @@ body {
     margin: 0;
     font-family: 'Inter';
     background-color: rgb(246, 247, 248);
+    overflow-x: hidden;
 }
 
 .Contact-Container {
