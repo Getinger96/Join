@@ -406,6 +406,11 @@ body {
   }
 }
 @media (max-width: 430px) {
+
+    .showMistakeValidation  {
+        width: 150px;
+    }
+
   .middle-section {
     padding: 0px;
   }
