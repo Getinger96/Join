@@ -1,344 +1,291 @@
-@media(max-width: 1530px) {
-
-  
-
-    .ForwardingBoard {
-        left: 38%;
-    }
-
-
+@media (max-width: 1530px) {
+  .ForwardingBoard {
+    left: 38%;
+  }
 }
 
-@media(max-width: 1410px) {
+@media (max-width: 1410px) {
+  .clear_COntainer {
+    margin-top: 119px;
+  }
 
-    .clear_COntainer {
-        margin-top: 119px;
-    }
-   
-    .add_task_content {
-        margin-left: 220px;
-        margin-top: 116px;
-    }
+  .add_task_content {
+    margin-left: 220px;
+    margin-top: 116px;
+  }
 
+  .addTask_Container {
+    margin-top: 5px;
+    padding: 16px;
+  }
 
-    .addTask_Container {
-        margin-top: 5px;
-        padding: 16px;
-    }
+  .headline_addTask {
+    padding: 16px;
+    margin-top: 0px;
+    font-size: 47px;
+    line-height: 28.4px;
+  }
 
+  .add_task_content {
+    margin-top: 170px;
+  }
 
-
-   
-
-
-    .headline_addTask {
-        padding: 16px;
-        margin-top: 0px;
-        font-size: 47px;
-        line-height: 28.4px;
-    }
-
-    .add_task_content {
-        margin-top: 170px;
-    }
-
-    .Btn_Container {
-        margin-left: 0px;
-        display: flex;
-        gap: 16px;
-        margin-top: 16px;
-        
-    }
+  .Btn_Container {
+    margin-left: 0px;
+    display: flex;
+    gap: 16px;
+    margin-top: 16px;
+  }
 }
 
-@media(max-width: 1230px) {
-    .add_task_content {
-        margin-left: 98px;
-        
-
-}
+@media (max-width: 1230px) {
+  .add_task_content {
+    margin-left: 98px;
+  }
 }
 
+@media (max-width: 1100px) {
+  .ForwardingBoard {
+    left: 35%;
+  }
 
-@media(max-width:1100px) {
-
-
-    .ForwardingBoard {
-        left: 35%;
-    }
-
-    .add_task_content {
-        margin-left: 0px;
-        
-
+  .add_task_content {
+    margin-left: 0px;
+  }
 }
 
+@media (max-width: 1005px) {
+  .clear_COntainer {
+    margin-top: 145px;
+  }
 
+  .addTask_Container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .dividing_Line {
+    width: 0px;
+    height: 424px;
+    border: 1px solid #d1d1d1;
+    margin-left: 48.25px;
+    display: none;
+  }
+
+  .header_COntainer {
+    display: flex;
+    justify-content: center;
+  }
+
+  .clear_Btn {
+    display: none;
+  }
+
+  .Task_Container_right {
+    margin-left: 0px;
+    margin-top: 80px;
+  }
+
+  .Btn_Container {
+    display: flex;
+    gap: 90px;
+    margin-top: 80px;
+    margin-left: 0px;
+    margin-bottom: 150px;
+    align-items: center;
+  }
+
+  .required_info_Container {
+    width: auto;
+    height: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-right: 0px;
+    margin-top: 80px;
+  }
 }
 
-
-@media(max-width:1005px) {
-
-    
-
-
-    .clear_COntainer {
-        margin-top: 145px;
-    }
-
-
-    .addTask_Container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-       
-    }
-
-    .dividing_Line {
-        width: 0px;
-        height: 424px;
-        border: 1px solid #D1D1D1;
-        margin-left: 48.25px;
-        display: none;
-    }
-
-    .header_COntainer {
-        display: flex;
-        justify-content: center;
-    }
-
-    .clear_Btn {
-        display: none;
-    }
-
-    .Task_Container_right {
-        margin-left: 0px;
-        margin-top: 80px;
-    }
-
-    .Btn_Container {
-        display: flex;
-        gap: 90px;
-        margin-top: 80px;
-        margin-left: 0px;
-        margin-bottom: 150px;
-        align-items: center;
-    }
-
-    .required_info_Container {
-        width: auto;
-        height: 0px;
-        margin-top: 0px;
-        margin-bottom: 0px;
-        margin-right: 0px;
-        margin-top: 80px;
-    }
+@media (max-width: 800px) {
+  .ForwardingBoard {
+    left: 30%;
+  }
 }
 
-@media(max-width:800px) {
-
-
-    .ForwardingBoard {
-        left: 30%;
-    }
+@media (max-width: 650px) {
+  .ForwardingBoard {
+    left: 20%;
+  }
 }
 
+@media (max-width: 500px) {
+  .profile_container_header {
+    padding: 7px 0px 7px 7px;
+  }
 
+  .showShubtaskError {
+    margin-left: 29px;
+  }
 
+  .ForwardingBoard {
+    width: 240px;
+    height: 65px;
+    gap: 20px;
+  }
 
-@media(max-width:650px) {
+  .clear_COntainer {
+    margin-top: 130px;
+  }
 
+  .subTaskInput {
+    width: 120px;
+  }
 
-    .ForwardingBoard {
-        left: 20%;
-    }
+  li {
+    display: flex;
+  }
+
+  .addTask_Container {
+    padding: 0px;
+  }
+
+  .input_Task_Container_left {
+    width: 280px;
+  }
+
+  .Title_Header {
+    width: 280px;
+  }
+
+  .input_Title {
+    width: 280px;
+  }
+
+  .Description_Container {
+    width: 280px;
+  }
+
+  .input_Description {
+    width: 280px;
+  }
+
+  .AssignedTO_Container {
+    width: 280px;
+  }
+
+  .select_container {
+    width: 250px;
+    padding: 2px;
+  }
+
+  .Selection_Container {
+    width: 250px;
+    margin-top: 80px;
+  }
+
+  .Selected_profiles_Container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 260px;
+  }
+
+  .profile_Container {
+    width: auto;
+  }
+
+  .date_Container {
+    width: 280px;
+  }
+
+  .input_date {
+    width: 280px;
+  }
+
+  .Prio_Container {
+    width: 280px;
+  }
+
+  .Prio_btn_Container {
+    width: 280px;
+    gap: 7px;
+  }
+
+  .Prio_Btn {
+    width: 121.33px;
+    padding: 8px 5px 8px 5px;
+    font-family: "Inter";
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19.2px;
+  }
+
+  .cataegory_Container {
+    width: 280px;
+  }
+
+  .Selection_Container_Category {
+    width: 280px;
+  }
+
+  .Subtasks_Container {
+    width: 280px;
+  }
+
+  .Subtask_Inputfield_Container {
+    width: 280px;
+  }
+
+  .required_info_Container {
+    width: 150px;
+    height: auto;
+    font-size: 12px;
+  }
+
+  .Btn_Container {
+    margin-top: 100px;
+    gap: 45px;
+  }
+
+  .Task_Container_right {
+    width: 280px;
+  }
+
+  .Create_Btn {
+    width: 140px;
+    font-size: 12px;
+  }
+
+  .Btn_Container {
+    display: flex;
+    gap: 0px;
+    margin-top: 120px;
+    margin-left: 0px;
+    margin-bottom: 150px;
+    align-items: baseline;
+  }
+
+  .Subtasks_Inputfield {
+    font-size: 16px;
+  }
+
+  .Category_Input {
+    font-size: 16px;
+  }
+
+  .add_task_content {
+    margin-top: 120px;
+  }
 }
 
+@media (max-width: 400px) {
+  .ForwardingBoard {
+    left: 15%;
+  }
 
-
-@media(max-width:500px) {
-    .profile_container_header {
-        padding: 7px 0px 7px 7px;
-    }
-
-    .showShubtaskError  {
-        margin-left: 29px;
-
-    }
-
-    .ForwardingBoard {
-        width: 240px;
-        height: 65px;
-        gap: 20px;
-    }
-
-
-    .clear_COntainer {
-        margin-top: 130px;
-    }
-
-
-    .subTaskInput {
-        width: 120px;
-    }
-
-
-    li {
-        display: flex;
-    }
-
-    .addTask_Container {
-        padding: 0px;
-    }
-
-    .input_Task_Container_left {
-        width: 280px;
-    }
-
-    .Title_Header {
-        width: 280px;
-    }
-
-    .input_Title {
-        width: 280px;
-    }
-
-    .Description_Container {
-        width: 280px;
-
-    }
-
-    .input_Description {
-        width: 280px;
-    }
-
-    .AssignedTO_Container {
-        width: 280px;
-    }
-
-    .select_container {
-        width: 250px;
-        padding: 2px;
-    }
-
-    .Selection_Container {
-        width: 250px;
-        margin-top: 80px
-    }
-
-    .Selected_profiles_Container {
-        display: flex;
-        flex-wrap: wrap;
-        width: 260px;
-    }
-
-    .profile_Container {
-        width: auto;
-    }
-
-    .date_Container {
-        width: 280px;
-    }
-
-    .input_date {
-        width: 280px;
-    }
-
-    .Prio_Container {
-        width: 280px;
-    }
-
-    .Prio_btn_Container {
-        width: 280px;
-        gap: 7px;
-    }
-
-    .Prio_Btn {
-        width: 121.33px;
-        padding: 8px 5px 8px 5px;
-        font-family: 'Inter';
-        font-weight: 400;
-        font-size: 16px;
-        line-height: 19.2px;
-    }
-
-    .cataegory_Container {
-        width: 280px;
-    }
-
-    .Selection_Container_Category {
-        width: 280px;
-    }
-
-    .Subtasks_Container {
-        width: 280px;
-    }
-
-    .Subtask_Inputfield_Container {
-        width: 280px;
-    }
-
-    .required_info_Container {
-        width: 150px;
-        height: auto;
-        font-size: 12px;
-    }
-
-
-
-    .Btn_Container {
-        margin-top: 100px;
-        gap: 45px;
-    }
-
-    .Task_Container_right {
-        width: 280px;
-    }
-
-    .Create_Btn {
-        width: 140px;
-        font-size: 12px;
-    }
-
-    .Btn_Container {
-        display: flex;
-        gap: 0px;
-        margin-top: 120px;
-        margin-left: 0px;
-        margin-bottom: 150px;
-        align-items: baseline;
-    }
-
-    .Subtasks_Inputfield {
-        font-size: 16px;
-    }
-
-    .Category_Input {
-        font-size: 16px;
-    }
-
-    .add_task_content {
-        margin-top: 120px;
-    }
-
-
-}
-
-
-@media(max-width:400px) {
-
-
-    .ForwardingBoard {
-        left: 15%;
-    }
-
-
-    .ForwardingBoard {
-        width: 206px;
-        height: 55px;
-        gap: 20px;
-        font-size: 14px;
-    }
-
-
+  .ForwardingBoard {
+    width: 206px;
+    height: 55px;
+    gap: 20px;
+    font-size: 14px;
+  }
 }

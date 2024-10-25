@@ -76,7 +76,6 @@ function openList() {
 }
 
 
-
 function closelist() {
     let selecCon = document.getElementById('Selection_Container');
     let arrowCon = document.getElementById('arrow_img_container');
@@ -377,7 +376,6 @@ async function clearTask() {
     
 
 }
-
 
 function emptySubtask() {
 

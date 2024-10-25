@@ -1,5 +1,4 @@
 
-
 function checkValidationDate() {
     
     
@@ -20,9 +19,6 @@ function checkValidationDate() {
     document.getElementById("WrongCurrentDateId").innerHTML = '';
     document.getElementById("dueDate").style.border = '';
 }
-
-
-
 
 function validateTask(titel,category, date) {
 
@@ -60,13 +56,11 @@ function validateTask(titel,category, date) {
 }
 
 function allInputFieldMissing() {
-
     let showTileMissing = document.getElementById("InputFieldsMissing")
     
     showTileMissing.innerHTML = `<div>
                                      <span class="missingInput"> Please fill in or select the marked fields</span>
-                                </div>`;
-    
+                                </div>`;    
 }
 
 function showInvalidDateMessage() {
@@ -76,18 +70,13 @@ function showInvalidDateMessage() {
     
     showWrongCurrentDate.innerHTML = `<div>
                                      <span class="missingInput"> No date in the past may be specified</span>
-                                </div>`;
-    
+                                </div>`;   
 }
 
 function changeColorBorder() {
-
-
     document.getElementById("title").style.border = "2px solid red";
     document.getElementById("dueDate").style.border = "2px solid red";
     document.getElementById("select_containerId").style.border = "2px solid red";
-
-
 }
 
 
@@ -102,10 +91,7 @@ function clearMissingFieldContent() {
     if (SubtaskLengthReachedElement) {
         SubtaskLengthReachedElement.innerHTML ='';
     }
- 
-    
-
-  
+   
 }
 
 
@@ -260,7 +246,6 @@ function editSubtask(i) {
     let change = document.getElementById(`changeImgEdit${i}`);
     change.innerHTML = `<img class="imgCheckedIcon" src="./assets/IMG/checkAddTask.png" alt="check" onclick="enterNewSubtask(${i})">`;
 }
-
 
 
 function enterNewSubtask(i) {
