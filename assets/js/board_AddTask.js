@@ -151,13 +151,12 @@ function deselctedtContact(index, name,nameletter,color) {
 
 function showSelectedProfile(color, name, index) {
     let selectedProfileContainer = document.getElementById('Selected_profiles_Container');
-    selectedProfileContainer.innerHTML = '';  // Leere den Container
+    selectedProfileContainer.innerHTML = '';  
 
     for (let index = 0; index < assignedContacts.length; index++) {
-        if (index < 4) {  // Zeige nur die ersten 4 Kontakte an
+        if (index < 4) { 
             let contactName = assignedContacts[index];
-            let contact = contactsArray.find(c => c.name === contactName); // Finde den Kontakt in der 'contacts'-Liste, um die richtige Farbe zu verwenden
-
+            let contact = contactsArray.find(c => c.name === contactName);
             if (contact) {
                 let contactColour = contact.color;
                 let firstletters = contactName.charAt(0).toUpperCase() + getLastName(contactName).charAt(0).toUpperCase();
@@ -169,7 +168,7 @@ function showSelectedProfile(color, name, index) {
         }
     }
 
-    // Verwalte das Badge für zusätzliche Kontakte
+
     let extraContactsBadge = document.getElementById('extra_Contacts_Badge');
     if (assignedContacts.length > 4) {
         let extraCount = assignedContacts.length - 4;

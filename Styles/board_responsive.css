@@ -468,6 +468,14 @@
 @media(max-width: 630px) {
 
 
+    .buttonContainerWhite  {
+        height: 50px;
+        width: 50px;
+        padding: 5px;
+    }
+
+
+
     .drag-area {
         width: 401px;
 

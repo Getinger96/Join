@@ -39,8 +39,7 @@
     }
 
     .add_task_content {
-        margin-top: 130px;
-
+        margin-top: 170px;
     }
 
     .Btn_Container {
@@ -317,6 +316,12 @@
     .Category_Input {
         font-size: 16px;
     }
+
+    .add_task_content {
+        margin-top: 120px;
+    }
+
+
 }
 
 

@@ -218,7 +218,7 @@ function addCurrentSubtask() {
     } else if (subtasks.length < 10) {
        
         subtasks.push(currentSubtask);
-        document.getElementById('input_Subtasks').value = '';  // Leere das Eingabefeld nach der Eingabe
+        document.getElementById('input_Subtasks').value = '';  
         addSubtask(); 
      }
 }
