@@ -270,7 +270,7 @@ function enterNewSubtask(i) {
     let errorMessageElement = document.getElementById(`subtasksValidation${i}`);
 
     if (newSubTask === '') {
-        errorMessageElement.innerHTML = '<span style="color:red;">Subtask cannot be empty</span>';  // Zeige Fehlermeldung in rot
+        errorMessageElement.innerHTML = '<span class= "subtaskempty" style="color:red;">Subtask cannot be empty</span>';  // Zeige Fehlermeldung in rot
         return;
     }
 

@@ -101,7 +101,10 @@
     .iconcategorybar {
         display:block;
     }
-
+    .HeadContainerBoard {
+        display: flex;
+        margin-top: 80px;
+    }
    
 }
 

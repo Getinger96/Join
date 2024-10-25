@@ -12,12 +12,16 @@
 @media(max-width: 1410px) {
 
     .clear_COntainer {
-        margin-top: 119px;
+        margin-top: 100px;
     }
    
     .add_task_content {
         margin-left: 220px;
-        margin-top: 116px;
+        margin-top: 130px;
+
+    }
+    .required_info_Container {
+        margin-top: 137px;
     }
 
 
@@ -34,13 +38,11 @@
     .headline_addTask {
         padding: 16px;
         margin-top: 0px;
-        font-size: 47px;
+        
         line-height: 28.4px;
     }
 
-    .add_task_content {
-        margin-top: 170px;
-    }
+   
 
     .Btn_Container {
         margin-left: 0px;

@@ -479,10 +479,13 @@ cursor:pointer;
 }
 
 .ChangeSubtask {
-    min-height: 20px;
+    min-height: 32px;
     border: 1px solid #ddd; 
     background-color: #f9f9f9; 
     padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 .imgCheckedIcon {
     height: 22px;
@@ -501,11 +504,10 @@ cursor:pointer;
     flex-direction: column;
 }
 
-.ChangeSubtask {
-    display: flex;
-    justify-content: space-between;
-}
- 
+
+ .subtaskempty{
+    font-size: 12px;
+ }
 .changeButtonDeleteAndEdit {
     display: flex;
     justify-content: center;
@@ -658,7 +660,7 @@ animation-fill-mode: forwards;
 .Btn_Container {
     display: flex;
     gap: 16px;
-   margin-top: 130px;
+   margin-top: 100px;
     align-items: center;
     justify-content: space-around;
     
