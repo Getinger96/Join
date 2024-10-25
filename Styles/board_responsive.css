@@ -739,6 +739,27 @@
     }
 
 }
+
+@media (max-width: 500px) {
+    .drag-area {
+        width: 420px;
+    }
+}
+
+    @media (max-width: 470px) {
+        .drag-area {
+            width: 370px;
+        }
+
+
+    .buttonContainerWhite {
+        width: 50px;
+    }
+
+}
+
+
+
 @media (max-width: 400px) {
 
     .fiedIsempty {
@@ -749,9 +770,15 @@
         width: 300px;
     }
 
+}
 
-    .buttonContainerWhite {
-        width: 50px;
+
+@media (max-width: 390px) {
+    .drag-area {
+        width: 248px;
     }
 
+    .spaceBetween {
+        margin-left: -10px;
+    }
 }
