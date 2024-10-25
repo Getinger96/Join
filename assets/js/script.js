@@ -120,7 +120,6 @@ document.addEventListener('click', function(event) {
 
 async function showTheNameInitial(loggedInUser) {
 
-
     let userSign = document.getElementById('loginUserId');
 
     let fullName = loggedInUser.name;
