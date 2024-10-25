@@ -5,6 +5,13 @@ font-family: "inter", sans-serif;
 background-color: #f6f7f8;
 }
 
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
 .loginheadline {
 display: flex;
 align-items: center;
@@ -119,7 +126,6 @@ font-weight: bolder;
             }
 
             .mailicon {
-                margin-left: 120px;
                 cursor: pointer;
             }
 
