@@ -363,8 +363,8 @@ body {
       display: flex;
       justify-content: center;
       align-items: center;
-      transform: scale(1) translate(0%, 0%); /* Das Element wird in seiner Originalgröße angezeigt (scale(1)) und bleibt an seiner ursprünglichen Position (translate(0%, 0%)). */
-      opacity: 1; /* Das Element ist vollständig sichtbar zu Beginn. */
+      transform: scale(1) translate(0%, 0%); 
+      opacity: 1; 
     }
     to {
       display: none;
@@ -434,4 +434,20 @@ body {
   .notajoinUsermobilversion {
     font-size: 15px;
   }
+
+    .inputemail {
+font-size: 15px;
+padding: 0px;
+}
+
+.inputpassword {
+    font-size: 15px;
+    padding: 0px;
+}
+
+
+.signUpsectionmobilversion  {
+    padding: 15px 0px 5px 0px;
+}
+
 }
