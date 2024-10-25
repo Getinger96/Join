@@ -513,8 +513,15 @@
     }
 }
 
+@media(max-width:740px){
+    .drag-area {
+           
+        width: 650px
+}
 
-@media(max-width: 630px) {
+}
+
+@media(max-width: 660px) {
 
 
     .buttonContainerWhite  {
@@ -522,8 +529,6 @@
         width: 50px;
         padding: 5px;
     }
-
-
 
     .drag-area {
         width: 550px;
@@ -637,7 +642,7 @@
     }
 
     .searchContainer {
-        width: 250px;
+        width: 100%;
         display: flex;
         justify-content: space-between;
     }
@@ -665,16 +670,148 @@
         gap: 6px;
     }
 
-    
+@media (max-width: 600px) {
+    #subtasksContainer {
+        height: 150px;
+    }
+
+    .fiedIsempty  {
+        width: 350px;
+    height: 60px;
+    }
+
+    .todo {
+        min-width: 200px;
+        height: 250px;
+    }
+
+    .paddingRight {
+        padding-right: 0px;
+    }
+    .showsmallFieldBar {
+        
+        margin-left: 0px;
+        margin-top: -10px;
+    }
+
+    .drag-area {
+           
+        width: 490px
+}
+
+.titleButtonBoard {
+    width:490px;
+}
+
+}
 
 
-   
+@media (max-width: 550px) {
+
+    .showsmallFieldBar {
+        height: 160px;
+
+    }
+
+    .drag-area {
+        width: 460px;
+    }
+}
+
+@media (max-width: 520px) {
+    .drag-area {
+        width: 420px;
+    }
+
+    .titleButtonBoard {
+        width:420px;
+    }
+}
+
+@media (max-width: 470px) {
+    .drag-area {
+        width: 370px;
+    }
+
+    .titleButtonBoard {
+        width:370px;
+    }
+
+
+.buttonContainerWhite {
+    width: 50px;
+}
+
+}
+
+
+
+@media(max-width: 450px) {
+    .boardAddTask {
+    height: 500px;
+
+}
+
+.EditSubtaskButton {
+    padding-right: 30px;
+}
+
+.showShubtaskError  {
+    font-size: 11px;
+}
+}
+
+}
+
+
+@media (max-width: 400px) {
+
+    .fiedIsempty {
+        width: 330px;
+        height: 60px;
+    }
+    .drag-area {
+        width: 340px;
+    }
+
+    h1 {
+        font-size: 48px;
+    }
+
+    .titleButtonBoard {
+        width: 340px;
+        gap: 70px;
+    }
+
+
+}
+
+
+@media (max-width: 360px) {
+    .drag-area {
+        width: 290px;
+    }
+    .titleButtonBoard {
+        width: 290px;
+        
+    }
+
+    .spaceBetween {
+        margin-left: -10px;
+    }
+
 }
 
 @media(max-height: 670px) {
     .cardbig {
         height: 450px;
         margin-top:-80px;
+    }
+}
+
+@media(max-height: 850px) {
+    .HeadContainerBoard {
+        margin-top: 80px;
     }
 }
 
@@ -692,21 +829,6 @@
     }
       
     
-}
-
-@media(max-width: 450px) {
-    .boardAddTask {
-    height: 500px;
-
-}
-
-.EditSubtaskButton {
-    padding-right: 30px;
-}
-
-.showShubtaskError  {
-    font-size: 11px;
-}
 }
 
 @media(min-height: 1000px) {
@@ -734,124 +856,3 @@
 }
 
 
-@media (max-width: 600px) {
-    #subtasksContainer {
-        height: 150px;
-    }
-
-    .fiedIsempty  {
-        width: 350px;
-    height: 60px;
-    }
-
-    .todo {
-        min-width: 200px;
-        height: 250px;
-    }
-
-    .paddingRight {
-        padding-right: 0px;
-    }
-    .showsmallFieldBar {
-        
-        margin-left: 0px;
-        margin-top: -10px;
-    }
-}
-
-@media(max-width:740px){
-    .drag-area {
-           
-        width: 650px
-}}
-
-
-
-@media(max-width:700px){
-    .drag-area {
-           
-        width: 520px
-}}
-
-
-
-@media(max-width:600px){
-    .drag-area {
-           
-        width: 490px
-}}
-
-@media (max-width: 550px) {
-
-    .showsmallFieldBar {
-        height: 160px;
-
-    }
-
-    .drag-area {
-        width: 460px;
-    }
-}
-
-
-@media (max-width: 450px) {
-
-
-    .drag-area {
-        width: 360px;
-    }
-
-}
-
-@media (max-width: 500px) {
-    .drag-area {
-        width: 420px;
-    }
-}
-
-    @media (max-width: 470px) {
-        .drag-area {
-            width: 370px;
-        }
-
-
-    .buttonContainerWhite {
-        width: 50px;
-    }
-
-}
-
-
-
-@media (max-width: 400px) {
-
-    .fiedIsempty {
-        width: 330px;
-        height: 60px;
-    }
-    .drag-area {
-        width: 300px;
-    }
-
-    h1 {
-        font-size: 48px;
-    }
-
-    .titleButtonBoard {
-        width: auto;
-        gap: 70px;
-    }
-
-
-}
-
-
-@media (max-width: 390px) {
-    .drag-area {
-        width: 248px;
-    }
-
-    .spaceBetween {
-        margin-left: -10px;
-    }
-}
