@@ -124,6 +124,11 @@
 
     }
 
+    .fiedIsempty  {
+        width: 350px;
+    height: 60px;
+    }
+
     .search {
         width:100%;
     }
