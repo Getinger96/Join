@@ -466,7 +466,6 @@ body {
 }
 
 .ChangeSubtask {
-<<<<<<< HEAD
     min-height: 32px;
     border: 1px solid #ddd; 
     background-color: #f9f9f9; 
@@ -474,12 +473,6 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-=======
-  min-height: 20px;
-  border: 1px solid #ddd;
-  background-color: #f9f9f9;
-  padding: 10px;
->>>>>>> 3016da563f15613b562714888076a0fc21c24237
 }
 .imgCheckedIcon {
   height: 22px;
@@ -498,7 +491,6 @@ body {
   flex-direction: column;
 }
 
-<<<<<<< HEAD
 
  .subtaskempty{
     font-size: 12px;
@@ -512,11 +504,6 @@ body {
 }
 .deleteSubtask {
     border: none;
-=======
-.ChangeSubtask {
-  display: flex;
-  justify-content: space-between;
->>>>>>> 3016da563f15613b562714888076a0fc21c24237
 }
 
 .changeButtonDeleteAndEdit {
@@ -667,20 +654,12 @@ input:focus {
 }
 
 .Btn_Container {
-<<<<<<< HEAD
     display: flex;
     gap: 16px;
    margin-top: 100px;
     align-items: center;
     justify-content: space-around;
     
-=======
-  display: flex;
-  gap: 16px;
-  margin-top: 130px;
-  align-items: center;
-  justify-content: space-around;
->>>>>>> 3016da563f15613b562714888076a0fc21c24237
 }
 
 .clear_Btn {
