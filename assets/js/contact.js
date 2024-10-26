@@ -40,7 +40,6 @@ async function fetchContacts(path = '') {
         }
     };
 
-    
     sortContactsByLetter();
 }
 
@@ -54,9 +53,7 @@ function groupContacts() {
 
     contactsArray.forEach((contact, index) => {
         let firstLetter = contact.name.charAt(0).toUpperCase();
-      
         let colorIndex = index % colors.length;
-
         let color = colors[colorIndex];
 
         if (!groupedContacts[firstLetter]) {
@@ -98,7 +95,6 @@ function displayContacts(contactIndex, contactsEmail, contactsName, contactLastn
                 </div>
                 <div class="contact-content">
                     <span class="contactname" style="color:${selectedClass ? 'white' : 'black'};">${contactsName}</span>
-                   
                 </div>
              <img src="./assets/IMG/Secondary mobile contact V1.png" alt="Add Contact" class="add-contact-button" onclick="mobileAddContact(event)">
             </div>`;
@@ -109,22 +105,17 @@ function selectContact(index) {
     getContacts();
     getContactBig(index);
 
-    const detailView = document.querySelector('.contactview-container');
+    let detailView = document.querySelector('.contactview-container');
     detailView.classList.add('active');
-
-
 }
 
 function closeDetailView() {
-    const detailView = document.querySelector('.contactview-container');
+    let detailView = document.querySelector('.contactview-container');
     detailView.classList.remove('active');
 }
 
-
 function getContactBig(index) {
     let contact = contactsArray[index];
-   
-
     let colorIndex = index % colors.length;
     let color = colors[colorIndex];
     
@@ -182,7 +173,6 @@ function showContactBig(contactsName, contactsEmail, contactPhone, contactLastna
 `;
 }
 
-
 function collectBeginningLetters() {
     beginningLetter = [];
     groupedContacts = {};
@@ -218,21 +208,13 @@ async function createContact() {
     const email = document.getElementById('mail').value.trim();
     const phone = document.getElementById('telephone').value.trim();
 
-    if (!validateContact(name, email, phone)) {
-        return;
-    }
-    const newContact = {
-        name: name,
-        email: email,
-        phone: phone
-    };
+    if (!validateContact(name, email, phone)) return;
 
+    const newContact = { name, email, phone };
     let response = await postData('contacts', newContact);
     let generatedKey = response.name;
-    contactsArray.push({
-        ...newContact,
-        id: generatedKey
-    });
+
+    contactsArray.push({ ...newContact, id: generatedKey });
     closeCardContact();
     await fetchContacts();
 }
@@ -307,14 +289,12 @@ function closeCardContact() {
     document.getElementById('mail').value = '';
     document.getElementById('telephone').value = '';
 
-    const createButton = document.querySelector('.createContact-button');
+    let createButton = document.querySelector('.createContact-button');
     createButton.innerHTML = 'Create Contact <img src="assets/IMG/check.svg" alt="Create Icon" class="button-icon" style="margin-left: 8px;">';
-
     document.querySelector('.addNewContactimg').style.display = 'block';
 
     renderContacts();
 }
-
 
 function editContact(index) {
     if (window.innerWidth <= 1150) {
@@ -348,28 +328,35 @@ async function deleteContact(index) {
     }
 }
 
-function closeCardContact() {
-    const newContactOverlay = document.getElementById('newContact');
-    newContactOverlay.style.display = 'none';
-    newContactOverlay.classList.remove('transition-in-from-right');
-
-    document.querySelector('.cancel-button').textContent = 'Cancel';
-    document.querySelector('.cancel-button').onclick = closeCardContact;
+function resetContactForm() {
     document.querySelector('.addcontactheadline').textContent = 'Add Contact';
     document.querySelector('.addcontactsecondline').style.display = 'flex';
     document.getElementById('name').value = '';
     document.getElementById('mail').value = '';
     document.getElementById('telephone').value = '';
-    document.querySelector('.createContact-button').textContent = 'Create Contact';
-    document.querySelector('.addNewContactimg').style.display = 'block';
-    document.getElementById("wrongEmail").innerHTML = '';
-    document.getElementById("wrongPhone").innerHTML ='';
-    document.getElementById("wrongText").innerHTML ='';
-    document.getElementById("mailInput").style.border ='';
-    document.getElementById("phoneInput").style.border = '';
-    document.getElementById("textInput").style.border= '';
 
+    let createButton = document.querySelector('.createContact-button');
+    createButton.innerHTML = 'Create Contact <img src="assets/IMG/check.svg" alt="Create Icon" class="button-icon" style="margin-left: 8px;">';
+    document.querySelector('.addNewContactimg').style.display = 'block';
+}
+
+function closeOverlay() {
+    const newContactOverlay = document.getElementById('newContact');
+    newContactOverlay.style.display = 'none';
+    newContactOverlay.classList.remove('transition-in-from-right');
+
+    const cancelButton = document.querySelector('.cancel-button');
+    cancelButton.innerHTML = 'Cancel <img src="assets/IMG/iconoir_cancel.png" alt="Cancel Icon" class="close-button" style="margin-left: 8px;">';
+    cancelButton.onclick = closeCardContact;
+    cancelButton.style.display = 'flex';
+
+    resetContactForm();
     renderContacts();
+}
+
+function closeCardContact() {
+    closeOverlay();
+    resetContactForm();
 }
 
 function handleCloseContact() {
@@ -377,49 +364,30 @@ function handleCloseContact() {
     closeCardContactMobile();
 }
 
-
 function clearBigContactView() {
     let showContacts = document.getElementById('contactViewBig');
     showContacts.innerHTML = '';
 }
 
 async function saveEditedContact(index) {
-    let oldName = contactsArray[index].name;
-    let name = document.getElementById('name').value.trim();
-    let email = document.getElementById('mail').value.trim();
-    let phone = document.getElementById('telephone').value.trim();
+    const oldName = contactsArray[index].name,
+          name = document.getElementById('name').value.trim(),
+          email = document.getElementById('mail').value.trim(),
+          phone = document.getElementById('telephone').value.trim();
 
-    if (name && email && phone) {
-        if (!validateContact(name, email, phone)) {
-            return;
-        }
+    if (!name || !email || !phone || !validateContact(name, email, phone)) return;
 
-        let key = contactsArray[index].id;
-        contactsArray[index].name = name;
-        contactsArray[index].email = email;
-        contactsArray[index].phone = phone;
-        let password = contactsArray[index].password;
+    const key = contactsArray[index].id,
+          password = contactsArray[index].password;
 
-        const newContact = {
-            name: name,
-            email: email,
-            phone: phone,
-            password: password
-        };
+    Object.assign(contactsArray[index], { name, email, phone });
 
-        await putData(`contacts/${key}`, newContact);
+    await putData(`contacts/${key}`, { name, email, phone, password });
+    await updateContactInTasks({ oldName, newName: name });
 
-
-        let editedContact = {
-            oldName: oldName,
-            newName: name
-        };
-
-        await updateContactInTasks(editedContact);
-        await fetchTasks();
-        await fetchContacts();
-
-        closeCardContact();
-        getContactBig(index);
-    }
+    await fetchTasks();
+    await fetchContacts();
+    closeCardContact();
+    getContactBig(index);
 }
+

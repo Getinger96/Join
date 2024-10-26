@@ -35,17 +35,11 @@ document.addEventListener('click', function(event) {
     }
 });
 
-
-
-
-
-
 function showMobileNewContactOverlay() {
     let overlay = document.getElementById("mobileNewContactOverlay");
     overlay.classList.remove("mobileNewContactOverlay-hidden");
     overlay.style.display = 'flex';
 }
-
 
 function closeMobileNewContact() {
     let overlay = document.getElementById("mobileNewContactOverlay");
@@ -63,7 +57,6 @@ function mobileAddContact(event) {
     }
 }
 
-
 async function createContactMobile() {
     const name = document.getElementById('mobileName').value.trim();
     const email = document.getElementById('mobileMail').value.trim();
@@ -72,7 +65,6 @@ async function createContactMobile() {
     if (!validateContactMobileVersion(name, email, phone)) {
         return;
     }
-
 
     const newContact = {
         name: name,
@@ -85,7 +77,6 @@ async function createContactMobile() {
     closeMobileNewContact();
     await fetchContacts();
 }
-
 
 function showMobileNewContactOverlay() {
     let overlay = document.getElementById("mobileNewContactOverlay");
@@ -117,46 +108,28 @@ function showMobileEditContactOverlay(contactIndex) {
     overlay.style.display = 'flex';
 }
 
-
 async function saveEditedContactMobile(contactIndex) {
-    let oldName = contactsArray[contactIndex].name;  
-    let name = document.getElementById('mobileName').value.trim();
-    let email = document.getElementById('mobileMail').value.trim();
-    let phone = document.getElementById('mobilePhone').value.trim();
+    const oldName = contactsArray[contactIndex].name,
+          name = document.getElementById('mobileName').value.trim(),
+          email = document.getElementById('mobileMail').value.trim(),
+          phone = document.getElementById('mobilePhone').value.trim();
 
-    if (name && email && phone) {
-        if (!validateContactMobileVersion(name, email, phone)) {
-            return;
-        }
-            let key = contactsArray[contactIndex].id;
-            contactsArray[contactIndex].name = name;
-            contactsArray[contactIndex].email = email;
-            contactsArray[contactIndex].phone = phone;
-            let password = contactsArray[contactIndex].password;
-    
-            const newContact = {
-                name: name,
-                email: email,
-                phone: phone,
-                password: password
-            };
-    
-            await putData(`contacts/${key}`, newContact);
-    
-           
-            let editedContact = {
-                oldName: oldName,
-                newName: name
-            };
-    
-            await updateContactInTasks(editedContact);  
-            await fetchTasks();  
-            await fetchContacts();
-    
-            closeMobileNewContact();
-            getContactBig(contactIndex);
+    if (!name || !email || !phone || !validateContactMobileVersion(name, email, phone)) return;
+
+    const key = contactsArray[contactIndex].id,
+          password = contactsArray[contactIndex].password;
+
+    Object.assign(contactsArray[contactIndex], { name, email, phone });
+
+    await putData(`contacts/${key}`, { name, email, phone, password });
+    await updateContactInTasks({ oldName, newName: name });
+
+    await fetchTasks();
+    await fetchContacts();
+    closeMobileNewContact();
+    getContactBig(contactIndex);
 }
-}
+
 
 async function deleteContactMobile(contactIndex) {
     if (contactIndex > -1) {
