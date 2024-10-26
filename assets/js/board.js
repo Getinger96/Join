@@ -9,47 +9,64 @@ let addtask = false;
 
 async function fetchTasks(path = '') {
     tasksArray = [];
-    let response = await fetch(base_URL + path + ".json");
-    let userJSON = await response.json();
+    const userJSON = await fetchTasksFromServer(path);
     if (!userJSON.tasks) {
-       
-
-        return;
-        
+        return;     
     }
-    let tasksAsarray = Object.values(userJSON.tasks)
-    let keysArrayTask = Object.keys(userJSON.tasks);
-    currentDraggedElement = 0;
-    id = 0
 
-    for (let index = 0; index < tasksAsarray.length; index++) {
-        let task = tasksAsarray[index];
+    const tasksAsArray = Object.values(userJSON.tasks);
+    const keysArrayTask = Object.keys(userJSON.tasks);
+    
+    await processTasks(tasksAsArray, keysArrayTask);
+    updatedView();
+}
+
+async function fetchTasksFromServer(path) {
+    let response = await fetch(base_URL + path + ".json");
+    return await response.json();
+}
+
+async function processTasks(tasksAsArray, keysArrayTask) {
+    currentDraggedElement = 0;
+    let id = 0;
+
+    for (let index = 0; index < tasksAsArray.length; index++) {
+        let task = tasksAsArray[index];
         let keyTask = keysArrayTask[index];
         id++;
-        let saveTask = tasksArray.filter(t => keyTask === t.taskKey);
-        if (saveTask.length > 0) {
-            console.log(`Task mit Titel "${task.Titel}" existiert bereits.`);
-
-        } else {
-
-            tasksArray.push({
-                taskKey: keyTask,
-                idTask: id,
-                Title: task.Titel,
-                Description: task.Description,
-                Assigned: task.AssignedContact,
-                duedate: task.Date,
-                Prio: task.Prio,
-                Category: task.Category,
-                subtask: task.Subtask,
-                status: task.Status,
-            });
+        
+        if (!isTaskAlreadySaved(keyTask)) {
+            saveTask(keyTask, id, task);
         }
     }
+}
 
+function isTaskAlreadySaved(keyTask) {
+    let saveTask = tasksArray.filter(t => keyTask === t.taskKey);
+    return saveTask.length > 0;
+}
+
+function saveTask(keyTask, id, task) {
+    tasksArray.push({
+        taskKey: keyTask,
+        idTask: id,
+        Title: task.Titel,
+        Description: task.Description,
+        Assigned: task.AssignedContact,
+        duedate: task.Date,
+        Prio: task.Prio,
+        Category: task.Category,
+        subtask: task.Subtask,
+        status: task.Status,
+    });
+}
+
+
+async function updatedView() {
     removeAllElement();
     await updateHtml();
     renderSubtask();
+
 }
 
 
@@ -75,22 +92,26 @@ function renderSubtask() {
         )
     }
 }
-
 function closeTask() {
-    document.getElementById('boardAddTask').style.display = 'none';
-    document.getElementById('darkOverlay').style.display = 'none';
+    let boardAddTask = document.getElementById('boardAddTask');
+    let darkOverlay = document.getElementById('darkOverlay');
+
+    boardAddTask.classList.remove('visible');
+    darkOverlay.classList.remove('visible');
     document.body.style.overflow = 'auto';
+
     clearTask();
     clearMissingFieldContent();
     returnColorPrioIcons();
     location.reload();
 }
+
+
 async function updateHtml() {
     let statusCategories = ['open', 'progress', 'awaitFeedback', 'closed'];
     for (let index = 0; index < statusCategories.length; index++) {
         let category = statusCategories[index];
         let filteredTasks = tasksArray.filter(t => t.status === category);
-
         let currentCategoryElement = document.getElementById(category)
 
         if (!currentCategoryElement) {
@@ -122,23 +143,28 @@ function updateAndCheckEmptyFields() {
         let container = document.getElementById(field.id);
         let hasTodo = container.querySelector('.todo');
         let emptyMessage = container.querySelector('.fiedIsempty');
+        checkAndDisplayEmptyMessage(container, hasTodo, field.text, emptyMessage);
 
-        if (!hasTodo) {
+    });
+}
+
+function checkAndDisplayEmptyMessage(container, hasTodo, messageText, emptyMessage) {
+        
+    if (!hasTodo) {
             if (!emptyMessage) {
                 container.innerHTML = `
                     <div class="fiedIsempty"> 
-                        <p>${field.text}</p>
+                        <p>${messageText}</p>
                     </div>`;
             } else {
-                emptyMessage.style.display = 'flex';
+                emptyMessage.classList.add('visibleContainer');
             }
         } else {
             if (emptyMessage) {
-                emptyMessage.style.display = 'none';
+                emptyMessage.classList.remove('visibleContainer');
             }
         }
-    });
-}
+    }
 
 function showEmptyFields(text) {
     return ` 
@@ -146,71 +172,81 @@ function showEmptyFields(text) {
         <p>${text}</p>
            </div>`;
 }
+
 function openTask(taskIndex) {
     currentTaskIndex = taskIndex;
-    const windowWidth = window.innerWidth;
     let taskDiv = document.getElementById('boardAddTask');
-    let overlay = document.getElementById('darkOverlay');
+    let darkOverlay = document.getElementById('darkOverlay');
+
     if (taskDiv.style.display === 'none' || taskDiv.style.display === '') {
-        taskDiv.style.display = 'block';
-        overlay.style.display = 'block';
+        boardAddTask.classList.add('visible');
+        darkOverlay.classList.add('visible');
         document.body.style.overflow = 'hidden';
     } else {
-        taskDiv.style.display = 'none';
-        overlay.style.display = 'none';
+        boardAddTask.classList.remove('visible');
+        darkOverlay.classList.remove('visible');
         document.body.style.overflow = 'auto';
     }
 
 }
 
-
 async function closeTaskUpdate() {
-    document.getElementById('boardAddTask').style.display = 'none';
-    document.getElementById('darkOverlay').style.display = 'none';
+    let boardAddTask = document.getElementById('boardAddTask');
+    let darkOverlay = document.getElementById('darkOverlay');
+
+    boardAddTask.classList.remove('visible');
+    darkOverlay.classList.remove('visible');
     document.body.style.overflow = 'auto';
+
     clearTask();
     clearMissingFieldContent();
 }
 
 function generateTodoHTML(task, taskIndex) {
-    let title = task.Title;
-    let description = task.Description || "";
-    let dueDate = task.duedate;
-    let priority = task.Prio;
-    let assignedContacts = task.Assigned || "";
-    let category = task.Category;
-    let idBoard = task.idTask;
-    let priorityIcon = getPriorityIcon(priority);
-    let categoryColor = getCategoryColor(category);
+    const title = task.Title;
+    const description = task.Description || "";
+    const priority = task.Prio;
+    const category = task.Category;
+    const priorityIcon = getPriorityIcon(priority);
+    const categoryColor = getCategoryColor(category);
     const progressHtml = generateProgressHtml(task);
 
     return `
        <div class="todo" id="task_${task.idTask - 1}Element" draggable="true" ondragstart="startDragging(${task.idTask})" onclick="openToDo(${task.idTask})">
-           <div class="boardCardheadlinesmall">  
-               <div>
-                   <div class="divKategorie"> 
-                       <div class="categoryheadline" style="background-color: ${categoryColor};">
-                           <span>${category} </span>
-                       </div>
-                       <div class="mobileCategory" onclick="showMoveTheElements(${task.idTask - 1})"> 
-                           <img class="iconcategorybar" src="./assets/IMG/Menu Contact options.png" alt=""> 
-                       </div>
-                   </div>
-                   <div id="fields_${task.idTask - 1}"></div> 
-               </div>
-           </div>
+           ${generateHeader(category, categoryColor, task.idTask)}
            <h3 id="task_Title${task.idTask - 1}" class="title">${title}</h3>
            <p class="description">${description}</p>
            ${progressHtml} <!-- Fortschritts-HTML wird hier eingefügt -->
-           
-           <!-- Wrapper für Kontakte und Prioritäts-Icon -->
-           <div class="task-footer">
-               <div class="boardContacts" id="assignedContacts${task.idTask}"></div>  
-               <div class="priority-icon">
-                   <img src="${priorityIcon}" alt="${priority} Priority">
-               </div>
-           </div>
+           ${generateFooter(priorityIcon, task.idTask)}
        </div>`;
+}
+
+
+function generateHeader(category, categoryColor, taskId) {
+    return `
+        <div class="boardCardheadlinesmall">  
+            <div>
+                <div class="divKategorie"> 
+                    <div class="categoryheadline" style="background-color: ${categoryColor};">
+                        <span>${category} </span>
+                    </div>
+                    <div class="mobileCategory" onclick="showMoveTheElements(${taskId - 1})"> 
+                        <img class="iconcategorybar" src="./assets/IMG/Menu Contact options.png" alt=""> 
+                    </div>
+                </div>
+                <div id="fields_${taskId - 1}"></div> 
+            </div>
+        </div>`;
+}
+
+function generateFooter(priorityIcon, taskId) {
+    return `
+        <div class="task-footer">
+            <div class="boardContacts" id="assignedContacts${taskId}"></div>  
+            <div class="priority-icon">
+                <img src="${priorityIcon}" alt="${taskId} Priority">
+            </div>
+        </div>`;
 }
 
 function generateProgressHtml(task) {
@@ -234,18 +270,23 @@ function generateProgressHtml(task) {
 }
 
 function showMoveTheElements(idTask) {
-    event.stopPropagation(); 
+    event.stopPropagation();
 
     if (window.innerWidth <= 1410) {
-        let fieldsContainer = document.getElementById(`fields_${idTask}`);
-        let existingMenu = fieldsContainer.querySelector('.showsmallFieldBar');
-        
+        toggleMenu(idTask);
+    } else if (window.innerWidth > 1410 && window.innerWidth <= 1420) {
+        hideMenu(idTask);
+    }
+}
 
-        if (existingMenu) {
-            fieldsContainer.innerHTML = '';
-        } else {
-    
-            fieldsContainer.innerHTML = `
+function toggleMenu(idTask) {
+    let fieldsContainer = document.getElementById(`fields_${idTask}`);
+    let existingMenu = fieldsContainer.querySelector('.showsmallFieldBar');
+
+    if (existingMenu) {
+        fieldsContainer.innerHTML = '';
+    } else {
+        fieldsContainer.innerHTML = `
             <div id="existingmenu" class="showsmallFieldBar" onclick="event.stopPropagation()">
                 <div class="headlsmallField"></div>
                 <div class="fieldElement"> <span class="statusField" onclick="moveTaskTo(${idTask}, 'open', event)">todo</span></div>
@@ -253,12 +294,16 @@ function showMoveTheElements(idTask) {
                 <div class="fieldElement"> <span class="statusField" onclick="moveTaskTo(${idTask}, 'awaitFeedback', event)">awaitFeedback</span></div>
                 <div class="fieldElement"> <span class="statusField" onclick="moveTaskTo(${idTask}, 'closed', event)">done</span></div>
             </div>`;
-        }
     }
-   else if (window.innerWidth > 1410 && window.innerWidth <= 1420) 
+}
+
+function hideMenu(idTask) {
+    let fieldsContainer = document.getElementById(`fields_${idTask}`);
+    let existingMenu = fieldsContainer.querySelector('.showsmallFieldBar');
+
     if (existingMenu) {
         fieldsContainer.innerHTML = '';
-}
+    }
 }
 
 document.addEventListener('click', function(event) {
@@ -323,9 +368,10 @@ async function getassignecontacts(task, taskIndex) {
     let maxContact = 4;
     let remainingContacts = assignedContacts.length - maxContact;
 
-    let asignedContainer = document.getElementById(`assignedContacts${taskIndex}`);
+    updateGetAssigneContacts(assignedContacts, taskIndex, maxContact, remainingContacts);
+}
 
-
+async function updateGetAssigneContacts(assignedContacts, taskIndex, maxContact, remainingContacts) {
     for (let index = 0; index < assignedContacts.length; index++) {
         if (index === maxContact) {
             break;
@@ -335,44 +381,60 @@ async function getassignecontacts(task, taskIndex) {
         if (contactsArray.length === 0) {
             await fetchContacts();
         }   
-    
-        let checkIndexarray = contactsArray.findIndex(c => c.name === contact);
 
+        let checkIndexarray = contactsArray.findIndex(c => c.name === contact);
         nameParts = contact.split(" ");
-        let firstLetterForName;
-        let firstLetterLastName;
         let colorid = `contactIcon_${taskIndex}_${index}`;
 
         if (nameParts.length >= 2) {
-            firstLetterForName = nameParts[0].charAt(0).toUpperCase();
-            firstLetterLastName = nameParts[1].charAt(0).toUpperCase();
-            asignedContainer.innerHTML += `<div id="${colorid}"class="contact-iconBoard">
-                    <span>${firstLetterForName}${firstLetterLastName}</span>
-                </div>`;
+            getAssignCcontactsForAndLastName(taskIndex, nameParts ,colorid)
         } else {
-            firstLetterForName = nameParts[0].charAt(0).toUpperCase();
-            asignedContainer.innerHTML += `<div id="${colorid}" class="contact-iconBoard">
-                    <span>${firstLetterForName}</span>
-                </div>`;
+            getAssignCcontactsForName(taskIndex, colorid)
         }
         showTheNameInitialInColorBoard(checkIndexarray, colorid);
     }
     if (assignedContacts.length > 4) {
-        asignedContainer.innerHTML += `<div id="colorName" class="contact-iconBoard">
+        showTheNearestContactsAsNumbers(taskIndex, remainingContacts)
+    }
+}
+
+function getAssignCcontactsForAndLastName(taskIndex, nameParts ,colorid ) {
+    let asignedContainer = document.getElementById(`assignedContacts${taskIndex}`);
+    let firstLetterForName;
+    let firstLetterLastName;
+
+    firstLetterForName = nameParts[0].charAt(0).toUpperCase();
+    firstLetterLastName = nameParts[1].charAt(0).toUpperCase();
+    asignedContainer.innerHTML += `<div id="${colorid}"class="contact-iconBoard">
+            <span>${firstLetterForName}${firstLetterLastName}</span>
+        </div>`;
+}
+
+function getAssignCcontactsForName(taskIndex, colorid ) {
+    let asignedContainer = document.getElementById(`assignedContacts${taskIndex}`);
+    let firstLetterForName;
+
+    firstLetterForName = nameParts[0].charAt(0).toUpperCase();
+    asignedContainer.innerHTML += `<div id="${colorid}" class="contact-iconBoard">
+            <span>${firstLetterForName}</span>
+        </div>`;
+
+}
+
+function showTheNearestContactsAsNumbers(taskIndex, remainingContacts) {
+    let asignedContainer = document.getElementById(`assignedContacts${taskIndex}`);
+
+    asignedContainer.innerHTML += `<div id="colorName" class="contact-iconBoard">
     <span> +${remainingContacts} </span>
 </div>`
-    }
 }
 
 function showTheNameInitialInColorBoard(checkIndexarray, colorid) {
     let nameColorContainer = document.getElementById(colorid);
     let contactColor = contactsArray[checkIndexarray].color
     contactColor = convertToValidColor(contactColor);
-
     nameColorContainer.style.backgroundColor = contactColor;
-
 }
-
 
 function convertToValidColor(color) {
     const colorMap = {
@@ -385,8 +447,6 @@ function convertToValidColor(color) {
         "orange": "#FF5733",
         "lila": "#A133FF"
     };
-
-
     return colorMap[color];
 }
 

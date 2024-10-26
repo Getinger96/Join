@@ -53,8 +53,25 @@ label {
     height: 100%;
 }
 
+#boardAddTask, #darkOverlay {
+    display: none;
+}
 
+#boardAddTask.visible, #darkOverlay.visible {
+    display: block;
+}
+.fiedIsempty {
+    display: none;
+}
 
+.fiedIsempty.visibleContainer {
+    border: dotted 1px gray;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #E7E7E7;
+}
 .drag-area-highlight {
     background-color: rgba(0, 0, 0, 0.2);
 }
@@ -224,14 +241,6 @@ h3 {
     cursor: pointer;
 }
 
-.fiedIsempty {
-    border: dotted 1px gray;
-    border-radius: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #E7E7E7;
-}
 
 .dateEdit {
     display: flex;
