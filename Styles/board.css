@@ -537,8 +537,8 @@ nav ul {
 }
 
 .HeadContainerBoard {
-    display: flex;
     margin-top: 140px;
+    width:100%
 }
 
 h1 {
