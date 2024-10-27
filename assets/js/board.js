@@ -157,11 +157,11 @@ function checkAndDisplayEmptyMessage(container, hasTodo, messageText, emptyMessa
                         <p>${messageText}</p>
                     </div>`;
             } else {
-                emptyMessage.classList.add('visibleContainer');
+                emptyMessage.classList.remove('visibleContainer');
             }
         } else {
             if (emptyMessage) {
-                emptyMessage.classList.remove('visibleContainer');
+                emptyMessage.classList.add('visibleContainer');
             }
         }
     }

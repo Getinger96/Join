@@ -193,21 +193,17 @@ function changeColorTextMobile() {
 async function updateContactInTasks(editedContact) {
     let response = await fetch(base_URL + "/tasks.json");  
     let tasksData = await response.json();
-   
     let keys = Object.keys(tasksData);
     let tasks = Object.values(tasksData);
 
     for (let index = 0; index < tasks.length; index++) {
         let assignedContacts = tasks[index].AssignedContact || [];
-        
         let contactIndex = assignedContacts.findIndex(contact => contact === editedContact.oldName);
 
         if (contactIndex !== -1) {
-        
-            assignedContacts[contactIndex] = editedContact.newName;
-            let taskId = keys[index];
-        
-            await updateTaskInFirebase(taskId, tasks[index]);
+        assignedContacts[contactIndex] = editedContact.newName;
+        let taskId = keys[index];
+        await updateTaskInFirebase(taskId, tasks[index]);
         }
     }
 }
@@ -233,13 +229,10 @@ async function deleteContactInBoard(index) {
         let task = tasksAsArray[indexTask];
         let assignedContacts = task.AssignedContact;
         let keyTask = keysArrayTask[indexTask];
-
         let contactIndex = assignedContacts.findIndex(contact => contact === currenContact);
 
         if (contactIndex !== -1) {
             assignedContacts.splice(contactIndex, 1);
-
-        
             await updateAssignedContactsInFirebase(`tasks/${keyTask}/AssignedContact`, assignedContacts);
         }
     }
@@ -249,7 +242,6 @@ async function updateAssignedContactsInFirebase(path, updatedContacts) {
         method: "PUT",
         body: JSON.stringify(updatedContacts)
     });
-
     return response.json();
 }
 
@@ -261,16 +253,13 @@ async function fetchTasks(path = '') {
     let response = await fetch(base_URL + path + ".json");
     let userJSON = await response.json();
     if (!userJSON.tasks) {
-       
-
         return;
-        
     }
+
     let tasksAsarray = Object.values(userJSON.tasks)
     let keysArrayTask = Object.keys(userJSON.tasks);
     currentDraggedElement = 0;
     id = 0
-
     for (let index = 0; index < tasksAsarray.length; index++) {
         let task = tasksAsarray[index];
         let keyTask = keysArrayTask[index];
@@ -280,7 +269,6 @@ async function fetchTasks(path = '') {
             console.log(`Task mit Titel "${task.Titel}" existiert bereits.`);
 
         } else {
-
             tasksArray.push({
                 taskKey: keyTask,
                 idTask: id,

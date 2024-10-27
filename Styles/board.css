@@ -61,21 +61,43 @@ label {
     display: block;
 }
 .fiedIsempty {
-    display: none;
-}
-
-.fiedIsempty.visibleContainer {
+    display: flex;
     border: dotted 1px gray;
     border-radius: 10px;
-    display: flex;
     justify-content: center;
     align-items: center;
     background-color: #E7E7E7;
 }
+
+.fiedIsempty.visibleContainer {
+    display: none;
+}
 .drag-area-highlight {
     background-color: rgba(0, 0, 0, 0.2);
 }
+.urgent {
+    background-color: red !important;
+    color: white !important;
+}
 
+.medium {
+    background-color: orange !important;
+    color: white !important;
+}
+
+.low {
+    background-color: limegreen !important;
+    color: white !important;
+}
+
+.activeMedium {
+    background-color: orange !important;
+    color: white !important;
+}
+
+.no-scroll {
+    overflow: hidden;
+}
 .todo {
     background-color: white;
     box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.35), 0px 3px 5px rgba(0, 0, 0, 0.5);

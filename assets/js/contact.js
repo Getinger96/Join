@@ -309,7 +309,6 @@ function editContact(index) {
 async function deleteContact(index) {
     let key = contactsArray[index].id;
     if (index > -1) {
-
         await deleteData(`contacts/${key}`);
         deleteContactInBoard(index);
         contactsArray.splice(index, 1);
@@ -320,7 +319,6 @@ async function deleteContact(index) {
         } else {
             clearBigContactView();
         }
-
         getContacts();
 
     } else {

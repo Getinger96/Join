@@ -115,15 +115,12 @@ async function saveEditedContactMobile(contactIndex) {
           phone = document.getElementById('mobilePhone').value.trim();
 
     if (!name || !email || !phone || !validateContactMobileVersion(name, email, phone)) return;
-
     const key = contactsArray[contactIndex].id,
-          password = contactsArray[contactIndex].password;
-
+    password = contactsArray[contactIndex].password;
     Object.assign(contactsArray[contactIndex], { name, email, phone });
 
     await putData(`contacts/${key}`, { name, email, phone, password });
     await updateContactInTasks({ oldName, newName: name });
-
     await fetchTasks();
     await fetchContacts();
     closeMobileNewContact();

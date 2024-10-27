@@ -19,34 +19,52 @@ let currentCategory = 'open';
 let path = "tasks";
 let currentStatus;
 
+
 async function createTask(event) {
     event.preventDefault();
-    const titleElement = document.getElementById('taskTitle');
-    const dueDateElement = document.getElementById('taskDueDate');
-    const kategorieElement = document.getElementById('kategorie');
-    
-    if (!validateTask(titleElement, kategorieElement,dueDateElement)) {
+
+    if (!validateInputFields()) {
         return;
-    }else{
+    }
 
-    document.getElementById("InputFieldsMissing").innerHTML ='';
-    document.getElementById("WrongCurrentDateId").innerHTML ='';
+    let newTodo = getTaskDetails();
+    await createNewTodo(newTodo);
+    resetAfterCreation();
+}
 
+function validateInputFields() {
+    let titleElement = document.getElementById('taskTitle');
+    let dueDateElement = document.getElementById('taskDueDate');
+    let kategorieElement = document.getElementById('kategorie');
 
+    if (!validateTask(titleElement, kategorieElement, dueDateElement)) {
+        return false;
+    } else {
+        clearValidationMessages();
+        return true;
+    }
+}
 
-    
-    const title = titleElement.value.trim();
-    const dueDate = dueDateElement.value.trim();
-    const kategorie = kategorieElement.value.trim();
+function clearValidationMessages() {
+    document.getElementById("InputFieldsMissing").innerHTML = '';
+    document.getElementById("WrongCurrentDateId").innerHTML = '';
+}
 
-  
-    const descriptionElement = document.getElementById('description');
-    const description = descriptionElement ? descriptionElement.value.trim() : '';
-    const priority = currentPriority;
+function getTaskDetails() {
+    let titleElement = document.getElementById('taskTitle');
+    let dueDateElement = document.getElementById('taskDueDate');
+    let kategorieElement = document.getElementById('kategorie');
+    let title = titleElement.value.trim();
+    let dueDate = dueDateElement.value.trim();
+    let kategorie = kategorieElement.value.trim();
+    let descriptionElement = document.getElementById('description');
+    let description = descriptionElement ? descriptionElement.value.trim() : '';
+    let priority = currentPriority;
     let subtask = subtasks;
-    const validCategories = ['open', 'progress', 'awaitFeedback', 'closed'];
-    const status = validCategories.includes(kategorie) ? kategorie : 'open';
-    const newTodo = {
+    let validCategories = ['open', 'progress', 'awaitFeedback', 'closed'];
+    let status = validCategories.includes(kategorie) ? kategorie : 'open';
+
+    return {
         Titel: title,
         Description: description,
         Date: dueDate,
@@ -56,12 +74,19 @@ async function createTask(event) {
         Status: status,
         AssignedContact: assignedContacts,
     };
-    await postData(`tasks`, newTodo);
-    tasksArray = [];
-    await closeTaskUpdate();
-    assignedContacts=[];
-    fetchTasks();}
 }
+
+async function createNewTodo(newTodo) {
+    await postData(`tasks`, newTodo);
+}
+
+function resetAfterCreation() {
+    tasksArray = [];
+    closeTaskUpdate();
+    assignedContacts = [];
+    fetchTasks();
+}
+
 
 async function postData(path = "", data = {}) {
     let response = await fetch(base_URL + path + ".json", {
@@ -74,21 +99,6 @@ async function postData(path = "", data = {}) {
     return responsASJson = await response.json();
 }
 
-function emptyTasks(category) {
-    let container = document.getElementById(category);
-    let noTasksElement = document.querySelector(`.noTasks[category="${category}"]`);
-
-    if (noTasksElement) {
-        if (container && container.innerHTML.trim() === '') {
-            noTasksElement.style.display = 'block';
-        } else {
-            noTasksElement.style.display = 'none';
-        }
-    } else {
-        console.error(`Element mit category="${category}" nicht gefunden.`);
-    }
-}
-
 async function fetchContacts(path = '') {
     let response = await fetch(base_URL + path + ".json");
     let userJSON = await response.json();
@@ -97,11 +107,9 @@ async function fetchContacts(path = '') {
     for (let index = 0; index < userAsArray.length; index++) {
         let contact = userAsArray[index];
         let colorIndex = index % colors.length;
-
         let color = colors[colorIndex]
 
         if (contact.email == 'guest@web.de') {
-
         } else {
             contactsArray.push({
                 name: contact.name,
@@ -124,16 +132,7 @@ function getContacts() {
         return;
     }
     showContacts.innerHTML = '';
-    let groupedContacts = {};
-    contactsArray.forEach((contact, index) => {
-        let firstLetter = contact.name.charAt(0).toUpperCase();
-        let color = contact.color;
-        if (!groupedContacts[firstLetter]) {
-            groupedContacts[firstLetter] = [];
-        }
-
-        groupedContacts[firstLetter].push({ ...contact, index, color });
-    });
+    let groupedContacts = groupContacts(contactsArray);
     let beginningLetter = Object.keys(groupedContacts).sort();
     for (let index = 0; index < beginningLetter.length; index++) {
         let letter = beginningLetter[index];
@@ -146,15 +145,26 @@ function getContacts() {
 }
     }
     
-
-
-
+    function groupContacts(contacts) {
+        let groupedContacts = {};
+        contacts.forEach((contact, index) => {
+            let firstLetter = contact.name.charAt(0).toUpperCase();
+            let color = contact.color;
+            
+            if (!groupedContacts[firstLetter]) {
+                groupedContacts[firstLetter] = [];
+            }
+    
+            groupedContacts[firstLetter].push({ ...contact, index, color });
+        });
+    
+        return groupedContacts;
+    }
 
 
 function letterSorting() {
     contactsArray.forEach(contact => {
         let firstLetter = contact.name.charAt(0).toUpperCase();
-
         if (beginningLetter.indexOf(firstLetter) === -1) {
             beginningLetter.push(firstLetter);
             groupedContacts.push({
@@ -172,52 +182,6 @@ function letterSorting() {
     getContacts();
 }
 
-function updateHTMLBoard() {
-    console.log("Aktuelle Todos:", tasksArray);
-    const containers = {
-        open: document.getElementById('open'),
-        progress: document.getElementById('progress'),
-        awaitFeedback: document.getElementById('awaitFeedback'),
-        closed: document.getElementById('closed')
-    };
-
-    Object.values(containers).forEach(container => {
-        if (container) {
-            container.innerHTML = '';
-        } else {
-            console.error('Container nicht gefunden.');
-        }
-    });
-
-    tasksArray.forEach(task => {
-        console.log("Aktuelle Aufgabe:", task);
-        if (containers[task.status]) {
-            const taskHTML = generateTodoHTML(task);
-            containers[task.status].innerHTML += taskHTML;
-        } else {
-            console.error(`Container für Status "${todo.status}" nicht gefunden.`);
-        }
-    });
-
-    ['open', 'progress', 'awaitFeedback', 'closed'].forEach(category => {
-        emptyTasks(category);
-    });
-}
-
-function emptyTasks(category) {
-    let container = document.getElementById(category);
-    let noTasksElement = document.querySelector(`.noTasks[category="${category}"]`);
-
-    if (noTasksElement) {
-        if (container && container.innerHTML.trim() === '') {
-            noTasksElement.style.display = 'block';
-        } else {
-            noTasksElement.style.display = 'none';
-        }
-    } else {
-        console.error(`Element mit category="${category}" nicht gefunden.`);
-    }
-}
 
 async function deleteData(path = "") {
     let response = await fetch(base_URL + path + ".json", {

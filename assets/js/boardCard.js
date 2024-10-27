@@ -372,7 +372,7 @@ function checkEmptyFieldsMoveToUpdate() {
         let container = document.getElementById(fieldId);
         if (container) {
             if (container.children.length === 0) {
-                container.innerHTML = showEmptyFields();
+                container.innerHTML = showEmptyFields(fieldId);
             } else {
                 let emptyField = container.querySelector('.fiedIsempty');
                 if (emptyField) {
