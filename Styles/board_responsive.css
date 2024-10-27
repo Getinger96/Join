@@ -146,6 +146,7 @@
 
   .widthContainer {
     margin-bottom: 100px;
+    
   }
 
   .Titleleft {
@@ -264,7 +265,7 @@
     min-height: 100px;
     display: flex;
     flex-direction: row;
-    width: 1050px;
+    
     gap: 10px;
     overflow: auto;
   }
@@ -380,7 +381,12 @@
   .noTasks {
     width: 350px;
   }
-
+  .statusButton {
+    display: flex;
+  justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+}
   .widthBoard {
     width: 100%;
     margin-left: 10px;
