@@ -36,23 +36,25 @@ function generateLargeContactsHtml(assignedContacts) {
     let contactsHtml = ''; 
 
     for (let index = 0; index < assignedContacts.length; index++) {
-
-        let contact = assignedContacts[index];
-        let nameParts = assignedContacts[index].split(' ');
-        let contactFirstname = nameParts[0] || '';  
-        let contactLastname = nameParts.slice(1).join(' ') || '';  
-
-        let checkIndexarray = contactsArray.findIndex(c => c.name === contact);
-
-        let firstLetterForName = contactFirstname.charAt(0).toUpperCase();
-        let firstLetterLastName = contactLastname.charAt(0).toUpperCase();
-
-        let color = showTheNameColor(checkIndexarray);
-        
-        contactsHtml += getLargeContactHtml(index, firstLetterForName, firstLetterLastName, contactFirstname, contactLastname, color);
+        contactsHtml += generateContactHtml(assignedContacts[index], index);
     }
   
     return contactsHtml;  
+}
+
+function generateContactHtml(contact, index) {
+    let nameParts = contact.split(' ');
+    let contactFirstname = nameParts[0] || '';  
+    let contactLastname = nameParts.slice(1).join(' ') || '';  
+
+    let checkIndexarray = contactsArray.findIndex(c => c.name === contact);
+    
+    let firstLetterForName = contactFirstname.charAt(0).toUpperCase();
+    let firstLetterLastName = contactLastname.charAt(0).toUpperCase();
+
+    let color = showTheNameColor(checkIndexarray);
+    
+    return getLargeContactHtml(index, firstLetterForName, firstLetterLastName, contactFirstname, contactLastname, color);
 }
 
 function showTheNameColor(checkIndexarray) {
@@ -64,10 +66,6 @@ function showTheNameColor(checkIndexarray) {
     return contactColor;
 
 }
-
-
-
-
 
 function getSmallContactHtml(index, firstname, lastname, color) {
     const initials = `${firstname.charAt(0).toUpperCase()}${lastname.charAt(0).toUpperCase()}`;
@@ -99,42 +97,44 @@ function createShowCard(task, taskIndex) {
     let priority = task.Prio;
     let assignedContacts1 = task.Assigned || [];
     let category = task.Category || '';
-    assignedContacts.push(...assignedContacts1);
-
     
+    assignedContacts.push(...assignedContacts1);
 
 
     const priorityIcon = getPriorityIcon(priority);
     const categoryColor = getCategoryColor(category);
     const contactsHtml = generateLargeContactsHtml(assignedContacts1);
     const subtasksHtml = generateSubtasksHtml(task.subtask, taskIndex);
+    return generateCardHtml(title, description, dueDate, priority, priorityIcon, category, categoryColor, contactsHtml, subtasksHtml, taskIndex);
+}
 
-   return `
+function generateCardHtml(title, description, dueDate, priority, priorityIcon, category, categoryColor, contactsHtml, subtasksHtml, taskIndex) {
+    return `
         <div class="todo-detail">
             <div>
                 <div class="divKategorieCard" style="background-color: ${categoryColor};">${category}</div>
                 <button onclick="closeOverlay(${taskIndex})" class="close-button"><img src="./assets/IMG/iconoir_cancel.png" alt=""></button>
             </div>
             <div>
-            <h2>${title}</h2>
+                <h2>${title}</h2>
             </div>
             <div class="responsiveDescription">
-            <p><strong>Description:</strong> ${description}</p>
+                <p><strong>Description:</strong> ${description}</p>
             </div>
             <p><strong>Due Date:</strong> ${dueDate}</p>
-         <div class="prioicon">
-            <p><strong>Priority:</strong> 
-                <span class="">${priority}</span> 
-               <div class="prioicon-imgSection">
-                <img src="${priorityIcon}" alt="${priority} Priority">
-               </div> 
-         </div>
-            </p>
+            <div class="prioicon">
+                <p><strong>Priority:</strong> 
+                    <span class="">${priority}</span> 
+                    <div class="prioicon-imgSection">
+                        <img src="${priorityIcon}" alt="${priority} Priority">
+                    </div> 
+                </p>
+            </div>
             <p><strong>Assigned To:</strong></p>
             <div class="assigned-contacts">
                 ${contactsHtml}
             </div>
-            <p class="subtaskstext"> <strong>Subtasks:</strong></p>
+            <p class="subtaskstext"><strong>Subtasks:</strong></p>
             <div class="subtasks-container">
                 ${subtasksHtml} <!-- Hier werden die Subtasks eingefügt -->
             </div>
@@ -153,6 +153,7 @@ function createShowCard(task, taskIndex) {
     `;
 }
 
+
 function closeOverlay(taskIndex) {
     const todoBig = document.getElementById('todoBig');
     const overlay = document.getElementById('overlay');
@@ -161,8 +162,6 @@ function closeOverlay(taskIndex) {
     todoBig.classList.add('d-none');
     overlay.classList.add('d-none');
     selectedProfileContainer.innerHTML = '';
-
-
     document.body.style.overflow = 'auto';
     clearTask();
 }
@@ -171,12 +170,9 @@ function closeoverlayedit(taskIndex) {
     const todoBig = document.getElementById('todoBig');
     const overlay = document.getElementById('overlay');
     let selectedProfileContainer = document.getElementById('Selected_profiles_Container');
-
     todoBig.classList.add('d-none');
     overlay.classList.add('d-none');
     selectedProfileContainer.innerHTML = '';
-
-
     document.body.style.overflow = 'auto';
 }
 
@@ -191,18 +187,23 @@ function generateSubtasksHtml(subtasks, taskIndex) {
             const subtaskStatus = JSON.parse(localStorage.getItem(`task-${taskIndex}-subtasks`)) || {};
             const isChecked = subtaskStatus[index] || false; 
 
-            subtasksHtml += `
-                <div class="subtask-item">
-                    <input class="checkbox" type="checkbox" id="subtask-${taskIndex}-${index}" ${isChecked ? 'checked' : ''} 
-                    onchange="subtaskChecked(${taskIndex}, ${index})" />
-                    <label class="checkboxtext" for="subtask-${taskIndex}-${index}">${subtask}</label>
-                </div>
-            `;
+            subtasksHtml += showSubtasksHtml(taskIndex, index, isChecked, subtask);
+        
         });
     }
-
     return subtasksHtml;
 }
+
+function showSubtasksHtml(taskIndex, subtaskIndex, isChecked, subtask) {
+    return `
+    <div class="subtask-item">
+        <input class="checkbox" type="checkbox" id="subtask-${taskIndex}-${subtaskIndex}" ${isChecked ? 'checked' : ''} 
+        onchange="subtaskChecked(${taskIndex}, ${subtaskIndex})" />
+        <label class="checkboxtext" for="subtask-${taskIndex}-${subtaskIndex}">${subtask}</label>
+    </div>
+`;
+}
+
 
 function subtaskChecked(taskIndex, subtaskIndex) {
     const subtaskStatus = JSON.parse(localStorage.getItem(`task-${taskIndex}-subtasks`)) || {};
@@ -236,59 +237,70 @@ async function initializeAllProgress() {
         const subtaskStatus = JSON.parse(localStorage.getItem(`task-${taskIndex}-subtasks`)) || {};
 
         if (tasksArrayElement === undefined) {
-            return;
+            return; 
         }
         if (!tasksArrayElement.subtask || tasksArrayElement.subtask.length === 0) {
             continue; 
         }
-
-        tasksArrayElement.subtask.forEach((_, index) => {
-            const isChecked = subtaskStatus[index] || false;
-            const checkbox = document.getElementById(`subtask-${taskIndex}-${index}`);
-            if (checkbox) {
-                checkbox.checked = isChecked;
-            }
-        });
-        updateProgress(taskIndex);
+    
+        await initializeSubtaskProgressElement(taskIndex, tasksArrayElement, subtaskStatus);
     }
 }
 
-
+async function initializeSubtaskProgressElement(taskIndex, tasksArrayElement, subtaskStatus) {
+    tasksArrayElement.subtask.forEach((_, index) => {
+        const isChecked = subtaskStatus[index] || false;
+        const checkbox = document.getElementById(`subtask-${taskIndex}-${index}`);
+        if (checkbox) {
+            checkbox.checked = isChecked; 
+        }
+    });
+    updateProgress(taskIndex);
+}
 
 function search() {
-    let search = document.getElementById('searchInput').value;
-    let searchTask = search.toLowerCase();
-
-   
+let searchTask = getSearchInput();
     if (searchTask.length >= 3) {
-       
         tasksArray.forEach((todo, index) => {
             let todos = document.getElementById(`task_${index}Element`);
             showTasksSearch(searchTask, todos, todo);
         });
     } else {
-       
         tasksArray.forEach((todo, index) => {
             let todos = document.getElementById(`task_${index}Element`);
-            todos.style.display = 'none';
+            hideTask(todos);
         });
     }
-
     if (searchTask === '') {
         tasksArray.forEach((todo, index) => {
             let todos = document.getElementById(`task_${index}Element`);
-            todos.style.display = 'block';
+            showTask(todos)
         });
     }
 }
+
+function getSearchInput() {
+    return document.getElementById('searchInput').value.toLowerCase();
+}
+
+
+function hideTask(taskElement) {
+    taskElement.classList.add('hiddenToDo');
+}
+
+function showTask(taskElement) {
+    taskElement.classList.remove('hiddenToDo');
+}
+
+
 function showTasksSearch(search, todos, todo) {
     let taskTitle = todo.Title.toLowerCase();
     let taskdescription= todo.Description.toLowerCase();
 
     if (taskTitle.includes(search)  || taskdescription.includes(search) ) {
-        todos.style.display = 'block';
+        showTask(todos);
     } else {
-        todos.style.display = 'none';
+        hideTask(todos);
     }
 }
 
@@ -343,8 +355,6 @@ function handleDragOver(categoryId) {
 function removeHighlight(categoryId) {
     let dragArea = document.getElementById(categoryId);
     dragArea.classList.remove('dragging-over');
-
-
 
 }
 

@@ -1,31 +1,33 @@
-let colorLetter = [
-    { letter: 'A', color: 'red' },     // A -> Red
-    { letter: 'B', color: 'blue' },    // B -> Blue
-    { letter: 'C', color: 'blue' },    // C -> Blue
-    { letter: 'D', color: 'red' },     // D -> Red
-    { letter: 'E', color: 'red' },     // E -> Red
-    { letter: 'F', color: 'red' },     // F -> Red
-    { letter: 'G', color: 'green' },   // G -> Green
-    { letter: 'H', color: 'yellow' },  // H -> Yellow
-    { letter: 'I', color: 'orange' },  // I -> Orange
-    { letter: 'J', color: 'violet' },  // J -> Violet
-    { letter: 'K', color: 'blue' },    // K -> Blue
-    { letter: 'L', color: 'blue' },    // L -> Blue
-    { letter: 'M', color: 'green' },   // M -> Green
-    { letter: 'N', color: 'yellow' },  // N -> Yellow
-    { letter: 'O', color: 'orange' },  // O -> Orange
-    { letter: 'P', color: 'violet' },  // P -> Violet
-    { letter: 'Q', color: 'green' },   // Q -> Green
-    { letter: 'R', color: 'yellow' },  // R -> Yellow
-    { letter: 'S', color: 'orange' },  // S -> Orange
-    { letter: 'T', color: 'violet' },  // T -> Violet
-    { letter: 'U', color: 'green' },   // U -> Green
-    { letter: 'V', color: 'yellow' },  // V -> Yellow
-    { letter: 'W', color: 'orange' },  // W -> Orange
-    { letter: 'X', color: 'violet' },  // X -> Violet
-    { letter: 'Y', color: 'green' },   // Y -> Green
-    { letter: 'Z', color: 'yellow' }   // Z -> Yellow
-];
+const colorLetter = {
+    'A': 'red',
+    'B': 'blue',
+    'C': 'blue',
+    'D': 'red',
+    'E': 'red',
+    'F': 'red',
+    'G': 'green',
+    'H': 'yellow',
+    'I': 'orange',
+    'J': 'violet',
+    'K': 'blue',
+    'L': 'blue',
+    'M': 'green',
+    'N': 'yellow',
+    'O': 'orange',
+    'P': 'violet',
+    'Q': 'green',
+    'R': 'yellow',
+    'S': 'orange',
+    'T': 'violet',
+    'U': 'green',
+    'V': 'yellow',
+    'W': 'orange',
+    'X': 'violet',
+    'Y': 'green',
+    'Z': 'yellow'
+};
+
+logOutVisibleBoolean = false;
 
 
 async function includeHTML() {
@@ -59,51 +61,34 @@ async function includeHTML() {
 
 
 async function init() {
-
-
     fetchContacts();
     includeHTML();
     checkIfLoggedIn();
     fetchTasks();
-   
-
-
 }
 
 
-logOutVisibleBoolean = false;
-
-
 function showLogOutSection() {
-
     let toggleLogout = document.getElementById('logoutId');
-
-
-
     if (logOutVisibleBoolean) {
         toggleLogout.innerHTML = '';
-
     } else {
 
+        toggleLogout.innerHTML = toggleLogoutHtml();
+    }
+    logOutVisibleBoolean = !logOutVisibleBoolean;
+}
 
 
-        toggleLogout.innerHTML = `<div class="logoutSection">
+
+function toggleLogoutHtml() {
+    return`<div class="logoutSection">
             <a class="logoutsectionlinkHelp d_none" href="help.html"> Help </a>
             <a class="logoutsectionlink" href="legal_notes.html"> Legal Notice </a>
             <a class="logoutsectionlink" href="privacy_policy.html"> Privacy Policy</a>
-            <a  class="logoutsectionlinklogouttext"  href="login.html"> Log out </a>
-        
+            <a  class="logoutsectionlinklogouttext"  href="login.html"> Log out </a>W
          </div>
                         `;
-
-
-    }
-
-
-
-    logOutVisibleBoolean = !logOutVisibleBoolean;
-
-
 }
 
 document.addEventListener('click', function(event) {
@@ -117,43 +102,27 @@ document.addEventListener('click', function(event) {
 });
 
 
-
 async function showTheNameInitial(loggedInUser) {
-
     let userSign = document.getElementById('loginUserId');
-
     let fullName = loggedInUser.name;
-
     let nameParts = fullName.split(" ");
-
     let firstName;
-
     if (nameParts.length >= 2) {
         firstName = nameParts[0].charAt(0).toUpperCase();
         let lastName = nameParts[1].charAt(0).toUpperCase();
         userSign.innerHTML = `${firstName} ${lastName} `;
-
-
     } else {
         firstName = nameParts[0].charAt(0).toUpperCase();
         userSign.innerHTML = `${firstName} `;
     }
-
     showTheNameInitialInColor(firstName);
 }
 
+
 function showTheNameInitialInColor(firstName) {
-
     let userSign = document.getElementById('loginUserId');
-    colorLetter.forEach(colorLetterItem => {
-
-
-
-        if (firstName === colorLetterItem.letter) {
-            let currentColor = colorLetterItem.color;
-            userSign.style.color = currentColor;
-        }
-    });
+    let currentColor = colorLetter[firstName];
+    userSign.style.color = currentColor;
 }
 
 
@@ -163,10 +132,8 @@ function checkIfLoggedIn() {
         loggedInUser = JSON.parse(loggedInUser);
        
         showTheNameInitial(loggedInUser);
-
-
     } else {
-        console.log('Kein Benutzer ist eingeloggt');
+        return;
     }
 }
 

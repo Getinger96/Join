@@ -10,7 +10,7 @@ function setTaskPriority() {
     let mediumButton = document.getElementById("medium");
     let mediumIcon = document.getElementById("mediumIcon");
     
-    mediumButton.classList.add("activeMedium")
+    mediumButton.classList.add("medium")
     mediumIcon.src = "./assets/IMG/Prio media.png";
     currentPriority = 'medium';
 }

@@ -381,7 +381,6 @@ async function updateGetAssigneContacts(assignedContacts, taskIndex, maxContact,
         if (contactsArray.length === 0) {
             await fetchContacts();
         }   
-
         let checkIndexarray = contactsArray.findIndex(c => c.name === contact);
         nameParts = contact.split(" ");
         let colorid = `contactIcon_${taskIndex}_${index}`;
