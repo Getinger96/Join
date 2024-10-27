@@ -189,8 +189,13 @@
   }
 
   .select_container {
-    width: 250px;
+    width: 276px;
     padding: 2px;
+    align-items: center;
+    font-size: 19px;
+  }
+  .arrow_img_container{
+    display: flex;
   }
 
   .Selection_Container {
@@ -213,7 +218,7 @@
   }
 
   .input_date {
-    width: 280px;
+    width: 276px;
   }
 
   .Prio_Container {
@@ -226,12 +231,13 @@
   }
 
   .Prio_Btn {
-    width: 121.33px;
-    padding: 8px 5px 8px 5px;
+    width: 100px;
+    padding: 0px;
     font-family: "Inter";
     font-weight: 400;
     font-size: 16px;
     line-height: 19.2px;
+    gap: 2px;
   }
 
   .cataegory_Container {
