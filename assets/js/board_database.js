@@ -63,7 +63,6 @@ function getTaskDetails() {
     let subtask = subtasks;
     let validCategories = ['open', 'progress', 'awaitFeedback', 'closed'];
     let status = validCategories.includes(kategorie) ? kategorie : 'open';
-
     return {
         Titel: title,
         Description: description,
@@ -246,7 +245,11 @@ async function EditData(index) {
     getContacts();
     closeoverlayedit(index);
     
-    
+    renderAssignedContacts(assignedContacts);
+    populateTaskFields(title, description, dueDate, priority, category, subtask, index);
+}
+
+function renderAssignedContacts(assignedContacts) {
     let selectedProfileContainer = document.getElementById('Selected_profiles_Container');
     selectedProfileContainer.innerHTML = '';
 
@@ -260,13 +263,19 @@ async function EditData(index) {
         showSelectedProfileEdit(contact); 
     }
 
-    if (assignedContacts.length > 4) {
-        let extraCount = assignedContacts.length - 4;
-        selectedProfileContainer.innerHTML += `
+    handleExtraContacts(selectedProfileContainer, assignedContacts.length);
+}
+
+function handleExtraContacts(container, count) {
+    if (count > 4) {
+        let extraCount = count - 4;
+        container.innerHTML += `
             <div id="extra_Contacts_Badge" class="profile_Badge_assign gray">+${extraCount}</div>
         `;
     }
+}
 
+function populateTaskFields(title, description, dueDate, priority, category, subtask, index) {
     let tasktitle = document.getElementById('taskTitle');
     tasktitle.value = title;
     let taskdescription = document.getElementById('description');
@@ -274,6 +283,18 @@ async function EditData(index) {
     let taskDAte = document.getElementById('taskDueDate');
     taskDAte.value = dueDate;
 
+    setPriority(priority);
+
+    let taskCategory = document.getElementById('kategorie');
+    taskCategory.value = category;
+
+    subtasks = subtask;
+    addSubtask();
+
+    changeAddtaskButton(index);
+}
+
+function setPriority(priority) {
     if (priority == 'urgent') {
         urgent();
     } else if (priority == 'medium') {
@@ -281,48 +302,40 @@ async function EditData(index) {
     } else if (priority == 'low') {
         low();
     }
-
-   
-    let taskCategory = document.getElementById('kategorie');
-    taskCategory.value = category;
-
-    subtasks = subtask;
-    addSubtask(event);
-
-    changeAddtaskButton(index);
 }
 
-
 async function createEdittask(index) {
-    let tasktitle = document.getElementById('taskTitle');
-    let taskdescription = document.getElementById('description');
-    let taskDAte = document.getElementById('taskDueDate');
-    let taskCategory = document.getElementById('kategorie');
-    let task = tasksArray[index];
-    let status = task.status
-    let key = task.taskKey;
-    
-    if (!validateTask(tasktitle, taskCategory, taskDAte)) {
-        return;
-    } else{
-
-   
-            let editedTASk = {
-    
-                Titel: tasktitle.value,
-                Description: taskdescription.value,
-                AssignedContact: assignedContacts,
-                Date: taskDAte.value,
-                Prio: currentPriority,
-                Category: taskCategory.value,
-                Subtask: subtasks,
-                Status: status,
-            }
-            await putDataEdit(`tasks/${key}`, editedTASk)
-            closeTask();
-            closeOverlay();
-            await fetchTasks();
+        let tasktitle = document.getElementById('taskTitle');
+        let taskdescription = document.getElementById('description');
+        let taskDAte = document.getElementById('taskDueDate');
+        let taskCategory = document.getElementById('kategorie');
+        let task = tasksArray[index];
+        let status = task.status
+        let key = task.taskKey;
+        
+        if (!validateTask(tasktitle, taskCategory, taskDAte)) {
+            return;
+        } else{ 
+            createEdittaskPut(tasktitle, taskdescription, taskDAte, taskCategory, task, status, key)
         }
+            
+    }
+async function createEdittaskPut(tasktitle, taskdescription, taskDAte, taskCategory, task, status, key) {   
+    let editedTASk = {
+        
+        Titel: tasktitle.value,
+        Description: taskdescription.value,
+        AssignedContact: assignedContacts,
+        Date: taskDAte.value,
+        Prio: currentPriority,
+        Category: taskCategory.value,
+        Subtask: subtasks,
+        Status: status,
+    }
+    await putDataEdit(`tasks/${key}`, editedTASk)
+    closeTask();
+    closeOverlay();
+    await fetchTasks();
     }
         
     

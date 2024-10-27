@@ -94,7 +94,9 @@ label {
     background-color: orange !important;
     color: white !important;
 }
-
+.hiddenToDo {
+    display: none !important; 
+}
 .no-scroll {
     overflow: hidden;
 }
