@@ -45,9 +45,9 @@
    
 
     .Btn_Container {
-        margin-left: 0px;
+        margin-left: 220px;
         display: flex;
-        gap: 16px;
+        gap: 525px;
         margin-top: 16px;
         
     }
@@ -57,9 +57,23 @@
   .add_task_content {
     margin-left: 98px;
   }
+
+  .Btn_Container {
+    margin-left: 98px;
+    display: flex;
+    gap: 525px;
+    margin-top: 16px;
+}
 }
 
 @media (max-width: 1100px) {
+
+  .Btn_Container {
+    margin-left: 10px;
+    display: flex;
+    gap: 510px;
+    margin-top: 16px;
+}
   .ForwardingBoard {
     left: 35%;
   }
@@ -103,12 +117,10 @@
   }
 
   .Btn_Container {
-    display: flex;
     gap: 90px;
-    margin-top: 80px;
-    margin-left: 0px;
     margin-bottom: 150px;
     align-items: center;
+    justify-content: center;
   }
 
   .required_info_Container {
@@ -263,7 +275,7 @@
   }
 
   .Btn_Container {
-    margin-top: 100px;
+  
     gap: 45px;
   }
 
@@ -279,7 +291,7 @@
   .Btn_Container {
     display: flex;
     gap: 0px;
-    margin-top: 120px;
+    
     margin-left: 0px;
     margin-bottom: 150px;
     align-items: baseline;
