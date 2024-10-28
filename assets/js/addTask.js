@@ -30,32 +30,18 @@ async function getContactsData(path) {
 
 function processAndAddContacts(userAsArray, keysArray) {
     for (let index = 0; index < userAsArray.length; index++) {
-<<<<<<< HEAD:assets/js/add_task.js
         const contact = userAsArray[index];
         const key = keysArray[index];
         const color = colors[index % colors.length];
 
         if (contact.email !== 'guest@web.de') {
-=======
-        let contact = userAsArray[index];
-        let key = keysArray[index];
-        let colorIndex = index % colors.length;
-        let color = colors[colorIndex];
-        if (contact.email == 'guest@web.de') {
-        } else {
->>>>>>> 3a2579da8f1228917383c86a859bc3747974292f:assets/js/addTask.js
             contacts.push({
                 id: key,
                 email: contact.email,
                 name: contact.name,
                 password: contact.password,
                 color: color,
-<<<<<<< HEAD:assets/js/add_task.js
             });
-=======
-            }
-        )
->>>>>>> 3a2579da8f1228917383c86a859bc3747974292f:assets/js/addTask.js
         }
     }
 }
@@ -76,10 +62,6 @@ function func1(event) {
     event.stopPropagation();
 }
 let d_none = true;
-<<<<<<< HEAD:assets/js/add_task.js
-
-=======
->>>>>>> 3a2579da8f1228917383c86a859bc3747974292f:assets/js/addTask.js
 function openList() {
     let selecCon = document.getElementById('Selection_Container');
     let arrowCon = document.getElementById('arrow_img_container');
@@ -211,7 +193,6 @@ function showSelectedProfile() {
     }
 }
 
-<<<<<<< HEAD:assets/js/add_task.js
 function renderContactBadge(contactName, index) {
     let contact = contacts.find(c => c.name === contactName); 
 
@@ -237,8 +218,6 @@ function renderExtraContactsBadge(selectedProfileContainer, extraContactsBadge) 
     }
 }
 
-=======
->>>>>>> 3a2579da8f1228917383c86a859bc3747974292f:assets/js/addTask.js
 function dateinput() {
     let duedate = document.getElementById('dueDate');
     duedate.min = new Date().toISOString().split('T')[0];
@@ -246,7 +225,6 @@ function dateinput() {
 
 function renderPrioButtons() {
     let prioButtonContainer = document.getElementById('Prio_btn_Container');
-<<<<<<< HEAD:assets/js/add_task.js
     prioButtonContainer.innerHTML = renderPrioButtonsHtml();
 }
 
@@ -255,17 +233,6 @@ function renderPrioButtonsHtml() {
                         id="urgentIcon" src="./assets/IMG/Priority symbols (1).png" alt=""></button>
                         <button type="button" id="medium" onclick="choossedmedium()" class="Prio_Btn">Medium <img
                         id="mediumIcon" src="./assets/IMG/Prio_medium(2).svg" alt="">
-=======
-    prioButtonContainer.innerHTML = prioButtonsHtml();
-}
-
-function prioButtonsHtml(){
-    return`
-                        <button onclick="chossedurgent()" type="button" id="urgent"  class="Prio_Btn">Urgent <img
-                                id="urgentIcon" src="./assets/IMG/Priority symbols (1).png" alt=""></button>
-                                 <button type="button" id="medium" onclick="choossedmedium()" class="Prio_Btn">Medium <img
-                                id="mediumIcon" src="./assets/IMG/Prio_medium(2).svg" alt="">
->>>>>>> 3a2579da8f1228917383c86a859bc3747974292f:assets/js/addTask.js
                         </button>
                         <button type="button" id="low" onclick="choosedlow()" class="Prio_Btn">Low
                             <img id="lowIcon" src="./assets/IMG/Prio_Low(2).svg" alt=""></button>
@@ -371,24 +338,12 @@ function newTaskObject(titel, description, assignedContact, date, prio, category
     };
 }
 
-<<<<<<< HEAD:assets/js/add_task.js
 async function saveTask(newTask) {
     clearMissingFieldContent();
     await postData(`tasks`, newTask);
-=======
-    if (loggedInUser === guest) {
-        localStorage.setItem('guestTasks', JSON.stringify(newTask))
-        clearTask();
-    }
-    clearMissingFieldContent();
-    await postData(`tasks`, newTask);
-    clearTask();
-    gotoBoard();
->>>>>>> 3a2579da8f1228917383c86a859bc3747974292f:assets/js/addTask.js
 }
 
 async function clearTask() {
-<<<<<<< HEAD:assets/js/add_task.js
     for (let i = 0; i < contacts.length; i++) {
         let contact = contacts[i];
         let contactColour = contacts[i].color;
@@ -405,9 +360,6 @@ async function clearTask() {
 }
 
 function clearFormFields() {
-=======
-    
->>>>>>> 3a2579da8f1228917383c86a859bc3747974292f:assets/js/addTask.js
     let selectedProfileContainer = document.getElementById('Selected_profiles_Container');
     selectedProfileContainer.innerHTML = '';
     let inpuSubtask = document.getElementById('input_Subtasks');
