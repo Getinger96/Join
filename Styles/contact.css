@@ -612,6 +612,10 @@ input:not(:placeholder-shown) {
   display: none;
 }
 
+.error-border {
+  border: 2px solid red !important;
+}
+
 @keyframes slide-in-from-right {
   from {
     transform: translateX(100%);

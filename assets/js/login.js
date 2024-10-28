@@ -17,92 +17,79 @@ async function loadUsers(path = '') {
 
 }
 }
+async function validateLoginEmail(loginMail, loginPassword, loginInfo) {
+    if (!emailIsCorrect(loginMail.value)) {
+        loginInfo.innerText = 'Please enter a valid email address!';
+        emptyTheInputFields(loginMail, loginPassword);
+        changeColorHrAndBorderMistake();
+        return false;
+    }
+    return true;
+}
+
+function checkUserCredentials(loginMail, loginPassword) {
+    return contacts.find(u => u.email === loginMail.value && u.password === loginPassword.value);
+}
+
+function handleLoginResult(user, loginMail, loginPassword, loginInfo) {
+    if (user) {
+        localStorage.setItem('loggedInUser', JSON.stringify(user)); 
+        emptyTheInputFields(loginMail, loginPassword);
+        loginUpSuccessfully();
+        setTimeout(() => {
+            window.location.href = "summary.html";
+        }, 2000);
+    } else {
+        loginInfo.innerText = wrongPasswordOrEmail();
+        emptyTheInputFields(loginMail, loginPassword);
+        changeColorHrAndBorderMistake();
+    }
+}
 
 async function loginAction() {
     let loginMail = document.getElementById('emaillogin');
     let loginPassword = document.getElementById('passwordlogin');
     let loginInfo = document.getElementById('incorrectentry');
-  
-
-
-    if (!emailIsCorrect(loginMail.value)) {
-        loginInfo.innerText = 'Please enter a valid email address!';
-        emptyTheInputFields(loginMail,loginPassword);
-        changeColorHrAndBorderMistake();
-        return; 
-    }
-
-
-    let user = contacts.find(u => u.email === loginMail.value && u.password === loginPassword.value);
-
-
+    
+    if (!await validateLoginEmail(loginMail, loginPassword, loginInfo)) return;
 
     if (loginMail.value === '' && loginPassword.value === '') {
-        emptyTheInputFields(loginMail,loginPassword);
+        emptyTheInputFields(loginMail, loginPassword);
         changeColorHrAndBorderMistake();
+        return;
     }
 
-
-    if(user) {
-        localStorage.setItem('loggedInUser', JSON.stringify(user)); 
-        emptyTheInputFields(loginMail,loginPassword);
-
-        loginUpSuccessfully();
-       
-
-        setTimeout(() => { window.location.href = "summary.html";
-            
-        }, 2000);
-
-        
-    } else {
-        loginInfo.innerText = wrongPasswordOrEmail();
-        emptyTheInputFields(loginMail,loginPassword);
-        changeColorHrAndBorderMistake();
-    }
-
-    emptyTheInputFields(loginMail,loginPassword);
+    let user = checkUserCredentials(loginMail, loginPassword);
+    handleLoginResult(user, loginMail, loginPassword, loginInfo);
 }
-
 
 function guestLogin() {
     let loginMail = document.getElementById('emaillogin');
     let loginPassword = document.getElementById('passwordlogin');
-    
     loginMail.value = "guest@web.de";  
     loginPassword.value = "guest123456";  
-
-
-
 }
+
 
 function validateEmailLogin() {
     let loginMail = document.getElementById('emaillogin');
-
     let loginInfo = document.getElementById('validateEmail');
-
 
     if (!emailIsCorrect(loginMail.value)) {
         loginInfo.innerText = 'Please enter a valid email address!';
         return; 
     }
-
     loginInfo.innerText ='';
 }
 
 
-
 function validatePasswordLogin() {
     let loginPassword = document.getElementById('passwordlogin');
-
     let loginInfo = document.getElementById('validatePassword');
-
     if (loginPassword.value.length <= 5) {
         loginInfo.innerHTML = passwordToShort();
-    
         return ;
     }
-
     loginInfo.innerText ='';
 }
 
@@ -110,13 +97,11 @@ function validatePasswordLogin() {
 function passwordToShort() {
     return `
     Passwords must have maximal 6 characters !!!`;
-    
     }
 
 function loginUpSuccessfully() {
     document.getElementById('loginupsuccessfully').innerHTML =`  <div class="loginUpsuccessfully">
     <span class="loginstylesuccessfully" id="showTheRightTimeLogin"></span>
-
     </div>`;
 
     showTheCurrentTime();
@@ -124,8 +109,6 @@ function loginUpSuccessfully() {
 
 
 function  showTheCurrentTime(){
-
-
     let currentTime = new Date().getHours();
     let greetingText = document.getElementById('showTheRightTimeLogin');
     
@@ -142,7 +125,6 @@ function  showTheCurrentTime(){
     
     }
 
-
 function changeColorHrAndBorderMistake() {
 
     document.getElementById("loginHr").style.color = "red";
@@ -158,20 +140,16 @@ function changeColorHrAndBorderCorrect() {
 
 }
 
-
 function emailIsCorrect(email) {
     let emailCheck = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailCheck.test(email); 
 }
-
-
 
 function wrongPasswordOrEmail() {
 return `
 Please note that the password or email address are incorrect !!!`;
 
 }
-
 
 function loginSuccesfull() {
     return `

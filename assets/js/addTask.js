@@ -206,7 +206,6 @@ function renderContactBadge(contactName, index) {
         `;
     }
 }
-
 function renderExtraContactsBadge(selectedProfileContainer, extraContactsBadge) {
     let extraCount = assignedContacts.length - 4;
     if (extraContactsBadge) {
@@ -238,7 +237,6 @@ function renderPrioButtonsHtml() {
                             <img id="lowIcon" src="./assets/IMG/Prio_Low(2).svg" alt=""></button>
                              `
 }
-
 
 function chossedurgent() {
     renderPrioButtons();
@@ -320,7 +318,6 @@ function createNewTask() {
     
     if (JSON.stringify(loggedInUser) === JSON.stringify(guest)) {
         localStorage.setItem('guestTasks', JSON.stringify(newTask));
-        clearTask();
     }
     return newTask;
 }

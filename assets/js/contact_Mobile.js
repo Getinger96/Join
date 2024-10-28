@@ -45,6 +45,7 @@ function closeMobileNewContact() {
     let overlay = document.getElementById("mobileNewContactOverlay");
     overlay.classList.add("mobileNewContactOverlay-hidden");
     overlay.style.display = 'none';
+    closeAllWarningMessageMobile();
 }
 
 function mobileAddContact(event) {

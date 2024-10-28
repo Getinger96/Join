@@ -476,7 +476,13 @@ Button {
     padding-block: 0px;
     padding-inline: 0px;
 }
+.error-border {
+    border: 2px solid red !important;
+  }
 
+.error-borderBottom {
+  border-bottom: 3px solid red  !important;
+}
 .boardAddTask {
     background-color: white;
     border-radius: 30px;

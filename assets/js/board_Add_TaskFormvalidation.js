@@ -218,8 +218,8 @@ function enterNewSubtask(i) {
    document.getElementById(`SubtaskLengthReached`).innerHTML ='';    
    if (newSubTask.length == 0) {
         pleaseEnterASubtask(i);
-        document.getElementById(`boderSubtaskId${i}`).style.border= "1px solid red";
-        document.getElementById(`subtaskValue${i}`).style.borderBottom= "1px solid red";
+        document.getElementById(`boderSubtaskId${i}`).classList.add("error-border"); 
+        document.getElementById(`subtaskValue${i}`).classList.add("error-borderBottom"); 
         return;
    }
    document.getElementById(`subtasksValidation${i}`).innerHTML='';
@@ -235,12 +235,12 @@ function validateSubtask(i) {
     if (newSubTask.length == 0) {
         subtasks.splice(i, 1);
         pleaseEnterASubtask();
-        document.getElementById(`boderSubtaskId${i}`).style.border= "1px solid red";
-        document.getElementById(`subtaskValue${i}`).style.borderBottom = "3px solid red";
+        document.getElementById(`boderSubtaskId${i}`).classList.add("error-border"); 
+        document.getElementById(`subtaskValue${i}`).classList.add("error-borderBottom"); 
         return;
     }
     document.getElementById(`subtasksValidation${i}`).innerHTML ='';
-    document.getElementById(`boderSubtaskId${i}`).style.border= "";
+    document.getElementById(`boderSubtaskId${i}`).classList.remove("error-border");
     document.getElementById(`SubtaskLengthReached`).innerHTML ='';   
     subtasks[i] = newSubTask;
     updateSubtaskElement(i);
@@ -272,10 +272,10 @@ function pleaseEnterASubtask() {
 
 
 function changeColorSubtaskInputField() {
-    document.getElementById(`subtaskBorderInputchange`).style.border= "4px solid red";
+    document.getElementById(`subtaskBorderInputchange`).classList.add("error-border");
     }
 
 function removeColorSubtaskInputField() {
-    document.getElementById(`subtaskBorderInputchange`).style.border= "";
+    document.getElementById(`subtaskBorderInputchange`).classList.remove("error-border");
         }
     

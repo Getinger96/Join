@@ -355,6 +355,7 @@ function closeOverlay() {
 function closeCardContact() {
     closeOverlay();
     resetContactForm();
+    closeAllWarningMessage();
 }
 
 function handleCloseContact() {
