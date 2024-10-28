@@ -181,7 +181,6 @@ function letterSorting() {
     getContacts();
 }
 
-
 async function deleteData(path = "") {
     let response = await fetch(base_URL + path + ".json", {
         method: "DELETE",
@@ -338,6 +337,19 @@ async function createEdittaskPut(tasktitle, taskdescription, taskDAte, taskCateg
     await fetchTasks();
     }
         
+    function closeTask() {
+        let boardAddTask = document.getElementById('boardAddTask');
+        let darkOverlay = document.getElementById('darkOverlay');
+    
+        boardAddTask.classList.remove('visible');
+        darkOverlay.classList.remove('visible');
+        document.body.style.overflow = 'auto';
+    
+        clearTask();
+        clearMissingFieldContent();
+        returnColorPrioIcons();
+        location.reload();
+    }
     
 
     

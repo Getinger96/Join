@@ -16,40 +16,45 @@ let assignedContacts = [];
 let prio = [];
 
 async function fetchContacts(path = '') {
-    let response = await fetch(base_URL + path + ".json");
-    let userJSON = await response.json();
-    let keysArray = Object.keys(userJSON.contacts);
-    let userAsArray = Object.values(userJSON.contacts);
+    const userJSON = await getContactsData(path);
+    const keysArray = Object.keys(userJSON.contacts);
+    const userAsArray = Object.values(userJSON.contacts);
 
+    processAndAddContacts(userAsArray, keysArray);
+    setPrioMediumAndRender();
+}
+async function getContactsData(path) {
+    const response = await fetch(base_URL + path + ".json");
+    return await response.json();
+}
+
+function processAndAddContacts(userAsArray, keysArray) {
     for (let index = 0; index < userAsArray.length; index++) {
-        let contact = userAsArray[index];
-        let key = keysArray[index];
-        let colorIndex = index % colors.length;
+        const contact = userAsArray[index];
+        const key = keysArray[index];
+        const color = colors[index % colors.length];
 
-        let color = colors[colorIndex];
-        if (contact.email == 'guest@web.de') {
-
-        } else {
+        if (contact.email !== 'guest@web.de') {
             contacts.push({
                 id: key,
                 email: contact.email,
                 name: contact.name,
                 password: contact.password,
                 color: color,
-            })
-
+            });
         }
     }
-    renderSelectionContainer()
-    renderPrioButtons()
-    let medium = document.getElementById('medium');
-    medium.innerHTML =
-        `
-    Medium
-    <img src="assets/IMG/PRio_Medium_WHITE.svg" alt="">
+}
+function setPrioMediumAndRender() {
+    renderSelectionContainer();
+    renderPrioButtons();
+
+    const medium = document.getElementById('medium');
+    medium.innerHTML = `
+        Medium
+        <img src="assets/IMG/PRio_Medium_WHITE.svg" alt="">
     `;
-    medium.classList.add('color_white');
-    medium.classList.add('bg_Medium');
+    medium.classList.add('color_white', 'bg_Medium');
     prio = 'medium';
 }
 
@@ -57,11 +62,10 @@ function func1(event) {
     event.stopPropagation();
 }
 let d_none = true;
-function openList() {
 
+function openList() {
     let selecCon = document.getElementById('Selection_Container');
     let arrowCon = document.getElementById('arrow_img_container');
-
     selecCon.classList.toggle('d_none');
 
     if (d_none == true) {
@@ -70,7 +74,6 @@ function openList() {
     } else {
         arrowCon.innerHTML = `<img class="arrow_drop_up" src="./assets/IMG/arrow_drop_downaa.svg" alt="">`;
         d_none = true;
-
     }
 
 }
@@ -81,7 +84,6 @@ function closelist() {
     let arrowCon = document.getElementById('arrow_img_container');
     arrowCon.innerHTML = '';
     arrowCon.innerHTML = `<img class="arrow_drop_downaa" src="assets/IMG/arrow_drop_downaa.svg" alt="">`;
-
     selecCon.classList.add('d_none');
     d_none = true;
 }
@@ -156,7 +158,6 @@ function renderContacts(i, contactColour, firstletters, name) {
 function selectedContact(i, name, firstletters, contactColour) {
     let checkbox = document.getElementById(`checkbox${i}`);
     checkbox.innerHTML = `<img  class="checked_img" src="./assets/IMG/Checked button.svg" alt="">`
-
     let profileContainer = document.getElementById(`profile_Container${i}`);
     profileContainer.classList.toggle('bg_color');
     profileContainer.classList.toggle('color_white');
@@ -165,7 +166,6 @@ function selectedContact(i, name, firstletters, contactColour) {
     if (!assignedContacts.includes(name)) {
         assignedContacts.push(name)
         showSelectedProfile(firstletters, i, contactColour)
-
     } else {
         deselctedtContact(i, name)
     }
@@ -175,7 +175,6 @@ function selectedContact(i, name, firstletters, contactColour) {
 function deselctedtContact(i, name, firstletters, contactColour) {
     let checkbox = document.getElementById(`checkbox${i}`);
     checkbox.innerHTML = `<img  id="checkImg${i}" class="check_img" src="assets/IMG/Check button.svg" alt="">`
-
     assignedContacts = assignedContacts.filter(contact => contact !== name);
 
     showSelectedProfile(firstletters, i, contactColour);
@@ -188,35 +187,43 @@ function showSelectedProfile() {
 
     for (let index = 0; index < assignedContacts.length; index++) {
         if (index < 4) {  
-            let contactName = assignedContacts[index];
-            let contact = contacts.find(c => c.name === contactName); 
-
-            if (contact) {
-                let contactColour = contact.color;
-                let firstletters = contactName.charAt(0).toUpperCase() + getLastName(contactName).charAt(0).toUpperCase();
-
-                selectedProfileContainer.innerHTML += `
-                    <div id="profile_Badge_assign${index}" class="profile_Badge_assign ${contactColour}">${firstletters}</div>
-                `;
-            }
+            let contactName = assignedContacts[index]; 
+            renderContactBadge(contactName, index);
         }
     }
 
     let extraContactsBadge = document.getElementById('extra_Contacts_Badge');
     if (assignedContacts.length > 4) {
-        let extraCount = assignedContacts.length - 4;
-        if (extraContactsBadge) {
-            extraContactsBadge.textContent = `+${extraCount}`;
-        } else {
-            selectedProfileContainer.innerHTML += `
-                <div id="extra_Contacts_Badge" class="profile_Badge_assign gray">+${extraCount}</div>
-            `;
-        }
+        renderExtraContactsBadge(selectedProfileContainer, extraContactsBadge);
     } else if (extraContactsBadge) {
-        extraContactsBadge.remove();
+        extraContactsBadge.remove(); 
     }
 }
 
+function renderContactBadge(contactName, index) {
+    let contact = contacts.find(c => c.name === contactName); 
+
+    if (contact) {
+        let contactColour = contact.color;
+        let firstLetters = contactName.charAt(0).toUpperCase() + getLastName(contactName).charAt(0).toUpperCase();
+
+        let selectedProfileContainer = document.getElementById('Selected_profiles_Container');
+        selectedProfileContainer.innerHTML += `
+            <div id="profile_Badge_assign${index}" class="profile_Badge_assign ${contactColour}">${firstLetters}</div>
+        `;
+    }
+}
+
+function renderExtraContactsBadge(selectedProfileContainer, extraContactsBadge) {
+    let extraCount = assignedContacts.length - 4;
+    if (extraContactsBadge) {
+        extraContactsBadge.textContent = `+${extraCount}`;
+    } else {
+        selectedProfileContainer.innerHTML += `
+            <div id="extra_Contacts_Badge" class="profile_Badge_assign gray">+${extraCount}</div>
+        `;
+    }
+}
 
 function dateinput() {
     let duedate = document.getElementById('dueDate');
@@ -225,16 +232,20 @@ function dateinput() {
 
 function renderPrioButtons() {
     let prioButtonContainer = document.getElementById('Prio_btn_Container');
-    prioButtonContainer.innerHTML = `
-                        <button onclick="chossedurgent()" type="button" id="urgent"  class="Prio_Btn">Urgent <img
-                                id="urgentIcon" src="./assets/IMG/Priority symbols (1).png" alt=""></button>
-                                 <button type="button" id="medium" onclick="choossedmedium()" class="Prio_Btn">Medium <img
-                                id="mediumIcon" src="./assets/IMG/Prio_medium(2).svg" alt="">
+    prioButtonContainer.innerHTML = renderPrioButtonsHtml();
+}
+
+function renderPrioButtonsHtml() {
+    return ` <button onclick="chossedurgent()" type="button" id="urgent"  class="Prio_Btn">Urgent <img
+                        id="urgentIcon" src="./assets/IMG/Priority symbols (1).png" alt=""></button>
+                        <button type="button" id="medium" onclick="choossedmedium()" class="Prio_Btn">Medium <img
+                        id="mediumIcon" src="./assets/IMG/Prio_medium(2).svg" alt="">
                         </button>
                         <button type="button" id="low" onclick="choosedlow()" class="Prio_Btn">Low
                             <img id="lowIcon" src="./assets/IMG/Prio_Low(2).svg" alt=""></button>
                              `;
 }
+
 
 function chossedurgent() {
     renderPrioButtons();
@@ -288,32 +299,44 @@ async function postData(path = "", data = {}) {
     return responsASJson = await response.json();
 }
 
-
 async function createTask(event) {
     event.preventDefault();
-    let loggedInUser = localStorage.getItem('loggedInUser');
-    loggedInUser = JSON.parse(loggedInUser);
-    let guest = { "email": "guest@web.de", "name": "guest", "password": "guest123456" }
+    let newTask = createNewTask();
+    if (!validateTask(newTask.Titel, newTask.Category, newTask.Date)) {
+        return;
+    }
+    document.getElementById("InputFieldsMissing").innerHTML = '';
+    document.getElementById("WrongCurrentDateId").innerHTML = '';
 
-    let titel = document.getElementById('title');
-    let description = document.getElementById('Description');
+    await saveTask(newTask);
+    clearTask();
+    gotoBoard();
+}
+
+function createNewTask() {
+    let loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+    let guest = { "email": "guest@web.de", "name": "guest", "password": "guest123456" };
+    let titel = document.getElementById('title').value;
+    let description = document.getElementById('Description').value;
     let assignedContact = assignedContacts;
     let date = document.getElementById('dueDate').value;
     let category = document.getElementById('Category').innerHTML;
     let subtask = subtasks;
-    let status = 'open'
+    let status = 'open';
+    let newTask = newTaskObject(titel, description, assignedContact, date, prio, category, subtask ,status)
 
+    
+    if (JSON.stringify(loggedInUser) === JSON.stringify(guest)) {
+        localStorage.setItem('guestTasks', JSON.stringify(newTask));
+        clearTask();
+    }
+    return newTask;
+}
 
-    if (!validateTask(titel, category, date)) {
-        return;
-    } else
-
-        document.getElementById("InputFieldsMissing").innerHTML = '';
-    document.getElementById("WrongCurrentDateId").innerHTML = '';
-
-    let newTask = {
-        Titel: titel.value,
-        Description: description.value,
+function newTaskObject(titel, description, assignedContact, date, prio, category, subtask ,status ) {
+    return newTask = {
+        Titel: titel,
+        Description: description,
         AssignedContact: assignedContact,
         Date: date,
         Prio: prio,
@@ -321,19 +344,11 @@ async function createTask(event) {
         Subtask: subtask,
         Status: status
     };
+}
 
-    if (loggedInUser === guest) {
-        localStorage.setItem('guestTasks', JSON.stringify(newTask))
-        clearTask();
-
-    }
-
-
+async function saveTask(newTask) {
     clearMissingFieldContent();
     await postData(`tasks`, newTask);
-    clearTask();
-    gotoBoard();
-
 }
 
 
@@ -348,8 +363,12 @@ async function clearTask() {
         let firstletterlastname = lastname.charAt(0);
         let firstletterlastnameBIG = firstletterlastname.toUpperCase();
         let firstletters = forNAmebig + firstletterlastnameBIG;
-
     }
+        clearFormFields();
+        resetAddTask();
+}
+
+function clearFormFields() {
     let selectedProfileContainer = document.getElementById('Selected_profiles_Container');
     selectedProfileContainer.innerHTML = '';
     let inpuSubtask = document.getElementById('input_Subtasks');
@@ -366,21 +385,18 @@ async function clearTask() {
     date.value = "";
     category.innerHTML = "";
     subtasks = [];
-    prio = [];
+    prio = [];    
+}
+function resetAddTask() {
     renderPrioButtons();
     clearMissingFieldContent();
     clearWarningField();
     choossedmedium();
     renderSelectionContainer();
-    
-
 }
 
 function emptySubtask() {
-
-
     let currentSubtask = document.getElementById('input_Subtasks')
-
     currentSubtask.value = '';
 }
 
