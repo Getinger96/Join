@@ -9,7 +9,6 @@ function openTaskBoard() {
 function setTaskPriority() {
     let mediumButton = document.getElementById("medium");
     let mediumIcon = document.getElementById("mediumIcon");
-    
     mediumButton.classList.add("medium")
     mediumIcon.src = "./assets/IMG/Prio media.png";
     currentPriority = 'medium';
@@ -44,11 +43,10 @@ function redirect() {
     if (addtask==true) {
         if (width < 1230) {
             window.location="http://127.0.0.1:5500/add_task.html"
-             
          }
     }
-   
 }
+
 function openList() {
     let selecCon = document.getElementById('Selection_Container');
     let arrowCon = document.getElementById('arrow_img_container');
@@ -59,12 +57,10 @@ function openList() {
     } else {
         arrowCon.innerHTML = `<img class="arrow_drop_downaa" src="./assets/IMG/arrow_drop_downaa.svg" alt="">`;
         d_none = true;
-
     }
     getContacts();
     updateContactStyles();
 }
-
 
 function updateContactStyles() {
     for (let i = 0; i < contactsArray.length; i++) {
@@ -87,9 +83,8 @@ function displayContacts(contactIndex, contactsName, contactLastname, selectedCl
                     <span class="contactname">${contactsName}</span>
                 </div>
             </div>`;
-            
-
 }
+
 function showSelectedContainer(name,index) {
     let includedName = assignedContacts.includes(name)
     let contactContainer = document.getElementById(`profile-${index}`);
@@ -119,7 +114,6 @@ function selectedContact(index, color, name) {
         contactContainer.classList.add('color_white');
     }
 }
-
 
 function deselctedtContact(index, name,nameletter,color) {
     showSelectedContainer(nameletter, index);
@@ -195,7 +189,6 @@ function createExtraContactsBadge(extraCount) {
         <div id="extra_Contacts_Badge" class="profile_Badge_assign gray">+${extraCount}</div>
     `;
 }
-
 
 function showSelectedProfileEdit(name) {
     let selectedProfileContainer = document.getElementById('Selected_profiles_Container');
