@@ -344,17 +344,7 @@ async function saveTask(newTask) {
 }
 
 async function clearTask() {
-    for (let i = 0; i < contacts.length; i++) {
-        let contact = contacts[i];
-        let contactColour = contacts[i].color;
-        let name = contact.name;
-        let forNAme = name.charAt(0);
-        let forNAmebig = forNAme.toUpperCase();
-        let lastname = getLastName(name);
-        let firstletterlastname = lastname.charAt(0);
-        let firstletterlastnameBIG = firstletterlastname.toUpperCase();
-        let firstletters = forNAmebig + firstletterlastnameBIG;
-    }
+  
         clearFormFields();
         resetAddTask();
 }
