@@ -25,10 +25,8 @@ async function fetchContacts(path = '') {
         let contact = userAsArray[index];
         let key = keysArray[index];
         let colorIndex = index % colors.length;
-
         let color = colors[colorIndex];
         if (contact.email == 'guest@web.de') {
-
         } else {
             contacts.push({
                 id: key,
@@ -36,8 +34,8 @@ async function fetchContacts(path = '') {
                 name: contact.name,
                 password: contact.password,
                 color: color,
-            })
-
+            }
+        )
         }
     }
     renderSelectionContainer()
@@ -58,10 +56,8 @@ function func1(event) {
 }
 let d_none = true;
 function openList() {
-
     let selecCon = document.getElementById('Selection_Container');
     let arrowCon = document.getElementById('arrow_img_container');
-
     selecCon.classList.toggle('d_none');
 
     if (d_none == true) {
@@ -70,18 +66,14 @@ function openList() {
     } else {
         arrowCon.innerHTML = `<img class="arrow_drop_up" src="./assets/IMG/arrow_drop_downaa.svg" alt="">`;
         d_none = true;
-
     }
-
 }
-
 
 function closelist() {
     let selecCon = document.getElementById('Selection_Container');
     let arrowCon = document.getElementById('arrow_img_container');
     arrowCon.innerHTML = '';
     arrowCon.innerHTML = `<img class="arrow_drop_downaa" src="assets/IMG/arrow_drop_downaa.svg" alt="">`;
-
     selecCon.classList.add('d_none');
     d_none = true;
 }
@@ -111,7 +103,6 @@ function closelistCategory() {
     let seleCon = document.getElementById('Selection_Container_Category');
     seleCon.classList.add('d_none');
 }
-
 
 function getLastName(name) {
     let lastName = name.trim().split(' ');
@@ -150,7 +141,6 @@ function renderContacts(i, contactColour, firstletters, name) {
           <img  class="check_img " src="./assets/IMG/Check button.svg" alt="">
          </div>
         </div>`
-
 }
 
 function selectedContact(i, name, firstletters, contactColour) {
@@ -175,11 +165,8 @@ function selectedContact(i, name, firstletters, contactColour) {
 function deselctedtContact(i, name, firstletters, contactColour) {
     let checkbox = document.getElementById(`checkbox${i}`);
     checkbox.innerHTML = `<img  id="checkImg${i}" class="check_img" src="assets/IMG/Check button.svg" alt="">`
-
     assignedContacts = assignedContacts.filter(contact => contact !== name);
-
     showSelectedProfile(firstletters, i, contactColour);
-
 }
 
 function showSelectedProfile() {
@@ -217,7 +204,6 @@ function showSelectedProfile() {
     }
 }
 
-
 function dateinput() {
     let duedate = document.getElementById('dueDate');
     duedate.min = new Date().toISOString().split('T')[0];
@@ -225,7 +211,11 @@ function dateinput() {
 
 function renderPrioButtons() {
     let prioButtonContainer = document.getElementById('Prio_btn_Container');
-    prioButtonContainer.innerHTML = `
+    prioButtonContainer.innerHTML = prioButtonsHtml();
+}
+
+function prioButtonsHtml(){
+    return`
                         <button onclick="chossedurgent()" type="button" id="urgent"  class="Prio_Btn">Urgent <img
                                 id="urgentIcon" src="./assets/IMG/Priority symbols (1).png" alt=""></button>
                                  <button type="button" id="medium" onclick="choossedmedium()" class="Prio_Btn">Medium <img
@@ -233,7 +223,7 @@ function renderPrioButtons() {
                         </button>
                         <button type="button" id="low" onclick="choosedlow()" class="Prio_Btn">Low
                             <img id="lowIcon" src="./assets/IMG/Prio_Low(2).svg" alt=""></button>
-                             `;
+                             `
 }
 
 function chossedurgent() {
@@ -276,7 +266,6 @@ function choosedlow() {
     prio = 'low';
 }
 
-
 async function postData(path = "", data = {}) {
     let response = await fetch(base_URL + path + ".json", {
         method: "POST",
@@ -287,7 +276,6 @@ async function postData(path = "", data = {}) {
     });
     return responsASJson = await response.json();
 }
-
 
 async function createTask(event) {
     event.preventDefault();
@@ -325,31 +313,15 @@ async function createTask(event) {
     if (loggedInUser === guest) {
         localStorage.setItem('guestTasks', JSON.stringify(newTask))
         clearTask();
-
     }
-
-
     clearMissingFieldContent();
     await postData(`tasks`, newTask);
     clearTask();
     gotoBoard();
-
 }
 
-
 async function clearTask() {
-    for (let i = 0; i < contacts.length; i++) {
-        let contact = contacts[i];
-        let contactColour = contacts[i].color;
-        let name = contact.name;
-        let forNAme = name.charAt(0);
-        let forNAmebig = forNAme.toUpperCase();
-        let lastname = getLastName(name);
-        let firstletterlastname = lastname.charAt(0);
-        let firstletterlastnameBIG = firstletterlastname.toUpperCase();
-        let firstletters = forNAmebig + firstletterlastnameBIG;
-
-    }
+    
     let selectedProfileContainer = document.getElementById('Selected_profiles_Container');
     selectedProfileContainer.innerHTML = '';
     let inpuSubtask = document.getElementById('input_Subtasks');
@@ -372,15 +344,9 @@ async function clearTask() {
     clearWarningField();
     choossedmedium();
     renderSelectionContainer();
-    
-
 }
 
 function emptySubtask() {
-
-
     let currentSubtask = document.getElementById('input_Subtasks')
-
     currentSubtask.value = '';
 }
-
