@@ -320,7 +320,7 @@ a:hover {
     
 
     .headblock {
-        padding: 20px 16px 20px 16px;
+        padding: 20px 99px 20px 99px;
         height: 80px;
     }
 
@@ -342,11 +342,20 @@ a:hover {
 
   
 }
-
-
-@media(max-width: 1220px) {
+@media(max-width: 1320px) {
     .headblock {
-        padding: 20px 40px 20px 60px;
+        padding: 20px 61px 20px 61px;
+    }
+
+
+
+
+}
+
+
+@media(max-width: 1230px) {
+    .headblock {
+        padding: 20px 40px 20px 40px;
     }
 
 
@@ -358,6 +367,12 @@ a:hover {
     .logoutSection {
         top: 100px;
         z-index: 999;
+    }
+}
+
+@media(max-width: 800px){
+    .headblock {
+        padding: 20px 20px 20px 12px;
     }
 }
 
