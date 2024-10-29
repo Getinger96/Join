@@ -10,12 +10,12 @@ function checkValidationDate() {
     currentDate.setHours(0, 0, 0, 0);
 
     if (selectedDate < currentDate ) {
-        document.getElementById("dueDate").style.border = "2px solid red";
+        document.getElementById("dueDate").classList.add("invalid-date-border");
         showInvalidDateMessage();
         return false;
     }
     document.getElementById("WrongCurrentDateId").innerHTML = '';
-    document.getElementById("dueDate").style.border = '';
+    document.getElementById("dueDate").classList.remove("invalid-date-border");
 }
 
 /**
@@ -38,7 +38,7 @@ function validateTask(titel, category, date) {
 }
 
 function validateInputs(titel, category, date) {
-    if (titel.value === '' || category.value === '' || date === '') {
+    if (titel === '' || category === '' || date === '') {
         allInputFieldMissing();
         changeColorBorder();
         showInvalidDateMessage();
@@ -64,11 +64,11 @@ function checkDateValidity(date) {
  * 
  */
 function resetInputStyles() {
-    document.getElementById("title").style.border = '';
-    document.getElementById("select_containerId").style.border = '';
+    document.getElementById("title").classList.remove("missing-input-border");
+    document.getElementById("select_containerId").classList.remove("missing-input-border");
     document.getElementById("InputFieldsMissing").innerHTML = '';
     document.getElementById("WrongCurrentDateId").innerHTML = '';
-    document.getElementById("dueDate").style.border = '';    
+    document.getElementById("dueDate").classList.remove("invalid-date-border");
 }
 
 
@@ -100,15 +100,16 @@ function showInvalidDateMessage() {
  * 
  */
 function changeColorBorder() {
-    document.getElementById("title").style.border = "2px solid red";
-    document.getElementById("dueDate").style.border = "2px solid red";
-    document.getElementById("select_containerId").style.border = "2px solid red";
+    document.getElementById("title").classList.add("missing-input-border");
+    document.getElementById("dueDate").classList.add("missing-input-border");
+    document.getElementById("select_containerId").classList.add("missing-input-border");
 }
 
+
 function clearMissingFieldContent() {
-    document.getElementById("title").style.border= '';
-    document.getElementById("dueDate").style.border= '';
-    document.getElementById("select_containerId").style.border= '';
+    document.getElementById("title").classList.remove("missing-input-border");
+    document.getElementById("dueDate").classList.remove("missing-input-border");
+    document.getElementById("select_containerId").classList.remove("missing-input-border");
     document.getElementById("InputFieldsMissing").innerHTML = '';
     let SubtaskLengthReachedElement = document.getElementById('SubtaskLengthReached')
 
@@ -119,9 +120,9 @@ function clearMissingFieldContent() {
 }
 
 function clearWarningField() {
-    document.getElementById("title").style.border= '';
-    document.getElementById("dueDate").style.border= '';
-    document.getElementById("select_containerId").style.border= '';
+    document.getElementById("title").classList.remove("missing-input-border");
+    document.getElementById("dueDate").classList.remove("missing-input-border");
+    document.getElementById("select_containerId").classList.remove("missing-input-border");
     document.getElementById("InputFieldsMissing").innerHTML = '';
     document.getElementById("WrongCurrentDateId").innerHTML = '';
 }

@@ -67,6 +67,7 @@ label {
     justify-content: center;
     align-items: center;
     background-color: #E7E7E7;
+    width: 250px;
 }
 
 .fiedIsempty.visibleContainer {
@@ -384,6 +385,7 @@ h3 {
     align-items: center;
 }
 
+
 .spaceBetween {
     display: flex;
     justify-content: space-between;
@@ -420,9 +422,10 @@ h3 {
     height: 48px;
     border-radius: 10px;
     background-color: rgb(255, 255, 255);
-    margin-right: 16px;
+    margin-right: 40px;
     width: 312px;
     box-sizing: border-box;
+    border: solid 0.5px;
 }
 
 .searchContainer:focus-within {
@@ -444,6 +447,13 @@ h3 {
     background-color: #2A3647;
 }
 
+<<<<<<< HEAD
+=======
+.buttonContainer:hover  {
+    background-color: #29ABE2;
+}
+
+>>>>>>> 67f815ebc5c1c7c44d7ca090a00b15e3789a2c33
 
 Button {
     height: 24px;
@@ -469,7 +479,13 @@ Button {
     padding-block: 0px;
     padding-inline: 0px;
 }
+.error-border {
+    border: 2px solid red !important;
+  }
 
+.error-borderBottom {
+  border-bottom: 3px solid red  !important;
+}
 .boardAddTask {
     background-color: white;
     border-radius: 30px;
@@ -606,6 +622,7 @@ h1 {
 /*Add Task*/
 .divBoard {
     margin-left: 350px;
+    margin-right: 160px;
 }
 
 .addTaskContainer {

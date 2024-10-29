@@ -24,6 +24,29 @@ body {
   font-weight: bolder;
 }
 
+.error-border {
+  border: 2px solid red !important;
+}
+
+.error-borderBottom {
+border-bottom: 3px solid red  !important;
+}
+.missing-input-border {
+  border: 2px solid red !important;
+}
+.invalid-date-border {
+  border: 2px solid red !important;
+}
+
+.invalid-border-Subtask {
+  border: 1px solid red !important;
+}
+
+.invalid-input.Subtask {
+  border-bottom: 3px solid red !important;
+}
+
+
 .EditSubtaskButton {
   border: none;
   background-color: #f6f7f8;

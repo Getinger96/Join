@@ -189,6 +189,23 @@ function changeColorTextMobile() {
     document.getElementById("textInputMobile").style.border= "2px solid red";
 }
 
+function closeAllWarningMessageMobile() {
+    document.getElementById("wrongPhoneMobile").innerHTML = '';
+    document.getElementById("phoneInputMobile").style.border = "";
+    document.getElementById("wrongEmailMobile").innerHTML = '';
+    document.getElementById("mailInputMobile").style.border = "";
+    document.getElementById("wrongTextMobile").innerHTML = '';
+    document.getElementById("textInputMobile").style.border = "";
+}
+
+function closeAllWarningMessage() {
+    document.getElementById("wrongText").innerHTML = '';
+    document.getElementById("textInput").style.border = "";
+    document.getElementById("wrongEmail").innerHTML = '';
+    document.getElementById("mailInput").style.border = "";
+    document.getElementById("wrongPhone").innerHTML = '';
+    document.getElementById("phoneInput").style.border = "";
+}
 
 async function updateContactInTasks(editedContact) {
     let response = await fetch(base_URL + "/tasks.json");  
@@ -245,43 +262,49 @@ async function updateAssignedContactsInFirebase(path, updatedContacts) {
     return response.json();
 }
 
-
-
-
 async function fetchTasks(path = '') {
     tasksArray = [];
-    let response = await fetch(base_URL + path + ".json");
-    let userJSON = await response.json();
+    let userJSON = await fetchTasksData(path);
     if (!userJSON.tasks) {
         return;
     }
+    populateTasksArray(userJSON);
+}
 
-    let tasksAsarray = Object.values(userJSON.tasks)
+async function fetchTasksData(path) {
+    let response = await fetch(base_URL + path + ".json");
+    return await response.json();
+}
+
+function populateTasksArray(userJSON) {
+    let tasksAsarray = Object.values(userJSON.tasks);
     let keysArrayTask = Object.keys(userJSON.tasks);
     currentDraggedElement = 0;
-    id = 0
+    id = 0;
+
     for (let index = 0; index < tasksAsarray.length; index++) {
         let task = tasksAsarray[index];
         let keyTask = keysArrayTask[index];
         id++;
-        let saveTask = tasksArray.filter(t => t.Title === task.Titel && t.Description === task.Description);
-        if (saveTask.length > 0) {
-            console.log(`Task mit Titel "${task.Titel}" existiert bereits.`);
-
-        } else {
-            tasksArray.push({
-                taskKey: keyTask,
-                idTask: id,
-                Title: task.Titel,
-                Description: task.Description,
-                Assigned: task.AssignedContact,
-                duedate: task.Date,
-                Prio: task.Prio,
-                Category: task.Category,
-                subtask: task.Subtask,
-                status: task.Status,
-            });
-        }
+        addTaskToArray(task, keyTask);
     }
+}
 
+function addTaskToArray(task, keyTask) {
+    let saveTask = tasksArray.filter(t => t.Title === task.Titel && t.Description === task.Description);
+    if (saveTask.length > 0) {
+    } else {
+        tasksArray.push({
+            taskKey: keyTask,
+            idTask: id,
+            Title: task.Titel,
+            Description: task.Description,
+            Assigned: task.AssignedContact,
+            duedate: task.Date,
+            Prio: task.Prio,
+            Category: task.Category,
+            subtask: task.Subtask,
+            status: task.Status,
+        });
+    }
 }

@@ -135,14 +135,15 @@ body {
   color: white;
   font-size: 20px;
   font-family: "inter", sans-serif;
+  touch-action: manipulation;
 }
 
 .loginbutton:hover {
   background-color: #29abe2;
-  font-weight: bolder;
-  cursor: pointer;
-  font-size: 20px;
-  font-family: "inter", sans-serif;
+  touch-action: manipulation;
+}
+.loginbutton {
+  -webkit-tap-highlight-color: transparent;
 }
 
 .guestbutton {

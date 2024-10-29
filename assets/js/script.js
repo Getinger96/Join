@@ -86,7 +86,7 @@ function toggleLogoutHtml() {
             <a class="logoutsectionlinkHelp d_none" href="help.html"> Help </a>
             <a class="logoutsectionlink" href="legal_notes.html"> Legal Notice </a>
             <a class="logoutsectionlink" href="privacy_policy.html"> Privacy Policy</a>
-            <a  class="logoutsectionlinklogouttext"  href="login.html"> Log out </a>W
+            <a  class="logoutsectionlinklogouttext"  href="login.html"> Log out </a>
          </div>
                         `;
 }

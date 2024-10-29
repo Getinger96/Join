@@ -5,7 +5,6 @@ function showCard(task, taskIndex) {
 
 }
 
-
 function openToDo(taskIndex) {
 taskIndex--;
 let task = tasksArray[taskIndex];  
@@ -345,7 +344,6 @@ async function putDataTask(path = "", data = {}) {
     return responsASJson = await response.json();
 }
 
-
 function handleDragOver(categoryId) {
     let dragArea = document.getElementById(categoryId);
     dragArea.classList.add('dragging-over');
@@ -357,7 +355,6 @@ function removeHighlight(categoryId) {
     dragArea.classList.remove('dragging-over');
 
 }
-
 
 async function updateBoard(category, task, event) {
     let taskElement = document.getElementById(`task_${task.idTask - 1}Element`);

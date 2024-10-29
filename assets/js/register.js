@@ -59,32 +59,14 @@ async function  checkRegistration() {
         email: usermail.value,
         password: userpassword.value
     };
-
-
     await postData(`contacts`, newContact)
-
-
-
     emptyTheInputFields(username, usermail, userpassword, userconfirmpassword, checkbox);
-
     showSignedUpSuccessfully();
-
-    setTimeout(() => {window.location.href ='login.html'
-        
+    setTimeout(() => {window.location.href ='login.html'  
     }, 3000);
-
-
     await loadUsers('users');
   
 }
-
-
-function validateUsername() {
-
-
-    
-}
-
 
 function ButtonDisabledSet() {
     let signUpButton = document.getElementById('signUpButton');
@@ -92,9 +74,6 @@ function ButtonDisabledSet() {
     signUpButton.classList.add('disabledbutton');
 
 }
-
-
-
 function checkFormCompletion() {
     let username = document.getElementById('username').value.trim();
     let usermail = document.getElementById('usermail').value.trim();
@@ -123,9 +102,7 @@ function emptyTheInputFields(username, usermail, userpassword, userconfirmpasswo
     checkbox.checked = false;
 }
 
-
 function passwordvisbility() {
-
     document.getElementById("visbilityimg").src = "assets/IMG/visibility_off_password.png";
     
 }
@@ -142,17 +119,12 @@ function showVisbility() {
         userpassword.type = "password"
         visibilityImg.src = "assets/IMG/visibility_off_password.png"; 
     }
-
 }
 
-
 function passwordconfirmvisbility() {
-
     document.getElementById("visbilityimgconfirm").src = "assets/IMG/visibility_off_password.png";
     
 }
-
-
 
 function showVisbilityconfirmpassword() {
     let userpassword = document.getElementById('userconfirmpassword');
@@ -165,9 +137,7 @@ function showVisbilityconfirmpassword() {
         userpassword.type = "password"
         visibilityImg.src = "assets/IMG/visibility_off_password.png"; 
     }
-
 }
-
 
 function validateUsername() {
     let username = document.getElementById('username').value.trim();
@@ -279,90 +249,91 @@ function showSignedUpSuccessfully() {
 
 function emailIsAlreadyAvailable() {
 return `Attention, the email already exists!!!`
-
 }
 
 function goBackToLogin() {
     window.location.href = "login.html";
 }
 
-
-
-
 function nameIsNotValid(username) {
     const nameCheck = /^[A-Za-zäöüÄÖÜß]+\s[A-Za-zäöüÄÖÜß]+$/;
     return nameCheck.test(username);
-
 }
-
 
 function emailIsNotCorrect(usermail) {
         let emailCheck = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return emailCheck.test(usermail); 
-    
-
 }
 
 function wrongEmailValidation() {
     return `
     Attention, a correct email address must be provided !!!`;
-
 }
-
 
 function wrongTextValidation() {           
     return `
-      Please enter a full name of 3-30 letters`;
-                   
+      Please enter a full name of 3-30 letters`;                   
                    }
 
 
-
-
-function sigUpValidation(user, username, usermail, userpassword, userconfirmpassword, checkbox) {
-
+function validateUserName(username) {
     let sigUpInfo = document.getElementById('signupinfotext');
-
-
-     if (user) {
-        sigUpInfo.innerHTML = emailIsAlreadyAvailable();
-        ButtonDisabledSet();
-        return;
-    }
-
-
-    if (!nameIsNotValid(username.value) || username.value.length < 3 ||  username.value.length > 30) {
+    
+    if (!nameIsNotValid(username.value) || username.value.length < 3 || username.value.length > 30) {
         sigUpInfo.innerHTML = wrongTextValidation();
         ButtonDisabledSet();
         return false;
     }
+    
+    sigUpInfo.innerHTML = ''; 
+    return true;
+}
 
-
+function validateUserEmail(usermail) {
+    let sigUpInfo = document.getElementById('signupinfotext');
+    
     if (!emailIsNotCorrect(usermail.value)) {
         sigUpInfo.innerHTML = wrongEmailValidation();
         ButtonDisabledSet();
         return false;
     }
 
+    sigUpInfo.innerHTML = '';
+    return true;
+}
 
-
+function validateUserPassword(userpassword, userconfirmpassword) {
+    let sigUpInfo = document.getElementById('signupinfotext');
+    
     if (userpassword.value.length <= 5) {
         sigUpInfo.innerHTML = passwordToShort();
         ButtonDisabledSet();
         return false;
     }
-
-
+    
     if (userpassword.value !== userconfirmpassword.value) {
         sigUpInfo.innerHTML = passwordNoMatch();
         ButtonDisabledSet();
         return false;
     }
+    sigUpInfo.innerHTML = ''; 
+}
 
+function sigUpValidation(user, username, usermail, userpassword, userconfirmpassword, checkbox) {
+    let sigUpInfo = document.getElementById('signupinfotext');
+    
+    if (user) {
+        sigUpInfo.innerHTML = emailIsAlreadyAvailable();
+        ButtonDisabledSet();
+        return false;
+    }
+    if (!validateUserName(username) || !validateUserEmail(usermail) || !validateUserPassword(userpassword, userconfirmpassword)) {
+        return false;
+    }
     if (!checkbox.checked) {
         sigUpInfo.innerHTML = checkboxNoChecked();
         ButtonDisabledSet();
         return false;
     }
-    return true
+    return true;
 }
