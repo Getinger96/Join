@@ -1,7 +1,7 @@
 /**
  * This function check the validation of the input of the Date
  * 
- * @returns if the Date is unacceptable
+ * @returns {boolean} if the Date is unacceptable
  */
 function checkValidationDate() {
     let date = document.getElementById('dueDate').value;
@@ -24,7 +24,7 @@ function checkValidationDate() {
  * @param {string} titel titel of the task
  * @param {string} category  category of the task
  * @param {date} date  date due the task should be finished
- * @returns wether or not ist filled
+ * @returns {boolean} wether or not ist filled
  */
 function validateTask(titel, category, date) {
     if (!validateInputs(titel, category, date)) {
@@ -145,7 +145,7 @@ function hasTasks(userJSON) {
  * This function fetches data from database about users
  * 
  * @param {*} path 
- * @returns 
+ * @returns {}
  */
 async function fetchUserData(path) {
     let response = await fetch(base_URL + path + ".json");
