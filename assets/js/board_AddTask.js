@@ -1,11 +1,21 @@
 let d_none = true;
 
+
+/**
+ * This function open Add Task
+ * 
+ */
 function openTaskBoard() {
     let =addtask=true;
     setTaskPriority();
     toggleTaskBoardVisibility();
 }
 
+
+/**
+ * 
+ * This function set the Prio Icon 
+ */
 function setTaskPriority() {
     let mediumButton = document.getElementById("medium");
     let mediumIcon = document.getElementById("mediumIcon");
@@ -14,6 +24,12 @@ function setTaskPriority() {
     currentPriority = 'medium';
 }
 
+
+
+/**
+ * 
+ * The function switches on the visibility of the board
+ */
 function toggleTaskBoardVisibility() {
     let taskDiv = document.getElementById('boardAddTask');
     let overlay = document.getElementById('darkOverlay');
@@ -25,6 +41,13 @@ function toggleTaskBoardVisibility() {
     }
 }
 
+
+/**
+ * 
+ * The function show AddTask
+ * @param {*} taskDiv  addTask Screen
+ * @param {*} overlay addTask Screen
+ */
 function showTaskBoard(taskDiv, overlay) {
     taskDiv.classList.remove('visible');
     overlay.classList.remove('visible');
@@ -32,12 +55,21 @@ function showTaskBoard(taskDiv, overlay) {
     setCreateTaskButton();
 }
 
+/**
+ *  The function hide AddTask
+ * @param {*} taskDiv addTask Screen
+ * @param {*} overlay addTask Screen
+ */
 function hideTaskBoard(taskDiv, overlay) {
     taskDiv.classList.add('visible');
     overlay.classList.add('visible');
     document.body.classList.remove('no-scroll');
 }
 
+
+/**
+ * the function goes to AddTask HTML
+ */
 function redirect() {
     let width=window.innerWidth;
     if (addtask==true) {
@@ -46,7 +78,9 @@ function redirect() {
          }
     }
 }
-
+/**
+ * the function open contacts List
+ */
 function openList() {
     let selecCon = document.getElementById('Selection_Container');
     let arrowCon = document.getElementById('arrow_img_container');
@@ -62,6 +96,9 @@ function openList() {
     updateContactStyles();
 }
 
+/**
+ * the function Update contacts List
+ */
 function updateContactStyles() {
     for (let i = 0; i < contactsArray.length; i++) {
         const contact = contactsArray[i];
@@ -85,6 +122,13 @@ function displayContacts(contactIndex, contactsName, contactLastname, selectedCl
             </div>`;
 }
 
+
+/**
+ * the function show contact List-bar
+ * @param {*} name contact name
+ * @param {*} index  index array assignedContacts
+ *
+ */
 function showSelectedContainer(name,index) {
     let includedName = assignedContacts.includes(name)
     let contactContainer = document.getElementById(`profile-${index}`);
@@ -100,6 +144,12 @@ function showSelectedContainer(name,index) {
     }
 }
 
+/**
+ * the function selected  contact List-bar 
+ * @param {*} index index array assignedContacts
+ * @param {*} color contact color
+ * @param {*} name contact name
+ */
 function selectedContact(index, color, name) {
     showSelectedContainer(name, index);
     let includedName = assignedContacts.includes(name);
@@ -114,7 +164,13 @@ function selectedContact(index, color, name) {
         contactContainer.classList.add('color_white');
     }
 }
-
+/**
+ * the function  deselctedt contact List-bar 
+ * @param {*} index index array assignedContacts
+ * @param {*} name contact name
+ * @param {*} nameletter name abbreviation
+ * @param {*} color contact name
+ */
 function deselctedtContact(index, name,nameletter,color) {
     showSelectedContainer(nameletter, index);
     let contactIndex = assignedContacts.indexOf(nameletter);
@@ -135,13 +191,22 @@ function deselctedtContact(index, name,nameletter,color) {
     }     
 }
 
-
+/**
+ * the function update Contacts
+ * @param {*} color contact color
+ * @param {*} name contact name
+ * @param {*} index index array assignedContacts
+ */
 function showSelectedProfile(color, name, index) {
     clearSelectedProfileContainer();
     displayAssignedContacts();
     updateExtraContactsBadge();
 }
 
+/**
+ * 
+the function deletes the selected profile containers
+ */
 function clearSelectedProfileContainer() {
     const selectedProfileContainer = document.getElementById('Selected_profiles_Container');
     if (selectedProfileContainer) {
@@ -149,6 +214,10 @@ function clearSelectedProfileContainer() {
     }
 }
 
+/**
+ * 
+the function shows View assigned contacts
+ */
 function displayAssignedContacts() {
     const selectedProfileContainer = document.getElementById('Selected_profiles_Container');
     for (let i = 0; i < assignedContacts.length && i < 4; i++) { 
@@ -160,6 +229,13 @@ function displayAssignedContacts() {
     }
 }
 
+/**
+ * the function adds contacts badge
+ * @param {*} container container foreach contacts
+ * @param {*} contact contact 
+ * @param {*} contactName full contact name
+ * @param {*} index index array assignedContacts
+ */
 function addContactBadge(container, contact, contactName, index) {
     let contactColour = contact.color;
     let firstletters = contactName.charAt(0).toUpperCase() + getLastName(contactName).charAt(0).toUpperCase();
@@ -167,7 +243,9 @@ function addContactBadge(container, contact, contactName, index) {
         <div id="profile_Badge_assign${index}" class="profile_Badge_assign ${contactColour}">${firstletters}</div>
     `;
 }
-
+/**
+ * the function update extra contacts badge
+ */
 function updateExtraContactsBadge() {
     const extraContactsBadge = document.getElementById('extra_Contacts_Badge');
     let extraCount = assignedContacts.length - 4;
@@ -182,14 +260,20 @@ function updateExtraContactsBadge() {
         extraContactsBadge.remove();
     }
 }
-
+/**
+ * the funcktion create extra contacts badge
+ * @param {*} extraCount extra contact id
+ */
 function createExtraContactsBadge(extraCount) {
     const selectedProfileContainer = document.getElementById('Selected_profiles_Container');
     selectedProfileContainer.innerHTML += `
         <div id="extra_Contacts_Badge" class="profile_Badge_assign gray">+${extraCount}</div>
     `;
 }
-
+/**
+ * the function show scelected profile edit
+ * @param {*} name contact name
+ */
 function showSelectedProfileEdit(name) {
     let selectedProfileContainer = document.getElementById('Selected_profiles_Container');
     let findcontact = contactsArray.find(co => co.name === name);
@@ -204,7 +288,13 @@ function showSelectedProfileEdit(name) {
 
     }
 }
-
+/**
+ * the function show selected profile container
+ * @param {*} index index array assignedContacts
+ * @param {*} color contac color
+ * @param {*} firstletters name fristletter
+ * @returns 
+ */
 function showselectedProfileContainer(index, color, firstletters) {
   return `
     <div id="profilebadge_Assign${index}" class="contact-icon${index} ${color} profilebadge">
@@ -212,7 +302,9 @@ function showselectedProfileContainer(index, color, firstletters) {
     </div>
 `;
 }
-
+/**
+ * the function reset all prio button
+ */
 function resetButtons() {
     let buttons = [
         { id: 'urgent', imgSrc: './assets/IMG/Priority symbols (1).png' },
@@ -229,7 +321,9 @@ function resetButtons() {
     });
     currentPriority = 'none';
 }
-
+/**
+ * the function clear Task 
+ */
 function clearTask() {
     deselectAllContacts();
     clearCurrentTask();
@@ -241,13 +335,18 @@ function clearTask() {
     returnColorPrioIcons();
     medium();
 }
-
+/**
+ * the function deselect all contacts
+ */
 function deselectAllContacts() {
     for (let contactIndex = 0; contactIndex < contactsArray.length; contactIndex++) {
         let contact = contactsArray[contactIndex];
         deselctedtContact(contactIndex, contact.name, `${contact.name.charAt(0).toUpperCase()}${getLastName(contact.name).charAt(0).toUpperCase()}`, contact.color);
     }
 }
+/**
+ * the function deselect current task
+ */
 
 function clearCurrentTask() {
     let taskIndex = currentTaskIndex;
@@ -256,7 +355,9 @@ function clearCurrentTask() {
         localStorage.removeItem(`task-${taskIndex}-subtasks`);
     }
 }
-
+/**
+ * the function clear Form input fields
+ */
 function clearFormFields() {
     clearSelectionContainer();
     clearInputField('taskTitle');
@@ -267,58 +368,77 @@ function clearFormFields() {
     clearDateInput();
     clearSelectedProfiles();
 }
-
+/**
+ * the function clear selection container
+ */
 function clearSelectionContainer() {
     const selectionContainer = document.getElementById('Selection_Container');
     if (selectionContainer) {
         selectionContainer.innerHTML = '';
     }
 }
-
+/**
+ * the function clear  input fields
+ */
 function clearInputField(fieldId) {
     const field = document.getElementById(fieldId);
     if (field) {
         field.value = '';
     }
 }
-
+/**
+ * the function creset select Element
+ */
 function resetSelectElement(elementId) {
     const element = document.getElementById(elementId);
     if (element) {
         element.selectedIndex = 0;
     }
 }
-
+/**
+ * the function clear subtask Container
+ */
 function clearSubtaskContainer() {
     const subtaskContainer = document.getElementById('subtasksContainer');
     if (subtaskContainer) {
         subtaskContainer.innerHTML = '';
     }
 }
-
+/**
+ * the function clear date Input
+ */
 function clearDateInput() {
     const dateInput = document.querySelector('.inputTitleDate');
     if (dateInput) {
         dateInput.value = '';
     }
 }
-
+/**
+ * the function clear selected profiles-Container
+ */
 function clearSelectedProfiles() {
     const selectedProfilesContainer = document.getElementById('Selected_profiles_Container');
     if (selectedProfilesContainer) {
         selectedProfilesContainer.innerHTML = '';
     }
 }
-
+/**
+ * the function reset additional settings
+ */
 function resetAdditionalSettings() {
     resetButtons();
 }
-
+/**
+ * the function reset subtask and assignedContacts
+ */
 function resetDataArrays() {
     assignedContacts = [];
     subtasks = [];
 }
 
+/**
+ * the function change urgent img
+ */
 function urgent() {
     resetButtons();
 
@@ -329,7 +449,9 @@ function urgent() {
     urgentIcon.src = "./assets/IMG/iconUrgentWhite.svg";
     currentPriority = 'urgent';
 }
-
+/**
+ * the function change medium img
+ */
 function medium() {
     resetButtons();
 
@@ -340,7 +462,9 @@ function medium() {
     mediumIcon.src = "./assets/IMG/Prio media.png";
     currentPriority = 'medium';
 }
-
+/**
+ * the function change low img
+ */
 function low() {
     resetButtons();
 

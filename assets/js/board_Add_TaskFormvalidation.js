@@ -1,3 +1,6 @@
+/**
+ * the function check validation date
+ */
 function checkValidationDate() {
     let date = document.getElementById('taskDueDate').value;
     let selectedDate = new Date(date);
@@ -11,7 +14,13 @@ function checkValidationDate() {
     document.getElementById("WrongCurrentDateId").innerHTML = '';
     document.getElementById("taskDueDate").style.border = '';
 }
-
+/**
+ *  the function check validation titel, category, date
+ * @param {*} titel addtask title
+ * @param {*} category addtask category
+ * @param {*} date addtask date
+ * 
+ */
 function validateTask(titel, category, date) {
     if (!validateInputs(titel, category, date)) {
         return false;
@@ -22,7 +31,13 @@ function validateTask(titel, category, date) {
     resetInputStyles();
     return true;
 }
-
+/**
+ * the function validate input field
+ * @param {*} titel addtask title
+ * @param {*} category addtask category
+ * @param {*} date addtask date
+ *  
+ */
 function validateInputs(titel, category, date) {
     if (titel.value === '' || category.value === '' || date.value === '') {
         allInputFieldMissing();
@@ -35,7 +50,11 @@ function validateInputs(titel, category, date) {
     }
     return true; 
 }
-
+/**
+ * the function check date validity
+ * @param {*} date addtask date
+ * 
+ */
 function checkDateValidity(date) {
     let selectedDate = new Date(date.value);
     let currentDate = new Date(); 
@@ -50,13 +69,18 @@ function checkDateValidity(date) {
     return true;
 }
 
+/**
+ * the function reset input Field and style
+ */
 function resetInputStyles() {
     document.getElementById("taskTitle").style.border = '';
     document.getElementById("taskDueDate").style.border = '';
     document.getElementById("InputFieldsMissing").innerHTML = '';
     document.getElementById("WrongCurrentDateId").innerHTML = '';
 }
-
+/**
+ *  the function show warning info
+ */
 function allInputFieldMissing() {
     let showTileMissing = document.getElementById("InputFieldsMissing")
     showTileMissing.innerHTML = `<div>
@@ -64,7 +88,9 @@ function allInputFieldMissing() {
                                 </div>`;
     
 }
-
+/**
+ * the function show invalid date message
+ */
 function showInvalidDateMessage() {
     let showWrongCurrentDate = document.getElementById("WrongCurrentDateId")
     showWrongCurrentDate.innerHTML = `<div>
@@ -72,26 +98,34 @@ function showInvalidDateMessage() {
                                 </div>`;
     
 }
-
+/**
+ * the function change color border
+ */
 function changeColorBorder() {
     document.getElementById("taskTitle").style.border = "2px solid red";
     document.getElementById("taskDueDate").style.border = "2px solid red";
   
 }
-
+/**
+ * the function chang color prio icons
+ */
 function changColorPrioIcons() {
     document.getElementById("urgent").style.border = "2px solid red";
     document.getElementById("low").style.border = "2px solid red";
     document.getElementById("medium").style.border = "2px solid red";
 }   
-
+/**
+ * the function remove color prio icons
+ */
  function returnColorPrioIcons() {
     document.getElementById("urgent").style.border = '';
     document.getElementById("low").style.border = '';
     document.getElementById("medium").style.border = '';
 }   
 
-
+/**
+ * the function clear missing field content
+ */
 function clearMissingFieldContent() {
     document.getElementById("taskTitle").style.border= '';
     document.getElementById("taskDueDate").style.border= '';
@@ -103,9 +137,12 @@ function clearMissingFieldContent() {
     if (SubtaskLengthReachedElement) {
         SubtaskLengthReachedElement.innerHTML ='';
     }
-
-  
+ 
 }
+
+/**
+ * the function add current subtask
+ */
 function addCurrentSubtask() {
     let currentSubtask = document.getElementById('new-subtask').value;
     let subtaskInfoText =  document.getElementById('SubtaskLengthReached');
@@ -127,7 +164,10 @@ function addCurrentSubtask() {
             changeColorSubtaskInputField();
     }
 }
-
+/**
+ * the function delete subtask wiht local storage item
+ * @param {*} i subtask id
+ */
 function deleteItem(i) {
     event.stopPropagation();
     subtasks.splice(i, 1);
@@ -140,11 +180,18 @@ function deleteItem(i) {
     updateProgress(taskIndex);
 }
 
+/**
+ * the function delete subtaskand update add Task 
+ * @param {*} i subtask id
+ */
 function deleteSubtask(i){
     subtasks.splice(i, 1);
     addSubtask();
 }
 
+/**
+ * the function add subtask
+ */
 function addSubtask() {
     if (!Array.isArray(subtasks)) {
         subtasks = [];
@@ -160,6 +207,12 @@ function addSubtask() {
     }
 }
 
+/**
+ * the function show subTask container
+ * @param {*} subtasks subtaks Element
+ * @param {*} i  subtask id
+ *
+ */
 function showSubTaskContainer(subtasks, i) {
     return `<div class="editSubtaskheadlineContainer" id="boderSubtaskId${i}">
             <div class="editSubtask" id="subTaskValueId${i}">
@@ -180,12 +233,17 @@ function showSubTaskContainer(subtasks, i) {
             </div>`;
 }
 
-
+/**
+ * the function empties the subtask value
+ */
 function emptySubtask() {
     let currentSubtask = document.getElementById('new-subtask')
     currentSubtask.value='';
 }
-
+/**
+ * the function edit the subtask 
+ *  * @param {*} i  subtask id
+ */
 function editSubtask(i) {
     document.getElementById(`SubtaskLengthReached`).innerHTML ='';    
     removeColorSubtaskInputField();
@@ -194,7 +252,10 @@ function editSubtask(i) {
     document.getElementById(`changeImgEdit${i}`).innerHTML = ShowChangeImgCheckedIcon(i);
 
 }
-
+/**
+ * the function show change img checkedIcon
+ *  * @param {*} i  subtask id
+ */
 function ShowChangeImgCheckedIcon(i) {
 return `
    <button type="button" class="EditSubtaskButton" onclick="enterNewSubtask(${i})">
@@ -202,7 +263,11 @@ return `
                 </button>`
 }
 
-
+/**
+ * the function show subTask value edit
+ * *  @param {*} subtasks subtaks Element
+ *  * @param {*} i  subtask id
+ */
 function showSubTaskValueEdit(subtasks, i) {
     return `
     <li>
@@ -211,7 +276,10 @@ function showSubTaskValueEdit(subtasks, i) {
     </li>
     <div id="subtasksValidation${i}"></div> `
 }
-
+/**
+ * the function enter new subtask
+ *  * @param {*} i  subtask id
+ */
 function enterNewSubtask(i) {
     event.stopPropagation();
    let newSubTask = document.getElementById(`subtaskValue${i}`).value
@@ -227,7 +295,10 @@ function enterNewSubtask(i) {
    updateSubtaskElement(i);
    removeColorSubtaskInputField()
 }
-
+/**
+ * the function validate subtask
+ *  * @param {*} i  subtask id
+ */
 function validateSubtask(i) {
     let newSubTask = document.getElementById(`subtaskValue${i}`).value
     document.getElementById(`subtasksValidation${i}`).innerHTML='';
@@ -246,6 +317,10 @@ function validateSubtask(i) {
     updateSubtaskElement(i);
  }
 
+/**
+ * the function update subtask
+ *  * @param {*} i  subtask id
+ */
     function updateSubtaskElement(i) {
         let subTaskValueId = document.getElementById(`subTaskValueId${i}`);
         subTaskValueId.innerHTML = `
@@ -257,6 +332,10 @@ function validateSubtask(i) {
         changeImgEdit.innerHTML =ShowChangeImgEdit(i);
     }
 
+/**
+ * the function show edit button
+ *  * @param {*} i  subtask id
+ */    
 function ShowChangeImgEdit(i) {
     return `
             <button type="button" class="EditSubtaskButton" onclick="editSubtask(${i})">
@@ -264,17 +343,24 @@ function ShowChangeImgEdit(i) {
             </button>
         `;
 }
-
+/**
+ * the function show warning empty field
+ */
 function pleaseEnterASubtask() {
     document.getElementById(`SubtaskLengthReached`).innerHTML =`<span class="showShubtaskError">Please Enter a full subtask`;
 }
 
 
-
+/**
+ * the function change color subtask input field
+ */
 function changeColorSubtaskInputField() {
     document.getElementById(`subtaskBorderInputchange`).classList.add("error-border");
     }
 
+/**
+ * the function remove subtask style
+ */
 function removeColorSubtaskInputField() {
     document.getElementById(`subtaskBorderInputchange`).classList.remove("error-border");
         }

@@ -1,10 +1,19 @@
+
+/**
+ * the function show card
+ * @param {*} task task 
+ * @param {*} taskIndex task id
+ */
 function showCard(task, taskIndex) {
     let todoBig = document.getElementById('todoBig');
     let showCardHTML = createShowCard(task, taskIndex); 
     todoBig.innerHTML = showCardHTML;
 
 }
-
+/**
+ * the function open to do Card 
+ * @param {*} taskIndex task id
+ */
 function openToDo(taskIndex) {
 taskIndex--;
 let task = tasksArray[taskIndex];  
@@ -18,6 +27,11 @@ document.getElementById('overlay').classList.remove('d-none');
 showCard(task, taskIndex );  
 }
 
+/**
+ * the function generate small contact field
+ * @param {*} assignedContacts assignedContacts elemente
+ * 
+ */
 function generateSmallContactsHtml(assignedContacts) {
     let contactsHtml = '';
     assignedContacts.forEach((contact, index) => {
@@ -30,7 +44,11 @@ function generateSmallContactsHtml(assignedContacts) {
     });
     return contactsHtml;
 }
-
+/**
+ * the function generate larg contact field with  full name
+ * @param {*} assignedContacts assignedContacts Element
+ * 
+ */
 function generateLargeContactsHtml(assignedContacts) {
     let contactsHtml = ''; 
 
@@ -40,7 +58,12 @@ function generateLargeContactsHtml(assignedContacts) {
   
     return contactsHtml;  
 }
-
+/**
+ * the function generate full element
+ * @param {*} contact full contact
+ * @param {*} index assignedContacts id
+ * 
+ */
 function generateContactHtml(contact, index) {
     let nameParts = contact.split(' ');
     let contactFirstname = nameParts[0] || '';  
@@ -55,7 +78,11 @@ function generateContactHtml(contact, index) {
     
     return getLargeContactHtml(index, firstLetterForName, firstLetterLastName, contactFirstname, contactLastname, color);
 }
-
+/**
+ * the function show the color name
+ * @param {*} checkIndexarray check contact in taskarray and contaclistarray
+ * 
+ */
 function showTheNameColor(checkIndexarray) {
 
     let contactColor = contactsArray[checkIndexarray].color
@@ -65,7 +92,14 @@ function showTheNameColor(checkIndexarray) {
     return contactColor;
 
 }
-
+/**
+ * the function generate the samll contact
+ * @param {*} index assignedContacts id
+ * @param {*} firstname firstname contact
+ * @param {*} lastname  lastname contact
+ * @param {*} color contact color
+ * @returns 
+ */
 function getSmallContactHtml(index, firstname, lastname, color) {
     const initials = `${firstname.charAt(0).toUpperCase()}${lastname.charAt(0).toUpperCase()}`;
     return `
@@ -74,8 +108,16 @@ function getSmallContactHtml(index, firstname, lastname, color) {
         </div>
     `;
 }
-
-function getLargeContactHtml(index, firstLetterForName, firstLetterLastName, contactFirstname, contactLastname, color) {// Zeige vollständige Namen
+/**
+ * the function show the html element contact
+ * @param {*} index assignedContacts id
+ * @param {*} firstLetterForName firstname initial
+ * @param {*} firstLetterLastName lastname initial
+ * @param {*} contactFirstname firstname contact
+ * @param {*} contactLastname lastname contact
+ * @param {*} color contact color
+ */
+function getLargeContactHtml(index, firstLetterForName, firstLetterLastName, contactFirstname, contactLastname, color) {
 
     return `
         <div class="contact-box">
@@ -88,7 +130,11 @@ function getLargeContactHtml(index, firstLetterForName, firstLetterLastName, con
         </div>
     `;
 }
-
+/**
+ * the function create the card element
+ * @param {*} task tasks 
+ * @param {*} taskIndex task id
+ */
 function createShowCard(task, taskIndex) {
     let title = task.Title || '';
     let description = task.Description || '';
@@ -106,7 +152,21 @@ function createShowCard(task, taskIndex) {
     const subtasksHtml = generateSubtasksHtml(task.subtask, taskIndex);
     return generateCardHtml(title, description, dueDate, priority, priorityIcon, category, categoryColor, contactsHtml, subtasksHtml, taskIndex);
 }
-
+/**
+ * 
+ * the funtion show the html card 
+ * @param {*} title task title
+ * @param {*} description task description
+ * @param {*} dueDate task dueDate
+ * @param {*} priority task priority
+ * @param {*} priorityIcon task priorityIcon
+ * @param {*} category task category
+ * @param {*} categoryColor task categoryColor
+ * @param {*} contactsHtml task contactsHtml
+ * @param {*} subtasksHtml task subtasksHtml
+ * @param {*} taskIndex task taskIndex
+ * @returns 
+ */
 function generateCardHtml(title, description, dueDate, priority, priorityIcon, category, categoryColor, contactsHtml, subtasksHtml, taskIndex) {
     return `
         <div class="todo-detail">
@@ -152,7 +212,10 @@ function generateCardHtml(title, description, dueDate, priority, priorityIcon, c
     `;
 }
 
-
+/**
+ * the function closed overlay
+ * @param {*} taskIndex task id
+ */
 function closeOverlay(taskIndex) {
     const todoBig = document.getElementById('todoBig');
     const overlay = document.getElementById('overlay');
@@ -164,7 +227,10 @@ function closeOverlay(taskIndex) {
     document.body.style.overflow = 'auto';
     clearTask();
 }
-
+/**
+ * the function closed eidt overlay
+ * @param {*} taskIndex task id
+ */
 function closeoverlayedit(taskIndex) {
     const todoBig = document.getElementById('todoBig');
     const overlay = document.getElementById('overlay');
@@ -176,7 +242,12 @@ function closeoverlayedit(taskIndex) {
 }
 
 
-
+/**
+ * 
+ * @param {*} subtasks subtask element
+ * @param {*} taskIndex task id
+ * @returns 
+ */
 function generateSubtasksHtml(subtasks, taskIndex) {
     let subtasksHtml = '';
     const totalSubtasks = subtasks ? subtasks.length : 0;
@@ -192,7 +263,14 @@ function generateSubtasksHtml(subtasks, taskIndex) {
     }
     return subtasksHtml;
 }
-
+/**
+ * the function show subtask html
+ * @param {*} taskIndex task id
+ * @param {*} subtaskIndex subtask id
+ * @param {*} isChecked checkbox is checked
+ * @param {*} subtask subtask element
+ * @returns 
+ */
 function showSubtasksHtml(taskIndex, subtaskIndex, isChecked, subtask) {
     return `
     <div class="subtask-item">
@@ -203,7 +281,11 @@ function showSubtasksHtml(taskIndex, subtaskIndex, isChecked, subtask) {
 `;
 }
 
-
+/**
+ * the function checked checkbox
+ * @param {*} taskIndex task id
+ * @param {*} subtaskIndex subtask id     
+ */
 function subtaskChecked(taskIndex, subtaskIndex) {
     const subtaskStatus = JSON.parse(localStorage.getItem(`task-${taskIndex}-subtasks`)) || {};
     const isChecked = document.getElementById(`subtask-${taskIndex}-${subtaskIndex}`).checked;
@@ -212,7 +294,10 @@ function subtaskChecked(taskIndex, subtaskIndex) {
 
     updateProgress(taskIndex);
 }
-
+/**
+ * the function update subtask bar
+ * @param {*} taskIndex task id   
+ */
 function updateProgress(taskIndex) {
     let indexTasksArray = taskIndex +1;
     const task = tasksArray.find(t => t.idTask === indexTasksArray);
@@ -229,7 +314,9 @@ function updateProgress(taskIndex) {
     progressLine.style.width = `${progressPercentage}%`;
     document.getElementById(`progress-text-${taskIndex}`).innerText = `Subtasks: ${completedSubtasks}/${totalSubtasks}`;
 }
-
+/**
+ * the function initialize all progress
+ */
 async function initializeAllProgress() {
     for (let taskIndex = 0; taskIndex < tasksArray.length; taskIndex++) {
         const tasksArrayElement = tasksArray[taskIndex];
@@ -245,7 +332,12 @@ async function initializeAllProgress() {
         await initializeSubtaskProgressElement(taskIndex, tasksArrayElement, subtaskStatus);
     }
 }
-
+/**
+ * the function initialize subtask progress element
+ * @param {*}taskIndex task id 
+ * @param {*} tasksArrayElement task element
+ * @param {*} subtaskStatus subtaskStatus checkbox
+ */
 async function initializeSubtaskProgressElement(taskIndex, tasksArrayElement, subtaskStatus) {
     tasksArrayElement.subtask.forEach((_, index) => {
         const isChecked = subtaskStatus[index] || false;
@@ -257,6 +349,9 @@ async function initializeSubtaskProgressElement(taskIndex, tasksArrayElement, su
     updateProgress(taskIndex);
 }
 
+/**
+ * the function input search task element
+ */
 function search() {
 let searchTask = getSearchInput();
     if (searchTask.length >= 3) {
@@ -277,21 +372,35 @@ let searchTask = getSearchInput();
         });
     }
 }
-
+/**
+ * the function get search value
+ * 
+ */
 function getSearchInput() {
     return document.getElementById('searchInput').value.toLowerCase();
 }
 
-
+/**
+ * the function hide task style
+ * 
+ */
 function hideTask(taskElement) {
     taskElement.classList.add('hiddenToDo');
 }
-
+/**
+ * the function show task style
+ * 
+ */
 function showTask(taskElement) {
     taskElement.classList.remove('hiddenToDo');
 }
 
-
+/**
+ * the function show the search task 
+ * @param {*} search search value 
+ * @param {*} todos all task element
+ * @param {*} todo single task element
+ */
 function showTasksSearch(search, todos, todo) {
     let taskTitle = todo.Title.toLowerCase();
     let taskdescription= todo.Description.toLowerCase();
@@ -302,22 +411,35 @@ function showTasksSearch(search, todos, todo) {
         hideTask(todos);
     }
 }
-
+/**
+ * the function allow to drop
+ * @param {*} ev event
+ */
 function allowDrop(ev) {
     ev.preventDefault();
 }
-
+/**
+ * the function allow to leave the drag area
+ * @param {*} ev event
+ */
 function dragLeave(ev) {
     const target = ev.target.closest('.drag-area');
     if (target) {
         removeHighlight(target.id);
     }
 }
-
+/**
+ * the function start dragging
+ * @param {*} idBoard id borad element
+ */
 function startDragging(idBoard) {
     currentDraggedElement = idBoard;
 }
-
+/**
+ * the function move to category
+ * @param {*} ev event
+ *  @param {*} idBoard id current category
+ */
 async function moveTo(event, category) {
     event.preventDefault();
     currentDraggedElement--;
@@ -332,7 +454,13 @@ async function moveTo(event, category) {
     updateAndCheckEmptyFields();
     removeHighlight(category);
 }
-
+/**
+ * Sends data to the specified path in the database using the PUT method.
+ * @async
+ * @param {string} [path=""] - Path in the database where data is to be updated.
+ * @param {Object} [data={}] - The data to be sent.
+ * @returns {Object} - The JSON response from the database.
+ */
 async function putDataTask(path = "", data = {}) {
     let response = await fetch(base_URL + path + ".json", {
         method: "PUT",
@@ -344,18 +472,32 @@ async function putDataTask(path = "", data = {}) {
     return responsASJson = await response.json();
 }
 
+/**
+ * Adds a highlight effect to a specified category area when a drag event occurs over it.
+ * @param {string} categoryId - The ID of the category to highlight.
+ */
 function handleDragOver(categoryId) {
     let dragArea = document.getElementById(categoryId);
     dragArea.classList.add('dragging-over');
-
 }
 
+/**
+ * the function removes the highlight effect from a specified category area when a drag event ends.
+ * @param {string} categoryId id  of the category to remove the highlight from.
+ */
 function removeHighlight(categoryId) {
     let dragArea = document.getElementById(categoryId);
     dragArea.classList.remove('dragging-over');
-
 }
 
+/**
+ * Updates the board by removing a task from its current position
+ * 
+ * @async
+ * @param {string} category the ID of the category 
+ * @param {Object} task  the task object 
+ * @param {Event} event  event
+ */
 async function updateBoard(category, task, event) {
     let taskElement = document.getElementById(`task_${task.idTask - 1}Element`);
     if (taskElement) {
@@ -372,7 +514,9 @@ async function updateBoard(category, task, event) {
     updateAndCheckEmptyFields();
 }
 
-
+/**
+ * the function checks each category field for empty content
+ */
 function checkEmptyFieldsMoveToUpdate() {
     let fields = ["open", "progress", "awaitFeedback", "closed"];
     fields.forEach(fieldId => {
@@ -392,7 +536,10 @@ function checkEmptyFieldsMoveToUpdate() {
     updateAndCheckEmptyFields();
 }
 
-
+/**
+ * the function adds a highlight effect dragarea element.
+ * @param {string} id - The ID of the element to be highlighted.
+ */
 function highlight(id) {
     const element = document.getElementById(id);
     if (element) {
