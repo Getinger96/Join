@@ -164,11 +164,11 @@ body {
 }
 
 .Selection_Container {
-  width: 448px;
+  width: 440px;
   height: 230px;
   background-color: #ffffff;
   position: absolute;
-  margin-top: 74px;
+  margin-top: 78px;
   border-radius: 10px;
   border-radius: 10px;
   border: 1px solid #d1d1d1;
@@ -183,7 +183,7 @@ body {
 
 .profile_Container {
   display: flex;
-  width: 426px;
+  width: 420px;
   height: 56px;
   justify-content: space-between;
   align-items: center;

@@ -1,4 +1,8 @@
-
+/**
+ * This function check the validation of the input of the Date
+ * 
+ * @returns if the Date is unacceptable
+ */
 function checkValidationDate() {
     let date = document.getElementById('dueDate').value;
     let selectedDate = new Date(date);
@@ -14,6 +18,14 @@ function checkValidationDate() {
     document.getElementById("dueDate").style.border = '';
 }
 
+/**
+ * This function cheks if the required input fileds are filled
+ * 
+ * @param {string} titel titel of the task
+ * @param {string} category  category of the task
+ * @param {date} date  date due the task should be finished
+ * @returns wether or not ist filled
+ */
 function validateTask(titel, category, date) {
     if (!validateInputs(titel, category, date)) {
         return false; 
@@ -47,6 +59,10 @@ function checkDateValidity(date) {
     return true; 
 }
 
+/**
+ * This function resets the styles of the inputfields
+ * 
+ */
 function resetInputStyles() {
     document.getElementById("title").style.border = '';
     document.getElementById("select_containerId").style.border = '';
@@ -56,12 +72,21 @@ function resetInputStyles() {
 }
 
 
+/**
+ * This function generate html about missing inputfields
+ * 
+ */
 function allInputFieldMissing() {
     let showTileMissing = document.getElementById("InputFieldsMissing")
     showTileMissing.innerHTML = `<div>
                                      <span class="missingInput"> Please fill in or select the marked fields</span>
                                 </div>`;    
 }
+
+/**
+ * This function generate html about missing inputfields
+ * 
+ */
 
 function showInvalidDateMessage() {
     let showWrongCurrentDate = document.getElementById("WrongCurrentDateId")
@@ -70,6 +95,10 @@ function showInvalidDateMessage() {
                                 </div>`;   
 }
 
+/**
+ * This function changes the color of the invalid input fields
+ * 
+ */
 function changeColorBorder() {
     document.getElementById("title").style.border = "2px solid red";
     document.getElementById("dueDate").style.border = "2px solid red";
@@ -97,6 +126,12 @@ function clearWarningField() {
     document.getElementById("WrongCurrentDateId").innerHTML = '';
 }
 
+/**
+ * this function check if the array has task in teh database
+ * 
+ * @param {Array} userJSON 
+ * @returns {boolean}
+ */
 function hasTasks(userJSON) {
     if (userJSON.tasks) {
         return true;
@@ -105,12 +140,24 @@ function hasTasks(userJSON) {
     }
 }
 
+/**
+ * This function fetches data from database about users
+ * 
+ * @param {*} path 
+ * @returns 
+ */
 async function fetchUserData(path) {
     let response = await fetch(base_URL + path + ".json");
     let userJSON = await response.json();
     return userJSON;
 }
 
+/**
+ * This function fetch Task from the Database
+ * 
+ * @param {} path path of the data from the database
+ * @returns 
+ */
 async function fetchTasks(path = '') {
     tasksArray = [];
     let userJSON = await fetchUserData(path);
@@ -130,6 +177,13 @@ async function fetchTasks(path = '') {
     }
 }
 
+/**
+ * 
+ * @param {number} task index of the task
+ * @param {*} keyTask  key automatically generate by the database
+ * @param {number} id  id of the task
+ * @param {*} tasksArray Array
+ */
 function addTaskToArray(task, keyTask, id, tasksArray) {
     let saveTask = tasksArray.filter(t => keyTask === t.taskKey);
     if (saveTask.length === 0) {
@@ -147,7 +201,11 @@ function addTaskToArray(task, keyTask, id, tasksArray) {
         });
     }
 }
-
+ 
+/**
+ * This function change location of the window
+ * 
+ */
  function gotoBoard() {
     let showTaskIsCreated = document.getElementById('newTaskIsReady');
 
@@ -161,6 +219,10 @@ setTimeout(() => { window.location.href = "board.html";
 }, 2000);
 }
 
+/**
+ * This function add the created subtask 
+ * 
+ */
 function addSubtask() {
     let list = document.getElementById('ul_subtasks');
     list.innerHTML = ''; 
@@ -173,6 +235,12 @@ function addSubtask() {
     }
 }
 
+/**
+ * this function returns Html for the add subtask function 
+ * 
+ * @param {number} i index of the subtask
+ * @returns 
+ */
 function generateSubtaskHTML(i) {
     return `
         <div class="ChangeSubtask" id="changeColorId${i}">
@@ -188,11 +256,21 @@ function generateSubtaskHTML(i) {
         </div>`;
 }
 
+/**
+ * this function delete the choosed subtask
+ * 
+ * @param {number} i index of the subtask
+ */
 function deleteItem(i) { 
     subtasks.splice(i, 1);
     addSubtask();
 }
 
+/**
+ * 
+ * 
+ * @returns 
+ */
 function addCurrentSubtask() {
     let currentSubtask = document.getElementById('input_Subtasks').value;
     if (currentSubtask === '') {       
@@ -204,6 +282,12 @@ function addCurrentSubtask() {
      }
 }
 
+/**
+ * This function validates the subtask if its empty
+ * 
+ * @param {number} i index of the subtask
+ * @returns 
+ */
 function validateSubtask(i) {
 let newSubTask = document.getElementById(`subtaskValue${i}`).value
 document.getElementById(`SubtaskLengthReached`).innerHTML =''; 
@@ -222,11 +306,19 @@ subtasks[i] = newSubTask;
 updateSubtaskElement(i);
 }
 
-
+/**
+ * genrate html for not valid subtasks
+ * 
+ */
 function pleaseEnterASubtask() {
     document.getElementById(`SubtaskLengthReached`).innerHTML =`<span class="showShubtaskError">Please Enter a full subtask`;
 }
 
+/**
+ * function to edit the subtasks
+ * 
+ * @param {number} i index of the subtask
+ */
 function editSubtask(i) {
     let subtaskElement = document.getElementById(`subTaskValueId${i}`);
 
@@ -239,7 +331,12 @@ function editSubtask(i) {
     change.innerHTML = `<img class="imgCheckedIcon" src="./assets/IMG/checkAddTask.png" alt="check" onclick="enterNewSubtask(${i})">`;
 }
 
-
+/**
+ * Function to change the Subtask
+ * 
+ * @param {number} i index of the subtask
+ * @returns 
+ */
 function enterNewSubtask(i) {
     event.stopPropagation();
     let newSubTask = document.getElementById(`subtaskValue${i}`).value.trim();
@@ -255,7 +352,11 @@ function enterNewSubtask(i) {
     updateSubtaskElement(i);
 }
 
-
+/**
+ * Function to update the Subtaskelement
+ * 
+ * @param {number} i  index of the Subtask
+ */
 function updateSubtaskElement(i) {
     let subtaskElement = document.getElementById(`changeColorId${i}`);
 

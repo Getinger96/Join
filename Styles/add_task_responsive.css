@@ -201,8 +201,7 @@
   }
 
   .select_container {
-    width: 276px;
-    padding: 2px;
+    width: 260px;
     align-items: center;
     font-size: 19px;
   }
@@ -211,8 +210,8 @@
   }
 
   .Selection_Container {
-    width: 250px;
-    margin-top: 80px;
+    width: 280px;
+    margin-top: 69px;
   }
 
   .Selected_profiles_Container {
@@ -284,8 +283,9 @@
   }
 
   .Create_Btn {
-    width: 140px;
-    font-size: 12px;
+    width: 135px;
+    font-size: 16px;
+    padding: 5px;
   }
 
   .Btn_Container {
