@@ -14,7 +14,11 @@ let contacts = [];
 let subtasks = [];
 let assignedContacts = [];
 let prio = [];
-
+/**
+ * This function fetch contact from teh database
+ * 
+ * @param {string} path of the database array
+ */
 async function fetchContacts(path = '') {
     const userJSON = await getContactsData(path);
     const keysArray = Object.keys(userJSON.contacts);
@@ -23,11 +27,23 @@ async function fetchContacts(path = '') {
     processAndAddContacts(userAsArray, keysArray);
     setPrioMediumAndRender();
 }
+/**
+ * this function gets th path for the fetch function
+ * 
+ * @param {*} path 
+ * @returns 
+ */
 async function getContactsData(path) {
     const response = await fetch(base_URL + path + ".json");
     return await response.json();
 }
 
+/**
+ * This function iterate threw the array and pushes into the array contacts
+ * 
+ * @param {} userAsArray data from database
+ * @param {*} keysArray key data from the database
+ */
 function processAndAddContacts(userAsArray, keysArray) {
     for (let index = 0; index < userAsArray.length; index++) {
         const contact = userAsArray[index];
@@ -45,6 +61,11 @@ function processAndAddContacts(userAsArray, keysArray) {
         }
     }
 }
+
+/**
+ * This function set the standard prio of the task to medium 
+ * 
+ */
 function setPrioMediumAndRender() {
     renderSelectionContainer();
     renderPrioButtons();
@@ -58,10 +79,16 @@ function setPrioMediumAndRender() {
     prio = 'medium';
 }
 
+
 function func1(event) {
     event.stopPropagation();
 }
 let d_none = true;
+
+/**
+ * This function opens the contact list where you can asigne contacts to a task
+ * 
+ */
 function openList() {
     let selecCon = document.getElementById('Selection_Container');
     let arrowCon = document.getElementById('arrow_img_container');
@@ -76,6 +103,10 @@ function openList() {
     }
 }
 
+/**
+ * This function closes the list with the contacts
+ * 
+ */
 function closelist() {
     let selecCon = document.getElementById('Selection_Container');
     let arrowCon = document.getElementById('arrow_img_container');
@@ -86,27 +117,27 @@ function closelist() {
 }
 
 function openCategoryLIst() {
-    // Toggle the visibility of the category selection container
+    
     let seleCon = document.getElementById('Selection_Container_Category');
     seleCon.classList.toggle('d_none');
 }
 
 function choosedUserStory() {
-    // Set the selected category as "User Story"
+    
     let userStory = document.getElementById('Category');
     userStory.textContent = "User Story";
     closelistCategory();
 }
 
 function choosedTechnicalTask() {
-    // Set the selected category as "Technical Task"
+   
     let technicalTask = document.getElementById('Category');
     technicalTask.textContent = "Technical Task";
     closelistCategory();
 }
 
 function closelistCategory() {
-    // Hide the category selection container
+    
     let seleCon = document.getElementById('Selection_Container_Category');
     seleCon.classList.add('d_none');
 }
