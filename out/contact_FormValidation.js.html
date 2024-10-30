@@ -1,4 +1,32 @@
-/**
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: contact_FormValidation.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: contact_FormValidation.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
  * Validates if the name is in the correct format with two words separated by a space.
  * @param {string} name - The full name to validate.
  * @returns {boolean} - Returns true if the name is valid, otherwise false.
@@ -33,9 +61,9 @@ function phoneNumberIsNotCorrect(phone) {
  */
 function wrongEmailValidation() {
     let showEmailMistake = document.getElementById("wrongEmail");
-    showEmailMistake.innerHTML = `<div>
-                                    <span class="mistakeInput"> Attention, a correct email address must be provided</span>
-                                  </div>`;
+    showEmailMistake.innerHTML = `&lt;div>
+                                    &lt;span class="mistakeInput"> Attention, a correct email address must be provided&lt;/span>
+                                  &lt;/div>`;
 }
 
 /**
@@ -43,9 +71,9 @@ function wrongEmailValidation() {
  */
 function wrongPhoneValidation() {
     let showPhoneMistake = document.getElementById("wrongPhone");
-    showPhoneMistake.innerHTML = `<div>
-                                    <span class="mistakeInput"> The phone number must consist of 6-15 numbers.</span>
-                                  </div>`;
+    showPhoneMistake.innerHTML = `&lt;div>
+                                    &lt;span class="mistakeInput"> The phone number must consist of 6-15 numbers.&lt;/span>
+                                  &lt;/div>`;
 }
 
 /**
@@ -53,9 +81,9 @@ function wrongPhoneValidation() {
  */
 function wrongTextValidation() {
     let showTextMistake = document.getElementById("wrongText");
-    showTextMistake.innerHTML = `<div>
-                                    <span class="mistakeInput"> Please enter a full name of 3-30 letters</span>
-                                 </div>`;
+    showTextMistake.innerHTML = `&lt;div>
+                                    &lt;span class="mistakeInput"> Please enter a full name of 3-30 letters&lt;/span>
+                                 &lt;/div>`;
 }
 
 /**
@@ -65,23 +93,23 @@ function wrongTextValidation() {
  */ 
 function wrongEmailValidationMobile() {
     let showEmailMistake = document.getElementById("wrongEmailMobile");
-    showEmailMistake.innerHTML = `<div>
-                                    <span class="mistakeInput"> Attention, a correct email address must be provided</span>
-                                  </div>`;
+    showEmailMistake.innerHTML = `&lt;div>
+                                    &lt;span class="mistakeInput"> Attention, a correct email address must be provided&lt;/span>
+                                  &lt;/div>`;
 }
 
 function wrongPhoneValidationMobile() {
     let showPhoneMistake = document.getElementById("wrongPhoneMobile");
-    showPhoneMistake.innerHTML = `<div>
-                                    <span class="mistakeInput"> The phone number must consist of 6-15 numbers.</span>
-                                  </div>`;
+    showPhoneMistake.innerHTML = `&lt;div>
+                                    &lt;span class="mistakeInput"> The phone number must consist of 6-15 numbers.&lt;/span>
+                                  &lt;/div>`;
 }
 
 function wrongTextValidationMobile() {
     let showTextMistake = document.getElementById("wrongTextMobile");
-    showTextMistake.innerHTML = `<div>
-                                    <span class="mistakeInput"> Please enter a full name of 3-30 letters</span>
-                                 </div>`;
+    showTextMistake.innerHTML = `&lt;div>
+                                    &lt;span class="mistakeInput"> Please enter a full name of 3-30 letters&lt;/span>
+                                 &lt;/div>`;
 }
 
 /**
@@ -107,7 +135,7 @@ function changeColorPhone() {
  * @returns {boolean} - Returns true if all fields are valid, otherwise false.
  */
 function validateContact(name, email, phone) {
-    if (!nameIsNotValid(name) || name.length < 3 || name.length > 30) {
+    if (!nameIsNotValid(name) || name.length &lt; 3 || name.length > 30) {
         wrongTextValidation();
         changeColorText();
         return false; 
@@ -125,7 +153,7 @@ function validateContact(name, email, phone) {
         document.getElementById("mailInput").style.border = "";
     }
 
-    if (!phoneNumberIsNotCorrect(phone) || phone.length < 6 || phone.length > 15 ) {
+    if (!phoneNumberIsNotCorrect(phone) || phone.length &lt; 6 || phone.length > 15 ) {
         wrongPhoneValidation(); 
         changeColorPhone();
         return false; 
@@ -217,7 +245,7 @@ async function deleteContactInBoard(index) {
  * Updates assigned contacts in Firebase for a specific task path.
  * @param {string} path - The Firebase path to update.
  * @param {Array} updatedContacts - The updated array of contacts.
- * @returns {Promise<Object>} - Returns the updated Firebase response as JSON.
+ * @returns {Promise&lt;Object>} - Returns the updated Firebase response as JSON.
  */
 async function updateAssignedContactsInFirebase(path, updatedContacts) {
     // PUT request to update the contacts in Firebase
@@ -237,7 +265,7 @@ async function fetchTasks(path = '') {
 /**
  * Fetches raw task data from Firebase.
  * @param {string} path - The path to fetch data from.
- * @returns {Promise<Object>} - Returns the fetched task data as JSON.
+ * @returns {Promise&lt;Object>} - Returns the fetched task data as JSON.
  */
 async function fetchTasksData(path) {
     let response = await fetch(base_URL + path + ".json");
@@ -254,7 +282,7 @@ function populateTasksArray(userJSON) {
     currentDraggedElement = 0;
     id = 0;
 
-    for (let index = 0; index < tasksAsarray.length; index++) {
+    for (let index = 0; index &lt; tasksAsarray.length; index++) {
         let task = tasksAsarray[index];
         let keyTask = keysArrayTask[index];
         id++;
@@ -268,7 +296,7 @@ function populateTasksArray(userJSON) {
  * @param {string} keyTask - The unique key for the task.
  */
 function addTaskToArray(task, keyTask) {
-    let saveTask = tasksArray.filter(t => t.Title === task.Titel && t.Description === task.Description);
+    let saveTask = tasksArray.filter(t => t.Title === task.Titel &amp;&amp; t.Description === task.Description);
     if (saveTask.length === 0) {
         tasksArray.push({
             taskKey: keyTask,
@@ -284,3 +312,26 @@ function addTaskToArray(task, keyTask) {
         });
     }
 }
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addTaskToArray">addTaskToArray</a></li><li><a href="global.html#changeColorMail">changeColorMail</a></li><li><a href="global.html#changeColorPhoneMobile">changeColorPhoneMobile</a></li><li><a href="global.html#closeAllWarningMessage">closeAllWarningMessage</a></li><li><a href="global.html#closeAllWarningMessageMobile">closeAllWarningMessageMobile</a></li><li><a href="global.html#deleteContactInBoard">deleteContactInBoard</a></li><li><a href="global.html#emailIsNotCorrect">emailIsNotCorrect</a></li><li><a href="global.html#fetchTasks">fetchTasks</a></li><li><a href="global.html#fetchTasksData">fetchTasksData</a></li><li><a href="global.html#nameIsNotValid">nameIsNotValid</a></li><li><a href="global.html#phoneNumberIsNotCorrect">phoneNumberIsNotCorrect</a></li><li><a href="global.html#populateTasksArray">populateTasksArray</a></li><li><a href="global.html#updateAssignedContactsInFirebase">updateAssignedContactsInFirebase</a></li><li><a href="global.html#updateContactInTasks">updateContactInTasks</a></li><li><a href="global.html#updateTaskInFirebase">updateTaskInFirebase</a></li><li><a href="global.html#validateContact">validateContact</a></li><li><a href="global.html#validateContactMobileVersion">validateContactMobileVersion</a></li><li><a href="global.html#wrongEmailValidation">wrongEmailValidation</a></li><li><a href="global.html#wrongEmailValidationMobile">wrongEmailValidationMobile</a></li><li><a href="global.html#wrongPhoneValidation">wrongPhoneValidation</a></li><li><a href="global.html#wrongTextValidation">wrongTextValidation</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Wed Oct 30 2024 19:03:47 GMT+0100 (Mitteleuropäische Normalzeit)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
