@@ -116,19 +116,30 @@ function closelist() {
     d_none = true;
 }
 
+/**
+ * this function opens the list where you can choose the category of the task
+ * 
+ */
 function openCategoryLIst() {
     
     let seleCon = document.getElementById('Selection_Container_Category');
     seleCon.classList.toggle('d_none');
 }
 
+/**
+ * This function delivers the text "User Story"if you choosed the div wit the category "User Story"
+ * 
+ */
 function choosedUserStory() {
     
     let userStory = document.getElementById('Category');
     userStory.textContent = "User Story";
     closelistCategory();
 }
-
+/**
+ * This function delivers the text "Technical Task"if you choosed the div wit the category "Technical Task"
+ * 
+ */
 function choosedTechnicalTask() {
    
     let technicalTask = document.getElementById('Category');
@@ -136,17 +147,33 @@ function choosedTechnicalTask() {
     closelistCategory();
 }
 
+/**
+ * This function closes the list with teh Categorys
+ * 
+ */
 function closelistCategory() {
     
     let seleCon = document.getElementById('Selection_Container_Category');
     seleCon.classList.add('d_none');
 }
 
+/**
+ * This Function trims the name into 1 parts to get the Lastname of the name
+ * 
+ * @param {String} name Name of the contact
+ * @returns {string} returns the lastname 
+ */
 function getLastName(name) {
     let lastName = name.trim().split(' ');
     return lastName[lastName.length - 1];
 }
 
+/**
+ * This function iterate thru the contacts Array and delivers data from the objects of the array
+ * 
+ * @returns if profiles not exist 
+ * 
+ */
 function renderSelectionContainer() {
     let profiles = document.getElementById('Selection_Container');
     if (!profiles) {
@@ -168,6 +195,15 @@ function renderSelectionContainer() {
     }
 }
 
+/**
+ * This function render the Html for the contacts list where you can assign the contacts for the task
+ * 
+ * @param {number} i index of the contact
+ * @param {string} contactColour color of the contacts badge
+ * @param {string} firstletters  the first  letters of the surname and lastname
+ * @param {string} name  name of the contact
+ * @returns  the html for the list
+ */
 function renderContacts(i, contactColour, firstletters, name) {
     return `
        <div  onclick="selectedContact(${i},'${name}','${firstletters}','${contactColour}')" id="profile_Container${i}" class="profile_Container">
@@ -181,6 +217,14 @@ function renderContacts(i, contactColour, firstletters, name) {
         </div>`
 }
 
+/**
+ * This function changes the style of an selected contact and checks wether or not the contact is selected if its  already  selected then style changes back and get spliced from the array
+ * 
+ * @param {number} i index of the contact
+ * @param {string} name name of the contact
+ * @param {string} firstletters first leter of surname and lastname
+ * @param {string} contactColour color of the contactsbadge
+ */
 function selectedContact(i, name, firstletters, contactColour) {
     let checkbox = document.getElementById(`checkbox${i}`);
     checkbox.innerHTML = `<img  class="checked_img" src="./assets/IMG/Checked button.svg" alt="">`
@@ -198,6 +242,15 @@ function selectedContact(i, name, firstletters, contactColour) {
     showSelectedProfile();
 }
 
+
+/**
+ * This function get started if the contact is already selected. and changes the style of the img of the contactcontainer and the starts another function named showselectedprofile
+ * 
+ * @param {number} i index of the contact
+ * @param {string} name full name of the contact
+ * @param {string} firstletters first letters of the surname and lastname 
+ * @param {string} contactColour color of the contacts badge
+ */
 function deselctedtContact(i, name, firstletters, contactColour) {
     let checkbox = document.getElementById(`checkbox${i}`);
     checkbox.innerHTML = `<img  id="checkImg${i}" class="check_img" src="assets/IMG/Check button.svg" alt="">`
@@ -205,6 +258,10 @@ function deselctedtContact(i, name, firstletters, contactColour) {
     showSelectedProfile(firstletters, i, contactColour);
 }
 
+/**
+ * This function iterate thru the array assignedContacts and if the length is under 4 it starts the function  renderContactBadge(contactName, index) if its higher the other function get started
+ * 
+ */
 function showSelectedProfile() {
     let selectedProfileContainer = document.getElementById('Selected_profiles_Container');
     selectedProfileContainer.innerHTML = '';  
@@ -224,6 +281,12 @@ function showSelectedProfile() {
     }
 }
 
+/**
+ * This function renders the contactsbadges that shows up under the selection container and returns the html
+ * 
+ * @param {string} contactName name of the contact
+ * @param {number} index index of the contact
+ */
 function renderContactBadge(contactName, index) {
     let contact = contacts.find(c => c.name === contactName); 
 
@@ -237,6 +300,13 @@ function renderContactBadge(contactName, index) {
         `;
     }
 }
+
+/**
+ * This function render the extra contactsbadge with the number of selcetd contacts
+ * 
+ * @param {*} selectedProfileContainer div container of the selected profiles
+ * @param {*} extraContactsBadge div of the contact badge with the numbers of the selected contaqct above 4
+ */
 function renderExtraContactsBadge(selectedProfileContainer, extraContactsBadge) {
     let extraCount = assignedContacts.length - 4;
     if (extraContactsBadge) {
@@ -248,16 +318,29 @@ function renderExtraContactsBadge(selectedProfileContainer, extraContactsBadge) 
     }
 }
 
+/**
+ * The validation of the dateinput that only allows present or future dates
+ * 
+ */
 function dateinput() {
     let duedate = document.getElementById('dueDate');
     duedate.min = new Date().toISOString().split('T')[0];
 }
 
+/**
+ * This function intiliases the rendering of the Prio buttons 
+ * 
+ */
 function renderPrioButtons() {
     let prioButtonContainer = document.getElementById('Prio_btn_Container');
     prioButtonContainer.innerHTML = renderPrioButtonsHtml();
 }
 
+/**
+ * This function returns the Html for the prio buttons 
+ * 
+ * @returns the Html gets returned
+ */
 function renderPrioButtonsHtml() {
     return ` <button onclick="chossedurgent()" type="button" id="urgent"  class="Prio_Btn">Urgent <img
                         id="urgentIcon" src="./assets/IMG/Priority symbols (1).png" alt=""></button>
@@ -269,6 +352,10 @@ function renderPrioButtonsHtml() {
                              `
 }
 
+/**
+ * This function starts  when you  onclick the button urgent. Then it start the function renderpriobuttons() and changes the style of the button
+ * 
+ */
 function chossedurgent() {
     renderPrioButtons();
     let urgent = document.getElementById('urgent');
@@ -283,6 +370,12 @@ function chossedurgent() {
     prio = 'urgent';
 };
 
+
+
+/**
+ * This function starts  when you  onclick the button medium. Then it start the function renderpriobuttons() and changes the style of the button
+ * 
+ */
 function choossedmedium() {
     renderPrioButtons();
     let medium = document.getElementById('medium');
@@ -296,6 +389,11 @@ function choossedmedium() {
     prio = 'medium';
 }
 
+
+/**
+ * This function starts  when you  onclick the button low. Then it start the function renderpriobuttons() and changes the style of the button
+ * 
+ */
 function choosedlow() {
     renderPrioButtons();
     let low = document.getElementById('low');
@@ -309,6 +407,14 @@ function choosedlow() {
     prio = 'low';
 }
 
+
+/**
+ * This function posts data to the firabse database
+ * 
+ * @param {string} path this is the path where you wana post the data
+ * @param {string} data that get pushed into the firebase database
+ * @returns  {boolean}
+ */
 async function postData(path = "", data = {}) {
     let response = await fetch(base_URL + path + ".json", {
         method: "POST",
@@ -320,6 +426,13 @@ async function postData(path = "", data = {}) {
     return responsASJson = await response.json();
 }
 
+
+/**
+ * This function checks if the input of the task ist valid if not  function validate task starts if ist valid function get starts to create the task
+ * 
+ * @param {*} event 
+ * @returns {boolean} wether or not true
+ */
 async function createTask(event) {
     event.preventDefault();
     let newTask = createNewTask();
@@ -334,6 +447,13 @@ async function createTask(event) {
     gotoBoard();
 }
 
+
+/**
+ * This function collects the data of the task that you wants to create
+ * 
+ * @returns {boolean}
+ * 
+ */
 function createNewTask() {
     let loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
     let guest = { "email": "guest@web.de", "name": "guest", "password": "guest123456" };
@@ -353,6 +473,20 @@ function createNewTask() {
     return newTask;
 }
 
+
+/**
+ * This function stores the collected data into an object 
+ * 
+ * @param {string} titel  value of the input titel 
+ * @param {string} description value of the input description
+ * @param {object} assignedContact  contacts of the array assigned contacts
+ * @param {number} date value of the date input
+ * @param {string} prio value of prio buttons
+ * @param {string} category value of the category
+ * @param {string} subtask  value of the strings
+ * @param {*} status status of the task
+ * @returns {boolean}
+ */
 function newTaskObject(titel, description, assignedContact, date, prio, category, subtask ,status ) {
     return newTask = {
         Titel: titel,
@@ -366,17 +500,31 @@ function newTaskObject(titel, description, assignedContact, date, prio, category
     };
 }
 
+
+/**
+ * This function initilises the post function 
+ * 
+ * @param {object} newTask the object that gets  postedt
+ */
 async function saveTask(newTask) {
     clearMissingFieldContent();
     await postData(`tasks`, newTask);
 }
 
+/**
+ * this function initiliases  functions to clear all input fields
+ * 
+ */
 async function clearTask() {
   
         clearFormFields();
         resetAddTask();
 }
 
+/**
+ * Tis function empty all input fields
+ * 
+ */
 function clearFormFields() {
     let selectedProfileContainer = document.getElementById('Selected_profiles_Container');
     selectedProfileContainer.innerHTML = '';
@@ -396,6 +544,11 @@ function clearFormFields() {
     subtasks = [];
     prio = [];    
 }
+
+/**
+ *This function resets the addtask side
+ * 
+ */
 function resetAddTask() {
     renderPrioButtons();
     clearMissingFieldContent();
@@ -404,6 +557,10 @@ function resetAddTask() {
     renderSelectionContainer();
 }
 
+/**
+ * 
+ * This function empty the subtask input fields 
+ */
 function emptySubtask() {
     let currentSubtask = document.getElementById('input_Subtasks')
     currentSubtask.value = '';
