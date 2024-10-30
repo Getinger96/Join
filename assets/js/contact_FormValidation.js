@@ -143,7 +143,32 @@ function validateContact(name, email, phone) {
  */
 
 function validateContactMobileVersion(name, email, phone) {
-    
+    if (!nameIsNotValid(name) || name.length < 3 || name.length > 30) {
+        wrongTextValidationMobile();
+        changeColorTextMobile();
+        return false; 
+    } else {
+        document.getElementById("wrongTextMobile").innerHTML = '';
+        document.getElementById("textInputMobile").style.border = "";
+    }
+    if (!emailIsNotCorrect(email)) {
+        wrongEmailValidationMobile();
+        changeColorMailMobile();
+        return false; 
+    } else {
+        document.getElementById("wrongEmailMobile").innerHTML = '';
+        document.getElementById("mailInputMobile").style.border = "";
+    }
+    if (!phoneNumberIsNotCorrect(phone) || phone.length < 6 || phone.length > 15 ) {
+        wrongPhoneValidationMobile(); 
+        changeColorPhoneMobile();
+        return false; 
+    } else {
+        document.getElementById("wrongPhoneMobile").innerHTML = '';
+        document.getElementById("phoneInputMobile").style.border = "";
+    }
+
+    return true; 
 }
 
 /**
@@ -284,3 +309,30 @@ function addTaskToArray(task, keyTask) {
         });
     }
 }
+
+/**
+ * Saves the edited contact data and updates the contact list.
+ * @param {number} index - The index of the contact to save.
+ */
+async function saveEditedContact(index) {
+    const oldName = contactsArray[index].name,
+          name = document.getElementById('name').value.trim(),
+          email = document.getElementById('mail').value.trim(),
+          phone = document.getElementById('telephone').value.trim();
+
+    if (!name || !email || !phone || !validateContact(name, email, phone)) return;
+
+    const key = contactsArray[index].id,
+          password = contactsArray[index].password;
+
+    Object.assign(contactsArray[index], { name, email, phone });
+
+    await putData(`contacts/${key}`, { name, email, phone, password });
+    await updateContactInTasks({ oldName, newName: name });
+
+    await fetchTasks();
+    await fetchContacts();
+    closeCardContact();
+    getContactBig(index);
+}
+

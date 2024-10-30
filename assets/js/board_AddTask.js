@@ -1,6 +1,5 @@
 let d_none = true;
 
-
 /**
  * This function open Add Task
  * 
@@ -10,7 +9,6 @@ function openTaskBoard() {
     setTaskPriority();
     toggleTaskBoardVisibility();
 }
-
 
 /**
  * 
@@ -23,8 +21,6 @@ function setTaskPriority() {
     mediumIcon.src = "./assets/IMG/Prio media.png";
     currentPriority = 'medium';
 }
-
-
 
 /**
  * 
@@ -40,7 +36,6 @@ function toggleTaskBoardVisibility() {
         hideTaskBoard(taskDiv, overlay);
     }
 }
-
 
 /**
  * 
@@ -65,7 +60,6 @@ function hideTaskBoard(taskDiv, overlay) {
     overlay.classList.add('visible');
     document.body.classList.remove('no-scroll');
 }
-
 
 /**
  * the function goes to AddTask HTML
@@ -96,212 +90,6 @@ function openList() {
     updateContactStyles();
 }
 
-/**
- * the function Update contacts List
- */
-function updateContactStyles() {
-    for (let i = 0; i < contactsArray.length; i++) {
-        const contact = contactsArray[i];
-        const contactContainer = document.getElementById(`profile-${i}`);
-        if (assignedContacts.includes(contact.name)) {
-            contactContainer.classList.add('bg_color', 'color_white');
-        } else {
-            contactContainer.classList.remove('bg_color', 'color_white');
-        }
-    }
-}
-
-function displayContacts(contactIndex, contactsName, contactLastname, selectedClass, color) {
-    return `<div class= "Contact-Container"  id="profile-${contactIndex}" onclick="selectedContact(${contactIndex}, '${color}', '${contactsName}')">
-                <div class="contact-icon ${color} profilebadge">
-                    <span>${contactsName.charAt(0).toUpperCase()}${contactLastname.charAt(0).toUpperCase()}</span>
-                </div>
-                <div class="contact-content">
-                    <span class="contactname">${contactsName}</span>
-                </div>
-            </div>`;
-}
-
-
-/**
- * the function show contact List-bar
- * @param {*} name contact name
- * @param {*} index  index array assignedContacts
- *
- */
-function showSelectedContainer(name,index) {
-    let includedName = assignedContacts.includes(name)
-    let contactContainer = document.getElementById(`profile-${index}`);
-    if (!contactContainer) {
-        return
-    }
-    if (includedName) {
-        contactContainer.classList.add('bg_color');
-        contactContainer.classList.add('color_white');  
-    }else {
-        contactContainer.classList.remove('bg_color');
-        contactContainer.classList.remove('color_white');
-    }
-}
-
-/**
- * the function selected  contact List-bar 
- * @param {*} index index array assignedContacts
- * @param {*} color contact color
- * @param {*} name contact name
- */
-function selectedContact(index, color, name) {
-    showSelectedContainer(name, index);
-    let includedName = assignedContacts.includes(name);
-
-    if (includedName) {
-        deselctedtContact(index, color, name);
-    } else {
-        assignedContacts.push(name);
-        showSelectedProfile(color, name, index);
-        let contactContainer = document.getElementById(`profile-${index}`);
-        contactContainer.classList.add('bg_color');
-        contactContainer.classList.add('color_white');
-    }
-}
-/**
- * the function  deselctedt contact List-bar 
- * @param {*} index index array assignedContacts
- * @param {*} name contact name
- * @param {*} nameletter name abbreviation
- * @param {*} color contact name
- */
-function deselctedtContact(index, name,nameletter,color) {
-    showSelectedContainer(nameletter, index);
-    let contactIndex = assignedContacts.indexOf(nameletter);
-    if (contactIndex !== -1) {
-        assignedContacts.splice(contactIndex, 1);
-    }
-    showSelectedProfile(color, name, index,color)
-    let contactContainer = document.getElementById(`profile-${index}`);
-
-    if (!contactContainer) {
-        return;
-    }
-    contactContainer.classList.remove('bg_color');
-    contactContainer.classList.remove('color_white');
-    let profileBadge = document.getElementById(`profilebadge_Assign${index}`);
-    if (profileBadge) {
-        profileBadge.remove();
-    }     
-}
-
-/**
- * the function update Contacts
- * @param {*} color contact color
- * @param {*} name contact name
- * @param {*} index index array assignedContacts
- */
-function showSelectedProfile(color, name, index) {
-    clearSelectedProfileContainer();
-    displayAssignedContacts();
-    updateExtraContactsBadge();
-}
-
-/**
- * 
-the function deletes the selected profile containers
- */
-function clearSelectedProfileContainer() {
-    const selectedProfileContainer = document.getElementById('Selected_profiles_Container');
-    if (selectedProfileContainer) {
-        selectedProfileContainer.innerHTML = '';  
-    }
-}
-
-/**
- * 
-the function shows View assigned contacts
- */
-function displayAssignedContacts() {
-    const selectedProfileContainer = document.getElementById('Selected_profiles_Container');
-    for (let i = 0; i < assignedContacts.length && i < 4; i++) { 
-        let contactName = assignedContacts[i];
-        let contact = contactsArray.find(c => c.name === contactName);
-        if (contact) {
-            addContactBadge(selectedProfileContainer, contact, contactName, i);
-        }
-    }
-}
-
-/**
- * the function adds contacts badge
- * @param {*} container container foreach contacts
- * @param {*} contact contact 
- * @param {*} contactName full contact name
- * @param {*} index index array assignedContacts
- */
-function addContactBadge(container, contact, contactName, index) {
-    let contactColour = contact.color;
-    let firstletters = contactName.charAt(0).toUpperCase() + getLastName(contactName).charAt(0).toUpperCase();
-    container.innerHTML += `
-        <div id="profile_Badge_assign${index}" class="profile_Badge_assign ${contactColour}">${firstletters}</div>
-    `;
-}
-/**
- * the function update extra contacts badge
- */
-function updateExtraContactsBadge() {
-    const extraContactsBadge = document.getElementById('extra_Contacts_Badge');
-    let extraCount = assignedContacts.length - 4;
-
-    if (extraCount > 0) {
-        if (extraContactsBadge) {
-            extraContactsBadge.textContent = `+${extraCount}`;
-        } else {
-            createExtraContactsBadge(extraCount);
-        }
-    } else if (extraContactsBadge) {
-        extraContactsBadge.remove();
-    }
-}
-/**
- * the funcktion create extra contacts badge
- * @param {*} extraCount extra contact id
- */
-function createExtraContactsBadge(extraCount) {
-    const selectedProfileContainer = document.getElementById('Selected_profiles_Container');
-    selectedProfileContainer.innerHTML += `
-        <div id="extra_Contacts_Badge" class="profile_Badge_assign gray">+${extraCount}</div>
-    `;
-}
-/**
- * the function show scelected profile edit
- * @param {*} name contact name
- */
-function showSelectedProfileEdit(name) {
-    let selectedProfileContainer = document.getElementById('Selected_profiles_Container');
-    let findcontact = contactsArray.find(co => co.name === name);
-    let color = findcontact.color;
-    let index = contactsArray.indexOf(findcontact);
-    let profile_Badge_assign = document.getElementById(`profilebadge_Assign${index}`)
-    let firstletters = `${name.charAt(0).toUpperCase()}${getLastName(name).charAt(0).toUpperCase()}`;
-    if (profile_Badge_assign) {
-        profile_Badge_assign.remove();
-    } else {
-        selectedProfileContainer.innerHTML += showselectedProfileContainer(index, color, firstletters);
-
-    }
-}
-/**
- * the function show selected profile container
- * @param {*} index index array assignedContacts
- * @param {*} color contac color
- * @param {*} firstletters name fristletter
- * @returns {*}
- */
-function showselectedProfileContainer(index, color, firstletters) {
-  return `
-    <div id="profilebadge_Assign${index}" class="contact-icon${index} ${color} profilebadge">
-        <div>${firstletters}</div>
-    </div>
-`;
-}
 /**
  * the function reset all prio button
  */
@@ -335,19 +123,10 @@ function clearTask() {
     returnColorPrioIcons();
     medium();
 }
-/**
- * the function deselect all contacts
- */
-function deselectAllContacts() {
-    for (let contactIndex = 0; contactIndex < contactsArray.length; contactIndex++) {
-        let contact = contactsArray[contactIndex];
-        deselctedtContact(contactIndex, contact.name, `${contact.name.charAt(0).toUpperCase()}${getLastName(contact.name).charAt(0).toUpperCase()}`, contact.color);
-    }
-}
+
 /**
  * the function deselect current task
  */
-
 function clearCurrentTask() {
     let taskIndex = currentTaskIndex;
     if (taskIndex !== undefined && tasksArray[taskIndex]) {

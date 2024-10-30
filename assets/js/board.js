@@ -155,91 +155,6 @@ async function closeTaskUpdate() {
 }
 
 /**
- * Generates the HTML content for a task.
- * @param {Object} task Task object with details
- * @param {number} taskIndex Index of the task
- */
-function generateTodoHTML(task, taskIndex) {
-    const title = task.Title;
-    const description = task.Description || "";
-    const priority = task.Prio;
-    const category = task.Category;
-    const priorityIcon = getPriorityIcon(priority);
-    const categoryColor = getCategoryColor(category);
-    const progressHtml = generateProgressHtml(task);
-
-    return `
-       <div class="todo" id="task_${task.idTask - 1}Element" draggable="true" ondragstart="startDragging(${task.idTask})" onclick="openToDo(${task.idTask})">
-           ${generateHeader(category, categoryColor, task.idTask)}
-           <h3 id="task_Title${task.idTask - 1}" class="title">${title}</h3>
-           <p class="description">${description}</p>
-           ${progressHtml} <!-- Fortschritts-HTML wird hier eingefügt -->
-           ${generateFooter(priorityIcon, task.idTask)}
-       </div>`;
-}
-
-/**
- * Generates HTML for the task header
- * @param {string} category Task category
- * @param {string} categoryColor Color  category
- * @param {number} taskId Task id
- */
-function generateHeader(category, categoryColor, taskId) {
-    return `
-        <div class="boardCardheadlinesmall">  
-            <div>
-                <div class="divKategorie"> 
-                    <div class="categoryheadline" style="background-color: ${categoryColor};">
-                        <span>${category} </span>
-                    </div>
-                    <div class="mobileCategory" onclick="showMoveTheElements(${taskId - 1})"> 
-                        <img class="iconcategorybar" src="./assets/IMG/Menu Contact options.png" alt=""> 
-                    </div>
-                </div>
-                <div id="fields_${taskId - 1}"></div> 
-            </div>
-        </div>`;
-}
-
-/**
- * Generates HTML for the task footer
- * @param {string} priorityIcon  priority icon image
- * @param {number} taskId Task id
- */
-function generateFooter(priorityIcon, taskId) {
-    return `
-        <div class="task-footer">
-            <div class="boardContacts" id="assignedContacts${taskId}"></div>  
-            <div class="priority-icon">
-                <img src="${priorityIcon}" alt="${taskId} Priority">
-            </div>
-        </div>`;
-}
-/**
- * Generates HTML for the task progress bar 
- * @param {Object} task Task object
- */
-function generateProgressHtml(task) {
-    const subtasks = task.subtask || [];
-    const totalSubtasks = subtasks.length;
-    const subtaskStatus = JSON.parse(localStorage.getItem(`task-${task.idTask - 1}-subtasks`)) || {};
-    const completedSubtasks = Object.values(subtaskStatus).filter(isChecked => isChecked).length;
-    const progressPercentage = totalSubtasks ? (completedSubtasks / totalSubtasks) * 100 : 0;
-
-    if (totalSubtasks > 0) {
-        return `
-            <div class="progress-container">
-                <div class="progress-bar">
-                    <div class="progress" id="progressbarline-${task.idTask - 1}" style="width: ${progressPercentage}%;"></div>
-                </div>
-                <span class="progresstext" id="progress-text-${task.idTask - 1}">Subtasks ${completedSubtasks}/${totalSubtasks}</span>
-            </div>
-        `;
-    }
-    return '';
-}
-
-/**
  * Shows or hides the menu based on the screen width.
  * @param {number} idTask - The ID of the task 
  */
@@ -268,20 +183,6 @@ function toggleMenu(idTask) {
     }
 }
 
-/**
- * Generates the HTML structure for the task status menu
- * @param {number} idTask - The id of the task 
- */
-function fieldsContainerhtml(idTask) {
-    return`
-            <div id="existingmenu" class="showsmallFieldBar" onclick="event.stopPropagation()">
-                <div class="headlsmallField"></div>
-                <div class="fieldElement"> <span class="statusField" onclick="moveTaskTo(${idTask}, 'open', event)">todo</span></div>
-                <div class="fieldElement"> <span class="statusField" onclick="moveTaskTo(${idTask}, 'progress', event)">Progress</span></div>
-                <div class="fieldElement"> <span class="statusField" onclick="moveTaskTo(${idTask}, 'awaitFeedback', event)">awaitFeedback</span></div>
-                <div class="fieldElement"> <span class="statusField" onclick="moveTaskTo(${idTask}, 'closed', event)">done</span></div>
-            </div>`
-}
 
 /**
  * Hides the menu task 
