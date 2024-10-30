@@ -94,6 +94,154 @@
     
 
     
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id="base_URL"><span class="type-signature">(constant) </span>base_URL<span class="type-signature"> :string</span></h4>
+
+
+
+
+<div class="description">
+    Base URL for the API.
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">string</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="register.js.html">register.js</a>, <a href="register.js.html#line6">line 6</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="contacts"><span class="type-signature"></span>contacts<span class="type-signature"> :Array</span></h4>
+
+
+
+
+<div class="description">
+    Array to store contacts.
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Array</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="register.js.html">register.js</a>, <a href="register.js.html#line12">line 12</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+    
 
     
         <h3 class="subsection-title">Methods</h3>
@@ -104,7 +252,7 @@
     
 
     
-    <h4 class="name" id="changeColorHrAndBorderCorrect"><span class="type-signature"></span>changeColorHrAndBorderCorrect<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="ButtonDisabledSet"><span class="type-signature"></span>ButtonDisabledSet<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -112,7 +260,7 @@
 
 
 <div class="description">
-    Changes border and line colors to green, indicating input is correct.
+    Disables the signup button.
 </div>
 
 
@@ -156,7 +304,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="login.js.html">login.js</a>, <a href="login.js.html#line174">line 174</a>
+        <a href="register.js.html">register.js</a>, <a href="register.js.html#line98">line 98</a>
     </li></ul></dd>
     
 
@@ -192,7 +340,7 @@
     
 
     
-    <h4 class="name" id="changeColorHrAndBorderMistake"><span class="type-signature"></span>changeColorHrAndBorderMistake<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="addNewUser"><span class="type-signature">(async) </span>addNewUser<span class="signature">(username, usermail, userpassword, userconfirmpassword, checkbox)</span><span class="type-signature"></span></h4>
     
 
     
@@ -200,95 +348,7 @@
 
 
 <div class="description">
-    Changes border and line colors to red, indicating an input error.
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="login.js.html">login.js</a>, <a href="login.js.html#line165">line 165</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="checkUserCredentials"><span class="type-signature"></span>checkUserCredentials<span class="signature">(loginMail, loginPassword)</span><span class="type-signature"> &rarr; {Object|undefined}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Checks if the provided email and password match any existing user credentials.
+    Adds a new user to the database and updates the UI upon successful signup.
 </div>
 
 
@@ -324,13 +384,13 @@
 
         <tr>
             
-                <td class="name"><code>loginMail</code></td>
+                <td class="name"><code>username</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">HTMLElement</span>
+<span class="param-type">HTMLInputElement</span>
 
 
             
@@ -340,20 +400,20 @@
 
             
 
-            <td class="description last">The email input element.</td>
+            <td class="description last">The username input element.</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>loginPassword</code></td>
+                <td class="name"><code>usermail</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">HTMLElement</span>
+<span class="param-type">HTMLInputElement</span>
 
 
             
@@ -363,7 +423,76 @@
 
             
 
-            <td class="description last">The password input element.</td>
+            <td class="description last">The user email input element.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>userpassword</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">HTMLInputElement</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The user password input element.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>userconfirmpassword</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">HTMLInputElement</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The confirm password input element.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>checkbox</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">HTMLInputElement</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The terms acceptance checkbox.</td>
         </tr>
 
     
@@ -404,7 +533,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="login.js.html">login.js</a>, <a href="login.js.html#line43">line 43</a>
+        <a href="register.js.html">register.js</a>, <a href="register.js.html#line82">line 82</a>
     </li></ul></dd>
     
 
@@ -429,31 +558,6 @@
 
 
 
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    - Returns the matching user object if found; otherwise, undefined.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Object</span>
-|
-
-<span class="param-type">undefined</span>
-
-
-    </dd>
-</dl>
-
-    
 
 
 
@@ -465,7 +569,7 @@
     
 
     
-    <h4 class="name" id="emailIsCorrect"><span class="type-signature"></span>emailIsCorrect<span class="signature">(email)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+    <h4 class="name" id="checkFormCompletion"><span class="type-signature"></span>checkFormCompletion<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -473,7 +577,183 @@
 
 
 <div class="description">
-    Checks if the email follows a standard email format.
+    Checks if all required form fields are completed and enables/disables the signup button accordingly.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="register.js.html">register.js</a>, <a href="register.js.html#line107">line 107</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="checkRegistration"><span class="type-signature">(async) </span>checkRegistration<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Checks registration form fields and adds a new user if validation passes.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="register.js.html">register.js</a>, <a href="register.js.html#line56">line 56</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="emptyTheInputFields"><span class="type-signature"></span>emptyTheInputFields<span class="signature">(username, usermail, userpassword, userconfirmpassword, checkbox)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Empties the input fields and unchecks the checkbox.
 </div>
 
 
@@ -509,7 +789,240 @@
 
         <tr>
             
-                <td class="name"><code>email</code></td>
+                <td class="name"><code>username</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">HTMLInputElement</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The username input element.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>usermail</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">HTMLInputElement</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The user email input element.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>userpassword</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">HTMLInputElement</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The user password input element.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>userconfirmpassword</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">HTMLInputElement</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The confirm password input element.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>checkbox</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">HTMLInputElement</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The terms acceptance checkbox.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="register.js.html">register.js</a>, <a href="register.js.html#line134">line 134</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="loadUsers"><span class="type-signature">(async) </span>loadUsers<span class="signature">(path<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Loads users from the specified path and populates the contacts array.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>path</code></td>
             
 
             <td class="type">
@@ -522,10 +1035,26 @@
             </td>
 
             
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
 
+                
+
+                
+                </td>
             
 
-            <td class="description last">The email address to validate.</td>
+            
+                <td class="default">
+                
+                    ''
+                
+                </td>
+            
+
+            <td class="description last">The path to fetch user data from.</td>
         </tr>
 
     
@@ -566,7 +1095,199 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="login.js.html">login.js</a>, <a href="login.js.html#line185">line 185</a>
+        <a href="register.js.html">register.js</a>, <a href="register.js.html#line19">line 19</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="postData"><span class="type-signature">(async) </span>postData<span class="signature">(path<span class="signature-attributes">opt</span>, data)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Posts data to the specified path.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>path</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    ''
+                
+                </td>
+            
+
+            <td class="description last">The path to post data to.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>data</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">The data to post.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="register.js.html">register.js</a>, <a href="register.js.html#line41">line 41</a>
     </li></ul></dd>
     
 
@@ -595,7 +1316,7 @@
 
         
 <div class="param-desc">
-    - Returns true if the email is correctly formatted.
+    The JSON response from the server.
 </div>
 
 
@@ -606,7 +1327,7 @@
     </dt>
     <dd>
         
-<span class="param-type">boolean</span>
+<span class="param-type">Object</span>
 
 
     </dd>
@@ -624,7 +1345,7 @@
     
 
     
-    <h4 class="name" id="emptyTheInputFields"><span class="type-signature"></span>emptyTheInputFields<span class="signature">(loginMail, loginPassword)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="showVisbility"><span class="type-signature"></span>showVisbility<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -632,167 +1353,7 @@
 
 
 <div class="description">
-    Clears the values of the provided email and password input fields.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>loginMail</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">HTMLElement</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The email input element.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>loginPassword</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">HTMLElement</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The password input element.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="login.js.html">login.js</a>, <a href="login.js.html#line213">line 213</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="guestLogin"><span class="type-signature"></span>guestLogin<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Populates login fields with guest credentials.
+    Toggles the visibility of the password field.
 </div>
 
 
@@ -836,7 +1397,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="login.js.html">login.js</a>, <a href="login.js.html#line92">line 92</a>
+        <a href="register.js.html">register.js</a>, <a href="register.js.html#line145">line 145</a>
     </li></ul></dd>
     
 
@@ -872,7 +1433,7 @@
     
 
     
-    <h4 class="name" id="handleLoginResult"><span class="type-signature"></span>handleLoginResult<span class="signature">(user, loginMail, loginPassword, loginInfo)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="sigUpValidation"><span class="type-signature"></span>sigUpValidation<span class="signature">(user, username, usermail, userpassword, userconfirmpassword, checkbox)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
     
 
     
@@ -880,7 +1441,7 @@
 
 
 <div class="description">
-    Handles the login result by redirecting on success or displaying an error message.
+    Validates the user's signup form data, including username, email, password,password confirmation, and terms acceptance checkbox.
 </div>
 
 
@@ -932,20 +1493,20 @@
 
             
 
-            <td class="description last">The user object if login credentials are valid.</td>
+            <td class="description last">Existing user object to check for email duplicates.</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>loginMail</code></td>
+                <td class="name"><code>username</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">HTMLElement</span>
+<span class="param-type">HTMLInputElement</span>
 
 
             
@@ -955,20 +1516,20 @@
 
             
 
-            <td class="description last">The email input element.</td>
+            <td class="description last">The username input field.</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>loginPassword</code></td>
+                <td class="name"><code>usermail</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">HTMLElement</span>
+<span class="param-type">HTMLInputElement</span>
 
 
             
@@ -978,20 +1539,20 @@
 
             
 
-            <td class="description last">The password input element.</td>
+            <td class="description last">The email input field.</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>loginInfo</code></td>
+                <td class="name"><code>userpassword</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">HTMLElement</span>
+<span class="param-type">HTMLInputElement</span>
 
 
             
@@ -1001,7 +1562,53 @@
 
             
 
-            <td class="description last">The element displaying login feedback.</td>
+            <td class="description last">The password input field.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>userconfirmpassword</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">HTMLInputElement</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The confirm password input field.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>checkbox</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">HTMLInputElement</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Checkbox element for terms acceptance.</td>
         </tr>
 
     
@@ -1042,320 +1649,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="login.js.html">login.js</a>, <a href="login.js.html#line54">line 54</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="loadUsers"><span class="type-signature">(async) </span>loadUsers<span class="signature">(path)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Fetches user data from the given path, processes it, and adds it to the `contacts` array.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>path</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The API path to fetch user data from.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="login.js.html">login.js</a>, <a href="login.js.html#line5">line 5</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="loginAction"><span class="type-signature">(async) </span>loginAction<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Initiates the login process by validating inputs and checking credentials.
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="login.js.html">login.js</a>, <a href="login.js.html#line72">line 72</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="loginSuccesfull"><span class="type-signature"></span>loginSuccesfull<span class="signature">()</span><span class="type-signature"> &rarr; {string}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Returns a success message for successful login.
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="login.js.html">login.js</a>, <a href="login.js.html#line203">line 203</a>
+        <a href="register.js.html">register.js</a>, <a href="register.js.html#line227">line 227</a>
     </li></ul></dd>
     
 
@@ -1384,762 +1678,7 @@
 
         
 <div class="param-desc">
-    - Success message for successful login.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">string</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="loginUpSuccessfully"><span class="type-signature"></span>loginUpSuccessfully<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Displays a success message upon successful login.
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="login.js.html">login.js</a>, <a href="login.js.html#line138">line 138</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="passwordToShort"><span class="type-signature"></span>passwordToShort<span class="signature">()</span><span class="type-signature"> &rarr; {string}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Returns a message for when the password is too short.
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="login.js.html">login.js</a>, <a href="login.js.html#line130">line 130</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    - Password length warning message.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">string</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="redirectToRegister"><span class="type-signature"></span>redirectToRegister<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Redirects the user to the registration page.
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="login.js.html">login.js</a>, <a href="login.js.html#line221">line 221</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="screenWidth"><span class="type-signature"></span>screenWidth<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Adjusts the display of sign-up sections based on screen width.
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="login.js.html">login.js</a>, <a href="login.js.html#line228">line 228</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="showTheCurrentTime"><span class="type-signature"></span>showTheCurrentTime<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Shows a greeting message based on the current time of day.
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="login.js.html">login.js</a>, <a href="login.js.html#line149">line 149</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="validateEmailLogin"><span class="type-signature"></span>validateEmailLogin<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Validates the email format for login and updates the login information display.
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="login.js.html">login.js</a>, <a href="login.js.html#line102">line 102</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="validateLoginEmail"><span class="type-signature">(async) </span>validateLoginEmail<span class="signature">(loginMail, loginPassword, loginInfo)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Validates the login email format and displays a message if invalid.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>loginMail</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">HTMLElement</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The email input element.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>loginPassword</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">HTMLElement</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The password input element.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>loginInfo</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">HTMLElement</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The element displaying login feedback.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="login.js.html">login.js</a>, <a href="login.js.html#line27">line 27</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    - Returns true if the email is valid; otherwise, false.
+    - Returns true if all fields are valid; false if any validation fails.
 </div>
 
 
@@ -2168,7 +1707,7 @@
     
 
     
-    <h4 class="name" id="validatePasswordLogin"><span class="type-signature"></span>validatePasswordLogin<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="validateUserEmail"><span class="type-signature"></span>validateUserEmail<span class="signature">(usermail)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
     
 
     
@@ -2176,7 +1715,7 @@
 
 
 <div class="description">
-    Validates the login password length and updates the login information display.
+    Validates the user's email input and provides feedback if invalid.
 </div>
 
 
@@ -2187,92 +1726,53 @@
 
 
 
-
-
-
-
-<dl class="details">
-
+    <h5>Parameters:</h5>
     
 
-    
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
 
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="login.js.html">login.js</a>, <a href="login.js.html#line116">line 116</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        <th>Type</th>
 
         
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>usermail</code></td>
             
 
-    
+            <td class="type">
+            
+                
+<span class="param-type">HTMLInputElement</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The email input field.</td>
+        </tr>
 
     
-    <h4 class="name" id="wrongPasswordOrEmail"><span class="type-signature"></span>wrongPasswordOrEmail<span class="signature">()</span><span class="type-signature"> &rarr; {string}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Returns an error message for incorrect email or password.
-</div>
-
-
-
-
-
-
-
+    </tbody>
+</table>
 
 
 
@@ -2308,7 +1808,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="login.js.html">login.js</a>, <a href="login.js.html#line194">line 194</a>
+        <a href="register.js.html">register.js</a>, <a href="register.js.html#line179">line 179</a>
     </li></ul></dd>
     
 
@@ -2337,7 +1837,7 @@
 
         
 <div class="param-desc">
-    - Error message for incorrect credentials.
+    - Returns true if the email is valid; false if not.
 </div>
 
 
@@ -2348,13 +1848,283 @@
     </dt>
     <dd>
         
-<span class="param-type">string</span>
+<span class="param-type">boolean</span>
 
 
     </dd>
 </dl>
 
     
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="validateUserPassword"><span class="type-signature"></span>validateUserPassword<span class="signature">(userpassword, userconfirmpassword)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Validates the user's password and confirmation password input.Checks for minimum length and if passwords match.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>userpassword</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">HTMLInputElement</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The password input field.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>userconfirmpassword</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">HTMLInputElement</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The confirm password input field.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="register.js.html">register.js</a>, <a href="register.js.html#line198">line 198</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - Returns true if password meets all conditions; false if not.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="validateUsername"><span class="type-signature"></span>validateUsername<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Validates the username input for format and length requirements.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="register.js.html">register.js</a>, <a href="register.js.html#line160">line 160</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2376,13 +2146,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#changeColorHrAndBorderCorrect">changeColorHrAndBorderCorrect</a></li><li><a href="global.html#changeColorHrAndBorderMistake">changeColorHrAndBorderMistake</a></li><li><a href="global.html#checkUserCredentials">checkUserCredentials</a></li><li><a href="global.html#emailIsCorrect">emailIsCorrect</a></li><li><a href="global.html#emptyTheInputFields">emptyTheInputFields</a></li><li><a href="global.html#guestLogin">guestLogin</a></li><li><a href="global.html#handleLoginResult">handleLoginResult</a></li><li><a href="global.html#loadUsers">loadUsers</a></li><li><a href="global.html#loginAction">loginAction</a></li><li><a href="global.html#loginSuccesfull">loginSuccesfull</a></li><li><a href="global.html#loginUpSuccessfully">loginUpSuccessfully</a></li><li><a href="global.html#passwordToShort">passwordToShort</a></li><li><a href="global.html#redirectToRegister">redirectToRegister</a></li><li><a href="global.html#screenWidth">screenWidth</a></li><li><a href="global.html#showTheCurrentTime">showTheCurrentTime</a></li><li><a href="global.html#validateEmailLogin">validateEmailLogin</a></li><li><a href="global.html#validateLoginEmail">validateLoginEmail</a></li><li><a href="global.html#validatePasswordLogin">validatePasswordLogin</a></li><li><a href="global.html#wrongPasswordOrEmail">wrongPasswordOrEmail</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#ButtonDisabledSet">ButtonDisabledSet</a></li><li><a href="global.html#addNewUser">addNewUser</a></li><li><a href="global.html#base_URL">base_URL</a></li><li><a href="global.html#checkFormCompletion">checkFormCompletion</a></li><li><a href="global.html#checkRegistration">checkRegistration</a></li><li><a href="global.html#contacts">contacts</a></li><li><a href="global.html#emptyTheInputFields">emptyTheInputFields</a></li><li><a href="global.html#loadUsers">loadUsers</a></li><li><a href="global.html#postData">postData</a></li><li><a href="global.html#showVisbility">showVisbility</a></li><li><a href="global.html#sigUpValidation">sigUpValidation</a></li><li><a href="global.html#validateUserEmail">validateUserEmail</a></li><li><a href="global.html#validateUserPassword">validateUserPassword</a></li><li><a href="global.html#validateUsername">validateUsername</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Wed Oct 30 2024 19:30:05 GMT+0100 (Mitteleuropäische Normalzeit)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Wed Oct 30 2024 19:36:59 GMT+0100 (Mitteleuropäische Normalzeit)
 </footer>
 
 <script> prettyPrint(); </script>
