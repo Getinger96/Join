@@ -19,7 +19,10 @@ let currentCategory = 'open';
 let path = "tasks";
 let currentStatus;
 
-
+/**
+ * Creates a new task and prevents default form submission.
+ * @param {*} event event
+ */
 async function createTask(event) {
     event.preventDefault();
 
@@ -32,6 +35,11 @@ async function createTask(event) {
     resetAfterCreation();
 }
 
+
+/**
+ * Validates input fields.
+ * @returns {boolean} 
+ */
 function validateInputFields() {
     let titleElement = document.getElementById('taskTitle');
     let dueDateElement = document.getElementById('taskDueDate');
@@ -44,12 +52,19 @@ function validateInputFields() {
         return true;
     }
 }
-
+/**
+ * Clears validation messages.
+ */
 function clearValidationMessages() {
     document.getElementById("InputFieldsMissing").innerHTML = '';
     document.getElementById("WrongCurrentDateId").innerHTML = '';
 }
 
+
+/**
+ * 
+ *  list and returns task details from input fields.
+ */
 function getTaskDetails() {
     let titleElement = document.getElementById('taskTitle');
     let dueDateElement = document.getElementById('taskDueDate');
@@ -75,10 +90,16 @@ function getTaskDetails() {
     };
 }
 
+/**
+ * Posts a new task to the server.
+ */
 async function createNewTodo(newTodo) {
     await postData(`tasks`, newTodo);
 }
 
+/**
+ * Resets fields and reloads tasks after creation.
+ */
 function resetAfterCreation() {
     tasksArray = [];
     closeTaskUpdate();
@@ -86,7 +107,12 @@ function resetAfterCreation() {
     fetchTasks();
 }
 
-
+/**
+ * Sends a POST request to the server.
+ * @param {string} path Request path
+ * @param {Object} data Data to post
+ * @returns {Object} Server response
+ */
 async function postData(path = "", data = {}) {
     let response = await fetch(base_URL + path + ".json", {
         method: "POST",
@@ -98,6 +124,10 @@ async function postData(path = "", data = {}) {
     return responsASJson = await response.json();
 }
 
+/**
+ * Fetches contacts from the server and organizes them.
+ * @param {string} patha API 
+ */
 async function fetchContacts(path = '') {
     let response = await fetch(base_URL + path + ".json");
     let userJSON = await response.json();
@@ -118,12 +148,17 @@ async function fetchContacts(path = '') {
         letterSorting()
     }
 }
-
+/**
+ * Retrieves the last name from a full name.
+ * @param {string} fullName Full name of the contact
+ */
 function getLastName(fullName) {
     let nameParts = fullName.trim().split(' ');
     return nameParts[nameParts.length - 1];
 }
-
+/**
+ * Renders contacts grouped by initial letter in the  container.
+ */
 function getContacts() {
     let showContacts = document.getElementById('Selection_Container');
 
@@ -143,7 +178,12 @@ function getContacts() {
        
 }
     }
-    
+/**
+ * Groups contacts by the first letter of the name
+ * @param {Array} contacts Array of contact objects
+ * @returns {Object} Contacts grouped by first letter
+ */
+
     function groupContacts(contacts) {
         let groupedContacts = {};
         contacts.forEach((contact, index) => {
@@ -160,7 +200,9 @@ function getContacts() {
         return groupedContacts;
     }
 
-
+/**
+ * Sorts and displays contacts alphabetically by first letter.
+ */
 function letterSorting() {
     contactsArray.forEach(contact => {
         let firstLetter = contact.name.charAt(0).toUpperCase();
@@ -181,6 +223,10 @@ function letterSorting() {
     getContacts();
 }
 
+/**
+ * Deletes data from the API .
+ * @param {string} path API path for delete
+ */
 async function deleteData(path = "") {
     let response = await fetch(base_URL + path + ".json", {
         method: "DELETE",
@@ -188,7 +234,12 @@ async function deleteData(path = "") {
 
     return responsASJson = await response.json();
 }
-
+/**
+ * Updates  API put function
+ * @param {string} path API path for put data
+ * @param {Object} data Data to update
+ * @returns {Object} Response from the server
+ */
 async function putDataEdit(path = "", data = {}) {
     let response = await fetch(base_URL + path + ".json", {
         method: "PUT",
@@ -200,7 +251,10 @@ async function putDataEdit(path = "", data = {}) {
 
     return responsASJson = await response.json();
 }
-
+/**
+ * Deletes a task and updates the task list in local storage .
+ * @param {number} task Index of the task to delete
+ */
 async function deleteTask(task) {
     localStorage.removeItem(`task-${task}-subtasks`);
     let key = tasksArray[task].taskKey;
@@ -209,7 +263,10 @@ async function deleteTask(task) {
     closeOverlay();
     location.reload();
 }
-
+/**
+ * Changes the add task button to show edit options.
+ * @param {number} index Index of the task to edit
+ */
 function changeAddtaskButton(index) {
     let buttonaddtask = document.getElementById('DibButtomAddtask');
     buttonaddtask.innerHTML = `
@@ -218,7 +275,9 @@ function changeAddtaskButton(index) {
                     <button  onclick="createEdittask(${index})" class="buttonContainerdark curser">Edit Task <img
                             src="assets/IMG/clear_Img.svg"></button>`
 }
-
+/**
+ * Resets the add task button to default.
+ */
 function setCreateTaskButton() {
     let buttonaddtask = document.getElementById('DibButtomAddtask');
     buttonaddtask.innerHTML = `
@@ -228,7 +287,10 @@ function setCreateTaskButton() {
                 src="assets/IMG/clear_Img.svg"></button>`;
 }
 
- 
+/**
+ * Edits a task by populating form fields and rendering contacts.
+ * @param {number} index Index of the task to edit
+ */ 
 async function EditData(index) {
     openTask(index);
     let task = tasksArray[index];
@@ -248,6 +310,10 @@ async function EditData(index) {
     populateTaskFields(title, description, dueDate, priority, category, subtask, index);
 }
 
+/**
+ * Renders assigned contacts, showing a max of four.
+ * @param {Array} assignedContacts Array of assigned contacts
+ */
 function renderAssignedContacts(assignedContacts) {
     let selectedProfileContainer = document.getElementById('Selected_profiles_Container');
     selectedProfileContainer.innerHTML = '';
@@ -265,6 +331,11 @@ function renderAssignedContacts(assignedContacts) {
     handleExtraContacts(selectedProfileContainer, assignedContacts.length);
 }
 
+/**
+ * Shows a badge for extra contacts if more than 4 contact.
+ * @param {HTMLElement} container Container for extra contact
+ * @param {number} count Total assigned contacts
+ */
 function handleExtraContacts(container, count) {
     if (count > 4) {
         let extraCount = count - 4;
@@ -274,6 +345,16 @@ function handleExtraContacts(container, count) {
     }
 }
 
+/**
+ * Fills task form fields for editing.
+ * @param {string} title Task title
+ * @param {string} description Task description
+ * @param {string} dueDate Task due date
+ * @param {string} priority Task priority
+ * @param {string} category Task category
+ * @param {Array} subtask Task subtasks
+ * @param {number} index Task index
+ */
 function populateTaskFields(title, description, dueDate, priority, category, subtask, index) {
     let tasktitle = document.getElementById('taskTitle');
     tasktitle.value = title;
@@ -281,17 +362,19 @@ function populateTaskFields(title, description, dueDate, priority, category, sub
     taskdescription.value = description;
     let taskDAte = document.getElementById('taskDueDate');
     taskDAte.value = dueDate;
-
     setPriority(priority);
-
     let taskCategory = document.getElementById('kategorie');
     taskCategory.value = category;
 
     subtasks = subtask;
     addSubtask();
-
     changeAddtaskButton(index);
 }
+
+/**
+ * Sets task priority based on its value.
+ * @param {string} priority Priority level (urgent, medium, or low)
+ */
 
 function setPriority(priority) {
     if (priority == 'urgent') {
@@ -303,6 +386,10 @@ function setPriority(priority) {
     }
 }
 
+/**
+ * Validates and edits a task's details.
+ * @param {number} index Index of the task to edit
+ */
 async function createEdittask(index) {
         let tasktitle = document.getElementById('taskTitle');
         let taskdescription = document.getElementById('description');
@@ -319,6 +406,17 @@ async function createEdittask(index) {
         }
             
     }
+
+/**
+ * Sends an updated task to the server.
+ * @param {HTMLElement} tasktitle Task title element
+ * @param {HTMLElement} taskdescription Task description element
+ * @param {HTMLElement} taskDAte Task due date element
+ * @param {HTMLElement} taskCategory Task category element
+ * @param {Object} task Task data
+ * @param {string} status Task status
+ * @param {string} key Task unique key
+ */    
 async function createEdittaskPut(tasktitle, taskdescription, taskDAte, taskCategory, task, status, key) {   
     let editedTASk = {
         
@@ -336,8 +434,11 @@ async function createEdittaskPut(tasktitle, taskdescription, taskDAte, taskCateg
     closeOverlay();
     await fetchTasks();
     }
-        
-    function closeTask() {
+
+/**
+ * Closes the task overlay and resets the form.
+ */
+function closeTask() {
         let boardAddTask = document.getElementById('boardAddTask');
         let darkOverlay = document.getElementById('darkOverlay');
     

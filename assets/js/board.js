@@ -1,4 +1,8 @@
 
+
+/**
+ * Updates the view by clearing old elements, updating HTML, and rendering subtasks.
+ */
 async function updatedView() {
     removeAllElement();
     await updateHtml();
@@ -6,12 +10,17 @@ async function updatedView() {
 
 }
 
-
+/**
+ * Clears all elements in the drag area 
+ */
 function removeAllElement() {
     let allElements = document.querySelectorAll('.drag-area');
     allElements.forEach(element => element.innerHTML = '');
 }
 
+/**
+ * Renders subtasks for each task
+ */
 function renderSubtask() {
     let idSubtask = 0
     for (let index = 0; index < tasksArray.length; index++) {
@@ -29,7 +38,9 @@ function renderSubtask() {
         )
     }
 }
-
+/**
+ * Updates HTML by filtering tasks into status categories and rendering t.
+ */
 async function updateHtml() {
     let statusCategories = ['open', 'progress', 'awaitFeedback', 'closed'];
     for (let index = 0; index < statusCategories.length; index++) {
@@ -53,7 +64,9 @@ async function updateHtml() {
     await initializeAllProgress();
 }
 
-
+/**
+ * Updates fields to check if they are empty 
+ */
 function updateAndCheckEmptyFields() {
     let fields = [
         { id: "open", text: "No tasks open" },
@@ -70,7 +83,13 @@ function updateAndCheckEmptyFields() {
 
     });
 }
-
+/**
+ * Checks if the container has tasks, then displays or hides an empty message.
+ * @param {Element} container The container element
+ * @param {boolean} hasTodo Whether the container has tasks
+ * @param {string} messageText Text for the empty message
+ * @param {Element} emptyMessage The empty message element
+ */
 function checkAndDisplayEmptyMessage(container, hasTodo, messageText, emptyMessage) {
         
     if (!hasTodo) {
@@ -88,7 +107,10 @@ function checkAndDisplayEmptyMessage(container, hasTodo, messageText, emptyMessa
             }
         }
     }
-
+/**
+ * Creates HTML for an empty field 
+ * @param {string} text The message text
+ */
 function showEmptyFields(text) {
     return ` 
     <div class="fiedIsempty"> 
@@ -96,6 +118,10 @@ function showEmptyFields(text) {
            </div>`;
 }
 
+/**
+ * Toggles task details overlay for the selected task.
+ * @param {number} taskIndex Index of the task to open
+ */
 function openTask(taskIndex) {
     currentTaskIndex = taskIndex;
     let taskDiv = document.getElementById('boardAddTask');
@@ -113,6 +139,9 @@ function openTask(taskIndex) {
 
 }
 
+/**
+ * Closes the task overlay and resets the input fields.
+ */
 async function closeTaskUpdate() {
     let boardAddTask = document.getElementById('boardAddTask');
     let darkOverlay = document.getElementById('darkOverlay');
@@ -125,6 +154,11 @@ async function closeTaskUpdate() {
     clearMissingFieldContent();
 }
 
+/**
+ * Generates the HTML content for a task.
+ * @param {Object} task Task object with details
+ * @param {number} taskIndex Index of the task
+ */
 function generateTodoHTML(task, taskIndex) {
     const title = task.Title;
     const description = task.Description || "";
@@ -144,7 +178,12 @@ function generateTodoHTML(task, taskIndex) {
        </div>`;
 }
 
-
+/**
+ * Generates HTML for the task header
+ * @param {string} category Task category
+ * @param {string} categoryColor Color  category
+ * @param {number} taskId Task id
+ */
 function generateHeader(category, categoryColor, taskId) {
     return `
         <div class="boardCardheadlinesmall">  
@@ -162,6 +201,11 @@ function generateHeader(category, categoryColor, taskId) {
         </div>`;
 }
 
+/**
+ * Generates HTML for the task footer
+ * @param {string} priorityIcon  priority icon image
+ * @param {number} taskId Task id
+ */
 function generateFooter(priorityIcon, taskId) {
     return `
         <div class="task-footer">
@@ -171,7 +215,10 @@ function generateFooter(priorityIcon, taskId) {
             </div>
         </div>`;
 }
-
+/**
+ * Generates HTML for the task progress bar 
+ * @param {Object} task Task object
+ */
 function generateProgressHtml(task) {
     const subtasks = task.subtask || [];
     const totalSubtasks = subtasks.length;
@@ -191,6 +238,7 @@ function generateProgressHtml(task) {
     }
     return '';
 }
+
 
 function showMoveTheElements(idTask) {
     event.stopPropagation();
