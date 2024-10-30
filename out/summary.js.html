@@ -1,4 +1,32 @@
-/**
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: summary.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: summary.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
  * Global counters for task statuses and priority, as well as a flag for icon color change.
  */
 let countPrioUrgent = 0;
@@ -27,7 +55,7 @@ async function fetchTasksSummary(path = '') {
  * Fetches tasks data from the server and parses it as JSON.
  * @async
  * @param {string} path - The path to fetch tasks data from.
- * @returns {Promise<Object>} - Parsed JSON data containing tasks.
+ * @returns {Promise&lt;Object>} - Parsed JSON data containing tasks.
  */
 async function fetchAndParseTasks(path) {
     let response = await fetch(base_URL + path + ".json");
@@ -42,12 +70,12 @@ function processTaskData(userJSON) {
     let tasksAsArray = Object.values(userJSON.tasks);
     let keysArrayTask = Object.keys(userJSON.tasks);
 
-    for (let index = 0; index < tasksAsArray.length; index++) {
+    for (let index = 0; index &lt; tasksAsArray.length; index++) {
         let task = tasksAsArray[index];
         let keyTask = keysArrayTask[index];
         id++;
 
-        let saveTask = tasksArray.filter(t => t.Title === task.Titel && t.Description === task.Description);
+        let saveTask = tasksArray.filter(t => t.Title === task.Titel &amp;&amp; t.Description === task.Description);
         if (saveTask.length === 0) {
             tasksArray.push({
                 taskKey: keyTask,
@@ -77,7 +105,7 @@ function finalizeSummaryRendering() {
  * Renders the tasks on the Kanban board by iterating over the tasks array.
  */
 function renderSummarySite() {
-    for (let index = 0; index < tasksArray.length; index++) {
+    for (let index = 0; index &lt; tasksArray.length; index++) {
         loadToDoAtTheKanbanBoard(index);
     }
 }
@@ -203,7 +231,7 @@ function showTheCurrentDate() {
         let nextUrgentTask = urgentTasks.reduce((earliest, current) => {
             let earliestDate = new Date(earliest.duedate);
             let currentDate = new Date(current.duedate);
-            return currentDate < earliestDate ? current : earliest;
+            return currentDate &lt; earliestDate ? current : earliest;
         });
         document.getElementById('currentDate').innerHTML = formatDate(nextUrgentTask.duedate);
     } else {
@@ -229,9 +257,9 @@ function formatDate(dueDate) {
 function showTheCurrentTime() {
     let currentTime = new Date().getHours();
     let greetingText = document.getElementById('showTheRightTime');
-    if (currentTime < 12) {
+    if (currentTime &lt; 12) {
         greetingText.innerHTML = "Good Morning !!!";
-    } else if (currentTime < 18) {
+    } else if (currentTime &lt; 18) {
         greetingText.innerHTML = "Good Afternoon !!!";
     } else {
         greetingText.innerHTML = "Good Evening !!!";
@@ -244,7 +272,7 @@ function showTheCurrentTime() {
 function summaryScreenWidth() {
     let screenWidth = window.innerWidth;
     let getNewHrLine = document.getElementById('newHrLineHeader');
-    if (screenWidth <= 900) {
+    if (screenWidth &lt;= 900) {
         getNewHrLine.classList.add('newhr');
     }
 }
@@ -282,3 +310,26 @@ function changeImageDoneDefault(isHovered) {
 
 
 
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#changeImageToDoDefault">changeImageToDoDefault</a></li><li><a href="global.html#countPrioUrgent">countPrioUrgent</a></li><li><a href="global.html#fetchAndParseTasks">fetchAndParseTasks</a></li><li><a href="global.html#fetchTasksSummary">fetchTasksSummary</a></li><li><a href="global.html#finalizeSummaryRendering">finalizeSummaryRendering</a></li><li><a href="global.html#formatDate">formatDate</a></li><li><a href="global.html#incrementStatusCounts">incrementStatusCounts</a></li><li><a href="global.html#loadToDoAtTheKanbanBoard">loadToDoAtTheKanbanBoard</a></li><li><a href="global.html#processTaskData">processTaskData</a></li><li><a href="global.html#renderSummarySite">renderSummarySite</a></li><li><a href="global.html#showAllPrioUrgent">showAllPrioUrgent</a></li><li><a href="global.html#showAllTaskinBoard">showAllTaskinBoard</a></li><li><a href="global.html#showBoardPrioAndTasks">showBoardPrioAndTasks</a></li><li><a href="global.html#showKanbanBoarTaskAwaitingFeedback">showKanbanBoarTaskAwaitingFeedback</a></li><li><a href="global.html#showKanbanBoardTaskProgress">showKanbanBoardTaskProgress</a></li><li><a href="global.html#showKanbanBoardTaskdone">showKanbanBoardTaskdone</a></li><li><a href="global.html#showKanbanBoardTodo">showKanbanBoardTodo</a></li><li><a href="global.html#showTheCurrentDate">showTheCurrentDate</a></li><li><a href="global.html#showTheCurrentTime">showTheCurrentTime</a></li><li><a href="global.html#showTheKanbanBoardDocument">showTheKanbanBoardDocument</a></li><li><a href="global.html#summaryScreenWidth">summaryScreenWidth</a></li><li><a href="global.html#updateBoardView">updateBoardView</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Wed Oct 30 2024 19:54:07 GMT+0100 (Mitteleuropäische Normalzeit)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

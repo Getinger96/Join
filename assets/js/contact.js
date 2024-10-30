@@ -347,10 +347,8 @@ function editFunctionAction(index) {
         saveEditedContact(index);
     };
 }
-/**
- * Closes the contact form overlay and resets the form fields.
- */
-function closeCardContact() {
+
+function closeCardContactzero() {
     const newContactOverlay = document.getElementById('newContact');
     newContactOverlay.style.display = 'none';
     newContactOverlay.classList.remove('transition-in-from-right');
