@@ -1,4 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: board_Card.js</title>
 
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: board_Card.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>
 /**
  * the function show card
  * @param {*} task task 
@@ -52,7 +80,7 @@ function generateSmallContactsHtml(assignedContacts) {
 function generateLargeContactsHtml(assignedContacts) {
     let contactsHtml = ''; 
 
-    for (let index = 0; index < assignedContacts.length; index++) {
+    for (let index = 0; index &lt; assignedContacts.length; index++) {
         contactsHtml += generateContactHtml(assignedContacts[index], index);
     }
   
@@ -103,9 +131,9 @@ function showTheNameColor(checkIndexarray) {
 function getSmallContactHtml(index, firstname, lastname, color) {
     const initials = `${firstname.charAt(0).toUpperCase()}${lastname.charAt(0).toUpperCase()}`;
     return `
-        <div class="contactCircle" style="background-color: ${color};">
+        &lt;div class="contactCircle" style="background-color: ${color};">
             ${initials}
-        </div>
+        &lt;/div>
     `;
 }
 /**
@@ -120,14 +148,14 @@ function getSmallContactHtml(index, firstname, lastname, color) {
 function getLargeContactHtml(index, firstLetterForName, firstLetterLastName, contactFirstname, contactLastname, color) {
 
     return `
-        <div class="contact-box">
-            <div class="contact-icon" style="background-color: ${color};">
+        &lt;div class="contact-box">
+            &lt;div class="contact-icon" style="background-color: ${color};">
                 ${firstLetterForName}${firstLetterLastName}  
-            </div>
-            <div class="contact-content">
-                <span class="contactname">${contactFirstname} ${contactLastname}</span>
-            </div>
-        </div>
+            &lt;/div>
+            &lt;div class="contact-content">
+                &lt;span class="contactname">${contactFirstname} ${contactLastname}&lt;/span>
+            &lt;/div>
+        &lt;/div>
     `;
 }
 /**
@@ -169,46 +197,46 @@ function createShowCard(task, taskIndex) {
  */
 function generateCardHtml(title, description, dueDate, priority, priorityIcon, category, categoryColor, contactsHtml, subtasksHtml, taskIndex) {
     return `
-        <div class="todo-detail">
-            <div>
-                <div class="divKategorieCard" style="background-color: ${categoryColor};">${category}</div>
-                <button onclick="closeOverlay(${taskIndex})" class="close-button"><img src="./assets/IMG/iconoir_cancel.png" alt=""></button>
-            </div>
-            <div>
-                <h2>${title}</h2>
-            </div>
-            <div class="responsiveDescription">
-                <p><strong>Description:</strong> ${description}</p>
-            </div>
-            <p><strong>Due Date:</strong> ${dueDate}</p>
-            <div class="prioicon">
-                <p><strong>Priority:</strong> 
-                    <span class="">${priority}</span> 
-                    <div class="prioicon-imgSection">
-                        <img src="${priorityIcon}" alt="${priority} Priority">
-                    </div> 
-                </p>
-            </div>
-            <p><strong>Assigned To:</strong></p>
-            <div class="assigned-contacts">
+        &lt;div class="todo-detail">
+            &lt;div>
+                &lt;div class="divKategorieCard" style="background-color: ${categoryColor};">${category}&lt;/div>
+                &lt;button onclick="closeOverlay(${taskIndex})" class="close-button">&lt;img src="./assets/IMG/iconoir_cancel.png" alt="">&lt;/button>
+            &lt;/div>
+            &lt;div>
+                &lt;h2>${title}&lt;/h2>
+            &lt;/div>
+            &lt;div class="responsiveDescription">
+                &lt;p>&lt;strong>Description:&lt;/strong> ${description}&lt;/p>
+            &lt;/div>
+            &lt;p>&lt;strong>Due Date:&lt;/strong> ${dueDate}&lt;/p>
+            &lt;div class="prioicon">
+                &lt;p>&lt;strong>Priority:&lt;/strong> 
+                    &lt;span class="">${priority}&lt;/span> 
+                    &lt;div class="prioicon-imgSection">
+                        &lt;img src="${priorityIcon}" alt="${priority} Priority">
+                    &lt;/div> 
+                &lt;/p>
+            &lt;/div>
+            &lt;p>&lt;strong>Assigned To:&lt;/strong>&lt;/p>
+            &lt;div class="assigned-contacts">
                 ${contactsHtml}
-            </div>
-            <p class="subtaskstext"><strong>Subtasks:</strong></p>
-            <div class="subtasks-container">
-                ${subtasksHtml} <!-- Hier werden die Subtasks eingefügt -->
-            </div>
-        </div>
-        <div class="actionBigTodo">
-            <button class="actionBigButton" onclick="deleteTask(${taskIndex})">
-                <img class="iconTodoBig" src="./assets/IMG/delete.png">
-                <p>Delete</p>
-            </button>
-            <div></div>
-            <button class="actionBigButton" onclick="EditData(${taskIndex})">
-                <img class="iconTodoBig" src="./assets/IMG/edit.png">
-                <p>Edit</p>
-            </button>
-        </div>
+            &lt;/div>
+            &lt;p class="subtaskstext">&lt;strong>Subtasks:&lt;/strong>&lt;/p>
+            &lt;div class="subtasks-container">
+                ${subtasksHtml} &lt;!-- Hier werden die Subtasks eingefügt -->
+            &lt;/div>
+        &lt;/div>
+        &lt;div class="actionBigTodo">
+            &lt;button class="actionBigButton" onclick="deleteTask(${taskIndex})">
+                &lt;img class="iconTodoBig" src="./assets/IMG/delete.png">
+                &lt;p>Delete&lt;/p>
+            &lt;/button>
+            &lt;div>&lt;/div>
+            &lt;button class="actionBigButton" onclick="EditData(${taskIndex})">
+                &lt;img class="iconTodoBig" src="./assets/IMG/edit.png">
+                &lt;p>Edit&lt;/p>
+            &lt;/button>
+        &lt;/div>
     `;
 }
 
@@ -273,11 +301,11 @@ function generateSubtasksHtml(subtasks, taskIndex) {
  */
 function showSubtasksHtml(taskIndex, subtaskIndex, isChecked, subtask) {
     return `
-    <div class="subtask-item">
-        <input class="checkbox" type="checkbox" id="subtask-${taskIndex}-${subtaskIndex}" ${isChecked ? 'checked' : ''} 
+    &lt;div class="subtask-item">
+        &lt;input class="checkbox" type="checkbox" id="subtask-${taskIndex}-${subtaskIndex}" ${isChecked ? 'checked' : ''} 
         onchange="subtaskChecked(${taskIndex}, ${subtaskIndex})" />
-        <label class="checkboxtext" for="subtask-${taskIndex}-${subtaskIndex}">${subtask}</label>
-    </div>
+        &lt;label class="checkboxtext" for="subtask-${taskIndex}-${subtaskIndex}">${subtask}&lt;/label>
+    &lt;/div>
 `;
 }
 
@@ -318,7 +346,7 @@ function updateProgress(taskIndex) {
  * the function initialize all progress
  */
 async function initializeAllProgress() {
-    for (let taskIndex = 0; taskIndex < tasksArray.length; taskIndex++) {
+    for (let taskIndex = 0; taskIndex &lt; tasksArray.length; taskIndex++) {
         const tasksArrayElement = tasksArray[taskIndex];
         const subtaskStatus = JSON.parse(localStorage.getItem(`task-${taskIndex}-subtasks`)) || {};
 
@@ -548,3 +576,26 @@ function highlight(id) {
 }
 
 
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#allowDrop">allowDrop</a></li><li><a href="global.html#checkEmptyFieldsMoveToUpdate">checkEmptyFieldsMoveToUpdate</a></li><li><a href="global.html#closeOverlay">closeOverlay</a></li><li><a href="global.html#closeoverlayedit">closeoverlayedit</a></li><li><a href="global.html#createShowCard">createShowCard</a></li><li><a href="global.html#dragLeave">dragLeave</a></li><li><a href="global.html#generateCardHtml">generateCardHtml</a></li><li><a href="global.html#generateContactHtml">generateContactHtml</a></li><li><a href="global.html#generateLargeContactsHtml">generateLargeContactsHtml</a></li><li><a href="global.html#generateSmallContactsHtml">generateSmallContactsHtml</a></li><li><a href="global.html#generateSubtasksHtml">generateSubtasksHtml</a></li><li><a href="global.html#getLargeContactHtml">getLargeContactHtml</a></li><li><a href="global.html#getSearchInput">getSearchInput</a></li><li><a href="global.html#getSmallContactHtml">getSmallContactHtml</a></li><li><a href="global.html#handleDragOver">handleDragOver</a></li><li><a href="global.html#hideTask">hideTask</a></li><li><a href="global.html#highlight">highlight</a></li><li><a href="global.html#initializeAllProgress">initializeAllProgress</a></li><li><a href="global.html#initializeSubtaskProgressElement">initializeSubtaskProgressElement</a></li><li><a href="global.html#moveTo">moveTo</a></li><li><a href="global.html#openToDo">openToDo</a></li><li><a href="global.html#putDataTask">putDataTask</a></li><li><a href="global.html#removeHighlight">removeHighlight</a></li><li><a href="global.html#search">search</a></li><li><a href="global.html#showCard">showCard</a></li><li><a href="global.html#showSubtasksHtml">showSubtasksHtml</a></li><li><a href="global.html#showTask">showTask</a></li><li><a href="global.html#showTasksSearch">showTasksSearch</a></li><li><a href="global.html#showTheNameColor">showTheNameColor</a></li><li><a href="global.html#startDragging">startDragging</a></li><li><a href="global.html#subtaskChecked">subtaskChecked</a></li><li><a href="global.html#updateBoard">updateBoard</a></li><li><a href="global.html#updateProgress">updateProgress</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Wed Oct 30 2024 18:58:48 GMT+0100 (Mitteleuropäische Normalzeit)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
