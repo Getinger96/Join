@@ -43,11 +43,19 @@ async function fetchContacts(path = '') {
     sortContactsByLetter();
 }
 
+/**
+ * Extracts the last name from a full name string.
+ * @param {string} fullName - The full name from which to extract the last name.
+ */
 function getLastName(fullName) {
     let nameParts = fullName.trim().split(' ');
     return nameParts[nameParts.length - 1];
 }
 
+
+/**
+ * Groups contacts by the first letter of their name.
+ */
 function groupContacts() {
     groupedContacts = {};
 
@@ -66,6 +74,9 @@ function groupContacts() {
     beginningLetter = Object.keys(groupedContacts).sort();
 }
 
+/**
+ * Retrieves and groups contacts, then renders them.
+ */
 function renderContacts() {
     let showContacts = document.getElementById('contactview');
     let content = '';
@@ -82,12 +93,25 @@ function renderContacts() {
 
     showContacts.innerHTML = content;
 }
-
+/**
+ * Retrieves and groups contacts, then renders them.
+ */
 function getContacts() {
     groupContacts();
     renderContacts();
 }
 
+
+/**
+ * Displays a single contact in the contact list.
+ * @param {number} contactIndex - The index of the contact.
+ * @param {string} contactsEmail - The email of the contact.
+ * @param {string} contactsName - The name of the contact.
+ * @param {string} contactLastname - The last name of the contact.
+ * @param {string} contactPhone - The phone number of the contact.
+ * @param {string} selectedClass - Class indicating if the contact is selected.
+ * @param {string} color - Background color for the contact icon.
+ */
 function displayContacts(contactIndex, contactsEmail, contactsName, contactLastname, contactPhone, selectedClass, color) {
     return `<div onclick="selectContact(${contactIndex})" class="single-contact-box ${selectedClass}" style="background-color:${selectedClass ? '#2A3647' : ''};">
                 <div class="contact-icon" style="background-color:${color};">
@@ -100,6 +124,11 @@ function displayContacts(contactIndex, contactsEmail, contactsName, contactLastn
             </div>`;
 }
 
+
+/**
+ * Selects a contact by its index and updates the UI accordingly.
+ * @param {number} index - The index of the selected contact.
+ */
 function selectContact(index) {
     selectedContactIndex = index;
     getContacts();
@@ -109,11 +138,19 @@ function selectContact(index) {
     detailView.classList.add('active');
 }
 
+/**
+ * Closes the detail view of the contact.
+ */
 function closeDetailView() {
     let detailView = document.querySelector('.contactview-container');
     detailView.classList.remove('active');
 }
 
+
+/**
+ * Retrieves and displays detailed information of a contact in a larger view.
+ * @param {number} index - The index of the contact to display.
+ */
 function getContactBig(index) {
     let contact = contactsArray[index];
     let colorIndex = index % colors.length;
@@ -123,6 +160,15 @@ function getContactBig(index) {
     showContacts.innerHTML = showContactBig(contact.name, contact.email, contact.phone, getLastName(contact.name), color);
 }
 
+
+/**
+ * Displays detailed information of a contact in a large view.
+ * @param {string} contactsName - The name of the contact.
+ * @param {string} contactsEmail - The email of the contact.
+ * @param {string} contactPhone - The phone number of the contact.
+ * @param {string} contactLastname - The last name of the contact.
+ * @param {string} color - Background color for the contact icon.
+ */
 function showContactBig(contactsName, contactsEmail, contactPhone, contactLastname, color) {
     return `
     <div class="largcontactbox">
@@ -173,6 +219,9 @@ function showContactBig(contactsName, contactsEmail, contactPhone, contactLastna
 `;
 }
 
+/**
+ * Collects the first letters of contact names and stores them in beginningLetter.
+ */
 function collectBeginningLetters() {
     beginningLetter = [];
     groupedContacts = {};
@@ -187,6 +236,9 @@ function collectBeginningLetters() {
     beginningLetter.sort();
 }
 
+/**
+ * Groups contacts by the first letter of their name and updates the display.
+ */
 function groupContactsByLetter() {
     contactsArray.forEach(contact => {
         let firstLetter = contact.name.charAt(0).toUpperCase();
@@ -197,12 +249,19 @@ function groupContactsByLetter() {
     });
 }
 
+/**
+ * Deletes a contact by index and updates the contact list.
+ * @param {number} index - The index of the contact to delete.
+ */
 function sortContactsByLetter() {
     collectBeginningLetters();
     groupContactsByLetter();
     getContacts();
 }
 
+/**
+ * Creates a new contact and sends it to the server.
+ */
 async function createContact() {
     const name = document.getElementById('name').value.trim();
     const email = document.getElementById('mail').value.trim();
@@ -219,7 +278,9 @@ async function createContact() {
     await fetchContacts();
 }
 
-
+/**
+ * Displays the new contact overlay to add a new contact.
+ */
 function addNewContact() {
     selectedContactIndex = null;
     let newContactOverlay = document.getElementById('newContact');
@@ -237,14 +298,25 @@ function addNewContact() {
     }
 
 }
-
+/**
+ * Displays the logo of the contact being edited.
+ * @param {string} contactsName - The name of the contact.
+ * @param {string} contactLastname - The last name of the contact.
+ * @param {string} color - Background color for the contact icon.
+ * @returns {string} - The HTML representation of the contact's logo.
+ */
 function displayEditContactLogo(contactsName, contactLastname, color) {
     return `
         <div class="edit-contact-logo" style="background-color:${color};">
             <span>${contactsName.charAt(0).toUpperCase()}${contactLastname.charAt(0).toUpperCase()}</span>
         </div>`;
 }
-
+/**
+ * Displays the logo of the contact being edited.
+ * @param {string} contactsName - The name of the contact.
+ * @param {string} contactLastname - The last name of the contact.
+ * @param {string} color - Background color for the contact icon.
+ */
 function htmlEditForm(index) {
     let contact = contactsArray[index];
 
@@ -260,7 +332,10 @@ function htmlEditForm(index) {
     newContactOverlay.classList.add('transition-in-from-right');
     newContactOverlay.style.display = 'flex';
 }
-
+/**
+ * Sets up actions for the edit contact modal, including save and delete actions.
+ * @param {number} index - The index of the contact to edit.
+ */
 function editFunctionAction(index) {
     const cancelButton = document.querySelector('.cancel-button');
     cancelButton.textContent = 'Delete';
@@ -272,7 +347,9 @@ function editFunctionAction(index) {
         saveEditedContact(index);
     };
 }
-
+/**
+ * Closes the contact form overlay and resets the form fields.
+ */
 function closeCardContact() {
     const newContactOverlay = document.getElementById('newContact');
     newContactOverlay.style.display = 'none';
@@ -296,6 +373,10 @@ function closeCardContact() {
     renderContacts();
 }
 
+/**
+ * Edits an existing contact based on the index provided.
+ * @param {number} index - The index of the contact to edit.
+ */
 function editContact(index) {
     if (window.innerWidth <= 1150) {
         showMobileEditContactOverlay(index);
@@ -305,7 +386,10 @@ function editContact(index) {
         editFunctionAction(index);
     }
 }
-
+/**
+ * Deletes a contact by index and updates the contact list.
+ * @param {number} index - The index of the contact to delete.
+ */
 async function deleteContact(index) {
     let key = contactsArray[index].id;
     if (index > -1) {
@@ -326,6 +410,9 @@ async function deleteContact(index) {
     }
 }
 
+/**
+ * Resets the contact form fields to their default values.
+ */
 function resetContactForm() {
     document.querySelector('.addcontactheadline').textContent = 'Add Contact';
     document.querySelector('.addcontactsecondline').style.display = 'flex';
@@ -338,6 +425,9 @@ function resetContactForm() {
     document.querySelector('.addNewContactimg').style.display = 'block';
 }
 
+/**
+ * Closes the overlay and resets the contact form.
+ */
 function closeOverlay() {
     const newContactOverlay = document.getElementById('newContact');
     newContactOverlay.style.display = 'none';
@@ -352,22 +442,35 @@ function closeOverlay() {
     renderContacts();
 }
 
+/**
+ * Closes the contact form overlay and resets the form fields and warning messages.
+ */
 function closeCardContact() {
     closeOverlay();
     resetContactForm();
     closeAllWarningMessage();
 }
 
+/**
+ * Handles the closing of contact forms, both desktop and mobile.
+ */
 function handleCloseContact() {
     closeCardContact();
     closeCardContactMobile();
 }
 
+/**
+ * Clears the detailed view of a contact.
+ */
 function clearBigContactView() {
     let showContacts = document.getElementById('contactViewBig');
     showContacts.innerHTML = '';
 }
 
+/**
+ * Saves the edited contact data and updates the contact list.
+ * @param {number} index - The index of the contact to save.
+ */
 async function saveEditedContact(index) {
     const oldName = contactsArray[index].name,
           name = document.getElementById('name').value.trim(),

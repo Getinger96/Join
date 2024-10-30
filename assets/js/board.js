@@ -239,7 +239,10 @@ function generateProgressHtml(task) {
     return '';
 }
 
-
+/**
+ * Shows or hides the menu based on the screen width.
+ * @param {number} idTask - The ID of the task 
+ */
 function showMoveTheElements(idTask) {
     event.stopPropagation();
 
@@ -250,6 +253,10 @@ function showMoveTheElements(idTask) {
     }
 }
 
+/**
+ * Toggles the display of the menu for  task.
+ * @param {number} idTask - The id of the task 
+ */
 function toggleMenu(idTask) {
     let fieldsContainer = document.getElementById(`fields_${idTask}`);
     let existingMenu = fieldsContainer.querySelector('.showsmallFieldBar');
@@ -260,6 +267,11 @@ function toggleMenu(idTask) {
         fieldsContainer.innerHTML =fieldsContainerhtml(idTask);
     }
 }
+
+/**
+ * Generates the HTML structure for the task status menu
+ * @param {number} idTask - The id of the task 
+ */
 function fieldsContainerhtml(idTask) {
     return`
             <div id="existingmenu" class="showsmallFieldBar" onclick="event.stopPropagation()">
@@ -271,6 +283,10 @@ function fieldsContainerhtml(idTask) {
             </div>`
 }
 
+/**
+ * Hides the menu task 
+ * @param {number} idTask - The id of the task 
+ */
 function hideMenu(idTask) {
     let fieldsContainer = document.getElementById(`fields_${idTask}`);
     let existingMenu = fieldsContainer.querySelector('.showsmallFieldBar');
@@ -280,6 +296,7 @@ function hideMenu(idTask) {
     }
 }
 
+// Event listener to close the menu when clicking outside of it
 document.addEventListener('click', function(event) {
     const openMenu = document.querySelector('.showsmallFieldBar');
     if (openMenu && !openMenu.contains(event.target)) {
@@ -287,7 +304,9 @@ document.addEventListener('click', function(event) {
     }
 });
 
-
+/**
+ * Handles the window resize event
+ */
 function handleResize() {
     const windowWidth = window.innerWidth;
     const openMenu = document.querySelector('.showsmallFieldBar');
@@ -298,7 +317,12 @@ function handleResize() {
         }
     }
 }
-
+/**
+ * Moves a task to a new status and updates 
+ * @param {number} idTask - The id of the task 
+ * @param {string} newStatus - The new status 
+ * @param {Event} event - The click event that triggered this function.
+ */
  async function moveTaskTo(idTask, newStatus, event) {
     event.stopPropagation();  
     idTask++;
@@ -312,6 +336,10 @@ function handleResize() {
     }
     
 }
+/**
+ * Gets the icon based on the priority level of a task.
+ * @param {string} priority - The priority level of the task.
+ */
 function getPriorityIcon(priority) {
     let checkPriority = priority;
     let priorityIcon = '';
@@ -327,6 +355,10 @@ function getPriorityIcon(priority) {
     return priorityIcon;
 }
 
+/**
+ * Gets the color with a specific task category.
+ * @param {string} category - The category of the task.
+ */
 function getCategoryColor(category) {
     if (category === 'Technical Task') {
         return '#1FD7C1';
@@ -334,6 +366,11 @@ function getCategoryColor(category) {
     return '#0038FF';
 }
 
+/**
+ * Fetches assigned contacts for a task and updates the display.
+ * @param {object} task - The task object 
+ * @param {number} taskIndex - The id of the task 
+ */
 async function getassignecontacts(task, taskIndex) {
     let assignedContacts = task.Assigned;
     if (assignedContacts === undefined) {
@@ -344,7 +381,13 @@ async function getassignecontacts(task, taskIndex) {
 
     updateGetAssigneContacts(assignedContacts, taskIndex, maxContact, remainingContacts);
 }
-
+/**
+ * Updates the display of assigned contacts for a task.
+ * @param {Array} assignedContacts - List of contacts assigned to the task.
+ * @param {number} taskIndex - The id of the task 
+ * @param {number} maxContact - The maximum number of contacts to display.
+ * @param {number} remainingContacts - The number of remaining contacts to be displayed as a number.
+ */
 async function updateGetAssigneContacts(assignedContacts, taskIndex, maxContact, remainingContacts) {
     for (let index = 0; index < assignedContacts.length; index++) {
         if (index === maxContact) {
@@ -370,7 +413,12 @@ async function updateGetAssigneContacts(assignedContacts, taskIndex, maxContact,
         showTheNearestContactsAsNumbers(taskIndex, remainingContacts)
     }
 }
-
+/**
+ * Creates and displays contact icons for contacts with both first and last names.
+ * @param {number} taskIndex - The id of the task 
+ * @param {Array} nameParts - The array containing first and last name parts.
+ * @param {string} colorid - The id for the contact color element.
+ */
 function getAssignCcontactsForAndLastName(taskIndex, nameParts ,colorid ) {
     let asignedContainer = document.getElementById(`assignedContacts${taskIndex}`);
     let firstLetterForName;
@@ -382,7 +430,11 @@ function getAssignCcontactsForAndLastName(taskIndex, nameParts ,colorid ) {
             <span>${firstLetterForName}${firstLetterLastName}</span>
         </div>`;
 }
-
+/**
+ * Creates and displays contact icons for contacts with only a first name.
+ * @param {number} taskIndex - The id of the task 
+ * @param {string} colorid - The Id for the contact icon element.
+ */
 function getAssignCcontactsForName(taskIndex, colorid ) {
     let asignedContainer = document.getElementById(`assignedContacts${taskIndex}`);
     let firstLetterForName;
@@ -393,7 +445,11 @@ function getAssignCcontactsForName(taskIndex, colorid ) {
         </div>`;
 
 }
-
+/**
+ * Displays the number of remaining contacts if more than the maximum are assigned.
+ * @param {number} taskIndex - The index of the task in the tasks array.
+ * @param {number} remainingContacts - The number of remaining contacts.
+ */
 function showTheNearestContactsAsNumbers(taskIndex, remainingContacts) {
     let asignedContainer = document.getElementById(`assignedContacts${taskIndex}`);
 
@@ -401,14 +457,21 @@ function showTheNearestContactsAsNumbers(taskIndex, remainingContacts) {
     <span> +${remainingContacts} </span>
 </div>`
 }
-
+/**
+ * Changes the background color of the based on the contact's color.
+ * @param {number} checkIndexarray - The index of the contact in the contacts array.
+ * @param {string} colorid - The ID for the contact icon element.
+ */
 function showTheNameInitialInColorBoard(checkIndexarray, colorid) {
     let nameColorContainer = document.getElementById(colorid);
     let contactColor = contactsArray[checkIndexarray].color
     contactColor = convertToValidColor(contactColor);
     nameColorContainer.style.backgroundColor = contactColor;
 }
-
+/**
+ * Converts color names to valid hex color codes.
+ * @param {string} color - The color name to convert.
+ */
 function convertToValidColor(color) {
     const colorMap = {
         "hellorange": "#FFA07A",
