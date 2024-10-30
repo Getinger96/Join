@@ -273,7 +273,7 @@ function editFunctionAction(index) {
     };
 }
 
-function closeCardContact() {
+function closeCardContactzero() {
     const newContactOverlay = document.getElementById('newContact');
     newContactOverlay.style.display = 'none';
     newContactOverlay.classList.remove('transition-in-from-right');
