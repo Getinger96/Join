@@ -267,7 +267,10 @@ function generateProgressHtml(task) {
     return '';
 }
 
-
+/**
+ * Shows or hides the menu based on the screen width.
+ * @param {number} idTask - The ID of the task 
+ */
 function showMoveTheElements(idTask) {
     event.stopPropagation();
 
@@ -278,6 +281,10 @@ function showMoveTheElements(idTask) {
     }
 }
 
+/**
+ * Toggles the display of the menu for  task.
+ * @param {number} idTask - The id of the task 
+ */
 function toggleMenu(idTask) {
     let fieldsContainer = document.getElementById(`fields_${idTask}`);
     let existingMenu = fieldsContainer.querySelector('.showsmallFieldBar');
@@ -288,6 +295,11 @@ function toggleMenu(idTask) {
         fieldsContainer.innerHTML =fieldsContainerhtml(idTask);
     }
 }
+
+/**
+ * Generates the HTML structure for the task status menu
+ * @param {number} idTask - The id of the task 
+ */
 function fieldsContainerhtml(idTask) {
     return`
             &lt;div id="existingmenu" class="showsmallFieldBar" onclick="event.stopPropagation()">
@@ -299,6 +311,10 @@ function fieldsContainerhtml(idTask) {
             &lt;/div>`
 }
 
+/**
+ * Hides the menu task 
+ * @param {number} idTask - The id of the task 
+ */
 function hideMenu(idTask) {
     let fieldsContainer = document.getElementById(`fields_${idTask}`);
     let existingMenu = fieldsContainer.querySelector('.showsmallFieldBar');
@@ -308,6 +324,7 @@ function hideMenu(idTask) {
     }
 }
 
+// Event listener to close the menu when clicking outside of it
 document.addEventListener('click', function(event) {
     const openMenu = document.querySelector('.showsmallFieldBar');
     if (openMenu &amp;&amp; !openMenu.contains(event.target)) {
@@ -315,7 +332,9 @@ document.addEventListener('click', function(event) {
     }
 });
 
-
+/**
+ * Handles the window resize event
+ */
 function handleResize() {
     const windowWidth = window.innerWidth;
     const openMenu = document.querySelector('.showsmallFieldBar');
@@ -326,7 +345,12 @@ function handleResize() {
         }
     }
 }
-
+/**
+ * Moves a task to a new status and updates 
+ * @param {number} idTask - The id of the task 
+ * @param {string} newStatus - The new status 
+ * @param {Event} event - The click event that triggered this function.
+ */
  async function moveTaskTo(idTask, newStatus, event) {
     event.stopPropagation();  
     idTask++;
@@ -340,6 +364,10 @@ function handleResize() {
     }
     
 }
+/**
+ * Gets the icon based on the priority level of a task.
+ * @param {string} priority - The priority level of the task.
+ */
 function getPriorityIcon(priority) {
     let checkPriority = priority;
     let priorityIcon = '';
@@ -355,6 +383,10 @@ function getPriorityIcon(priority) {
     return priorityIcon;
 }
 
+/**
+ * Gets the color with a specific task category.
+ * @param {string} category - The category of the task.
+ */
 function getCategoryColor(category) {
     if (category === 'Technical Task') {
         return '#1FD7C1';
@@ -362,6 +394,11 @@ function getCategoryColor(category) {
     return '#0038FF';
 }
 
+/**
+ * Fetches assigned contacts for a task and updates the display.
+ * @param {object} task - The task object 
+ * @param {number} taskIndex - The id of the task 
+ */
 async function getassignecontacts(task, taskIndex) {
     let assignedContacts = task.Assigned;
     if (assignedContacts === undefined) {
@@ -372,7 +409,13 @@ async function getassignecontacts(task, taskIndex) {
 
     updateGetAssigneContacts(assignedContacts, taskIndex, maxContact, remainingContacts);
 }
-
+/**
+ * Updates the display of assigned contacts for a task.
+ * @param {Array} assignedContacts - List of contacts assigned to the task.
+ * @param {number} taskIndex - The id of the task 
+ * @param {number} maxContact - The maximum number of contacts to display.
+ * @param {number} remainingContacts - The number of remaining contacts to be displayed as a number.
+ */
 async function updateGetAssigneContacts(assignedContacts, taskIndex, maxContact, remainingContacts) {
     for (let index = 0; index &lt; assignedContacts.length; index++) {
         if (index === maxContact) {
@@ -398,7 +441,12 @@ async function updateGetAssigneContacts(assignedContacts, taskIndex, maxContact,
         showTheNearestContactsAsNumbers(taskIndex, remainingContacts)
     }
 }
-
+/**
+ * Creates and displays contact icons for contacts with both first and last names.
+ * @param {number} taskIndex - The id of the task 
+ * @param {Array} nameParts - The array containing first and last name parts.
+ * @param {string} colorid - The id for the contact color element.
+ */
 function getAssignCcontactsForAndLastName(taskIndex, nameParts ,colorid ) {
     let asignedContainer = document.getElementById(`assignedContacts${taskIndex}`);
     let firstLetterForName;
@@ -410,7 +458,11 @@ function getAssignCcontactsForAndLastName(taskIndex, nameParts ,colorid ) {
             &lt;span>${firstLetterForName}${firstLetterLastName}&lt;/span>
         &lt;/div>`;
 }
-
+/**
+ * Creates and displays contact icons for contacts with only a first name.
+ * @param {number} taskIndex - The id of the task 
+ * @param {string} colorid - The Id for the contact icon element.
+ */
 function getAssignCcontactsForName(taskIndex, colorid ) {
     let asignedContainer = document.getElementById(`assignedContacts${taskIndex}`);
     let firstLetterForName;
@@ -421,7 +473,11 @@ function getAssignCcontactsForName(taskIndex, colorid ) {
         &lt;/div>`;
 
 }
-
+/**
+ * Displays the number of remaining contacts if more than the maximum are assigned.
+ * @param {number} taskIndex - The index of the task in the tasks array.
+ * @param {number} remainingContacts - The number of remaining contacts.
+ */
 function showTheNearestContactsAsNumbers(taskIndex, remainingContacts) {
     let asignedContainer = document.getElementById(`assignedContacts${taskIndex}`);
 
@@ -429,14 +485,21 @@ function showTheNearestContactsAsNumbers(taskIndex, remainingContacts) {
     &lt;span> +${remainingContacts} &lt;/span>
 &lt;/div>`
 }
-
+/**
+ * Changes the background color of the based on the contact's color.
+ * @param {number} checkIndexarray - The index of the contact in the contacts array.
+ * @param {string} colorid - The ID for the contact icon element.
+ */
 function showTheNameInitialInColorBoard(checkIndexarray, colorid) {
     let nameColorContainer = document.getElementById(colorid);
     let contactColor = contactsArray[checkIndexarray].color
     contactColor = convertToValidColor(contactColor);
     nameColorContainer.style.backgroundColor = contactColor;
 }
-
+/**
+ * Converts color names to valid hex color codes.
+ * @param {string} color - The color name to convert.
+ */
 function convertToValidColor(color) {
     const colorMap = {
         "hellorange": "#FFA07A",
@@ -461,13 +524,13 @@ function convertToValidColor(color) {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#checkAndDisplayEmptyMessage">checkAndDisplayEmptyMessage</a></li><li><a href="global.html#closeTaskUpdate">closeTaskUpdate</a></li><li><a href="global.html#generateFooter">generateFooter</a></li><li><a href="global.html#generateHeader">generateHeader</a></li><li><a href="global.html#generateProgressHtml">generateProgressHtml</a></li><li><a href="global.html#generateTodoHTML">generateTodoHTML</a></li><li><a href="global.html#openTask">openTask</a></li><li><a href="global.html#removeAllElement">removeAllElement</a></li><li><a href="global.html#renderSubtask">renderSubtask</a></li><li><a href="global.html#showEmptyFields">showEmptyFields</a></li><li><a href="global.html#updateAndCheckEmptyFields">updateAndCheckEmptyFields</a></li><li><a href="global.html#updateHtml">updateHtml</a></li><li><a href="global.html#updatedView">updatedView</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#checkAndDisplayEmptyMessage">checkAndDisplayEmptyMessage</a></li><li><a href="global.html#closeTaskUpdate">closeTaskUpdate</a></li><li><a href="global.html#convertToValidColor">convertToValidColor</a></li><li><a href="global.html#fieldsContainerhtml">fieldsContainerhtml</a></li><li><a href="global.html#generateFooter">generateFooter</a></li><li><a href="global.html#generateHeader">generateHeader</a></li><li><a href="global.html#generateProgressHtml">generateProgressHtml</a></li><li><a href="global.html#generateTodoHTML">generateTodoHTML</a></li><li><a href="global.html#getAssignCcontactsForAndLastName">getAssignCcontactsForAndLastName</a></li><li><a href="global.html#getAssignCcontactsForName">getAssignCcontactsForName</a></li><li><a href="global.html#getCategoryColor">getCategoryColor</a></li><li><a href="global.html#getPriorityIcon">getPriorityIcon</a></li><li><a href="global.html#getassignecontacts">getassignecontacts</a></li><li><a href="global.html#handleResize">handleResize</a></li><li><a href="global.html#hideMenu">hideMenu</a></li><li><a href="global.html#moveTaskTo">moveTaskTo</a></li><li><a href="global.html#openTask">openTask</a></li><li><a href="global.html#removeAllElement">removeAllElement</a></li><li><a href="global.html#renderSubtask">renderSubtask</a></li><li><a href="global.html#showEmptyFields">showEmptyFields</a></li><li><a href="global.html#showMoveTheElements">showMoveTheElements</a></li><li><a href="global.html#showTheNameInitialInColorBoard">showTheNameInitialInColorBoard</a></li><li><a href="global.html#showTheNearestContactsAsNumbers">showTheNearestContactsAsNumbers</a></li><li><a href="global.html#toggleMenu">toggleMenu</a></li><li><a href="global.html#updateAndCheckEmptyFields">updateAndCheckEmptyFields</a></li><li><a href="global.html#updateGetAssigneContacts">updateGetAssigneContacts</a></li><li><a href="global.html#updateHtml">updateHtml</a></li><li><a href="global.html#updatedView">updatedView</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Wed Oct 30 2024 19:42:01 GMT+0100 (Mitteleuropäische Normalzeit)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Wed Oct 30 2024 19:57:56 GMT+0100 (Mitteleuropäische Normalzeit)
 </footer>
 
 <script> prettyPrint(); </script>

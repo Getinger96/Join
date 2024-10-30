@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: script.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: script.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>
+let colorLetter = {
+    'A': 'red',
+    'B': 'blue',
+    'C': 'blue',
+    'D': 'red',
+    'E': 'red',
+    'F': 'red',
+    'G': 'green',
+    'H': 'yellow',
+    'I': 'orange',
+    'J': 'violet',
+    'K': 'blue',
+    'L': 'blue',
+    'M': 'green',
+    'N': 'yellow',
+    'O': 'orange',
+    'P': 'violet',
+    'Q': 'green',
+    'R': 'yellow',
+    'S': 'orange',
+    'T': 'violet',
+    'U': 'green',
+    'V': 'yellow',
+    'W': 'orange',
+    'X': 'violet',
+    'Y': 'green',
+    'Z': 'yellow'
+};
+
+logOutVisibleBoolean = false;
+
+/**
+ * Includes HTML files specified in elements with the attribute `w3-include-html`.
+ *
+ */
+async function includeHTML() {
+    let z, i, elmnt, file, xhttp;
+    z = document.getElementsByTagName("*");
+    for (i = 0; i &lt; z.length; i++) {
+        elmnt = z[i];
+        file = elmnt.getAttribute("w3-include-html");
+        if (file) {
+            xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4) {
+                    if (this.status == 200) { elmnt.innerHTML = this.responseText; }
+                    if (this.status == 404) { elmnt.innerHTML = "Page not found."; }
+                    elmnt.removeAttribute("w3-include-html");
+                    includeHTML();
+                }
+            }
+            xhttp.open("GET", file, true);
+            xhttp.send();
+            return
+        }
+    }
+    setActiveLink();
+};
+
+/**
+ * Initializes the application by fetching contacts, including HTML, and checking login status.
+ */
+async function init() {
+    fetchContacts();
+    includeHTML();
+    checkIfLoggedIn();
+    fetchTasks();
+}
+
+/**
+ * Toggles the visibility of the logout section in the UI.
+ */
+function showLogOutSection() {
+    let toggleLogout = document.getElementById('logoutId');
+    if (logOutVisibleBoolean) {
+        toggleLogout.innerHTML = '';
+    } else {
+
+        toggleLogout.innerHTML = toggleLogoutHtml();
+    }
+    logOutVisibleBoolean = !logOutVisibleBoolean;
+}
+
+/**
+ * Generates the HTML for the logout section.
+ */
+function toggleLogoutHtml() {
+    return`&lt;div class="logoutSection">
+            &lt;a class="logoutsectionlinkHelp d_none" href="help.html"> Help &lt;/a>
+            &lt;a class="logoutsectionlink" href="legal_notes.html"> Legal Notice &lt;/a>
+            &lt;a class="logoutsectionlink" href="privacy_policy.html"> Privacy Policy&lt;/a>
+            &lt;a  class="logoutsectionlinklogouttext"  href="login.html"> Log out &lt;/a>
+         &lt;/div>
+                        `;
+}
+
+/**
+ * Hides the logout section if the click is outside of it.
+ */
+document.addEventListener('click', function(event) {
+    let toggleLogout = document.getElementById('logoutId');
+    let loginUser = document.querySelector('.logInUser_Container');
+
+    if (!loginUser.contains(event.target) &amp;&amp; !toggleLogout.contains(event.target)) {
+        toggleLogout.innerHTML = '';
+        logOutVisibleBoolean = false;
+    }
+});
+
+/**
+ * Displays the initials of the logged-in user.
+ * @param {Object} loggedInUser - The logged-in user object containing user details.
+ */
+async function showTheNameInitial(loggedInUser) {
+    let userSign = document.getElementById('loginUserId');
+    let fullName = loggedInUser.name;
+    let nameParts = fullName.split(" ");
+    let firstName;
+    if (nameParts.length >= 2) {
+        firstName = nameParts[0].charAt(0).toUpperCase();
+        let lastName = nameParts[1].charAt(0).toUpperCase();
+        userSign.innerHTML = `${firstName} ${lastName} `;
+    } else {
+        firstName = nameParts[0].charAt(0).toUpperCase();
+        userSign.innerHTML = `${firstName} `;
+    }
+    showTheNameInitialInColor(firstName);
+}
+
+/**
+ * Sets the color of the user's initials based on the first letter of their name.
+ * @param {string} firstName - The first letter of the user's first name.
+ */
+function showTheNameInitialInColor(firstName) {
+    let userSign = document.getElementById('loginUserId');
+    let currentColor = colorLetter[firstName];
+    userSign.style.color = currentColor;
+}
+/**
+ * Checks if a user is logged in and displays their initials.
+ */
+function checkIfLoggedIn() {
+    let loggedInUser = localStorage.getItem('loggedInUser');
+    if (loggedInUser) {
+        loggedInUser = JSON.parse(loggedInUser);
+       
+        showTheNameInitial(loggedInUser);
+    } else {
+        return;
+    }
+}
+
+/**
+ * Navigates the user to the summary page.
+ */
+function goToSummary() {
+    window.location.href = 'summary.html';
+}
+
+/**
+ * Navigates the user to the login page and clears local storage.
+ */
+function goToLogin() {
+    window.location.href = 'login.html';
+    localStorage.clear();
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#checkIfLoggedIn">checkIfLoggedIn</a></li><li><a href="global.html#goToLogin">goToLogin</a></li><li><a href="global.html#goToSummary">goToSummary</a></li><li><a href="global.html#includeHTML">includeHTML</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#showLogOutSection">showLogOutSection</a></li><li><a href="global.html#showTheNameInitial">showTheNameInitial</a></li><li><a href="global.html#showTheNameInitialInColor">showTheNameInitialInColor</a></li><li><a href="global.html#toggleLogoutHtml">toggleLogoutHtml</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Wed Oct 30 2024 19:58:17 GMT+0100 (Mitteleuropäische Normalzeit)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
