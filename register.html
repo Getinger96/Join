@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="./Styles/fontStyles.css">
     <link rel="stylesheet" href="./Styles/register.css">
     <script src="./assets/js/register.js"></script>
+    <script src="./assets/js/register_Template.js"></script>
+    <script src="./assets/js/register_ValidationSigUpButton.js"></script>
 
 
     <link rel="icon" type="image/x-icon" href="./assets/IMG/Capa 2.png" />
@@ -46,14 +48,14 @@
                 <div class="showMistakeValidation" id="inputNameMistake"></div>
 
                 <div class="inputemailsection" id="inputemailsectionId">
-                    <input id="usermail" class="inputemail" type="email" required placeholder="E-Mail" autocomplete="email"  onblur=" validateUserEmail()">
+                    <input id="usermail" class="inputemail" type="email" required placeholder="E-Mail" autocomplete="email"  onblur=" validateEmail()">
                     <img class="mailicon" src="assets/IMG/mail.png" alt="">
                 </div>
                 <div  class="showMistakeValidation" id="inputEmailMistake"></div>
 
                 <div class="inputpasswordsection" id="inputpasswordsectionId">
                     <input id="userpassword"  class="inputpassword" type="password" autocomplete="new-password" onclick="passwordvisbility()"
-                        required placeholder="Password" onblur="validateUserPassword()">
+                        required placeholder="Password" onblur="validatePassword()">
                     <img class="visbilityimg"  id="visbilityimg" src="assets/IMG/lock.png" alt="" onclick="showVisbility()">
                 </div>
                 <div class="showMistakeValidation" id="inputPasswordMistake"></div>

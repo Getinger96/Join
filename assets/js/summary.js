@@ -261,7 +261,7 @@ function showTheKanbanBoardDocument() {
  * @param {boolean} boolean - Hover state (true if hovered).
  */
 function changeImageToDoDefault(boolean) {
-    let imgIconKanbanBoardToDo = document.getElementtById('iconBoardToDo');
+    let imgIconKanbanBoardToDo = document.getElementById('iconBoardToDo');
     if (boolean) {
         imgIconKanbanBoardToDo.src = './assets/IMG/Frameimgwhite.png';
     } else {
