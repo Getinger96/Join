@@ -125,105 +125,6 @@ async function postData(path = "", data = {}) {
 }
 
 /**
- * Fetches contacts from the server and organizes them.
- * @param {string} patha API 
- */
-async function fetchContacts(path = '') {
-    let response = await fetch(base_URL + path + ".json");
-    let userJSON = await response.json();
-    let userAsArray = Object.values(userJSON.contacts);
-
-    for (let index = 0; index < userAsArray.length; index++) {
-        let contact = userAsArray[index];
-        let colorIndex = index % colors.length;
-        let color = colors[colorIndex]
-
-        if (contact.email == 'guest@web.de') {
-        } else {
-            contactsArray.push({
-                name: contact.name,
-                color: color,
-            })
-        }
-        letterSorting()
-    }
-}
-/**
- * Retrieves the last name from a full name.
- * @param {string} fullName Full name of the contact
- */
-function getLastName(fullName) {
-    let nameParts = fullName.trim().split(' ');
-    return nameParts[nameParts.length - 1];
-}
-/**
- * Renders contacts grouped by initial letter in the  container.
- */
-function getContacts() {
-    let showContacts = document.getElementById('Selection_Container');
-
-    if (!showContacts) {
-        return;
-    }
-    showContacts.innerHTML = '';
-    let groupedContacts = groupContacts(contactsArray);
-    let beginningLetter = Object.keys(groupedContacts).sort();
-    for (let index = 0; index < beginningLetter.length; index++) {
-        let letter = beginningLetter[index];
-        showContacts.innerHTML += `<h2 class="letter">${letter}</h2>`;
-        groupedContacts[letter].forEach(contact => {
-            showContacts.innerHTML += displayContacts(contact.index, contact.name, getLastName(contact.name), '', contact.color)
-            showSelectedContainer(contact.name,contact.index);
-        });
-       
-}
-    }
-/**
- * Groups contacts by the first letter of the name
- * @param {Array} contacts Array of contact objects
- * @returns {Object} Contacts grouped by first letter
- */
-
-    function groupContacts(contacts) {
-        let groupedContacts = {};
-        contacts.forEach((contact, index) => {
-            let firstLetter = contact.name.charAt(0).toUpperCase();
-            let color = contact.color;
-            
-            if (!groupedContacts[firstLetter]) {
-                groupedContacts[firstLetter] = [];
-            }
-    
-            groupedContacts[firstLetter].push({ ...contact, index, color });
-        });
-    
-        return groupedContacts;
-    }
-
-/**
- * Sorts and displays contacts alphabetically by first letter.
- */
-function letterSorting() {
-    contactsArray.forEach(contact => {
-        let firstLetter = contact.name.charAt(0).toUpperCase();
-        if (beginningLetter.indexOf(firstLetter) === -1) {
-            beginningLetter.push(firstLetter);
-            groupedContacts.push({
-                letter: firstLetter,
-                contacts: [contact]
-            });
-        } else {
-            let group = groupedContacts.find(contacts => contacts.letter === firstLetter);
-            if (group) {
-                group.contacts.push(contact);
-            }
-        }
-    });
-    beginningLetter.sort();
-    getContacts();
-}
-
-/**
  * Deletes data from the API .
  * @param {string} path API path for delete
  */
@@ -263,29 +164,7 @@ async function deleteTask(task) {
     closeOverlay();
     location.reload();
 }
-/**
- * Changes the add task button to show edit options.
- * @param {number} index Index of the task to edit
- */
-function changeAddtaskButton(index) {
-    let buttonaddtask = document.getElementById('DibButtomAddtask');
-    buttonaddtask.innerHTML = `
-          <button onclick="clearTask()" class="buttonContainerWhite curser">Clear <img
-                            src="./assets/IMG/x_icon_clear.svg"></button>
-                    <button  onclick="createEdittask(${index})" class="buttonContainerdark curser">Edit Task <img
-                            src="assets/IMG/clear_Img.svg"></button>`
-}
-/**
- * Resets the add task button to default.
- */
-function setCreateTaskButton() {
-    let buttonaddtask = document.getElementById('DibButtomAddtask');
-    buttonaddtask.innerHTML = `
-            <button onclick="clearTask()" class="buttonContainerWhite curser">Clear <img
-                src="./assets/IMG/x_icon_clear.svg"></button>
-            <button onclick="createTask(event)" class="buttonContainerdark curser">Create Task <img
-                src="assets/IMG/clear_Img.svg"></button>`;
-}
+
 
 /**
  * Edits a task by populating form fields and rendering contacts.
@@ -310,40 +189,7 @@ async function EditData(index) {
     populateTaskFields(title, description, dueDate, priority, category, subtask, index);
 }
 
-/**
- * Renders assigned contacts, showing a max of four.
- * @param {Array} assignedContacts Array of assigned contacts
- */
-function renderAssignedContacts(assignedContacts) {
-    let selectedProfileContainer = document.getElementById('Selected_profiles_Container');
-    selectedProfileContainer.innerHTML = '';
 
-    for (let indexcon = 0; indexcon < assignedContacts.length && indexcon < 4; indexcon++) {
-        let contact = assignedContacts[indexcon];
-        let contactContainer = document.getElementById(`profile-${indexcon}`);
-        if (contactContainer) {
-            contactContainer.classList.add('bg_color');
-            contactContainer.classList.add('color_white');
-        }
-        showSelectedProfileEdit(contact); 
-    }
-
-    handleExtraContacts(selectedProfileContainer, assignedContacts.length);
-}
-
-/**
- * Shows a badge for extra contacts if more than 4 contact.
- * @param {HTMLElement} container Container for extra contact
- * @param {number} count Total assigned contacts
- */
-function handleExtraContacts(container, count) {
-    if (count > 4) {
-        let extraCount = count - 4;
-        container.innerHTML += `
-            <div id="extra_Contacts_Badge" class="profile_Badge_assign gray">+${extraCount}</div>
-        `;
-    }
-}
 
 /**
  * Fills task form fields for editing.

@@ -28,109 +28,6 @@ showCard(task, taskIndex );
 }
 
 /**
- * the function generate small contact field
- * @param {*} assignedContacts assignedContacts elemente
- * 
- */
-function generateSmallContactsHtml(assignedContacts) {
-    let contactsHtml = '';
-    assignedContacts.forEach((contact, index) => {
-        let contactParts = contact.split(' ');
-        let contactFirstname = contactParts[0] || '';  
-        let contactLastname = contactParts.slice(1).join(' ') || '';  
-
-        const color = getRandomColorForContact(); 
-        contactsHtml += getSmallContactHtml(index, contactFirstname, contactLastname, color); 
-    });
-    return contactsHtml;
-}
-/**
- * the function generate larg contact field with  full name
- * @param {*} assignedContacts assignedContacts Element
- * 
- */
-function generateLargeContactsHtml(assignedContacts) {
-    let contactsHtml = ''; 
-
-    for (let index = 0; index < assignedContacts.length; index++) {
-        contactsHtml += generateContactHtml(assignedContacts[index], index);
-    }
-  
-    return contactsHtml;  
-}
-/**
- * the function generate full element
- * @param {*} contact full contact
- * @param {*} index assignedContacts id
- * 
- */
-function generateContactHtml(contact, index) {
-    let nameParts = contact.split(' ');
-    let contactFirstname = nameParts[0] || '';  
-    let contactLastname = nameParts.slice(1).join(' ') || '';  
-
-    let checkIndexarray = contactsArray.findIndex(c => c.name === contact);
-    
-    let firstLetterForName = contactFirstname.charAt(0).toUpperCase();
-    let firstLetterLastName = contactLastname.charAt(0).toUpperCase();
-
-    let color = showTheNameColor(checkIndexarray);
-    
-    return getLargeContactHtml(index, firstLetterForName, firstLetterLastName, contactFirstname, contactLastname, color);
-}
-/**
- * the function show the color name
- * @param {*} checkIndexarray check contact in taskarray and contaclistarray
- * 
- */
-function showTheNameColor(checkIndexarray) {
-
-    let contactColor = contactsArray[checkIndexarray].color
-    contactColor = convertToValidColor(contactColor);
-    
-    
-    return contactColor;
-
-}
-/**
- * the function generate the samll contact
- * @param {*} index assignedContacts id
- * @param {*} firstname firstname contact
- * @param {*} lastname  lastname contact
- * @param {*} color contact color
- * @returns {*}
- */
-function getSmallContactHtml(index, firstname, lastname, color) {
-    const initials = `${firstname.charAt(0).toUpperCase()}${lastname.charAt(0).toUpperCase()}`;
-    return `
-        <div class="contactCircle" style="background-color: ${color};">
-            ${initials}
-        </div>
-    `;
-}
-/**
- * the function show the html element contact
- * @param {*} index assignedContacts id
- * @param {*} firstLetterForName firstname initial
- * @param {*} firstLetterLastName lastname initial
- * @param {*} contactFirstname firstname contact
- * @param {*} contactLastname lastname contact
- * @param {*} color contact color
- */
-function getLargeContactHtml(index, firstLetterForName, firstLetterLastName, contactFirstname, contactLastname, color) {
-
-    return `
-        <div class="contact-box">
-            <div class="contact-icon" style="background-color: ${color};">
-                ${firstLetterForName}${firstLetterLastName}  
-            </div>
-            <div class="contact-content">
-                <span class="contactname">${contactFirstname} ${contactLastname}</span>
-            </div>
-        </div>
-    `;
-}
-/**
  * the function create the card element
  * @param {*} task tasks 
  * @param {*} taskIndex task id
@@ -152,66 +49,6 @@ function createShowCard(task, taskIndex) {
     const subtasksHtml = generateSubtasksHtml(task.subtask, taskIndex);
     return generateCardHtml(title, description, dueDate, priority, priorityIcon, category, categoryColor, contactsHtml, subtasksHtml, taskIndex);
 }
-/**
- * 
- * the funtion show the html card 
- * @param {*} title task title
- * @param {*} description task description
- * @param {*} dueDate task dueDate
- * @param {*} priority task priority
- * @param {*} priorityIcon task priorityIcon
- * @param {*} category task category
- * @param {*} categoryColor task categoryColor
- * @param {*} contactsHtml task contactsHtml
- * @param {*} subtasksHtml task subtasksHtml
- * @param {*} taskIndex task taskIndex
- * @returns {*}
- */
-function generateCardHtml(title, description, dueDate, priority, priorityIcon, category, categoryColor, contactsHtml, subtasksHtml, taskIndex) {
-    return `
-        <div class="todo-detail">
-            <div>
-                <div class="divKategorieCard" style="background-color: ${categoryColor};">${category}</div>
-                <button onclick="closeOverlay(${taskIndex})" class="close-button"><img src="./assets/IMG/iconoir_cancel.png" alt=""></button>
-            </div>
-            <div>
-                <h2>${title}</h2>
-            </div>
-            <div class="responsiveDescription">
-                <p><strong>Description:</strong> ${description}</p>
-            </div>
-            <p><strong>Due Date:</strong> ${dueDate}</p>
-            <div class="prioicon">
-                <p><strong>Priority:</strong> 
-                    <span class="">${priority}</span> 
-                    <div class="prioicon-imgSection">
-                        <img src="${priorityIcon}" alt="${priority} Priority">
-                    </div> 
-                </p>
-            </div>
-            <p><strong>Assigned To:</strong></p>
-            <div class="assigned-contacts">
-                ${contactsHtml}
-            </div>
-            <p class="subtaskstext"><strong>Subtasks:</strong></p>
-            <div class="subtasks-container">
-                ${subtasksHtml} <!-- Hier werden die Subtasks eingefügt -->
-            </div>
-        </div>
-        <div class="actionBigTodo">
-            <button class="actionBigButton" onclick="deleteTask(${taskIndex})">
-                <img class="iconTodoBig" src="./assets/IMG/delete.png">
-                <p>Delete</p>
-            </button>
-            <div></div>
-            <button class="actionBigButton" onclick="EditData(${taskIndex})">
-                <img class="iconTodoBig" src="./assets/IMG/edit.png">
-                <p>Edit</p>
-            </button>
-        </div>
-    `;
-}
-
 /**
  * the function closed overlay
  * @param {*} taskIndex task id
@@ -262,23 +99,6 @@ function generateSubtasksHtml(subtasks, taskIndex) {
         });
     }
     return subtasksHtml;
-}
-/**
- * the function show subtask html
- * @param {*} taskIndex task id
- * @param {*} subtaskIndex subtask id
- * @param {*} isChecked checkbox is checked
- * @param {*} subtask subtask element
- * @returns {*}
- */
-function showSubtasksHtml(taskIndex, subtaskIndex, isChecked, subtask) {
-    return `
-    <div class="subtask-item">
-        <input class="checkbox" type="checkbox" id="subtask-${taskIndex}-${subtaskIndex}" ${isChecked ? 'checked' : ''} 
-        onchange="subtaskChecked(${taskIndex}, ${subtaskIndex})" />
-        <label class="checkboxtext" for="subtask-${taskIndex}-${subtaskIndex}">${subtask}</label>
-    </div>
-`;
 }
 
 /**

@@ -73,29 +73,6 @@ function resetInputStyles() {
 
 
 /**
- * This function generate html about missing inputfields
- * 
- */
-function allInputFieldMissing() {
-    let showTileMissing = document.getElementById("InputFieldsMissing")
-    showTileMissing.innerHTML = `<div>
-                                     <span class="missingInput"> Please fill in or select the marked fields</span>
-                                </div>`;    
-}
-
-/**
- * This function generate html about missing inputfields
- * 
- */
-
-function showInvalidDateMessage() {
-    let showWrongCurrentDate = document.getElementById("WrongCurrentDateId")
-    showWrongCurrentDate.innerHTML = `<div>
-                                     <span class="missingInput"> No date in the past may be specified</span>
-                                </div>`;   
-}
-
-/**
  * This function changes the color of the invalid input fields
  * 
  */
@@ -237,27 +214,6 @@ function addSubtask() {
 }
 
 /**
- * this function returns Html for the add subtask function 
- * 
- * @param {number} i index of the subtask
- * @returns 
- */
-function generateSubtaskHTML(i) {
-    return `
-        <div class="ChangeSubtask" id="changeColorId${i}">
-            <div id="subTaskValueId${i}" class="li subtaskError">${subtasks[i]}</div>
-            <div class="changeButtonDeleteAndEdit">
-                <button type="button" class="deleteSubtask_Btn" onclick="deleteItem(${i})">
-                    <img src="./assets/IMG/delete.png" class="deleteButton">
-                </button>
-                <button type="button" id="changeImgEdit${i}" class="EditSubtaskButton" onclick="editSubtask(${i})">
-                    <img src="./assets/IMG/edit.png" class="deleteButton" alt="Edit">
-                </button>
-            </div>            
-        </div>`;
-}
-
-/**
  * this function delete the choosed subtask
  * 
  * @param {number} i index of the subtask
@@ -307,68 +263,3 @@ subtasks[i] = newSubTask;
 updateSubtaskElement(i);
 }
 
-/**
- * genrate html for not valid subtasks
- * 
- */
-function pleaseEnterASubtask() {
-    document.getElementById(`SubtaskLengthReached`).innerHTML =`<span class="showShubtaskError">Please Enter a full subtask`;
-}
-
-/**
- * function to edit the subtasks
- * 
- * @param {number} i index of the subtask
- */
-function editSubtask(i) {
-    let subtaskElement = document.getElementById(`subTaskValueId${i}`);
-
-    subtaskElement.innerHTML = `
-        <input id="subtaskValue${i}" class="subTaskInput" type="text" value="${subtasks[i]}">
-        <div id="subtasksValidation${i}" class="subtaskError"></div>  <!-- Platz für Fehlermeldung -->
-    `;
-
-    let change = document.getElementById(`changeImgEdit${i}`);
-    change.innerHTML = `<img class="imgCheckedIcon" src="./assets/IMG/checkAddTask.png" alt="check" onclick="enterNewSubtask(${i})">`;
-}
-
-/**
- * Function to change the Subtask
- * 
- * @param {number} i index of the subtask
- * @returns 
- */
-function enterNewSubtask(i) {
-    event.stopPropagation();
-    let newSubTask = document.getElementById(`subtaskValue${i}`).value.trim();
-
-    let errorMessageElement = document.getElementById(`subtasksValidation${i}`);
-
-    if (newSubTask === '') {
-        errorMessageElement.innerHTML = '<span class= "subtaskempty" style="color:red;">Subtask cannot be empty</span>';  // Zeige Fehlermeldung in rot
-        return;
-    }
-    subtasks[i] = newSubTask;
-    errorMessageElement.innerHTML = '';
-    updateSubtaskElement(i);
-}
-
-/**
- * Function to update the Subtaskelement
- * 
- * @param {number} i  index of the Subtask
- */
-function updateSubtaskElement(i) {
-    let subtaskElement = document.getElementById(`changeColorId${i}`);
-
-    subtaskElement.innerHTML = `
-        <div id="subTaskValueId${i}" class="li">${subtasks[i]}</div>
-        <div class="changeButtonDeleteAndEdit">
-            <button type="button" class="Subtasks_Btn" onclick="deleteItem(${i})">
-                <img src="./assets/IMG/delete.png">
-            </button>
-            <button type="button" id="changeImgEdit${i}" class="EditSubtaskButton" onclick="editSubtask(${i})">
-                <img src="./assets/IMG/edit.png" class="deleteButton" alt="Edit">
-            </button>
-        </div>`;
-}

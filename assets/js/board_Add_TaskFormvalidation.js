@@ -78,26 +78,7 @@ function resetInputStyles() {
     document.getElementById("InputFieldsMissing").innerHTML = '';
     document.getElementById("WrongCurrentDateId").innerHTML = '';
 }
-/**
- *  the function show warning info
- */
-function allInputFieldMissing() {
-    let showTileMissing = document.getElementById("InputFieldsMissing")
-    showTileMissing.innerHTML = `<div>
-                                     <span class="missingInput"> Please fill in or select the marked fields</span>
-                                </div>`;
-    
-}
-/**
- * the function show invalid date message
- */
-function showInvalidDateMessage() {
-    let showWrongCurrentDate = document.getElementById("WrongCurrentDateId")
-    showWrongCurrentDate.innerHTML = `<div>
-                                     <span class="missingInput"> No date in the past may be specified</span>
-                                </div>`;
-    
-}
+
 /**
  * the function change color border
  */
@@ -208,32 +189,6 @@ function addSubtask() {
 }
 
 /**
- * the function show subTask container
- * @param {*} subtasks subtaks Element
- * @param {*} i  subtask id
- *
- */
-function showSubTaskContainer(subtasks, i) {
-    return `<div class="editSubtaskheadlineContainer" id="boderSubtaskId${i}">
-            <div class="editSubtask" id="subTaskValueId${i}">
-                <ul>
-                <li>${subtasks[i]}</li>
-                </ul>
-                </div>
-            <div class="subtaskEditDiv">
-                <button type="button" class="Subtasks_Btn" onclick="deleteSubtask(${i})">
-                    <img src="./assets/IMG/delete.png" alt="Delete">
-                </button>
-
-            
-              <button type="button" id="changeImgEdit${i}" class="EditSubtaskButton" onclick="editSubtask(${i})">
-                    <img src="./assets/IMG/edit.png" alt="Edit">
-                </button>
-            </div>
-            </div>`;
-}
-
-/**
  * the function empties the subtask value
  */
 function emptySubtask() {
@@ -252,30 +207,7 @@ function editSubtask(i) {
     document.getElementById(`changeImgEdit${i}`).innerHTML = ShowChangeImgCheckedIcon(i);
 
 }
-/**
- * the function show change img checkedIcon
- *  * @param {*} i  subtask id
- */
-function ShowChangeImgCheckedIcon(i) {
-return `
-   <button type="button" class="EditSubtaskButton" onclick="enterNewSubtask(${i})">
-                    <img class="imgCheckedIcon" id="changeImgEdit${i}" src="./assets/IMG/checkAddTask.png" alt="check">
-                </button>`
-}
 
-/**
- * the function show subTask value edit
- * *  @param {*} subtasks subtaks Element
- *  * @param {*} i  subtask id
- */
-function showSubTaskValueEdit(subtasks, i) {
-    return `
-    <li>
-    <input id="subtaskValue${i}" class="subTaskInput" type="text" value="${subtasks[i]}"
-    onblur="validateSubtask(${i})">
-    </li>
-    <div id="subtasksValidation${i}"></div> `
-}
 /**
  * the function enter new subtask
  *  * @param {*} i  subtask id
@@ -331,24 +263,6 @@ function validateSubtask(i) {
         
         changeImgEdit.innerHTML =ShowChangeImgEdit(i);
     }
-
-/**
- * the function show edit button
- *  * @param {*} i  subtask id
- */    
-function ShowChangeImgEdit(i) {
-    return `
-            <button type="button" class="EditSubtaskButton" onclick="editSubtask(${i})">
-                <img src="./assets/IMG/edit.png" alt="Edit">
-            </button>
-        `;
-}
-/**
- * the function show warning empty field
- */
-function pleaseEnterASubtask() {
-    document.getElementById(`SubtaskLengthReached`).innerHTML =`<span class="showShubtaskError">Please Enter a full subtask`;
-}
 
 
 /**
