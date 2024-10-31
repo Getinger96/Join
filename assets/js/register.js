@@ -1,44 +1,25 @@
-
-/**
- * Base URL for the API.
- * @type {string}
- */
 const base_URL = "https://join-37803-default-rtdb.europe-west1.firebasedatabase.app/";
-
-/**
- * Array to store contacts.
- * @type {Array}
- */
 let contacts = [];
 
-/**
- * Loads users from the specified path and populates the contacts array.
- * @async
- * @param {string} [path=''] - The path to fetch user data from.
- */
 async function loadUsers(path = '') {
     let response = await fetch(base_URL + path + ".json");
     let userJSON = await response.json();
     let userAsArray = Object.values(userJSON.contacts);
-    
+
     for (let index = 0; index < userAsArray.length; index++) {
         let contact = userAsArray[index];
+
+
         contacts.push({
             email: contact.email,
             name: contact.name,
             password: contact.password,
-        });
-    }
+        })
 }
 
-/**
- * Posts data to the specified path.
- * @async
- * @param {string} [path=''] - The path to post data to.
- * @param {Object} data - The data to post.
- * @returns {Object} The JSON response from the server.
- */
-async function postData(path = "", data = {}) {
+}
+
+async function postData(path="", data={}) {
     let response = await fetch(base_URL + path + ".json", {
         method: "POST",
         headers: {
@@ -46,14 +27,12 @@ async function postData(path = "", data = {}) {
         },
         body: JSON.stringify(data)
     });
-    return await response.json();
+
+    return responsASJson = await response.json();
+
 }
 
-/**
- * Checks registration form fields and adds a new user if validation passes.
- * @async
- */
-async function checkRegistration() {
+async function  checkRegistration() {
     let username = document.getElementById('username');
     let usermail = document.getElementById('usermail');
     let userpassword = document.getElementById('userpassword');
@@ -61,49 +40,42 @@ async function checkRegistration() {
     let checkbox = document.getElementById('checkbox');
     let sigUpInfo = document.getElementById('signupinfotext');
 
+
     let user = contacts.find(u => u.email === usermail.value);
+
 
     if (!sigUpValidation(user, username, usermail, userpassword, userconfirmpassword, checkbox)) {
         return;
     }
-    sigUpInfo.innerHTML = '';
-    addNewUser(username, usermail, userpassword, userconfirmpassword, checkbox);
-}
+    sigUpInfo.innerHTML= '';
 
-/**
- * Adds a new user to the database and updates the UI upon successful signup.
- * @async
- * @param {HTMLInputElement} username - The username input element.
- * @param {HTMLInputElement} usermail - The user email input element.
- * @param {HTMLInputElement} userpassword - The user password input element.
- * @param {HTMLInputElement} userconfirmpassword - The confirm password input element.
- * @param {HTMLInputElement} checkbox - The terms acceptance checkbox.
- */
-async function addNewUser(username, usermail, userpassword, userconfirmpassword, checkbox) {
-    let newContact = {
+    addNewUser(username, usermail, userpassword, userconfirmpassword, checkbox)
+}
+   async function addNewUser(username, usermail, userpassword, userconfirmpassword, checkbox) {
+
+    let newContact  = {
         name: username.value,
         email: usermail.value,
         password: userpassword.value
     };
-    await postData(`contacts`, newContact);
+    await postData(`contacts`, newContact)
     emptyTheInputFields(username, usermail, userpassword, userconfirmpassword, checkbox);
     showSignedUpSuccessfully();
-    setTimeout(() => { window.location.href = 'login.html' }, 3000);
+    
+        
+    setTimeout(() => {window.location.href ='login.html'  
+    }, 3000);
     await loadUsers('users');
+
 }
 
-/**
- * Disables the signup button.
- */
+
 function ButtonDisabledSet() {
     let signUpButton = document.getElementById('signUpButton');
     signUpButton.classList.remove('enabledbutton');
     signUpButton.classList.add('disabledbutton');
-}
 
-/**
- * Checks if all required form fields are completed and enables/disables the signup button accordingly.
- */
+}
 function checkFormCompletion() {
     let username = document.getElementById('username').value.trim();
     let usermail = document.getElementById('usermail').value.trim();
@@ -112,25 +84,18 @@ function checkFormCompletion() {
     let checkbox = document.getElementById('checkbox').checked;
     let signUpButton = document.getElementById('signUpButton');
 
+
     if (username !== "" && usermail !== "" && userpassword !== "" && userconfirmpassword !== "" && checkbox) {
-        signUpButton.disabled = false;
+        signUpButton.disabled = false; 
         signUpButton.classList.remove('disabledbutton');
         signUpButton.classList.add('enabledbutton');
     } else {
-        signUpButton.disabled = true;
+        signUpButton.disabled = true; 
         signUpButton.classList.remove('enabledbutton');
         signUpButton.classList.add('disabledbutton');
     }
 }
 
-/**
- * Empties the input fields and unchecks the checkbox.
- * @param {HTMLInputElement} username - The username input element.
- * @param {HTMLInputElement} usermail - The user email input element.
- * @param {HTMLInputElement} userpassword - The user password input element.
- * @param {HTMLInputElement} userconfirmpassword - The confirm password input element.
- * @param {HTMLInputElement} checkbox - The terms acceptance checkbox.
- */
 function emptyTheInputFields(username, usermail, userpassword, userconfirmpassword, checkbox) {
     username.value = '';
     usermail.value = '';
@@ -138,35 +103,17 @@ function emptyTheInputFields(username, usermail, userpassword, userconfirmpasswo
     userconfirmpassword.value = '';
     checkbox.checked = false;
 }
+
 function passwordvisbility() {
     document.getElementById("visbilityimg").src = "assets/IMG/visibility_off_password.png";
-    
+
 }
 
 
-/**
- * Toggles the visibility of the password field.
- */
 function showVisbility() {
     let userpassword = document.getElementById('userpassword');
     let visibilityImg = document.getElementById('visbilityimg');
-    if (userpassword.type === "password") {
-        userpassword.type = "text";
-        visibilityImg.src = "assets/IMG/visibility_on.png";
-    } else {
-        userpassword.type = "password";
-        visibilityImg.src = "assets/IMG/visibility_off_password.png";
-    }
-}
 
-function passwordconfirmvisbility() {
-    document.getElementById("visbilityimgconfirm").src = "assets/IMG/visibility_off_password.png";
-    
-}
-function showVisbilityconfirmpassword() {
-    let userpassword = document.getElementById('userconfirmpassword');
-    let visibilityImg = document.getElementById('visbilityimgconfirm');
-    
     if (userpassword.type === "password") {
         userpassword.type = "text"
         visibilityImg.src = "assets/IMG/visibility_on.png"; 
@@ -176,27 +123,38 @@ function showVisbilityconfirmpassword() {
     }
 }
 
+function passwordconfirmvisbility() {
+    document.getElementById("visbilityimgconfirm").src = "assets/IMG/visibility_off_password.png";
 
+}
 
+function showVisbilityconfirmpassword() {
+    let userpassword = document.getElementById('userconfirmpassword');
+    let visibilityImg = document.getElementById('visbilityimgconfirm');
 
+    if (userpassword.type === "password") {
+        userpassword.type = "text"
+        visibilityImg.src = "assets/IMG/visibility_on.png"; 
+    } else {
+        userpassword.type = "password"
+        visibilityImg.src = "assets/IMG/visibility_off_password.png"; 
+    }
+}
 
-
-/**
- * Validates the username input for format and length requirements.
- */
 function validateUsername() {
     let username = document.getElementById('username').value.trim();
     if (!nameIsNotValid(username) || username.length < 3 || username.length > 30) {
         document.getElementById('inputNameMistake').innerText = wrongTextValidation();
-        document.getElementById('inputNameMistake').style.display = 'flex';
+        document.getElementById('inputNameMistake').style.display ='flex';
         changeBorderName();
     } else {
         document.getElementById('inputNameMistake').innerText = '';
-        document.getElementById("inputenamesectionId").style.border = '';
-        document.getElementById('inputNameMistake').style.display = 'none';
+        document.getElementById("inputenamesectionId").style.border= '';
+        document.getElementById('inputNameMistake').style.display ='none';
     }
     checkFormCompletion();
 }
+
 function validateEmail() {
     let usermail = document.getElementById('usermail').value.trim();
     if (!emailIsNotCorrect(usermail)) {
@@ -266,7 +224,7 @@ function changeBorderConfirmPassword() {
 function passwordToShort() {
     return `
     Passwords must have maximal 6 characters !!!`;
-    
+
     }
 
 function passwordNoMatch() {
@@ -286,8 +244,6 @@ function showSignedUpSuccessfully() {
     document.getElementById('Signedupsuccessfully').innerHTML =`  <div class="Signedupsuccessfully">
     <span class="textstylesuccessfully"> You Signed Up successfully</span>
     <img class="" src="assets/IMG/You Signed Up successfully.png" alt="">   
-
-
     </div>`;
 }
 
@@ -307,6 +263,7 @@ function nameIsNotValid(username) {
 function emailIsNotCorrect(usermail) {
         let emailCheck = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return emailCheck.test(usermail); 
+    
 }
 
 function wrongEmailValidation() {
@@ -315,13 +272,16 @@ function wrongEmailValidation() {
 }
 
 function wrongTextValidation() {           
-    return `
+    return `              
       Please enter a full name of 3-30 letters`;                   
                    }
 
 
+ 
 function validateUserName(username) {
     let sigUpInfo = document.getElementById('signupinfotext');
+     
+    
     
     if (!nameIsNotValid(username.value) || username.value.length < 3 || username.value.length > 30) {
         sigUpInfo.innerHTML = wrongTextValidation();
@@ -333,30 +293,19 @@ function validateUserName(username) {
     return true;
 }
 
-/**
- * Validates the user's email input and provides feedback if invalid.
- * @param {HTMLInputElement} usermail - The email input field.
- * @returns {boolean} - Returns true if the email is valid; false if not.
- */
-function validateUserEmail(usermail) {
+function validateUserEmail() {
     let sigUpInfo = document.getElementById('signupinfotext');
-    
+    let usermail=document.getElementById('usermail');
     if (!emailIsNotCorrect(usermail.value)) {
         sigUpInfo.innerHTML = wrongEmailValidation();
         ButtonDisabledSet();
         return false;
     }
+
     sigUpInfo.innerHTML = '';
     return true;
 }
 
-/**
- * Validates the user's password and confirmation password input.
- * Checks for minimum length and if passwords match.
- * @param {HTMLInputElement} userpassword - The password input field.
- * @param {HTMLInputElement} userconfirmpassword - The confirm password input field.
- * @returns {boolean} - Returns true if password meets all conditions; false if not.
- */
 function validateUserPassword(userpassword, userconfirmpassword) {
     let sigUpInfo = document.getElementById('signupinfotext');
     
@@ -371,7 +320,25 @@ function validateUserPassword(userpassword, userconfirmpassword) {
         ButtonDisabledSet();
         return false;
     }
-    sigUpInfo.innerHTML = '';
-    return true;
+    sigUpInfo.innerHTML = ''; 
 }
 
+function sigUpValidation(user, username, usermail, userpassword, userconfirmpassword, checkbox) {
+    let sigUpInfo = document.getElementById('signupinfotext');
+    
+    if (user) {
+        sigUpInfo.innerHTML = emailIsAlreadyAvailable();
+        ButtonDisabledSet();
+        return false;
+    }
+    if (!validateUserName(username) || !validateUserEmail(usermail) || !validateUserPassword(userpassword, userconfirmpassword)) {
+        return false;
+    }
+    if (!checkbox.checked) {
+        sigUpInfo.innerHTML = checkboxNoChecked();
+        ButtonDisabledSet();
+        return false;
+    }
+   
+    return true;
+}
