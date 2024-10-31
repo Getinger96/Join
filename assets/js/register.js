@@ -143,6 +143,7 @@ function passwordvisbility() {
     
 }
 
+
 /**
  * Toggles the visibility of the password field.
  */
@@ -157,11 +158,11 @@ function showVisbility() {
         visibilityImg.src = "assets/IMG/visibility_off_password.png";
     }
 }
+
 function passwordconfirmvisbility() {
     document.getElementById("visbilityimgconfirm").src = "assets/IMG/visibility_off_password.png";
     
 }
-
 function showVisbilityconfirmpassword() {
     let userpassword = document.getElementById('userconfirmpassword');
     let visibilityImg = document.getElementById('visbilityimgconfirm');
@@ -175,28 +176,9 @@ function showVisbilityconfirmpassword() {
     }
 }
 
-/**
- * show visbiliy img password
- */
-function passwordconfirmvisbility() {
-    document.getElementById("visbilityimgconfirm").src = "assets/IMG/visibility_off_password.png";
-    
-}
 
 
-function showVisbilityconfirmpassword() {
-    let userpassword = document.getElementById('userconfirmpassword');
-    let visibilityImg = document.getElementById('visbilityimgconfirm');
-    
-    if (userpassword.type === "password") {
-        userpassword.type = "text"
-        visibilityImg.src = "assets/IMG/visibility_on.png"; 
-    } else {
-        userpassword.type = "password"
-        visibilityImg.src = "assets/IMG/visibility_off_password.png"; 
-    }
 
-}
 
 
 /**
@@ -393,188 +375,3 @@ function validateUserPassword(userpassword, userconfirmpassword) {
     return true;
 }
 
-function validateConfirmPassword() {
-    let userpassword = document.getElementById('userpassword').value.trim();
-    let userconfirmpassword = document.getElementById('userconfirmpassword').value.trim();
-    if (userpassword !== userconfirmpassword) {
-    if (userpassword !== userconfirmpassword || userconfirmpassword== '') {
-        document.getElementById('inputConfirmPasswordMistake').innerText = passwordNoMatch();
-        document.getElementById('inputConfirmPasswordMistake').style.display ='flex';
-        changeBorderConfirmPassword();
-    } else {
-        document.getElementById('inputConfirmPasswordMistake').innerText = '';
-        document.getElementById("inputpasswordconfirmsectionId").style.border= '';
-        document.getElementById('inputConfirmPasswordMistake').style.display ='none';
-    }
-    checkFormCompletion();
-}
-
-}
-
-/**
- * Validates the user's signup form data, including username, email, password,
- * password confirmation, and terms acceptance checkbox.
- * @param {Object} user - Existing user object to check for email duplicates.
- * @param {HTMLInputElement} username - The username input field.
- * @param {HTMLInputElement} usermail - The email input field.
- * @param {HTMLInputElement} userpassword - The password input field.
- * @param {HTMLInputElement} userconfirmpassword - The confirm password input field.
- * @param {HTMLInputElement} checkbox - Checkbox element for terms acceptance.
- */
-function sigUpValidation(user, username, usermail, userpassword, userconfirmpassword, checkbox) {
-    let sigUpInfo = document.getElementById('signupinfotext');
-    
-    if (user) {
-        sigUpInfo.innerHTML = emailIsAlreadyAvailable();
-        ButtonDisabledSet();
-        return false;
-    }
-    if (!validateUserName(username) || !validateUserEmail(usermail) || !validateUserPassword(userpassword, userconfirmpassword)) {
-        return false;
-    }
-    if (!checkbox.checked) {
-        sigUpInfo.innerHTML = checkboxNoChecked();
-        ButtonDisabledSet();
-        return false;
-    }
-    return true;
-}
-
-
-
-function changeBorderName() {
-    document.getElementById("inputenamesectionId").style.border= "3px solid red";
-
-}
-
-function changeBorderEmail() {
-    document.getElementById("inputemailsectionId").style.border= "3px solid red";
-
-}
-
-function changeBorderPassword() {
-    document.getElementById("inputpasswordsectionId").style.border= "3px solid red";
-
-}
-
-function changeBorderConfirmPassword() {
-    document.getElementById("inputpasswordconfirmsectionId").style.border= "3px solid red";
-
-}
-
-
-
-function passwordToShort() {
-    return `
-    Passwords must have maximal 6 characters !!!`;
-    
-    }
-
-function passwordNoMatch() {
-    return `
-    Passwords do not match! !!!`;
-
-}
-
-function checkboxNoChecked() {
-    return `
-    You must accept the privacy policy to register !!!`;
-
-}
-
-function showSignedUpSuccessfully() {
-    document.getElementById('Signedupsuccessfully').innerHTML =`  <div class="Signedupsuccessfully">
-    <span class="textstylesuccessfully"> You Signed Up successfully</span>
-    <img class="" src="assets/IMG/You Signed Up successfully.png" alt="">   
-
-
-    </div>`;
-}
-
-function emailIsAlreadyAvailable() {
-return `Attention, the email already exists!!!`
-
-}
-
-function goBackToLogin() {
-    window.location.href = "login.html";
-}
-
-
-
-
-function nameIsNotValid(username) {
-    const nameCheck = /^[A-Za-zäöüÄÖÜß]+\s[A-Za-zäöüÄÖÜß]+$/;
-    return nameCheck.test(username);
-
-}
-
-
-function emailIsNotCorrect(usermail) {
-        let emailCheck = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return emailCheck.test(usermail); 
-    
-
-}
-
-function wrongEmailValidation() {
-    return `
-    Attention, a correct email address must be provided !!!`;
-
-}
-
-
-function wrongTextValidation() {           
-    return `
-      Please enter a full name of 3-30 letters`;
-                   
-                   }
-
-
-
-
-function sigUpValidation(user, username, usermail, userpassword, userconfirmpassword, checkbox) {
-
-    let sigUpInfo = document.getElementById('signupinfotext');
-
-     if (user) {
-        sigUpInfo.innerHTML = emailIsAlreadyAvailable();
-        ButtonDisabledSet();
-        return;
-    }
-
-    if (!nameIsNotValid(username.value) || username.value.length < 3 ||  username.value.length > 30) {
-        sigUpInfo.innerHTML = wrongTextValidation();
-        ButtonDisabledSet();
-        return false;
-    }
-
-
-    if (!emailIsNotCorrect(usermail.value)) {
-        sigUpInfo.innerHTML = wrongEmailValidation();
-        ButtonDisabledSet();
-        return false;
-    }
-
-
-
-    if (userpassword.value.length <= 5) {
-        sigUpInfo.innerHTML = passwordToShort();
-        ButtonDisabledSet();
-        return false;
-    }
-
-
-    if (userpassword.value !== userconfirmpassword.value) {
-        sigUpInfo.innerHTML = passwordNoMatch();
-        ButtonDisabledSet();
-        return false;
-    }
-
-    if (!checkbox.checked) {
-        sigUpInfo.innerHTML = checkboxNoChecked();
-        ButtonDisabledSet();
-        return false;
-    }
-    return true
-}
