@@ -280,61 +280,27 @@ function getContacts() {
         return;
     }
     showContacts.innerHTML = '';
-    let groupedContacts = groupContacts(contactsArray);
-    let beginningLetter = Object.keys(groupedContacts).sort();
-    for (let index = 0; index < beginningLetter.length; index++) {
-        let letter = beginningLetter[index];
-        showContacts.innerHTML += `<h2 class="letter">${letter}</h2>`;
-        groupedContacts[letter].forEach(contact => {
-            showContacts.innerHTML += displayContacts(contact.index, contact.name, getLastName(contact.name), '', contact.color)
-            showSelectedContainer(contact.name,contact.index);
-        });
-       
-}
-    }
-/**
- * Groups contacts by the first letter of the name
- * @param {Array} contacts Array of contact objects
- * @returns {Object} Contacts grouped by first letter
- */
 
-    function groupContacts(contacts) {
-        let groupedContacts = {};
-        contacts.forEach((contact, index) => {
-            let firstLetter = contact.name.charAt(0).toUpperCase();
-            let color = contact.color;
-            
-            if (!groupedContacts[firstLetter]) {
-                groupedContacts[firstLetter] = [];
-            }
     
-            groupedContacts[firstLetter].push({ ...contact, index, color });
-        });
+    let sortedContacts = [...contactsArray].sort((a, b) => a.name.localeCompare(b.name));
+
     
-        return groupedContacts;
+    for (let i = 0; i < sortedContacts.length; i++) {
+        let contact = sortedContacts[i];
+        showContacts.innerHTML += displayContacts(i, contact.name, getLastName(contact.name), '', contact.color);
+        showSelectedContainer(contact.name, i);
     }
+}
+
+
 /**
- * Sorts and displays contacts alphabetically by first letter.
+ * Sortiert und zeigt die Kontakte alphabetisch an.
  */
 function letterSorting() {
-    contactsArray.forEach(contact => {
-        let firstLetter = contact.name.charAt(0).toUpperCase();
-        if (beginningLetter.indexOf(firstLetter) === -1) {
-            beginningLetter.push(firstLetter);
-            groupedContacts.push({
-                letter: firstLetter,
-                contacts: [contact]
-            });
-        } else {
-            let group = groupedContacts.find(contacts => contacts.letter === firstLetter);
-            if (group) {
-                group.contacts.push(contact);
-            }
-        }
-    });
-    beginningLetter.sort();
+    contactsArray.sort((a, b) => a.name.localeCompare(b.name));
     getContacts();
 }
+
 /**
  * the function generate small contact field
  * @param {*} assignedContacts assignedContacts elemente
