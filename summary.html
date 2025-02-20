@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Summary</title>
+    <link rel="icon" type="image/x-icon" href="./assets/IMG/Capa 3.png" />
+    <link rel="stylesheet" href="Styles/Desktop_template.css">
+    <link rel="stylesheet" href="./Styles/fontStyles.css">
+    <link rel="stylesheet" href="./Styles/summary.css">
+    <link rel="stylesheet" href="./Styles/mobile_tamplate.css">
+    <script src="./assets/js/script.js"></script>
+    <script src="./assets/js/script_Template.js"></script>
+    <script src="./assets/js/board_FetchTask.js"></script>
+    <script src="./assets/js/board_Database.js"></script>
+    <script src="./assets/js/board.js"> </script>
+    <script src="./assets/js/board_Card.js"> </script>
+    <script src="./assets/js/summary.js"> </script>
+    <script src="./assets/js/script_Sidebar.js"></script>
+    <script src="./assets/js/board_Contact.js"></script>
+
+    <link rel="icon" type="image/x-icon" href="./assets/IMG/Capa 2.png" />
+</head>
+
+<body onload="init(); fetchTasksSummary(); summaryScreenWidth()">
+    <header>
+
+
+        <div w3-include-html="./assets/Templates/desktop_template.html"></div>
+        <div class="headblock">
+            <div class="title">
+                <span class="kanbanBoardTitle">Kanban Projekt Management Tool</span>
+                <img src="./assets/IMG/Capa 3.png" alt="MobileIcon" class="MobileIcon">
+            </div>
+            <div class="headUserContainer">
+                <a href="help.html" class="help-link">
+                    <img src="./assets/IMG/help.png" alt="Hilfe" class="help-icon">
+                </a>
+                <div class="logInUser_Container" onclick="showLogOutSection();">
+                    <span class="logInUser" id="loginUserId"></span>
+                </div>
+
+            </div>
+        </div>
+
+        <div id="logoutId"> </div>
+
+
+    </header>
+
+    <main>
+        <section class="middle-SectionSummary">
+
+            <section class="kanbanBoardSection">
+
+                <div class="summary_headline">
+                    <h1 class="summary_title_big"> Join 360 </h1>
+                    <hr class="summary_hr">
+                    <h3 class="summary_secondline"> Key Metrics at a Glance </h3>
+                    <div id="newHrLineHeader"> </div>
+                </div>
+
+
+                <section class="kanbanboradtodoanddone">
+
+                    <div class="kanbanboradtodo" onmouseover="changeImageToDoDefault(true)"
+                        onmouseout="changeImageToDoDefault(false)">
+                        <div class="contentodoboard" onclick="showTheKanbanBoardDocument()">
+                            <img class="imgtodo" id="iconBoardToDo" src="./assets/IMG/Frame 59.png">
+
+
+                            <div class="kanbandboardtodocompartment">
+                                <span class="todonummber" id="toDoNumber"> </span>
+                                <span class="todotext"> to do </span>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="kanbanboraddone" onmouseover="changeImageDoneDefault(true)"
+                        onmouseout="changeImageDoneDefault(false)">
+                        <div class="contendoneboard" onclick="showTheKanbanBoardDocument()">
+                            <img class="imgdone" id="iconBoardDone" src="./assets/IMG/Frame 59 (1).png">
+
+                            <div class="kanbandboarddonecompartment">
+                                <span class="donenummber" id="accomplishedTask"> </span>
+                                <span class="donetext"> done </span>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </section>
+
+
+                <section class="priosection">
+                    <div class="kanbanboardprio">
+                        <div class="prioimgsection" onclick="showTheKanbanBoardDocument()">
+                            <img class="prioimg" src="./assets/IMG/Frame 59 (6).png" alt="">
+
+                            <div class="priocompartment">
+                                <span class="prionummber" id="prioUrgentId"> 0</span>
+                                <span class="priotext"> urgent </span>
+                            </div>
+                            <hr class="hrpriocontent">
+
+                            <div class="contentdate">
+                                <span class="datekanbanboard" id="currentDate"> Oktober 16, 2024</span>
+                                <span class="Upcoming-Deadline"> Upcoming Deadline </span>
+
+
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+
+                    <section class="thridsectionsummary">
+
+                        <div class="taskboard">
+                            <div class="taskinBoardcompartment" onclick="showTheKanbanBoardDocument()">
+                                <span class="Tasknumber" id="allTaskinBoard"> </span>
+                                <span class="Tasktext"> Tasks in board </span>
+
+                            </div>
+                        </div>
+
+                        </div>
+
+                        <div class="taskboard">
+                            <div class="taskinBoardcompartment" onclick="showTheKanbanBoardDocument()">
+                                <span class="Tasknumber" id="taskInProgress"> </span>
+                                <span class="Tasktext"> Tasks in Progress </span>
+
+                            </div>
+                        </div>
+
+                        </div>
+
+
+                        <div class="taskboard">
+                            <div class="taskinBoardcompartment" onclick="showTheKanbanBoardDocument()">
+                                <span class="Tasknumber" id="taskAwaitingFeedback"> </span>
+                                <span class="Tasktext"> Awaiting Feedback </span>
+
+                            </div>
+                        </div>
+
+                        </div>
+
+                    </section>
+
+
+                </section>
+                <div id="loginupsuccessfully"></div>
+
+            </section>
+            <div class="greetingTheContact">
+                <span class="loginstylesuccessfully" id="showTheRightTime"> </span>
+
+            </div>
+
+
+        </section>
+            <section>
+                <div w3-include-html="./assets/Templates/mobile_version.html"></div>
+            </section>
+            <nav id="mobileNav" class="mobile-nav"></nav>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="./assets/IMG/ 2.png" />
+    <link rel="stylesheet" href="./Styles/fontStyles.css">
+    <link rel="stylesheet" href="./Styles/register.css">
+    <script src="./assets/js/register.js"></script>
+    <script src="./assets/js/register_Template.js"></script>
+    <script src="./assets/js/register_ValidationSigUpButton.js"></script>
+
+
+    <link rel="icon" type="image/x-icon" href="./assets/IMG/Capa 2.png" />
+
+    <title>Registrierung </title>
+</head>
+
+<body onload="loadUsers(path = '')">
+
+    <header>
+
+        <div class="loginheadline">
+            <img class="loginlogo" src="assets/IMG/Join_logo.svg" alt="">
+
+        </div>
+
+        </div>
+
+
+
+    </header>
+    <div class="middle-section">
+        <section class="register">
+            <img src="assets/IMG/arrow-left-line.png" alt="Back Button" class="back-button" onclick="goBackToLogin()">
+            <h1 class="login-headline"> Sign up </h1>
+            
+            <hr class="signuphr">
+            
+            <form onsubmit="checkRegistration(); return false;" novalidate>
+
+
+                <div class="inputenamesection" id="inputenamesectionId">
+                    <input id="username" class="inputname" type="text" required placeholder="Name"  autocomplete="username"  onblur="validateUsername()">
+                    <img class="mailicon" src="assets/IMG/person.png" alt="">
+                </div>
+                <div class="showMistakeValidation" id="inputNameMistake"></div>
+
+                <div class="inputemailsection" id="inputemailsectionId">
+                    <input id="usermail" class="inputemail" type="email" required placeholder="E-Mail" autocomplete="email"  onblur=" validateEmail()">
+                    <img class="mailicon" src="assets/IMG/mail.png" alt="">
+                </div>
+                <div  class="showMistakeValidation" id="inputEmailMistake"></div>
+
+                <div class="inputpasswordsection" id="inputpasswordsectionId">
+                    <input id="userpassword"  class="inputpassword" type="password" autocomplete="new-password" onclick="passwordvisbility()"
+                        required placeholder="Password" onblur="validatePassword()">
+                    <img class="visbilityimg"  id="visbilityimg" src="assets/IMG/lock.png" alt="" onclick="showVisbility()">
+                </div>
+                <div class="showMistakeValidation" id="inputPasswordMistake"></div>
+
+                <div class="inputpasswordconfirmsection" id="inputpasswordconfirmsectionId">
+                    <input id="userconfirmpassword" class="inputconfirmpassword" type="password"
+                        onclick="passwordconfirmvisbility()" autocomplete="new-password" required placeholder=" Confrim Password"  onblur="validateConfirmPassword()">
+                    <img class="visbilityimg" id="visbilityimgconfirm" src="assets/IMG/lock.png" alt=""
+                        onclick="showVisbilityconfirmpassword()">
+                </div>
+                <div class="showMistakeValidation" id="inputConfirmPasswordMistake"></div>
+
+                <span id="signupinfotext" class="signupinfotextstyle"></span>
+
+
+                <div class="checkboxsection">
+                    <input id="checkbox" class="checkbox" type="checkbox" onclick="checkFormCompletion()">
+                    <span class="Rememberme"> I accept the <a class="privacy_policlink"
+                            href="privacy_policy_login.html"> Privacy policy</a> </span>
+                </div>
+
+                <div class="loginandgustbutton">
+                    <button id="signUpButton" class="loginbutton disabledbutton" disabled>Sign Up</button>
+                </div>
+            </form>
+
+
+        </section>
+    </div>
+
+    <div id="Signedupsuccessfully"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+    <footer>
+        <a class="privacypolicyandlegalnotice" href="./privacy_policy_login.html">Privacy Policy </a>
+        <a class="privacypolicyandlegalnotice" href="./legalNotes_login.html"> Legal notice</a>
+
+
+    </footer>
+
+
+</body>
+
+</html>

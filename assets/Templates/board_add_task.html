@@ -1,0 +1,104 @@
+<section onresize="redirect()" id="boardAddTask" class="boardAddTask positionTask">
+    <div class="widthBoard">
+        <div class="boardtitle addTaskBoard">
+            <div class="addTaskTitle">
+                <h2>Add Task</h2>
+                <button class="closeAddTask curser" onclick="closeTask()"><img class="xButton"
+                        src="./assets/IMG/iconoir_cancel.png"></button>
+            </div>
+            <div class="addTaskContainer">
+                <div class="divSectionAddTask">
+                    <div>
+                        <div class="Titleleft">
+                            <p>Title</p>
+                            <p class="red">*</p>
+                        </div>
+                        <input id="taskTitle" class="inputTitle" type="text" placeholder="Enter a title" required>
+                    </div>
+                    <div id="InputFieldsMissing"></div>
+                    <div class="flexdirection">
+                        <label for="description">Description</label>
+                        <textarea class="inputDescription marginTop" id="description" type="text" placeholder="Enter a Description"></textarea>
+                    </div>
+                    <div id="InputFieldsMissing"></div>
+                    <div class="AssignedTO_Container">
+                        <span class="Assign_Header">Assigned to</span>
+                        <div onclick="openList()" id="select_container" class="select_container">
+                            <span>Select contacts to assign</span>
+                            <div id="arrow_img_container"> <img  class="arrow_drop_downaa curser"
+                                    src="assets/IMG/arrow_drop_downaa.svg" alt=""></div>
+                        </div>
+                        <div id="Selection_Container" class="Selection_Container d_none">
+
+                        </div>
+                        <div id="InputFieldsMissing"></div>
+                        <div id="Selected_profiles_Container" class="Selected_profiles_Container">
+                        </div>
+                    </div>
+                </div>
+                <div class="separatorTask"></div>
+                <div class="divSectionAddTask2">
+                    <div class="flexdirection">
+                        <div class="dateEdit">
+                            <p class="dueDateEdit">Due date</p>
+                            <p class="red">*</p>
+                        </div>
+                        <input id="taskDueDate" class="inputTitleDate curser" type="date" required onblur="checkValidationDate()">
+                        <div id="WrongCurrentDateId"> </div>
+                    </div>
+                    <div class="prioEditSection">
+                        <p>Prio</p>
+                        <div class="marginButtomButton">
+                            <button id="urgent" class="buttonContainerPrio curser" onclick="urgent()">Urgent <img
+                                    class="prioButton" id="urgentIcon" src="./assets/IMG/Priority symbols (1).png"></button>
+                            <button id="medium" class="buttonContainerPrio curser" onclick="medium()">Medium <img
+                                    class="prioButton" id="mediumIcon" src="./assets/IMG/Prio_medium(2).svg"></button>
+                            <button id="low" class="buttonContainerPrio curser" onclick="low()">Low <img
+                                    class="prioButton" id="lowIcon" src="./assets/IMG/Priority symbols.png"></button>
+                        </div>
+                    </div>
+                    <div class="flexdirection">
+                        <div class="categoryEdit alaignItems">
+                            <p>Category</p> <!-- Geänderte ID -->
+                            <p class="red">*</p>
+                        </div>
+                        <select class="inputTitle marginTop curser" name="text" id="kategorie"placeholder="Select Category"> <!-- Beibehaltene ID -->
+                            <option value="Technical Task">Technical Task</option>
+                            <option value="User Story">User Story</option>
+                        </select>
+                        
+                    </div>
+
+                    <div class="divPaddingBottum">
+                        <p>Subtasks</p>
+                        <div class="inputTitle divSubtask"id="subtaskBorderInputchange">
+                            <input id="new-subtask" class="subtasksInputfield" type="text" placeholder="Add new subtask">
+                    
+                    <div class="subtaskImgContent">
+                            <img onclick="addCurrentSubtask()" class="addSubTaskIcon" id="add-subtask-icon" src="assets/IMG/add_subtask_img.svg"
+                                alt="Add Subtask">
+                          <div class="separatorSubtask"></div>      
+                          <img onclick="emptySubtask()" class="emptySubtaskicon" id="empty-subtask-icon" src="assets/IMG/iconoir_cancel.png"
+                          alt="Add Subtask">
+                        </div>
+                    </div>
+                        <div id="subtasksContainer"></div>
+                    </div>
+                    <div id="SubtaskLengthReached"></div>
+                </div>
+            </div>
+            <div class="bottomInfo">
+                <div class="bottomInfoEdit">
+                    <p class="redrequired">*</p>
+                    <p class="required-message">This field is required</p>
+                </div>
+                <div id="DibButtomAddtask" class="divButtonButtom">
+                    <button onclick="clearTask()" class="buttonContainerWhite curser">Clear <img
+                            src="./assets/IMG/x_icon_clear.svg"></button>
+                    <button  onclick="createTask(event)" class="buttonContainerdark curser">Create Task <img
+                            src="assets/IMG/clear_Img.svg"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

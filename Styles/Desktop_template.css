@@ -1,0 +1,453 @@
+body {
+    margin: 0;
+    font-family: 'Inter';
+    font-weight: 400;
+}
+
+.sideblock {
+    width: 232px;
+    background-color: #2A3647;
+    height: 100vh;
+    /* Volle Höhe des Bildschirms */
+    padding: 64px 0px 64px 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* Verteilt den Platz zwischen den Elementen */
+    position: fixed;
+    z-index: 10;
+    top: 0;
+}
+
+.d_none {
+    display: none;
+}
+
+.headblock {
+    height: 96px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    padding: 20px 40px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
+    z-index: 5;
+    position: fixed;
+    font-size: 20px;
+    line-height: 24px;
+    font-family: 'Inter';
+    font-weight: 400;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.kanbanBoardTitle {
+    margin-left: 225px;
+
+}
+
+.logInUser_Container {
+    display: flex;
+    cursor: pointer;
+}
+
+.logInUser {
+    padding: 10px;
+    border-radius: 45px;
+    border: 3px solid #2A3647;
+    height: 42px;
+    width: 42px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    font-weight: bolder;
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.headUserContainer {
+    width: 104px;
+    height: 56px;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+
+.logo {
+    width: 100px;
+    height: 121.97px;
+    margin-left: 50px;
+}
+
+
+    
+
+
+
+.navLink_Summary {
+
+    text-decoration: none;
+    color: #FFFFFF;
+    display: flex;
+    gap: 8px;
+    padding: 8px 56px 8px 56px;
+    align-items: center;
+}
+
+.logoutSection {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    position: fixed;
+    background-color: rgb(32, 42, 54);
+    cursor: pointer;
+    width: 150px;
+    height: 160px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    top: 135px;
+    right: 0px;
+    padding: 5px;
+    z-index: 100;
+}
+
+
+.logoutsectionlink {
+
+    text-decoration: none;
+    color: #CDCDCD;
+    margin-top: 20px;
+    font-size: 16px;
+
+}
+
+.logoutsectionlinkHelp {
+
+    text-decoration: none;
+    color: #CDCDCD;
+    margin-top: 20px;
+    font-size: 16px;
+
+}
+
+.logoutsectionlinkHelp:hover {
+    background-color: #405169;
+}
+
+.logoutsectionlink:hover {
+    background-color: #405169;
+}
+
+
+.logoutsectionlinklogouttext {
+    text-decoration: none;
+    color: #CDCDCD;
+    margin-bottom: 20px;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+
+.logoutsectionlinklogouttext:hover {
+    background-color: #405169;
+}
+
+
+
+.navLink_Contact {
+    text-decoration: none;
+    color: #FFFFFF;
+    display: flex;
+    gap: 8px;
+    padding: 8px 56px 8px 56px;
+    align-items: center;
+    height: 46px;
+}
+
+
+.navLink_Add_Task {
+    text-decoration: none;
+    color: #FFFFFF;
+    display: flex;
+    gap: 8px;
+    padding: 8px 56px 8px 56px;
+    align-items: center;
+}
+
+.navLink_Board {
+    text-decoration: none;
+    color: #FFFFFF;
+    display: flex;
+    gap: 8px;
+    padding: 8px 56px 8px 56px;
+    align-items: center;
+    
+}
+.active {
+    background-color: #405169;
+}
+
+
+
+.sidelink {
+    width: 232px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.icon_container {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+}
+
+.icon_container_board {
+    width: 30px;
+    height: 30px;
+    gap: 10px;
+    display: flex;
+}
+
+.icon_summary {
+    width: 25px;
+    height: 25px;
+    top: 2.5px;
+    left: 2.5px;
+}
+
+.icon_add {
+    width: 25px;
+    height: 25.03px;
+    top: 2.17px;
+    left: 2.19px;
+}
+
+.icon_board {
+    width: 25px;
+    height: 29.55px;
+}
+
+.icon_contact {
+    width: 22.5px;
+    height: 25px;
+    top: 2.5px;
+    left: 3.75px;
+}
+
+.txt_Summary {
+    width: 72px;
+    height: 19px;
+    font-size: 16px;
+    line-height: 19.2px;
+}
+
+.txt_add {
+    font-size: 16px;
+    line-height: 19.2px;
+}
+
+.txt_Board {
+    font-size: 16px;
+    line-height: 19.2px;
+}
+
+.txt_Contact {
+    font-size: 16px;
+    line-height: 19.2px;
+}
+
+.bottom_Side_Block {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 150px;
+}
+
+.navLink {
+    text-decoration: none;
+    color: #FFFFFF;
+    padding-left: 50px;
+}
+
+a:hover {
+    background-color: #405169;
+}
+
+.MobileIcon {
+    display: none;
+}
+
+.help-icon {
+    cursor: pointer;
+}
+
+.help-link {
+    background-color: transparent !important;
+    border: none;
+    padding: 0;
+    margin: 0;
+    display: inline-block;
+}
+
+.help-link img {
+    background-color: transparent;
+    display: block;
+}
+
+@keyframes slideLogout {
+    from {
+        transform: translateX(100%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+
+@media(max-width: 1528px) {
+    
+
+    .headblock {
+        padding: 20px 99px 20px 99px;
+        height: 80px;
+    }
+
+   
+
+}
+@media(max-width: 1410px) {
+    .sideblock {
+        display: none;
+    }
+
+    .kanbanBoardTitle{
+        margin-left: 0px;
+    }
+
+    .headblock {
+        height: 50px;
+    }
+
+  
+}
+@media(max-width: 1320px) {
+    .headblock {
+        padding: 20px 61px 20px 61px;
+    }
+
+
+
+
+}
+
+
+@media(max-width: 1230px) {
+    .headblock {
+        padding: 20px 40px 20px 40px;
+    }
+
+
+
+
+}
+
+@media(max-width: 1150px){
+    .logoutSection {
+        top: 100px;
+        z-index: 999;
+    }
+}
+
+@media(max-width: 800px){
+    .headblock {
+        padding: 20px 20px 20px 12px;
+    }
+}
+
+
+
+@media(max-width: 500px) {
+
+    .logInUser {
+         padding: 0px;
+         margin-left:0px;
+    }
+
+    .logoutSection {
+        top: 63px;
+       animation: slideLogout 1.5s ;
+    }
+
+    .logoutsectionlink {
+    
+        margin-top: 10px;
+       
+    }
+
+    .logoutsectionlinklogouttext {
+        text-decoration: none;
+        color: #CDCDCD;
+        margin-bottom: 10px;
+        font-size: 16px;
+        margin-top: 10px;
+    }
+
+    .logoutsectionlinkHelp {
+        margin-top: 10px;
+    }
+    .kanbanBoardTitle {
+        display: none;
+    }
+
+    .logoutsectionlinkHelp {
+        display: block;
+    }
+
+    .headUserContainer img[src*="help.png"] {
+        display: none;
+    }
+
+    .MobileIcon {
+        display: block;
+        width: 36px;
+        height: 44px;
+    }
+
+    .headblock {
+        padding: 20px 30px 20px 30px;
+        height: 40px;
+        justify-content: space-between;
+        padding: 20px 16px;
+    }
+
+    .headUserContainer {
+        width: 55px;
+    }
+
+}
+
+@media(max-width: 400px) {
+    .kanbanBoardTitle {
+        font-size: 16px;
+    }
+
+    .logInUser {
+        font-size: 14px;
+    }
+
+    .headUserContainer {
+        width: 60px;
+    }
+}

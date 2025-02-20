@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Task</title>
+
+    <link rel="stylesheet" href="./Styles/add_task.css">
+    <link rel="stylesheet" href="./Styles/Desktop_template.css">
+    <link rel="stylesheet" href="./Styles/fontStyles.css">
+    <link rel="stylesheet" href="./Styles/mobile_tamplate.css">
+    <link rel="stylesheet" href="Styles/add_task_responsive.css">
+    <script src="./assets/js/addTask.js"></script>
+    <script src="./assets/js/script.js"></script>
+    <script src="./assets/js/script_Template.js"></script>
+    <script src="./assets/js/script_Sidebar.js"></script>
+    <script src="./assets/js/add_TaskValidation.js"></script>
+    <script src="./assets/js/addTask_Contact.js"></script>
+    <script src="./assets/js/addTask_Template.js"></script>
+    
+   
+
+    <link rel="icon" type="image/x-icon" href="./assets/IMG/Capa 2.png" />
+
+</head>
+
+<body onclick="closelist()"  onload="init()">
+
+    <header>
+
+
+        
+        <div w3-include-html="./assets/Templates/desktop_template.html"></div>
+        <div class="headblock">
+            <div class="title">
+                <span class="kanbanBoardTitle">Kanban Projekt Management Tool</span>
+                <img src="./assets/IMG/Capa 3.png" alt="MobileIcon" class="MobileIcon">
+            </div>
+            <div class="headUserContainer">
+                <a href="help.html" class="help-link">
+                    <img src="./assets/IMG/help.png" alt="Hilfe" class="help-icon">
+                </a>
+                <div class="logInUser_Container" onclick="showLogOutSection();">
+                    <span class="logInUser" id="loginUserId"></span>
+                </div>
+        
+            </div>
+        </div>
+        
+        <div id="logoutId"> </div>
+    
+    </header>
+    <div class="add_task_content" onclick="closelist(); closelistCategory()">
+
+        <div class="header_COntainer">
+            <h1 class="headline_addTask">Add Task</h1>
+        </div>
+
+        <form id="form_addtask" class="addTask_Container">
+            <div class="input_Task_Container_left">
+                <div class="Title_Container">
+                    <span class="Title_Header">Title<span class="red">*</span></span>
+                    <input id="title" placeholder="Enter a Title" class="input_Title" required
+                        type="text">
+                        <div id="titleMissing"></div>
+                </div>
+                <div class="Description_Container">
+                    <span class="Description_Header">Description</span>
+                    <textarea id="Description" class="input_Description" placeholder="Enter a Description" type="text"></textarea>
+                </div>
+                <div onclick="func1(event)" class="AssignedTO_Container">
+                    <span class="Assign_Header">Assigned to</span>
+                    <div onclick="openList()" id="select_container" class="select_container">
+                        <span>Select contacts to assign </span>
+                        <div class="arrow_img_container" id="arrow_img_container"> <img  class="arrow_drop_downaa"
+                                src="assets/IMG/arrow_drop_downaa.svg" alt=""></div>
+                    </div>
+                    <div id="Selection_Container" class="Selection_Container d_none">
+
+                    </div>
+                    <div id="Selected_profiles_Container" class="Selected_profiles_Container">
+                    </div>
+
+
+
+
+                </div>
+            </div>
+
+            <div class="dividing_Line"></div>
+
+            <div class="Task_Container_right">
+                <div class="date_Container">
+                    <span class="Date_header">Due date <span class="red">*</span></span>
+                    <input onclick="dateinput()" id="dueDate" placeholder="dd/mm/yyyy" class="input_date" required
+                        type="date" onblur="checkValidationDate()">
+                </div>
+                <div id="WrongCurrentDateId"> </div>
+                
+                <div class="Prio_Container">
+                    <span class="prio_Header">Prio</span>
+                    <div id="Prio_btn_Container" class="Prio_btn_Container">
+                    </div>
+                </div>
+                <div onclick="func1(event)" class="cataegory_Container">
+                    <span class="category_Header">Category <span class="red">*</span></span>
+                    <div id="select_containerId" class="select_container" onclick="openCategoryLIst()">
+                        <span id="Category" class="Category_Input">Select Category</span>
+                        <div id="arrow_img_container_Category">
+                            <img class="arrow_drop_downaa" src="assets/IMG/arrow_drop_downaa.svg" alt="">
+                        </div>
+                    </div>
+                    <div id="Selection_Container_Category" class="Selection_Container_Category d_none">
+                        <div onclick="choosedUserStory()" id="userStory" class="userStory">User Story</div>
+                        <div onclick="choosedTechnicalTask()" id="technicalTask" class="technical_Task">Technical Task</div>
+                    </div>
+                </div>
+                
+                
+                    <div id="InputFieldsMissing"></div>
+                    <div id="Selection_Container_Category" class="Selection_Container_Category d_none">
+                    </div>
+                    <div class="Subtasks_Container">
+                        <span class="Subtasks_Header">Subtasks</span>
+                        <div class="Subtask_Inputfield_Container" id="subtaskBorderInputchange">
+                            <input id="input_Subtasks" placeholder="Add new Subtask" class="Subtasks_Inputfield"
+                                type="text">
+                            <button id="add_Subtask" type="button" onclick="addCurrentSubtask()"
+                                class="Subtasks_Btn"><img src="assets/IMG/add_subtask_img.svg" alt=""></button>
+                                <div class="separatorSubtask"></div>      
+
+                                <img onclick="emptySubtask()" class="emptySubtaskicon" id="empty-subtask-icon" src="assets/IMG/iconoir_cancel.png"
+                                alt="Add Subtask">
+                        </div>
+                    </div>
+                    <div id="subtaskHeadContainer">
+                    <div id="ul_subtasks" class="ul_subtasks">
+                    </div>
+                    <div id="SubtaskLengthReached"></div>
+                </div>
+            </div>
+        </div>   
+        </form>
+        <div class="Btn_Container">
+            <div class="required_info_Container"><span class="red">*</span><span class="fieldisrequired">This field is required</span></div>
+            <div class="clear_COntainer" id="createNewTask">
+            <button onclick="clearTask()" class="clear_Btn">Clear <img class="clear-icon"
+                    src="assets/IMG/x_icon_clear.svg" alt=""></button>
+            <button type="submit" form="form_addtask" onclick="createTask(event)" class="Create_Btn">Create Task <img
+                    class="create_icon" src="assets/IMG/clear_Img.svg" alt=""></button>
+        </div>
+    </div>
+    <section>
+        <div id="newTaskIsReady"></div>
+          
+        
+        <div w3-include-html="./assets/Templates/mobile_version.html"></div>
+    </section>
+
+   
+    
+</body>
+
+</html>

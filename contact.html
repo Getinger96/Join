@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact</title>
+    <link rel="icon" type="image/x-icon" href="./assets/IMG/Capa 3.png">
+    <link rel="stylesheet" href="Styles/Desktop_template.css">
+    <link rel="stylesheet" href="./Styles/contact.css">
+    <link rel="stylesheet" href="./Styles/contact_responsive.css">
+    <link rel="stylesheet" href="./Styles/mobile_tamplate.css">
+    <link rel="stylesheet" href="Styles/fontStyles.css">
+    <script src="./assets/js/script.js"></script>
+    <script src="./assets/js/script_Template.js"></script>
+    <script src="./assets/js/script_Template.js"></script>
+    <script src="./assets/js/contact.js"></script>
+    <script src="./assets/js/contact_Mobile.js"></script>
+    <script src="./assets/js/contact_FormValidation.js"></script>
+    <script src="./assets/js/contact_Template.js"></script>
+    <script src="./assets/js/script_Sidebar.js"></script>
+
+    <link rel="icon" type="image/x-icon" href="./assets/IMG/Capa 2.png" />
+
+</head>
+
+<body onload="init()">
+    <header>
+
+        
+        <div w3-include-html="./assets/Templates/desktop_template.html"></div>
+        <div class="headblock">
+            <div class="title">
+                <span class="kanbanBoardTitle">Kanban Projekt Management Tool</span>
+                <img src="./assets/IMG/Capa 3.png" alt="MobileIcon" class="MobileIcon">
+            </div>
+            <div class="headUserContainer">
+                <a href="help.html" class="help-link">
+                    <img src="./assets/IMG/help.png" alt="Hilfe" class="help-icon">
+                </a>
+                <div class="logInUser_Container" onclick="showLogOutSection();">
+                    <span class="logInUser" id="loginUserId"></span>
+                </div>
+        
+            </div>
+        </div>
+        
+        <div id="logoutId"> </div>
+    
+
+        
+    </header>
+
+    <section class="middle-Section">
+        <section class="contactlist">
+            <div class="newcontactbutton">
+                <button class="addnewcontactbutton" onclick="addNewContact(event)">
+                    Add new contact
+                    <img class="addpersonlogo" src="assets/IMG/person_add.png" alt="">
+                </button>
+            </div>
+            <div class="listing-contacted">
+                <div class="contacts-alphabet"></div>
+            </div>
+            <div id="contactview"></div>
+        </section>
+
+        <section class="contactview-container">
+            <section class="contactview">
+                <div class="headline-contacts">
+                    <h1>Contacts</h1>
+                    <hr>
+                    <h2>Better with a team</h2>
+                </div>
+                <div id="contactViewBig" class="contact-details-container"></div>
+            </section>
+        </section>
+    </section>
+
+    <div class="newContact" id="newContact">
+        <div class="contactCars-overview">
+            <div class="leftside">
+                <div class="leftsidehead">
+                    <img class="newCard-logo" src="assets/IMG/Capa 1.png" alt="">
+                    <h2 class="addcontactheadline">Add contact</h2>
+                    <span class="addcontactsecondline">Tasks are better with a team!</span>
+                    <div class="hrdiv">
+                        <hr class="hrnewcontact">
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-side">
+                <img src="assets/IMG/Close.svg" alt="Close" class="closethewindow-button" onclick="closeCardContact()">
+                <div class="contactlogo">
+                    <img class="addNewContactimg" src="assets/IMG/Group 13.png" alt="NewContactLogo">
+
+                    <form onsubmit="return false;" id="contactForm">
+                        <div class="input-container">
+
+
+                            <div class="input-field name-icon" id="textInput">
+                                <input type="text" id="name" name="Name" placeholder="Name" required>
+                                <img src="assets/IMG/person.svg" alt="Person Icon" class="input-icon">
+                            </div>
+                            <div id="wrongText"></div>
+
+
+                    
+                            <div class="input-fieldmail mail-icon" id="mailInput">
+                                <input type="email" id="mail" name="Email" placeholder="Email" required>
+                                <img src="assets/IMG/mail.svg" alt="Mail Icon" class="input-icon">
+                            </div>
+                            <div id="wrongEmail"></div>
+                
+
+
+                            <div class="input-fieldphone phone-icon" id="phoneInput">
+                                <input type="tel" id="telephone" name="Phone" placeholder="Phone" required>
+                                <img src="assets/IMG/call.svg" alt="Call Icon" class="input-icon">
+                            </div>
+                            <div id="wrongPhone"></div>
+                        </div>
+                        <div class="two-buttons">
+                            <button type="button" class="cancel-button" onclick="cancel()">Cancel<img class="close-button"
+                                    src="assets/IMG/iconoir_cancel.png"></button>
+                            <button onclick="saveEditedContact()" type="submit" class="createContact-button">Create Contact<img
+                                    src="assets/IMG/check.svg"></button>
+                        </div>
+                    </form>                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mobileNewContactOverlay mobileNewContactOverlay-hidden" id="mobileNewContactOverlay">
+        <div class="overlay-add-contact-mobile">
+            <div class="overlay-add-contact-mobile-top">
+                <h1>Add contact</h1>
+                <span>Tasks are better with a team!</span>
+                <hr>
+                <div class="overlay-add-contact-profile-img-mobile">
+                    <img src="assets/IMG/Group 13.png" alt="Profile Image" />
+                </div>
+            </div>
+            
+            <div class="overlay-add-contact-mobile-bottom">
+                <div class="input-fields-add-contact-mobile">
+                    <div class="input-field-mobile name-icon-mobile" id="textInputMobile">
+                        <input type="text" id="mobileName" placeholder="Name" required>
+                        <img src="./assets/IMG/person.svg" alt="Person Icon" class="input-icon-mobile">
+                    </div>
+                    <div id="wrongTextMobile"></div>
+
+                    
+                    <div class="input-field-mobile mail-icon-mobile" id="mailInputMobile">
+                        <input type="email" id="mobileMail" placeholder="Email" required>
+                        <img src="./assets/IMG/mail.svg" alt="Mail Icon" class="input-icon-mobile">
+                    </div>
+                    <div id="wrongEmailMobile"></div>
+
+                    <div class="input-field-mobile phone-icon-mobile" id="phoneInputMobile">
+                        <input type="tel" id="mobilePhone" placeholder="Phone" required>
+                        <img src="./assets/IMG/call.svg" alt="Call Icon" class="input-icon-mobile">
+                    </div>
+                    <div id="wrongPhoneMobile"></div>
+                    <div class="mobile-form-buttons">
+                        <button type="button" class="createContact-mobile-button" onclick="createContactMobile()">
+                            Create Contact
+                            <img src="./assets/IMG/check.svg" alt="Check Icon" class="check-icon-mobile">
+                        </button>
+                    
+                        <button type="button" class="delete-button" style="display: none;" onclick="deleteContactMobile(selectedContactIndex)">
+                            Delete
+                        </button>
+
+                        <button type="button" class="save-button" style="display: none;" onclick="saveEditedContactMobile(selectedContactIndex)">
+                            Save
+                            <img src="./assets/IMG/check.svg" alt="Check Icon" class="check-icon-mobile">
+                        </button>
+                    
+                        
+                    </div>
+                </div>
+                <div class="close-button-mobile" onclick="closeMobileNewContact()">
+                    <img src="./assets/IMG/Close.png" alt="Close">
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+
+    <section>
+        <div w3-include-html="./assets/Templates/mobile_version.html"></div>
+    </section>
+
+    <nav id="mobileNav" class="mobile-nav"></nav>
+
+</body>
+
+</html>

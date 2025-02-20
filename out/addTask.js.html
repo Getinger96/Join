@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: addTask.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: addTask.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const colors = [
+    'orange',
+    'gelb',
+    'grün',
+    'türkis',
+    'blau',
+    'lila',
+    'pink',
+    'hellorange'
+];
+
+const base_URL = "https://join-37803-default-rtdb.europe-west1.firebasedatabase.app/";
+let contacts = [];
+let subtasks = [];
+let assignedContacts = [];
+let prio = [];
+/**
+ * This function fetch contact from teh database
+ * 
+ * @param {string} path of the database array
+ */
+async function fetchContacts(path = '') {
+    const userJSON = await getContactsData(path);
+    const keysArray = Object.keys(userJSON.contacts);
+    const userAsArray = Object.values(userJSON.contacts);
+
+    processAndAddContacts(userAsArray, keysArray);
+    setPrioMediumAndRender();
+}
+/**
+ * this function gets th path for the fetch function
+ * 
+ * @param {*} path 
+ * @returns {boolean}
+ */
+async function getContactsData(path) {
+    const response = await fetch(base_URL + path + ".json");
+    return await response.json();
+}
+
+/**
+ * This function iterate threw the array and pushes into the array contacts
+ * 
+ * @param {} userAsArray data from database
+ * @param {*} keysArray key data from the database
+ */
+function processAndAddContacts(userAsArray, keysArray) {
+    for (let index = 0; index &lt; userAsArray.length; index++) {
+        const contact = userAsArray[index];
+        const key = keysArray[index];
+        const color = colors[index % colors.length];
+
+        if (contact.email !== 'guest@web.de') {
+            contacts.push({
+                id: key,
+                email: contact.email,
+                name: contact.name,
+                password: contact.password,
+                color: color,
+            });
+        }
+    }
+}
+
+/**
+ * This function set the standard prio of the task to medium 
+ * 
+ */
+function setPrioMediumAndRender() {
+    renderSelectionContainer();
+    renderPrioButtons();
+
+    const medium = document.getElementById('medium');
+    medium.innerHTML = `
+        Medium
+        &lt;img src="assets/IMG/PRio_Medium_WHITE.svg" alt="">
+    `;
+    medium.classList.add('color_white', 'bg_Medium');
+    prio = 'medium';
+}
+
+
+function func1(event) {
+    event.stopPropagation();
+}
+let d_none = true;
+
+/**
+ * This function opens the contact list where you can asigne contacts to a task
+ * 
+ */
+function openList() {
+    let selecCon = document.getElementById('Selection_Container');
+    let arrowCon = document.getElementById('arrow_img_container');
+    selecCon.classList.toggle('d_none');
+
+    if (d_none == true) {
+        arrowCon.innerHTML = `&lt;img class="arrow_drop_downaa" src="assets/IMG/arrow_drop_up.svg" alt="">`;
+        d_none = false;
+    } else {
+        arrowCon.innerHTML = `&lt;img class="arrow_drop_up" src="./assets/IMG/arrow_drop_downaa.svg" alt="">`;
+        d_none = true;
+    }
+}
+
+/**
+ * This function closes the list with the contacts
+ * 
+ */
+function closelist() {
+    let selecCon = document.getElementById('Selection_Container');
+    let arrowCon = document.getElementById('arrow_img_container');
+    arrowCon.innerHTML = '';
+    arrowCon.innerHTML = `&lt;img class="arrow_drop_downaa" src="assets/IMG/arrow_drop_downaa.svg" alt="">`;
+    selecCon.classList.add('d_none');
+    d_none = true;
+}
+
+/**
+ * this function opens the list where you can choose the category of the task
+ * 
+ */
+function openCategoryLIst() {
+    
+    let seleCon = document.getElementById('Selection_Container_Category');
+    seleCon.classList.toggle('d_none');
+}
+
+/**
+ * This function delivers the text "User Story"if you choosed the div wit the category "User Story"
+ * 
+ */
+function choosedUserStory() {
+    
+    let userStory = document.getElementById('Category');
+    userStory.textContent = "User Story";
+    closelistCategory();
+}
+/**
+ * This function delivers the text "Technical Task"if you choosed the div wit the category "Technical Task"
+ * 
+ */
+function choosedTechnicalTask() {
+   
+    let technicalTask = document.getElementById('Category');
+    technicalTask.textContent = "Technical Task";
+    closelistCategory();
+}
+
+/**
+ * This function closes the list with teh Categorys
+ * 
+ */
+function closelistCategory() {
+    
+    let seleCon = document.getElementById('Selection_Container_Category');
+    seleCon.classList.add('d_none');
+}
+
+/**
+ * This Function trims the name into 1 parts to get the Lastname of the name
+ * 
+ * @param {String} name Name of the contact
+ * @returns {string} returns the lastname 
+ */
+function getLastName(name) {
+    let lastName = name.trim().split(' ');
+    return lastName[lastName.length - 1];
+}
+
+/**
+ * This function iterate thru the contacts Array and delivers data from the objects of the array
+ * 
+ * @returns if profiles not exist 
+ * 
+ */
+function renderSelectionContainer() {
+    let profiles = document.getElementById('Selection_Container');
+    if (!profiles) {
+        console.error('Selection_Container not found');
+        return;
+    }
+    profiles.innerHTML = ' ';
+    for (let i = 0; i &lt; contacts.length; i++) {
+        let contact = contacts[i];
+        let name = contact.name;
+        let contactColour = contacts[i].color;
+        let forNAme = name.charAt(0);
+        let forNAmebig = forNAme.toUpperCase();
+        let lastname = getLastName(name);
+        let firstletterlastname = lastname.charAt(0);
+        let firstletterlastnameBIG = firstletterlastname.toUpperCase();
+        let firstletters = forNAmebig + firstletterlastnameBIG;
+        profiles.innerHTML += renderContacts(i, contactColour, firstletters, name);
+    }
+}
+
+/**
+ * This function render the Html for the contacts list where you can assign the contacts for the task
+ * 
+ * @param {number} i index of the contact
+ * @param {string} contactColour color of the contacts badge
+ * @param {string} firstletters  the first  letters of the surname and lastname
+ * @param {string} name  name of the contact
+ * @returns  the html for the list
+ */
+function renderContacts(i, contactColour, firstletters, name) {
+    return `
+       &lt;div  onclick="selectedContact(${i},'${name}','${firstletters}','${contactColour}')" id="profile_Container${i}" class="profile_Container">
+         &lt;div class="profile_container_header">
+          &lt;div class="profile_Badge_assign ${contactColour}">${firstletters}&lt;/div>
+          &lt;div>${name}&lt;/div>
+         &lt;/div>
+          &lt;div id="checkbox${i}">
+          &lt;img  class="check_img " src="./assets/IMG/Check button.svg" alt="">
+         &lt;/div>
+        &lt;/div>`
+}
+
+/**
+ * This function changes the style of an selected contact and checks wether or not the contact is selected if its  already  selected then style changes back and get spliced from the array
+ * 
+ * @param {number} i index of the contact
+ * @param {string} name name of the contact
+ * @param {string} firstletters first leter of surname and lastname
+ * @param {string} contactColour color of the contactsbadge
+ */
+function selectedContact(i, name, firstletters, contactColour) {
+    let checkbox = document.getElementById(`checkbox${i}`);
+    checkbox.innerHTML = `&lt;img  class="checked_img" src="./assets/IMG/Checked button.svg" alt="">`
+    let profileContainer = document.getElementById(`profile_Container${i}`);
+    profileContainer.classList.toggle('bg_color');
+    profileContainer.classList.toggle('color_white');
+    profileContainer.classList.toggle('profile_Containerselected');
+
+    if (!assignedContacts.includes(name)) {
+        assignedContacts.push(name)
+        showSelectedProfile(firstletters, i, contactColour)
+    } else {
+        deselctedtContact(i, name)
+    }
+    showSelectedProfile();
+}
+
+
+/**
+ * This function get started if the contact is already selected. and changes the style of the img of the contactcontainer and the starts another function named showselectedprofile
+ * 
+ * @param {number} i index of the contact
+ * @param {string} name full name of the contact
+ * @param {string} firstletters first letters of the surname and lastname 
+ * @param {string} contactColour color of the contacts badge
+ */
+function deselctedtContact(i, name, firstletters, contactColour) {
+    let checkbox = document.getElementById(`checkbox${i}`);
+    checkbox.innerHTML = `&lt;img  id="checkImg${i}" class="check_img" src="assets/IMG/Check button.svg" alt="">`
+    assignedContacts = assignedContacts.filter(contact => contact !== name);
+    showSelectedProfile(firstletters, i, contactColour);
+}
+
+/**
+ * This function iterate thru the array assignedContacts and if the length is under 4 it starts the function  renderContactBadge(contactName, index) if its higher the other function get started
+ * 
+ */
+function showSelectedProfile() {
+    let selectedProfileContainer = document.getElementById('Selected_profiles_Container');
+    selectedProfileContainer.innerHTML = '';  
+
+    for (let index = 0; index &lt; assignedContacts.length; index++) {
+        if (index &lt; 4) {  
+            let contactName = assignedContacts[index]; 
+            renderContactBadge(contactName, index);
+        }
+    }
+
+    let extraContactsBadge = document.getElementById('extra_Contacts_Badge');
+    if (assignedContacts.length > 4) {
+        renderExtraContactsBadge(selectedProfileContainer, extraContactsBadge);
+    } else if (extraContactsBadge) {
+        extraContactsBadge.remove(); 
+    }
+}
+
+/**
+ * This function renders the contactsbadges that shows up under the selection container and returns the html
+ * 
+ * @param {string} contactName name of the contact
+ * @param {number} index index of the contact
+ */
+function renderContactBadge(contactName, index) {
+    let contact = contacts.find(c => c.name === contactName); 
+
+    if (contact) {
+        let contactColour = contact.color;
+        let firstLetters = contactName.charAt(0).toUpperCase() + getLastName(contactName).charAt(0).toUpperCase();
+
+        let selectedProfileContainer = document.getElementById('Selected_profiles_Container');
+        selectedProfileContainer.innerHTML += `
+            &lt;div id="profile_Badge_assign${index}" class="profile_Badge_assign ${contactColour}">${firstLetters}&lt;/div>
+        `;
+    }
+}
+
+/**
+ * This function render the extra contactsbadge with the number of selcetd contacts
+ * 
+ * @param {*} selectedProfileContainer div container of the selected profiles
+ * @param {*} extraContactsBadge div of the contact badge with the numbers of the selected contaqct above 4
+ */
+function renderExtraContactsBadge(selectedProfileContainer, extraContactsBadge) {
+    let extraCount = assignedContacts.length - 4;
+    if (extraContactsBadge) {
+        extraContactsBadge.textContent = `+${extraCount}`;
+    } else {
+        selectedProfileContainer.innerHTML += `
+            &lt;div id="extra_Contacts_Badge" class="profile_Badge_assign gray">+${extraCount}&lt;/div>
+        `;
+    }
+}
+
+/**
+ * The validation of the dateinput that only allows present or future dates
+ * 
+ */
+function dateinput() {
+    let duedate = document.getElementById('dueDate');
+    duedate.min = new Date().toISOString().split('T')[0];
+}
+
+/**
+ * This function intiliases the rendering of the Prio buttons 
+ * 
+ */
+function renderPrioButtons() {
+    let prioButtonContainer = document.getElementById('Prio_btn_Container');
+    prioButtonContainer.innerHTML = renderPrioButtonsHtml();
+}
+
+/**
+ * This function returns the Html for the prio buttons 
+ * 
+ * @returns the Html gets returned
+ */
+function renderPrioButtonsHtml() {
+    return ` &lt;button onclick="chossedurgent()" type="button" id="urgent"  class="Prio_Btn">Urgent &lt;img
+                        id="urgentIcon" src="./assets/IMG/Priority symbols (1).png" alt="">&lt;/button>
+                        &lt;button type="button" id="medium" onclick="choossedmedium()" class="Prio_Btn">Medium &lt;img
+                        id="mediumIcon" src="./assets/IMG/Prio_medium(2).svg" alt="">
+                        &lt;/button>
+                        &lt;button type="button" id="low" onclick="choosedlow()" class="Prio_Btn">Low
+                            &lt;img id="lowIcon" src="./assets/IMG/Prio_Low(2).svg" alt="">&lt;/button>
+                             `
+}
+
+/**
+ * This function starts  when you  onclick the button urgent. Then it start the function renderpriobuttons() and changes the style of the button
+ * 
+ */
+function chossedurgent() {
+    renderPrioButtons();
+    let urgent = document.getElementById('urgent');
+    urgent.innerHTML =
+        `
+     Urgent
+     &lt;img src="./assets/IMG/Prio_urgent_WHITE.svg" alt="">
+     `;
+
+    urgent.classList.add('bg_urgent_selected');
+    urgent.classList.add('color_white')
+    prio = 'urgent';
+};
+
+
+
+/**
+ * This function starts  when you  onclick the button medium. Then it start the function renderpriobuttons() and changes the style of the button
+ * 
+ */
+function choossedmedium() {
+    renderPrioButtons();
+    let medium = document.getElementById('medium');
+    medium.innerHTML =
+        `
+    Medium
+    &lt;img src="assets/IMG/PRio_Medium_WHITE.svg" alt="">
+    `;
+    medium.classList.add('color_white');
+    medium.classList.add('bg_Medium');
+    prio = 'medium';
+}
+
+
+/**
+ * This function starts  when you  onclick the button low. Then it start the function renderpriobuttons() and changes the style of the button
+ * 
+ */
+function choosedlow() {
+    renderPrioButtons();
+    let low = document.getElementById('low');
+    low.innerHTML =
+        `
+    Low
+    &lt;img src="./assets/IMG/Prio_LOW_WHITE.svg" alt="">
+    `;
+    low.classList.add('color_white');
+    low.classList.add('bg_Low');
+    prio = 'low';
+}
+
+
+/**
+ * This function posts data to the firabse database
+ * 
+ * @param {string} path this is the path where you wana post the data
+ * @param {string} data that get pushed into the firebase database
+ * @returns  {boolean}
+ */
+async function postData(path = "", data = {}) {
+    let response = await fetch(base_URL + path + ".json", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    });
+    return responsASJson = await response.json();
+}
+
+
+/**
+ * This function checks if the input of the task ist valid if not  function validate task starts if ist valid function get starts to create the task
+ * 
+ * @param {*} event 
+ * @returns {boolean} wether or not true
+ */
+async function createTask(event) {
+    event.preventDefault();
+    let newTask = createNewTask();
+    if (!validateTask(newTask.Titel, newTask.Category, newTask.Date)) {
+        return;
+    }
+    document.getElementById("InputFieldsMissing").innerHTML = '';
+    document.getElementById("WrongCurrentDateId").innerHTML = '';
+
+    await saveTask(newTask);
+    clearTask();
+    gotoBoard();
+}
+
+
+/**
+ * This function collects the data of the task that you wants to create
+ * 
+ * @returns {boolean}
+ * 
+ */
+function createNewTask() {
+    let loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+    let guest = { "email": "guest@web.de", "name": "guest", "password": "guest123456" };
+    let titel = document.getElementById('title').value;
+    let description = document.getElementById('Description').value;
+    let assignedContact = assignedContacts;
+    let date = document.getElementById('dueDate').value;
+    let category = document.getElementById('Category').innerHTML;
+    let subtask = subtasks;
+    let status = 'open';
+    let newTask = newTaskObject(titel, description, assignedContact, date, prio, category, subtask ,status)
+
+    
+    if (JSON.stringify(loggedInUser) === JSON.stringify(guest)) {
+        localStorage.setItem('guestTasks', JSON.stringify(newTask));
+    }
+    return newTask;
+}
+
+
+/**
+ * This function stores the collected data into an object 
+ * 
+ * @param {string} titel  value of the input titel 
+ * @param {string} description value of the input description
+ * @param {object} assignedContact  contacts of the array assigned contacts
+ * @param {number} date value of the date input
+ * @param {string} prio value of prio buttons
+ * @param {string} category value of the category
+ * @param {string} subtask  value of the strings
+ * @param {*} status status of the task
+ * @returns {boolean}
+ */
+function newTaskObject(titel, description, assignedContact, date, prio, category, subtask ,status ) {
+    return newTask = {
+        Titel: titel,
+        Description: description,
+        AssignedContact: assignedContact,
+        Date: date,
+        Prio: prio,
+        Category: category,
+        Subtask: subtask,
+        Status: status
+    };
+}
+
+
+/**
+ * This function initilises the post function 
+ * 
+ * @param {object} newTask the object that gets  postedt
+ */
+async function saveTask(newTask) {
+    clearMissingFieldContent();
+    await postData(`tasks`, newTask);
+}
+
+/**
+ * this function initiliases  functions to clear all input fields
+ * 
+ */
+async function clearTask() {
+  
+        clearFormFields();
+        resetAddTask();
+}
+
+/**
+ * Tis function empty all input fields
+ * 
+ */
+function clearFormFields() {
+    let selectedProfileContainer = document.getElementById('Selected_profiles_Container');
+    selectedProfileContainer.innerHTML = '';
+    let inpuSubtask = document.getElementById('input_Subtasks');
+    inpuSubtask.value = "";
+    let list = document.getElementById('ul_subtasks');
+    list.innerHTML = '';
+    let titel = document.getElementById('title');
+    let description = document.getElementById('Description')
+    let date = document.getElementById('dueDate');
+    let category = document.getElementById('Category');
+    titel.value = "";
+    description.value = "";
+    assignedContacts = [];
+    date.value = "";
+    category.innerHTML = "";
+    subtasks = [];
+    prio = [];    
+}
+
+/**
+ *This function resets the addtask side
+ * 
+ */
+function resetAddTask() {
+    renderPrioButtons();
+    clearMissingFieldContent();
+    clearWarningField();
+    choossedmedium();
+    renderSelectionContainer();
+}
+
+/**
+ * 
+ * This function empty the subtask input fields 
+ */
+function emptySubtask() {
+    let currentSubtask = document.getElementById('input_Subtasks')
+    currentSubtask.value = '';
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#choosedTechnicalTask">choosedTechnicalTask</a></li><li><a href="global.html#choosedUserStory">choosedUserStory</a></li><li><a href="global.html#choosedlow">choosedlow</a></li><li><a href="global.html#choossedmedium">choossedmedium</a></li><li><a href="global.html#chossedurgent">chossedurgent</a></li><li><a href="global.html#clearFormFields">clearFormFields</a></li><li><a href="global.html#clearTask">clearTask</a></li><li><a href="global.html#closelist">closelist</a></li><li><a href="global.html#closelistCategory">closelistCategory</a></li><li><a href="global.html#createNewTask">createNewTask</a></li><li><a href="global.html#createTask">createTask</a></li><li><a href="global.html#dateinput">dateinput</a></li><li><a href="global.html#deselctedtContact">deselctedtContact</a></li><li><a href="global.html#emptySubtask">emptySubtask</a></li><li><a href="global.html#fetchContacts">fetchContacts</a></li><li><a href="global.html#getContactsData">getContactsData</a></li><li><a href="global.html#getLastName">getLastName</a></li><li><a href="global.html#newTaskObject">newTaskObject</a></li><li><a href="global.html#openCategoryLIst">openCategoryLIst</a></li><li><a href="global.html#openList">openList</a></li><li><a href="global.html#postData">postData</a></li><li><a href="global.html#processAndAddContacts">processAndAddContacts</a></li><li><a href="global.html#renderContactBadge">renderContactBadge</a></li><li><a href="global.html#renderContacts">renderContacts</a></li><li><a href="global.html#renderExtraContactsBadge">renderExtraContactsBadge</a></li><li><a href="global.html#renderPrioButtons">renderPrioButtons</a></li><li><a href="global.html#renderPrioButtonsHtml">renderPrioButtonsHtml</a></li><li><a href="global.html#renderSelectionContainer">renderSelectionContainer</a></li><li><a href="global.html#resetAddTask">resetAddTask</a></li><li><a href="global.html#saveTask">saveTask</a></li><li><a href="global.html#selectedContact">selectedContact</a></li><li><a href="global.html#setPrioMediumAndRender">setPrioMediumAndRender</a></li><li><a href="global.html#showSelectedProfile">showSelectedProfile</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Wed Oct 30 2024 18:32:31 GMT+0100 (Mitteleuropäische Normalzeit)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

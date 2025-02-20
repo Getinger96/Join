@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Board</title>
+
+    <link rel="stylesheet" href="Styles/board.css">
+    <link rel="stylesheet" href="Styles/Desktop_template.css">
+    <link rel="stylesheet" href="Styles/add_task_responsive.css">
+    <link rel="stylesheet" href="./Styles/fontStyles.css">
+    <link rel="stylesheet" href="./Styles/mobile_tamplate.css">
+    <link rel="stylesheet" href="Styles/board_responsive.css">
+    <script src="./assets/js/board_Add_TaskFormvalidation.js"></script>
+    <script src="./assets/js/board_FetchTask.js"></script>
+    <script src="./assets/js/board.js"></script>
+    <script src="./assets/js/board_Card.js"> </script>
+    <script src="./assets/js/script.js"></script>
+    <script src="./assets/js/script_Template.js"></script>
+    <script src="./assets/js/board_Database.js"></script>
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
+    <script src="./assets/js/board_AddTask.js"></script>
+    <script src="./assets/js/board_Template.js"></script>
+    <script src="./assets/js/script_Sidebar.js"></script>
+    <script src="./assets/js/board_Contact.js"></script>
+
+
+    <link rel="icon" type="image/x-icon" href="./assets/IMG/Capa 2.png" />
+</head>
+
+<body onresize="setTimeout(redirect(),300); handleResize()" onload="init() " >
+    <section>
+        <header>
+
+
+            <div w3-include-html="./assets/Templates/desktop_template.html"></div>
+            <div class="headblock">
+                <div class="title">
+                    <span class="kanbanBoardTitle">Kanban Projekt Management Tool</span>
+                    <img src="./assets/IMG/Capa 3.png" alt="MobileIcon" class="MobileIcon">
+                </div>
+                <div class="headUserContainer">
+                    <a href="help.html" class="help-link">
+                        <img src="./assets/IMG/help.png" alt="Hilfe" class="help-icon">
+                    </a>
+                    <div class="logInUser_Container" onclick="showLogOutSection();">
+                        <span class="logInUser" id="loginUserId"></span>
+                    </div>
+
+                </div>
+            </div>
+
+            <div id="logoutId"> </div>
+
+        </header>
+
+        <nav class="board HeadContainerBoard backgrount-color">
+            <div class="divBoard">
+                <div class="boardtitle spaceBetween addTaskBoard">
+                    <div class="titleButtonBoard">
+                        <h1>Board</h1>
+                        <div onclick="openTaskBoard()" class="buttonContainerSmall curser">
+                            <img class="imgButton" src="./assets/IMG/add (1).png">
+                        </div>
+                    </div>
+                    <div class="displayFlex alignCenter">
+                        <div class="displayFlex searchContainer addTask">
+                            <input onkeyup="search()" id="searchInput" class="search" type="text" placeholder="Find Task....">
+                            <div class="separator"></div>
+                            <img class="searchIcon" src="./assets/IMG/Frame 122.png">
+                        </div>
+                        <button onclick="openTaskBoard()" class="displayFlex button-d-none addTask buttonContainer curser addTaskButton">
+                            <img src="./assets/IMG/add (1).png" alt="Add Icon"> Add task
+                        </button>
+                    </div>
+                </div>
+
+                <div id="overlay" class="overlay d-none">
+                    <div id="todoBig" class="cardbig">
+                        <!-- Hier wird die große ToDo-Anzeige eingefügt -->
+                    </div>
+                </div>
+
+                <div class="spaceBetween1 boardtitle">
+                    <!-- to do -->
+                    <div class="paddingRight widthContainer">
+                        <div class="statusButton">
+                            <p class="text">To do</p>
+                            <img class="curser" onclick="openTaskBoard()" src="./assets/IMG/plus button.png">
+                        </div>
+                        <div class="noTasks" category="open" style="display: none;">No tasks To do</div>
+                        <div class="drag-area" id="open" ondrop="moveTo(event, 'open')" ondragover="allowDrop(event), handleDragOver('open')" 
+                            ondragleave="removeHighlight('open')"></div>
+                           
+                    </div>
+                    <!-- in progress -->
+                    <div class="paddingRight widthContainer">
+                        <div class="statusButton">
+                            <p class="text">In progress</p>
+                            <img class="curser" onclick="openTaskBoard()" src="./assets/IMG/plus button.png">
+                        </div>
+                        <div class="noTasks" category="progress" style="display: none;">No tasks in progress</div>
+                        <div class="drag-area" id="progress" ondrop="moveTo(event, 'progress')" ondragover="allowDrop(event), handleDragOver('progress')" 
+                         ondragleave="removeHighlight('progress')" ></div>
+                    </div>
+                    <!-- await feedback -->
+                    <div class="paddingRight widthContainer">
+                        <div class="statusButton">
+                            <p class="text">Await feedback</p>
+                            <img class="curser" onclick="openTaskBoard()" src="./assets/IMG/plus button.png">
+                        </div>
+                        <div class="noTasks" category="awaitFeedback" style="display: none;">No tasks Await feedback
+                        </div>
+                        <div class="drag-area" id="awaitFeedback" ondrop="moveTo(event, 'awaitFeedback')" ondragover="allowDrop(event), handleDragOver('awaitFeedback')"
+                        ondragleave="removeHighlight('awaitFeedback')" ></div>
+                    </div>
+                    <!-- done -->
+                    <div class="paddingRight widthContainer">
+                        <div class="statusButton">
+                            <p class="text">Done</p>
+                        </div>
+                        <div class="noTasks" category="closed" style="display: none;">No tasks Done</div>
+                        <div class="drag-area" id="closed" ondrop="moveTo(event, 'closed')" ondragover="allowDrop(event), handleDragOver( 'closed')"
+                        ondragleave="removeHighlight('closed')" ></div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+       
+
+        <section>
+            <div w3-include-html="./assets/Templates/board_add_task.html"></div>
+        </section>
+
+
+        <section>
+            <div w3-include-html="./assets/Templates/mobile_version.html"></div>
+        </section>
+
+        <div  id="darkOverlay" style="display: none;"></div>
+
+    </section>
+
+   
+</body>
+
+</html>

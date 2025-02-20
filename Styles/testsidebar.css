@@ -1,0 +1,220 @@
+
+body {
+    margin: 0;
+    font-family: "inter", sans-serif;
+}
+
+
+
+.sideblock {
+    width: 232px;
+    background-color: #2A3647;
+    height: 85vh;
+    padding: 64px 0px 64px 0px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+
+.headblock {
+    height: 96px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    padding: 20px 40px 20px 348px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    width: -webkit-fill-available; /* Nutzt die maximale verfügbare Breite im Container. */
+}
+
+.logInUser {
+   padding: 10px;
+    border-radius: 45px;
+    border: 3px solid #2A3647;
+    margin-left: 8px;
+    height: 42px;
+    width: 42px;
+}
+
+.title {
+    width:319px ;
+    height: 24px;
+}
+
+.headUserContainer {
+    width: 104px;
+    height: 56px;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+
+.logo {
+    width: 100.03px;
+    height: 121.97px;
+}
+
+
+
+.navLink_Summary {
+
+    text-decoration: none;
+    color: #FFFFFF;
+    display: flex;
+    gap: 8px;
+    padding: 8px 56px 8px 56px;
+    align-items: center;
+
+
+
+}
+
+.navLink_Contact {
+    text-decoration: none;
+    color: #FFFFFF;
+    display: flex;
+    gap: 8px;
+    padding: 8px 56px 8px 56px;
+    align-items: center;
+    height: 46px;
+
+}
+
+.navLink_Add_Task {
+    text-decoration: none;
+    color: #FFFFFF;
+    display: flex;
+    gap: 8px;
+    padding: 8px 56px 8px 56px;
+    align-items: center;
+
+}
+
+.navLink_Board {
+    text-decoration: none;
+    color: #FFFFFF;
+    display: flex;
+    gap: 8px;
+    padding: 8px 56px 8px 56px;
+    align-items: center;
+
+
+}
+
+.sidelink {
+    gap: 15px;
+    display: flex;
+    flex-direction: column;
+
+}
+
+
+
+.icon_container {
+    width: 30px;
+    height: 30px;
+    display: flex;
+
+    align-items: center;
+}
+
+.icon_container_board {
+    width: 30px;
+    height: 30px;
+    gap: 10px;
+    display: flex;
+
+}
+
+.icon_summary {
+    width: 25px;
+    height: 25px;
+    top: 2.5px;
+    left: 2.5px;
+}
+
+.icon_add {
+    width: 25px;
+    height: 25.03px;
+    top: 2.17px;
+    left: 2.19px;
+
+}
+
+.icon_board {
+    width: 25px;
+    height: 29.55px;
+
+
+}
+
+.icon_contact {
+    width: 22.5px;
+    height: 25px;
+    top: 2.5px;
+    left: 3.75px;
+
+
+}
+
+.txt_Summary {
+    width: 72px;
+    height: 19px;
+    font-size: 16px;
+    line-height: 19.2px;
+}
+
+.txt_add {
+    font-size: 16px;
+    line-height: 19.2px;
+}
+
+.txt_Board {
+
+    font-size: 16px;
+    line-height: 19.2px;
+}
+
+.txt_Contact {
+    font-size: 16px;
+    line-height: 19.2px;
+}
+
+.bottom_Side_Block {
+
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+}
+
+.navLink {
+    text-decoration: none;
+    color: #FFFFFF;
+}
+
+a:hover {
+    background-color: #405169;
+}
+
+main {
+    display: flex;
+}
+
+.middle {
+    display: flex;
+    margin-left: 273px;
+
+
+}
+
+
+.headline {
+    padding: 100px;
+}

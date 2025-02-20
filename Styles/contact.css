@@ -1,0 +1,631 @@
+body {
+  padding: 0;
+  overflow-y: hidden;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  font-family: "Inter";
+  font-weight: 400;
+}
+
+h2 {
+  font-size: 20px;
+  font-weight: 400;
+  padding: 17px 40px;
+}
+
+.headline-contacts {
+  width: 569px;
+  height: 73px;
+  display: flex;
+  padding: 88px 40px 32px 20px;
+}
+
+.headline-contacts h1 {
+  font-size: 61px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.headline-contacts h2 {
+  font-size: 27px;
+  font-weight: 400;
+  padding: 0;
+}
+
+.headline-contacts hr {
+  height: 59px;
+  border: 3px solid #29abe2;
+  border-radius: 3px;
+}
+
+.contact-details-container {
+  padding: 20px;
+}
+
+.contactview {
+  display: flex;
+  flex-direction: column;
+  width: 461px;
+  height: 364px;
+}
+
+.middle-Section {
+  font-family: "inter", sans-serif;
+  margin-left: 238px;
+  display: flex;
+  align-items: stretch;
+  height: 100vh;
+  overflow: hidden;
+  margin-top: 140px;
+}
+
+.contactview-container {
+  flex-grow: 1;
+  background-color: #f6f7f8;
+  flex-direction: column;
+  padding: 20px;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.addnewcontactbutton {
+  font-family: "inter", sans-serif;
+  background-color: #2a3647;
+  color: white;
+  font-size: 21px;
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  width: 352px;
+  height: 56px;
+}
+
+.addnewcontactbutton:hover {
+  cursor: pointer;
+}
+
+.addpersonlogo {
+  height: 32px;
+  width: 32px;
+  margin-left: 16px;
+}
+
+.contactlist {
+  padding-top: 30px;
+  width: 400px;
+  box-shadow: 4px 0px 6px 0px #00000014;
+  display: flex;
+  flex-direction: column;
+  padding: 32px 24px;
+  max-height: 100%;
+  overflow-y: auto;
+  z-index: 4;
+  cursor: pointer;
+}
+
+.newcontactbutton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contactlist-hr {
+  border: 1px solid;
+  width: 350px;
+  color: #d1d1d1;
+}
+
+.single-contact-box {
+  padding: 15px 24px;
+  width: 352px;
+  display: flex;
+  gap: 35px;
+  border-radius: 10px;
+  align-items: center;
+}
+
+.single-contact-box:hover {
+  background-color: #e3e3ec;
+  border-radius: 10px;
+}
+
+.single-contact-box.selected {
+  background-color: #2a3647;
+  color: white;
+}
+
+.single-contact-box.selected .contactname {
+  color: white;
+}
+
+.single-contact-box.selected .contactmail {
+  color: #007cee;
+}
+
+.contact-icon {
+  height: 42px;
+  width: 42px;
+  border-radius: 42px;
+  font-size: 12px;
+  color: white;
+  border: 2px solid #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.contactname {
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.contact-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.contactmail {
+  text-decoration: none;
+  color: #007cee;
+  font-size: 16px;
+}
+
+.contactmail:hover {
+  background-color: transparent;
+}
+
+.largsingle-contact-box {
+  display: flex;
+  gap: 54px;
+  align-items: center;
+}
+
+.largcontactbox {
+  height: 500px;
+  width: 600px;
+  position: relative;
+  animation: slide 0.5s;
+}
+
+@keyframes slide {
+  from {
+    left: 700px;
+  }
+
+  to {
+    left: 0px;
+  }
+}
+
+.largcontact-icon {
+  flex-shrink: 0;
+  width: 120px;
+  height: 120px;
+  border-radius: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  color: white;
+  border: 2px solid #ffffff;
+}
+
+.largcontactname {
+  font-size: 47px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.editanddelete {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 8px;
+}
+
+.deletecontent {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.deletecontent:hover {
+  color: #1009ef;
+  filter: invert(53%) sepia(96%) saturate(406%) hue-rotate(155deg)
+    brightness(92%) contrast(92%);
+}
+
+.edit {
+  margin-right: 30px;
+  cursor: pointer;
+}
+
+.editicon {
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+}
+
+.delete {
+  cursor: pointer;
+}
+
+.deleteicon {
+  cursor: pointer;
+  width: 24px;
+}
+
+.contactinfo {
+  display: flex;
+  flex-direction: column;
+  padding: 40px 0px;
+}
+
+.contactmailsection {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  padding-top: 50px;
+}
+
+.contactinfoname {
+  font-size: 20px;
+}
+
+.contactphonesection {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  padding-top: 22px;
+}
+
+.contactphone {
+  text-decoration: none;
+  color: black;
+  font-size: 16px;
+}
+
+.contactphone:hover {
+  background: transparent;
+}
+
+.contactmailadress {
+  text-decoration: none;
+  font-size: 16px;
+  color: #007cee;
+}
+
+.contactmailadress:hover {
+  background-color: transparent;
+}
+
+.Emailname {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.phonename {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.editcontent {
+  gap: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.editcontent:hover {
+  color: #1009ef;
+  filter: invert(53%) sepia(70%) saturate(1822%) hue-rotate(165deg)
+    brightness(99%) contrast(101%);
+}
+
+.newContact {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  justify-content: center;
+  align-items: center;
+  display: none;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 1001;
+}
+
+.contactCars-overview {
+  display: flex;
+  height: 592px;
+  width: 1212px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.leftside {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  color: white;
+  background-color: rgb(42, 54, 71);
+  width: 467px;
+  align-items: center;
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+}
+
+.right-side {
+  position: relative;
+  background-color: white;
+  width: calc(100% - 467px);
+  border-top-right-radius: 30px;
+  border-bottom-right-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.contactlogo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 64px;
+}
+
+.addNewContactimg {
+  height: 120px;
+  width: 120px;
+  margin-top: -80px;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  height: 215px;
+  width: 422px;
+  margin-top: 60px;
+}
+
+.addcontactheadline {
+  font-weight: 700;
+  font-size: 61px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  width: 371px;
+}
+
+.addcontactsecondline {
+  font-size: 27px;
+  font-weight: 400;
+  display: flex;
+  justify-content: center;
+}
+
+.hrnewcontact {
+  margin-block-start: 20px;
+  border: 2px solid #29abe2;
+  width: 90px;
+  border-radius: 3px;
+  margin: 0;
+  margin-top: 16px;
+  margin-left: 40px;
+}
+
+.newCard-logo {
+  width: 57px;
+  height: 67px;
+  margin-left: 40px;
+}
+
+.leftsidehead {
+  margin-top: -70px;
+}
+
+input::placeholder {
+  color: #d1d1d1;
+}
+
+.input-field {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid #d1d1d1;
+  border-radius: 10px;
+  padding: 10px;
+  height: 50px;
+}
+
+.input-fieldphone {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid #d1d1d1;
+  border-radius: 10px;
+  padding: 10px;
+  height: 50px;
+}
+
+.contactBigNone {
+  display: none;
+}
+
+.input-fieldmail {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid #d1d1d1;
+  border-radius: 10px;
+  padding: 10px;
+  height: 50px;
+}
+
+.input-icon {
+  width: 24px;
+  height: 24px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"] {
+  border: none;
+  outline: none;
+  font-size: 20px;
+  color: #d1d1d1;
+  cursor: pointer;
+  width: 100%;
+}
+
+input:focus {
+  color: black;
+}
+
+input:not(:placeholder-shown) {
+  color: black;
+}
+
+.input-field:focus-within {
+  color: black !important;
+  border-color: #94d5f0 !important;
+  outline: none !important;
+}
+
+.two-buttons {
+  display: flex;
+  gap: 24px;
+  margin-top: 80px;
+}
+
+.mistakeInput {
+  color: red;
+  font-size: 13px;
+}
+
+.cancel-button,
+.createContact-button {
+  border-radius: 10px;
+  padding: 16px;
+  font-size: 20px;
+}
+
+.cancel-button,
+.delete-button {
+  width: 126px;
+  height: 56px;
+  background-color: white;
+  color: black;
+  border: 1px solid #d1d1d1;
+  font-weight: 400;
+  display: flex;
+}
+
+.cancel-button:hover,
+.delete-button:hover {
+  background-color: white;
+  color: #5ec0e9;
+  border-color: #5ec0e9;
+  border-width: 2px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.cancel-button:hover img.close-button {
+  filter: invert(57%) sepia(70%) saturate(1822%) hue-rotate(165deg)
+    brightness(99%) contrast(101%);
+}
+
+.cancel-button:active img.close-button {
+  filter: invert(57%) sepia(70%) saturate(1822%) hue-rotate(165deg)
+    brightness(99%) contrast(101%);
+}
+
+.save_button {
+  display: flex;
+  align-items: center;
+  background-color: #2a3647;
+  height: 57px;
+  border-radius: 10px;
+  padding: 16px;
+  gap: 4px;
+  border: 1px solid #2a3647;
+  font-size: 21px;
+  line-height: 24px;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.createContact-button {
+  display: flex;
+  align-items: center;
+  background-color: #2a3647;
+  height: 57px;
+  border-radius: 10px;
+  padding: 16px;
+  gap: 4px;
+  border: 1px solid #2a3647;
+  font-size: 21px;
+  line-height: 24px;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.createContact-button:hover {
+  background-color: #5ec0e9;
+  color: white;
+  border-color: #5ec0e9;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.closethewindow-button {
+  position: absolute;
+  top: 48px;
+  right: 80px;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.closethewindow-button:hover {
+  transform: scale(1.1);
+}
+
+.back-button {
+  display: none;
+}
+
+.menu-button-img {
+  display: none;
+}
+
+.add-contact-button {
+  display: none;
+}
+
+.error-border {
+  border: 2px solid red !important;
+}
+
+@keyframes slide-in-from-right {
+  from {
+    transform: translateX(100%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+.transition-in-from-right {
+  animation: slide-in-from-right 300ms forwards ease-in-out;
+}

@@ -1,0 +1,459 @@
+body {
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "inter", sans-serif;
+  background-color: #f6f7f8;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.loginheadline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 100px 20px 100px;
+}
+
+.notajoinUser {
+  font-size: 20px;
+  font-weight: 500;
+  margin-right: 20px;
+}
+.showMistakeValidation {
+  color: red;
+  font-size: 13px;
+}
+
+.signupsectionbutton {
+  background-color: #2a3647;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 18px;
+  font-family: "inter", sans-serif;
+  font-weight: bolder;
+}
+
+.signupsectionbutton:hover {
+  background-color: #29abe2;
+  cursor: pointer;
+}
+
+.register {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  padding: 0px 88px 48px 88px;
+  border-radius: 30px;
+  gap: 8px;
+  box-shadow: 3px 0px 14px 21px #d9bebe0a;
+  justify-content: center;
+}
+
+.loginhr {
+  width: 30%;
+  margin-block-start: 0;
+  border: 2px solid;
+  color: #29abe2;
+}
+
+.login-headline {
+  font-size: 61px;
+  font-weight: 700;
+  margin-block-end: 6px;
+}
+
+.inputemailsection {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 11px 12px;
+  border: 1px solid gray;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.inputpasswordsection {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 11px 12px;
+  border: 1px solid gray;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.inputemailsection:has(input:focus),
+.inputpasswordsection:has(input:focus) {
+  border: 1px solid #29abe2;
+}
+
+.inputemail {
+  border: none;
+  outline: none;
+  padding: 10px;
+  width: 100%;
+  cursor: pointer;
+  font-family: "inter", sans-serif;
+  font-size: 20px;
+}
+
+.inputpassword {
+  border: none;
+  outline: none;
+  padding: 10px;
+  width: 100%;
+  cursor: pointer;
+  font-family: "inter", sans-serif;
+  font-size: 20px;
+}
+
+.mailicon {
+  cursor: pointer;
+}
+
+.checkboxsection {
+  padding: 30px 0px 24px 24px;
+  margin-left: 30px;
+}
+
+.loginbutton {
+  font-weight: bolder;
+  padding: 15px;
+  border-radius: 10px;
+  border: none;
+  background-color: #2a3647;
+  color: white;
+  font-size: 20px;
+  font-family: "inter", sans-serif;
+  touch-action: manipulation;
+}
+
+.loginbutton:hover {
+  background-color: #29abe2;
+  touch-action: manipulation;
+}
+.loginbutton {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.guestbutton {
+  font-weight: bolder;
+  padding: 15px;
+  border-radius: 10px;
+  background-color: white;
+  color: black;
+  font-size: 20px;
+  cursor: pointer;
+  font-family: "inter", sans-serif;
+}
+
+.guestbutton:hover {
+  color: #29abe2;
+  border: solid 2px #29abe2;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.Rememberme {
+  font-size: 18px;
+}
+
+.loginandgustbutton {
+  display: flex;
+  gap: 35px;
+  justify-content: center;
+  padding: 15px;
+}
+
+.Screen-Logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  animation: logoScreen 1.5s forwards;
+  animation-timing-function: ease-in-out;
+  background-color: white;
+}
+@keyframes logoScreen {
+  from {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  to {
+    display: none;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+}
+
+.loginUpsuccessfully {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  background-color: white;
+  flex-direction: column;
+}
+
+.loginstylesuccessfully {
+  font-size: 47px;
+  font-weight: bolder;
+}
+
+.loginlogo {
+  width: 100px;
+  height: 122px;
+}
+
+.big-logo {
+  position: absolute;
+  width: 274px;
+  height: 335px;
+  top: 33%;
+  left: 42%;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in-out;
+  animation: BiglogoScreen 1.5s forwards;
+}
+
+@keyframes BiglogoScreen {
+  form {
+    top: 50%;
+    left: 150px;
+    width: 274px;
+    height: 300px;
+  }
+
+  to {
+    top: 70px;
+    left: 99px;
+    width: 70px;
+    height: 70px;
+  }
+}
+
+.logoscreennone {
+  display: none;
+}
+
+.incorrectentrystyle {
+  color: red;
+}
+
+.middle-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+}
+
+.privacypolicyandlegalnotice {
+  color: #aaa2a2;
+  text-decoration: none;
+}
+
+.showMistakeValidation {
+  display: flex;
+}
+
+.privacy_policyandlegal_notesSection {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
+.privacypolicyandlegalnotice:hover {
+  color: #29abe2;
+}
+
+.notajoinUsermobilversion {
+  font-size: 20px;
+  font-weight: 500;
+  margin-right: 20px;
+}
+
+.signupsectionmobilversionbutton {
+  background-color: #2a3647;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 18px;
+  font-family: "inter", sans-serif;
+}
+
+.signupsectionmobilversionbutton:hover {
+  background-color: #29abe2;
+  cursor: pointer;
+}
+
+.signUpsectionmobilversion {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0px 30px 0px;
+}
+
+@media (max-width: 530px) {
+  .loginheadline {
+    padding: 20px 0px 0px 20px;
+  }
+
+  .signUpsectionmobilversion {
+    padding: 15px 0px 25px 0px;
+  }
+
+  .loginlogo {
+    width: 70px;
+    height: 70px;
+  }
+
+  .login-headline {
+    font-size: 45px;
+  }
+
+  .inputemailsection {
+    margin-top: 15px;
+    padding: 8px 10px;
+  }
+
+  .inputpasswordsection {
+    margin-top: 15px;
+    padding: 8px 10px;
+  }
+
+  .loginandgustbutton {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .guestbutton {
+    padding: 10px;
+  }
+
+  .register {
+    margin-top: 50px;
+    padding: 0px 64px 48px 50px;
+  }
+  .Screen-Logo {
+    animation: logoScreen 500ms forwards;
+    animation-timing-function: ease-in-out;
+    animation-delay: 0.5s;
+  }
+  @keyframes logoScreen {
+    from {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transform: scale(1) translate(0%, 0%); 
+      opacity: 1; 
+    }
+    to {
+      display: none;
+      transform: scale(0) translate(-50%, -50%);
+      opacity: 0;
+    }
+  }
+
+  .big-logo {
+    position: absolute;
+    top: 34%;
+    left: 30%;
+    width: 150px;
+    height: 150px;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in-out;
+    animation: BiglogoScreen 1s forwards;
+    animation-delay: 0.5s;
+  }
+
+  @keyframes BiglogoScreen {
+    form {
+      width: 150px;
+      height: 150px;
+      top: 34%;
+      left: 30%;
+    }
+
+    to {
+      top: 10px;
+      left: 10px;
+      width: 70px;
+      height: 70px;
+    }
+  }
+
+  .loginstylesuccessfully {
+    font-size: 32px;
+  }
+}
+@media (max-width: 430px) {
+
+    .showMistakeValidation  {
+        width: 150px;
+    }
+
+  .middle-section {
+    padding: 0px;
+  }
+  .register {
+    margin-top: 20px;
+    padding: 0px 10px 10px 10px;
+  }
+
+  .login-headline {
+    font-size: 35px;
+  }
+
+  .inputemailsection {
+    width: 230px;
+  }
+
+  .inputpasswordsection {
+    width: 230px;
+  }
+
+  .loginlogo {
+    width: 50px;
+    height: 50px;
+  }
+
+  .notajoinUsermobilversion {
+    font-size: 15px;
+  }
+
+    .inputemail {
+font-size: 15px;
+padding: 0px;
+}
+
+.inputpassword {
+    font-size: 15px;
+    padding: 0px;
+}
+
+
+.signUpsectionmobilversion  {
+    padding: 15px 0px 5px 0px;
+}
+
+}

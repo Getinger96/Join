@@ -1,0 +1,170 @@
+body {
+    margin: 0;
+    background-color: #F6F7F8;
+    font-family: 'Inter';
+    font-weight: 400;
+}
+
+
+.middle-Section-Privacy  {
+    font-family: "inter", sans-serif;
+    margin-left: 328px;
+    margin-right: 50px;
+    margin-top: 200px;
+}
+
+.middle-Section-Privacy h1{
+    font-size: 48px;
+}
+
+
+a {
+    text-decoration: none;
+    color: rgb(20, 8, 253);
+}
+
+.top-right-img {
+    position: absolute;
+    top: 180px;
+    right: 40px;
+    cursor: pointer; 
+    width: 40px; 
+    height: 40px;
+}
+
+.privacyPolicy {
+    margin-top:120px;
+}
+
+@media(max-width:1528px){
+   
+}
+@media(max-width: 1410px) {
+    .middle-Section-Privacy {
+        margin-left: 20px;
+        margin-right:20px;
+        margin-top:20px;
+        margin-bottom:100px;
+        overflow-x: hidden;
+    }
+    .d-none {
+        display: block;
+    }
+
+
+
+.top-right-img {
+    position: absolute;
+    top: 160px;
+    right: 40px;
+    cursor: pointer; 
+    width: 40px;
+    height: 40px;
+    }
+
+}
+
+@media(max-width: 800px) {
+    .top-right-img {
+    position: absolute;
+    top: 140px;
+    right: 40px;
+    cursor: pointer; 
+    width: 40px;
+    height: 40px;
+    }
+
+}
+
+@media(max-width: 540px) {
+    .privacyPolicy {
+        margin-top:120px;
+    }
+
+    .top-right-img {
+        position: absolute;
+        top: 140px;
+        right: 20px;
+        cursor: pointer; 
+        width: 40px;
+        height: 40px;
+        }
+
+
+}
+
+
+@media(max-width: 650px) {
+    .top-right-img {
+        position: absolute;
+        top: 146px;
+        right: 24px;
+        cursor: pointer;
+        width: 40px;
+        height: 40px;
+    }
+
+    .middle-Section-Privacy h1 {
+       font-size: 40px;
+
+}
+
+.middle-Section-Privacy h1 {
+    font-size: 35px;
+}
+
+
+}
+
+@media(max-width: 480px) {
+    .top-right-img {
+        position: absolute;
+        top: 145px;
+        right: 24px;
+        cursor: pointer;
+        width: 35px;
+        height: 35px;
+    }
+
+.middle-Section-Privacy h1 {
+   font-size: 32px;
+
+}
+}
+
+@media(max-width: 450px) {
+
+    .middle-Section-Privacy h1 {
+        font-size: 28px;
+     
+     }
+
+     h2 {
+        font-size: 22px;
+     }
+}
+
+
+@media(max-width: 400px) {
+    .top-right-img {
+        position: absolute;
+        top: 140px;
+        right: 20px;
+        cursor: pointer;
+        width: 30px;
+        height: 30px;
+    }
+
+
+    .middle-Section-Privacy h1 {
+        font-size: 23px;
+    }
+
+    h2 {
+        font-size: 20px;
+     }
+
+
+}
+
+

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="./assets/IMG/Capa 2.png" />
+    <link rel="stylesheet" href="./Styles/fontStyles.css">
+    <link rel="stylesheet" href="./Styles/login.css">
+    <script src="./assets/js/register.js"></script>
+    <script src="./assets/js/login.js"></script>
+    <script src="./assets/js/register_Template.js"></script>
+    <script src="./assets/js/register_ValidationSigUpButton.js"></script>
+    <title>Login</title>
+
+    <link rel="icon" type="image/x-icon" href="./assets/IMG/Capa 2.png" />
+
+</head>
+<body onload="loadUsers(path = ''); screenWidth();" onresize="screenWidth()" id="myopacity">
+
+    <header>
+
+        <div class="loginheadline">
+            <img class="loginlogo" src="assets/IMG/Join_logo.svg" alt="">
+
+            <div class="signUpsection">
+            <span class="notajoinUser"> Not a Join user ?</span>
+            <button class="signupsectionbutton" onclick="redirectToRegister()"> Sign up</button>
+            </div>
+
+        </div>
+
+
+
+    </header>
+    <div class="middle-section">
+    <section class="register">
+
+        <h1 class="login-headline">Log in</h1>
+        <hr class="loginhr" id="loginHr">
+        <form onsubmit="loginAction(); return false;" novalidate >
+        <div class="inputemailsection" id="inputmailsection">
+            <input id="emaillogin" class="inputemail" type="email" required placeholder="E-Mail" autocomplete="email" onblur="validateEmailLogin()"> 
+            <img  class="mailicon"src="assets/IMG/mail.png" alt="">
+        </div>
+        <div id="validateEmail" class="showMistakeValidation"></div>
+
+        <div class="inputpasswordsection" id="inputpasswordsection">
+            <input id="passwordlogin" class="inputpassword" type="password" autocomplete="current-password" required placeholder="Password" onblur="validatePasswordLogin()">
+            <img  src="assets/IMG/lock.png"  alt="">
+        </div>
+        <div id="validatePassword" class="showMistakeValidation"></div>
+
+        <span class="incorrectentrystyle" id="incorrectentry">
+        </span>
+
+        <div class="checkboxsection">
+        <input id="checkboxlogin" class="checkbox" type="checkbox"> 
+        <span class="Rememberme"> Remember me </span>
+        </div>
+
+        <div class="loginandgustbutton"> 
+        <button class="loginbutton"> Login in</button>
+        <button class="guestbutton" onclick="guestLogin()">Guest Log in </button>
+        </div>
+        </form>
+
+
+
+    </section>
+    </div>
+
+    <div class="signUpsectionmobilversion">
+        <span class="notajoinUsermobilversion"> Not a Join user ?</span>
+        <button class="signupsectionmobilversionbutton" onclick="redirectToRegister()"> Sign up</button>
+        </div>
+
+    <div class="privacy_policyandlegal_notesSection">
+
+        <a  class="privacypolicyandlegalnotice" href="./privacy_policy_login.html"> Privacy Policy</a>
+        <a  class="privacypolicyandlegalnotice" href="./legalNotes_login.html"> Legal Notes </a>
+
+
+    </div>
+    <div id="loginupsuccessfully"></div>
+    
+    <div id="logoscreensection" class="Screen-Logo">
+
+        <img id="logoscreen" class="big-logo" src="assets/IMG/Join_logo.svg" alt="">
+
+
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,457 @@
+body {
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "inter", sans-serif;
+  background-color: #f6f7f8;
+}
+
+.loginheadline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30px 0px 0px 50px;
+}
+
+.loginlogo {
+  width: 100px;
+  height: 122px;
+}
+
+.loginscreen {
+  position: absolute;
+  width: 274px;
+  height: 335px;
+  top: 50%;
+  left: 50%;
+  z-index: 100;
+}
+
+.notajoinUser {
+  font-size: 20px;
+  font-weight: 500;
+  margin-right: 20px;
+}
+
+.signupsection {
+  background-color: #2a3647;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 18px;
+}
+
+.signupsection:hover {
+  background-color: #0068fa;
+  font-weight: bolder;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.register {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  padding: 0px 88px 0px 88px;
+  border-radius: 30px;
+  gap: 8px;
+  box-shadow: 3px 0px 14px 21px #d9bebe0a;
+  justify-content: center;
+}
+
+.showMistakeValidation {
+  display: none;
+  font-size: 13px;
+  margin-inline-start: 15px;
+  margin-block-start: -15px;
+  color: red;
+}
+
+.middle-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.signuphr {
+  border: 2px solid #29abe2;
+  width: 150px;
+  margin-block-start: 0;
+}
+
+.login-headline {
+  font-size: 61px;
+  font-weight: 700;
+  margin-block-end: 6px;
+}
+
+.inputemailsection {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 11px 11px;
+  border: 1px solid gray;
+  border-radius: 20px;
+  margin-top: 20px;
+  cursor: pointer;
+  font-family: "inter", sans-serif;
+  font-size: 20px;
+  width: 420px;
+}
+
+.inputemailsection:has(input:focus),
+.inputpasswordsection:has(input:focus),
+.inputpasswordconfirmsection:has(input:focus),
+.inputenamesection:has(input:focus),
+.inputconfirmpassword:has(input:focus) {
+  border: 1px solid #29abe2;
+}
+
+.inputpasswordsection {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 11px 11px;
+  border: 1px solid gray;
+  border-radius: 20px;
+  margin-top: 20px;
+  cursor: pointer;
+  width: 420px;
+}
+
+.inputpasswordconfirmsection {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 11px 11px;
+  border: 1px solid gray;
+  border-radius: 20px;
+  margin-top: 20px;
+  cursor: pointer;
+  width: 420px;
+}
+
+.inputenamesection {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 11px 11px;
+  border: 1px solid gray;
+  border-radius: 20px;
+  margin-top: 20px;
+  cursor: pointer;
+  font-family: "inter", sans-serif;
+  font-size: 20px;
+  width: 420px;
+}
+
+.inputname {
+  border: none;
+  outline: none;
+  padding: 5px;
+  width: 100%;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.inputemail {
+  border: none;
+  outline: none;
+  padding: 5px;
+  width: 100%;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.inputconfirmpassword {
+  border: none;
+  outline: none;
+  padding: 5px;
+  width: 100%;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.disabledbutton {
+  background-color: #a8a8a8;
+}
+
+.enabledbutton {
+  background-color: #2a3647;
+}
+
+.enabledbutton:hover {
+  background-color: #29abe2;
+  font-weight: bolder;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.inputpassword {
+  border: none;
+  outline: none;
+  padding: 5px;
+  width: 100%;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.mailicon {
+  margin-left: 0px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.visbilityimg {
+  margin-left: 0px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.checkboxsection {
+  padding: 30px 0px 24px 90px;
+}
+
+.checkbox {
+  cursor: pointer;
+}
+
+.loginbutton {
+  font-weight: bolder;
+  padding: 15px;
+  border-radius: 10px;
+  border: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.Signedupsuccessfully {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  background-color: white;
+  flex-direction: column;
+}
+
+.Signedupsuccessfully img {
+  width: 323px;
+  height: 100px;
+  cursor: pointer;
+}
+
+.textstylesuccessfully {
+  color: #29abe2;
+}
+
+.textstylesuccessfully:hover {
+  color: #2a3647;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.guestbutton {
+  font-weight: bolder;
+  padding: 15px;
+  border-radius: 10px;
+  background-color: white;
+  color: black;
+  font-size: 20px;
+}
+
+.guestbutton:hover {
+  color: #0068fa;
+  border: solid 1px #0068fa;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.Rememberme {
+  font-size: 18px;
+}
+
+.loginandgustbutton {
+  display: flex;
+  gap: 35px;
+  padding: 0px 25px 39px 0px;
+  justify-content: center;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #a8a8a8;
+  gap: 15px;
+  margin-top: 35px;
+}
+
+.privacy_policlink {
+  text-decoration: none;
+  color: #049ef3;
+}
+
+.privacy_policlink:hover {
+  text-decoration: underline;
+}
+
+.privacypolicyandlegalnotice {
+  text-decoration: none;
+  color: #9a9494;
+}
+
+.privacypolicyandlegalnotice:hover {
+  color: #29abe2;
+  font-weight: bolder;
+}
+
+.signupinfotextstyle {
+  display: flex;
+  justify-content: center;
+  color: red;
+  margin-top: 20px;
+}
+
+.back-button {
+  position: absolute;
+  top: 60px;
+  left: 30px;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+}
+
+@media (max-width: 950px) {
+  .showMistakeValidation {
+    margin-inline-start: 0px;
+  }
+
+  .loginlogo {
+    width: 70px;
+    height: 70px;
+  }
+
+  .loginheadline {
+    padding: 30px 0px 0px 25px;
+  }
+
+  .login-headline {
+    font-size: 45px;
+  }
+
+  .signuphr {
+    width: 60%;
+  }
+
+  .checkboxsection {
+    padding: 20px 0px 24px 20px;
+  }
+
+  .inputname,
+  .inputemail,
+  .inputconfirmpassword,
+  .inputpassword {
+    font-size: 15px;
+    width: auto;
+  }
+
+  .register {
+    padding: 0px 30px 15px 30px;
+    cursor: pointer;
+    margin-top: 50px;
+    margin-bottom: 50px;
+  }
+
+  footer {
+    margin: 0;
+  }
+
+  .mailicon {
+    margin-left: 60px;
+  }
+
+  .visbilityimg {
+    margin-left: 60px;
+  }
+
+  .inputenamesection {
+    width: 300px;
+  }
+
+  .inputemailsection {
+    width: 300px;
+  }
+
+  .inputpasswordsection {
+    width: 300px;
+  }
+
+  .inputpasswordconfirmsection {
+    width: 300px;
+  }
+}
+
+@media (max-width: 380px) {
+.loginlogo {
+    width: 50px;
+    height: 50px;
+}
+
+}
+@media (max-width: 380px) {
+  .showMistakeValidation {
+    flex-wrap: wrap;
+    max-width: 200px;
+  }
+
+  .register {
+    padding: 0px 10px 15px 10px;
+  }
+
+  .loginandgustbutton {
+    padding: 0px 25px 10px 0px;
+  }
+
+  .Signedupsuccessfully img {
+    width: 220px;
+    height: 65px;
+  }
+
+  .textstylesuccessfully {
+    font-size: 12px;
+  }
+  .register {
+    margin-bottom: 10px;
+    margin-top: 30px;
+  }
+  .mailicon {
+    margin-left: 10px;
+  }
+
+  .visbilityimg {
+    margin-left: 10px;
+  }
+
+  .inputenamesection {
+    width: 230px;
+  }
+
+  .inputemailsection {
+    width: 230px;
+  }
+
+  .inputpasswordsection {
+    width: 230px;
+  }
+
+  .inputpasswordconfirmsection {
+    width: 230px;
+  }
+}
