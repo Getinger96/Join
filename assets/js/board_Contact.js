@@ -258,7 +258,7 @@ async function fetchContacts(path = '') {
                 name: contact.name,
                 color: color,
             });
-            console.log('contactsArray', contactsArray);
+
         }
 
     }
