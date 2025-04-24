@@ -221,32 +221,65 @@ async function updateContactInTasks(editedContact) {
     // Fetch tasks and update contact in each assigned task
 }
 
-/**
- * Updates a task in Firebase with a new set of contact assignments.
- * @param {string} taskId - The unique identifier of the task.
- * @param {Object} updatedTask - The updated task data to push to Firebase.
- */
-async function updateTaskInFirebase(taskId, updatedTask) {
-    // PUT request to update the task in Firebase
-}
+
 
 /**
  * Deletes a contact from all tasks in the board.
  * @param {number} index - The index of the contact in `contactsArray`.
+/**
+ * @param {number} index - The index of the contact in `contactsArray`.
  */
 async function deleteContactInBoard(index) {
-    // Fetches tasks and removes the contact from each assigned task
+    const contactToDelete = contactsArray[index].name; // Nur der Name!
+        const response = await fetch(`${base_URL}/tasks.json`);
+        if (!response.ok) throw new Error('Fehler beim Laden der Aufgaben.');
+        const tasks = await response.json();
+
+        for (let taskId in tasks) {
+            let task = tasks[taskId];
+            if (task.AssignedContact && Array.isArray(task.AssignedContact)) {
+                console.log(`Task ID: ${taskId}, assignedContact:`, task.AssignedContact);
+
+                const updatedContacts = task.AssignedContact.filter(
+                    name => name !== contactToDelete
+                );
+                if (updatedContacts.length !== task.AssignedContact.length) {
+                    await updateTaskInFirebase(taskId, {
+                        ...task,
+                        AssignedContact: updatedContacts
+                    });
+                }
+            }
+        }
+ 
 }
 
+
 /**
- * Updates assigned contacts in Firebase for a specific task path.
- * @param {string} path - The Firebase path to update.
- * @param {Array} updatedContacts - The updated array of contacts.
- * @returns {Promise<Object>} - Returns the updated Firebase response as JSON.
+ * Updates a specific task in Firebase with new task data.
+ * 
+ * This function sends a PUT request to Firebase to update the entire task object,
+ * typically used to update the assigned contacts or other task-related fields.
+ *
+ * @param {string} taskId - The ID/path of the task in Firebase to be updated.
+ * @param {Object} updatedTask - The updated task object (e.g. with modified assignedContact).
+ * @returns {Promise<Object>} - Returns the updated task data from Firebase as a JSON object.
  */
-async function updateAssignedContactsInFirebase(path, updatedContacts) {
-    // PUT request to update the contacts in Firebase
+async function updateTaskInFirebase(taskId, updatedTask) {
+    const url = `${base_URL}/tasks/${taskId}.json`;
+
+    const response = await fetch(url, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedTask),
+    });
+
+
+    return await response.json();
 }
+
 
 /**
  * Fetches tasks from Firebase and populates the global `tasksArray`.
