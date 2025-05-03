@@ -97,9 +97,17 @@
     .HeadContainerBoard {
         margin-top: 80px;
     }
-   
-}
 
+    .boardAddTask {
+      height: 700px;
+      width: 1000px;
+  }
+  .positionTask {
+    top: 45%;
+
+  }
+
+}
 @media (max-width: 1320px) {
   .divBoard {
     margin-left: 60px;
@@ -428,6 +436,16 @@
 
 .searchContainer {
   border: none;
+}
+
+.positionTask {
+  top: 45%;
+}
+
+
+
+.boardAddTask {
+  height: 700px;
 }
 }
 

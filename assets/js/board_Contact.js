@@ -251,15 +251,16 @@ async function fetchContacts(path = '') {
         let contact = userAsArray[index];
         let colorIndex = index % colors.length;
         let color = colors[colorIndex]
+        let alreadyExists = contactsArray.some(existingContact => existingContact.name === contact.name);
 
-        if (contact.email == 'guest@web.de') {
-        } else {
+        if (!alreadyExists && contact.email !== 'guest@web.de') {
             contactsArray.push({
                 name: contact.name,
                 color: color,
-            })
+            });
+
         }
-        letterSorting()
+
     }
 }
 /**
