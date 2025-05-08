@@ -479,6 +479,7 @@ input[type="tel"] {
   .contact-details-container {
     padding: 16px;
     padding-top: 50px;
+    
   }
 
   .headline-contacts hr {
@@ -639,9 +640,9 @@ input[type="tel"] {
 }
 
 @media (max-height: 850px) {
-  .add-contact-button,
+ 
   .menu-button-img {
-    top: 690px;
+    top: 600px;
   }
 
   .context-menu {
@@ -720,7 +721,7 @@ input[type="tel"] {
 }
 
 @media (min-height: 1100px) {
-  .add-contact-button,
+
   .menu-button-img {
     top: 1020px;
     right: 20px;

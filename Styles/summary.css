@@ -1,15 +1,17 @@
 body {
-    margin: 0;
-    font-family: 'Inter', sans-serif;
-    background-color: rgb(246, 247, 248);
-    overflow: hidden;
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: rgb(246, 247, 248);
+  overflow: hidden;
 }
 
 .middle-SectionSummary {
   margin-left: 328px;
   display: flex;
-  margin-top: 150px;
-  height: auto;
+  height: 100vh;
+ justify-content: center;
+ align-items: center;
+
 }
 
 .kanbanBoardSection {
@@ -305,11 +307,13 @@ body {
     margin-left: 60px;
   }
 }
+
 @media (max-width: 1410px) {
   .headblock {
     left: 0px;
   }
 }
+
 @media (max-width: 1450px) {
   .kanbanboardprio:hover {
     transform: scale(1.05);
@@ -326,6 +330,8 @@ body {
   }
 }
 
+
+
 @media (max-width: 1410px) {
   .sideblock {
     display: none;
@@ -334,7 +340,7 @@ body {
   .middle-SectionSummary {
     margin-left: 0;
     overflow-x: hidden;
-    display: block;
+    
   }
 
   .headblock {
@@ -355,6 +361,8 @@ body {
     display: flex;
     flex-direction: column;
     padding: 20px;
+    margin-bottom: 0px;
+    margin-top: 40px;
   }
 
   .summary_headline {
@@ -520,11 +528,14 @@ body {
   }
 }
 
+
+
 @media (max-width: 650px) {
   .kanbanBoardSection {
     align-items: center;
   }
 }
+
 @media (max-width: 500px) {
   .summary_title_big {
     font-size: 40px;
@@ -610,6 +621,7 @@ body {
     .kanbanboradtodoanddone {
       gap: 19px;
     }
+
     .summary_title_big {
       font-size: 40px;
       margin-left: -65px;
