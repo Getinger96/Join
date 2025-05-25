@@ -9,8 +9,8 @@ body {
   margin-left: 328px;
   display: flex;
   height: 100vh;
- justify-content: center;
- align-items: center;
+  justify-content: center;
+  align-items: center;
 
 }
 
@@ -340,7 +340,7 @@ body {
   .middle-SectionSummary {
     margin-left: 0;
     overflow-x: hidden;
-    
+
   }
 
   .headblock {
@@ -530,13 +530,15 @@ body {
 
 
 
+
+
 @media (max-width: 650px) {
   .kanbanBoardSection {
     align-items: center;
   }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 540px) {
   .summary_title_big {
     font-size: 40px;
     margin-left: -95px;
@@ -649,6 +651,8 @@ body {
 
     .kanbanboradtodo {
       width: 146px;
+      margin-top: 35px;
+      height: 95px;
     }
 
     .imgtodo {
@@ -658,6 +662,8 @@ body {
 
     .kanbanboraddone {
       width: 146px;
+      margin-top: 35px;
+      height: 95px;
     }
 
     .imgdone {
@@ -667,6 +673,7 @@ body {
 
     .kanbanboardprio {
       width: 310px;
+      margin-top: 20px;
     }
 
     .prioimg {
@@ -689,10 +696,11 @@ body {
   }
 }
 
-@media (max-height: 680px) {
+@media (max-height: 640px) {
   .kanbanBoardSection {
     padding: 6px;
     top: 20px;
+    margin-top: 0px;
   }
 
   .summary_headline {
@@ -700,14 +708,77 @@ body {
   }
 
   .middle-SectionSummary {
-    margin-top: 30px;
+    margin-top: 0px;
   }
 
   .kanbanboradtodo {
     margin-top: 30px;
+    height: 90px;
   }
 
   .kanbanboraddone {
     margin-top: 30px;
+    height: 90px;
   }
+
+  .kanbanboardprio {
+    height: 90px;
+  }
+
+  .hrpriocontent {
+
+    height: 90px;
+  }
+}
+
+@media (max-height: 610px) {
+  .kanbanBoardSection {
+    padding: 6px;
+    top: 0px;
+    margin-top: 45px;
+  }
+
+  .summary_title_big {
+    font-size: 30px;
+
+  }
+
+  .summary_secondline {
+    font-size: 20px;
+
+  }
+
+  .middle-SectionSummary {
+    margin-top: 0px;
+  }
+
+  .kanbanboradtodo {
+    margin-top: 25px;
+    height: 75px;
+    width: 170px;
+  }
+
+  .kanbanboraddone {
+    margin-top: 25px;
+    height: 75px;
+    width: 170px;
+  }
+
+  .kanbanboardprio {
+    height: 75px;
+    margin-top: 15px;
+    width: 369px;
+  }
+
+  .hrpriocontent {
+
+    height: 75px;
+  }
+
+  .taskboard {
+   height: 85px;
+    margin-top: 15px;
+    width: 105px;
+   
+}
 }
