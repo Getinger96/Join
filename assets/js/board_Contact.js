@@ -4,12 +4,10 @@
 function updateContactStyles() {
     for (let i = 0; i < contactsArray.length; i++) {
         const contact = contactsArray[i];
-        const contactContainer = document.getElementById(`profile-${i}`);
+        const contactContainer = document.getElementById(`profile-${contact.i}`);
         if (assignedContacts.includes(contact.name)) {
-            contactContainer.classList.add('bg_color', 'color_white');
-        } else {
-            contactContainer.classList.remove('bg_color', 'color_white');
-        }
+            return contactContainer.classList.add('bg_color', 'color_white');
+        } 
     }
 }
 
