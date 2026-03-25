@@ -14,6 +14,7 @@ let contacts = [];
 let subtasks = [];
 let assignedContacts = [];
 let prio = [];
+let allfiles = [];
 
 
 /**
@@ -75,7 +76,7 @@ function closelist() {
  * 
  */
 function openCategoryLIst() {
-    
+
     let seleCon = document.getElementById('Selection_Container_Category');
     seleCon.classList.toggle('d_none');
 }
@@ -85,7 +86,7 @@ function openCategoryLIst() {
  * 
  */
 function choosedUserStory() {
-    
+
     let userStory = document.getElementById('Category');
     userStory.textContent = "User Story";
     closelistCategory();
@@ -95,7 +96,7 @@ function choosedUserStory() {
  * 
  */
 function choosedTechnicalTask() {
-   
+
     let technicalTask = document.getElementById('Category');
     technicalTask.textContent = "Technical Task";
     closelistCategory();
@@ -106,7 +107,7 @@ function choosedTechnicalTask() {
  * 
  */
 function closelistCategory() {
-    
+
     let seleCon = document.getElementById('Selection_Container_Category');
     seleCon.classList.add('d_none');
 }
@@ -148,6 +149,48 @@ function renderSelectionContainer() {
         profiles.innerHTML += renderContacts(i, contactColour, firstletters, name);
     }
 }
+
+function fileupload() {
+    const filepicker = document.getElementById('Filepicker');
+    filepicker.removeEventListener('change', handleFileChange);
+    filepicker.addEventListener('change', handleFileChange);
+}
+
+async function handleFileChange() {
+    const filepicker = document.getElementById('Filepicker');
+    const files = filepicker.files;
+
+    if (files.length > 0) {
+        Array.from(files).forEach(async file => {
+            const blob = new Blob([file], { type: file.type });
+            console.log('Neue Datei', blob);
+
+            const base64 = await blobToBase64(blob);
+            const img = document.createElement('img');
+            img.src = base64;
+            allfiles.push({
+                filename: file.name,
+                fileType: blob.type,
+                base64: base64
+            });
+        });
+    }
+}
+
+
+
+
+
+
+function blobToBase64(blob) {
+    return new Promise((resolve, _) => {
+        const reader = new FileReader();
+        reader.onloadend = () => resolve(reader.result);
+        reader.readAsDataURL(blob);
+    });
+}
+
+
 
 
 
@@ -278,13 +321,14 @@ function createNewTask() {
     let titel = document.getElementById('title').value;
     let description = document.getElementById('Description').value;
     let assignedContact = assignedContacts;
+    let files = allfiles;
     let date = document.getElementById('dueDate').value;
     let category = document.getElementById('Category').innerHTML;
     let subtask = subtasks;
     let status = 'open';
-    let newTask = newTaskObject(titel, description, assignedContact, date, prio, category, subtask ,status)
+    let newTask = newTaskObject(titel, description, assignedContact, date, files, prio, category, subtask, status)
 
-    
+
     if (JSON.stringify(loggedInUser) === JSON.stringify(guest)) {
         localStorage.setItem('guestTasks', JSON.stringify(newTask));
     }
@@ -305,12 +349,13 @@ function createNewTask() {
  * @param {*} status status of the task
  * @returns {boolean}
  */
-function newTaskObject(titel, description, assignedContact, date, prio, category, subtask ,status ) {
+function newTaskObject(titel, description, assignedContact, date, files, prio, category, subtask, status) {
     return newTask = {
         Titel: titel,
         Description: description,
         AssignedContact: assignedContact,
         Date: date,
+        Files: files,
         Prio: prio,
         Category: category,
         Subtask: subtask,
@@ -334,9 +379,9 @@ async function saveTask(newTask) {
  * 
  */
 async function clearTask() {
-  
-        clearFormFields();
-        resetAddTask();
+
+    clearFormFields();
+    resetAddTask();
 }
 
 /**
@@ -360,7 +405,7 @@ function clearFormFields() {
     date.value = "";
     category.innerHTML = "";
     subtasks = [];
-    prio = [];    
+    prio = [];
 }
 
 /**
@@ -383,3 +428,4 @@ function emptySubtask() {
     let currentSubtask = document.getElementById('input_Subtasks')
     currentSubtask.value = '';
 }
+

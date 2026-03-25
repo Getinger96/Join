@@ -261,6 +261,26 @@ border-bottom: 3px solid red  !important;
   color: white;
 }
 
+.File_Upload_Container {
+  width: 440px;
+  height: 80px;
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.File_Upload_Header {
+  font-family: "Inter";
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  width: 112px;
+  height: 24px;
+}
+
+
+
 .orange {
   background-color: #ff5733;
 }
