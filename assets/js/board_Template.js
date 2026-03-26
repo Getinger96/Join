@@ -34,7 +34,7 @@ function allInputFieldMissing() {
     showTileMissing.innerHTML = `<div>
                                      <span class="missingInput"> Please fill in or select the marked fields</span>
                                 </div>`;
- 
+
 }
 /**
  * the function show invalid date message
@@ -44,7 +44,7 @@ function showInvalidDateMessage() {
     showWrongCurrentDate.innerHTML = `<div>
                                      <span class="missingInput"> No date in the past may be specified</span>
                                 </div>`;
-    
+
 }
 
 /**
@@ -56,27 +56,27 @@ function ShowChangeImgCheckedIcon(i) {
        <button type="button" class="EditSubtaskButton" onclick="enterNewSubtask(${i})">
                         <img class="imgCheckedIcon" id="changeImgEdit${i}" src="./assets/IMG/checkAddTask.png" alt="check">
                     </button>`
-    }
-    
-    /**
-     * the function show subTask value edit
-     * *  @param {*} subtasks subtaks Element
-     *  * @param {*} i  subtask id
-     */
-    function showSubTaskValueEdit(subtasks, i) {
-        return `
+}
+
+/**
+ * the function show subTask value edit
+ * *  @param {*} subtasks subtaks Element
+ *  * @param {*} i  subtask id
+ */
+function showSubTaskValueEdit(subtasks, i) {
+    return `
         <li>
         <input id="subtaskValue${i}" class="subTaskInput" type="text" value="${subtasks[i]}"
         onblur="validateSubtask(${i})">
         </li>
         <div id="subtasksValidation${i}"></div> `
-    }
+}
 
 
-    /**
- * the function show edit button
- *  * @param {*} i  subtask id
- */    
+/**
+* the function show edit button
+*  * @param {*} i  subtask id
+*/
 function ShowChangeImgEdit(i) {
     return `
             <button type="button" class="EditSubtaskButton" onclick="editSubtask(${i})">
@@ -88,7 +88,7 @@ function ShowChangeImgEdit(i) {
  * the function show warning empty field
  */
 function pleaseEnterASubtask() {
-    document.getElementById(`SubtaskLengthReached`).innerHTML =`<span class="showShubtaskError">Please Enter a full subtask`;
+    document.getElementById(`SubtaskLengthReached`).innerHTML = `<span class="showShubtaskError">Please Enter a full subtask`;
 }
 
 
@@ -169,7 +169,7 @@ function getLargeContactHtml(index, firstLetterForName, firstLetterLastName, con
  * @param {*} taskIndex task taskIndex
  * @returns {*}
  */
-function generateCardHtml(title, description, dueDate, priority, priorityIcon, category, categoryColor, contactsHtml, subtasksHtml, taskIndex) {
+function generateCardHtml(title, description, dueDate, imagesHtml, priority, priorityIcon, category, categoryColor, contactsHtml, subtasksHtml, taskIndex) {
     return `
         <div class="todo-detail">
             <div>
@@ -195,6 +195,11 @@ function generateCardHtml(title, description, dueDate, priority, priorityIcon, c
             <div class="assigned-contacts">
                 ${contactsHtml}
             </div>
+            <div class="card">
+             <div class="card-images">
+                ${imagesHtml}
+             </div>
+        </div>
             <p class="subtaskstext"><strong>Subtasks:</strong></p>
             <div class="subtasks-container">
                 ${subtasksHtml} <!-- Hier werden die Subtasks eingefügt -->
@@ -350,7 +355,7 @@ function generateProgressHtml(task) {
  * @param {number} idTask - The id of the task 
  */
 function fieldsContainerhtml(idTask) {
-    return`
+    return `
             <div id="existingmenu" class="showsmallFieldBar" onclick="event.stopPropagation()">
                 <div class="headlsmallField"></div>
                 <div class="fieldElement"> <span class="statusField" onclick="moveTaskTo(${idTask}, 'open', event)">todo</span></div>

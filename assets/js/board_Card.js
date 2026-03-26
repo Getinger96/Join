@@ -6,7 +6,7 @@
  */
 function showCard(task, taskIndex) {
     let todoBig = document.getElementById('todoBig');
-    let showCardHTML = createShowCard(task, taskIndex); 
+    let showCardHTML = createShowCard(task, taskIndex);
     todoBig.innerHTML = showCardHTML;
 
 }
@@ -15,16 +15,16 @@ function showCard(task, taskIndex) {
  * @param {*} taskIndex task id
  */
 function openToDo(taskIndex) {
-taskIndex--;
-let task = tasksArray[taskIndex];  
-let todoBig = document.getElementById('todoBig');
-todoBig.classList = 'cardbig'; 
-todoBig.innerHTML = '';
+    taskIndex--;
+    let task = tasksArray[taskIndex];
+    let todoBig = document.getElementById('todoBig');
+    todoBig.classList = 'cardbig';
+    todoBig.innerHTML = '';
 
-document.body.style.overflow = "hidden";
-document.getElementById('overlay').classList.remove('d-none');
+    document.body.style.overflow = "hidden";
+    document.getElementById('overlay').classList.remove('d-none');
 
-showCard(task, taskIndex );  
+    showCard(task, taskIndex);
 }
 
 /**
@@ -36,18 +36,57 @@ function createShowCard(task, taskIndex) {
     let title = task.Title || '';
     let description = task.Description || '';
     let dueDate = task.duedate || '';
+    let files = task.files || [];
     let priority = task.Prio;
     let assignedContacts1 = task.Assigned || [];
     let category = task.Category || '';
-    
+
     assignedContacts.push(...assignedContacts1);
 
 
+    const imagesHtml = createimg(files);
     const priorityIcon = getPriorityIcon(priority);
     const categoryColor = getCategoryColor(category);
     const contactsHtml = generateLargeContactsHtml(assignedContacts1);
     const subtasksHtml = generateSubtasksHtml(task.subtask, taskIndex);
-    return generateCardHtml(title, description, dueDate, priority, priorityIcon, category, categoryColor, contactsHtml, subtasksHtml, taskIndex);
+    return generateCardHtml(title, description, dueDate, imagesHtml, priority, priorityIcon, category, categoryColor, contactsHtml, subtasksHtml, taskIndex);
+}
+
+function createimg(files) {
+    return files.map(image => 
+        `<img 
+            src="${image.base64}" 
+            alt="${image.filename}" 
+            style="width:50px; height:50px; object-fit:cover; border-radius:4px; cursor:pointer;"
+            onclick="openLightbox('${image.base64}', '${image.filename}')"
+        >`
+    ).join('');
+}
+
+function openLightbox(src, filename) {
+    const lightbox = document.createElement('div');
+    lightbox.id = 'lightbox';
+    lightbox.style.cssText = `
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        background: rgba(0,0,0,0.85);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        cursor: pointer;
+    `;
+    lightbox.innerHTML = `
+        <img src="${src}" alt="${filename}" style="
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 8px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+        ">
+    `;
+    lightbox.onclick = () => lightbox.remove();
+    document.body.appendChild(lightbox);
 }
 /**
  * the function closed overlay
@@ -92,10 +131,10 @@ function generateSubtasksHtml(subtasks, taskIndex) {
     if (totalSubtasks > 0) {
         subtasks.forEach((subtask, index) => {
             const subtaskStatus = JSON.parse(localStorage.getItem(`task-${taskIndex}-subtasks`)) || {};
-            const isChecked = subtaskStatus[index] || false; 
+            const isChecked = subtaskStatus[index] || false;
 
             subtasksHtml += showSubtasksHtml(taskIndex, index, isChecked, subtask);
-        
+
         });
     }
     return subtasksHtml;
@@ -119,7 +158,7 @@ function subtaskChecked(taskIndex, subtaskIndex) {
  * @param {*} taskIndex task id   
  */
 function updateProgress(taskIndex) {
-    let indexTasksArray = taskIndex +1;
+    let indexTasksArray = taskIndex + 1;
     const task = tasksArray.find(t => t.idTask === indexTasksArray);
     if (!task || !task.subtask) return;
 
@@ -127,7 +166,7 @@ function updateProgress(taskIndex) {
     const subtaskStatus = JSON.parse(localStorage.getItem(`task-${taskIndex}-subtasks`)) || {};
     const completedSubtasks = Object.values(subtaskStatus).filter(status => status).length;
     let progressLine = document.getElementById(`progressbarline-${taskIndex}`);
-    if (!progressLine) return;  
+    if (!progressLine) return;
 
 
     const progressPercentage = totalSubtasks ? (completedSubtasks / totalSubtasks) * 100 : 0;
@@ -143,12 +182,12 @@ async function initializeAllProgress() {
         const subtaskStatus = JSON.parse(localStorage.getItem(`task-${taskIndex}-subtasks`)) || {};
 
         if (tasksArrayElement === undefined) {
-            return; 
+            return;
         }
         if (!tasksArrayElement.subtask || tasksArrayElement.subtask.length === 0) {
-            continue; 
+            continue;
         }
-    
+
         await initializeSubtaskProgressElement(taskIndex, tasksArrayElement, subtaskStatus);
     }
 }
@@ -163,7 +202,7 @@ async function initializeSubtaskProgressElement(taskIndex, tasksArrayElement, su
         const isChecked = subtaskStatus[index] || false;
         const checkbox = document.getElementById(`subtask-${taskIndex}-${index}`);
         if (checkbox) {
-            checkbox.checked = isChecked; 
+            checkbox.checked = isChecked;
         }
     });
     updateProgress(taskIndex);
@@ -173,7 +212,7 @@ async function initializeSubtaskProgressElement(taskIndex, tasksArrayElement, su
  * the function input search task element
  */
 function search() {
-let searchTask = getSearchInput();
+    let searchTask = getSearchInput();
     if (searchTask.length >= 3) {
         tasksArray.forEach((todo, index) => {
             let todos = document.getElementById(`task_${index}Element`);
@@ -223,9 +262,9 @@ function showTask(taskElement) {
  */
 function showTasksSearch(search, todos, todo) {
     let taskTitle = todo.Title.toLowerCase();
-    let taskdescription= todo.Description.toLowerCase();
+    let taskdescription = todo.Description.toLowerCase();
 
-    if (taskTitle.includes(search)  || taskdescription.includes(search) ) {
+    if (taskTitle.includes(search) || taskdescription.includes(search)) {
         showTask(todos);
     } else {
         hideTask(todos);
@@ -323,14 +362,14 @@ async function updateBoard(category, task, event) {
     if (taskElement) {
         taskElement.remove();
     }
-    
+
     let newCategoryColumn = document.getElementById(category);
     let taskHTML = generateTodoHTML(task, task.idTask);
-    
+
     newCategoryColumn.insertAdjacentHTML('afterbegin', taskHTML);
-    
+
     getassignecontacts(task, task.idTask);
-    
+
     updateAndCheckEmptyFields();
 }
 

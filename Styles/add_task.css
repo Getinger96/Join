@@ -264,7 +264,7 @@ border-bottom: 3px solid red  !important;
 .File_Upload_Container {
   width: 440px;
   height: 80px;
-  margin-top: 8px;
+  margin-top: 50px;
   display: flex;
   flex-direction: column;
   gap: 8px;

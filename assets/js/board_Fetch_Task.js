@@ -82,6 +82,7 @@ function saveTask(keyTask, id, task) {
         Description: task.Description,
         Assigned: task.AssignedContact,
         duedate: task.Date,
+        files: task.Files,
         Prio: task.Prio,
         Category: task.Category,
         subtask: task.Subtask,
