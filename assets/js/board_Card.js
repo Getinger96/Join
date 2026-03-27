@@ -1,4 +1,3 @@
-
 /**
  * the function show card
  * @param {*} task task 
@@ -7,8 +6,8 @@
 function showCard(task, taskIndex) {
     let todoBig = document.getElementById('todoBig');
     let showCardHTML = createShowCard(task, taskIndex);
-    todoBig.innerHTML = showCardHTML;
-
+    todoBig.innerHTML = showCardHTML;  
+    initViewer();                       
 }
 /**
  * the function open to do Card 
@@ -43,51 +42,32 @@ function createShowCard(task, taskIndex) {
 
     assignedContacts.push(...assignedContacts1);
 
-
     const imagesHtml = createimg(files);
     const priorityIcon = getPriorityIcon(priority);
     const categoryColor = getCategoryColor(category);
     const contactsHtml = generateLargeContactsHtml(assignedContacts1);
     const subtasksHtml = generateSubtasksHtml(task.subtask, taskIndex);
+
     return generateCardHtml(title, description, dueDate, imagesHtml, priority, priorityIcon, category, categoryColor, contactsHtml, subtasksHtml, taskIndex);
 }
 
 function createimg(files) {
-    return files.map(image => 
-        `<img 
-            src="${image.base64}" 
-            alt="${image.filename}" 
-            style="width:50px; height:50px; object-fit:cover; border-radius:4px; cursor:pointer;"
-            onclick="openLightbox('${image.base64}', '${image.filename}')"
-        >`
+    return files.map(image =>
+        `<img class="img-card" src="${image.base64}" alt="${image.filename}">`
     ).join('');
 }
 
-function openLightbox(src, filename) {
-    const lightbox = document.createElement('div');
-    lightbox.id = 'lightbox';
-    lightbox.style.cssText = `
-        position: fixed;
-        top: 0; left: 0;
-        width: 100%; height: 100%;
-        background: rgba(0,0,0,0.85);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 9999;
-        cursor: pointer;
-    `;
-    lightbox.innerHTML = `
-        <img src="${src}" alt="${filename}" style="
-            max-width: 90%;
-            max-height: 90%;
-            border-radius: 8px;
-            box-shadow: 0 0 30px rgba(0,0,0,0.5);
-        ">
-    `;
-    lightbox.onclick = () => lightbox.remove();
-    document.body.appendChild(lightbox);
+let viewer = null;
+
+function initViewer() {
+    const container = document.getElementById('card-images');
+    if (!container) return;
+
+    if (viewer) viewer.destroy();
+    viewer = new Viewer(container);
 }
+
+
 /**
  * the function closed overlay
  * @param {*} taskIndex task id

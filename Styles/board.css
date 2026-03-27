@@ -272,6 +272,21 @@ h3 {
     margin-top: 40px;
 }
 
+
+.img-card{
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.img-card:hover {
+  
+  filter: brightness(1.2);
+  box-shadow: 2px 2px 2px rgba(0,0,0,0.2);
+}
+
 .checkbox {
     scale: 1.5;
     cursor: pointer;

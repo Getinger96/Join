@@ -159,28 +159,28 @@ function fileupload() {
 async function handleFileChange() {
     const filepicker = document.getElementById('Filepicker');
     const files = filepicker.files;
+    const error = document.getElementById('error');
 
     if (files.length > 0) {
         Array.from(files).forEach(async file => {
+            if (!file.type.startsWith ('image/')) {
+                error.textContent = 'Nur Bilddateien sind erlaubt!';
+                return;
+            }
             const blob = new Blob([file], { type: file.type });
             console.log('Neue Datei', blob);
 
-            const base64 = await blobToBase64(blob);
+            const compressedBase64 = await compressImage(file, 800,800, 0.8);
             const img = document.createElement('img');
-            img.src = base64;
+            img.src = compressedBase64;
             allfiles.push({
                 filename: file.name,
                 fileType: blob.type,
-                base64: base64
+                base64: compressedBase64
             });
         });
     }
 }
-
-
-
-
-
 
 function blobToBase64(blob) {
     return new Promise((resolve, _) => {
@@ -191,8 +191,49 @@ function blobToBase64(blob) {
 }
 
 
+function compressImage(file, maxWidth = 800, maxHeight = 800, quality = 0.8) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
 
+                reader.onload = (event) => {
+                    const img = new Image();
+                    img.onload = () => {
+                        const canvas = document.createElement('canvas');
+                        const ctx = canvas.getContext('2d');
 
+                        // Berechnung der neuen Größe, um die Proportionen beizubehalten
+                        let width = img.width;
+                        let height = img.height;
+
+                        if (width > maxWidth || height > maxHeight) {
+                            if (width > height) {
+                                height = (height * maxWidth) / width;
+                                width = maxWidth;
+                            } else {
+                                width = (width * maxHeight) / height;
+                                height = maxHeight;
+                            }
+                        }
+
+                        canvas.width = width;
+                        canvas.height = height;
+
+                        // Zeichne das Bild in das Canvas
+                        ctx.drawImage(img, 0, 0, width, height);
+
+                        // Exportiere das Bild als Base64
+                        const compressedBase64 = canvas.toDataURL('image/jpeg', quality);
+                        resolve(compressedBase64);
+                    };
+
+                    img.onerror = () => reject('Fehler beim Laden des Bildes.');
+                    img.src = event.target.result;
+                };
+
+                reader.onerror = () => reject('Fehler beim Lesen der Datei.');
+                reader.readAsDataURL(file);
+            });
+        }
 
 /**
  * The validation of the dateinput that only allows present or future dates

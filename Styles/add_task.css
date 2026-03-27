@@ -29,11 +29,13 @@ body {
 }
 
 .error-borderBottom {
-border-bottom: 3px solid red  !important;
+  border-bottom: 3px solid red !important;
 }
+
 .missing-input-border {
   border: 2px solid red !important;
 }
+
 .invalid-date-border {
   border: 2px solid red !important;
 }
@@ -300,6 +302,7 @@ border-bottom: 3px solid red  !important;
 .blau {
   background-color: #3357ff;
 }
+
 .gray {
   background-color: gray;
 }
@@ -509,24 +512,27 @@ border-bottom: 3px solid red  !important;
 }
 
 .ChangeSubtask {
-    min-height: 32px;
-    border: 1px solid #ddd; 
-    background-color: #f9f9f9; 
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  min-height: 32px;
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
+
 .imgCheckedIcon {
   height: 22px;
   width: 22px;
 }
+
 .subTaskInput {
   border: none;
   font-size: 18px;
   border-bottom: 3px solid #29abe2;
   background-color: #f6f7f8;
 }
+
 .li {
   display: flex;
   align-items: center;
@@ -535,19 +541,23 @@ border-bottom: 3px solid red  !important;
 }
 
 
- .subtaskempty{
-    font-size: 12px;
- }
+.subtaskempty {
+  font-size: 12px;
+}
+
 .changeButtonDeleteAndEdit {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    background-color: #F6F7F8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  background-color: #F6F7F8;
 }
+
 .deleteSubtask {
-    border: none;
+  border: none;
 }
+
+
 
 .changeButtonDeleteAndEdit {
   display: flex;
@@ -556,6 +566,7 @@ border-bottom: 3px solid red  !important;
   gap: 10px;
   background-color: #f6f7f8;
 }
+
 .deleteSubtask {
   border: none;
 }
@@ -640,6 +651,7 @@ input:focus {
   line-height: 24px;
   color: black;
 }
+
 .emptySubtaskicon {
   width: 24px;
   height: 24px;
@@ -660,6 +672,7 @@ input:focus {
   margin-left: 10px;
   margin-top: 4px;
 }
+
 .ForwardingBoard {
   position: absolute;
   bottom: -70px;
@@ -697,13 +710,18 @@ input:focus {
 }
 
 .Btn_Container {
-    display: flex;
-    gap: 500px;
-   margin-top: 100px;
-    align-items: center;
-    margin-left: 328px;
-    
-    
+  display: flex;
+  gap: 500px;
+  margin-top: 100px;
+  align-items: center;
+  margin-left: 328px;
+
+
+}
+
+.error {
+  color: red;
+  margin-top: 10px;
 }
 
 .clear_Btn {
