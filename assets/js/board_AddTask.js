@@ -1,4 +1,6 @@
 let d_none = true;
+let allfiles = [];
+
 
 /**
  * This function open Add Task
@@ -122,6 +124,7 @@ function clearTask() {
     clearMissingFieldContent();
     returnColorPrioIcons();
     medium();
+   removeAllFiles()
 }
 
 /**
@@ -253,5 +256,115 @@ function low() {
     lowButton.classList.add("low"); 
     lowIcon.src = "./assets/IMG/Prio_LOW_WHITE.svg";
     currentPriority = 'low';
+}
+
+
+function fileupload() {
+    const filepicker = document.getElementById('Filepicker');
+    filepicker.removeEventListener('change', handleFileChange);
+    filepicker.addEventListener('change', handleFileChange);
+}
+
+async function handleFileChange() {
+    console.log('handleFileChange aufgerufen')
+    const filepicker = document.getElementById('Filepicker');
+    const files = filepicker.files;
+     console.log('files:', files)
+    const error = document.getElementById('error');
+    const container = document.getElementById('uploaded_Files');
+    console.log('container:', container);
+
+    if (files.length > 0) {
+        Array.from(files).forEach(async file => {
+            console.log('file:', file.name, file.type);
+            if (!file.type.startsWith('image/')) {
+                error.textContent = 'Nur Bilddateien sind erlaubt!';
+                return;
+            }
+            const blob = new Blob([file], { type: file.type });
+            console.log('Neue Datei', blob);
+
+            const compressedBase64 = await compressImage(file, 800, 800, 0.8);
+            console.log('compressedBase64 fertig');
+            const img = document.createElement('img');
+            img.src = compressedBase64;
+            allfiles.push({
+                filename: file.name,
+                fileType: blob.type,
+                base64: compressedBase64
+            });
+
+            const item = document.createElement('div');
+            item.classList.add('uploaded_file_item');
+            item.innerHTML = `
+                <img src="${compressedBase64}" alt="${file.name}">
+                <span>${file.name}</span>
+                <button onclick="removeFile(this, '${file.name}')">✕</button>
+            `;
+            container.appendChild(item);
+            console.log('item hinzugefügt')
+        });
+    }
+}
+
+function blobToBase64(blob) {
+    return new Promise((resolve, _) => {
+        const reader = new FileReader();
+        reader.onloadend = () => resolve(reader.result);
+        reader.readAsDataURL(blob);
+    });
+}
+
+function removeFile(btn, filename) {
+    btn.parentElement.remove();
+    allfiles = allfiles.filter(f => f.filename !== filename);
+}
+function removeAllFiles() {
+    document.getElementById('uploaded_Files').innerHTML = '';
+    allfiles = [];
+}
+
+function compressImage(file, maxWidth = 800, maxHeight = 800, quality = 0.8) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+
+        reader.onload = (event) => {
+            const img = new Image();
+            img.onload = () => {
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+
+                // Berechnung der neuen Größe, um die Proportionen beizubehalten
+                let width = img.width;
+                let height = img.height;
+
+                if (width > maxWidth || height > maxHeight) {
+                    if (width > height) {
+                        height = (height * maxWidth) / width;
+                        width = maxWidth;
+                    } else {
+                        width = (width * maxHeight) / height;
+                        height = maxHeight;
+                    }
+                }
+
+                canvas.width = width;
+                canvas.height = height;
+
+                // Zeichne das Bild in das Canvas
+                ctx.drawImage(img, 0, 0, width, height);
+
+                // Exportiere das Bild als Base64
+                const compressedBase64 = canvas.toDataURL('image/jpeg', quality);
+                resolve(compressedBase64);
+            };
+
+            img.onerror = () => reject('Fehler beim Laden des Bildes.');
+            img.src = event.target.result;
+        };
+
+        reader.onerror = () => reject('Fehler beim Lesen der Datei.');
+        reader.readAsDataURL(file);
+    });
 }
 

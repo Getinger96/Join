@@ -35,6 +35,21 @@
                         <div id="Selected_profiles_Container" class="Selected_profiles_Container">
                         </div>
                     </div>
+                    <div class="File_Upload_Container">
+                    <span class="File_Upload_Header">Attachments</span>
+                    <span class="attachments_info">Allowed file types are JPEG and PNG</span>
+                    <div id="error" class="error"></div>
+                    <div class="upload_button_container" onclick="document.getElementById('Filepicker').click()">
+                        <span class="upload_button_text">Drag a file or Browse</span>
+                         <img src="./assets/IMG/plus button mobile.png" alt="">
+                        <input type="file" id="Filepicker" accept="image/*" style="display: none;"
+                            onchange="handleFileChange()">
+                    </div>
+
+                    <div id="uploaded_Files" class="Uploaded_FIles_Container">
+
+                    </div>
+                </div>
                 </div>
                 <div class="separatorTask"></div>
                 <div class="divSectionAddTask2">
