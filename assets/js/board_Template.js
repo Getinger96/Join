@@ -196,6 +196,7 @@ function generateCardHtml(title, description, dueDate, imagesHtml, priority, pri
                 ${contactsHtml}
             </div>
             <div class="card">
+            <p><strong>Attachments</strong></p>
              <div id="card-images" class="card-images">
                 ${imagesHtml}
              </div>

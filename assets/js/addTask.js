@@ -169,7 +169,8 @@ async function handleFileChange() {
         Array.from(files).forEach(async file => {
             console.log('file:', file.name, file.type);
             if (!file.type.startsWith('image/')) {
-                error.textContent = 'Nur Bilddateien sind erlaubt!';
+                showToast();
+                setTimeout(hideToast, 3000);
                 return;
             }
             const blob = new Blob([file], { type: file.type });
@@ -196,6 +197,16 @@ async function handleFileChange() {
             console.log('item hinzugefügt')
         });
     }
+}
+
+function showToast() {
+  const toast = document.getElementById('error-toast');
+  toast.classList.add('show');
+  
+}
+
+function hideToast() {
+  document.getElementById('error-toast').classList.remove('show');
 }
 
 function blobToBase64(blob) {

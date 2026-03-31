@@ -27,7 +27,7 @@
 <body onload="init()">
     <header>
 
-        
+
         <div w3-include-html="./assets/Templates/desktop_template.html"></div>
         <div class="headblock">
             <div class="title">
@@ -41,14 +41,14 @@
                 <div class="logInUser_Container" onclick="showLogOutSection();">
                     <span class="logInUser" id="loginUserId"></span>
                 </div>
-        
+
             </div>
         </div>
-        
-        <div id="logoutId"> </div>
-    
 
-        
+        <div id="logoutId"> </div>
+
+
+
     </header>
 
     <section class="middle-Section">
@@ -90,7 +90,21 @@
                 </div>
             </div>
 
+
             <div class="right-side">
+                <div class="account-badge-side" id="accountBadgeSide" style="display:none;">
+                    <div class="account-badge" id="accountBadge">
+                        <span id="accountInitials"></span>
+                        <img id="accountPhoto" src=""
+                            style="display:none; width:100%; height:100%; border-radius:50%; object-fit:cover;">
+                    </div>
+                    <label for="photoUpload" class="upload-label">
+                        <img src="assets/IMG/camera.png" alt="Upload" style="width:20px;">
+                    </label>
+                    <input type="file" id="photoUpload" accept="image/*" style="display:none;"
+                        onchange="handlePhotoUpload(event)">
+                </div>
+
                 <img src="assets/IMG/Close.svg" alt="Close" class="closethewindow-button" onclick="closeCardContact()">
                 <div class="contactlogo">
                     <img class="addNewContactimg" src="assets/IMG/Group 13.png" alt="NewContactLogo">
@@ -106,13 +120,13 @@
                             <div id="wrongText"></div>
 
 
-                    
+
                             <div class="input-fieldmail mail-icon" id="mailInput">
                                 <input type="email" id="mail" name="Email" placeholder="Email" required>
                                 <img src="assets/IMG/mail.svg" alt="Mail Icon" class="input-icon">
                             </div>
                             <div id="wrongEmail"></div>
-                
+
 
 
                             <div class="input-fieldphone phone-icon" id="phoneInput">
@@ -122,12 +136,12 @@
                             <div id="wrongPhone"></div>
                         </div>
                         <div class="two-buttons">
-                            <button type="button" class="cancel-button" onclick="cancel()">Cancel<img class="close-button"
-                                    src="assets/IMG/iconoir_cancel.png"></button>
-                            <button onclick="saveEditedContact()" type="submit" class="createContact-button">Create Contact<img
-                                    src="assets/IMG/check.svg"></button>
+                            <button type="button" class="cancel-button" onclick="closeCardContact()">Cancel<img
+                                    class="close-button" src="assets/IMG/iconoir_cancel.png"></button>
+                            <button onclick="saveEditedContact()" type="submit" class="createContact-button">Create
+                                Contact<img src="assets/IMG/check.svg"></button>
                         </div>
-                    </form>                    
+                    </form>
                 </div>
             </div>
         </div>
@@ -143,7 +157,7 @@
                     <img src="assets/IMG/Group 13.png" alt="Profile Image" />
                 </div>
             </div>
-            
+
             <div class="overlay-add-contact-mobile-bottom">
                 <div class="input-fields-add-contact-mobile">
                     <div class="input-field-mobile name-icon-mobile" id="textInputMobile">
@@ -152,7 +166,7 @@
                     </div>
                     <div id="wrongTextMobile"></div>
 
-                    
+
                     <div class="input-field-mobile mail-icon-mobile" id="mailInputMobile">
                         <input type="email" id="mobileMail" placeholder="Email" required>
                         <img src="./assets/IMG/mail.svg" alt="Mail Icon" class="input-icon-mobile">
@@ -169,17 +183,19 @@
                             Create Contact
                             <img src="./assets/IMG/check.svg" alt="Check Icon" class="check-icon-mobile">
                         </button>
-                    
-                        <button type="button" class="delete-button" style="display: none;" onclick="deleteContactMobile(selectedContactIndex)">
+
+                        <button type="button" class="delete-button" style="display: none;"
+                            onclick="deleteContactMobile(selectedContactIndex)">
                             Delete
                         </button>
 
-                        <button type="button" class="save-button" style="display: none;" onclick="saveEditedContactMobile(selectedContactIndex)">
+                        <button type="button" class="save-button" style="display: none;"
+                            onclick="saveEditedContactMobile(selectedContactIndex)">
                             Save
                             <img src="./assets/IMG/check.svg" alt="Check Icon" class="check-icon-mobile">
                         </button>
-                    
-                        
+
+
                     </div>
                 </div>
                 <div class="close-button-mobile" onclick="closeMobileNewContact()">
@@ -188,8 +204,8 @@
             </div>
         </div>
     </div>
-    
-    
+
+
 
     <section>
         <div w3-include-html="./assets/Templates/mobile_version.html"></div>

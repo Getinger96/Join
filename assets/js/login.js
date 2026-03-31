@@ -5,11 +5,14 @@
 async function loadUsers(path = '') {
     let response = await fetch(base_URL + path + ".json");
     let userJSON = await response.json();
+     let keysArray = Object.keys(userJSON.contacts);
     let userAsArray = Object.values(userJSON.contacts);
 
     for (let index = 0; index < userAsArray.length; index++) {
         let contact = userAsArray[index];
+        let key = keysArray[index];
         contacts.push({
+            id: key,
             email: contact.email,
             name: contact.name,
             password: contact.password,

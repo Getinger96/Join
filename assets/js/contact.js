@@ -34,7 +34,8 @@ async function fetchContacts(path = '') {
                 email: contact.email,
                 name: contact.name,
                 password: contact.password,
-                phone: contact.phone
+                phone: contact.phone,
+                photo: contact.photo || null  // ← neu
             });
         }
     };
@@ -62,7 +63,7 @@ function groupContacts() {
         let color = colors[colorIndex];
 
         if (!groupedContacts[firstLetter]) {
-        groupedContacts[firstLetter] = [];
+            groupedContacts[firstLetter] = [];
         }
 
         groupedContacts[firstLetter].push({ ...contact, index, color });
@@ -128,9 +129,9 @@ function getContactBig(index) {
     let contact = contactsArray[index];
     let colorIndex = index % colors.length;
     let color = colors[colorIndex];
-    
+
     let showContacts = document.getElementById('contactViewBig');
-    showContacts.innerHTML = showContactBig(contact.name, contact.email, contact.phone, getLastName(contact.name), color);
+    showContacts.innerHTML = showContactBig(contact.name, contact.email, contact.phone, getLastName(contact.name), color, contact.photo);
 }
 
 /**
@@ -350,6 +351,18 @@ function closeOverlay() {
     cancelButton.onclick = closeCardContact;
     cancelButton.style.display = 'flex';
 
+    // Badge zurücksetzen
+    document.getElementById('accountBadgeSide').style.display = 'none';
+    document.getElementById('accountPhoto').style.display = 'none';
+    document.getElementById('accountPhoto').src = '';
+    document.getElementById('accountInitials').style.display = 'block';
+    document.getElementById('accountInitials').textContent = '';
+
+    // Inputs wieder aktivieren
+    document.getElementById('name').disabled = false;
+    document.getElementById('mail').disabled = false;
+    document.getElementById('telephone').disabled = false;
+
     resetContactForm();
     renderContacts();
 }
@@ -377,3 +390,38 @@ function clearBigContactView() {
     let showContacts = document.getElementById('contactViewBig');
     showContacts.innerHTML = '';
 }
+
+
+async function handlePhotoUpload(event) {
+    const file = event.target.files[0];
+    if (!file || !file.type.startsWith('image/')) return;
+
+    const reader = new FileReader();
+    reader.onload = async function (e) {
+        const base64 = e.target.result;
+
+        // Badge aktualisieren
+        document.getElementById('accountPhoto').src = base64;
+        document.getElementById('accountPhoto').style.display = 'block';
+        document.getElementById('accountInitials').style.display = 'none';
+
+        // localStorage updaten
+        let loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+        loggedInUser.photo = base64;
+        localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
+
+        // In Firebase speichern
+        await putData(`contacts/${loggedInUser.id}`, {
+            name: loggedInUser.name,
+            email: loggedInUser.email,
+            password: loggedInUser.password,
+            phone: loggedInUser.phone,
+            photo: base64
+        });
+    };
+    reader.readAsDataURL(file);
+}
+
+
+
+

@@ -361,11 +361,16 @@ async function saveEditedContact(index) {
     Object.assign(contactsArray[index], { name, email, phone });
 
     await putData(`contacts/${key}`, { name, email, phone, password });
-    await updateContactInTasks({ oldName, newName: name });
 
+    // localStorage updaten falls es der eingeloggte User ist
+    let loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+    if (loggedInUser && loggedInUser.email === email) {
+        localStorage.setItem('loggedInUser', JSON.stringify({ ...loggedInUser, name, email, phone }));
+    }
+
+    await updateContactInTasks({ oldName, newName: name });
     await fetchTasks();
     await fetchContacts();
     closeCardContact();
     getContactBig(index);
 }
-

@@ -66,6 +66,16 @@ async function init() {
     includeHTML();
     checkIfLoggedIn();
     fetchTasks();
+    let loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+    if (loggedInUser) {
+        let initials = loggedInUser.name.split(' ').map(n => n[0].toUpperCase()).join('');
+        let headerBadge = document.getElementById('loginUserId');
+        if (loggedInUser.photo) {
+            headerBadge.innerHTML = `<img src="${loggedInUser.photo}" style="width:100%; height:100%; border-radius:50%; object-fit:cover;">`;
+        } else {
+            headerBadge.textContent = initials;
+        }
+    }
 }
 
 /**
@@ -139,6 +149,79 @@ function checkIfLoggedIn() {
     }
 }
 
+function htmlacountForm() {
+    let loggedInUser = localStorage.getItem('loggedInUser');
+    if (loggedInUser) {
+        loggedInUser = JSON.parse(loggedInUser);
+    } else {
+        return;
+    }
+
+    let userIndex = contactsArray.findIndex(c => c.email === loggedInUser.email);
+
+    document.querySelector('.addcontactheadline').textContent = 'My account';
+    document.querySelector('.addcontactsecondline').style.display = 'none';
+
+    // Badge anzeigen + Initialen setzen
+    document.getElementById('accountBadgeSide').style.display = 'flex';
+    const initials = loggedInUser.name.split(' ').map(n => n[0].toUpperCase()).join('');
+    document.getElementById('accountInitials').textContent = initials;
+
+    if (loggedInUser.photo) {
+    document.getElementById('accountPhoto').src = loggedInUser.photo;
+    document.getElementById('accountPhoto').style.display = 'block';
+    document.getElementById('accountInitials').style.display = 'none';
+} else {
+    document.getElementById('accountPhoto').style.display = 'none';
+    document.getElementById('accountInitials').style.display = 'block';
+}
+
+    document.getElementById('name').value = loggedInUser.name;
+    document.getElementById('mail').value = loggedInUser.email;
+    document.getElementById('telephone').value = loggedInUser.phone;
+
+    document.getElementById('name').disabled = true;
+    document.getElementById('mail').disabled = true;
+    document.getElementById('telephone').disabled = true;
+
+    document.querySelector('.addNewContactimg').style.display = 'none';
+
+    document.querySelector('.two-buttons').innerHTML = `
+        <button type="button" class="cancel-button" style="width: 250px;" onclick="deleteContact(${userIndex})">
+            Delete my account
+            <img class="close-button" src="assets/IMG/iconoir_cancel.png">
+        </button>
+        <button type="button" class="createContact-button" onclick="htmlEditAccountForm(${userIndex})">
+            Edit
+            <img src="assets/IMG/check.svg">
+        </button>
+    `;
+
+    let newContactOverlay = document.getElementById('newContact');
+    newContactOverlay.classList.add('transition-in-from-right');
+    newContactOverlay.style.display = 'flex';
+}
+
+function htmlEditAccountForm(userIndex) {
+    // Felder wieder aktivieren
+    document.getElementById('name').disabled = false;
+    document.getElementById('mail').disabled = false;
+    document.getElementById('telephone').disabled = false;
+
+    document.querySelector('.addcontactheadline').textContent = 'My account';
+
+    // Buttons mit bestehenden Funktionen verdrahten
+    document.querySelector('.two-buttons').innerHTML = `
+        <button type="button" class="cancel-button" onclick="closeCardContact()">
+            Cancel
+            <img class="close-button" src="assets/IMG/iconoir_cancel.png">
+        </button>
+        <button type="button" class="createContact-button" onclick="saveEditedContact(${userIndex})">
+            Save
+            <img src="assets/IMG/check.svg">
+        </button>
+    `;
+}
 /**
  * Navigates the user to the summary page.
  */

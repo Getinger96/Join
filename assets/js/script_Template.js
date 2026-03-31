@@ -2,7 +2,8 @@
  * Generates the HTML for the logout section.
  */
 function toggleLogoutHtml() {
-    return`<div class="logoutSection">
+    return `<div class="logoutSection">
+            <a onclick="htmlacountForm()" class="logoutsectionlink"> account </a>
             <a class="logoutsectionlinkHelp d_none" href="help.html"> Help </a>
             <a class="logoutsectionlink" href="legal_notes.html"> Legal Notice </a>
             <a class="logoutsectionlink" href="privacy_policy.html"> Privacy Policy</a>
