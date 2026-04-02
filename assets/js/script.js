@@ -96,7 +96,7 @@ function showLogOutSection() {
 /**
  * Hides the logout section if the click is outside of it.
  */
-document.addEventListener('click', function(event) {
+document.addEventListener('click', function (event) {
     let toggleLogout = document.getElementById('logoutId');
     let loginUser = document.querySelector('.logInUser_Container');
 
@@ -142,7 +142,7 @@ function checkIfLoggedIn() {
     let loggedInUser = localStorage.getItem('loggedInUser');
     if (loggedInUser) {
         loggedInUser = JSON.parse(loggedInUser);
-       
+
         showTheNameInitial(loggedInUser);
     } else {
         return;
@@ -168,13 +168,13 @@ function htmlacountForm() {
     document.getElementById('accountInitials').textContent = initials;
 
     if (loggedInUser.photo) {
-    document.getElementById('accountPhoto').src = loggedInUser.photo;
-    document.getElementById('accountPhoto').style.display = 'block';
-    document.getElementById('accountInitials').style.display = 'none';
-} else {
-    document.getElementById('accountPhoto').style.display = 'none';
-    document.getElementById('accountInitials').style.display = 'block';
-}
+        document.getElementById('accountPhoto').src = loggedInUser.photo;
+        document.getElementById('accountPhoto').style.display = 'block';
+        document.getElementById('accountInitials').style.display = 'none';
+    } else {
+        document.getElementById('accountPhoto').style.display = 'none';
+        document.getElementById('accountInitials').style.display = 'block';
+    }
 
     document.getElementById('name').value = loggedInUser.name;
     document.getElementById('mail').value = loggedInUser.email;
@@ -187,10 +187,10 @@ function htmlacountForm() {
     document.querySelector('.addNewContactimg').style.display = 'none';
 
     document.querySelector('.two-buttons').innerHTML = `
-        <button type="button" class="cancel-button" style="width: 250px;" onclick="deleteContact(${userIndex})">
-            Delete my account
-            <img class="close-button" src="assets/IMG/iconoir_cancel.png">
-        </button>
+       <button type="button" class="cancel-button" style="width: 250px;" onclick="openDeleteModal()">
+    Delete my account
+    <img class="close-button" src="assets/IMG/iconoir_cancel.png">
+</button>
         <button type="button" class="createContact-button" onclick="htmlEditAccountForm(${userIndex})">
             Edit
             <img src="assets/IMG/check.svg">
@@ -208,7 +208,7 @@ function htmlEditAccountForm(userIndex) {
     document.getElementById('mail').disabled = false;
     document.getElementById('telephone').disabled = false;
 
-    document.querySelector('.addcontactheadline').textContent = 'My account';
+    document.querySelector('.addcontactheadline').textContent = 'Edit account';
 
     // Buttons mit bestehenden Funktionen verdrahten
     document.querySelector('.two-buttons').innerHTML = `
@@ -236,3 +236,22 @@ function goToLogin() {
     window.location.href = 'login.html';
     localStorage.clear();
 }
+
+
+function openDeleteModal() {
+    document.getElementById('deleteAccountModal').style.display = 'flex';
+}
+
+function closeDeleteModal() {
+    document.getElementById('deleteAccountModal').style.display = 'none';
+}
+
+async function confirmDeleteAccount() {
+    closeDeleteModal();
+    let loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+    let userIndex = contactsArray.findIndex(c => c.email === loggedInUser.email);
+    await deleteContact(userIndex);
+    localStorage.removeItem('loggedInUser');
+    window.location.href = 'login.html';
+}
+

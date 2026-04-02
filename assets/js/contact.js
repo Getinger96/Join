@@ -227,25 +227,28 @@ function displayEditContactLogo(contactsName, contactLastname, color) {
         </div>`;
 }
 /**
- * Displays the logo of the contact being edited.
- * @param {string} contactsName - The name of the contact.
- * @param {string} contactLastname - The last name of the contact.
- * @param {string} color - Background color for the contact icon.
+ * Opens the edit form for a contact by index.
+ * @param {number} index - The index of the contact in contactsArray.
  */
 function htmlEditForm(index) {
     let contact = contactsArray[index];
+    let color = colors[index % colors.length];
+    changehtmlaccountform(color, contact, index);
+}
 
-    document.querySelector('.addcontactheadline').textContent = 'Edit Contact';
-    document.querySelector('.addcontactsecondline').style.display = 'none';
-    document.getElementById('name').value = contact.name;
-    document.getElementById('mail').value = contact.email;
-    document.getElementById('telephone').value = contact.phone;
-    document.querySelector('.createContact-button').innerHTML = 'Save <img src="./assets/IMG/check.svg" alt="Save Icon" class="button-icon" style="margin-left: 8px;">';
-    document.querySelector('.addNewContactimg').style.display = 'none';
 
-    let newContactOverlay = document.getElementById('newContact');
-    newContactOverlay.classList.add('transition-in-from-right');
-    newContactOverlay.style.display = 'flex';
+
+/**
+ * Handles photo upload for a contact, compresses and saves it.
+ * @param {Event} event - The file input change event.
+ * @param {number} index - The index of the contact in contactsArray.
+ */
+async function handleContactPhotoUpload(event, index) {
+    const file = event.target.files[0];
+    if (!file || !file.type.startsWith('image/')) return;
+    const reader = new FileReader();
+    reader.onload = (e) => loadImage(e.target.result, index);
+    reader.readAsDataURL(file);
 }
 /**
  * Sets up actions for the edit contact modal, including save and delete actions.
@@ -263,28 +266,7 @@ function editFunctionAction(index) {
     };
 }
 
-function closeCardContactzero() {
-    const newContactOverlay = document.getElementById('newContact');
-    newContactOverlay.style.display = 'none';
-    newContactOverlay.classList.remove('transition-in-from-right');
 
-    const cancelButton = document.querySelector('.cancel-button');
-    cancelButton.innerHTML = 'Cancel <img src="assets/IMG/iconoir_cancel.png" alt="Cancel Icon" class="close-button" style="margin-left: 8px;">';
-    cancelButton.onclick = closeCardContact;
-    cancelButton.style.display = 'flex';
-
-    document.querySelector('.addcontactheadline').textContent = 'Add Contact';
-    document.querySelector('.addcontactsecondline').style.display = 'flex';
-    document.getElementById('name').value = '';
-    document.getElementById('mail').value = '';
-    document.getElementById('telephone').value = '';
-
-    let createButton = document.querySelector('.createContact-button');
-    createButton.innerHTML = 'Create Contact <img src="assets/IMG/check.svg" alt="Create Icon" class="button-icon" style="margin-left: 8px;">';
-    document.querySelector('.addNewContactimg').style.display = 'block';
-
-    renderContacts();
-}
 
 /**
  * Edits an existing contact based on the index provided.
@@ -339,32 +321,35 @@ function resetContactForm() {
 }
 
 /**
- * Closes the overlay and resets the contact form.
+ * Closes the overlay and resets the contact form, badge and inputs.
  */
 function closeOverlay() {
-    const newContactOverlay = document.getElementById('newContact');
-    newContactOverlay.style.display = 'none';
-    newContactOverlay.classList.remove('transition-in-from-right');
+    closeOverlayAnimation();
+    resetCancelButton();
+    resetBadge();
+    resetInputs();
+    resetContactForm();
+    renderContacts();
+}
 
-    const cancelButton = document.querySelector('.cancel-button');
-    cancelButton.innerHTML = 'Cancel <img src="assets/IMG/iconoir_cancel.png" alt="Cancel Icon" class="close-button" style="margin-left: 8px;">';
-    cancelButton.onclick = closeCardContact;
-    cancelButton.style.display = 'flex';
-
-    // Badge zurücksetzen
+/**
+ * Resets the badge to its default empty state.
+ */
+function resetBadge() {
     document.getElementById('accountBadgeSide').style.display = 'none';
     document.getElementById('accountPhoto').style.display = 'none';
     document.getElementById('accountPhoto').src = '';
     document.getElementById('accountInitials').style.display = 'block';
     document.getElementById('accountInitials').textContent = '';
+}
 
-    // Inputs wieder aktivieren
+/**
+ * Re-enables all contact form input fields.
+ */
+function resetInputs() {
     document.getElementById('name').disabled = false;
     document.getElementById('mail').disabled = false;
     document.getElementById('telephone').disabled = false;
-
-    resetContactForm();
-    renderContacts();
 }
 
 /**
@@ -391,37 +376,29 @@ function clearBigContactView() {
     showContacts.innerHTML = '';
 }
 
-
+/**
+ * Handles photo upload for the logged in user account.
+ * @param {Event} event - The file input change event.
+ */
 async function handlePhotoUpload(event) {
     const file = event.target.files[0];
     if (!file || !file.type.startsWith('image/')) return;
-
     const reader = new FileReader();
-    reader.onload = async function (e) {
-        const base64 = e.target.result;
-
-        // Badge aktualisieren
-        document.getElementById('accountPhoto').src = base64;
-        document.getElementById('accountPhoto').style.display = 'block';
-        document.getElementById('accountInitials').style.display = 'none';
-
-        // localStorage updaten
-        let loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
-        loggedInUser.photo = base64;
-        localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
-
-        // In Firebase speichern
-        await putData(`contacts/${loggedInUser.id}`, {
-            name: loggedInUser.name,
-            email: loggedInUser.email,
-            password: loggedInUser.password,
-            phone: loggedInUser.phone,
-            photo: base64
-        });
-    };
+    reader.onload = (e) => saveAccountPhoto(e.target.result);
     reader.readAsDataURL(file);
 }
 
-
-
-
+/**
+ * Updates the badge UI, localStorage and Firebase with the new photo.
+ * @param {string} base64 - The base64 encoded image.
+ */
+async function saveAccountPhoto(base64) {
+    updateBadgeUI(base64);
+    let loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+    loggedInUser.photo = base64;
+    localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
+    await putData(`contacts/${loggedInUser.id}`, {
+        name: loggedInUser.name, email: loggedInUser.email,
+        password: loggedInUser.password, phone: loggedInUser.phone, photo: base64
+    });
+}

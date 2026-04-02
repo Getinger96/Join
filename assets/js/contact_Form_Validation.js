@@ -360,7 +360,7 @@ async function saveEditedContact(index) {
 
     Object.assign(contactsArray[index], { name, email, phone });
 
-    await putData(`contacts/${key}`, { name, email, phone, password });
+    await putData(`contacts/${key}`, { name, email, phone, password , photo: contactsArray[index].photo || null });
 
     // localStorage updaten falls es der eingeloggte User ist
     let loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
