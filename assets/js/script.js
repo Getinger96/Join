@@ -149,78 +149,78 @@ function checkIfLoggedIn() {
     }
 }
 
+/**
+ * Opens the account form in read-only mode with badge and account buttons.
+ */
 function htmlacountForm() {
-    let loggedInUser = localStorage.getItem('loggedInUser');
-    if (loggedInUser) {
-        loggedInUser = JSON.parse(loggedInUser);
-    } else {
-        return;
-    }
-
+    let loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+    if (!loggedInUser) return;
     let userIndex = contactsArray.findIndex(c => c.email === loggedInUser.email);
+    setAccountFormFields(loggedInUser);
+    setAccountBadge(loggedInUser);
+    setAccountButtons(userIndex);
+    openOverlay();
+}
 
+/**
+ * Fills and disables the form fields with the logged in user's data.
+ * @param {Object} loggedInUser - The logged in user object.
+ */
+function setAccountFormFields(loggedInUser) {
     document.querySelector('.addcontactheadline').textContent = 'My account';
     document.querySelector('.addcontactsecondline').style.display = 'none';
-
-    // Badge anzeigen + Initialen setzen
-    document.getElementById('accountBadgeSide').style.display = 'flex';
-    const initials = loggedInUser.name.split(' ').map(n => n[0].toUpperCase()).join('');
-    document.getElementById('accountInitials').textContent = initials;
-
-    if (loggedInUser.photo) {
-        document.getElementById('accountPhoto').src = loggedInUser.photo;
-        document.getElementById('accountPhoto').style.display = 'block';
-        document.getElementById('accountInitials').style.display = 'none';
-    } else {
-        document.getElementById('accountPhoto').style.display = 'none';
-        document.getElementById('accountInitials').style.display = 'block';
-    }
-
+    document.querySelector('.addNewContactimg').style.display = 'none';
     document.getElementById('name').value = loggedInUser.name;
     document.getElementById('mail').value = loggedInUser.email;
     document.getElementById('telephone').value = loggedInUser.phone;
-
     document.getElementById('name').disabled = true;
     document.getElementById('mail').disabled = true;
     document.getElementById('telephone').disabled = true;
-
-    document.querySelector('.addNewContactimg').style.display = 'none';
-
-    document.querySelector('.two-buttons').innerHTML = `
-       <button type="button" class="cancel-button" style="width: 250px;" onclick="openDeleteModal()">
-    Delete my account
-    <img class="close-button" src="assets/IMG/iconoir_cancel.png">
-</button>
-        <button type="button" class="createContact-button" onclick="htmlEditAccountForm(${userIndex})">
-            Edit
-            <img src="assets/IMG/check.svg">
-        </button>
-    `;
-
-    let newContactOverlay = document.getElementById('newContact');
-    newContactOverlay.classList.add('transition-in-from-right');
-    newContactOverlay.style.display = 'flex';
 }
 
+/**
+ * Shows the badge with initials or photo for the logged in user.
+ * @param {Object} loggedInUser - The logged in user object.
+ */
+function setAccountBadge(loggedInUser) {
+    const initials = loggedInUser.name.split(' ').map(n => n[0].toUpperCase()).join('');
+    document.getElementById('accountBadgeSide').style.display = 'flex';
+    document.getElementById('accountInitials').textContent = initials;
+    document.getElementById('accountPhoto').src = loggedInUser.photo || '';
+    document.getElementById('accountPhoto').style.display = loggedInUser.photo ? 'block' : 'none';
+    document.getElementById('accountInitials').style.display = loggedInUser.photo ? 'none' : 'block';
+}
+
+/**
+ * Renders the delete and edit buttons for the account form.
+ * @param {number} userIndex - The index of the logged in user in contactsArray.
+ */
+function setAccountButtons(userIndex) {
+    document.querySelector('.two-buttons').innerHTML = `
+        <button type="button" class="cancel-button" style="width:250px;" onclick="openDeleteModal()">
+            Delete my account <img class="close-button" src="assets/IMG/iconoir_cancel.png">
+        </button>
+        <button type="button" class="createContact-button" onclick="htmlEditAccountForm(${userIndex})">
+            Edit <img src="assets/IMG/check.svg">
+        </button>`;
+}
+
+/**
+ * Switches the account form to edit mode.
+ * @param {number} userIndex - The index of the logged in user in contactsArray.
+ */
 function htmlEditAccountForm(userIndex) {
-    // Felder wieder aktivieren
+    document.querySelector('.addcontactheadline').textContent = 'Edit account';
     document.getElementById('name').disabled = false;
     document.getElementById('mail').disabled = false;
     document.getElementById('telephone').disabled = false;
-
-    document.querySelector('.addcontactheadline').textContent = 'Edit account';
-
-    // Buttons mit bestehenden Funktionen verdrahten
     document.querySelector('.two-buttons').innerHTML = `
         <button type="button" class="cancel-button" onclick="closeCardContact()">
-            Cancel
-            <img class="close-button" src="assets/IMG/iconoir_cancel.png">
+            Cancel <img class="close-button" src="assets/IMG/iconoir_cancel.png">
         </button>
         <button type="button" class="createContact-button" onclick="saveEditedContact(${userIndex})">
-            Save
-            <img src="assets/IMG/check.svg">
-        </button>
-    `;
+            Save <img src="assets/IMG/check.svg">
+        </button>`;
 }
 /**
  * Navigates the user to the summary page.
@@ -238,20 +238,35 @@ function goToLogin() {
 }
 
 
+/**
+ * Opens the delete account confirmation modal.
+ */
 function openDeleteModal() {
     document.getElementById('deleteAccountModal').style.display = 'flex';
 }
 
+/**
+ * Closes the delete account confirmation modal.
+ */
 function closeDeleteModal() {
     document.getElementById('deleteAccountModal').style.display = 'none';
 }
 
+/**
+ * Deletes the logged in user's account and redirects to login.
+ */
 async function confirmDeleteAccount() {
     closeDeleteModal();
+    await deleteLoggedInUser();
+    window.location.href = 'login.html';
+}
+
+/**
+ * Finds and deletes the logged in user from Firebase and clears localStorage.
+ */
+async function deleteLoggedInUser() {
     let loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
     let userIndex = contactsArray.findIndex(c => c.email === loggedInUser.email);
     await deleteContact(userIndex);
     localStorage.removeItem('loggedInUser');
-    window.location.href = 'login.html';
 }
-
