@@ -13,7 +13,7 @@
 
   .add_task_content {
     margin-left: 220px;
-    margin-top: 180px;
+    margin-top: 80px;
 
   }
 
@@ -47,7 +47,7 @@
     margin-left: 220px;
     display: flex;
     gap: 525px;
-    margin-top: 16px;
+    margin-top: 140px;
 
   }
 }
@@ -55,14 +55,14 @@
 @media (max-width: 1230px) {
   .add_task_content {
     margin-left: 98px;
-    margin-top: 130px;
+    margin-top: 80px;
   }
 
   .Btn_Container {
     margin-left: 98px;
     display: flex;
     gap: 525px;
-    margin-top: 40px;
+    margin-top: 140px;
   }
 }
 
@@ -94,6 +94,11 @@
     flex-direction: column;
     align-items: center;
   }
+
+  .File_Upload_Container {
+    
+    margin-top: 130px;
+}
 
   .dividing_Line {
     width: 0px;
@@ -154,6 +159,16 @@
   .showShubtaskError {
     margin-left: 29px;
   }
+
+  .File_Upload_Container {
+    width: 280px;
+    
+}
+
+.upload_button_container {
+    width: 280px;
+    
+}
 
   .ForwardingBoard {
     width: 240px;
