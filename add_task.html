@@ -115,16 +115,15 @@
                         <span style="font-size: 13px; opacity: 0.9;">Nur JPEG und PNG sind erlaubt.</span>
                         <button class="close-btn" onclick="hideToast()">&#x2715;</button>
                     </div>
-                    <div class="upload_button_container" onclick="document.getElementById('Filepicker').click()">
+                    <button class="upload_button_container" onclick="document.getElementById('Filepicker').click()">
                         <span class="upload_button_text">Drag a file or Browse</span>
                         <img src="./assets/IMG/plus button mobile.png" alt="">
-                        <input type="file" id="Filepicker" accept="image/*" style="display: none;"
-                            onchange="handleFileChange()">
-                    </div>
+                    </button>
 
-                    <div id="uploaded_Files" class="Uploaded_FIles_Container">
+                    <input type="file" id="Filepicker" accept="image/*" style="display: none;"
+                        onchange="handleFileChange()">
 
-                    </div>
+                    <div id="uploaded_Files" class="Uploaded_FIles_Container"></div>
 
                 </div>
 

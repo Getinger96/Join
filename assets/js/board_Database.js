@@ -169,7 +169,7 @@ async function deleteTask(task) {
 /**
  * Edits a task by populating form fields and rendering contacts.
  * @param {number} index Index of the task to edit
- */ 
+ */
 async function EditData(index) {
     openTask(index);
     let task = tasksArray[index];
@@ -181,12 +181,13 @@ async function EditData(index) {
     let category = task.Category;
     let subtask = task.subtask;
     let status = task.status;
+    let files = task.files || [];
     currentCategory = status;
     getContacts();
     closeoverlayedit(index);
-    
+
     renderAssignedContacts(assignedContacts);
-    populateTaskFields(title, description, dueDate, priority, category, subtask, index);
+    populateTaskFields(title, description, dueDate, priority, category, subtask, index, files);
 }
 
 
@@ -200,8 +201,9 @@ async function EditData(index) {
  * @param {string} category Task category
  * @param {Array} subtask Task subtasks
  * @param {number} index Task index
+ * @param {Array} files Task files
  */
-function populateTaskFields(title, description, dueDate, priority, category, subtask, index) {
+function populateTaskFields(title, description, dueDate, priority, category, subtask, index, files) {
     let tasktitle = document.getElementById('taskTitle');
     tasktitle.value = title;
     let taskdescription = document.getElementById('description');
@@ -211,6 +213,19 @@ function populateTaskFields(title, description, dueDate, priority, category, sub
     setPriority(priority);
     let taskCategory = document.getElementById('kategorie');
     taskCategory.value = category;
+    console.log(files[0]);
+    let filesContainer = document.getElementById('uploaded_Files');
+    filesContainer.innerHTML = '';
+    files.forEach(file => {
+    filesContainer.innerHTML += `
+        <div class="uploaded_file_item">
+            <img src="${file.base64}" alt="${file.filename}" style="width:50px; height:50px; object-fit:cover; border-radius:4px;" />
+            <span>${file.filename.slice(0, 5)}</span>
+            <button onclick="removeFile(this, '${file.filename}')">✕</button>
+        </div>
+    `;
+});
+    allfiles = files;
 
     subtasks = subtask;
     addSubtask();
@@ -237,21 +252,21 @@ function setPriority(priority) {
  * @param {number} index Index of the task to edit
  */
 async function createEdittask(index) {
-        let tasktitle = document.getElementById('taskTitle');
-        let taskdescription = document.getElementById('description');
-        let taskDAte = document.getElementById('taskDueDate');
-        let taskCategory = document.getElementById('kategorie');
-        let task = tasksArray[index];
-        let status = task.status
-        let key = task.taskKey;
-        
-        if (!validateTask(tasktitle, taskCategory, taskDAte)) {
-            return;
-        } else{ 
-            createEdittaskPut(tasktitle, taskdescription, taskDAte, taskCategory, task, status, key)
-        }
-            
+    let tasktitle = document.getElementById('taskTitle');
+    let taskdescription = document.getElementById('description');
+    let taskDAte = document.getElementById('taskDueDate');
+    let taskCategory = document.getElementById('kategorie');
+    let task = tasksArray[index];
+    let status = task.status
+    let key = task.taskKey;
+
+    if (!validateTask(tasktitle, taskCategory, taskDAte)) {
+        return;
+    } else {
+        createEdittaskPut(tasktitle, taskdescription, taskDAte, taskCategory, task, status, key)
     }
+
+}
 
 /**
  * Sends an updated task to the server.
@@ -262,10 +277,10 @@ async function createEdittask(index) {
  * @param {Object} task Task data
  * @param {string} status Task status
  * @param {string} key Task unique key
- */    
-async function createEdittaskPut(tasktitle, taskdescription, taskDAte, taskCategory, task, status, key) {   
+ */
+async function createEdittaskPut(tasktitle, taskdescription, taskDAte, taskCategory, task, status, key) {
     let editedTASk = {
-        
+
         Titel: tasktitle.value,
         Description: taskdescription.value,
         AssignedContact: assignedContacts,
@@ -279,30 +294,30 @@ async function createEdittaskPut(tasktitle, taskdescription, taskDAte, taskCateg
     closeTask();
     closeOverlay();
     await fetchTasks();
-    }
+}
 
 /**
  * Closes the task overlay and resets the form.
  */
 function closeTask() {
-        let boardAddTask = document.getElementById('boardAddTask');
-        let darkOverlay = document.getElementById('darkOverlay');
-    
-        boardAddTask.classList.remove('visible');
-        darkOverlay.classList.remove('visible');
-        document.body.style.overflow = 'auto';
-    
-        clearTask();
-        clearMissingFieldContent();
-        returnColorPrioIcons();
-        location.reload();
-    }
-    
+    let boardAddTask = document.getElementById('boardAddTask');
+    let darkOverlay = document.getElementById('darkOverlay');
 
-    
+    boardAddTask.classList.remove('visible');
+    darkOverlay.classList.remove('visible');
+    document.body.style.overflow = 'auto';
+
+    clearTask();
+    clearMissingFieldContent();
+    returnColorPrioIcons();
+    location.reload();
+}
 
 
-  
+
+
+
+
 
 
 
