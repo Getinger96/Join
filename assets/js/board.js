@@ -374,16 +374,19 @@ function showTheNameInitialInColorBoard(checkIndexarray, colorid) {
  * @param {string} color - The color name to convert.
  */
 function convertToValidColor(color) {
+    if (color && color.startsWith('#')) {
+        return color;
+    }
+    
     const colorMap = {
-        "hellorange": "#FFA07A",
-        "türkis": "#40E0D0",
+        "hellorange": "#FF8F33",
+        "türkis": "#33FFF3",
         "gelb": "#FFC300",
-        "grün": "#008000",
-        "blau": "#0000FF",
+        "grün": "#33FF57",
+        "blau": "#3357FF",
         "pink": "#FF33A1",
         "orange": "#FF5733",
         "lila": "#A133FF"
     };
-    return colorMap[color];
+    return colorMap[color] || '#aaaaaa';
 }
-

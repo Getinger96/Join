@@ -10,15 +10,8 @@
     <link rel="stylesheet" href="./Styles/fontStyles.css">
     <link rel="stylesheet" href="./Styles/summary.css">
     <link rel="stylesheet" href="./Styles/mobile_tamplate.css">
-    <script src="./assets/js/script.js"></script>
-    <script src="./assets/js/script_Template.js"></script>
-    <script src="./assets/js/board_Fetch_Task.js"></script>
-    <script src="./assets/js/board_Database.js"></script>
-    <script src="./assets/js/board.js"> </script>
-    <script src="./assets/js/board_Card.js"> </script>
-    <script src="./assets/js/summary.js"> </script>
-    <script src="./assets/js/script_Sidebar.js"></script>
-    <script src="./assets/js/board_Contact.js"></script>
+    <link rel="stylesheet" href="./Styles/contact.css">
+
 
     <link rel="icon" type="image/x-icon" href="./assets/IMG/Capa 2.png" />
 </head>
@@ -178,6 +171,82 @@
 
 
 
+
+        <div class="newContact" id="newContact" style="display:none;">
+            <div class="contactCars-overview">
+                <div class="leftside">
+                    <div class="leftsidehead">
+                        <img class="newCard-logo" src="assets/IMG/Capa 1.png" alt="">
+                        <h2 class="addcontactheadline">Add contact</h2>
+                        <span class="addcontactsecondline">Tasks are better with a team!</span>
+                        <div class="hrdiv">
+                            <hr class="hrnewcontact">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="right-side">
+                    <div class="account-badge-side" id="accountBadgeSide" style="display:none;">
+                        <div class="account-badge" id="accountBadge">
+                            <span id="accountInitials"></span>
+                            <img id="accountPhoto" src=""
+                                style="display:none; width:100%; height:100%; border-radius:50%; object-fit:cover;">
+                        </div>
+                        <label for="photoUpload" class="upload-label">
+                            <img src="assets/IMG/camera.png" alt="Upload" style="width:20px;">
+                        </label>
+                        <input type="file" id="photoUpload" accept="image/*" style="display:none;"
+                            onchange="handlePhotoUpload(event)">
+                    </div>
+
+                    <img src="assets/IMG/Close.svg" alt="Close" class="closethewindow-button"
+                        onclick="closeCardContact()">
+                    <div class="contactlogo">
+                        <img class="addNewContactimg" src="assets/IMG/Group 13.png" alt="NewContactLogo">
+
+                        <form onsubmit="return false;" id="contactForm">
+                            <div class="input-container">
+                                <div class="input-field name-icon" id="textInput">
+                                    <input type="text" id="name" name="Name" placeholder="Name" required>
+                                    <img src="assets/IMG/person.svg" alt="Person Icon" class="input-icon">
+                                </div>
+                                <div id="wrongText"></div>
+
+                                <div class="input-fieldmail mail-icon" id="mailInput">
+                                    <input type="email" id="mail" name="Email" placeholder="Email" required>
+                                    <img src="assets/IMG/mail.svg" alt="Mail Icon" class="input-icon">
+                                </div>
+                                <div id="wrongEmail"></div>
+
+                                <div class="input-fieldphone phone-icon" id="phoneInput">
+                                    <input type="tel" id="telephone" name="Phone" placeholder="Phone" required>
+                                    <img src="assets/IMG/call.svg" alt="Call Icon" class="input-icon">
+                                </div>
+                                <div id="wrongPhone"></div>
+                            </div>
+                            <div class="two-buttons">
+                                <button type="button" class="cancel-button" onclick="closeCardContact()">Cancel<img
+                                        class="close-button" src="assets/IMG/iconoir_cancel.png"></button>
+                                <button onclick="saveEditedContact()" type="submit" class="createContact-button">Create
+                                    Contact<img src="assets/IMG/check.svg"></button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="./assets/js/contact_Template.js"></script>
+        <script src="./assets/js/contact.js"></script> <!-- ← neu -->
+        <script src="./assets/js/script.js"></script>
+        <script src="./assets/js/script_Template.js"></script>
+        <script src="./assets/js/board_Fetch_Task.js"></script>
+        <script src="./assets/js/board_Database.js"></script>
+        <script src="./assets/js/board.js"></script>
+        <script src="./assets/js/board_Card.js"></script>
+        <script src="./assets/js/summary.js"></script>
+        <script src="./assets/js/script_Sidebar.js"></script>
+        <script src="./assets/js/board_Contact.js"></script>
 </body>
 
 </html>

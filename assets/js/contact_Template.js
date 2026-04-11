@@ -158,7 +158,7 @@ function setFormFields(contact) {
     document.querySelector('.addcontactsecondline').style.display = 'none';
     document.getElementById('name').value = contact.name;
     document.getElementById('mail').value = contact.email;
-    document.getElementById('telephone').value = contact.phone;
+    document.getElementById('telephone').value = contact.phone|| '+1234567890';
     document.querySelector('.createContact-button').innerHTML = 'Save <img src="./assets/IMG/check.svg">';
     document.querySelector('.addNewContactimg').style.display = 'none';
 }

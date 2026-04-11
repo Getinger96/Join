@@ -128,7 +128,7 @@ function addContactBadge(container, contact, contactName, index) {
     let contactColour = contact.color;
     let firstletters = contactName.charAt(0).toUpperCase() + getLastName(contactName).charAt(0).toUpperCase();
     container.innerHTML += `
-        <div id="profile_Badge_assign${index}" class="profile_Badge_assign ${contactColour}">${firstletters}</div>
+        <div id="profile_Badge_assign${index}" class="profile_Badge_assign" style="background-color: ${contactColour};">${firstletters}</div>
     `;
 }
 /**
@@ -184,11 +184,11 @@ function showSelectedProfileEdit(name) {
  * @returns {*}
  */
 function showselectedProfileContainer(index, color, firstletters) {
-  return `
-    <div id="profilebadge_Assign${index}" class="contact-icon${index} ${color} profilebadge">
-        <div>${firstletters}</div>
-    </div>
-`;
+    return `
+        <div id="profilebadge_Assign${index}" class="profilebadge" style="background-color: ${color};">
+            <div>${firstletters}</div>
+        </div>
+    `;
 }
 
 /**
@@ -236,31 +236,7 @@ function handleExtraContacts(container, count) {
     }
 }
 
-/**
- * Fetches contacts from the server and organizes them.
- * @param {string} patha API 
- */
-async function fetchContacts(path = '') {
-    let response = await fetch(base_URL + path + ".json");
-    let userJSON = await response.json();
-    let userAsArray = Object.values(userJSON.contacts);
 
-    for (let index = 0; index < userAsArray.length; index++) {
-        let contact = userAsArray[index];
-        let colorIndex = index % colors.length;
-        let color = colors[colorIndex]
-        let alreadyExists = contactsArray.some(existingContact => existingContact.name === contact.name);
-
-        if (!alreadyExists && contact.email !== 'guest@web.de') {
-            contactsArray.push({
-                name: contact.name,
-                color: color,
-            });
-
-        }
-
-    }
-}
 /**
  * Retrieves the last name from a full name.
  * @param {string} fullName Full name of the contact
@@ -309,11 +285,12 @@ function generateSmallContactsHtml(assignedContacts) {
     let contactsHtml = '';
     assignedContacts.forEach((contact, index) => {
         let contactParts = contact.split(' ');
-        let contactFirstname = contactParts[0] || '';  
-        let contactLastname = contactParts.slice(1).join(' ') || '';  
+        let contactFirstname = contactParts[0] || '';
+        let contactLastname = contactParts.slice(1).join(' ') || '';
 
-        const color = getRandomColorForContact(); 
-        contactsHtml += getSmallContactHtml(index, contactFirstname, contactLastname, color); 
+        let foundContact = contactsArray.find(c => c.name === contact);
+        let color = foundContact ? foundContact.color : '#aaaaaa'; // ← echte Farbe statt random
+        contactsHtml += getSmallContactHtml(index, contactFirstname, contactLastname, color);
     });
     return contactsHtml;
 }

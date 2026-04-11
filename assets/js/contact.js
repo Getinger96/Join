@@ -20,6 +20,7 @@ async function fetchContacts(path = '') {
     let userJSON = await response.json();
     let keysArray = Object.keys(userJSON.contacts);
     let userAsArray = Object.values(userJSON.contacts);
+    let colorCounter = 0; // ← eigener Zähler
 
     for (let index = 0; index < userAsArray.length; index++) {
         let contact = userAsArray[index];
@@ -29,14 +30,15 @@ async function fetchContacts(path = '') {
 
         if (contact.email !== "guest@web.de" && checkMailContact.length > 0) {
             contactsArray.push({
-
                 id: key,
                 email: contact.email,
                 name: contact.name,
                 password: contact.password,
                 phone: contact.phone,
-                photo: contact.photo || null  // ← neu
+                photo: contact.photo || null,
+                color: colors[colorCounter % colors.length] // ← neu
             });
+            colorCounter++; // ← nur hochzählen wenn Kontakt hinzugefügt wird
         }
     };
 
@@ -323,13 +325,22 @@ function resetContactForm() {
 /**
  * Closes the overlay and resets the contact form, badge and inputs.
  */
-function closeOverlay() {
-    closeOverlayAnimation();
-    resetCancelButton();
+function closeContactOverlay() {
+    let overlay = document.getElementById('newContact');
+    if (overlay) {
+        overlay.style.display = 'none';                    // ← Overlay verstecken
+        overlay.classList.remove('transition-in-from-right'); // ← Animation zurücksetzen
+    }
+    
+   
     resetBadge();
     resetInputs();
     resetContactForm();
-    renderContacts();
+    
+    // renderContacts nur aufrufen wenn das Element existiert (nicht auf summary.html)
+    if (document.getElementById('contactview')) {
+        renderContacts();
+    }
 }
 
 /**
@@ -356,9 +367,9 @@ function resetInputs() {
  * Closes the contact form overlay and resets the form fields and warning messages.
  */
 function closeCardContact() {
-    closeOverlay();
+    closeContactOverlay();
     resetContactForm();
-    closeAllWarningMessage();
+    
 }
 
 /**

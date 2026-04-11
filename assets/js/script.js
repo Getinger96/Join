@@ -156,10 +156,11 @@ function htmlacountForm() {
     let loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
     if (!loggedInUser) return;
     let userIndex = contactsArray.findIndex(c => c.email === loggedInUser.email);
+    openOverlay();
     setAccountFormFields(loggedInUser);
     setAccountBadge(loggedInUser);
     setAccountButtons(userIndex);
-    openOverlay();
+
 }
 
 /**
@@ -172,7 +173,7 @@ function setAccountFormFields(loggedInUser) {
     document.querySelector('.addNewContactimg').style.display = 'none';
     document.getElementById('name').value = loggedInUser.name;
     document.getElementById('mail').value = loggedInUser.email;
-    document.getElementById('telephone').value = loggedInUser.phone;
+    document.getElementById('telephone').value = loggedInUser.phone|| '+1234567890';
     document.getElementById('name').disabled = true;
     document.getElementById('mail').disabled = true;
     document.getElementById('telephone').disabled = true;

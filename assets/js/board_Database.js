@@ -1,18 +1,4 @@
-let colors = [
-    'orange',
-    'gelb',
-    'grün',
-    'türkis',
-    'blau',
-    'lila',
-    'pink',
-    'hellorange'
-];
 
-const base_URL = "https://join-37803-default-rtdb.europe-west1.firebasedatabase.app/";
-let contactsArray = [];
-let beginningLetter = [];
-let groupedContacts = [];
 let assignedContacts = [];
 let currentPriority = 'none';
 let currentCategory = 'open';
