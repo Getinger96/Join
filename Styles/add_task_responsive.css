@@ -9,11 +9,90 @@
     margin-top: 0px;
   }
 
-  
+  .Title_Header {
+    font-size: 18px;
+  }
+
+
+  .input_Title {
+
+    height: 40px;
+    font-size: 18px;
+  }
+
+
+  .Description_Container {
+    height: 120px;
+  }
+
+  .Description_Header {
+    font-size: 18px;
+  }
+
+  .input_Description {
+    height: 80px;
+    font-size: 18px;
+  }
+
+  .Date_header {
+    font-size: 18px;
+  }
+
+  .date_Container {
+    margin-bottom: 0px;
+  }
+
+  .input_date {
+    font-size: 18px;
+  }
+
+
+
+  .Prio_Container {
+    margin-top: 0px;
+  }
+
+  .prio_Header {
+    font-size: 18px;
+  }
+
+
+  .Prio_Btn {
+    height: 50px;
+    font-size: 18px;
+  }
+
+
+  .cataegory_Container {
+    margin-top: 0px;
+  }
+
+  .category_Header {
+    font-size: 18px;
+  }
+
+  .Category_Input {
+    font-size: 18px;
+  }
+
+  .Selection_Container_Category {
+    width: 438px;
+  }
+
+  .userStory,
+  .technical_Task {
+    font-size: 18px;
+
+  }
+
+  .dividing_Line {
+    height: 500px;
+
+  }
 
   .add_task_content {
     margin-left: 220px;
-    margin-top: 80px;
+    margin-top: 100px;
 
   }
 
@@ -22,14 +101,14 @@
   }
 
   .addTask_Container {
-    margin-top: 5px;
+    margin-top: 0px;
     padding: 16px;
   }
 
   .headline_addTask {
     padding: 16px;
     margin-top: 0px;
-    font-size: 47px;
+    font-size: 40px;
     line-height: 28.4px;
   }
 
@@ -44,10 +123,8 @@
 
 
   .Btn_Container {
-    margin-left: 220px;
-    display: flex;
-    gap: 525px;
-    margin-top: 140px;
+    margin-left: 235px;
+    margin-top: 20px;
 
   }
 }
@@ -55,14 +132,14 @@
 @media (max-width: 1230px) {
   .add_task_content {
     margin-left: 98px;
-    margin-top: 80px;
+    margin-top: 90px;
   }
 
   .Btn_Container {
     margin-left: 98px;
     display: flex;
     gap: 525px;
-    margin-top: 140px;
+    margin-top: 20px;
   }
 }
 
@@ -96,9 +173,9 @@
   }
 
   .File_Upload_Container {
-    
+
     margin-top: 130px;
-}
+  }
 
   .dividing_Line {
     width: 0px;
@@ -113,9 +190,7 @@
     justify-content: center;
   }
 
-  .clear_Btn {
-    display: none;
-  }
+
 
   .Task_Container_right {
     margin-left: 0px;
@@ -127,6 +202,8 @@
     margin-bottom: 150px;
     align-items: center;
     justify-content: center;
+    margin-top: 80px;
+
   }
 
   .required_info_Container {
@@ -135,7 +212,7 @@
     margin-top: 0px;
     margin-bottom: 0px;
     margin-right: 0px;
-    margin-top: 80px;
+    margin-top: 125px;
   }
 }
 
@@ -162,13 +239,13 @@
 
   .File_Upload_Container {
     width: 280px;
-    
-}
 
-.upload_button_container {
+  }
+
+  .upload_button_container {
     width: 280px;
-    
-}
+
+  }
 
   .ForwardingBoard {
     width: 240px;
@@ -177,7 +254,7 @@
   }
 
   .clear_COntainer {
-    margin-top: 130px;
+    margin-top: 180px;
   }
 
   .subTaskInput {
@@ -338,4 +415,21 @@
     gap: 20px;
     font-size: 14px;
   }
+
+  .clear_Btn {
+    width: 100px;
+    height: 48px;
+    padding: 16px;
+
+    font-size: 18px;
+  }
+
+
+  .Create_Btn {
+    width: 129px;
+    font-size: 16px;
+    padding: 2px;
+    height: 49px;
+  }
+
 }

@@ -24,7 +24,7 @@ body {
 }
 
 .headblock {
-    height: 96px;
+    height: 60px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -320,8 +320,8 @@ a:hover {
     
 
     .headblock {
-        padding: 20px 99px 20px 99px;
-        height: 80px;
+        padding: 20px 99px 20px 260px;
+       
     }
 
    

@@ -4,6 +4,7 @@ let currentPriority = 'none';
 let currentCategory = 'open';
 let path = "tasks";
 let currentStatus;
+let allfiles = []; 
 
 /**
  * Creates a new task and prevents default form submission.
@@ -54,25 +55,26 @@ function clearValidationMessages() {
 function getTaskDetails() {
     let titleElement = document.getElementById('taskTitle');
     let dueDateElement = document.getElementById('taskDueDate');
-    let kategorieElement = document.getElementById('kategorie');
+    let categoryElement = document.getElementById('category');
     let title = titleElement.value.trim();
     let dueDate = dueDateElement.value.trim();
-    let kategorie = kategorieElement.value.trim();
+    let category = categoryElement.value.trim();
     let descriptionElement = document.getElementById('description');
     let description = descriptionElement ? descriptionElement.value.trim() : '';
     let priority = currentPriority;
     let subtask = subtasks;
     let validCategories = ['open', 'progress', 'awaitFeedback', 'closed'];
-    let status = validCategories.includes(kategorie) ? kategorie : 'open';
+    let status = validCategories.includes(category) ? category : 'open';
     return {
         Titel: title,
         Description: description,
         Date: dueDate,
         Prio: priority,
-        Category: kategorie,
+        Category: category,
         Subtask: subtask,
         Status: status,
         AssignedContact: assignedContacts,
+        files: allfiles || [],
     };
 }
 
@@ -275,6 +277,7 @@ async function createEdittaskPut(tasktitle, taskdescription, taskDAte, taskCateg
         Category: taskCategory.value,
         Subtask: subtasks,
         Status: status,
+        files: allfiles || [],
     }
     await putDataEdit(`tasks/${key}`, editedTASk)
     closeTask();
