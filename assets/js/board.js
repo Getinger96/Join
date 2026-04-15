@@ -1,4 +1,4 @@
-
+let isFetchingContacts = false;
 
 /**
  * Updates the view by clearing old elements, updating HTML, and rendering subtasks.
@@ -290,28 +290,39 @@ async function getassignecontacts(task, taskIndex) {
  * @param {number} remainingContacts - The number of remaining contacts to be displayed as a number.
  */
 async function updateGetAssigneContacts(assignedContacts, taskIndex, maxContact, remainingContacts) {
-    for (let index = 0; index < assignedContacts.length; index++) {
-        if (index === maxContact) {
-            break;
-        }
-        let contact = assignedContacts[index];
+    // Kontakte nur einmal laden
+    if (contactsArray.length === 0 && !isFetchingContacts) {
+        isFetchingContacts = true;
+        await fetchContacts();
+        isFetchingContacts = false;
+    } else if (isFetchingContacts) {
+        // Warten bis fetchContacts fertig ist
+        await new Promise(resolve => {
+            let interval = setInterval(() => {
+                if (!isFetchingContacts) {
+                    clearInterval(interval);
+                    resolve();
+                }
+            }, 50);
+        });
+    }
 
-        if (contactsArray.length === 0) {
-            await fetchContacts();
-        }   
+    for (let index = 0; index < assignedContacts.length; index++) {
+        if (index === maxContact) break;
+        let contact = assignedContacts[index];
         let checkIndexarray = contactsArray.findIndex(c => c.name === contact);
         nameParts = contact.split(" ");
         let colorid = `contactIcon_${taskIndex}_${index}`;
 
         if (nameParts.length >= 2) {
-            getAssignCcontactsForAndLastName(taskIndex, nameParts ,colorid)
+            getAssignCcontactsForAndLastName(taskIndex, nameParts, colorid);
         } else {
-            getAssignCcontactsForName(taskIndex, colorid)
+            getAssignCcontactsForName(taskIndex, colorid);
         }
         showTheNameInitialInColorBoard(checkIndexarray, colorid);
     }
     if (assignedContacts.length > 4) {
-        showTheNearestContactsAsNumbers(taskIndex, remainingContacts)
+        showTheNearestContactsAsNumbers(taskIndex, remainingContacts);
     }
 }
 /**

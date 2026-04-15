@@ -101,16 +101,21 @@ function pleaseEnterASubtask() {
  * @param {string} color - Background color for the contact icon.
  */
 function displayContacts(contactIndex, contactsName, contactLastname, selectedClass, color) {
-    return `<div class= "Contact-Container"  id="profile-${contactIndex}" onclick="selectedContact(${contactIndex}, '${color}', '${contactsName}')">
-                <div class="contact-icon ${color} profilebadge">
+    const isSelected = selectedClass === 'selected' || selectedClass === 'bg_color';
+    return `
+        <div class="Contact-Container ${isSelected ? 'bg_color color_white' : ''}" id="profile-${contactIndex}" 
+             onclick="selectedContact(${contactIndex}, '${color}', '${contactsName}')">
+            <div class="profile_container_header">
+                <div class="contact-icon profilebadge" style="background-color: ${color};">
                     <span>${contactsName.charAt(0).toUpperCase()}${contactLastname.charAt(0).toUpperCase()}</span>
                 </div>
-                <div class="contact-content">
-                    <span class="contactname">${contactsName}</span>
-                </div>
-            </div>`;
+                <div>${contactsName}</div>
+            </div>
+            <div id="checkbox${contactIndex}">
+                <img class="check_img" src="./assets/IMG/Check button.svg" alt="">
+            </div>
+        </div>`;
 }
-
 
 /**
  * the function generate the samll contact

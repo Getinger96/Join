@@ -127,6 +127,12 @@
     margin-top: 20px;
 
   }
+
+  .Selection_Container {
+
+    height: 125px;
+
+  }
 }
 
 @media (max-width: 1230px) {
@@ -202,7 +208,7 @@
     margin-bottom: 150px;
     align-items: center;
     justify-content: center;
-    margin-top: 80px;
+    margin-top: 100px;
 
   }
 

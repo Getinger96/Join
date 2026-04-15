@@ -115,7 +115,6 @@ body {
 .Description_Container {
   width: 440px;
   height: 168px;
-  margin-top: 8px;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -406,7 +405,6 @@ body {
   width: 440px;
   height: 96px;
   display: flex;
-  margin-bottom: 8px;
   gap: 8px;
 }
 
@@ -438,7 +436,6 @@ body {
 .Prio_Container {
   width: 440px;
   height: 88px;
-  margin-top: 24px;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -497,7 +494,6 @@ body {
 .cataegory_Container {
   width: 440px;
   height: 80px;
-  margin-top: 16px;
   display: flex;
   flex-direction: column;
   gap: 8px;

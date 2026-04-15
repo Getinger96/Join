@@ -62,10 +62,10 @@ async function includeHTML() {
  * Initializes the application by fetching contacts, including HTML, and checking login status.
  */
 async function init() {
-    fetchContacts();
+    await fetchContacts();
     includeHTML();
     checkIfLoggedIn();
-    fetchTasks();
+    await fetchTasks();
     let loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
     if (loggedInUser) {
         let initials = loggedInUser.name.split(' ').map(n => n[0].toUpperCase()).join('');

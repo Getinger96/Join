@@ -483,7 +483,7 @@ function clearFormFields() {
     description.value = "";
     assignedContacts = [];
     date.value = "";
-    category.innerHTML = "";
+    category.innerHTML = "Select Category";
     subtasks = [];
     prio = [];
 }

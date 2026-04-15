@@ -4,7 +4,7 @@ let currentPriority = 'none';
 let currentCategory = 'open';
 let path = "tasks";
 let currentStatus;
-let allfiles = []; 
+
 
 /**
  * Creates a new task and prevents default form submission.
