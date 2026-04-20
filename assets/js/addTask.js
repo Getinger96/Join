@@ -44,7 +44,8 @@ let d_none = true;
  * This function opens the contact list where you can asigne contacts to a task
  * 
  */
-function openList() {
+function openList(event) {
+    event.stopPropagation();
     let selecCon = document.getElementById('Selection_Container');
     let arrowCon = document.getElementById('arrow_img_container');
     selecCon.classList.toggle('d_none');
@@ -52,6 +53,9 @@ function openList() {
     if (d_none == true) {
         arrowCon.innerHTML = `<img class="arrow_drop_downaa" src="assets/IMG/arrow_drop_up.svg" alt="">`;
         d_none = false;
+        // Fokus auf ersten Kontakt setzen
+        const firstContact = selecCon.querySelector('.profile_Container');
+        if (firstContact) firstContact.focus();
     } else {
         arrowCon.innerHTML = `<img class="arrow_drop_up" src="./assets/IMG/arrow_drop_downaa.svg" alt="">`;
         d_none = true;
@@ -75,28 +79,31 @@ function closelist() {
  * this function opens the list where you can choose the category of the task
  * 
  */
-function openCategoryLIst() {
-
-    let seleCon = document.getElementById('Selection_Container_Category');
-    seleCon.classList.toggle('d_none');
+function openCategoryLIst(event) {
+    event.stopPropagation();
+    const container = document.getElementById('Selection_Container_Category');
+    container.classList.toggle('d_none');
+    if (!container.classList.contains('d_none')) {
+        document.getElementById('userStory').focus();
+    }
 }
 
 /**
  * This function delivers the text "User Story"if you choosed the div wit the category "User Story"
  * 
  */
-function choosedUserStory() {
-
+function choosedUserStory(event) {
+    event.stopPropagation();
     let userStory = document.getElementById('Category');
     userStory.textContent = "User Story";
-    closelistCategory();
+    closelistCategory();    
 }
 /**
  * This function delivers the text "Technical Task"if you choosed the div wit the category "Technical Task"
  * 
  */
 function choosedTechnicalTask() {
-
+    event.stopPropagation();
     let technicalTask = document.getElementById('Category');
     technicalTask.textContent = "Technical Task";
     closelistCategory();
@@ -160,7 +167,7 @@ async function handleFileChange() {
     console.log('handleFileChange aufgerufen')
     const filepicker = document.getElementById('Filepicker');
     const files = filepicker.files;
-     console.log('files:', files)
+    console.log('files:', files)
     const error = document.getElementById('error');
     const container = document.getElementById('uploaded_Files');
     console.log('container:', container);
@@ -200,13 +207,13 @@ async function handleFileChange() {
 }
 
 function showToast() {
-  const toast = document.getElementById('error-toast');
-  toast.classList.add('show');
-  
+    const toast = document.getElementById('error-toast');
+    toast.classList.add('show');
+
 }
 
 function hideToast() {
-  document.getElementById('error-toast').classList.remove('show');
+    document.getElementById('error-toast').classList.remove('show');
 }
 
 function blobToBase64(blob) {

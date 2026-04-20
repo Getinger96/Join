@@ -4,13 +4,16 @@
 function updateContactStyles() {
     for (let i = 0; i < contactsArray.length; i++) {
         const contact = contactsArray[i];
-        const contactContainer = document.getElementById(`profile-${contact.i}`);
-        if (assignedContacts.includes(contact.name)) {
-            return contactContainer.classList.add('bg_color', 'color_white');
-        } 
+        const contactContainer = document.getElementById(`profile-${contact.id}`); // .i → .id
+        if (contactContainer) { // null-check zur Sicherheit
+            if (assignedContacts.includes(contact.name)) {
+                contactContainer.classList.add('bg_color', 'color_white');
+            } else {
+                contactContainer.classList.remove('bg_color', 'color_white'); // reset falls nicht assigned
+            }
+        }
     }
 }
-
 /**
  * the function show contact List-bar
  * @param {*} name contact name

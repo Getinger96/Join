@@ -502,7 +502,7 @@ Button {
     border: 2px solid #e4dedc;
     display: flex;
     justify-content: center;
-    height: 890px;
+    height: 865px;
     width: 1116px;
     overflow-x: hidden;
 }
@@ -516,8 +516,7 @@ Button {
     display: flex;
     justify-content: space-between;
     position: fixed;
-    max-height: 60px;
-
+    max-height: 40px;
     left: 40px;
     right: 50px;
     background-color: white;
@@ -1237,7 +1236,7 @@ li {
 
 .xButton {
     position: absolute;
-    top: 70px;
+    top: 60px;
     width: 32px;
     height: 32px;
     right: 65px;

@@ -7,7 +7,7 @@ let allfiles = [];
  * 
  */
 function openTaskBoard() {
-     addtask = true;
+    addtask = true;
     setTaskPriority();
     toggleTaskBoardVisibility();
 }
@@ -32,7 +32,7 @@ function toggleTaskBoardVisibility() {
     let taskDiv = document.getElementById('boardAddTask');
     let overlay = document.getElementById('darkOverlay');
 
-    if (taskDiv.classList.contains('visible')){
+    if (taskDiv.classList.contains('visible')) {
         showTaskBoard(taskDiv, overlay);
     } else {
         hideTaskBoard(taskDiv, overlay);
@@ -67,11 +67,11 @@ function hideTaskBoard(taskDiv, overlay) {
  * the function goes to AddTask HTML
  */
 function redirect() {
-    let width=window.innerWidth;
-    if (addtask==true) {
+    let width = window.innerWidth;
+    if (addtask == true) {
         if (width < 1230) {
-            window.location="http://127.0.0.1:5500/add_task.html"
-         }
+            window.location = "http://127.0.0.1:5500/add_task.html"
+        }
     }
 }
 /**
@@ -104,7 +104,7 @@ function resetButtons() {
     buttons.forEach(button => {
         let btnElement = document.getElementById(button.id);
         let iconElement = document.getElementById(button.id + "Icon");
-        
+
         btnElement.classList.remove('urgent', 'medium', 'low');
         btnElement.classList.add('default');
         iconElement.src = button.imgSrc;
@@ -124,7 +124,7 @@ function clearTask() {
     clearMissingFieldContent();
     returnColorPrioIcons();
     medium();
-   removeAllFiles()
+    removeAllFiles()
 }
 
 /**
@@ -144,7 +144,7 @@ function clearFormFields() {
     clearSelectionContainer();
     clearInputField('taskTitle');
     clearInputField('description');
-    resetSelectElement('kategorie');
+    resetSelectElement('category');
     clearSubtaskContainer();
     resetSelectElement('select_container');
     clearDateInput();
@@ -171,11 +171,9 @@ function clearInputField(fieldId) {
 /**
  * the function creset select Element
  */
-function resetSelectElement(elementId) {
-    const element = document.getElementById(elementId);
-    if (element) {
-        element.selectedIndex = 0;
-    }
+function resetSelectElement(selectId) {
+    const select = document.getElementById(selectId);
+    select.value = "";  // setzt zurück auf die Placeholder-Option
 }
 /**
  * the function clear subtask Container
@@ -227,7 +225,7 @@ function urgent() {
     let urgentButton = document.getElementById("urgent");
     let urgentIcon = document.getElementById("urgentIcon");
 
-    urgentButton.classList.add("urgent"); 
+    urgentButton.classList.add("urgent");
     urgentIcon.src = "./assets/IMG/iconUrgentWhite.svg";
     currentPriority = 'urgent';
 }
@@ -253,7 +251,7 @@ function low() {
     let lowButton = document.getElementById("low");
     let lowIcon = document.getElementById("lowIcon");
 
-    lowButton.classList.add("low"); 
+    lowButton.classList.add("low");
     lowIcon.src = "./assets/IMG/Prio_LOW_WHITE.svg";
     currentPriority = 'low';
 }
@@ -269,7 +267,7 @@ async function handleFileChange() {
     console.log('handleFileChange aufgerufen')
     const filepicker = document.getElementById('Filepicker');
     const files = filepicker.files;
-     console.log('files:', files)
+    console.log('files:', files)
     const error = document.getElementById('error');
     const container = document.getElementById('uploaded_Files');
     console.log('container:', container);

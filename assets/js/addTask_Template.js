@@ -9,13 +9,16 @@
  */
 function renderContacts(i, contactColour, firstletters, name) {
     return `
-       <div  onclick="selectedContact(${i},'${name}','${firstletters}','${contactColour}')" id="profile_Container${i}" class="profile_Container">
+       <div onclick="selectedContact(event, ${i},'${name}','${firstletters}','${contactColour}')" 
+            onkeydown="if(event.key==='Enter') selectedContact(event, ${i},'${name}','${firstletters}','${contactColour}')"
+            tabindex="0"
+            id="profile_Container${i}" class="profile_Container">
          <div class="profile_container_header">
           <div class="profile_Badge_assign ${contactColour}">${firstletters}</div>
           <div>${name}</div>
          </div>
           <div id="checkbox${i}">
-          <img  class="check_img " src="./assets/IMG/Check button.svg" alt="">
+          <img class="check_img" src="./assets/IMG/Check button.svg" alt="">
          </div>
         </div>`
 }

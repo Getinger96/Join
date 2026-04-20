@@ -204,7 +204,7 @@ setTimeout(() => { window.location.href = "board.html";
 function addSubtask() {
     let list = document.getElementById('ul_subtasks');
     list.innerHTML = ''; 
-    if (subtasks.length <= 0) {
+    if (subtasks.length < 0) {
         document.getElementById(`createNewTask${0}`).style.marginTop = "60px";
     }
 

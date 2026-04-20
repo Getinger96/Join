@@ -50,21 +50,25 @@ function processAndAddContacts(userAsArray, keysArray) {
  * @param {string} firstletters first leter of surname and lastname
  * @param {string} contactColour color of the contactsbadge
  */
-function selectedContact(i, name, firstletters, contactColour) {
+function selectedContact(event, i, name, firstletters, contactColour) {
+    event.stopPropagation();
     let checkbox = document.getElementById(`checkbox${i}`);
-    checkbox.innerHTML = `<img  class="checked_img" src="./assets/IMG/Checked button.svg" alt="">`
+    if (!checkbox) {
+        console.log("checkbox nicht gefunden für id:", `checkbox${i}`);
+        return;
+    }
+    checkbox.innerHTML = `<img class="checked_img" src="./assets/IMG/Checked button.svg" alt="">`;
     let profileContainer = document.getElementById(`profile_Container${i}`);
     profileContainer.classList.toggle('bg_color');
     profileContainer.classList.toggle('color_white');
     profileContainer.classList.toggle('profile_Containerselected');
 
     if (!assignedContacts.includes(name)) {
-        assignedContacts.push(name)
-        showSelectedProfile(firstletters, i, contactColour)
+        assignedContacts.push(name);
+        showSelectedProfile(firstletters, i, contactColour);
     } else {
-        deselctedtContact(i, name)
+        deselctedtContact(i, name);
     }
-    showSelectedProfile();
 }
 
 

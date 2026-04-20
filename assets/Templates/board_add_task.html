@@ -42,8 +42,8 @@
               <p>Category</p> <!-- Geänderte ID -->
               <p class="red">*</p>
             </div>
-            <select class="inputTitle marginTop curser" name="text" id="category" placeholder="Select Category">
-              <!-- Beibehaltene ID -->
+            <select class="inputTitle marginTop curser" name="text" id="category">
+              <option value="" disabled selected hidden>Select Category</option>
               <option value="Technical Task">Technical Task</option>
               <option value="User Story">User Story</option>
             </select>
@@ -77,20 +77,19 @@
             <div id="subtasksContainer"></div>
           </div>
           <div id="SubtaskLengthReached"></div>
-           <div class="AssignedTO_Container">
-          <span class="Assign_Header">Assigned to</span>
-          <div onclick="openList()" id="select_container" class="select_container">
-            <span>Select contacts to assign</span>
-            <div id="arrow_img_container">
-              <img class="arrow_drop_downaa curser" src="assets/IMG/arrow_drop_downaa.svg" alt="" />
+          <div class="AssignedTO_Container">
+            <span class="Assign_Header">Assigned to</span>
+            <div onclick="openList()" id="select_container" class="select_container">
+              <span>Select contacts to assign</span>
+              <div id="arrow_img_container">
+                <img class="arrow_drop_downaa curser" src="assets/IMG/arrow_drop_downaa.svg" alt="" />
+              </div>
             </div>
+            <div id="Selection_Container" class="Selection_Container d_none"></div>
+            <div id="InputFieldsMissing"></div>
+            <div id="Selected_profiles_Container" class="Selected_profiles_Container"></div>
           </div>
-          <div id="Selection_Container" class="Selection_Container d_none"></div>
-          <div id="InputFieldsMissing"></div>
-          <div id="Selected_profiles_Container" class="Selected_profiles_Container"></div>
         </div>
-        </div>
-       
       </div>
       <div class="bottomInfo">
         <div class="bottomInfoEdit">
