@@ -51,9 +51,10 @@ function selectedContact(index, color, name) {
         assignedContacts.push(name);
         showSelectedProfile(color, name, index);
         let contactContainer = document.getElementById(`profile-${index}`);
-        contactContainer.classList.add('bg_color');
-        contactContainer.classList.add('color_white');
+        contactContainer.classList.add('bg_color', 'color_white');
     }
+
+    updateCheckboxImage(index, name); // ✅ hier hinzufügen
 }
 /**
  * the function  deselctedt contact List-bar 

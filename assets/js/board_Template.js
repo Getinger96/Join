@@ -101,7 +101,7 @@ function pleaseEnterASubtask() {
  * @param {string} color - Background color for the contact icon.
  */
 function displayContacts(contactIndex, contactsName, contactLastname, selectedClass, color) {
-    const isSelected = selectedClass === 'selected' || selectedClass === 'bg_color';
+    const isSelected = assignedContacts.includes(contactsName);
     return `
         <div class="Contact-Container ${isSelected ? 'bg_color color_white' : ''}" id="profile-${contactIndex}" 
              onclick="selectedContact(${contactIndex}, '${color}', '${contactsName}')">
@@ -112,9 +112,20 @@ function displayContacts(contactIndex, contactsName, contactLastname, selectedCl
                 <div>${contactsName}</div>
             </div>
             <div id="checkbox${contactIndex}">
-                <img class="check_img" src="./assets/IMG/Check button.svg" alt="">
+                <img class="check_img" src="${isSelected 
+                    ? './assets/IMG/Checked button.svg' 
+                    : './assets/IMG/Check button.svg'}" alt="">
             </div>
         </div>`;
+}
+
+function updateCheckboxImage(index, name) {
+    let checkboxImg = document.querySelector(`#checkbox${index} .check_img`);
+    if (!checkboxImg) return;
+
+    checkboxImg.src = assignedContacts.includes(name)
+        ? './assets/IMG/Checked button.svg'
+        : './assets/IMG/Check button.svg';
 }
 
 /**

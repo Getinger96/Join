@@ -155,10 +155,21 @@
     margin-left: 10px;
     display: flex;
     gap: 510px;
+    margin-top: 10px;
   }
 
   .ForwardingBoard {
     left: 35%;
+  }
+
+  .Selection_Container_Category {
+
+    margin-top: 65px;
+
+  }
+
+  .Selection_Container {
+    height: 105px;
   }
 
   .add_task_content {
@@ -170,6 +181,10 @@
 @media (max-width: 1024px) {
   .clear_COntainer {
     margin-top: 145px;
+  }
+
+  .Selection_Container {
+    height: 140px;
   }
 
   .addTask_Container {
