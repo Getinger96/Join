@@ -263,64 +263,75 @@ function fileupload() {
     filepicker.addEventListener('change', handleFileChange);
 }
 
-async function handleFileChange() {
-    console.log('handleFileChange aufgerufen')
-    const filepicker = document.getElementById('Filepicker');
-    const files = filepicker.files;
-    console.log('files:', files)
-    const error = document.getElementById('error');
-    const container = document.getElementById('uploaded_Files');
-    console.log('container:', container);
+const ALLOWED_TYPES = ['image/jpeg', 'image/png'];
+const MAX_SIZE_BYTES = 1 * 1024 * 1024; // 1MB
 
-    if (files.length > 0) {
-        Array.from(files).forEach(async file => {
-            console.log('file:', file.name, file.type);
-            if (!file.type.startsWith('image/')) {
-                error.textContent = 'Nur Bilddateien sind erlaubt!';
-                return;
-            }
-            const blob = new Blob([file], { type: file.type });
-            console.log('Neue Datei', blob);
+async function handleFileChange(input) {
+    const container = input.closest('.File_Upload_Container');
+    const uploadedFilesContainer = container.querySelector('#uploaded_Files');
+    const files = input.files;
 
-            const compressedBase64 = await compressImage(file, 800, 800, 0.8);
-            console.log('compressedBase64 fertig');
-            const img = document.createElement('img');
-            img.src = compressedBase64;
-            allfiles.push({
-                filename: file.name,
-                fileType: blob.type,
-                base64: compressedBase64
-            });
+    if (files.length === 0) return;
 
-            const item = document.createElement('div');
-            item.classList.add('uploaded_file_item');
-            item.innerHTML = `
-                <img src="${compressedBase64}" alt="${file.name}">
-                <span>${file.name}</span>
-                <button onclick="removeFile(this, '${file.name}')">✕</button>
-            `;
-            container.appendChild(item);
-            console.log('item hinzugefügt')
+    for (const file of Array.from(files)) {
+        if (!ALLOWED_TYPES.includes(file.type)) {
+            showToast('Dieses Dateiformat ist nicht erlaubt!');
+            continue; // ← return statt continue, damit nur diese Datei übersprungen wird
+        }
+
+        const compressedBase64 = await compressImage(file, 800, 800, 0.8);
+
+        const base64SizeBytes = (compressedBase64.length * 3) / 4;
+        if (base64SizeBytes > MAX_SIZE_BYTES) {
+            showToast('Upload-Limit von 1MB überschritten!');
+            continue;
+        }
+
+        allfiles.push({
+            filename: file.name,
+            fileType: 'image/jpeg',
+            base64: compressedBase64
         });
-    }
-}
 
-function blobToBase64(blob) {
-    return new Promise((resolve, _) => {
-        const reader = new FileReader();
-        reader.onloadend = () => resolve(reader.result);
-        reader.readAsDataURL(blob);
-    });
+        const item = document.createElement('div');
+        item.classList.add('uploaded_file_item');
+        item.innerHTML = `
+            <img src="${compressedBase64}" alt="${file.name}">
+            <span>${file.name}</span>
+            <button onclick="removeFile(this, '${file.name}')">✕</button>
+        `;
+        uploadedFilesContainer.appendChild(item);
+    }
+
+    input.value = '';
 }
 
 function removeFile(btn, filename) {
     btn.parentElement.remove();
     allfiles = allfiles.filter(f => f.filename !== filename);
 }
+
 function removeAllFiles() {
-    document.getElementById('uploaded_Files').innerHTML = '';
+    document.querySelectorAll('#uploaded_Files').forEach(c => c.innerHTML = '');
     allfiles = [];
 }
+
+function showToast(message = 'Dieses Dateiformat ist nicht erlaubt!') {
+    const toast = document.getElementById('board-error-toast');
+    if (!toast) return;
+    document.getElementById('board-toast-title').textContent = message;
+    toast.classList.add('show');
+    setTimeout(hideBoardToast, 3000);
+}
+
+function hideBoardToast() {
+    const toast = document.getElementById('board-error-toast');
+    if (!toast) return;
+    toast.classList.remove('show');
+}
+
+
+
 
 function compressImage(file, maxWidth = 800, maxHeight = 800, quality = 0.8) {
     return new Promise((resolve, reject) => {

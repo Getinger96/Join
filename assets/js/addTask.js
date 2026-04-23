@@ -164,32 +164,34 @@ function fileupload() {
 }
 
 async function handleFileChange() {
-    console.log('handleFileChange aufgerufen')
     const filepicker = document.getElementById('Filepicker');
     const files = filepicker.files;
-    console.log('files:', files)
-    const error = document.getElementById('error');
     const container = document.getElementById('uploaded_Files');
-    console.log('container:', container);
+
+    const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
+    const MAX_SIZE_BYTES = 1 * 1024 * 1024; // 1MB
 
     if (files.length > 0) {
         Array.from(files).forEach(async file => {
-            console.log('file:', file.name, file.type);
-            if (!file.type.startsWith('image/')) {
-                showToast();
-                setTimeout(hideToast, 3000);
+
+            // Format-Validierung per JS
+            if (!ALLOWED_TYPES.includes(file.type)) {
+                showToast('Ungültiges Dateiformat. Erlaubt: JPG, PNG');
                 return;
             }
-            const blob = new Blob([file], { type: file.type });
-            console.log('Neue Datei', blob);
 
             const compressedBase64 = await compressImage(file, 800, 800, 0.8);
-            console.log('compressedBase64 fertig');
-            const img = document.createElement('img');
-            img.src = compressedBase64;
+
+            // Größenvalidierung nach Komprimierung
+            const base64SizeBytes = (compressedBase64.length * 3) / 4; // Base64 → Bytes
+            if (base64SizeBytes > MAX_SIZE_BYTES) {
+                showToast('Bild überschreitet das Upload-Limit von 1MB.');
+                return;
+            }
+
             allfiles.push({
                 filename: file.name,
-                fileType: blob.type,
+                fileType: 'image/jpeg',
                 base64: compressedBase64
             });
 
@@ -201,15 +203,15 @@ async function handleFileChange() {
                 <button onclick="removeFile(this, '${file.name}')">✕</button>
             `;
             container.appendChild(item);
-            console.log('item hinzugefügt')
         });
     }
 }
 
-function showToast() {
+function showToast(message = 'Nur Bilddateien erlaubt.') {
     const toast = document.getElementById('error-toast');
+    toast.textContent = message;
     toast.classList.add('show');
-
+    setTimeout(hideToast, 3000);
 }
 
 function hideToast() {
