@@ -103,8 +103,11 @@ function pleaseEnterASubtask() {
 function displayContacts(contactIndex, contactsName, contactLastname, selectedClass, color) {
     const isSelected = assignedContacts.includes(contactsName);
     return `
-        <div class="Contact-Container ${isSelected ? 'bg_color color_white' : ''}" id="profile-${contactIndex}" 
-             onclick="selectedContact(${contactIndex}, '${color}', '${contactsName}')">
+        <div class="Contact-Container ${isSelected ? 'bg_color color_white' : ''}" 
+             id="profile-${contactIndex}" 
+             tabindex="0"
+             onclick="selectedContact(${contactIndex}, '${color}', '${contactsName}')"
+             onkeydown="if(event.key==='Enter'||event.key===' ') selectedContact(${contactIndex}, '${color}', '${contactsName}')">
             <div class="profile_container_header">
                 <div class="contact-icon profilebadge" style="background-color: ${color};">
                     <span>${contactsName.charAt(0).toUpperCase()}${contactLastname.charAt(0).toUpperCase()}</span>

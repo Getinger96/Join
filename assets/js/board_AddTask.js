@@ -2,6 +2,19 @@ let d_none = true;
 let allfiles = [];
 
 
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeList();
+});
+
+// Fokus verlässt die Liste
+document.addEventListener('focusin', (e) => {
+    let selecCon = document.getElementById('Selection_Container');
+    let selectContainer = document.getElementById('select_container');
+    if (!selecCon.contains(e.target) && e.target !== selectContainer) {
+        closeList();
+    }
+});
+
 /**
  * This function open Add Task
  * 
@@ -79,17 +92,24 @@ function redirect() {
  */
 function openList() {
     let selecCon = document.getElementById('Selection_Container');
-    let arrowCon = document.getElementById('arrow_img_container');
-    selecCon.classList.toggle('d_none');
     if (d_none == true) {
+        let arrowCon = document.getElementById('arrow_img_container');
+        selecCon.classList.remove('d_none');
         arrowCon.innerHTML = `<img class="arrow_drop_up" src="assets/IMG/arrow_drop_up.svg" alt="">`;
         d_none = false;
+        getContacts();
+        updateContactStyles();
     } else {
-        arrowCon.innerHTML = `<img class="arrow_drop_downaa" src="./assets/IMG/arrow_drop_downaa.svg" alt="">`;
-        d_none = true;
+        closeList();
     }
-    getContacts();
-    updateContactStyles();
+}
+
+function closeList() {
+    let selecCon = document.getElementById('Selection_Container');
+    let arrowCon = document.getElementById('arrow_img_container');
+    selecCon.classList.add('d_none');
+    arrowCon.innerHTML = `<img class="arrow_drop_downaa" src="./assets/IMG/arrow_drop_downaa.svg" alt="">`;
+    d_none = true;
 }
 
 /**
@@ -290,6 +310,7 @@ async function handleFileChange(input) {
         allfiles.push({
             filename: file.name,
             fileType: 'image/jpeg',
+            fileSize: file.size,
             base64: compressedBase64
         });
 

@@ -58,13 +58,15 @@
             <div id="board-error-toast" class="error-toast">
               <span id="board-toast-title" style="font-size: 14px; font-weight: 500;">Dieses Dateiformat ist nicht erlaubt!</span>
               <span id="board-toast-subtitle" style="font-size: 13px; opacity: 0.9;">Nur JPEG und PNG sind erlaubt.</span>
-              <button class="close-btn" onclick="hideBoardToast()">&#x2715;</button>
+              <button class="close-btn" onclick="hideBoardToast()" tabindex="-1">&#x2715;</button>
             </div>
 
-            <div class="upload_button_container" onclick="document.getElementById('Filepicker').click()">
+            <input type="file" id="Filepicker" accept="image/jpeg,image/png" style="display: none;" onchange="handleFileChange(this)" tabindex="-1" />
+
+            <!-- upload_button_container fokussierbar machen -->
+            <div class="upload_button_container" onclick="document.getElementById('Filepicker').click()" tabindex="0">
               <span class="upload_button_text">Drag a file or Browse</span>
               <img src="./assets/IMG/plus button mobile.png" alt="" />
-              <input type="file" id="Filepicker" accept="image/jpeg,image/png" style="display: none;" onchange="handleFileChange(this)" />
             </div>
 
             <div id="uploaded_Files" class="Uploaded_FIles_Container"></div>
@@ -85,7 +87,7 @@
           <div id="SubtaskLengthReached"></div>
           <div class="AssignedTO_Container">
             <span class="Assign_Header">Assigned to</span>
-            <div onclick="openList()" id="select_container" class="select_container">
+            <div onclick="openList()" id="select_container" class="select_container" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ') openList()">
               <span>Select contacts to assign</span>
               <div id="arrow_img_container">
                 <img class="arrow_drop_downaa curser" src="assets/IMG/arrow_drop_downaa.svg" alt="" />

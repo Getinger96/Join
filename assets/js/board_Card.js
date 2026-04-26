@@ -6,8 +6,8 @@
 function showCard(task, taskIndex) {
     let todoBig = document.getElementById('todoBig');
     let showCardHTML = createShowCard(task, taskIndex);
-    todoBig.innerHTML = showCardHTML;  
-    initViewer();                       
+    todoBig.innerHTML = showCardHTML;
+    setTimeout(() => initViewer(), 50); // ← kleines Timeout
 }
 /**
  * the function open to do Card 
@@ -53,7 +53,7 @@ function createShowCard(task, taskIndex) {
 
 function createimg(files) {
     return files.map(image =>
-        `<img class="img-card" src="${image.base64}" alt="${image.filename}">`
+        `<img class="img-card" src="${image.base64}" alt="${image.filename}" data-filesize="${image.fileSize}">`
     ).join('');
 }
 
@@ -64,7 +64,40 @@ function initViewer() {
     if (!container) return;
 
     if (viewer) viewer.destroy();
-    viewer = new Viewer(container);
+    viewer = new Viewer(container, {
+        title: [4, (image) => {
+            const size = parseInt(image.dataset.filesize);
+            if (!size || isNaN(size)) return image.alt;
+            const sizeKB = Math.round(size / 1024);
+            const sizeMB = (size / 1024 / 1024).toFixed(2);
+            const displaySize = sizeKB > 1024 ? `${sizeMB} MB` : `${sizeKB} KB`;
+            return `${image.alt} — ${displaySize}`;
+        }],
+        toolbar: {
+            zoomIn: true,
+            zoomOut: true,
+            oneToOne: true,
+            reset: true,
+            prev: true,
+            play: true,
+            next: true,
+            rotateLeft: true,
+            rotateRight: true,
+            flipHorizontal: true,
+            flipVertical: true,
+            download: {
+                show: true,
+                size: 'medium',
+                click() {
+                    const image = viewer.image;
+                    const link = document.createElement('a');
+                    link.href = image.src;
+                    link.download = image.alt || 'download';
+                    link.click();
+                }
+            }
+        }
+    });
 }
 
 

@@ -30,9 +30,9 @@ async function createTask(event) {
 function validateInputFields() {
     let titleElement = document.getElementById('taskTitle');
     let dueDateElement = document.getElementById('taskDueDate');
-    let kategorieElement = document.getElementById('kategorie');
+    let categoryElement = document.getElementById('category');
 
-    if (!validateTask(titleElement, kategorieElement, dueDateElement)) {
+    if (!validateTask(titleElement, categoryElement, dueDateElement)) {
         return false;
     } else {
         clearValidationMessages();
@@ -74,7 +74,7 @@ function getTaskDetails() {
         Subtask: subtask,
         Status: status,
         AssignedContact: assignedContacts,
-        files: allfiles || [],
+        Files: allfiles || [],
     };
 }
 
@@ -199,7 +199,7 @@ function populateTaskFields(title, description, dueDate, priority, category, sub
     let taskDAte = document.getElementById('taskDueDate');
     taskDAte.value = dueDate;
     setPriority(priority);
-    let taskCategory = document.getElementById('kategorie');
+    let taskCategory = document.getElementById('category');
     taskCategory.value = category;
     console.log(files[0]);
     let filesContainer = document.getElementById('uploaded_Files');
@@ -243,7 +243,7 @@ async function createEdittask(index) {
     let tasktitle = document.getElementById('taskTitle');
     let taskdescription = document.getElementById('description');
     let taskDAte = document.getElementById('taskDueDate');
-    let taskCategory = document.getElementById('kategorie');
+    let taskCategory = document.getElementById('category');
     let task = tasksArray[index];
     let status = task.status
     let key = task.taskKey;
@@ -277,7 +277,7 @@ async function createEdittaskPut(tasktitle, taskdescription, taskDAte, taskCateg
         Category: taskCategory.value,
         Subtask: subtasks,
         Status: status,
-        files: allfiles || [],
+        Files: allfiles || [],
     }
     await putDataEdit(`tasks/${key}`, editedTASk)
     closeTask();

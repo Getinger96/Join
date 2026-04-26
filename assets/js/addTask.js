@@ -168,7 +168,7 @@ async function handleFileChange() {
     const files = filepicker.files;
     const container = document.getElementById('uploaded_Files');
 
-    const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
+    const ALLOWED_TYPES = ['image/jpeg', 'image/png'];
     const MAX_SIZE_BYTES = 1 * 1024 * 1024; // 1MB
 
     if (files.length > 0) {
@@ -192,6 +192,7 @@ async function handleFileChange() {
             allfiles.push({
                 filename: file.name,
                 fileType: 'image/jpeg',
+                fileSize: file.size,
                 base64: compressedBase64
             });
 
