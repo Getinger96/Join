@@ -201,7 +201,6 @@ function populateTaskFields(title, description, dueDate, priority, category, sub
     setPriority(priority);
     let taskCategory = document.getElementById('category');
     taskCategory.value = category;
-    console.log(files[0]);
     let filesContainer = document.getElementById('uploaded_Files');
     filesContainer.innerHTML = '';
     files.forEach(file => {

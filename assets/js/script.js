@@ -28,6 +28,8 @@ let colorLetter = {
     'Z': 'yellow'
 };
 
+let allfiles = [];
+
 logOutVisibleBoolean = false;
 
 /**

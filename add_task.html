@@ -13,8 +13,8 @@
     <link rel="stylesheet" href="Styles/add_task_responsive.css">
     <link rel="stylesheet" href="./node_modules/viewerjs/dist/viewer.css">
     <link rel="stylesheet" href="./Styles/viewer-custom.css">
-    <script src="./assets/js/addTask.js"></script>
     <script src="./assets/js/script.js"></script>
+    <script src="./assets/js/addTask.js"></script>
     <script src="./assets/js/script_Template.js"></script>
     <script src="./assets/js/script_Sidebar.js"></script>
     <script src="./assets/js/add_Task_Validation.js"></script>
@@ -121,7 +121,7 @@
                         <span style="font-size: 13px; opacity: 0.9;">Nur JPEG und PNG sind erlaubt.</span>
                         <button class="close-btn" onclick="hideToast()">&#x2715;</button>
                     </div>
-                    <button class="upload_button_container" onclick="document.getElementById('Filepicker').click()">
+                    <button type="button" class="upload_button_container" onclick="document.getElementById('Filepicker').click()">
                         <span class="upload_button_text">Drag a file or Browse</span>
                         <img src="./assets/IMG/plus button mobile.png" alt="">
                     </button>

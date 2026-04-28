@@ -14,7 +14,7 @@ let contacts = [];
 let subtasks = [];
 let assignedContacts = [];
 let prio = [];
-let allfiles = [];
+
 
 
 /**
@@ -96,7 +96,7 @@ function choosedUserStory(event) {
     event.stopPropagation();
     let userStory = document.getElementById('Category');
     userStory.textContent = "User Story";
-    closelistCategory();    
+    closelistCategory();
 }
 /**
  * This function delivers the text "Technical Task"if you choosed the div wit the category "Technical Task"
@@ -163,50 +163,56 @@ function fileupload() {
     filepicker.addEventListener('change', handleFileChange);
 }
 
+function formatFileSize(bytes) {
+    if (bytes < 1024) return bytes + ' B';
+    if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+    return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+}
+
 async function handleFileChange() {
     const filepicker = document.getElementById('Filepicker');
     const files = filepicker.files;
     const container = document.getElementById('uploaded_Files');
 
     const ALLOWED_TYPES = ['image/jpeg', 'image/png'];
-    const MAX_SIZE_BYTES = 1 * 1024 * 1024; // 1MB
+    const MAX_SIZE_BYTES = 1 * 1024 * 1024;
 
-    if (files.length > 0) {
-        Array.from(files).forEach(async file => {
+    if (files.length === 0) return;
 
-            // Format-Validierung per JS
-            if (!ALLOWED_TYPES.includes(file.type)) {
-                showToast('Ungültiges Dateiformat. Erlaubt: JPG, PNG');
-                return;
-            }
+    for (const file of Array.from(files)) {
+        if (!ALLOWED_TYPES.includes(file.type)) {
+            showToast('Dieses Dateiformat ist nicht erlaubt!');
+            continue;
+        }
 
-            const compressedBase64 = await compressImage(file, 800, 800, 0.8);
+        const compressedBase64 = await compressImage(file, 800, 800, 0.8);
 
-            // Größenvalidierung nach Komprimierung
-            const base64SizeBytes = (compressedBase64.length * 3) / 4; // Base64 → Bytes
-            if (base64SizeBytes > MAX_SIZE_BYTES) {
-                showToast('Bild überschreitet das Upload-Limit von 1MB.');
-                return;
-            }
+        const base64SizeBytes = (compressedBase64.length * 3) / 4;
+        if (base64SizeBytes > MAX_SIZE_BYTES) {
+            showToast('Upload-Limit von 1MB überschritten!');
+            continue; // ← Datei wird nicht gepusht
+        }
 
-            allfiles.push({
-                filename: file.name,
-                fileType: 'image/jpeg',
-                fileSize: file.size,
-                base64: compressedBase64
-            });
+        allfiles.push({
+            filename: file.name,
+            fileType: 'image/jpeg',
+            fileSize: formatFileSize(file.size),
+            base64: compressedBase64
+        });
+    
 
-            const item = document.createElement('div');
-            item.classList.add('uploaded_file_item');
-            item.innerHTML = `
+        const item = document.createElement('div');
+        item.classList.add('uploaded_file_item');
+        item.innerHTML = `
                 <img src="${compressedBase64}" alt="${file.name}">
                 <span>${file.name}</span>
                 <button onclick="removeFile(this, '${file.name}')">✕</button>
             `;
-            container.appendChild(item);
-        });
-    }
+        container.appendChild(item);
+    };
 }
+
+
 
 function showToast(message = 'Nur Bilddateien erlaubt.') {
     const toast = document.getElementById('error-toast');

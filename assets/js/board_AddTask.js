@@ -1,5 +1,5 @@
 let d_none = true;
-let allfiles = [];
+
 
 
 document.addEventListener('keydown', (e) => {
@@ -283,6 +283,12 @@ function fileupload() {
     filepicker.addEventListener('change', handleFileChange);
 }
 
+function formatFileSize(bytes) {
+    if (bytes < 1024) return bytes + ' B';
+    if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+    return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+}
+
 const ALLOWED_TYPES = ['image/jpeg', 'image/png'];
 const MAX_SIZE_BYTES = 1 * 1024 * 1024; // 1MB
 
@@ -310,9 +316,10 @@ async function handleFileChange(input) {
         allfiles.push({
             filename: file.name,
             fileType: 'image/jpeg',
-            fileSize: file.size,
+            fileSize: formatFileSize(file.size), // ← z.B. "204.8 KB"
             base64: compressedBase64
         });
+       
 
         const item = document.createElement('div');
         item.classList.add('uploaded_file_item');
