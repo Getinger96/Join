@@ -184,22 +184,22 @@ async function handleFileChange() {
             showToast('Dieses Dateiformat ist nicht erlaubt!');
             continue;
         }
-
-        const compressedBase64 = await compressImage(file, 800, 800, 0.8);
-
-        const base64SizeBytes = (compressedBase64.length * 3) / 4;
-        if (base64SizeBytes > MAX_SIZE_BYTES) {
+        if (file.size > MAX_SIZE_BYTES) {
             showToast('Upload-Limit von 1MB überschritten!');
-            continue; // ← Datei wird nicht gepusht
+            continue;
         }
+
+        const compressedBase64 = await compressImage(file, file.type, 800, 800, 0.8);
+
+
 
         allfiles.push({
             filename: file.name,
-            fileType: 'image/jpeg',
+            fileType: file.type,
             fileSize: formatFileSize(file.size),
             base64: compressedBase64
         });
-    
+
 
         const item = document.createElement('div');
         item.classList.add('uploaded_file_item');
@@ -244,7 +244,7 @@ function removeAllFiles() {
 }
 
 
-function compressImage(file, maxWidth = 800, maxHeight = 800, quality = 0.8) {
+function compressImage(file, fileType, maxWidth = 800, maxHeight = 800, quality = 0.8) {
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
 
@@ -275,7 +275,7 @@ function compressImage(file, maxWidth = 800, maxHeight = 800, quality = 0.8) {
                 ctx.drawImage(img, 0, 0, width, height);
 
                 // Exportiere das Bild als Base64
-                const compressedBase64 = canvas.toDataURL('image/jpeg', quality);
+                const compressedBase64 = canvas.toDataURL(fileType, quality);
                 resolve(compressedBase64);
             };
 

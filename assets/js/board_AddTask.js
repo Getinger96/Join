@@ -292,7 +292,8 @@ function formatFileSize(bytes) {
 const ALLOWED_TYPES = ['image/jpeg', 'image/png'];
 const MAX_SIZE_BYTES = 1 * 1024 * 1024; // 1MB
 
-async function handleFileChange(input) {
+async function handleFileChange(event) {
+    const input = event.target;
     const container = input.closest('.File_Upload_Container');
     const uploadedFilesContainer = container.querySelector('#uploaded_Files');
     const files = input.files;
@@ -302,23 +303,23 @@ async function handleFileChange(input) {
     for (const file of Array.from(files)) {
         if (!ALLOWED_TYPES.includes(file.type)) {
             showToast('Dieses Dateiformat ist nicht erlaubt!');
-            continue; // ← return statt continue, damit nur diese Datei übersprungen wird
+            continue; 
         }
 
-        const compressedBase64 = await compressImage(file, 800, 800, 0.8);
-
-        const base64SizeBytes = (compressedBase64.length * 3) / 4;
-        if (base64SizeBytes > MAX_SIZE_BYTES) {
+          if (file.size > MAX_SIZE_BYTES) {
             showToast('Upload-Limit von 1MB überschritten!');
             continue;
         }
 
+        const compressedBase64 = await compressImage(file, file.type, 800, 800, 0.8);
+
         allfiles.push({
             filename: file.name,
-            fileType: 'image/jpeg',
+            fileType: file.type,
             fileSize: formatFileSize(file.size), // ← z.B. "204.8 KB"
             base64: compressedBase64
         });
+        
        
 
         const item = document.createElement('div');
@@ -361,7 +362,7 @@ function hideBoardToast() {
 
 
 
-function compressImage(file, maxWidth = 800, maxHeight = 800, quality = 0.8) {
+function compressImage(file, fileType, maxWidth = 800, maxHeight = 800, quality = 0.8) {
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
 
@@ -392,7 +393,7 @@ function compressImage(file, maxWidth = 800, maxHeight = 800, quality = 0.8) {
                 ctx.drawImage(img, 0, 0, width, height);
 
                 // Exportiere das Bild als Base64
-                const compressedBase64 = canvas.toDataURL('image/jpeg', quality);
+                const compressedBase64 = canvas.toDataURL(fileType, quality);
                 resolve(compressedBase64);
             };
 

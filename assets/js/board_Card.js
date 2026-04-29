@@ -7,7 +7,7 @@ function showCard(task, taskIndex) {
     let todoBig = document.getElementById('todoBig');
     let showCardHTML = createShowCard(task, taskIndex);
     todoBig.innerHTML = showCardHTML;
-    setTimeout(() => initViewer(), 50); // ← kleines Timeout
+    setTimeout(() => initViewer(), 300); // ← kleines Timeout
 }
 /**
  * the function open to do Card 
@@ -64,14 +64,13 @@ function initViewer() {
     if (!container) return;
 
     if (viewer) viewer.destroy();
+   
     viewer = new Viewer(container, {
         title: [4, (image) => {
-            const size = parseInt(image.dataset.filesize);
-            if (!size || isNaN(size)) return image.alt;
-            const sizeKB = Math.round(size / 1024);
-            const sizeMB = (size / 1024 / 1024).toFixed(2);
-            const displaySize = sizeKB > 1024 ? `${sizeMB} MB` : `${sizeKB} KB`;
-            return `${image.alt} — ${displaySize}`;
+            const original = container.querySelector(`img[alt="${image.alt}"]`);
+            const size = original ? original.dataset.filesize : null;
+            if (!size) return image.alt;
+            return `${image.alt}, ${size}`;
         }],
         toolbar: {
             zoomIn: true,

@@ -61,7 +61,7 @@
               <button class="close-btn" onclick="hideBoardToast()" tabindex="-1">&#x2715;</button>
             </div>
 
-            <input type="file" id="Filepicker" accept="image/jpeg,image/png" style="display: none;" onchange="handleFileChange(this)" tabindex="-1" />
+            <input type="file" id="Filepicker" accept="image/jpeg,image/png" style="display: none;" onchange="handleFileChange(event)" tabindex="-1" />
 
             <!-- upload_button_container fokussierbar machen -->
             <div class="upload_button_container" onclick="document.getElementById('Filepicker').click()" tabindex="0">
