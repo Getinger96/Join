@@ -81,7 +81,7 @@ function closelist() {
  */
 function openCategoryLIst(event) {
     event.stopPropagation();
-    const container = document.getElementById('Selection_Container_Category');
+    const container = document.getElementById('Selection_Container_Category-List');
     container.classList.toggle('d_none');
     if (!container.classList.contains('d_none')) {
         document.getElementById('userStory').focus();
@@ -115,7 +115,7 @@ function choosedTechnicalTask() {
  */
 function closelistCategory() {
 
-    let seleCon = document.getElementById('Selection_Container_Category');
+    let seleCon = document.getElementById('Selection_Container_Category-List');
     seleCon.classList.add('d_none');
 }
 

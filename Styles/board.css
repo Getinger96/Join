@@ -2,7 +2,12 @@ body {
     margin: 0;
     font-family: 'Inter';
     background-color: rgb(246, 247, 248);
-    overflow-x: hidden;
+    overflow-x: hidden; /* zurück zum Original */
+}
+
+html.no-scroll,
+body.no-scroll {
+    overflow: hidden;
 }
 
 .Contact-Container {
@@ -106,8 +111,18 @@ label {
     display: none !important;
 }
 
+
+
 .no-scroll {
     overflow: hidden;
+}
+
+html.no-scroll {
+    overflow: hidden !important;
+}
+
+body.no-scroll {
+    overflow: hidden !important;
 }
 
 .todo {
@@ -516,6 +531,7 @@ Button {
     height: 865px;
     width: 1116px;
     overflow-x: hidden;
+    overflow-y: hidden;
 }
 
 .widthBoard {
@@ -533,6 +549,7 @@ Button {
     background-color: white;
     z-index: 1;
     padding: 10px;
+    bottom: -4px;
 }
 
 .bottomInfoEdit {
@@ -927,7 +944,7 @@ li {
     height: 200px;
     background-color: #FFFFFF;
     position: absolute;
-    margin-top: 74px;
+    margin-top: 78px;
     border-radius: 10px;
     border: 1px solid #D1D1D1;
     padding-right: 0px;
@@ -1179,9 +1196,7 @@ li {
     font-size: 13px;
 }
 
-#SubtaskLengthReached {
-    margin-top: 15px;
-}
+
 
 .dragging-over {
     border: 2px dotted #868080;

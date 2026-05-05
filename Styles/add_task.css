@@ -89,13 +89,8 @@ body {
   flex-direction: column;
 }
 
-.Title_Header {
-  width: 440px;
-  height: 24px;
-  font-size: 20px;
-  line-height: 24px;
-  font-family: "Inter";
-  font-weight: 400;
+.label {
+  font-size: 20px !important;
 }
 
 .input_Title {
@@ -520,7 +515,7 @@ body {
   line-height: 24px;
 }
 
-.Selection_Container_Category {
+.Selection_Container_Category-list {
   width: 447px;
   background-color: #ffffff;
   position: absolute;

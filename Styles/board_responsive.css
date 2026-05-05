@@ -74,6 +74,7 @@
     left: 94px;
     right: 90px;
     max-height: 52px;
+    bottom: -7px;
   }
 
   .Titleleft {
@@ -92,7 +93,7 @@
   }
 
   .Selection_Container {
-    width: 376px;
+    width: 436px;
   }
 
   .h2 {
@@ -106,6 +107,13 @@
 
   }
 
+  .bottomInfo {
+    left: 94px;
+    right: 90px;
+    max-height: 52px;
+    bottom: -151px;
+  }
+
   .iconcategorybar {
     display: block;
   }
@@ -117,6 +125,8 @@
   .boardAddTask {
     height: 700px;
     width: 1000px;
+    overflow-y: auto;
+    
   }
 
   .positionTask {

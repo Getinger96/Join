@@ -293,7 +293,7 @@ function closeTask() {
 
     boardAddTask.classList.remove('visible');
     darkOverlay.classList.remove('visible');
-    document.body.style.overflow = 'auto';
+    document.body.classList.remove('no-scroll');
 
     clearTask();
     clearMissingFieldContent();

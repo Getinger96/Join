@@ -61,17 +61,17 @@
         <form id="form_addtask" class="addTask_Container">
             <div class="input_Task_Container_left">
                 <div class="Title_Container">
-                    <span class="Title_Header">Title<span class="red">*</span></span>
+                    <label class="label" for="title">Title<span class="red">*</span></label>
                     <input id="title" placeholder="Enter a Title" class="input_Title" required type="text">
                     <div id="titleMissing"></div>
                 </div>
                 <div class="Description_Container">
-                    <span class="Description_Header">Description</span>
+                    <label class="label" for="Description">Description</label>
                     <textarea id="Description" class="input_Description" placeholder="Enter a Description"
-                        type="text"></textarea>
+                        ></textarea>
                 </div>
                 <div class="date_Container">
-                    <span class="Date_header">Due date <span class="red">*</span></span>
+                    <label class="label" for="dueDate">Due date <span class="red">*</span></label>
                     <input onclick="dateinput()" id="dueDate" placeholder="dd/mm/yyyy" class="input_date" required
                         type="date" onblur="checkValidationDate()">
                 </div>
@@ -82,7 +82,7 @@
                     </div>
                 </div>
                 <div onclick="func1(event)" class="cataegory_Container">
-                    <span class="category_Header">Category <span class="red">*</span></span>
+                    <label class="label" for="Category">Category <span class="red">*</span></label>
                     <div id="select_containerId" class="select_container" onclick="openCategoryLIst(event)" tabindex="0"
                         onkeydown="if(event.key==='Enter'||event.key===' ') openCategoryLIst(event)">
                         <span id="Category" class="Category_Input">Select Category</span>
@@ -90,7 +90,7 @@
                             <img class="arrow_drop_downaa" src="assets/IMG/arrow_drop_downaa.svg" alt="">
                         </div>
                     </div>
-                    <div id="Selection_Container_Category" class="Selection_Container_Category d_none">
+                    <div id="Selection_Container_Category-List" class="Selection_Container_Category-list d_none">
                         <div onclick="choosedUserStory(event)" id="userStory" class="userStory" tabindex="0"
                             onkeydown="if(event.key==='Enter') choosedUserStory(event)">User Story</div>
                         <div onclick="choosedTechnicalTask(event)" id="technicalTask" class="technical_Task"
@@ -113,7 +113,7 @@
             <div class="Task_Container_right">
 
                 <div class="File_Upload_Container">
-                    <span class="File_Upload_Header">Attachments</span>
+                    <label class="label" for="Filepicker">Attachments</label>
                     <span class="attachments_info">Allowed file types are JPEG and PNG</span>
                     <div id="error-toast" class="error-toast">
                         <span style="font-size: 14px; font-weight: 500;">Dieses Dateiformat ist nicht
@@ -121,7 +121,8 @@
                         <span style="font-size: 13px; opacity: 0.9;">Nur JPEG und PNG sind erlaubt.</span>
                         <button class="close-btn" onclick="hideToast()">&#x2715;</button>
                     </div>
-                    <button type="button" class="upload_button_container" onclick="document.getElementById('Filepicker').click()">
+                    <button type="button" class="upload_button_container"
+                        onclick="document.getElementById('Filepicker').click()">
                         <span class="upload_button_text">Drag a file or Browse</span>
                         <img src="./assets/IMG/plus button mobile.png" alt="">
                     </button>
@@ -134,16 +135,16 @@
                 </div>
 
                 <div class="Subtasks_Container">
-                    <span class="Subtasks_Header">Subtasks</span>
+                    <label class="label" for="input_Subtasks">Subtasks</label>
                     <div class="Subtask_Inputfield_Container" id="subtaskBorderInputchange">
                         <input id="input_Subtasks" placeholder="Add new Subtask" class="Subtasks_Inputfield"
                             type="text">
                         <button id="add_Subtask" type="button" onclick="addCurrentSubtask()" class="Subtasks_Btn"><img
-                                src="assets/IMG/add_subtask_img.svg" alt=""></button>
+                                src="assets/IMG/add_subtask_img.svg" alt="Add Subtask"></button>
                         <div class="separatorSubtask"></div>
 
                         <img onclick="emptySubtask()" class="emptySubtaskicon" id="empty-subtask-icon"
-                            src="assets/IMG/iconoir_cancel.png" alt="Add Subtask">
+                            src="assets/IMG/iconoir_cancel.png" alt="subtask leeren">
                     </div>
                 </div>
                 <div id="subtaskHeadContainer">
@@ -152,7 +153,7 @@
                     <div id="SubtaskLengthReached"></div>
                 </div>
                 <div onclick="func1(event)" class="AssignedTO_Container">
-                    <span class="Assign_Header">Assigned to</span>
+                    <label class="label" for="select_container">Assigned to</label>
                     <div onclick="openList(event)" id="select_container" class="select_container" tabindex="0"
                         onkeydown="if(event.key==='Enter'||event.key===' ') openList(event)">
                         <span>Select contacts to assign </span>
@@ -167,17 +168,18 @@
                 </div>
             </div>
     </div>
-    </form>
     <div class="Btn_Container">
         <div class="required_info_Container"><span class="red">*</span><span class="fieldisrequired">This field is
                 required</span></div>
         <div class="clear_COntainer" id="createNewTask">
             <button onclick="clearTask()" class="clear_Btn">Clear <img class="clear-icon"
-                    src="assets/IMG/x_icon_clear.svg" alt=""></button>
+                    src="assets/IMG/x_icon_clear.svg" alt="Formular leeren"></button>
             <button type="submit" form="form_addtask" onclick="createTask(event)" class="Create_Btn">Create Task
-                <img class="create_icon" src="assets/IMG/clear_Img.svg" alt=""></button>
+                <img class="create_icon" src="assets/IMG/clear_Img.svg" alt="Task erstellen"></button>
         </div>
     </div>
+    </form>
+
     <section>
         <div id="newTaskIsReady"></div>
 

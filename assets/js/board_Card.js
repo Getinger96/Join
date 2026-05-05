@@ -20,7 +20,8 @@ function openToDo(taskIndex) {
     todoBig.classList = 'cardbig';
     todoBig.innerHTML = '';
 
-    document.body.style.overflow = "hidden";
+    document.documentElement.classList.add('no-scroll'); // ← statt style.overflow
+    document.body.classList.add('no-scroll');
     document.getElementById('overlay').classList.remove('d-none');
 
     showCard(task, taskIndex);
@@ -64,7 +65,7 @@ function initViewer() {
     if (!container) return;
 
     if (viewer) viewer.destroy();
-   
+
     viewer = new Viewer(container, {
         title: [4, (image) => {
             const original = container.querySelector(`img[alt="${image.alt}"]`);
@@ -112,7 +113,8 @@ function closeOverlay(taskIndex) {
     todoBig.classList.add('d-none');
     overlay.classList.add('d-none');
     selectedProfileContainer.innerHTML = '';
-    document.body.style.overflow = 'auto';
+    document.documentElement.classList.remove('no-scroll'); // ← statt style.overflow
+    document.body.classList.remove('no-scroll');
     clearTask();
 }
 /**
@@ -126,9 +128,8 @@ function closeoverlayedit(taskIndex) {
     todoBig.classList.add('d-none');
     overlay.classList.add('d-none');
     selectedProfileContainer.innerHTML = '';
-    document.body.style.overflow = 'auto';
+     
 }
-
 
 /**
  * 

@@ -21,6 +21,8 @@ document.addEventListener('focusin', (e) => {
  */
 function openTaskBoard() {
     addtask = true;
+    document.documentElement.classList.add('no-scroll'); // html
+    document.body.classList.add('no-scroll');
     setTaskPriority();
     toggleTaskBoardVisibility();
 }
@@ -61,7 +63,8 @@ function toggleTaskBoardVisibility() {
 function showTaskBoard(taskDiv, overlay) {
     taskDiv.classList.remove('visible');
     overlay.classList.remove('visible');
-    document.body.classList.add('no-scroll');
+    document.documentElement.classList.remove('no-scroll');
+    document.body.classList.remove('no-scroll');
     setCreateTaskButton();
 }
 
@@ -73,7 +76,7 @@ function showTaskBoard(taskDiv, overlay) {
 function hideTaskBoard(taskDiv, overlay) {
     taskDiv.classList.add('visible');
     overlay.classList.add('visible');
-    document.body.classList.remove('no-scroll');
+     document.body.classList.add('no-scroll')
 }
 
 /**
