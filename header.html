@@ -1,17 +1,16 @@
 <div class="headblock">
     <div class="title">
-        <span class="kanbanBoardTitle">Kanban Projekt Management Tool</span>
-        <img src="./assets/IMG/Capa 3.png" alt="MobileIcon" class="MobileIcon">
+        <p class="kanbanBoardTitle">Kanban Projekt Management Tool</p> <!-- span → p -->
+        <img src="./assets/IMG/Capa 3.png" alt="" class="MobileIcon"> <!-- dekorativ → alt="" -->
     </div>
     <div class="headUserContainer">
         <a href="help.html" class="help-link">
-            <img src="./assets/IMG/help.png" alt="Hilfe" class="help-icon">
+            <img src="./assets/IMG/help.png" alt="Hilfe" class="help-icon"> <!-- okay so -->
         </a>
-        <div class="logInUser_Container" onclick="showLogOutSection();">
+        <button class="logInUser_Container" onclick="showLogOutSection();"> <!-- div → button, da klickbar -->
             <span class="logInUser" id="loginUserId"></span>
-        </div>
-
+        </button>
     </div>
 </div>
 
-<div id="logoutId"> </div>
+<div id="logoutId"></div>

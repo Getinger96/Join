@@ -37,33 +37,34 @@
     <link rel="icon" type="image/x-icon" href="./assets/IMG/Capa 2.png" />
 </head>
 
-<body onresize="setTimeout(redirect(),300); handleResize()" onload="init()">
-    <section>
-        <header>
+<body onresize="setTimeout(() => redirect(), 300), handleResize()" onload="init()">
+    <header>
 
 
-            <div w3-include-html="./assets/Templates/desktop_template.html"></div>
-            <div class="headblock">
-                <div class="title">
-                    <span class="kanbanBoardTitle">Kanban Projekt Management Tool</span>
-                    <img src="./assets/IMG/Capa 3.png" alt="MobileIcon" class="MobileIcon">
-                </div>
-                <div class="headUserContainer">
-                    <a href="help.html" class="help-link">
-                        <img src="./assets/IMG/help.png" alt="Hilfe" class="help-icon">
-                    </a>
-                    <div class="logInUser_Container" onclick="showLogOutSection();">
-                        <span class="logInUser" id="loginUserId"></span>
-                    </div>
-
-                </div>
+        <div w3-include-html="./assets/Templates/desktop_template.html"></div>
+        <div class="headblock">
+            <div class="title">
+                <h2 class="kanbanBoardTitle">Kanban Projekt Management Tool</h2>
+                <img src="./assets/IMG/Capa 3.png" alt="MobileIcon" class="MobileIcon">
             </div>
+            <div class="headUserContainer">
+                <a href="help.html" class="help-link">
+                    <img src="./assets/IMG/help.png" alt="Hilfe" class="help-icon">
+                </a>
+                <div class="logInUser_Container" onclick="showLogOutSection();">
+                    <span class="logInUser" id="loginUserId"></span>
+                </div>
 
-            <div id="logoutId"> </div>
+            </div>
+        </div>
 
-        </header>
+        <div id="logoutId"> </div>
 
-        <nav class="board HeadContainerBoard backgrount-color">
+    </header>
+    <div>
+
+
+        <main class="board HeadContainerBoard backgrount-color">
             <div class="divBoard">
                 <div class="boardtitle spaceBetween addTaskBoard">
                     <div class="titleButtonBoard">
@@ -96,8 +97,9 @@
                     <!-- to do -->
                     <div class="paddingRight widthContainer">
                         <div class="statusButton">
-                            <p class="text">To do</p>
-                            <img class="curser" onclick="openTaskBoard()" src="./assets/IMG/plus button.png">
+                            <h2 class="text">To do</h2>
+                            <img class="curser" onclick="openTaskBoard()" src="./assets/IMG/plus button.png"
+                                alt="Open the add task form">
                         </div>
                         <div class="noTasks" category="open" style="display: none;">No tasks To do</div>
                         <div class="drag-area" id="open" ondrop="moveTo(event, 'open')"
@@ -108,8 +110,9 @@
                     <!-- in progress -->
                     <div class="paddingRight widthContainer">
                         <div class="statusButton">
-                            <p class="text">In progress</p>
-                            <img class="curser" onclick="openTaskBoard()" src="./assets/IMG/plus button.png">
+                            <h2 class="text">In progress</h2>
+                            <img class="curser" onclick="openTaskBoard()" src="./assets/IMG/plus button.png"
+                                alt="Open the add task form">
                         </div>
                         <div class="noTasks" category="progress" style="display: none;">No tasks in progress</div>
                         <div class="drag-area" id="progress" ondrop="moveTo(event, 'progress')"
@@ -119,8 +122,9 @@
                     <!-- await feedback -->
                     <div class="paddingRight widthContainer">
                         <div class="statusButton">
-                            <p class="text">Await feedback</p>
-                            <img class="curser" onclick="openTaskBoard()" src="./assets/IMG/plus button.png">
+                            <h2 class="text">Await feedback</h2>
+                            <img class="curser" onclick="openTaskBoard()" src="./assets/IMG/plus button.png"
+                                alt="Open the add task form">
                         </div>
                         <div class="noTasks" category="awaitFeedback" style="display: none;">No tasks Await feedback
                         </div>
@@ -131,7 +135,7 @@
                     <!-- done -->
                     <div class="paddingRight widthContainer">
                         <div class="statusButton">
-                            <p class="text">Done</p>
+                            <h2 class="text">Done</h2>
                         </div>
                         <div class="noTasks" category="closed" style="display: none;">No tasks Done</div>
                         <div class="drag-area" id="closed" ondrop="moveTo(event, 'closed')"
@@ -140,22 +144,22 @@
                     </div>
                 </div>
             </div>
-        </nav>
+        </main>
 
 
 
-        <section>
+        <div>
             <div w3-include-html="./assets/Templates/board_add_task.html"></div>
-        </section>
+        </div>
 
 
-        <section>
+        <div>
             <div w3-include-html="./assets/Templates/mobile_version.html"></div>
-        </section>
+        </div>
 
         <div id="darkOverlay" style="display: none;"></div>
 
-    </section>
+    </div>
 
 
 </body>

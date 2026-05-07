@@ -1,4 +1,4 @@
-<section onresize="redirect()" id="boardAddTask" class="boardAddTask positionTask">
+<main onresize="redirect()" id="boardAddTask" class="boardAddTask positionTask">
   <div class="widthBoard">
     <div class="boardtitle addTaskBoard">
       <div class="addTaskTitle">
@@ -9,7 +9,7 @@
         <div class="divSectionAddTask">
           <div>
             <div class="Titleleft">
-              <p>Title</p>
+              <label for="taskTitle">Title</label>
               <p class="red">*</p>
             </div>
             <input id="taskTitle" class="inputTitle" type="text" placeholder="Enter a title" required />
@@ -17,19 +17,19 @@
           <div id="InputFieldsMissing"></div>
           <div class="flexdirection">
             <label for="description">Description</label>
-            <textarea class="inputDescription marginTop" id="description" type="text" placeholder="Enter a Description"></textarea>
+            <textarea class="inputDescription marginTop" id="description"  placeholder="Enter a Description"></textarea>
           </div>
           <div id="InputFieldsMissing"></div>
           <div class="flexdirection">
             <div class="dateEdit">
-              <p class="dueDateEdit">Due date</p>
+              <label for="taskDueDate">Due date</label>
               <p class="red">*</p>
             </div>
             <input id="taskDueDate" class="inputTitleDate curser" type="date" required onblur="checkValidationDate()" />
             <div id="WrongCurrentDateId"></div>
           </div>
           <div class="prioEditSection">
-            <p>Prio</p>
+            <label for="priority">Prio</label>
             <div class="marginButtomButton">
               <button id="urgent" class="buttonContainerPrio curser" onclick="urgent()">Urgent <img class="prioButton" id="urgentIcon" src="./assets/IMG/Priority symbols (1).png" /></button>
               <button id="medium" class="buttonContainerPrio curser" onclick="medium()">Medium <img class="prioButton" id="mediumIcon" src="./assets/IMG/Prio_medium(2).svg" /></button>
@@ -39,7 +39,7 @@
 
           <div class="flexdirection">
             <div class="categoryEdit alaignItems">
-              <p>Category</p> <!-- Geänderte ID -->
+              <label for="category">Category</label> <!-- Geänderte ID -->
               <p class="red">*</p>
             </div>
             <select class="inputTitle marginTop curser" name="text" id="category">
@@ -64,29 +64,29 @@
             <input type="file" id="Filepicker" accept="image/jpeg,image/png" style="display: none;" onchange="handleFileChange(event)" tabindex="-1" />
 
             <!-- upload_button_container fokussierbar machen -->
-            <div class="upload_button_container" onclick="document.getElementById('Filepicker').click()" tabindex="0">
+            <button type="button" class="upload_button_container" onclick="document.getElementById('Filepicker').click()">
               <span class="upload_button_text">Drag a file or Browse</span>
               <img src="./assets/IMG/plus button mobile.png" alt="" />
-            </div>
+            </button>
 
             <div id="uploaded_Files" class="Uploaded_FIles_Container"></div>
           </div>
           <div class="divPaddingBottum">
-            <p>Subtasks</p>
+            <label for="subtasks">Subtasks</label>
             <div class="divSubtask" id="subtaskBorderInputchange">
               <input id="new-subtask" class="subtasksInputfield" type="text" placeholder="Add new subtask" />
 
               <div class="subtaskImgContent">
-                <img onclick="addCurrentSubtask()" class="addSubTaskIcon" id="add-subtask-icon" src="assets/IMG/add_subtask_img.svg" alt="Add Subtask" />
+                <button type="button" class="addSubTaskIcon-btn" onclick="addCurrentSubtask()" aria-label="Subtask hinzufügen"><img class="addSubTaskIcon" src="assets/IMG/add_subtask_img.svg" alt="" /></button>
                 <div class="separatorSubtask"></div>
-                <img onclick="emptySubtask()" class="emptySubtaskicon" id="empty-subtask-icon" src="assets/IMG/iconoir_cancel.png" alt="Add Subtask" />
+                <button type="button" class="emptySubtask-btn" onclick="emptySubtask()" aria-label="Subtask leeren"><img class="emptySubtaskicon" src="assets/IMG/iconoir_cancel.png" alt="" /></button>
               </div>
             </div>
             <div id="subtasksContainer"></div>
           </div>
           <div id="SubtaskLengthReached"></div>
           <div class="AssignedTO_Container">
-            <span class="Assign_Header">Assigned to</span>
+            <label class="Assign_Header">Assigned to</label>
             <div onclick="openList()" id="select_container" class="select_container" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ') openList()">
               <span>Select contacts to assign</span>
               <div id="arrow_img_container">
@@ -105,10 +105,10 @@
           <p class="required-message">This field is required</p>
         </div>
         <div id="DibButtomAddtask" class="divButtonButtom">
-          <button onclick="clearTask()" class="buttonContainerWhite curser">Clear <img src="./assets/IMG/x_icon_clear.svg" /></button>
+          <button onclick="clearTask()" class="buttonContainerWhite curser">Clear <img src="./assets/IMG/x_icon_clear.svg"  alt="Clear Button"/></button>
           <button onclick="createTask(event)" class="buttonContainerdark curser">Create Task <img src="assets/IMG/clear_Img.svg" /></button>
         </div>
       </div>
     </div>
   </div>
-</section>
+</main>

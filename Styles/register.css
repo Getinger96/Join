@@ -17,6 +17,20 @@ body {
   height: 122px;
 }
 
+.back-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.visbilityimg-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
 .loginscreen {
   position: absolute;
   width: 274px;

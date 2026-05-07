@@ -121,6 +121,22 @@ html.no-scroll {
     overflow: hidden !important;
 }
 
+.upload_button_container {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.addSubTaskIcon-btn,
+.emptySubtask-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    width: auto;
+}
+
 body.no-scroll {
     overflow: hidden !important;
 }
@@ -294,6 +310,7 @@ h3 {
 
 .dateEdit {
     display: flex;
+    align-items: center;
 
 }
 
@@ -603,6 +620,7 @@ nav ul {
     display: flex;
     margin-top: 94px;
     font-size: 20px;
+    align-items: center;
 }
 
 .divPaddingBottum {
@@ -1307,6 +1325,7 @@ li {
 
 .categoryEdit {
     display: flex;
+    align-items: center;
 }
 
 @media(max-height: 450px) {

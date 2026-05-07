@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Login</title>
     <link rel="icon" type="image/x-icon" href="./assets/IMG/Capa 2.png" />
     <link rel="stylesheet" href="./Styles/fontStyles.css">
     <link rel="stylesheet" href="./Styles/login.css">
@@ -10,9 +11,8 @@
     <script src="./assets/js/login.js"></script>
     <script src="./assets/js/register_Template.js"></script>
     <script src="./assets/js/register_ValidationSigUpButton.js"></script>
-    <title>Login</title>
+   
 
-    <link rel="icon" type="image/x-icon" href="./assets/IMG/Capa 2.png" />
 
 </head>
 <body onload="loadUsers(path = ''); screenWidth();" onresize="screenWidth()" id="myopacity">
@@ -20,7 +20,7 @@
     <header>
 
         <div class="loginheadline">
-            <img class="loginlogo" src="assets/IMG/Join_logo.svg" alt="">
+            <img class="loginlogo" src="assets/IMG/Join_logo.svg" alt="Join logo">
 
             <div class="signUpsection">
             <span class="notajoinUser"> Not a Join user ?</span>
@@ -32,7 +32,7 @@
 
 
     </header>
-    <div class="middle-section">
+    <main class="middle-section">
     <section class="register">
 
         <h1 class="login-headline">Log in</h1>
@@ -50,12 +50,12 @@
         </div>
         <div id="validatePassword" class="showMistakeValidation"></div>
 
-        <span class="incorrectentrystyle" id="incorrectentry">
+        <span role="alert" class="incorrectentrystyle" id="incorrectentry">
         </span>
 
         <div class="checkboxsection">
         <input id="checkboxlogin" class="checkbox" type="checkbox"> 
-        <span class="Rememberme"> Remember me </span>
+        <label for="checkboxlogin"  class="Rememberme" > Remember me </label>
         </div>
 
         <div class="loginandgustbutton"> 
@@ -67,7 +67,7 @@
 
 
     </section>
-    </div>
+    </main>
 
     <div class="signUpsectionmobilversion">
         <span class="notajoinUsermobilversion"> Not a Join user ?</span>
