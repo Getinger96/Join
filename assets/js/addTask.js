@@ -156,19 +156,32 @@ function renderSelectionContainer() {
         profiles.innerHTML += renderContacts(i, contactColour, firstletters, name);
     }
 }
-
+/**
+ * Registers the file input change listener.
+ * Removes any existing listener first to avoid duplicates.
+ */
 function fileupload() {
     const filepicker = document.getElementById('Filepicker');
     filepicker.removeEventListener('change', handleFileChange);
     filepicker.addEventListener('change', handleFileChange);
 }
-
+/**
+ * Converts a file size in bytes to a human-readable string.
+ * @param {number} bytes - File size in bytes
+ * @returns {string} Formatted string e.g. '204.8 KB', '1.2 MB', '512 B'
+ */
 function formatFileSize(bytes) {
     if (bytes < 1024) return bytes + ' B';
     if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
     return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
 }
-
+/**
+ * Handles file input changes. Validates type and size,
+ * compresses valid images and appends them to the upload container.
+ * Invalid files trigger a toast message and are skipped.
+ * @async
+ * @returns {Promise<void>}
+ */
 async function handleFileChange() {
     const filepicker = document.getElementById('Filepicker');
     const files = filepicker.files;
@@ -212,8 +225,10 @@ async function handleFileChange() {
     };
 }
 
-
-
+/**
+ * Shows a toast notification for a given duration (3s).
+ * @param {string} [message='Nur Bilddateien erlaubt.'] - Message to display
+ */
 function showToast(message = 'Nur Bilddateien erlaubt.') {
     const toast = document.getElementById('error-toast');
     toast.textContent = message;
@@ -221,10 +236,18 @@ function showToast(message = 'Nur Bilddateien erlaubt.') {
     setTimeout(hideToast, 3000);
 }
 
+/**
+ * Hides the toast notification.
+ */
 function hideToast() {
     document.getElementById('error-toast').classList.remove('show');
 }
 
+/**
+ * Converts a Blob to a base64 data URL string.
+ * @param {Blob} blob - The blob to convert
+ * @returns {Promise<string>} Base64 encoded data URL
+ */
 function blobToBase64(blob) {
     return new Promise((resolve, _) => {
         const reader = new FileReader();
@@ -233,17 +256,34 @@ function blobToBase64(blob) {
     });
 }
 
+/**
+ * Removes a file from the UI and from the allfiles array.
+ * @param {HTMLButtonElement} btn - The remove button that was clicked
+ * @param {string} filename - Name of the file to remove
+ */
 function removeFile(btn, filename) {
     btn.parentElement.remove();
     allfiles = allfiles.filter(f => f.filename !== filename);
 }
 
+/**
+ * Clears all uploaded files from the UI and resets the allfiles array.
+ */
 function removeAllFiles() {
     document.getElementById('uploaded_Files').innerHTML = '';
     allfiles = [];
 }
 
-
+/**
+ * Compresses an image to fit within max dimensions at a given quality.
+ * Maintains aspect ratio. Returns a base64 data URL.
+ * @param {File} file - The image file to compress
+ * @param {string} fileType - MIME type e.g. 'image/jpeg'
+ * @param {number} [maxWidth=800] - Maximum width in px
+ * @param {number} [maxHeight=800] - Maximum height in px
+ * @param {number} [quality=0.8] - Compression quality between 0 and 1
+ * @returns {Promise<string>} Base64 encoded compressed image
+ */
 function compressImage(file, fileType, maxWidth = 800, maxHeight = 800, quality = 0.8) {
     return new Promise((resolve, reject) => {
         const reader = new FileReader();

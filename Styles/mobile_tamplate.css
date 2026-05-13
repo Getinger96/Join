@@ -3,7 +3,6 @@
     bottom: 0;
     width: 100%;
     background-color: #2A3647;
-    padding: 5px 0;
     z-index: 1000;
     height: 60px;
 }
@@ -12,7 +11,6 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    margin-top: 4px;
 }
 
 .sidelinkMobil a {
@@ -21,7 +19,15 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 6px 12px;        /* padding auf den Link selbst */
+    border-radius: 8px;
+    transition: background-color 0.2s;
 }
+
+.sidelinkMobil a:hover {
+    background-color: #405169;
+}
+
 
 .sidelinkMobil img {
     width: 28px;

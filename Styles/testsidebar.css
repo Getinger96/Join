@@ -199,9 +199,7 @@ body {
     color: #FFFFFF;
 }
 
-a:hover {
-    background-color: #405169;
-}
+
 
 main {
     display: flex;

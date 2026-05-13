@@ -7,7 +7,25 @@ function showCard(task, taskIndex) {
     let todoBig = document.getElementById('todoBig');
     let showCardHTML = createShowCard(task, taskIndex);
     todoBig.innerHTML = showCardHTML;
-    setTimeout(() => initViewer(), 300); // ← kleines Timeout
+
+    const images = todoBig.querySelectorAll('#card-images img');
+    if (images.length === 0) {
+        initViewer();
+        return;
+    }
+
+    let loaded = 0;
+    images.forEach(img => {
+        if (img.complete) {
+            loaded++;
+            if (loaded === images.length) initViewer();
+        } else {
+            img.onload = () => {
+                loaded++;
+                if (loaded === images.length) initViewer();
+            };
+        }
+    });
 }
 /**
  * the function open to do Card 
@@ -54,7 +72,7 @@ function createShowCard(task, taskIndex) {
 
 function createimg(files) {
     return files.map(image =>
-        `<img class="img-card" src="${image.base64}" alt="${image.filename}" data-filesize="${image.fileSize}">`
+        `<img class="img-card" src="${image.base64}" alt="${image.filename}" data-filesize="${image.fileSize}" >`
     ).join('');
 }
 
@@ -69,9 +87,12 @@ function initViewer() {
     viewer = new Viewer(container, {
         title: [4, (image) => {
             const original = container.querySelector(`img[alt="${image.alt}"]`);
+            const w = original?.naturalWidth;
+            const h = original?.naturalHeight;
             const size = original ? original.dataset.filesize : null;
+           
             if (!size) return image.alt;
-            return `${image.alt}, ${size}`;
+            return `${image.alt}, ${size}, ${w}x${h}`;
         }],
         toolbar: {
             zoomIn: true,
@@ -128,7 +149,7 @@ function closeoverlayedit(taskIndex) {
     todoBig.classList.add('d-none');
     overlay.classList.add('d-none');
     selectedProfileContainer.innerHTML = '';
-     
+
 }
 
 /**

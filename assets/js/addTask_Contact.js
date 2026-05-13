@@ -1,3 +1,10 @@
+/**
+ * Fetches all contacts from Firebase, assigns colors, filters out
+ * the guest account and duplicates, then sorts alphabetically.
+ * @async
+ * @param {string} [path=''] - Firebase path appended to base_URL
+ * @returns {Promise<void>}
+ */
 async function fetchContacts(path = '') {
     const userJSON = await getContactsData(path);
     const keysArray = Object.keys(userJSON.contacts);
@@ -54,7 +61,6 @@ function selectedContact(event, i, name, firstletters, contactColour) {
     event.stopPropagation();
     let checkbox = document.getElementById(`checkbox${i}`);
     if (!checkbox) {
-        console.log("checkbox nicht gefunden für id:", `checkbox${i}`);
         return;
     }
     checkbox.innerHTML = `<img class="checked_img" src="./assets/IMG/Checked button.svg" alt="">`;

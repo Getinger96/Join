@@ -238,7 +238,6 @@ async function deleteContactInBoard(index) {
         for (let taskId in tasks) {
             let task = tasks[taskId];
             if (task.AssignedContact && Array.isArray(task.AssignedContact)) {
-                console.log(`Task ID: ${taskId}, assignedContact:`, task.AssignedContact);
 
                 const updatedContacts = task.AssignedContact.filter(
                     name => name !== contactToDelete

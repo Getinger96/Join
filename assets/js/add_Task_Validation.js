@@ -37,6 +37,14 @@ function validateTask(titel, category, date) {
     return true;
 }
 
+/**
+ * Validates that title, category and date are not empty.
+ * Triggers error UI if any field is missing.
+ * @param {string} titel - Task title input value
+ * @param {string} category - Selected category value
+ * @param {string} date - Due date input value
+ * @returns {boolean} false if any field is empty, true if all are filled
+ */
 function validateInputs(titel, category, date) {
     if (titel === '' || category === '' || date === '') {
         allInputFieldMissing();
@@ -46,7 +54,11 @@ function validateInputs(titel, category, date) {
     }
     return true; 
 }
-
+/**
+ * Checks if the selected date is not in the past.
+ * @param {string} date - Date string in format 'YYYY-MM-DD'
+ * @returns {boolean} false if date is in the past, true if valid
+ */
 function checkDateValidity(date) {
     let selectedDate = new Date(date);
     let currentDate = new Date(); 
@@ -82,7 +94,10 @@ function changeColorBorder() {
     document.getElementById("select_containerId").classList.add("missing-input-border");
 }
 
-
+/**
+ * Removes all missing-field error styles and clears error messages.
+ * Also clears the subtask length warning if present.
+ */
 function clearMissingFieldContent() {
     document.getElementById("title").classList.remove("missing-input-border");
     document.getElementById("dueDate").classList.remove("missing-input-border");
@@ -95,7 +110,10 @@ function clearMissingFieldContent() {
     }
    
 }
-
+/**
+ * Removes missing-field error styles and clears both the
+ * input validation message and the invalid date message.
+ */
 function clearWarningField() {
     document.getElementById("title").classList.remove("missing-input-border");
     document.getElementById("dueDate").classList.remove("missing-input-border");
@@ -175,7 +193,7 @@ function addTaskToArray(task, keyTask, id, tasksArray) {
             Prio: task.Prio,
             Category: task.Category,
             subtask: task.Subtask,
-            status: task.Status,
+            status: task.Status
         });
     }
 }

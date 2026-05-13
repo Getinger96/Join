@@ -6,7 +6,6 @@ document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeList();
 });
 
-// Fokus verlässt die Liste
 document.addEventListener('focusin', (e) => {
     let selecCon = document.getElementById('Selection_Container');
     let selectContainer = document.getElementById('select_container');
@@ -137,7 +136,7 @@ function resetButtons() {
 /**
  * the function clear Task 
  */
-function clearTask() {
+function clearBoardTask() {
     deselectAllContacts();
     clearCurrentTask();
     clearFormFields();
@@ -147,7 +146,7 @@ function clearTask() {
     clearMissingFieldContent();
     returnColorPrioIcons();
     medium();
-    removeAllFiles()
+    removeAllFilesBoard()
 }
 
 /**
@@ -279,13 +278,20 @@ function low() {
     currentPriority = 'low';
 }
 
-
-function fileupload() {
+/**
+ * Registers the file input change listener.
+ * Removes any existing listener first to avoid duplicates.
+ */
+function fileuploadBoard() {
     const filepicker = document.getElementById('Filepicker');
-    filepicker.removeEventListener('change', handleFileChange);
-    filepicker.addEventListener('change', handleFileChange);
+    filepicker.removeEventListener('change', handleFileChangeBoard);
+    filepicker.addEventListener('change', handleFileChangeBoard);
 }
-
+/**
+ * Converts a file size in bytes to a human-readable string.
+ * @param {number} bytes - File size in bytes
+ * @returns {string} Formatted string e.g. '204.8 KB', '1.2 MB', '512 B'
+ */
 function formatFileSize(bytes) {
     if (bytes < 1024) return bytes + ' B';
     if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
@@ -295,7 +301,16 @@ function formatFileSize(bytes) {
 const ALLOWED_TYPES = ['image/jpeg', 'image/png'];
 const MAX_SIZE_BYTES = 1 * 1024 * 1024; // 1MB
 
-async function handleFileChange(event) {
+
+/**
+ * Handles file input changes. Finds the upload container relative to the
+ * input element, validates type and size, compresses valid images and
+ * appends them to the upload container. Resets the input after processing.
+ * @async
+ * @param {Event} event - The change event from the file input
+ * @returns {Promise<void>}
+ */
+async function handleFileChangeBoard(event) {
     const input = event.target;
     const container = input.closest('.File_Upload_Container');
     const uploadedFilesContainer = container.querySelector('#uploaded_Files');
@@ -305,16 +320,16 @@ async function handleFileChange(event) {
 
     for (const file of Array.from(files)) {
         if (!ALLOWED_TYPES.includes(file.type)) {
-            showToast('Dieses Dateiformat ist nicht erlaubt!');
+            showToastBoard('Dieses Dateiformat ist nicht erlaubt!');
             continue; 
         }
 
           if (file.size > MAX_SIZE_BYTES) {
-            showToast('Upload-Limit von 1MB überschritten!');
+            showToastBoard('Upload-Limit von 1MB überschritten!');
             continue;
         }
 
-        const compressedBase64 = await compressImage(file, file.type, 800, 800, 0.8);
+        const compressedBase64 = await compressImageBoard(file, file.type, 800, 800, 0.8);
 
         allfiles.push({
             filename: file.name,
@@ -330,7 +345,7 @@ async function handleFileChange(event) {
         item.innerHTML = `
             <img src="${compressedBase64}" alt="${file.name}">
             <span>${file.name}</span>
-            <button onclick="removeFile(this, '${file.name}')">✕</button>
+            <button onclick="removeFileBoard(this, '${file.name}')">✕</button>
         `;
         uploadedFilesContainer.appendChild(item);
     }
@@ -338,17 +353,27 @@ async function handleFileChange(event) {
     input.value = '';
 }
 
-function removeFile(btn, filename) {
+function removeFileBoard(btn, filename) {
     btn.parentElement.remove();
     allfiles = allfiles.filter(f => f.filename !== filename);
 }
 
-function removeAllFiles() {
+/**
+ * Removes a file from the UI and from the allfiles array.
+ * @param {HTMLButtonElement} btn - The remove button that was clicked
+ * @param {string} filename - Name of the file to remove
+ */
+function removeAllFilesBoard() {
     document.querySelectorAll('#uploaded_Files').forEach(c => c.innerHTML = '');
     allfiles = [];
 }
 
-function showToast(message = 'Dieses Dateiformat ist nicht erlaubt!') {
+
+/**
+ * Shows a toast notification for 3 seconds using the board toast element.
+ * @param {string} [message='Dieses Dateiformat ist nicht erlaubt!'] - Message to display
+ */
+function showToastBoard(message = 'Dieses Dateiformat ist nicht erlaubt!') {
     const toast = document.getElementById('board-error-toast');
     if (!toast) return;
     document.getElementById('board-toast-title').textContent = message;
@@ -356,6 +381,10 @@ function showToast(message = 'Dieses Dateiformat ist nicht erlaubt!') {
     setTimeout(hideBoardToast, 3000);
 }
 
+
+/**
+ * Hides the board toast notification.
+ */
 function hideBoardToast() {
     const toast = document.getElementById('board-error-toast');
     if (!toast) return;
@@ -364,8 +393,17 @@ function hideBoardToast() {
 
 
 
-
-function compressImage(file, fileType, maxWidth = 800, maxHeight = 800, quality = 0.8) {
+/**
+ * Compresses an image to fit within max dimensions at a given quality.
+ * Maintains aspect ratio. Returns a base64 data URL.
+ * @param {File} file - The image file to compress
+ * @param {string} fileType - MIME type e.g. 'image/jpeg'
+ * @param {number} [maxWidth=800] - Maximum width in px
+ * @param {number} [maxHeight=800] - Maximum height in px
+ * @param {number} [quality=0.8] - Compression quality between 0 and 1
+ * @returns {Promise<string>} Base64 encoded compressed image
+ */
+function compressImageBoard(file, fileType, maxWidth = 800, maxHeight = 800, quality = 0.8) {
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
 

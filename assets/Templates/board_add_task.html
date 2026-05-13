@@ -61,7 +61,7 @@
               <button class="close-btn" onclick="hideBoardToast()" tabindex="-1">&#x2715;</button>
             </div>
 
-            <input type="file" id="Filepicker" accept="image/jpeg,image/png" style="display: none;" onchange="handleFileChange(event)" tabindex="-1" />
+            <input type="file" id="Filepicker" accept="image/jpeg,image/png" style="display: none;" onchange="handleFileChangeBoard(event)" tabindex="-1" />
 
             <!-- upload_button_container fokussierbar machen -->
             <button type="button" class="upload_button_container" onclick="document.getElementById('Filepicker').click()">
@@ -105,7 +105,7 @@
           <p class="required-message">This field is required</p>
         </div>
         <div id="DibButtomAddtask" class="divButtonButtom">
-          <button onclick="clearTask()" class="buttonContainerWhite curser">Clear <img src="./assets/IMG/x_icon_clear.svg"  alt="Clear Button"/></button>
+          <button onclick="clearBoardTask()" class="buttonContainerWhite curser">Clear <img src="./assets/IMG/x_icon_clear.svg"  alt="Clear Button"/></button>
           <button onclick="createTask(event)" class="buttonContainerdark curser">Create Task <img src="assets/IMG/clear_Img.svg" /></button>
         </div>
       </div>
