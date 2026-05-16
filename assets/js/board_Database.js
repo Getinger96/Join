@@ -208,7 +208,7 @@ function populateTaskFields(title, description, dueDate, priority, category, sub
         <div class="uploaded_file_item">
             <img src="${file.base64}" alt="${file.filename}" style="width:50px; height:50px; object-fit:cover; border-radius:4px;" />
             <span>${file.filename.slice(0, 5)}</span>
-            <button onclick="removeFile(this, '${file.filename}')">✕</button>
+            <button onclick="removeFileBoard(this, '${file.filename}')">✕</button>
         </div>
     `;
 });
@@ -295,7 +295,7 @@ function closeTask() {
     darkOverlay.classList.remove('visible');
     document.body.classList.remove('no-scroll');
 
-    clearTask();
+    clearBoardTask();
     clearMissingFieldContent();
     returnColorPrioIcons();
     location.reload();

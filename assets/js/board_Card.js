@@ -136,7 +136,7 @@ function closeOverlay(taskIndex) {
     selectedProfileContainer.innerHTML = '';
     document.documentElement.classList.remove('no-scroll'); // ← statt style.overflow
     document.body.classList.remove('no-scroll');
-    clearTask();
+    clearBoardTask();
 }
 /**
  * the function closed eidt overlay

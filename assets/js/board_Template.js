@@ -266,7 +266,7 @@ function showSubtasksHtml(taskIndex, subtaskIndex, isChecked, subtask) {
 function changeAddtaskButton(index) {
     let buttonaddtask = document.getElementById('DibButtomAddtask');
     buttonaddtask.innerHTML = `
-          <button onclick="clearTask()" class="buttonContainerWhite curser">Clear <img
+          <button onclick="clearBoardTask()" class="buttonContainerWhite curser">Clear <img
                             src="./assets/IMG/x_icon_clear.svg"></button>
                     <button  onclick="createEdittask(${index})" class="buttonContainerdark curser">Edit Task <img
                             src="assets/IMG/clear_Img.svg"></button>`
@@ -277,7 +277,7 @@ function changeAddtaskButton(index) {
 function setCreateTaskButton() {
     let buttonaddtask = document.getElementById('DibButtomAddtask');
     buttonaddtask.innerHTML = `
-            <button onclick="clearTask()" class="buttonContainerWhite curser">Clear <img
+            <button onclick="clearBoardTask()" class="buttonContainerWhite curser">Clear <img
                 src="./assets/IMG/x_icon_clear.svg"></button>
             <button onclick="createTask(event)" class="buttonContainerdark curser">Create Task <img
                 src="assets/IMG/clear_Img.svg"></button>`;

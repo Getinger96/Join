@@ -148,7 +148,7 @@ function openTask(taskIndex) {
         boardAddTask.classList.remove('visible');
         darkOverlay.classList.remove('visible');
 
-        clearTask();
+        clearBoardTask();
         clearMissingFieldContent();
     }
 
