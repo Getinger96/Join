@@ -45,10 +45,14 @@ function renderPrioButtonsHtml() {
  * 
  */
 function allInputFieldMissing() {
-    let showTileMissing = document.getElementById("InputFieldsMissing")
-    showTileMissing.innerHTML = `<div>
-                                     <span class="missingInput"> Please fill in or select the marked fields</span>
-                                </div>`;    
+    document.getElementById("InputFieldsMissing").innerHTML =
+        `<span class="missingInput">Please fill in or select the marked fields</span>`;
+
+    let title = document.getElementById("title").value;
+    if (title === '') {
+        document.getElementById("titleMissing").innerHTML =
+            `<span class="missingInput">Title is required</span>`;
+    }
 }
 
 /**
@@ -60,7 +64,7 @@ function showInvalidDateMessage() {
     let showWrongCurrentDate = document.getElementById("WrongCurrentDateId")
     showWrongCurrentDate.innerHTML = `<div>
                                      <span class="missingInput"> No date in the past may be specified</span>
-                                </div>`;   
+                                </div>`;
 }
 
 /**
@@ -90,7 +94,7 @@ function generateSubtaskHTML(i) {
  * 
  */
 function pleaseEnterASubtask() {
-    document.getElementById(`SubtaskLengthReached`).innerHTML =`<span class="showShubtaskError">Please Enter a full subtask`;
+    document.getElementById(`SubtaskLengthReached`).innerHTML = `<span class="showShubtaskError">Please Enter a full subtask`;
 }
 
 /**

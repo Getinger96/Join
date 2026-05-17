@@ -12,6 +12,18 @@ body {
   margin-top: 120px;
 }
 
+.wrongdatemsg{
+  min-height: 25px;
+}
+
+.titlemissingmsg {
+  min-height: 25px;
+}
+
+.categorymissingmsg {
+  min-height: 25px;
+}
+
 .headline_addTask {
   display: flex;
   gap: 1px;
@@ -814,6 +826,7 @@ input:focus {
   gap: 500px;
   align-items: center;
   margin-left: 328px;
+  margin-top: 20px;
 
 
 }

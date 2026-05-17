@@ -63,19 +63,19 @@
                 <div class="Title_Container">
                     <label class="label" for="title">Title<span class="red">*</span></label>
                     <input id="title" placeholder="Enter a Title" class="input_Title" required type="text">
-                    <div id="titleMissing"></div>
+                    <div class="titlemissingmsg" id="titleMissing"></div>
                 </div>
                 <div class="Description_Container">
                     <label class="label" for="Description">Description</label>
-                    <textarea id="Description" class="input_Description" placeholder="Enter a Description"
-                        ></textarea>
+                    <textarea id="Description" class="input_Description" placeholder="Enter a Description"></textarea>
                 </div>
                 <div class="date_Container">
                     <label class="label" for="dueDate">Due date <span class="red">*</span></label>
                     <input onclick="dateinput()" id="dueDate" placeholder="dd/mm/yyyy" class="input_date" required
                         type="date" onblur="checkValidationDate()">
+                    <div class="wrongdatemsg" id="WrongCurrentDateId"> </div>
                 </div>
-                <div id="WrongCurrentDateId"> </div>
+
                 <div class="Prio_Container">
                     <span class="prio_Header">Prio</span>
                     <div id="Prio_btn_Container" class="Prio_btn_Container">
@@ -97,10 +97,11 @@
                             tabindex="0" onkeydown="if(event.key==='Enter') choosedTechnicalTask(event)">Technical Task
                         </div>
                     </div>
+                    <div class="categorymissingmsg" id="InputFieldsMissing"></div>
                 </div>
 
 
-                <div id="InputFieldsMissing"></div>
+
                 <div id="Selection_Container_Category" class="Selection_Container_Category d_none">
                 </div>
 
