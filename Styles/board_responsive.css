@@ -1132,14 +1132,14 @@
 
 @media (min-height: 671px) {
   .cardbig {
-    height: 590px;
+    
     margin-top: -80px;
   }
 }
 
 @media (min-height: 781px) {
   .cardbig {
-    height: 630px;
+    
     margin-top: -80px;
   }
 }

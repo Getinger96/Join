@@ -72,7 +72,11 @@ function createShowCard(task, taskIndex) {
 
 function createimg(files) {
     return files.map(image =>
-        `<img class="img-card" src="${image.base64}" alt="${image.filename}" data-filesize="${image.fileSize}" >`
+        `
+        <div class="card-image-container">
+            <img class="img-card" src="${image.base64}" alt="${image.filename}" data-filesize="${image.fileSize}" >
+            <span class="filename">${image.filename}</span>
+        </div>`
     ).join('');
 }
 

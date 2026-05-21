@@ -316,8 +316,8 @@ h3 {
 
 
 .img-card {
-    width: 50px;
-    height: 50px;
+    width: 112px;
+    height: 56px;
     object-fit: cover;
     border-radius: 4px;
     cursor: pointer;
@@ -328,6 +328,23 @@ h3 {
     filter: brightness(1.2);
     box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
 }
+
+.card-images {
+    display: flex;
+}
+
+.card-image-container{
+  display: flex;
+    align-items: center;
+    flex-direction: column; 
+}
+
+.filename {
+    font-size: 16px;
+    color: #A8A8A8;
+}
+
+
 
 .checkbox {
     scale: 1.5;
@@ -1187,6 +1204,7 @@ li {
 
 .cardbig {
     background-color: white;
+     height: 807px;
     padding: 20px;
     border-radius: 30px;
     max-width: 400px;
@@ -1197,6 +1215,7 @@ li {
     overflow: auto;
     scrollbar-width: none;
     animation: slideRight 0.5s ease-out forwards;
+   
 }
 
 .missingInput {
