@@ -372,4 +372,5 @@ async function saveEditedContact(index) {
     await fetchContacts();
     closeCardContact();
     getContactBig(index);
+     showContactToast('Contact successfully updated');
 }

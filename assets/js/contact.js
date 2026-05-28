@@ -133,7 +133,7 @@ function getContactBig(index) {
     let color = colors[colorIndex];
 
     let showContacts = document.getElementById('contactViewBig');
-    showContacts.innerHTML = showContactBig(contact.name, contact.email, contact.phone, getLastName(contact.name), color, contact.photo);
+    showContacts.innerHTML = showContactBig(contact.name, contact.email, contact.phone, getLastName(contact.name), color, contact.photo,index);
 }
 
 /**
@@ -192,6 +192,7 @@ async function createContact() {
 
     contactsArray.push({ ...newContact, id: generatedKey });
     closeCardContact();
+    showContactToast('Contact successfully created');
     await fetchContacts();
 }
 
@@ -205,6 +206,7 @@ function addNewContact() {
     newContactOverlay.classList.add('transition-in-from-right');
 
     const cancelButton = document.querySelector('.cancel-button');
+    cancelButton.textContent = 'Cancel';
     cancelButton.onclick = function () {
         closeCardContact();
     };
@@ -239,6 +241,35 @@ function htmlEditForm(index) {
 }
 
 
+function showContactToast(message) {
+    let toast = document.createElement('div');
+    toast.textContent = message;
+    toast.style.cssText = `
+        position: fixed;
+        bottom: 40px;
+        left: 50%;
+        transform: translateX(-50%) translateY(100px);
+        background-color: #2a3647;
+        color: white;
+        padding: 16px 32px;
+        border-radius: 10px;
+        font-size: 16px;
+        z-index: 9999;
+        transition: transform 0.4s ease;
+    `;
+    document.body.appendChild(toast);
+
+    requestAnimationFrame(() => {
+        toast.style.transform = 'translateX(-50%) translateY(0)';
+    });
+
+    setTimeout(() => {
+        toast.style.transform = 'translateX(-50%) translateY(100px)';
+        setTimeout(() => toast.remove(), 400);
+    }, 2500);
+}
+
+
 
 /**
  * Handles photo upload for a contact, compresses and saves it.
@@ -266,6 +297,7 @@ function editFunctionAction(index) {
     saveButton.onclick = function () {
         saveEditedContact(index);
     };
+    
 }
 
 
@@ -282,6 +314,7 @@ function editContact(index) {
         htmlEditForm(index);
         editFunctionAction(index);
     }
+   
 }
 /**
  * Deletes a contact by index and updates the contact list.
@@ -305,6 +338,7 @@ async function deleteContact(index) {
     } else {
         console.error("Invalid index for deletion:", index);
     }
+     showContactToast('Contact successfully deleted');
 }
 
 /**
@@ -320,6 +354,7 @@ function resetContactForm() {
     let createButton = document.querySelector('.createContact-button');
     createButton.innerHTML = 'Create Contact <img src="assets/IMG/check.svg" alt="Create Icon" class="button-icon" style="margin-left: 8px;">';
     document.querySelector('.addNewContactimg').style.display = 'block';
+    closeAllWarningMessage()
 }
 
 /**
