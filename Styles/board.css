@@ -653,6 +653,7 @@ nav ul {
 
 .HeadContainerBoard {
     margin-top: 140px;
+    max-width: 1900px;
     width: 100%
 }
 
