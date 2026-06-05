@@ -298,7 +298,7 @@ body {
 
 @media (max-width: 1528px) {
   .headblock {
-    height: 96px;
+    height: 55px;
     padding: 20px 40px;
     left: 230px;
   }
@@ -345,7 +345,7 @@ body {
 
   .headblock {
     padding: 20px 16px 20px 16px;
-    height: 80px;
+    height: 40px;
     left: 0px;
   }
 
