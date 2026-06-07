@@ -28,22 +28,23 @@
 
         <div w3-include-html="./assets/Templates/desktop_template.html"></div>
         <div class="headblock">
-            <div class="title">
-                <h2 class="kanbanBoardTitle">Kanban Projekt Management Tool</h2>
-                <img src="./assets/IMG/Capa 3.png" alt="MobileIcon" class="MobileIcon">
-            </div>
-            <div class="headUserContainer">
-                <a href="help.html" class="help-link">
-                    <img src="./assets/IMG/help.png" alt="Hilfe" class="help-icon">
-                </a>
-                <div class="logInUser_Container" onclick="showLogOutSection();">
-                    <span class="logInUser" id="loginUserId"></span>
+            <div class="headblock-inner">
+                <div class="title">
+                    <span class="kanbanBoardTitle">Kanban Projekt Management Tool</span>
+                    <img src="./assets/IMG/Capa 3.png" alt="MobileIcon" class="MobileIcon">
                 </div>
-
+                <div class="headUserContainer">
+                    <a href="help.html" class="help-link">
+                        <img src="./assets/IMG/help.png" alt="Hilfe" class="help-icon">
+                    </a>
+                    <div class="logInUser_Container" onclick="showLogOutSection();">
+                        <span class="logInUser" id="loginUserId"></span>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div id="logoutId"> </div>
+        <div id="logoutId"></div>
 
 
 
@@ -135,7 +136,8 @@
                         </div>
                         <div class="two-buttons">
                             <button type="button" class="cancel-button" onclick="closeCardContact()">Cancel<img
-                                    class="close-button" src="assets/IMG/iconoir_cancel.png" alt="close button"></button>
+                                    class="close-button" src="assets/IMG/iconoir_cancel.png"
+                                    alt="close button"></button>
                             <button onclick="saveEditedContact()" type="submit" class="createContact-button">Create
                                 Contact<img src="assets/IMG/check.svg" alt="save button"></button>
                         </div>

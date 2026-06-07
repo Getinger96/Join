@@ -133,7 +133,7 @@ function getContactBig(index) {
     let color = colors[colorIndex];
 
     let showContacts = document.getElementById('contactViewBig');
-    showContacts.innerHTML = showContactBig(contact.name, contact.email, contact.phone, getLastName(contact.name), color, contact.photo,index);
+    showContacts.innerHTML = showContactBig(contact.name, contact.email, contact.phone, getLastName(contact.name), color, contact.photo, index);
 }
 
 /**
@@ -205,11 +205,6 @@ function addNewContact() {
     newContactOverlay.style.display = 'flex';
     newContactOverlay.classList.add('transition-in-from-right');
 
-    const cancelButton = document.querySelector('.cancel-button');
-    cancelButton.textContent = 'Cancel';
-    cancelButton.onclick = function () {
-        closeCardContact();
-    };
 
     const createButton = document.querySelector('.createContact-button');
     createButton.onclick = function () {
@@ -297,7 +292,7 @@ function editFunctionAction(index) {
     saveButton.onclick = function () {
         saveEditedContact(index);
     };
-    
+
 }
 
 
@@ -314,7 +309,7 @@ function editContact(index) {
         htmlEditForm(index);
         editFunctionAction(index);
     }
-   
+
 }
 /**
  * Deletes a contact by index and updates the contact list.
@@ -331,14 +326,16 @@ async function deleteContact(index) {
         if (window.innerWidth <= 1150) {
             closeDetailView();
         } else {
-            clearBigContactView();
+            if (contactsArray.length > 0) {
+                let nextIndex = Math.min(index, contactsArray.length - 1);
+                selectContact(nextIndex);
+            } else {
+                clearBigContactView();
+            }
         }
         getContacts();
-
-    } else {
-        console.error("Invalid index for deletion:", index);
     }
-     showContactToast('Contact successfully deleted');
+    showContactToast('Contact successfully deleted');
 }
 
 /**
@@ -350,6 +347,11 @@ function resetContactForm() {
     document.getElementById('name').value = '';
     document.getElementById('mail').value = '';
     document.getElementById('telephone').value = '';
+
+    const cancelButton = document.querySelector('.cancel-button');
+    cancelButton.style.display = 'flex';
+    cancelButton.innerHTML = 'Cancel<img class="close-button" src="assets/IMG/iconoir_cancel.png" alt="close button">';
+    cancelButton.onclick = function () { closeCardContact(); };
 
     let createButton = document.querySelector('.createContact-button');
     createButton.innerHTML = 'Create Contact <img src="assets/IMG/check.svg" alt="Create Icon" class="button-icon" style="margin-left: 8px;">';
@@ -366,12 +368,12 @@ function closeContactOverlay() {
         overlay.style.display = 'none';                    // ← Overlay verstecken
         overlay.classList.remove('transition-in-from-right'); // ← Animation zurücksetzen
     }
-    
-   
+
+
     resetBadge();
     resetInputs();
     resetContactForm();
-    
+
     // renderContacts nur aufrufen wenn das Element existiert (nicht auf summary.html)
     if (document.getElementById('contactview')) {
         renderContacts();
@@ -404,7 +406,7 @@ function resetInputs() {
 function closeCardContact() {
     closeContactOverlay();
     resetContactForm();
-    
+
 }
 
 /**

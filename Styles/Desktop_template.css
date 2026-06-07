@@ -24,24 +24,23 @@ body {
 }
 
 .headblock {
-    height: 60px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    height: 80px;
     background-color: white;
-    padding: 20px 40px;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
     z-index: 5;
     position: fixed;
-    font-size: 20px;
-    line-height: 24px;
-    font-family: 'Inter';
-    font-weight: 400;
     top: 0;
     right: 0;
-    bottom: 0;
     left: 0;
+    width: 100%;
+}
+.headblock-inner {
     max-width: 1900px;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 40px;
 }
 
 .kanbanBoardTitle {
@@ -317,17 +316,7 @@ a:hover {
 }
 
 
-@media(max-width: 1528px) {
-    
 
-    .headblock {
-        padding: 20px 99px 20px 260px;
-       
-    }
-
-   
-
-}
 @media(max-width: 1410px) {
     .sideblock {
         display: none;
@@ -337,32 +326,15 @@ a:hover {
         margin-left: 0px;
     }
 
-    .headblock {
-        height: 50px;
-    }
+   
 
   
 }
-@media(max-width: 1320px) {
-    .headblock {
-        padding: 20px 61px 20px 61px;
-    }
 
 
 
 
-}
 
-
-@media(max-width: 1230px) {
-    .headblock {
-        padding: 20px 40px 20px 40px;
-    }
-
-
-
-
-}
 
 @media(max-width: 1150px){
     .logoutSection {
@@ -371,11 +343,7 @@ a:hover {
     }
 }
 
-@media(max-width: 800px){
-    .headblock {
-        padding: 20px 20px 20px 12px;
-    }
-}
+
 
 
 

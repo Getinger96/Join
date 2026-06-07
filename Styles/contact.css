@@ -58,7 +58,7 @@ h2 {
   align-items: stretch;
   height: 100vh;
   overflow: hidden;
-  margin-top: 140px;
+  margin-top: 85px;
 }
 
 .contactview-container {
@@ -104,7 +104,7 @@ h2 {
   max-height: 100%;
   overflow-y: auto;
   z-index: 4;
-  
+
 }
 
 .newcontactbutton {
@@ -240,8 +240,7 @@ h2 {
 
 .deletecontent:hover {
   color: #1009ef;
-  filter: invert(53%) sepia(96%) saturate(406%) hue-rotate(155deg)
-    brightness(92%) contrast(92%);
+  filter: invert(53%) sepia(96%) saturate(406%) hue-rotate(155deg) brightness(92%) contrast(92%);
 }
 
 .edit {
@@ -326,8 +325,7 @@ h2 {
 
 .editcontent:hover {
   color: #1009ef;
-  filter: invert(53%) sepia(70%) saturate(1822%) hue-rotate(165deg)
-    brightness(99%) contrast(101%);
+  filter: invert(53%) sepia(70%) saturate(1822%) hue-rotate(165deg) brightness(99%) contrast(101%);
 }
 
 .newContact {
@@ -366,36 +364,36 @@ h2 {
 }
 
 .account-badge-side {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    padding: 0 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 0 1.5rem;
 }
 
 .account-badge {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    background-color: #2A3647;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2rem;
-    color: white;
-    font-weight: 500;
-    overflow: hidden;
-    cursor: pointer;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: #2A3647;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: white;
+  font-weight: 500;
+  overflow: hidden;
+  cursor: pointer;
 }
 
 .upload-label {
-    cursor: pointer;
-    opacity: 0.7;
-    transition: opacity 0.2s;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s;
 }
 
 .upload-label:hover {
-    opacity: 1;
+  opacity: 1;
 }
 
 .right-side {
@@ -439,8 +437,11 @@ h2 {
   margin-bottom: 0px;
   width: 371px;
 }
-#wrongText, #wrongEmail, #wrongPhone {
-    min-height: 18px;
+
+#wrongText,
+#wrongEmail,
+#wrongPhone {
+  min-height: 18px;
 }
 
 
@@ -481,7 +482,7 @@ input::placeholder {
   border: 1px solid #d1d1d1;
   border-radius: 10px;
   padding: 10px;
-  height: 50px;
+  height: 30px;
 }
 
 .input-fieldphone {
@@ -490,7 +491,7 @@ input::placeholder {
   border: 1px solid #d1d1d1;
   border-radius: 10px;
   padding: 10px;
-  height: 50px;
+  height: 30px;
 }
 
 .contactBigNone {
@@ -503,7 +504,7 @@ input::placeholder {
   border: 1px solid #d1d1d1;
   border-radius: 10px;
   padding: 10px;
-  height: 50px;
+  height: 30px;
 }
 
 .input-icon {
@@ -563,6 +564,9 @@ input:not(:placeholder-shown) {
   border: 1px solid #d1d1d1;
   font-weight: 400;
   display: flex;
+  align-items: center;
+  /* ← das fehlt */
+  gap: 8px;
 }
 
 .cancel-button:hover,
@@ -576,13 +580,11 @@ input:not(:placeholder-shown) {
 }
 
 .cancel-button:hover img.close-button {
-  filter: invert(57%) sepia(70%) saturate(1822%) hue-rotate(165deg)
-    brightness(99%) contrast(101%);
+  filter: invert(57%) sepia(70%) saturate(1822%) hue-rotate(165deg) brightness(99%) contrast(101%);
 }
 
 .cancel-button:active img.close-button {
-  filter: invert(57%) sepia(70%) saturate(1822%) hue-rotate(165deg)
-    brightness(99%) contrast(101%);
+  filter: invert(57%) sepia(70%) saturate(1822%) hue-rotate(165deg) brightness(99%) contrast(101%);
 }
 
 .save_button {

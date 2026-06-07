@@ -2,7 +2,8 @@ body {
     margin: 0;
     font-family: 'Inter';
     background-color: rgb(246, 247, 248);
-    overflow-x: hidden; /* zurück zum Original */
+    overflow-x: hidden;
+    /* zurück zum Original */
 }
 
 html.no-scroll,
@@ -151,6 +152,9 @@ body.no-scroll {
     width: 220px;
     word-break: break-word;
     position: relative;
+    display: flex;
+    /* ← neu */
+    flex-direction: column;
 }
 
 .todo:hover {
@@ -333,10 +337,10 @@ h3 {
     display: flex;
 }
 
-.card-image-container{
-  display: flex;
+.card-image-container {
+    display: flex;
     align-items: center;
-    flex-direction: column; 
+    flex-direction: column;
 }
 
 .filename {
@@ -355,7 +359,7 @@ h3 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 10px;
+    margin-top: auto;
 }
 
 
@@ -428,7 +432,7 @@ h3 {
 }
 
 .progress-bar {
-    width: 200px;
+    width: 90px;
     height: 10px;
     background-color: #e0e0df;
     border-radius: 5px;
@@ -583,7 +587,7 @@ Button {
     background-color: white;
     z-index: 1;
     padding: 10px;
-   
+
 }
 
 .bottomInfoEdit {
@@ -1205,7 +1209,7 @@ li {
 
 .cardbig {
     background-color: white;
-     height: 807px;
+    height: 807px;
     padding: 20px;
     border-radius: 30px;
     max-width: 400px;
@@ -1216,7 +1220,7 @@ li {
     overflow: auto;
     scrollbar-width: none;
     animation: slideRight 0.5s ease-out forwards;
-   
+
 }
 
 .missingInput {
