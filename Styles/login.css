@@ -179,34 +179,7 @@ body {
   padding: 15px;
 }
 
-.Screen-Logo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
-  animation: logoScreen 1.5s forwards;
-  animation-timing-function: ease-in-out;
-  background-color: white;
-}
 
-@keyframes logoScreen {
-  from {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  to {
-    display: none;
-    justify-content: flex-start;
-    align-items: flex-start;
-  }
-}
 
 .loginUpsuccessfully {
   position: fixed;
@@ -232,32 +205,29 @@ body {
   height: 122px;
 }
 
+
+.Screen-Logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  background-color: white;
+  z-index: 9999;
+}
+
 .big-logo {
-  position: absolute;
+  position: fixed;
   width: 274px;
-  height: 335px;
-  top: 33%;
-  left: 42%;
-  animation-fill-mode: forwards;
-  animation-timing-function: ease-in-out;
-  animation: BiglogoScreen 1.5s forwards;
+  height: 274px;
+  transition: top 0.8s ease-in-out, left 0.8s ease-in-out,
+              width 0.8s ease-in-out, height 0.8s ease-in-out;
 }
 
-@keyframes BiglogoScreen {
-  form {
-    top: 50%;
-    left: 150px;
-    width: 274px;
-    height: 300px;
-  }
-
-  to {
-    top: 70px;
-    left: 99px;
-    width: 70px;
-    height: 70px;
-  }
-}
 
 .logoscreennone {
   display: none;
@@ -362,55 +332,7 @@ body {
     padding: 0px 64px 48px 50px;
   }
 
-  .Screen-Logo {
-    animation: logoScreen 500ms forwards;
-    animation-timing-function: ease-in-out;
-    animation-delay: 0.5s;
-  }
-
-  @keyframes logoScreen {
-    from {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      transform: scale(1) translate(0%, 0%);
-      opacity: 1;
-    }
-
-    to {
-      display: none;
-      transform: scale(0) translate(-50%, -50%);
-      opacity: 0;
-    }
-  }
-
-  .big-logo {
-    position: absolute;
-    top: 34%;
-    left: 30%;
-    width: 150px;
-    height: 150px;
-    animation-fill-mode: forwards;
-    animation-timing-function: ease-in-out;
-    animation: BiglogoScreen 1s forwards;
-    animation-delay: 0.5s;
-  }
-
-  @keyframes BiglogoScreen {
-    form {
-      width: 150px;
-      height: 150px;
-      top: 34%;
-      left: 30%;
-    }
-
-    to {
-      top: 10px;
-      left: 10px;
-      width: 70px;
-      height: 70px;
-    }
-  }
+  
 
   .loginstylesuccessfully {
     font-size: 32px;

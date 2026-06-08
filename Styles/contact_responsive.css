@@ -209,17 +209,7 @@ input[type="tel"] {
   display: none;
 }
 
-@media (max-width: 1528px) {
-  .headblock {
-    height: 96px !important;
-    padding: 20px 40px !important;
-    left: 230px !important;
-  }
 
-  .kanbanBoardTitle {
-    margin-left: 60px;
-  }
-}
 
 @media (max-width: 1410px) {
   .middle-Section {
@@ -230,17 +220,7 @@ input[type="tel"] {
   }
 }
 
-@media (max-width: 1450px) {
-  .headblock {
-    height: 96px !important;
-    padding: 20px 40px !important;
-    left: 0px !important;
-  }
 
-  .kanbanBoardTitle {
-    margin-left: 300px !important;
-  }
-}
 
 @media (max-width: 1350px) {
   .headline-contacts {

@@ -146,6 +146,36 @@ function loginUpSuccessfully() {
     showTheCurrentTime();
 }
 
+
+function startLogoAnimation() {
+  const bigLogo = document.getElementById('logoscreen');
+  const logoScreen = document.getElementById('logoscreensection');
+  const targetLogo = document.querySelector('.loginlogo');
+
+  // Startposition: zentriert im Viewport
+  bigLogo.style.top = (window.innerHeight / 2 - 137) + 'px';
+  bigLogo.style.left = (window.innerWidth / 2 - 137) + 'px';
+  bigLogo.style.width = '274px';
+  bigLogo.style.height = '274px';
+
+  // Einen Frame warten, damit der Browser die Startposition rendert
+  // DANN transition starten
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      const target = targetLogo.getBoundingClientRect();
+
+      bigLogo.style.top = target.top + 'px';
+      bigLogo.style.left = target.left + 'px';
+      bigLogo.style.width = target.width + 'px';
+      bigLogo.style.height = target.height + 'px';
+    });
+  });
+
+  setTimeout(() => {
+    logoScreen.style.display = 'none';
+  }, 1400);
+}
+
 /**
  * Shows a greeting message based on the current time of day.
  */

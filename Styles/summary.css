@@ -296,17 +296,7 @@ body {
   gap: 20px;
 }
 
-@media (max-width: 1528px) {
-  .headblock {
-    height: 55px;
-    padding: 20px 40px;
-    left: 230px;
-  }
 
-  .kanbanBoardTitle {
-    margin-left: 60px;
-  }
-}
 
 @media (max-width: 1410px) {
   .headblock {

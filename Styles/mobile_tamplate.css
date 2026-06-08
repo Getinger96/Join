@@ -4,28 +4,40 @@
     width: 100%;
     background-color: #2A3647;
     z-index: 1000;
-    height: 60px;
+    height: 85px;
 }
 
 .sidelinkMobil {
     display: flex;
     justify-content: space-around;
-    align-items: center;
+    align-items: stretch;
+    /* Links auf volle Höhe strecken */
+    height: 85px;
+    /* gleiche Höhe wie .sideblockMobil */
+    padding: 0;
+    /* padding weg */
 }
 
 .sidelinkMobil a {
+    padding: 0;
+    border-radius: 8px;
+    /* kein radius mehr, füllt die ganze Box */
+    flex: 1;
+    /* jeder Link nimmt gleich viel Breite */
+    justify-content: center;
     text-decoration: none;
     color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 6px 12px;        /* padding auf den Link selbst */
-    border-radius: 8px;
+    margin: 8px 4px;
     transition: background-color 0.2s;
 }
 
-.sidelinkMobil a:hover {
+.sidelinkMobil a:hover,
+.sidelinkMobil a.active {
     background-color: #091931;
+    /* kein border-radius nötig */
 }
 
 
@@ -48,8 +60,8 @@
     display: none;
 }
 
-@media(max-width: 1410px){
-    .sideblockMobil{
+@media(max-width: 1410px) {
+    .sideblockMobil {
         display: block;
     }
 }
