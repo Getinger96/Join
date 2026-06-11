@@ -644,18 +644,18 @@ input[type="tel"] {
 @media (max-height: 670px) {
   .add-contact-button,
   .menu-button-img {
-    top: 520px;
+    top: 460px;
   }
 
   .context-menu {
-    top: 490px;
+    top: 425px;
   }
 
   .contactmailsection {
     padding-top: 20px;
   }
   .contact-details-container {
-    padding-top: 40px;
+    padding-top: 45px;
   }
 
   .contactinfo {
@@ -663,7 +663,16 @@ input[type="tel"] {
   }
 
   .headline-contacts {
-    padding: 70px 28px 28px 10px;
+    padding: 10px 10px 10px 10px;
+  }
+  .contactview-container {
+      padding: 10px;
+  }
+}
+
+@media (min-height: 670px) {
+  .headline-contacts {
+    padding: 10px 10px 10px 10px;
   }
 }
 

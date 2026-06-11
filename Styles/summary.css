@@ -352,7 +352,7 @@ body {
     flex-direction: column;
     padding: 20px;
     margin-bottom: 0px;
-    margin-top: 40px;
+    
   }
 
   .summary_headline {
@@ -599,6 +599,7 @@ body {
   .kanbanBoardSection {
     padding: 10px;
     top: 120px;
+    margin-top: 0px;
   }
 
   .taskinBoardcompartment {
@@ -682,6 +683,7 @@ body {
     .kanbanBoardSection {
       padding: 10px;
       top: 120px;
+      margin-top: 0px;
     }
   }
 }
@@ -725,7 +727,7 @@ body {
   .kanbanBoardSection {
     padding: 6px;
     top: 0px;
-    margin-top: 45px;
+    
   }
 
   .summary_title_big {

@@ -126,7 +126,7 @@
     height: 700px;
     width: 1000px;
     overflow-y: auto;
-    
+
   }
 
   .positionTask {
@@ -430,7 +430,7 @@
   }
 
   .responsiveDescription {
-    height: 60px;
+    height: fit-content;
     overflow: auto;
   }
 
@@ -495,11 +495,23 @@
     top: 45%;
   }
 
-
+  .boardCardheadlinesmall {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+  }
 
   .boardAddTask {
-    height: 700px;
+    height: 475px;
   }
+
+  .close-button {
+    position: relative;
+    top: 0px;
+    right: 13px;
+    width:0px;
+  }
+  
 }
 
 @media(max-width:1160px) {
@@ -745,7 +757,7 @@
   }
 
 
-  
+
 
 
 
@@ -836,25 +848,25 @@
 
   .File_Upload_Container {
     width: 240px;
-    
-}
 
-.attachments_info {
+  }
+
+  .attachments_info {
 
     font-size: 13px;
-   
-}
 
-.divSubtask {
-        width: 240px;
-    }
+  }
+
+  .divSubtask {
+    width: 240px;
+  }
 
 
-      
 
-.upload_button_container {
-        width: 240px;
-    }
+
+  .upload_button_container {
+    width: 240px;
+  }
 
   .noTasks {
     width: 150px;
@@ -900,14 +912,14 @@
   }
 
   .File_Upload_Container {
-        margin-top: 0px;
-    }
+    margin-top: 0px;
+  }
 
 
-    .AssignedTO_Container {
-     
-        margin-bottom: 66px;
-    }
+  .AssignedTO_Container {
+
+    margin-bottom: 66px;
+  }
 }
 
 
@@ -1031,7 +1043,7 @@
     width: 430px;
   }
 
-  
+
 }
 
 @media (max-width: 455px) {
@@ -1132,14 +1144,14 @@
 
 @media (min-height: 671px) {
   .cardbig {
-    
+
     margin-top: -80px;
   }
 }
 
 @media (min-height: 781px) {
   .cardbig {
-    
+
     margin-top: -80px;
   }
 }

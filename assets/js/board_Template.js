@@ -191,7 +191,7 @@ function getLargeContactHtml(index, firstLetterForName, firstLetterLastName, con
 function generateCardHtml(title, description, dueDate, imagesHtml, priority, priorityIcon, category, categoryColor, contactsHtml, subtasksHtml, taskIndex) {
     return `
         <div class="todo-detail">
-            <div>
+            <div class="boardCardheadlinesmall">
                 <div class="divKategorieCard" style="background-color: ${categoryColor};">${category}</div>
                 <button onclick="closeOverlay(${taskIndex})" class="close-button"><img src="./assets/IMG/iconoir_cancel.png" alt=""></button>
             </div>

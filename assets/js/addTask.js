@@ -11,6 +11,7 @@ const colors = [
 
 const base_URL = "https://join-37803-default-rtdb.europe-west1.firebasedatabase.app/";
 let contacts = [];
+let contactsArray = [];
 let subtasks = [];
 let assignedContacts = [];
 let prio = [];
@@ -563,5 +564,77 @@ function resetAddTask() {
 function emptySubtask() {
     let currentSubtask = document.getElementById('input_Subtasks')
     currentSubtask.value = '';
+}
+
+function closeContactOverlay() {
+    let overlay = document.getElementById('newContact');
+    if (overlay) {
+        overlay.style.display = 'none';                    // ← Overlay verstecken
+        overlay.classList.remove('transition-in-from-right'); // ← Animation zurücksetzen
+    }
+
+
+    resetBadge();
+    resetInputs();
+    resetContactForm();
+
+    // renderContacts nur aufrufen wenn das Element existiert (nicht auf summary.html)
+    if (document.getElementById('contactview')) {
+        renderContacts();
+    }
+}
+
+/**
+ * Resets the badge to its default empty state.
+ */
+function resetBadge() {
+    document.getElementById('accountBadgeSide').style.display = 'none';
+    document.getElementById('accountPhoto').style.display = 'none';
+    document.getElementById('accountPhoto').src = '';
+    document.getElementById('accountInitials').style.display = 'block';
+    document.getElementById('accountInitials').textContent = '';
+}
+
+/**
+ * Re-enables all contact form input fields.
+ */
+function resetInputs() {
+    document.getElementById('name').disabled = false;
+    document.getElementById('mail').disabled = false;
+    document.getElementById('telephone').disabled = false;
+}
+
+
+
+function closeCardContact() {
+    closeContactOverlay();
+    resetContactForm();
+
+}
+
+/**
+ * Handles the closing of contact forms, both desktop and mobile.
+ */
+function handleCloseContact() {
+    closeCardContact();
+    closeCardContactMobile();
+}
+
+function resetContactForm() {
+    document.querySelector('.addcontactheadline').textContent = 'Add Contact';
+    document.querySelector('.addcontactsecondline').style.display = 'flex';
+    document.getElementById('name').value = '';
+    document.getElementById('mail').value = '';
+    document.getElementById('telephone').value = '';
+
+    const cancelButton = document.querySelector('.cancel-button');
+    cancelButton.style.display = 'flex';
+    cancelButton.innerHTML = 'Cancel<img class="close-button" src="assets/IMG/iconoir_cancel.png" alt="close button">';
+    cancelButton.onclick = function () { closeCardContact(); };
+
+    let createButton = document.querySelector('.createContact-button');
+    createButton.innerHTML = 'Create Contact <img src="assets/IMG/check.svg" alt="Create Icon" class="button-icon" style="margin-left: 8px;">';
+    document.querySelector('.addNewContactimg').style.display = 'block';
+    closeAllWarningMessage()
 }
 
