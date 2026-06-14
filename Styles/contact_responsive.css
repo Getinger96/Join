@@ -215,6 +215,7 @@ input[type="tel"] {
   .middle-Section {
     margin-left: 0px;
   }
+
   .contactlist {
     margin-bottom: 50px;
   }
@@ -459,7 +460,7 @@ input[type="tel"] {
   .contact-details-container {
     padding: 16px;
     padding-top: 50px;
-    
+
   }
 
   .headline-contacts hr {
@@ -491,11 +492,13 @@ input[type="tel"] {
 
   .context-menu.show {
     display: block;
-    animation: slideIn 0.3s forwards; /* Startet das Einblenden */
+    animation: slideIn 0.3s forwards;
+    /* Startet das Einblenden */
   }
 
   .context-menu.hide {
-    animation: slideOut 0.3s forwards; /* Startet das Ausblenden */
+    animation: slideOut 0.3s forwards;
+    /* Startet das Ausblenden */
   }
 
   #contextMenu {
@@ -521,7 +524,115 @@ input[type="tel"] {
     display: block;
     cursor: pointer;
   }
+
+  .contactCars-overview {
+    width: 1040px;
+  }
 }
+
+@media (max-width: 1100px) {
+  .contactCars-overview {
+    width: 800px;
+  }
+
+
+  .closethewindow-button {
+    position: absolute;
+    top: 17px;
+    right: 13px;
+  }
+
+  .leftside {
+    width: 329px;
+  }
+
+  .addcontactheadline {
+
+    font-size: 43px;
+    width: 254px;
+  }
+
+
+  .right-side {
+    width: calc(100% - 321px);
+  }
+
+
+  .account-badge {
+    width: 89px;
+    height: 90px;
+
+  }
+
+
+  .input-container {
+    width: 270px;
+  }
+
+
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"] {
+    width: 212px;
+
+  }
+}
+
+
+@media (max-width: 900px) {
+  .contactCars-overview {
+    width: 600px;
+    flex-direction: column;
+    transform: translate(-25%, -65%);
+  }
+
+  .leftside {
+    padding-top:10px;
+    width: 305px;
+    align-items: center;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 0px;
+    border-top-right-radius: 30px;
+  }
+
+  .leftsidehead {
+    margin-top: 0px;
+  }
+
+  .right-side {
+
+    flex-direction: column;
+    width: calc(100% - 336px);
+
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+  }
+
+  .cancel-button,
+  .delete-button {
+    width: 115px;
+    font-size: 16px;
+
+  }
+
+  .close-button{
+    height: 20px;
+    width: 20px;
+  }
+
+
+  .createContact-button {
+
+    font-size: 17px;
+
+  }
+}
+
+
+
+
+
 
 @media (max-width: 700px) {
   .largcontactname {
@@ -574,6 +685,7 @@ input[type="tel"] {
   .input-fields-add-contact-mobile {
     margin-top: 70px;
   }
+
   .overlay-add-contact-mobile {
     width: 336px;
   }
@@ -595,7 +707,7 @@ input[type="tel"] {
   input[type="text"],
   input[type="email"],
   input[type="tel"] {
-    width: 250px;
+    width: 211px;
   }
 
   .overlay-add-contact-profile-img-mobile {
@@ -620,7 +732,7 @@ input[type="tel"] {
 }
 
 @media (max-height: 850px) {
- 
+
   .menu-button-img {
     top: 600px;
   }
@@ -631,6 +743,7 @@ input[type="tel"] {
 }
 
 @media (max-height: 750px) {
+
   .add-contact-button,
   .menu-button-img {
     top: 580px;
@@ -642,6 +755,7 @@ input[type="tel"] {
 }
 
 @media (max-height: 670px) {
+
   .add-contact-button,
   .menu-button-img {
     top: 460px;
@@ -654,6 +768,7 @@ input[type="tel"] {
   .contactmailsection {
     padding-top: 20px;
   }
+
   .contact-details-container {
     padding-top: 45px;
   }
@@ -665,8 +780,9 @@ input[type="tel"] {
   .headline-contacts {
     padding: 10px 10px 10px 10px;
   }
+
   .contactview-container {
-      padding: 10px;
+    padding: 10px;
   }
 }
 
@@ -677,6 +793,7 @@ input[type="tel"] {
 }
 
 @media (min-height: 850px) {
+
   .add-contact-button,
   .menu-button-img {
     top: 710px;
@@ -688,6 +805,7 @@ input[type="tel"] {
 }
 
 @media (min-height: 890px) {
+
   .add-contact-button,
   .menu-button-img {
     top: 755px;
@@ -699,6 +817,7 @@ input[type="tel"] {
 }
 
 @media (min-height: 900px) {
+
   .add-contact-button,
   .menu-button-img {
     top: 775px;
@@ -723,6 +842,7 @@ input[type="tel"] {
 }
 
 @media (min-height: 1300px) {
+
   .add-contact-button,
   .menu-button-img {
     top: 1200px;
@@ -739,6 +859,7 @@ input[type="tel"] {
   from {
     transform: translateX(100%);
   }
+
   to {
     transform: translateX(0);
   }
@@ -748,6 +869,7 @@ input[type="tel"] {
   from {
     transform: translateX(0);
   }
+
   to {
     transform: translateX(100%);
   }
