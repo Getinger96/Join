@@ -1,6 +1,6 @@
 body {
   padding: 0;
-  overflow-y: hidden;
+
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -557,7 +557,7 @@ input:not(:placeholder-shown) {
 
 .cancel-button,
 .delete-button {
-  width: 126px;
+  width: 235px;
   height: 56px;
   background-color: white;
   color: black;

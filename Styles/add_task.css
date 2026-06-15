@@ -1168,7 +1168,7 @@ input:not(:placeholder-shown) {
 
 .cancel-button,
 .delete-button {
-  width: 126px;
+width: 235px;
   height: 56px;
   background-color: white;
   color: black;

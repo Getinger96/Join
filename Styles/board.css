@@ -528,7 +528,6 @@ h3 {
 
 Button {
     height: 24px;
-    width: 92px;
     color: #FFFFFF;
     font-size: 18px;
     border: none;
@@ -1269,15 +1268,11 @@ li {
 }
 
 .close-button {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    background-color: white;
-    color: white;
+    height: 20px;
+    width: 20px;
+    background-color: transparent;
     border: none;
-    padding: 10px;
-    cursor: pointer;
-    border-radius: 5px;
+    padding: 0;
 }
 
 #darkOverlay {

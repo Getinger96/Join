@@ -566,7 +566,7 @@ input[type="tel"] {
 
 
   .input-container {
-    width: 270px;
+    width: 293px;
   }
 
 
@@ -611,7 +611,7 @@ input[type="tel"] {
 
   .cancel-button,
   .delete-button {
-    width: 115px;
+    width: 148px;
     font-size: 16px;
 
   }
@@ -626,6 +626,11 @@ input[type="tel"] {
 
     font-size: 17px;
 
+  }
+
+
+  .input-container {
+    width: 267px;
   }
 }
 
