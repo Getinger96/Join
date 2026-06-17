@@ -200,7 +200,7 @@ function setAccountBadge(loggedInUser) {
  */
 function setAccountButtons(userIndex) {
     document.querySelector('.two-buttons').innerHTML = `
-        <button type="button" class="cancel-button"onclick="openDeleteModal()">
+        <button type="button" class="delete-account-button"onclick="openDeleteModal()">
             Delete my account <img class="close-button" src="assets/IMG/iconoir_cancel.png">
         </button>
         <button type="button" class="createContact-button" onclick="htmlEditAccountForm(${userIndex})">

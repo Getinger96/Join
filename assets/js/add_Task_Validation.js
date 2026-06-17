@@ -6,10 +6,10 @@
 function checkValidationDate() {
     let date = document.getElementById('dueDate').value;
     let selectedDate = new Date(date);
-    let currentDate = new Date(); 
+    let currentDate = new Date();
     currentDate.setHours(0, 0, 0, 0);
 
-    if (selectedDate < currentDate ) {
+    if (selectedDate < currentDate) {
         document.getElementById("dueDate").classList.add("invalid-date-border");
         showInvalidDateMessage();
         return false;
@@ -28,10 +28,10 @@ function checkValidationDate() {
  */
 function validateTask(titel, category, date) {
     if (!validateInputs(titel, category, date)) {
-        return false; 
+        return false;
     }
     if (!checkDateValidity(date)) {
-        return false; 
+        return false;
     }
     resetInputStyles();
     return true;
@@ -49,10 +49,10 @@ function validateInputs(titel, category, date) {
     if (titel === '' || category === '' || date === '') {
         allInputFieldMissing();
         changeColorBorder();
-        showInvalidDateMessage();
-        return false; 
+        if (date === '') showInvalidDateMessage();
+        return false;
     }
-    return true; 
+    return true;
 }
 /**
  * Checks if the selected date is not in the past.
@@ -61,14 +61,14 @@ function validateInputs(titel, category, date) {
  */
 function checkDateValidity(date) {
     let selectedDate = new Date(date);
-    let currentDate = new Date(); 
+    let currentDate = new Date();
     currentDate.setHours(0, 0, 0, 0);
 
     if (selectedDate < currentDate) {
         showInvalidDateMessage();
-        return false; 
+        return false;
     }
-    return true; 
+    return true;
 }
 
 /**
@@ -89,9 +89,48 @@ function resetInputStyles() {
  * 
  */
 function changeColorBorder() {
-    document.getElementById("title").classList.add("missing-input-border");
-    document.getElementById("dueDate").classList.add("missing-input-border");
-    document.getElementById("select_containerId").classList.add("missing-input-border");
+    if (document.getElementById('title').value.trim() === '') {
+        document.getElementById('title').classList.add('missing-input-border');
+    } else {
+        document.getElementById('title').classList.remove('missing-input-border');
+    }
+    if (document.getElementById('dueDate').value === '') {
+        document.getElementById('dueDate').classList.add('missing-input-border');
+    } else {
+        document.getElementById('dueDate').classList.remove('missing-input-border');
+        document.getElementById('WrongCurrentDateId').innerHTML = '';
+    }
+    if (document.getElementById('Category').innerHTML.trim() === 'Select Category') {
+        document.getElementById('select_containerId').classList.add('missing-input-border');
+    } else {
+        document.getElementById('select_containerId').classList.remove('missing-input-border');
+    }
+
+    if (!document.getElementById('title').dataset.listenerAdded) {
+        document.getElementById('title').addEventListener('input', function () {
+            if (this.value.trim() !== '') {
+                this.classList.remove('missing-input-border');
+                document.getElementById('titleMissing').innerHTML = '';
+                let date = document.getElementById('dueDate').value;
+                let category = document.getElementById('Category').innerHTML.trim();
+                if (date !== '' && category !== 'Select Category') {
+                    document.getElementById('InputFieldsMissing').innerHTML = '';
+                }
+            }
+        });
+        document.getElementById('dueDate').addEventListener('input', function () {
+            if (this.value !== '') {
+                this.classList.remove('missing-input-border');
+                document.getElementById('WrongCurrentDateId').innerHTML = '';
+                let title = document.getElementById('title').value.trim();
+                let category = document.getElementById('Category').innerHTML.trim();
+                if (title !== '' && category !== 'Select Category') {
+                    document.getElementById('InputFieldsMissing').innerHTML = '';
+                }
+            }
+        });
+        document.getElementById('title').dataset.listenerAdded = 'true';
+    }
 }
 
 /**
@@ -106,9 +145,9 @@ function clearMissingFieldContent() {
     let SubtaskLengthReachedElement = document.getElementById('SubtaskLengthReached')
 
     if (SubtaskLengthReachedElement) {
-        SubtaskLengthReachedElement.innerHTML ='';
+        SubtaskLengthReachedElement.innerHTML = '';
     }
-   
+
 }
 /**
  * Removes missing-field error styles and clears both the
@@ -132,7 +171,7 @@ function hasTasks(userJSON) {
     if (userJSON.tasks) {
         return true;
     } else {
-        return false; 
+        return false;
     }
 }
 
@@ -157,7 +196,7 @@ async function fetchUserData(path) {
 async function fetchTasks(path = '') {
     tasksArray = [];
     let userJSON = await fetchUserData(path);
-    if (!hasTasks(userJSON)) { 
+    if (!hasTasks(userJSON)) {
         return;
     }
     let tasksAsarray = Object.values(userJSON.tasks);
@@ -197,12 +236,12 @@ function addTaskToArray(task, keyTask, id, tasksArray) {
         });
     }
 }
- 
+
 /**
  * This function change location of the window
  * 
  */
- function gotoBoard() {
+function gotoBoard() {
     let showTaskIsCreated = document.getElementById('newTaskIsReady');
 
     showTaskIsCreated.innerHTML = `<div class="ForwardingBoard">
@@ -210,9 +249,10 @@ function addTaskToArray(task, keyTask, id, tasksArray) {
     <img src="./assets/IMG/Icons (3).png" alt="">
 </div>`;
 
-setTimeout(() => { window.location.href = "board.html";
-            
-}, 2000);
+    setTimeout(() => {
+        window.location.href = "board.html";
+
+    }, 2000);
 }
 
 /**
@@ -221,7 +261,7 @@ setTimeout(() => { window.location.href = "board.html";
  */
 function addSubtask() {
     let list = document.getElementById('ul_subtasks');
-    list.innerHTML = ''; 
+    list.innerHTML = '';
     if (subtasks.length < 0) {
         document.getElementById(`createNewTask${0}`).style.marginTop = "60px";
     }
@@ -236,7 +276,7 @@ function addSubtask() {
  * 
  * @param {number} i index of the subtask
  */
-function deleteItem(i) { 
+function deleteItem(i) {
     subtasks.splice(i, 1);
     addSubtask();
 }
@@ -248,13 +288,13 @@ function deleteItem(i) {
  */
 function addCurrentSubtask() {
     let currentSubtask = document.getElementById('input_Subtasks').value;
-    if (currentSubtask === '') {       
+    if (currentSubtask === '') {
         return;
     } else if (subtasks.length < 10) {
         subtasks.push(currentSubtask);
-        document.getElementById('input_Subtasks').value = '';  
-        addSubtask(); 
-     }
+        document.getElementById('input_Subtasks').value = '';
+        addSubtask();
+    }
 }
 
 /**
@@ -264,20 +304,20 @@ function addCurrentSubtask() {
  * @returns 
  */
 function validateSubtask(i) {
-let newSubTask = document.getElementById(`subtaskValue${i}`).value
-document.getElementById(`SubtaskLengthReached`).innerHTML =''; 
-removeColorSubtaskInputField(); 
+    let newSubTask = document.getElementById(`subtaskValue${i}`).value
+    document.getElementById(`SubtaskLengthReached`).innerHTML = '';
+    removeColorSubtaskInputField();
 
-if (newSubTask.length == 0) {
-    subtasks.splice(i, 1);
-    pleaseEnterASubtask();
-    document.getElementById(`changeColorId${i}`).style.border= "1px solid red";
-    document.getElementById(`subtaskValue${i}`).style.borderBottom = "3px solid red";
-    return;
-}
-document.getElementById(`subtasksValidation${i}`).innerHTML ='';
-document.getElementById(`changeColorId${i}`).style.border= '';
-subtasks[i] = newSubTask;
-updateSubtaskElement(i);
+    if (newSubTask.length == 0) {
+        subtasks.splice(i, 1);
+        pleaseEnterASubtask();
+        document.getElementById(`changeColorId${i}`).style.border = "1px solid red";
+        document.getElementById(`subtaskValue${i}`).style.borderBottom = "3px solid red";
+        return;
+    }
+    document.getElementById(`subtasksValidation${i}`).innerHTML = '';
+    document.getElementById(`changeColorId${i}`).style.border = '';
+    subtasks[i] = newSubTask;
+    updateSubtaskElement(i);
 }
 

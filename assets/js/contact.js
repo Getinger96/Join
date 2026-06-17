@@ -342,21 +342,32 @@ async function deleteContact(index) {
  * Resets the contact form fields to their default values.
  */
 function resetContactForm() {
-    document.querySelector('.addcontactheadline').textContent = 'Add Contact';
-    document.querySelector('.addcontactsecondline').style.display = 'flex';
+    const headline = document.querySelector('.addcontactheadline');
+    if (headline) headline.textContent = 'Add Contact';
+
+    const secondline = document.querySelector('.addcontactsecondline');
+    if (secondline) secondline.style.display = 'flex';
+
+    const img = document.querySelector('.addNewContactimg');
+    if (img) img.style.display = 'block';
+
     document.getElementById('name').value = '';
     document.getElementById('mail').value = '';
     document.getElementById('telephone').value = '';
 
     const cancelButton = document.querySelector('.cancel-button');
-    cancelButton.style.display = 'flex';
-    cancelButton.innerHTML = 'Cancel<img class="close-button" src="assets/IMG/iconoir_cancel.png" alt="close button">';
-    cancelButton.onclick = function () { closeCardContact(); };
+    if (cancelButton) {
+        cancelButton.style.display = 'flex';
+        cancelButton.innerHTML = 'Cancel<img class="close-button" src="assets/IMG/iconoir_cancel.png" alt="close button">';
+        cancelButton.onclick = function () { closeCardContact(); };
+    }
 
-    let createButton = document.querySelector('.createContact-button');
-    createButton.innerHTML = 'Create Contact <img src="assets/IMG/check.svg" alt="Create Icon" class="button-icon" style="margin-left: 8px;">';
-    document.querySelector('.addNewContactimg').style.display = 'block';
-    closeAllWarningMessage()
+    const createButton = document.querySelector('.createContact-button');
+    if (createButton) {
+        createButton.innerHTML = 'Create Contact <img src="assets/IMG/check.svg">';
+    }
+
+    closeAllWarningMessage();
 }
 
 /**

@@ -101,6 +101,15 @@
   }
 }
 
+@media(max-width: 1460px) {
+
+      .spaceBetween {
+        
+        gap: 350px;
+    }
+
+}
+
 @media(max-width: 1410px) {
   .divBoard {
     margin-left: 100px;
@@ -298,7 +307,7 @@
   .addTaskTitle {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 40px;
+    
   }
 
   .boardAddTask {

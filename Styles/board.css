@@ -501,7 +501,7 @@ h3 {
     border-radius: 10px;
     background-color: rgb(255, 255, 255);
     margin-right: 40px;
-    width: 312px;
+    width:410px;
     box-sizing: border-box;
     border: solid 0.5px;
 }
@@ -1207,8 +1207,8 @@ li {
 }
 
 .cardbig {
+    max-height: 750px;
     background-color: white;
-    height: 807px;
     padding: 20px;
     border-radius: 30px;
     max-width: 400px;
@@ -1253,6 +1253,12 @@ li {
     font-weight: bolder;
     color: red;
     margin-top: 5px;
+}
+
+.boardCardheadlinesmall{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 @keyframes slideRight {

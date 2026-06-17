@@ -97,19 +97,19 @@ function choosedUserStory(event) {
     event.stopPropagation();
     let userStory = document.getElementById('Category');
     userStory.textContent = "User Story";
-    closelistCategory();
-}
-/**
- * This function delivers the text "Technical Task"if you choosed the div wit the category "Technical Task"
- * 
- */
-function choosedTechnicalTask() {
-    event.stopPropagation();
-    let technicalTask = document.getElementById('Category');
-    technicalTask.textContent = "Technical Task";
+    document.getElementById('select_containerId').classList.remove('missing-input-border');
+    document.getElementById('InputFieldsMissing').innerHTML = '';
     closelistCategory();
 }
 
+function choosedTechnicalTask(event) {
+    event.stopPropagation();
+    let technicalTask = document.getElementById('Category');
+    technicalTask.textContent = "Technical Task";
+    document.getElementById('select_containerId').classList.remove('missing-input-border');
+    document.getElementById('InputFieldsMissing').innerHTML = '';
+    closelistCategory();
+}
 /**
  * This function closes the list with teh Categorys
  * 
@@ -432,6 +432,9 @@ async function postData(path = "", data = {}) {
 async function createTask(event) {
     event.preventDefault();
     let newTask = createNewTask();
+    console.log('Titel:', newTask.Titel);
+    console.log('Category:', newTask.Category);
+    console.log('Date:', newTask.Date);
     if (!validateTask(newTask.Titel, newTask.Category, newTask.Date)) {
         return;
     }

@@ -557,7 +557,7 @@ input:not(:placeholder-shown) {
 
 .cancel-button,
 .delete-button {
-  width: 235px;
+  width: 148px;
   height: 56px;
   background-color: white;
   color: black;
@@ -567,6 +567,23 @@ input:not(:placeholder-shown) {
   align-items: center;
   /* ← das fehlt */
   gap: 8px;
+}
+
+.delete-account-button {
+  width: 235px;
+  justify-content: space-between;
+  height: 56px;
+  background-color: white;
+  color: black;
+  border: 1px solid #d1d1d1;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  /* ← das fehlt */
+  gap: 8px;
+  border-radius: 10px;
+  padding: 16px;
+  font-size: 20px;
 }
 
 .cancel-button:hover,
