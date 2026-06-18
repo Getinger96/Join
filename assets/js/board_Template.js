@@ -195,7 +195,7 @@ function generateCardHtml(title, description, dueDate, imagesHtml, priority, pri
                 <div class="divKategorieCard" style="background-color: ${categoryColor};">${category}</div>
                 <button onclick="closeOverlay(${taskIndex})" class="close-button"><img src="./assets/IMG/iconoir_cancel.png" alt=""></button>
             </div>
-            <div>
+            <div class="todo-detail-header">
                 <h2>${title}</h2>
             </div>
             <div class="responsiveDescription">

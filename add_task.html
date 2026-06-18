@@ -13,8 +13,10 @@
     <link rel="stylesheet" href="Styles/add_task_responsive.css">
     <link rel="stylesheet" href="./node_modules/viewerjs/dist/viewer.css">
     <link rel="stylesheet" href="./Styles/viewer-custom.css">
+    <link rel="stylesheet" href="./Styles/contact.css">
+
     <link rel="stylesheet" href="./Styles/contact_responsive.css">
-   
+
     <script src="./assets/js/contact_Template.js"></script>
     <script src="./assets/js/contact_Form_Validation.js"></script>
     <script src="./assets/js/script.js"></script>
@@ -173,17 +175,21 @@
                     </div>
                 </div>
             </div>
+
+
+            <div class="Btn_Container">
+                <div class="required_info_Container"><span class="red">*</span><span class="fieldisrequired">This field
+                        is
+                        required</span></div>
+                <div class="clear_COntainer" id="createNewTask">
+                    <button onclick="clearTask()" class="clear_Btn">Clear <img class="clear-icon"
+                            src="assets/IMG/x_icon_clear.svg" alt="Formular leeren"></button>
+                    <button type="submit" form="form_addtask" onclick="createTask(event)" class="Create_Btn">Create Task
+                        <img class="create_icon" src="assets/IMG/clear_Img.svg" alt="Task erstellen"></button>
+                </div>
+            </div>
     </div>
-    <div class="Btn_Container">
-        <div class="required_info_Container"><span class="red">*</span><span class="fieldisrequired">This field is
-                required</span></div>
-        <div class="clear_COntainer" id="createNewTask">
-            <button onclick="clearTask()" class="clear_Btn">Clear <img class="clear-icon"
-                    src="assets/IMG/x_icon_clear.svg" alt="Formular leeren"></button>
-            <button type="submit" form="form_addtask" onclick="createTask(event)" class="Create_Btn">Create Task
-                <img class="create_icon" src="assets/IMG/clear_Img.svg" alt="Task erstellen"></button>
-        </div>
-    </div>
+
 
     </form>
 

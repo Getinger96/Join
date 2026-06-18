@@ -667,7 +667,7 @@ input[type="tel"] {
 
   .createContact-button {
 
-    font-size: 17px;
+    font-size: 16px;
 
   }
 
@@ -675,6 +675,13 @@ input[type="tel"] {
   .input-container {
     width: 267px;
   }
+
+
+  .delete-account-button {
+    width: 145px;
+    
+    font-size: 16px;
+}
 }
 
 

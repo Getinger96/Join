@@ -495,6 +495,14 @@ h3 {
 }
 
 
+.todo-detail-header{
+    display: flex;
+    justify-content: center;
+
+   
+}
+
+
 
 .searchContainer {
     height: 48px;
