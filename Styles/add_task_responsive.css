@@ -5,14 +5,11 @@
 }
 
 
-@media (max-width: 1450px) {
-
-  .add_task_content {
-    margin-top: 90px;
-}
-}
+@media (max-width: 1450px) {}
 
 @media (max-width: 1410px) {
+
+
   .clear_COntainer {
     margin-top: 0px;
   }
@@ -100,7 +97,7 @@
 
   .add_task_content {
     margin-left: 220px;
-    margin-top: 100px;
+    margin-top: 66px;
 
   }
 
@@ -110,13 +107,13 @@
 
   .addTask_Container {
     margin-top: 0px;
-    padding: 16px;
+    padding-left: 16px;
   }
 
   .headline_addTask {
     padding: 16px;
     margin-top: 0px;
-    font-size: 40px;
+    font-size: 30px;
     line-height: 28.4px;
   }
 
@@ -147,7 +144,7 @@
 @media (max-width: 1230px) {
   .add_task_content {
     margin-left: 98px;
-    margin-top: 90px;
+
   }
 
   .Btn_Container {
@@ -183,23 +180,25 @@
 
   .add_task_content {
     margin-left: 0px;
-    margin-top: 100px;
+
   }
 }
 
 @media (max-width: 1024px) {
   .clear_COntainer {
-    margin-top: 145px;
+    margin-top: 0px;
   }
 
   .Selection_Container {
     height: 140px;
+    z-index: 1001;
   }
 
   .addTask_Container {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 85px;
   }
 
   .File_Upload_Container {
@@ -228,22 +227,27 @@
   }
 
   .Btn_Container {
-    gap: 90px;
-    margin-bottom: 80px;
+    display: none;
+
+  }
+
+  .Btn_Container_responsive {
+    margin-left: 10px;
+    display: flex;
+    gap: 50px;
+    margin-top: 269px;
     align-items: center;
-    justify-content: center;
-    margin-top: 100px;
-
   }
 
-  .required_info_Container {
-    width: auto;
-    height: 0px;
-    margin-top: 0px;
-    margin-bottom: 0px;
-    margin-right: 0px;
-    margin-top: 125px;
-  }
+
+.required_info_Container {
+  width: auto;
+  height: 0px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-right: 0px;
+  margin-top: 0px;
+}
 }
 
 @media (max-width: 800px) {

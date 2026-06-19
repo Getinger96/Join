@@ -539,6 +539,11 @@ body {
   padding-top: 9px;
   display: flex;
   flex-direction: column;
+  z-index: 1001;
+}
+
+.Btn_Container_responsive {
+  display: none;
 }
 
 .ul_subtasks {

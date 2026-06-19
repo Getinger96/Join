@@ -6,7 +6,7 @@
     z-index: 1000;
     height: 85px;
     display: none;
-     /* standardmäßig versteckt, wird durch media query angezeigt */
+    /* standardmäßig versteckt, wird durch media query angezeigt */
 }
 
 .sidelinkMobil {
@@ -65,6 +65,19 @@
 @media(max-width: 1410px) {
     .sideblockMobil {
         display: block;
+        height: 62px;
+    }
+
+    .sidelinkMobil {
+
+        height: 62px;
+
+    }
+
+    .sidelinkMobil a {
+
+        margin: 0px 4px;
+
     }
 }
 
