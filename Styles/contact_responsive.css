@@ -434,7 +434,7 @@ input[type="tel"] {
   .contactview-container.active {
     display: block;
     position: absolute;
-    top: 96px;
+    top: 80px;
     left: 0;
     width: 100%;
     background: #f6f7f8;
