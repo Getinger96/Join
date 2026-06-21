@@ -15,6 +15,11 @@
   .addTaskTitle {
     margin-bottom: 80px;
   }
+  .h2_AddTaskTittle{
+    font-size: 30px;
+    font-weight: 700;
+    padding:17px 0px;
+  }
 
   .divSectionAddTask2 {
     margin-top: 25px;
@@ -1031,6 +1036,10 @@
   .titleButtonBoard {
     width: 470px;
   }
+
+      .subtaskImgContent {
+        margin-left: -50px;
+    }
 }
 
 @media (max-width: 495px) {
@@ -1189,3 +1198,15 @@
     height: 120px;
   }
 }
+
+
+@media (max-height: 801px) {
+
+  .boardAddTask {
+        
+        height: 700px;
+        
+    }
+
+}
+ 

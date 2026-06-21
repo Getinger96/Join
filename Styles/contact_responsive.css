@@ -221,7 +221,7 @@ input[type="tel"] {
   }
 
   .overlay-add-contact-mobile {
-    
+
     top: 49%;
   }
 }
@@ -350,7 +350,7 @@ input[type="tel"] {
     width: 1140px;
   }
 
-  .contact-icon{
+  .contact-icon {
     height: 35px;
     width: 35px;
     font-size: 16px;
@@ -358,8 +358,8 @@ input[type="tel"] {
 
   .contactname {
     font-size: 16px;
-    
-}
+
+  }
 }
 
 @media (max-width: 1150px) {
@@ -496,7 +496,7 @@ input[type="tel"] {
   .context-menu {
     position: fixed;
     display: none;
-    top: 750px;
+    top: 585px;
     right: 10px;
     background-color: white;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -589,7 +589,8 @@ input[type="tel"] {
   input[type="text"],
   input[type="email"],
   input[type="tel"] {
-    width: 212px;
+    width: 263px;
+    font-size: 16px;
 
   }
 
@@ -679,9 +680,9 @@ input[type="tel"] {
 
   .delete-account-button {
     width: 145px;
-    
+
     font-size: 16px;
-}
+  }
 }
 
 
@@ -792,9 +793,7 @@ input[type="tel"] {
     top: 600px;
   }
 
-  .context-menu {
-    top: 660px;
-  }
+
 }
 
 @media (max-height: 750px) {
@@ -928,4 +927,14 @@ input[type="tel"] {
   to {
     transform: translateX(100%);
   }
+}
+
+
+@media (min-height: 800px) {
+        
+     .contactCars-overview {
+     overflow-x:hidden;
+     height: 780px;
+    }
+       
 }

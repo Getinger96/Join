@@ -111,7 +111,7 @@
   }
 
   .headline_addTask {
-    padding: 16px;
+    padding: 10px;
     margin-top: 0px;
     font-size: 30px;
     line-height: 28.4px;
@@ -119,7 +119,7 @@
 
 
   .headline_addTask {
-    padding: 16px;
+    padding: 10px;
     margin-top: 0px;
 
     line-height: 28.4px;
@@ -240,14 +240,14 @@
   }
 
 
-.required_info_Container {
-  width: auto;
-  height: 0px;
-  margin-top: 0px;
-  margin-bottom: 0px;
-  margin-right: 0px;
-  margin-top: 0px;
-}
+  .required_info_Container {
+    width: auto;
+    height: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-right: 0px;
+    margin-top: 0px;
+  }
 }
 
 @media (max-width: 800px) {
@@ -466,4 +466,12 @@
     height: 49px;
   }
 
+}
+
+
+
+@media (max-height: 801px) {
+  .clear_COntainer {
+    margin-top: 0px;
+  }
 }
