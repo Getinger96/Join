@@ -730,47 +730,61 @@ body {
 
   .summary_title_big {
     font-size: 30px;
+    margin-left: -130px;
 
   }
+
+  .summary_hr {
+
+    margin-left: -86px;
+
+  }
+
+
 
   .summary_secondline {
     font-size: 20px;
-
+    margin-left: -130px;
   }
 
-  .middle-SectionSummary {
-    margin-top: 0px;
-  }
+.newhr {
+        display: none;
+      
+    }
 
-  .kanbanboradtodo {
-    margin-top: 25px;
-    height: 75px;
-    width: 170px;
-  }
+.middle-SectionSummary {
+  margin-top: 0px;
+}
 
-  .kanbanboraddone {
-    margin-top: 25px;
-    height: 75px;
-    width: 170px;
-  }
+.kanbanboradtodo {
+  margin-top: 25px;
+  height: 75px;
+  width: 170px;
+}
 
-  .kanbanboardprio {
-    height: 75px;
-    margin-top: 15px;
-    width: 369px;
-  }
+.kanbanboraddone {
+  margin-top: 25px;
+  height: 75px;
+  width: 170px;
+}
 
-  .hrpriocontent {
+.kanbanboardprio {
+  height: 75px;
+  margin-top: 15px;
+  width: 369px;
+}
 
-    height: 75px;
-  }
+.hrpriocontent {
 
-  .taskboard {
-    height: 85px;
-    margin-top: 15px;
-    width: 105px;
+  height: 75px;
+}
 
-  }
+.taskboard {
+  height: 85px;
+  margin-top: 15px;
+  width: 105px;
+
+}
 }
 
 
