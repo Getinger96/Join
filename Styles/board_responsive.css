@@ -15,10 +15,11 @@
   .addTaskTitle {
     margin-bottom: 80px;
   }
-  .h2_AddTaskTittle{
+
+  .h2_AddTaskTittle {
     font-size: 30px;
     font-weight: 700;
-    padding:17px 0px;
+    padding: 17px 0px;
   }
 
   .divSectionAddTask2 {
@@ -108,10 +109,10 @@
 
 @media(max-width: 1460px) {
 
-      .spaceBetween {
-        
-        gap: 350px;
-    }
+  .spaceBetween {
+
+    gap: 350px;
+  }
 
 }
 
@@ -312,7 +313,7 @@
   .addTaskTitle {
     display: flex;
     justify-content: space-between;
-    
+
   }
 
   .boardAddTask {
@@ -523,9 +524,9 @@
     position: relative;
     top: 0px;
     right: 13px;
-    width:0px;
+    width: 0px;
   }
-  
+
 }
 
 @media(max-width:1160px) {
@@ -1037,9 +1038,9 @@
     width: 470px;
   }
 
-      .subtaskImgContent {
-        margin-left: -50px;
-    }
+  .subtaskImgContent {
+    margin-left: -50px;
+  }
 }
 
 @media (max-width: 495px) {
@@ -1200,13 +1201,32 @@
 }
 
 
+@media (min-height: 1280px) {
+
+  .boardAddTask {
+
+    height: 1122px;
+
+  }
+
+}
+
+
 @media (max-height: 801px) {
 
   .boardAddTask {
-        
-        height: 700px;
-        
-    }
+
+    height: 700px;
+
+  }
 
 }
- 
+
+
+@media (max-height: 700px) {
+
+  .boardAddTask {
+
+    height: 400px;
+  }
+}

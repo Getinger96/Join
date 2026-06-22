@@ -931,10 +931,41 @@ input[type="tel"] {
 
 
 @media (min-height: 800px) {
-        
-     .contactCars-overview {
-     overflow-x:hidden;
-     height: 780px;
-    }
-       
+
+  .contactCars-overview {
+    overflow-x: hidden;
+    height: 780px;
+
+  }
+
+
+  .add-contact-button {
+
+    top: 670px;
+
+  }
+
+}
+
+
+@media (max-height: 601px) {
+
+  .contactCars-overview {
+
+    height: 500px;
+
+  }
+
+
+
+
+}
+
+
+@media(max-height:550px) {
+
+  .add-contact-button,
+  .menu-button-img {
+    top: 400px;
+  }
 }

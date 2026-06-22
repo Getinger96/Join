@@ -69,7 +69,7 @@ body {
 }
 
 .greetingTheContact {
- 
+
   flex: 1;
 }
 
@@ -77,7 +77,7 @@ body {
   font-size: 47px;
   font-weight: bolder;
   position: absolute;
- 
+
 }
 
 .kanbanboradtodo:hover {
@@ -605,12 +605,12 @@ body {
   }
 
   .thridsectionsummary {
-    gap: 23px;
+    gap: 10px;
   }
 
   @media (max-width: 420px) {
     .kanbanboradtodoanddone {
-      gap: 19px;
+      gap: 10px;
     }
 
     .summary_title_big {
@@ -771,4 +771,65 @@ body {
     width: 105px;
 
   }
+}
+
+
+@media(max-height:550px) {
+  .todonummber {
+    font-size: 30px;
+  }
+
+  .kanbanboradtodo {
+
+    height: 70px;
+    width: 150px;
+  }
+
+  .kanbanboraddone {
+
+    height: 70px;
+    width: 150px;
+  }
+
+  .donenummber {
+    font-size: 30px;
+  }
+
+
+  .Upcoming-Deadline {
+    font-size: 15px;
+  }
+
+  .datekanbanboard {
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  .prionummber {
+    font-size: 30px;
+  }
+
+  .prioimgsection {
+    padding: 6px;
+
+  }
+
+  .kanbanboardprio {
+    height: 70px;
+    width: 310px;
+  }
+
+  .taskboard {
+    height: 70px;
+    width: 95px;
+
+
+  }
+
+  .Tasknumber {
+    font-size: 30px;
+    font-weight: 600;
+
+  }
+
 }

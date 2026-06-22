@@ -466,6 +466,13 @@
     height: 49px;
   }
 
+  .Btn_Container_responsive {
+
+    gap: 29px;
+
+    flex-direction: column-reverse;
+  }
+
 }
 
 
