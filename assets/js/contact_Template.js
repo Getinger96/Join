@@ -224,7 +224,7 @@ function updateBadgeUI(base64) {
     document.getElementById('accountPhoto').src = base64;
     document.getElementById('accountPhoto').style.display = 'block';
     document.getElementById('accountInitials').style.display = 'none';
-    document.getElementById('accountBadge').style.backgroundColor = 'transparent';
+   
 }
 
 /**

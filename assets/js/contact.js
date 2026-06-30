@@ -79,6 +79,7 @@ function groupContacts() {
  */
 function renderContacts() {
     let showContacts = document.getElementById('contactview');
+    if (!showContacts) return;
     let content = '';
 
     beginningLetter.forEach(letter => {

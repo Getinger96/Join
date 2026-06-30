@@ -9,10 +9,17 @@
     <link rel="stylesheet" href="Styles/help.css">
     <link rel="stylesheet" href="Styles/Desktop_template.css">
     <link rel="stylesheet" href="./Styles/mobile_tamplate.css">
+     <link rel="stylesheet" href="./Styles/contact.css">
+    <link rel="stylesheet" href="./Styles/contact_responsive.css">
     <script src="./assets/js/board_Database.js"></script>
     <script src="./assets/js/board_Contact.js"></script>
     <script src="./assets/js/board_Fetch_Task.js"></script>
     <script src="./assets/js/board.js"> </script>
+    <script src="./assets/js/contact.js"></script>
+    <script src="./assets/js/contact_Template.js"></script>
+    <script src="./assets/js/contact_Form_Validation.js"></script>
+    <script src="./assets/js/contact_Template.js"></script>
+    <script src="./assets/js/contact_Form_Validation.js"></script>
     <script src="./assets/js/script.js"></script>
     <script src="./assets/js/script_Template.js"></script>
     <script src="./assets/js/script_Sidebar.js"></script>
@@ -26,23 +33,24 @@
 
     <div w3-include-html="./assets/Templates/desktop_template.html"></div>
     <div class="headblock">
-        <div class="title">
-            <span class="kanbanBoardTitle">Kanban Projekt Management Tool</span>
-            <img src="./assets/IMG/Capa 3.png" alt="MobileIcon" class="MobileIcon">
-        </div>
-        <div class="headUserContainer">
-            <a href="help.html" class="help-link">
-                <img src="./assets/IMG/help.png" alt="Hilfe" class="help-icon">
-            </a>
-            <div class="logInUser_Container" onclick="showLogOutSection();">
-                <span class="logInUser" id="loginUserId"></span>
+        <div class="headblock-inner">
+            <div class="title">
+                <span class="kanbanBoardTitle">Kanban Projekt Management Tool</span>
+                <img src="./assets/IMG/Capa 3.png" alt="MobileIcon" class="MobileIcon">
             </div>
-    
+            <div class="headUserContainer">
+                <a href="help.html" class="help-link">
+                    <img src="./assets/IMG/help.png" alt="Hilfe" class="help-icon">
+                </a>
+                <div class="logInUser_Container" onclick="showLogOutSection();">
+                    <span class="logInUser" id="loginUserId"></span>
+                </div>
+            </div>
         </div>
     </div>
-    
+
     <div id="logoutId"> </div>
-    
+
 
     <img src="./assets/IMG/arrow-left-line.png" class="top-right-img" onclick="goToSummary()" alt="Back to Summary">
 
