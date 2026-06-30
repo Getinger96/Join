@@ -2,7 +2,7 @@ body {
   margin: 0;
   font-family: 'Inter', sans-serif;
   background-color: rgb(246, 247, 248);
-  overflow: hidden;
+  overflow-y: auto;
 }
 
 .middle-SectionSummary {
@@ -686,7 +686,18 @@ body {
   }
 }
 
+@media (max-height: 897px) {
+  .newhr {
+    display: none;
+  }
+}
+
 @media (max-height: 640px) {
+
+  body {
+    overflow-y: auto;
+  }
+
   .kanbanBoardSection {
     padding: 6px;
     top: 20px;
@@ -698,7 +709,13 @@ body {
   }
 
   .middle-SectionSummary {
-    margin-top: 0px;
+    height: auto;
+    /* statt 100vh */
+    align-items: flex-start;
+    padding-top: 80px;
+    /* Platz für Header */
+    padding-bottom: 80px;
+    /* Platz für mobile Nav */
   }
 
   .kanbanboradtodo {
@@ -747,48 +764,48 @@ body {
     margin-left: -130px;
   }
 
-.newhr {
-        display: none;
-      
-    }
+  .newhr {
+    display: none;
 
-.middle-SectionSummary {
-  margin-top: 0px;
+  }
+
+  .middle-SectionSummary {
+    margin-top: 0px;
+  }
+
+  .kanbanboradtodo {
+    margin-top: 25px;
+    height: 75px;
+    width: 170px;
+  }
+
+  .kanbanboraddone {
+    margin-top: 25px;
+    height: 75px;
+    width: 170px;
+  }
+
+  .kanbanboardprio {
+    height: 75px;
+    margin-top: 15px;
+    width: 369px;
+  }
+
+  .hrpriocontent {
+
+    height: 75px;
+  }
+
+  .taskboard {
+    height: 85px;
+    margin-top: 15px;
+    width: 105px;
+
+  }
 }
 
-.kanbanboradtodo {
-  margin-top: 25px;
-  height: 75px;
-  width: 170px;
-}
 
-.kanbanboraddone {
-  margin-top: 25px;
-  height: 75px;
-  width: 170px;
-}
-
-.kanbanboardprio {
-  height: 75px;
-  margin-top: 15px;
-  width: 369px;
-}
-
-.hrpriocontent {
-
-  height: 75px;
-}
-
-.taskboard {
-  height: 85px;
-  margin-top: 15px;
-  width: 105px;
-
-}
-}
-
-
-@media(max-height:550px) {
+@media(max-height:570px) {
   .todonummber {
     font-size: 30px;
   }
@@ -844,6 +861,20 @@ body {
     font-size: 30px;
     font-weight: 600;
 
+  }
+
+  .summary_title_big {
+
+    margin-left: -50px;
+  }
+
+  .summary_hr {
+    margin-left: 0px;
+  }
+
+  .summary_secondline {
+
+    margin-left: -50px;
   }
 
 }
