@@ -608,85 +608,122 @@ body {
     gap: 10px;
   }
 
-  @media (max-width: 420px) {
-    .kanbanboradtodoanddone {
-      gap: 10px;
-    }
 
-    .summary_title_big {
-      font-size: 40px;
-      margin-left: -65px;
-    }
+}
 
-    .summary_secondline {
-      font-size: 18px;
-      margin-left: -63px;
-    }
+@media (max-width: 480px) {
+  .thridsectionsummary {
+    gap: 30px;
+  }
 
-    .summary_headline {
-      flex-direction: column;
-      display: flex;
-      margin-top: -40px;
-      gap: 30px;
-    }
+}
 
-    .summary_hr {
-      margin-left: -21px;
-    }
+@media (max-width: 420px) {
+  .kanbanboradtodoanddone {
+    gap: 10px;
+  }
 
-    .newhr {
-      width: 180px;
-    }
+  .summary_title_big {
+    font-size: 40px;
+    margin-left: -65px;
+  }
 
-    .kanbanboradtodo {
-      width: 146px;
-      margin-top: 35px;
-      height: 95px;
-    }
+  .summary_secondline {
+    font-size: 18px;
+    margin-left: -63px;
+  }
 
-    .imgtodo {
-      width: 35px;
-      height: 35px;
-    }
+  .summary_headline {
+    flex-direction: column;
+    display: flex;
+    margin-top: -40px;
+    gap: 30px;
+  }
 
-    .kanbanboraddone {
-      width: 146px;
-      margin-top: 35px;
-      height: 95px;
-    }
+  .summary_hr {
+    margin-left: -21px;
+  }
 
-    .imgdone {
-      width: 35px;
-      height: 35px;
-    }
+  .newhr {
+    width: 180px;
+  }
 
-    .kanbanboardprio {
-      width: 310px;
-      margin-top: 20px;
-    }
+  .kanbanboradtodo {
+    width: 146px;
+    margin-top: 35px;
+    height: 95px;
+  }
 
-    .prioimg {
-      width: 35px;
-      height: 35px;
-    }
+  .imgtodo {
+    width: 35px;
+    height: 35px;
+  }
 
-    .datekanbanboard {
-      font-size: 18px;
-    }
+  .kanbanboraddone {
+    width: 146px;
+    margin-top: 35px;
+    height: 95px;
+  }
 
-    .taskboard {
-      width: 85px;
-    }
+  .imgdone {
+    width: 35px;
+    height: 35px;
+  }
 
-    .kanbanBoardSection {
-      padding: 10px;
-      top: 120px;
-      margin-top: 0px;
-    }
+  .kanbanboardprio {
+    width: 310px;
+    margin-top: 20px;
+  }
+
+  .prioimg {
+    width: 35px;
+    height: 35px;
+  }
+
+  .datekanbanboard {
+    font-size: 18px;
+  }
+
+  .taskboard {
+    width: 85px;
+  }
+
+  .kanbanBoardSection {
+    padding: 10px;
+    top: 120px;
+    margin-top: 0px;
+  }
+
+
+
+}
+
+
+@media (max-width: 320px) {
+  .newhr {
+    display: none;
   }
 }
 
 @media (max-height: 897px) {
+  .thridsectionsummary {
+    gap: 30px;
+
+  }
+
+  .newhr {
+    display: none;
+  }
+}
+
+@media (max-height: 800px) {
+  .thridsectionsummary {
+    gap: 20px;
+  }
+}
+
+
+@media (max-height: 750px) {
   .newhr {
     display: none;
   }
@@ -804,6 +841,18 @@ body {
   }
 }
 
+@media(max-height:600px) {
+  .kanbanboardprio {
+
+    width: 350px;
+  }
+
+  .thridsectionsummary {
+    gap: 16px;
+  }
+}
+
+
 
 @media(max-height:570px) {
   .todonummber {
@@ -877,4 +926,21 @@ body {
     margin-left: -50px;
   }
 
+}
+
+@media(max-height: 400px) {
+  .kanbanboardprio {
+
+    width: 323px;
+  }
+
+  .contentdate {
+
+    gap: 0px;
+  }
+
+  .taskboard {
+    height: 75px;
+    width: 95px;
+  }
 }

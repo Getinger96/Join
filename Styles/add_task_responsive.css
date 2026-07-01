@@ -263,6 +263,11 @@
 }
 
 @media (max-width: 500px) {
+
+  .Selection_Container_Category-list {
+    width: 280px;
+  }
+
   .profile_container_header {
     padding: 7px 0px 7px 7px;
   }
@@ -312,7 +317,7 @@
   }
 
   .input_Title {
-    width: 280px;
+    width: 270px;
   }
 
   .Description_Container {
@@ -425,6 +430,11 @@
     align-items: baseline;
   }
 
+  .Btn_Container_responsive {
+    margin-top: 160px;
+    flex-direction: column-reverse;
+  }
+
   .Subtasks_Inputfield {
     font-size: 16px;
   }
@@ -480,5 +490,90 @@
 @media (max-height: 801px) {
   .clear_COntainer {
     margin-top: 0px;
+  }
+}
+
+@media (max-height: 787px) {
+
+  .input_Title {
+    width: 270px !important;
+  }
+
+  .clear_COntainer {
+
+    gap: 40px;
+
+  }
+
+
+  .Selection_Container {
+    width: 281px;
+    margin-top: 77px;
+    padding-top: 0px;
+    z-index: 4;
+  }
+
+  .Selection_Container_Category-list {
+    width: 281px;
+    margin-top: 83px;
+    padding-top: 9px;
+    z-index: 4;
+  }
+
+
+  .Btn_Container_responsive {
+
+    flex-direction: column-reverse;
+  }
+
+}
+
+
+@media (max-height: 505px) {
+  .input_Title {
+    width: 430px !important;
+  }
+
+  .Selection_Container_Category-list {
+    width: 440px;
+
+  }
+
+  .Selection_Container {
+    width: 440px;
+
+  }
+
+  .clear_COntainer {
+    gap: 140px;
+  }
+
+}
+
+
+@media (max-height: 481px) {
+
+  .input_Title {
+    width: 270px !important;
+  }
+
+  .Selection_Container_Category-list {
+    width: 280px;
+  }
+
+  .Selection_Container {
+    width: 280px;
+  }
+
+  .clear_COntainer {
+    gap: 44px;
+
+
+  }
+
+  .Btn_Container_responsive {
+    gap: 7px;
+    flex-direction: column-reverse;
+    margin-top: 230px;
   }
 }
