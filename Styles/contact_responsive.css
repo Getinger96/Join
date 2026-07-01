@@ -948,6 +948,16 @@ input[type="tel"] {
 }
 
 
+@media (max-height: 769px) {
+
+  .add-contact-button {
+
+    top: 633px;
+
+  }
+}
+
+
 @media (max-height: 601px) {
 
   .contactCars-overview {
@@ -961,11 +971,168 @@ input[type="tel"] {
 
 }
 
+@media(max-height: 641px) {
+
+  .add-contact-button {
+    top: 518px;
+  }
+
+
+  .menu-button-img {
+    top: 500px;
+  }
+
+  .contactview-container.active {
+    top: 70px;
+  }
+
+  .context-menu {
+    top: 467px;
+  }
+}
+
 
 @media(max-height:550px) {
 
   .add-contact-button,
   .menu-button-img {
     top: 400px;
+  }
+}
+
+
+@media(max-height:481px) {
+
+  h2 {
+    text-align: center;
+  }
+
+  .single-contact-box {
+    width: 255px;
+    margin-left: 10px;
+  }
+
+  .add-contact-button {
+    top: 350px;
+  }
+
+
+  .overlay-add-contact-mobile-top {
+    width: 303px;
+    height: 171px;
+  }
+
+
+  .overlay-add-contact-mobile-top h1 {
+    font-size: 40px;
+
+  }
+
+  .overlay-add-contact-mobile-top span {
+    font-size: 16px;
+
+  }
+
+
+  .overlay-add-contact-profile-img-mobile {
+    top: 135px;
+  }
+
+  .overlay-add-contact-profile-img-mobile img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .overlay-add-contact-mobile-bottom {
+    width: 303px;
+    height: 269px;
+  }
+
+  .input-fields-add-contact-mobile {
+    width: 290px;
+    margin-top: 45px;
+  }
+
+  .mobile-form-buttons {
+
+    top: 363px;
+  }
+
+  .contactview-container.active {
+    top: 71px;
+  }
+
+  .menu-button-img {
+    top: 366px;
+  }
+
+  .context-menu {
+    top: 327px;
+  }
+
+
+}
+
+
+@media (max-height: 347px) {
+
+  .overlay-add-contact-mobile {
+    top: 50%;
+  }
+
+  .add-contact-button {
+    top: 200px;
+  }
+
+
+  .overlay-add-contact-mobile-top {
+
+    height: 114px;
+  }
+
+  .overlay-add-contact-mobile-top h1 {
+    font-size: 30px;
+    margin-top: 10px;
+  }
+
+  .overlay-add-contact-profile-img-mobile {
+    top: 80px;
+  }
+
+
+  .close-button-mobile {
+    top: 7px;
+    right: 23px;
+  }
+
+  .overlay-add-contact-profile-img-mobile {
+    top: 65px;
+  }
+
+  .overlay-add-contact-profile-img-mobile img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .overlay-add-contact-mobile-bottom {
+
+    height: 227px;
+  }
+
+  .input-fields-add-contact-mobile {
+
+    margin-top: 26px;
+  }
+
+  .mobile-form-buttons {
+    top: 272px;
+  }
+
+  .menu-button-img {
+    top: 230px;
+  }
+
+  .context-menu {
+    top: 190px;
   }
 }
