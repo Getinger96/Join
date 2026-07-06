@@ -512,16 +512,28 @@ input::placeholder {
   height: 24px;
 }
 
-input[type="text"],
-input[type="email"],
-input[type="tel"] {
+.newContact input[type="text"],
+.newContact input[type="email"],
+.newContact input[type="tel"] {
   border: none;
   outline: none;
   font-size: 20px;
-  color: #d1d1d1;
   cursor: pointer;
   width: 100%;
+  background-color: transparent;
 }
+
+.overlay-add-contact-mobile input[type="text"],
+.overlay-add-contact-mobile input[type="email"],
+.overlay-add-contact-mobile input[type="tel"] {
+  border: none;
+  outline: none;
+  font-size: 20px;
+  cursor: pointer;
+  width: 100%;
+  background-color: transparent;
+}
+
 
 input:focus {
   color: black;

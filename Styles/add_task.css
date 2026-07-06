@@ -539,7 +539,7 @@ body {
   padding-top: 9px;
   display: flex;
   flex-direction: column;
-  z-index: 1001;
+  z-index: 1000;
 }
 
 .Btn_Container_responsive {

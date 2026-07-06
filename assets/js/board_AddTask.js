@@ -1,7 +1,9 @@
 let d_none = true;
 
 
-
+function func1(event) {
+    event.stopPropagation();
+}
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeList();
 });
@@ -75,7 +77,7 @@ function showTaskBoard(taskDiv, overlay) {
 function hideTaskBoard(taskDiv, overlay) {
     taskDiv.classList.add('visible');
     overlay.classList.add('visible');
-     document.body.classList.add('no-scroll')
+    document.body.classList.add('no-scroll')
 }
 
 /**
@@ -166,9 +168,8 @@ function clearFormFields() {
     clearSelectionContainer();
     clearInputField('taskTitle');
     clearInputField('description');
-    resetSelectElement('category');
+    resetCategorySelection();
     clearSubtaskContainer();
-    resetSelectElement('select_container');
     clearDateInput();
     clearSelectedProfiles();
 }
@@ -193,9 +194,9 @@ function clearInputField(fieldId) {
 /**
  * the function creset select Element
  */
-function resetSelectElement(selectId) {
-    const select = document.getElementById(selectId);
-    select.value = "";  // setzt zurück auf die Placeholder-Option
+function resetCategorySelection() {
+    document.getElementById('Category').textContent = 'Select Category';
+    document.getElementById('select_containerId').classList.remove('missing-input-border');
 }
 /**
  * the function clear subtask Container
@@ -321,10 +322,10 @@ async function handleFileChangeBoard(event) {
     for (const file of Array.from(files)) {
         if (!ALLOWED_TYPES.includes(file.type)) {
             showToastBoard('Dieses Dateiformat ist nicht erlaubt!');
-            continue; 
+            continue;
         }
 
-          if (file.size > MAX_SIZE_BYTES) {
+        if (file.size > MAX_SIZE_BYTES) {
             showToastBoard('Upload-Limit von 1MB überschritten!');
             continue;
         }
@@ -337,8 +338,8 @@ async function handleFileChangeBoard(event) {
             fileSize: formatFileSize(file.size), // ← z.B. "204.8 KB"
             base64: compressedBase64
         });
-        
-       
+
+
 
         const item = document.createElement('div');
         item.classList.add('uploaded_file_item');
@@ -447,3 +448,28 @@ function compressImageBoard(file, fileType, maxWidth = 800, maxHeight = 800, qua
     });
 }
 
+
+function toggleCategoryList(event) {
+    event.stopPropagation();
+    document.getElementById('Selection_Container_Category-List').classList.toggle('d_none');
+}
+
+function selectUserStory(event) {
+    event.stopPropagation();
+    document.getElementById('Category').textContent = 'User Story';
+    document.getElementById('select_containerId').classList.remove('missing-input-border');
+    document.getElementById('InputFieldsMissing').innerHTML = '';
+    document.getElementById('Selection_Container_Category-List').classList.add('d_none');
+}
+
+function selectTechnicalTask(event) {
+    event.stopPropagation();
+    document.getElementById('Category').textContent = 'Technical Task';
+    document.getElementById('select_containerId').classList.remove('missing-input-border');
+    document.getElementById('InputFieldsMissing').innerHTML = '';
+    document.getElementById('Selection_Container_Category-List').classList.add('d_none');
+}
+
+document.addEventListener('click', () => {
+    document.getElementById('Selection_Container_Category-List').classList.add('d_none');
+});

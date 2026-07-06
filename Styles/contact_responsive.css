@@ -122,9 +122,19 @@
   height: 24px;
 }
 
-input[type="text"],
-input[type="email"],
-input[type="tel"] {
+.newContact input[type="text"],
+.newContact input[type="email"],
+.newContact input[type="tel"] {
+  width: 364px;
+  border: none;
+  outline: none;
+  font-size: 24px;
+  padding-left: 10px;
+}
+
+.overlay-add-contact-mobile input[type="text"],
+.overlay-add-contact-mobile input[type="email"],
+.overlay-add-contact-mobile input[type="tel"] {
   width: 364px;
   border: none;
   outline: none;
@@ -586,9 +596,9 @@ input[type="tel"] {
   }
 
 
-  input[type="text"],
-  input[type="email"],
-  input[type="tel"] {
+  .overlay-add-contact-mobile input[type="text"],
+  .overlay-add-contact-mobile input[type="email"],
+  .overlay-add-contact-mobile input[type="tel"] {
     width: 263px;
     font-size: 16px;
 
@@ -760,9 +770,9 @@ input[type="tel"] {
     width: 304px;
   }
 
-  input[type="text"],
-  input[type="email"],
-  input[type="tel"] {
+  .overlay-add-contact-mobile input[type="text"],
+  .overlay-add-contact-mobile input[type="email"],
+  .overlay-add-contact-mobile input[type="tel"] {
     width: 211px;
   }
 
@@ -958,18 +968,7 @@ input[type="tel"] {
 }
 
 
-@media (max-height: 601px) {
 
-  .contactCars-overview {
-
-    height: 500px;
-
-  }
-
-
-
-
-}
 
 @media(max-height: 641px) {
 
@@ -989,6 +988,23 @@ input[type="tel"] {
   .context-menu {
     top: 467px;
   }
+}
+
+@media (max-height: 601px) {
+
+  .contactCars-overview {
+
+    height: 500px;
+
+  }
+
+  .add-contact-button {
+    top: 460px;
+  }
+
+
+
+
 }
 
 

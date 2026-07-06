@@ -495,11 +495,11 @@ h3 {
 }
 
 
-.todo-detail-header{
+.todo-detail-header {
     display: flex;
     justify-content: center;
 
-   
+
 }
 
 
@@ -509,7 +509,7 @@ h3 {
     border-radius: 10px;
     background-color: rgb(255, 255, 255);
     margin-right: 40px;
-    width:410px;
+    width: 410px;
     box-sizing: border-box;
     border: solid 0.5px;
 }
@@ -737,6 +737,8 @@ h1 {
     margin-bottom: 24px;
     font-size: 20px;
     font-family: 'Inter';
+
+
 }
 
 .inputTitleDate {
@@ -1263,7 +1265,7 @@ li {
     margin-top: 5px;
 }
 
-.boardCardheadlinesmall{
+.boardCardheadlinesmall {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -1513,4 +1515,52 @@ li {
     font-size: 18px;
     cursor: pointer;
     opacity: 0.85;
+}
+
+
+.cataegory_Container {
+    width: 440px;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.category_Header {
+    font-family: "Inter";
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+}
+
+.select_Category {
+    width: 440px;
+    height: 48px;
+    border-radius: 10px;
+    border: 1px solid #ffffff;
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    font-family: "Inter";
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+}
+
+.Selection_Container_Category-list {
+    width: 431px;
+    background-color: #ffffff;
+    position: absolute;
+    margin-top: 91px;
+    border-radius: 10px;
+    border-radius: 10px;
+    border: 1px solid #d1d1d1;
+    padding-right: 0px;
+    padding-top: 9px;
+    display: flex;
+    flex-direction: column;
+    z-index: 1000;
+    gap: 8px;
+    padding-bottom: 8px;
+    padding-left: 8px;
 }

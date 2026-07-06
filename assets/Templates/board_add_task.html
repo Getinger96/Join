@@ -17,7 +17,7 @@
           <div id="InputFieldsMissing"></div>
           <div class="flexdirection">
             <label for="description">Description</label>
-            <textarea class="inputDescription marginTop" id="description"  placeholder="Enter a Description"></textarea>
+            <textarea class="inputDescription marginTop" id="description" placeholder="Enter a Description"></textarea>
           </div>
           <div id="InputFieldsMissing"></div>
           <div class="flexdirection">
@@ -37,16 +37,19 @@
             </div>
           </div>
 
-          <div class="flexdirection">
-            <div class="categoryEdit alaignItems">
-              <label for="category">Category</label> <!-- Geänderte ID -->
-              <p class="red">*</p>
+          <div class="cataegory_Container">
+            <label class="label" for="Category">Category <span class="red">*</span></label>
+            <div id="select_containerId" class="select_container" onclick="toggleCategoryList(event)" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ') toggleCategoryList(event)">
+              <span id="Category" class="Category_Input">Select Category</span>
+              <div id="arrow_img_container_Category">
+                <img class="arrow_drop_downaa" src="assets/IMG/arrow_drop_downaa.svg" alt="" />
+              </div>
             </div>
-            <select class="inputTitle marginTop curser" name="text" id="category">
-              <option value="" disabled selected hidden>Select Category</option>
-              <option value="Technical Task">Technical Task</option>
-              <option value="User Story">User Story</option>
-            </select>
+            <div id="Selection_Container_Category-List" class="Selection_Container_Category-list d_none">
+              <div onclick="selectUserStory(event)" id="userStory" class="userStory" tabindex="0" onkeydown="if(event.key==='Enter') selectUserStory(event)">User Story</div>
+              <div onclick="selectTechnicalTask(event)" id="technicalTask" class="technical_Task" tabindex="0" onkeydown="if(event.key==='Enter') selectTechnicalTask(event)">Technical Task</div>
+            </div>
+            <div class="categorymissingmsg" id="InputFieldsMissing"></div>
           </div>
         </div>
         <div class="separatorTask"></div>
@@ -105,7 +108,7 @@
           <p class="required-message">This field is required</p>
         </div>
         <div id="DibButtomAddtask" class="divButtonButtom">
-          <button onclick="clearBoardTask()" class="buttonContainerWhite curser">Clear <img src="./assets/IMG/x_icon_clear.svg"  alt="Clear Button"/></button>
+          <button onclick="clearBoardTask()" class="buttonContainerWhite curser">Clear <img src="./assets/IMG/x_icon_clear.svg" alt="Clear Button" /></button>
           <button onclick="createTask(event)" class="buttonContainerdark curser">Create Task <img src="assets/IMG/clear_Img.svg" /></button>
         </div>
       </div>
