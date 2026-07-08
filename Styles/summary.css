@@ -517,7 +517,11 @@ body {
 }
 
 
-
+@media (max-width: 800px) {
+  .newhr {
+    display: none;
+  }
+}
 
 
 @media (max-width: 650px) {
@@ -691,7 +695,7 @@ body {
   .kanbanBoardSection {
     padding: 10px;
     top: 120px;
-    margin-top: 0px;
+    margin-top: 20px;
   }
 
 
@@ -854,7 +858,7 @@ body {
 
 
 
-@media(max-height:570px) {
+@media(max-height:600px) {
   .todonummber {
     font-size: 30px;
   }

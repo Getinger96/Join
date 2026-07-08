@@ -631,6 +631,25 @@
 }
 
 
+
+@media (max-width: 1024px) {
+  .contactCars-overview {
+    width: 887px;
+  }
+}
+
+
+@media(max-width:995px) {
+  .overlay-add-contact-mobile-top {
+    height: 200px;
+  }
+
+  .overlay-add-contact-mobile-bottom {
+    height: 355px;
+
+  }
+}
+
 @media (max-width: 900px) {
   .contactCars-overview {
     width: 600px;
@@ -693,6 +712,14 @@
 
     font-size: 16px;
   }
+
+
+  .newContact input[type="text"],
+  .newContact input[type="email"],
+  .newContact input[type="tel"] {
+    width: 200px;
+
+  }
 }
 
 
@@ -747,6 +774,13 @@
   }
 }
 
+
+@media(max-width: 480px) {
+  .contactview-container.active {
+    top: 80px;
+  }
+}
+
 @media (max-width: 450px) {
   .input-fields-add-contact-mobile {
     margin-top: 70px;
@@ -797,11 +831,63 @@
   }
 }
 
+
+
+
+
+@media (max-width: 360px) {
+  .mobile-form-buttons {
+
+    top: 410px;
+
+  }
+
+  .input-fields-add-contact-mobile {
+    margin-top: 45px;
+  }
+
+
+  .overlay-add-contact-mobile-bottom {
+    width: 336px;
+    height: 284px;
+  }
+
+
+  .overlay-add-contact-profile-img-mobile img {
+    width: 80px;
+    height: 80px;
+
+  }
+
+
+  .overlay-add-contact-mobile-top {
+    width: 338px;
+    height: 200px;
+  }
+
+
+  .overlay-add-contact-profile-img-mobile {
+    top: 160px;
+  }
+
+
+
+}
+
+
+@media(max-width: 320px) {
+  .single-contact-box {
+    width: 260px;
+  }
+}
+
 @media (max-height: 850px) {
 
   .menu-button-img {
     top: 600px;
   }
+
+
 
 
 }
@@ -919,6 +1005,8 @@
   }
 }
 
+
+
 @keyframes slideIn {
   from {
     transform: translateX(100%);
@@ -957,6 +1045,16 @@
 
 }
 
+@media (min-height: 1023px) {
+  .contactCars-overview {
+    overflow-x: hidden;
+    height: 800px;
+  }
+}
+
+
+
+
 
 @media (max-height: 769px) {
 
@@ -965,9 +1063,35 @@
     top: 633px;
 
   }
+
+  .contactCars-overview {
+    overflow-x: hidden;
+    height: 800px;
+  }
 }
 
 
+@media (max-height: 740px) {
+
+  .contactCars-overview {
+
+    height: 500px;
+
+  }
+
+  .add-contact-button {
+    top: 610px;
+  }
+}
+
+
+@media (max-height: 670px) {
+
+
+  .add-contact-button {
+    top: 550px;
+  }
+}
 
 
 @media(max-height: 641px) {
@@ -978,7 +1102,7 @@
 
 
   .menu-button-img {
-    top: 500px;
+    top: 480px;
   }
 
   .contactview-container.active {
@@ -986,20 +1110,16 @@
   }
 
   .context-menu {
-    top: 467px;
+    top: 445px;
   }
 }
 
 @media (max-height: 601px) {
 
-  .contactCars-overview {
 
-    height: 500px;
-
-  }
 
   .add-contact-button {
-    top: 460px;
+    top: 450px;
   }
 
 
@@ -1008,16 +1128,40 @@
 }
 
 
-@media(max-height:550px) {
+@media(max-height:569px) {
 
   .add-contact-button,
   .menu-button-img {
     top: 400px;
   }
+
+  .menu-button-img {
+    top: 455px;
+  }
+
+  .context-menu {
+    top: 416px;
+  }
+}
+
+
+@media (max-height: 540px) {
+
+  .menu-button-img {
+    top: 410px;
+  }
+
+  .context-menu {
+    top: 380px;
+  }
 }
 
 
 @media(max-height:481px) {
+
+  .contactCars-overview {
+        height: 460px;
+    }
 
   h2 {
     text-align: center;
@@ -1150,5 +1294,9 @@
 
   .context-menu {
     top: 190px;
+  }
+
+  .contactCars-overview {
+    height: 330px;
   }
 }

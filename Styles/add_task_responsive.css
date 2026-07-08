@@ -348,6 +348,7 @@
   .Selection_Container {
     width: 280px;
     margin-top: 69px;
+    height: 128px;
   }
 
   .Selected_profiles_Container {
@@ -451,6 +452,20 @@
   }
 }
 
+
+
+@media (max-width: 480px) {
+  .addTask_Container {
+    margin-bottom: 0px;
+  }
+
+  .Btn_Container_responsive {
+    margin-top: 234px;
+
+  }
+
+}
+
 @media (max-width: 400px) {
   .ForwardingBoard {
     left: 15%;
@@ -489,6 +504,13 @@
 }
 
 
+@media (max-width: 375px) {
+  .addTask_Container {
+    margin-bottom: 13px;
+  }
+}
+
+
 
 @media (max-height: 801px) {
   .clear_COntainer {
@@ -498,9 +520,7 @@
 
 @media (max-height: 767px) {
 
-  .input_Title {
-    width: 270px !important;
-  }
+
 
   .clear_COntainer {
 
@@ -531,6 +551,30 @@
 
   }
 
+
+}
+
+
+@media (max-height: 600px) {
+  .Selection_Container_Category-list {
+    width: 280px;
+  }
+
+  .Selection_Container {
+    width: 281px;
+  }
+
+}
+
+
+@media (max-height: 569px) {
+  .Selection_Container_Category-list {
+    width: 280px;
+  }
+
+  .Selection_Container {
+    width: 281px;
+  }
 
 }
 
@@ -576,4 +620,17 @@
     flex-direction: column-reverse;
     margin-top: 230px;
   }
+
+  .Selection_Container_Category-list {
+    width: 280px;
+  }
+
+
+  .Selection_Container {
+    width: 280px;
+    height: 120px;
+  }
 }
+
+
+
