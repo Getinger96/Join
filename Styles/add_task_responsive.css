@@ -467,13 +467,18 @@
 }
 
 
-@media(max-width: 420px) {
+@media(max-width: 430px) {
   .Btn_Container_responsive {
 
 
     margin-top: 250px;
 
   }
+
+  .clear_COntainer {
+    margin-top: 0px;
+  }
+
 
 }
 
@@ -521,7 +526,7 @@
   }
 
   .Btn_Container_responsive {
-    margin-top: 90px;
+    margin-top: 250px;
   }
 
 
