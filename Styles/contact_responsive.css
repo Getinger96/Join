@@ -455,9 +455,9 @@
   }
 
   .back-button {
-    position: fixed;
-    top: 180px;
-    right: 20px;
+    position: absolute;
+    top: 25px;
+    left: 900px;
     display: block;
   }
 
@@ -636,6 +636,11 @@
   .contactCars-overview {
     width: 887px;
   }
+
+  .largcontactbox {
+    height: 400px;
+
+  }
 }
 
 
@@ -648,6 +653,11 @@
     height: 355px;
 
   }
+
+  .back-button {
+    left: 800px;
+  }
+
 }
 
 @media (max-width: 900px) {
@@ -723,7 +733,18 @@
 }
 
 
+@media(max-width: 880px) {
+  .back-button {
+    left: 700px;
+  }
+}
 
+
+@media (max-width: 780px) {
+ .back-button {
+    left: 600px;
+  }
+}
 
 
 
@@ -733,6 +754,17 @@
     max-width: 98%;
     display: block;
   }
+
+  .back-button {
+    left: 500px;
+  }
+}
+
+
+@media(max-width: 600px) {
+  .back-button {
+    left: 400px;
+  }
 }
 
 @media (max-width: 500px) {
@@ -741,7 +773,7 @@
   }
 
   .contactview-container.active {
-    top: 40px;
+    top: 70px;
   }
 
   .contactlist {
@@ -770,7 +802,10 @@
   }
 
   .back-button {
-    top: 120px;
+    top: 0px;
+    
+    left: 300px;
+  
   }
 }
 
@@ -870,7 +905,9 @@
     top: 160px;
   }
 
-
+.back-button {
+    left: 250px;
+  }
 
 }
 
@@ -1106,7 +1143,11 @@
 
 
   .add-contact-button {
-    top: 550px;
+    top: 530px;
+  }
+
+  .menu-button-img {
+    top: 530px;
   }
 }
 

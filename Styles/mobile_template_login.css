@@ -42,10 +42,14 @@
     /* Textfarbe */
 }
 
-.d-none {
+/* .d-none {
+    display: none;
+} */
+
+
+.logInUser {
     display: none;
 }
-
 
 
 @media(max-width:1528px) {

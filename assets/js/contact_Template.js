@@ -57,6 +57,7 @@ function showContactBig(contactsName, contactsEmail, contactPhone, contactLastna
                     </div>
                 </div>
             </div>
+             <img src="./assets/IMG/arrow-left-line.png" alt="backButton" onclick="closeDetailView()" class="back-button">
         </div>
         <div class="contactinfo">
             <span class="contactinfoname">Contact Information</span>
@@ -69,7 +70,7 @@ function showContactBig(contactsName, contactsEmail, contactPhone, contactLastna
                 <a class="contactphone" href="tel:${contactPhone}">${contactPhone}</a>
             </div>
         </div>
-        <img src="./assets/IMG/arrow-left-line.png" alt="backButton" onclick="closeDetailView()" class="back-button">
+        
         <img src="./assets/IMG/Menu Contact options.png" alt="Menu button" class="menu-button-img" onclick="toggleMenu()">
         <div id="contextMenu" class="context-menu">
             <div onclick="editContact(${index})" class="menu-item">

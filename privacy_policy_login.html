@@ -7,6 +7,7 @@
     <link rel="icon" type="image/x-icon" href="./assets/IMG/Capa 3.png">
     <link rel="stylesheet" href="Styles/fontStyles.css">
     <link rel="stylesheet" href="Styles/privacy_login.css">
+    <link rel="stylesheet" href="Styles/legal_login_notes.css">
     <link rel="stylesheet" href="Styles/stylePrivacyPolicy.css">
     <link rel="stylesheet" href="Styles/Desktop_template.css">
     <link rel="stylesheet" href="./Styles/mobile_template_login.css">
@@ -22,27 +23,36 @@
 
 <body onload="includeHTML()">
 
+
     <div w3-include-html="./assets/Templates/sidebar_login.html"></div>
+
     <div class="headblock">
-        <div class="title">
-            <span class="kanbanBoardTitle">Kanban Projekt Management Tool</span>
-            <img src="./assets/IMG/Capa 3.png" alt="MobileIcon" class="MobileIcon">
-        </div>
-        <div class="headUserContainer">
-        
-         
-    
+        <div class="headblock-inner">
+            <div class="title">
+                <span class="kanbanBoardTitle">Kanban Projekt Management Tool</span>
+                <img src="./assets/IMG/Capa 3.png" alt="MobileIcon" class="MobileIcon">
+            </div>
+            <div class="headUserContainer">
+                <a href="help.html" class="help-link">
+                    <img src="./assets/IMG/help.png" alt="Hilfe" class="help-icon">
+                </a>
+                <div class="logInUser_Container" onclick="showLogOutSection();">
+                    <span class="logInUser" id="loginUserId"></span>
+                </div>
+            </div>
         </div>
     </div>
-    
+
     <div id="logoutId"> </div>
 
-    <img src="./assets/IMG/arrow-left-line.png" class="top-right-img" onclick="goToLogin()" alt="Back to Login">
-    
+
     <section class="middle-Section-Privacy">
         <section class="privacyPolicy">
-            <div class="headline"> </div>
-            <h1>Datenschutz&shy;erkl&auml;rung</h1>
+            <div class="headline">
+                <h1>Datenschutz&shy;erkl&auml;rung</h1> <img src="./assets/IMG/arrow-left-line.png"
+                    class="top-right-img" onclick="goToLogin()" alt="Back to Login">
+            </div>
+
             <h2>1. Datenschutz auf einen Blick</h2>
             <h3>Allgemeine Hinweise</h3>
             <p>Die folgenden Hinweise geben einen einfachen &Uuml;berblick dar&uuml;ber, was mit Ihren personenbezogenen
@@ -122,7 +132,7 @@
                 Dritte ist nicht m&ouml;glich.</p>
             <h3>Hinweis zur verantwortlichen Stelle</h3>
             <p>Die verantwortliche Stelle f&uuml;r die Datenverarbeitung auf dieser Website ist:</p>
-            
+
             <p> Philip Tesch <br>
                 im Mühlental 2a <br>
                 55595 Traisen </p>
@@ -141,7 +151,7 @@
 
             <p> Erich Getinger <br>
                 Landgrafenstrasse 75 <br>
-               41068 Mönchengladbach </p>
+                41068 Mönchengladbach </p>
 
             <p> Telefon :+491771480425 <br>
                 E-Mail: erich.getinger@outlook.de</p>

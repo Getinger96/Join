@@ -19,18 +19,31 @@
 
 <body onload="includeHTML()">
 
-    <div w3-include-html="./assets/Templates/sidebar_login.html"></div>
-    <div class="headblock">
-        <div class="title">
-            <span class="kanbanBoardTitle">Kanban Projekt Management Tool</span>
-            <img src="./assets/IMG/Capa 3.png" alt="MobileIcon" class="MobileIcon">
-        </div>
-        <div class="headUserContainer">
-            
+    <header>
 
+
+
+        <div w3-include-html="./assets/Templates/sidebar_login.html"></div>
+    <div class="headblock">
+        <div class="headblock-inner">
+            <div class="title">
+                <span class="kanbanBoardTitle">Kanban Projekt Management Tool</span>
+                <img src="./assets/IMG/Capa 3.png" alt="MobileIcon" class="MobileIcon">
+            </div>
+            <div class="headUserContainer">
+                <a href="help.html" class="help-link">
+                    <img src="./assets/IMG/help.png" alt="Hilfe" class="help-icon">
+                </a>
+                <div class="logInUser_Container" onclick="showLogOutSection();">
+                    <span class="logInUser" id="loginUserId"></span>
+                </div>
+            </div>
         </div>
     </div>
 
+        <div id="logoutId"></div>
+
+    </header>
     <div id="logoutId"> </div>
     <img src="./assets/IMG/arrow-left-line.png" class="top-right-img" onclick="goToLogin()" alt="Back to Login">
 
@@ -47,7 +60,7 @@
             <p>Erich Getinger<br />
                 Fringsstraße 53<br />
                 41068 Mönchengladbach<br />
-                
+
             </p>
 
             <p>Philip Tesch<br />
@@ -67,7 +80,7 @@
             <p>Telefon: Telefon :+491771480425<br />
                 E-Mail: erichgetinger31@gmail.com
             </p>
-            
+
             <p>Telefon: Telefon: +41796921781<br />
                 E-Mail: andre.sutter13@gmail.com
             </p>
