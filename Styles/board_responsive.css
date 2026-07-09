@@ -1078,6 +1078,10 @@
   .titleButtonBoard {
     width: 450px;
   }
+
+  .AssignedTO_Container {
+    margin-bottom: 90px;
+  }
 }
 
 @media (max-width: 475px) {
@@ -1122,6 +1126,10 @@
   .titleButtonBoard {
     width: 370px;
   }
+
+  .AssignedTO_Container {
+    margin-bottom: 85px;
+  }
 }
 
 @media (max-width: 400px) {
@@ -1144,6 +1152,9 @@
   }
 }
 
+
+
+
 @media (max-width: 365px) {
   .drag-area {
     width: 290px;
@@ -1156,6 +1167,8 @@
   .spaceBetween {
     margin-left: -10px;
   }
+
+
 }
 
 @media (max-width: 340px) {
@@ -1263,6 +1276,27 @@
 }
 
 
+@media(max-height: 690px) {
+
+  .boardAddTask {
+    height: 620px;
+  }
+
+  .cardbig {
+    height: 560px;
+  }
+
+}
+
+
+@media(max-height: 640px) {
+
+  .cardbig {
+    height: 460px;
+  }
+
+}
+
 
 
 @media (max-height: 581px) {
@@ -1290,8 +1324,8 @@
   }
 
   .boardAddTask {
-        height: 390px;
-    }
+    height: 390px;
+  }
 }
 
 
@@ -1300,6 +1334,17 @@
   .cardbig {
     height: 220px;
     margin-top: -60px;
+  }
+}
+
+@media (max-height: 360px) {
+
+  .boardAddTask {
+    height: 280px;
+  }
+
+  .positionTask {
+    top: 42%;
   }
 }
 

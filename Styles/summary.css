@@ -294,33 +294,19 @@ body {
   gap: 20px;
 }
 
-
-
-@media (max-width: 1410px) {
-  .headblock {
-    left: 0px;
-  }
-}
-
 @media (max-width: 1450px) {
   .kanbanboardprio:hover {
     transform: scale(1.05);
   }
 }
 
-@media (max-width: 1250px) {
-  .loginstylesuccessfully {
-    display: none;
-  }
-
-  .greetingTheContact {
-    display: none;
-  }
-}
-
-
 
 @media (max-width: 1410px) {
+  .headblock {
+    left: 0px;
+  }
+
+
   .sideblock {
     display: none;
   }
@@ -474,7 +460,7 @@ body {
 
   .prioimgsection {
     padding: 15px;
-    gap: 25px;
+    gap: 20px;
   }
 
   .priosection {
@@ -515,6 +501,19 @@ body {
     font-size: 14px;
   }
 }
+
+
+
+@media (max-width: 1250px) {
+  .loginstylesuccessfully {
+    display: none;
+  }
+
+  .greetingTheContact {
+    display: none;
+  }
+}
+
 
 
 @media (max-width: 800px) {

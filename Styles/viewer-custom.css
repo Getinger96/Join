@@ -53,3 +53,12 @@
     }
 
 }
+
+
+@media(max-width: 768px) {
+    ul {
+        width: 240px;
+        
+        ;
+    }
+}

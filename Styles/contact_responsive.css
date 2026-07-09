@@ -835,7 +835,7 @@
 
 
 
-@media (max-width: 360px) {
+@media (max-width: 400px) {
   .mobile-form-buttons {
 
     top: 410px;
@@ -1085,6 +1085,23 @@
 }
 
 
+@media (max-height: 700px) {
+
+  .add-contact-button {
+    top: 570px;
+  }
+
+
+  .menu-button-img {
+    top: 575px;
+  }
+
+  .context-menu {
+    top: 537px;
+  }
+}
+
+
 @media (max-height: 670px) {
 
 
@@ -1113,6 +1130,9 @@
     top: 445px;
   }
 }
+
+
+
 
 @media (max-height: 601px) {
 
@@ -1160,8 +1180,8 @@
 @media(max-height:481px) {
 
   .contactCars-overview {
-        height: 460px;
-    }
+    height: 460px;
+  }
 
   h2 {
     text-align: center;
@@ -1215,7 +1235,7 @@
 
   .mobile-form-buttons {
 
-    top: 363px;
+    top: 375px;
   }
 
   .contactview-container.active {
@@ -1234,7 +1254,7 @@
 }
 
 
-@media (max-height: 347px) {
+@media (max-height: 360px) {
 
   .overlay-add-contact-mobile {
     top: 50%;
@@ -1247,7 +1267,7 @@
 
   .overlay-add-contact-mobile-top {
 
-    height: 114px;
+    height: 80px;
   }
 
   .overlay-add-contact-mobile-top h1 {
@@ -1256,18 +1276,15 @@
   }
 
   .overlay-add-contact-profile-img-mobile {
-    top: 80px;
+    top: 36px;
   }
 
 
   .close-button-mobile {
-    top: 7px;
-    right: 23px;
+    top: 10px;
+    right: 50px;
   }
 
-  .overlay-add-contact-profile-img-mobile {
-    top: 65px;
-  }
 
   .overlay-add-contact-profile-img-mobile img {
     width: 60px;
@@ -1276,7 +1293,7 @@
 
   .overlay-add-contact-mobile-bottom {
 
-    height: 227px;
+    height: 280px;
   }
 
   .input-fields-add-contact-mobile {
