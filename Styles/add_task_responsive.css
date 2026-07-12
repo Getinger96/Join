@@ -5,7 +5,7 @@
 }
 
 
-@media (max-width: 1450px) {}
+
 
 @media (max-width: 1410px) {
   .input_Task_Container_left {
@@ -137,11 +137,7 @@
 
   }
 
-  .Selection_Container {
-
-    height: 85px;
-
-  }
+  
 }
 
 @media (max-width: 1230px) {
@@ -193,7 +189,7 @@
   }
 
   .Selection_Container {
-    height: 140px;
+    height: 120px;
     z-index: 1000;
   }
 
@@ -226,7 +222,7 @@
 
   .Task_Container_right {
     margin-left: 0px;
-    margin-top: 130px;
+    margin-top: 60px;
   }
 
   .Btn_Container {
@@ -234,18 +230,30 @@
 
   }
 
+  .add_task_content {
+    padding-bottom: 370px;
+    /* Höhe der Bar + Puffer */
+  }
+
   .Btn_Container_responsive {
-    margin-left: 10px;
+    position: fixed;
+    bottom: 62px;
+    ;
+    left: 0;
+    width: 100%;
+    margin: 0;
+    padding: 12px 16px;
     display: flex;
     gap: 50px;
-    margin-top: 269px;
     align-items: center;
+    justify-content: center;
+    background-color: #f6f7f8;
+    z-index: 1000;
   }
 
 
   .required_info_Container {
     width: auto;
-    height: 0px;
     margin-top: 0px;
     margin-bottom: 0px;
     margin-right: 0px;
@@ -262,6 +270,21 @@
 @media (max-width: 650px) {
   .ForwardingBoard {
     left: 20%;
+  }
+}
+
+
+@media (max-width: 600px) {
+  .Btn_Container_responsive {
+    margin-top: 160px;
+    flex-direction: column-reverse;
+    bottom: 60px;
+    gap: 13px;
+  }
+
+  .add_task_content {
+    padding-bottom: 430px;
+    height:none;
   }
 }
 
@@ -434,10 +457,7 @@
     align-items: baseline;
   }
 
-  .Btn_Container_responsive {
-    margin-top: 160px;
-    flex-direction: column-reverse;
-  }
+
 
   .Subtasks_Inputfield {
     font-size: 16px;
@@ -459,21 +479,13 @@
     margin-bottom: 8px;
   }
 
-  .Btn_Container_responsive {
-    margin-top: 234px;
 
-  }
 
 }
 
 
 @media(max-width: 430px) {
-  .Btn_Container_responsive {
 
-
-    margin-top: 250px;
-
-  }
 
   .clear_COntainer {
     margin-top: 0px;
@@ -510,12 +522,7 @@
     height: 49px;
   }
 
-  .Btn_Container_responsive {
 
-    gap: 29px;
-    margin-top: 250px;
-    flex-direction: column-reverse;
-  }
 
 }
 
@@ -553,12 +560,7 @@
 
 }
 
-@media (max-height: 600px) {
-  .Btn_Container_responsive {
-    margin-top: 250px;
-  }
 
-}
 
 
 @media (max-height: 505px) {
@@ -578,10 +580,8 @@
 @media (max-height: 481px) {
 
   .input_Title {
-    width: 270px
+    width: 270px;
   }
-
-
 
   .clear_COntainer {
     gap: 44px;
@@ -589,11 +589,6 @@
 
   }
 
-  .Btn_Container_responsive {
-    gap: 7px;
-    flex-direction: column-reverse;
-    margin-top: 260px;
-  }
 
 
 }

@@ -16,6 +16,7 @@ body {
     font-family: "inter", sans-serif;
     max-width: 1900px;
     padding: 24px;
+    
 }
 
 .middle-Section-Privacy h1 {
@@ -31,31 +32,29 @@ body {
 
 .privacyPolicy {
     margin-top: 120px;
+    margin-left: 280px;
 }
 
 
-.logInUser {
-    display: none !important;
-}
 
-@media(max-width:1528px) {
-    .middle-Section-Privacy {
 
-        margin-left: 260px;
 
-    }
-}
 
 @media(max-width: 1410px) {
 
 
     .middle-Section-Privacy {
-        margin-left: 20px;
+       
         margin-right: 20px;
         margin-top: 20px;
         margin-bottom: 100px;
         overflow-x: hidden;
     }
+
+    .privacyPolicy {
+    margin-top: 40px;
+    margin-left: 40px;
+}
 
 }
 
