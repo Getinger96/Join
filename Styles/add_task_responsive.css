@@ -231,7 +231,7 @@
   }
 
   .add_task_content {
-    padding-bottom: 370px;
+    padding-bottom: 460px;
     /* Höhe der Bar + Puffer */
   }
 
@@ -259,6 +259,10 @@
     margin-right: 0px;
     margin-top: 0px;
   }
+
+  .AssignedTO_Container {
+    margin-top: 20px;
+}
 }
 
 @media (max-width: 800px) {
@@ -318,9 +322,7 @@
     gap: 20px;
   }
 
-  .clear_COntainer {
-    margin-top: 180px;
-  }
+  
 
   .subTaskInput {
     width: 120px;

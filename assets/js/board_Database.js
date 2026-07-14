@@ -55,10 +55,10 @@ function clearValidationMessages() {
 function getTaskDetails() {
     let titleElement = document.getElementById('taskTitle');
     let dueDateElement = document.getElementById('taskDueDate');
-    let categoryElement = document.getElementById('category');
+    let categoryElement = document.getElementById('Category');
     let title = titleElement.value.trim();
     let dueDate = dueDateElement.value.trim();
-    let category = categoryElement.value.trim();
+    let category = categoryElement.textContent.trim();
     let descriptionElement = document.getElementById('description');
     let description = descriptionElement ? descriptionElement.value.trim() : '';
     let priority = currentPriority;
@@ -199,19 +199,19 @@ function populateTaskFields(title, description, dueDate, priority, category, sub
     let taskDAte = document.getElementById('taskDueDate');
     taskDAte.value = dueDate;
     setPriority(priority);
-    let taskCategory = document.getElementById('category');
-    taskCategory.value = category;
+    let taskCategory = document.getElementById('Category');
+    taskCategory.textContent = category;
     let filesContainer = document.getElementById('uploaded_Files');
     filesContainer.innerHTML = '';
     files.forEach(file => {
-    filesContainer.innerHTML += `
+        filesContainer.innerHTML += `
         <div class="uploaded_file_item">
             <img src="${file.base64}" alt="${file.filename}" style="width:50px; height:50px; object-fit:cover; border-radius:4px;" />
             <span>${file.filename.slice(0, 5)}</span>
             <button onclick="removeFileBoard(this, '${file.filename}')">✕</button>
         </div>
     `;
-});
+    });
     allfiles = files;
 
     subtasks = subtask;
@@ -242,7 +242,7 @@ async function createEdittask(index) {
     let tasktitle = document.getElementById('taskTitle');
     let taskdescription = document.getElementById('description');
     let taskDAte = document.getElementById('taskDueDate');
-    let taskCategory = document.getElementById('category');
+    let taskCategory = document.getElementById('Category');
     let task = tasksArray[index];
     let status = task.status
     let key = task.taskKey;
@@ -250,7 +250,7 @@ async function createEdittask(index) {
     if (!validateTask(tasktitle, taskCategory, taskDAte)) {
         return;
     } else {
-        createEdittaskPut(tasktitle, taskdescription, taskDAte, taskCategory, task, status, key)
+        createEdittaskPut(tasktitle, taskdescription, taskDAte, taskCategory.textContent, task, status, key)
     }
 
 }

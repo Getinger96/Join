@@ -45,9 +45,8 @@ a {
     .middle-Section-Privacy {
         margin-left: 20px;
         margin-right:20px;
-        margin-top:20px;
         margin-bottom:100px;
-        overflow-x: hidden;
+        
     }
     .d-none {
         display: block;
@@ -57,19 +56,25 @@ a {
 
 .top-right-img {
     position: absolute;
-    top: 160px;
+    top: 170px;
     right: 40px;
     cursor: pointer; 
     width: 40px;
     height: 40px;
     }
 
+
+    .privacyPolicy {
+    margin-top:120px;
+    margin-left: 0px;
+}
+
 }
 
 @media(max-width: 800px) {
     .top-right-img {
     position: absolute;
-    top: 140px;
+    top: 170px;
     right: 40px;
     cursor: pointer; 
     width: 40px;
@@ -85,7 +90,6 @@ a {
 
     .top-right-img {
         position: absolute;
-        top: 140px;
         right: 20px;
         cursor: pointer; 
         width: 40px;
@@ -99,7 +103,7 @@ a {
 @media(max-width: 650px) {
     .top-right-img {
         position: absolute;
-        top: 146px;
+
         right: 24px;
         cursor: pointer;
         width: 40px;
@@ -121,7 +125,6 @@ a {
 @media(max-width: 480px) {
     .top-right-img {
         position: absolute;
-        top: 145px;
         right: 24px;
         cursor: pointer;
         width: 35px;
@@ -150,7 +153,7 @@ a {
 @media(max-width: 400px) {
     .top-right-img {
         position: absolute;
-        top: 140px;
+        
         right: 20px;
         cursor: pointer;
         width: 30px;

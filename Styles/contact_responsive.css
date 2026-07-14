@@ -1139,7 +1139,7 @@
 }
 
 
-@media (max-height: 670px) {
+@media (max-height: 690px) {
 
 
   .add-contact-button {
@@ -1148,6 +1148,9 @@
 
   .menu-button-img {
     top: 530px;
+  }
+  .context-menu {
+    top: 493px;
   }
 }
 
