@@ -17,8 +17,7 @@ body {
   justify-content: space-between;
   padding: 20px 100px 20px 100px;
   max-width: 1900px;
-  margin: 0px auto;
-  width: 100%;
+
 }
 
 .notajoinUser {
@@ -60,7 +59,7 @@ body {
 }
 
 .loginhr {
-  width: 30%;
+  width: 35%;
   margin-block-start: 0;
   border: 2px solid;
   color: #29abe2;
@@ -73,11 +72,13 @@ body {
 }
 
 .inputemailsection {
+  height: 48px;
+  width: 422px;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  padding: 11px 12px;
-  border: 1px solid gray;
+  padding: 12px 21px 12px 21px;
+  border: 1px solid #686868;
   border-radius: 10px;
   margin-bottom: 10px;
   margin-top: 20px;
@@ -85,11 +86,13 @@ body {
 }
 
 .inputpasswordsection {
+  height: 48px;
+  width: 422px;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  padding: 11px 12px;
-  border: 1px solid gray;
+  padding: 12px 21px 12px 21px;
+  border: 1px solid #686868;
   border-radius: 10px;
   margin-bottom: 10px;
   margin-top: 20px;
@@ -132,7 +135,7 @@ body {
 
 .loginbutton {
   font-weight: bolder;
-  padding: 15px;
+
   border-radius: 10px;
   border: none;
   background-color: #2a3647;
@@ -140,6 +143,8 @@ body {
   font-size: 20px;
   font-family: "inter", sans-serif;
   touch-action: manipulation;
+  width: 110px;
+  height: 48px;
 }
 
 .loginbutton:hover {
@@ -153,13 +158,14 @@ body {
 
 .guestbutton {
   font-weight: bolder;
-  padding: 15px;
   border-radius: 10px;
   background-color: white;
   color: black;
   font-size: 20px;
   cursor: pointer;
   font-family: "inter", sans-serif;
+  width: 177px;
+  height: 48px;
 }
 
 .guestbutton:hover {
@@ -195,9 +201,16 @@ body {
   flex-direction: column;
 }
 
-.loginstylesuccessfully {
+.greetingText {
+  font-weight: 500;
   font-size: 47px;
-  font-weight: bolder;
+  color: #2A3647;
+}
+
+.greetingName {
+  font-weight: 700;
+  font-size: 64px;
+  color: #124658;
 }
 
 .loginlogo {
@@ -225,7 +238,7 @@ body {
   width: 274px;
   height: 274px;
   transition: top 0.8s ease-in-out, left 0.8s ease-in-out,
-              width 0.8s ease-in-out, height 0.8s ease-in-out;
+    width 0.8s ease-in-out, height 0.8s ease-in-out;
 }
 
 
@@ -242,6 +255,7 @@ body {
   justify-content: center;
   align-items: center;
   padding: 30px;
+  flex: 1
 }
 
 .privacypolicyandlegalnotice {
@@ -251,12 +265,20 @@ body {
 
 .showMistakeValidation {
   display: flex;
+  height: 10px;
 }
 
 .privacy_policyandlegal_notesSection {
   display: flex;
   justify-content: center;
   gap: 30px;
+
+}
+
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 .privacypolicyandlegalnotice:hover {
@@ -332,7 +354,7 @@ body {
     padding: 0px 64px 48px 50px;
   }
 
-  
+
 
   .loginstylesuccessfully {
     font-size: 32px;

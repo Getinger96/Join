@@ -6,7 +6,7 @@
  */
 function passwordToShort() {
   return `
-    Passwords must have maximal 6 characters !!!`;
+    Passwords must have minimal 6 characters !!!`;
 }
 
 /**

@@ -229,13 +229,23 @@ function formatDate(dueDate) {
 function showTheCurrentTime() {
     let currentTime = new Date().getHours();
     let greetingText = document.getElementById('showTheRightTime');
+
+    let greeting;
     if (currentTime < 12) {
-        greetingText.innerHTML = "Good Morning !!!";
+        greeting = "Good Morning";
     } else if (currentTime < 18) {
-        greetingText.innerHTML = "Good Afternoon !!!";
+        greeting = "Good Afternoon";
     } else {
-        greetingText.innerHTML = "Good Evening !!!";
+        greeting = "Good Evening";
     }
+
+    let isGuest = localStorage.getItem('isGuest') === 'true';
+    let loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+    let name = (!isGuest && loggedInUser) ? loggedInUser.name : '';
+
+    greetingText.innerHTML = name
+        ? `<span class="greetingText">${greeting}</span><br><span class="greetingName">${name}</span>`
+        : `<span class="greetingText">${greeting} </span>`;
 }
 
 /**

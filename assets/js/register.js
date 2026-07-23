@@ -41,46 +41,46 @@ async function postData(path = "", data = {}) {
  * The function checks the registration form fields for validity and initiates user addition if valid.
  */
 async function checkRegistration() {
-    if (validateRegistrationInputs()) {
-      await processRegistration();
-    }
+  if (validateRegistrationInputs()) {
+    await processRegistration();
   }
+}
 
 
-  /**
- * The function validates the user inputs 
- */
+/**
+* The function validates the user inputs 
+*/
 function validateRegistrationInputs() {
-    let username = document.getElementById("username");
-    let usermail = document.getElementById("usermail");
-    let userpassword = document.getElementById("userpassword");
-    let userconfirmpassword = document.getElementById("userconfirmpassword");
-    let checkbox = document.getElementById("checkbox");
-    let sigUpInfo = document.getElementById("signupinfotext");
-    let user = contacts.find((u) => u.email === usermail.value);
-  
-    if (!sigUpValidation(user, username, usermail, userpassword, userconfirmpassword, checkbox)) {
-      return false;
-    }
-  
-    sigUpInfo.innerHTML = "";
-    return true;
+  let username = document.getElementById("username");
+  let usermail = document.getElementById("usermail");
+  let userpassword = document.getElementById("userpassword");
+  let userconfirmpassword = document.getElementById("userconfirmpassword");
+  let checkbox = document.getElementById("checkbox");
+  let sigUpInfo = document.getElementById("signupinfotext");
+  let user = contacts.find((u) => u.email === usermail.value);
+
+  if (!sigUpValidation(user, username, usermail, userpassword, userconfirmpassword, checkbox)) {
+    return false;
   }
-  
-  /**
-   * The function initiates user registration if validation is successful.
-   */
-  async function processRegistration() {
-    let username = document.getElementById("username");
-    let usermail = document.getElementById("usermail");
-    let userpassword = document.getElementById("userpassword");
-    let userconfirmpassword = document.getElementById("userconfirmpassword");
-    let checkbox = document.getElementById("checkbox");
-  
-    if (validateRegistrationInputs()) {
-      await addNewUser(username, usermail, userpassword, userconfirmpassword, checkbox);
-    }
+
+  sigUpInfo.innerHTML = "";
+  return true;
+}
+
+/**
+ * The function initiates user registration if validation is successful.
+ */
+async function processRegistration() {
+  let username = document.getElementById("username");
+  let usermail = document.getElementById("usermail");
+  let userpassword = document.getElementById("userpassword");
+  let userconfirmpassword = document.getElementById("userconfirmpassword");
+  let checkbox = document.getElementById("checkbox");
+
+  if (validateRegistrationInputs()) {
+    await addNewUser(username, usermail, userpassword, userconfirmpassword, checkbox);
   }
+}
 
 /**
  * The function handles the user registration process by creating a new user
@@ -91,9 +91,9 @@ function validateRegistrationInputs() {
  * @param {HTMLElement} checkbox - The checkbox input element.
  */
 async function addNewUser(username, usermail, userpassword, userconfirmpassword, checkbox) {
-    await createUser(username, usermail, userpassword);
-    postRegistrationActions(username, usermail, userpassword, userconfirmpassword, checkbox);
-  }
+  await createUser(username, usermail, userpassword);
+  postRegistrationActions(username, usermail, userpassword, userconfirmpassword, checkbox);
+}
 
 
 /**
@@ -103,29 +103,29 @@ async function addNewUser(username, usermail, userpassword, userconfirmpassword,
  * @param {HTMLElement} userpassword - The password input element.
  */
 async function createUser(username, usermail, userpassword) {
-    let newContact = {
-      name: username.value,
-      email: usermail.value,
-      password: userpassword.value,
-    };
-    await postData(`contacts`, newContact);
-  }
-  
-  /**
-   * The function handles post-registration actions
-   * @param {HTMLElement} username - The username input element.
-   * @param {HTMLElement} usermail - The email input element.
-   * @param {HTMLElement} userpassword - The password input element.
-   * @param {HTMLElement} userconfirmpassword - The confirm password input element.
-   * @param {HTMLElement} checkbox - The checkbox input element.
-   */
-  function postRegistrationActions(username, usermail, userpassword, userconfirmpassword, checkbox) {
-    emptyTheInputFields(username, usermail, userpassword, userconfirmpassword, checkbox);
-    showSignedUpSuccessfully();
-    setTimeout(() => {
-      window.location.href = "login.html";
-    }, 3000);
-  }
+  let newContact = {
+    name: username.value,
+    email: usermail.value,
+    password: userpassword.value,
+  };
+  await postData(`contacts`, newContact);
+}
+
+/**
+ * The function handles post-registration actions
+ * @param {HTMLElement} username - The username input element.
+ * @param {HTMLElement} usermail - The email input element.
+ * @param {HTMLElement} userpassword - The password input element.
+ * @param {HTMLElement} userconfirmpassword - The confirm password input element.
+ * @param {HTMLElement} checkbox - The checkbox input element.
+ */
+function postRegistrationActions(username, usermail, userpassword, userconfirmpassword, checkbox) {
+  emptyTheInputFields(username, usermail, userpassword, userconfirmpassword, checkbox);
+  showSignedUpSuccessfully();
+  setTimeout(() => {
+    window.location.href = "login.html";
+  }, 3000);
+}
 
 /**
  * Disables the sign-up button
@@ -223,19 +223,39 @@ function showVisbilityconfirmpassword() {
  */
 function validateUsername() {
   let username = document.getElementById("username").value.trim();
-  if (
-    !nameIsNotValid(username) ||
-    username.length < 3 ||
-    username.length > 30
-  ) {
-    document.getElementById("inputNameMistake").innerText =
-      wrongTextValidation();
-    document.getElementById("inputNameMistake").style.display = "flex";
-    changeBorderName();
+  let mistakeField = document.getElementById("inputNameMistake");
+  let isValid = nameIsNotValid(username) && username.length >= 3 && username.length <= 30;
+
+  if (!isValid) {
+    mistakeField.innerText = wrongTextValidation();
+    mistakeField.style.display = "flex";
   } else {
-    document.getElementById("inputNameMistake").innerText = "";
+    mistakeField.innerText = "";
     document.getElementById("inputenamesectionId").style.border = "";
-    document.getElementById("inputNameMistake").style.display = "none";
+    mistakeField.style.display = "none";
+  }
+  checkFormCompletion();
+}
+
+/**
+ * Validates the email format.
+ */
+/**
+ * Validates the username based on length and regex match.
+ */
+function validateUsername() {
+  let username = document.getElementById("username").value.trim();
+  let mistakeField = document.getElementById("inputNameMistake");
+  let isValid =
+    nameIsNotValid(username) && username.length >= 3 && username.length <= 30;
+
+  if (!isValid) {
+    mistakeField.innerText = wrongTextValidation();
+    mistakeField.style.display = "flex";
+  } else {
+    mistakeField.innerText = "";
+    document.getElementById("inputenamesectionId").style.border = "";
+    mistakeField.style.display = "none";
   }
   checkFormCompletion();
 }
@@ -245,15 +265,15 @@ function validateUsername() {
  */
 function validateEmail() {
   let usermail = document.getElementById("usermail").value.trim();
+  let mistakeField = document.getElementById("inputEmailMistake");
+
   if (!emailIsNotCorrect(usermail)) {
-    document.getElementById("inputEmailMistake").innerText =
-      wrongEmailValidation();
-    document.getElementById("inputEmailMistake").style.display = "flex";
-    changeBorderEmail();
+    mistakeField.innerText = wrongEmailValidation();
+    mistakeField.style.display = "flex";
   } else {
-    document.getElementById("inputEmailMistake").innerText = "";
+    mistakeField.innerText = "";
     document.getElementById("inputemailsectionId").style.border = "";
-    document.getElementById("inputEmailMistake").style.display = "none";
+    mistakeField.style.display = "none";
   }
   checkFormCompletion();
 }
@@ -263,15 +283,15 @@ function validateEmail() {
  */
 function validatePassword() {
   let userpassword = document.getElementById("userpassword").value.trim();
+  let mistakeField = document.getElementById("inputPasswordMistake");
+
   if (userpassword.length <= 5) {
-    document.getElementById("inputPasswordMistake").innerText =
-      passwordToShort();
-    changeBorderPassword();
-    document.getElementById("inputPasswordMistake").style.display = "flex";
+    mistakeField.innerText = passwordToShort();
+    mistakeField.style.display = "flex";
   } else {
-    document.getElementById("inputPasswordMistake").innerText = "";
+    mistakeField.innerText = "";
     document.getElementById("inputpasswordsectionId").style.border = "";
-    document.getElementById("inputPasswordMistake").style.display = "none";
+    mistakeField.style.display = "none";
   }
   checkFormCompletion();
 }
@@ -284,45 +304,18 @@ function validateConfirmPassword() {
   let userconfirmpassword = document
     .getElementById("userconfirmpassword")
     .value.trim();
-  if (userpassword !== userconfirmpassword || userconfirmpassword == "") {
-    document.getElementById("inputConfirmPasswordMistake").innerText =
-      passwordNoMatch();
-    document.getElementById("inputConfirmPasswordMistake").style.display =
-      "flex";
-    changeBorderConfirmPassword();
+  let mistakeField = document.getElementById("inputConfirmPasswordMistake");
+
+  if (userpassword !== userconfirmpassword || userconfirmpassword === "") {
+    mistakeField.innerText = passwordNoMatch();
+    mistakeField.style.display = "flex";
+    
   } else {
-    document.getElementById("inputConfirmPasswordMistake").innerText = "";
+    mistakeField.innerText = "";
     document.getElementById("inputpasswordconfirmsectionId").style.border = "";
-    document.getElementById("inputConfirmPasswordMistake").style.display =
-      "none";
+    mistakeField.style.display = "none";
   }
   checkFormCompletion();
-}
-
-/**
- * The function changes the border color of the name input field 
- */
-function changeBorderName() {
-  document.getElementById("inputenamesectionId").style.border = "3px solid red";
-}
-/**
- * The function changes the border color of the email input field 
- */
-function changeBorderEmail() {
-  document.getElementById("inputemailsectionId").style.border = "3px solid red";
-}
-/**
- * The function changes the border color of the password input field 
- */
-function changeBorderPassword() {
-  document.getElementById("inputpasswordsectionId").style.border = "3px solid red";
-}
-
-/**
- * The function changes the border color of the password confirmation input field 
- */
-function changeBorderConfirmPassword() {
-  document.getElementById("inputpasswordconfirmsectionId").style.border ="3px solid red";
 }
 
 /**

@@ -53,6 +53,8 @@ body {
 .logInUser_Container {
     display: flex;
     cursor: pointer;
+    position: relative;
+  cursor: pointer;
 }
 
 .logInUser {
@@ -105,10 +107,10 @@ body {
 
 .logoutSection {
     display: flex;
+    position: absolute;
     justify-content: space-between;
     align-items: center;
     flex-direction: column;
-    position: fixed;
     background-color: rgb(32, 42, 54);
     cursor: pointer;
     width: 150px;
@@ -116,7 +118,7 @@ body {
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
-    top: 135px;
+    top: 100%;
     right: 0px;
     padding: 5px;
     z-index: 100;

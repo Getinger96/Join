@@ -5,7 +5,7 @@
 async function loadUsers(path = '') {
     let response = await fetch(base_URL + path + ".json");
     let userJSON = await response.json();
-     let keysArray = Object.keys(userJSON.contacts);
+    let keysArray = Object.keys(userJSON.contacts);
     let userAsArray = Object.values(userJSON.contacts);
 
     for (let index = 0; index < userAsArray.length; index++) {
@@ -58,7 +58,8 @@ function handleLoginResult(user, loginMail, loginPassword, loginInfo) {
     if (user) {
         localStorage.setItem('loggedInUser', JSON.stringify(user));
         emptyTheInputFields(loginMail, loginPassword);
-        loginUpSuccessfully();
+        let isGuest = localStorage.getItem('isGuest') === 'true';
+        loginUpSuccessfully(isGuest ? null : user.name);
         setTimeout(() => {
             window.location.href = "summary.html";
         }, 2000);
@@ -76,7 +77,11 @@ async function loginAction() {
     let loginMail = document.getElementById('emaillogin');
     let loginPassword = document.getElementById('passwordlogin');
     let loginInfo = document.getElementById('incorrectentry');
-    
+
+    if (loginMail.value !== "guest@web.de") {
+        localStorage.setItem('isGuest', 'false');
+    }
+
     if (!await validateLoginEmail(loginMail, loginPassword, loginInfo)) return;
 
     if (loginMail.value === '' && loginPassword.value === '') {
@@ -97,6 +102,7 @@ function guestLogin() {
     let loginPassword = document.getElementById('passwordlogin');
     loginMail.value = "guest@web.de";
     loginPassword.value = "guest123456";
+    localStorage.setItem('isGuest', 'true');
 }
 
 /**
@@ -138,58 +144,63 @@ function passwordToShort() {
 /**
  * Displays a success message upon successful login.
  */
-function loginUpSuccessfully() {
+function loginUpSuccessfully(name) {
     document.getElementById('loginupsuccessfully').innerHTML = `
     <div class="loginUpsuccessfully">
         <span class="loginstylesuccessfully" id="showTheRightTimeLogin"></span>
     </div>`;
-    showTheCurrentTime();
+    showTheCurrentTime(name);
 }
 
 
 function startLogoAnimation() {
-  const bigLogo = document.getElementById('logoscreen');
-  const logoScreen = document.getElementById('logoscreensection');
-  const targetLogo = document.querySelector('.loginlogo');
+    const bigLogo = document.getElementById('logoscreen');
+    const logoScreen = document.getElementById('logoscreensection');
+    const targetLogo = document.querySelector('.loginlogo');
 
-  // Startposition: zentriert im Viewport
-  bigLogo.style.top = (window.innerHeight / 2 - 137) + 'px';
-  bigLogo.style.left = (window.innerWidth / 2 - 137) + 'px';
-  bigLogo.style.width = '274px';
-  bigLogo.style.height = '274px';
+    // Startposition: zentriert im Viewport
+    bigLogo.style.top = (window.innerHeight / 2 - 137) + 'px';
+    bigLogo.style.left = (window.innerWidth / 2 - 137) + 'px';
+    bigLogo.style.width = '274px';
+    bigLogo.style.height = '274px';
 
-  // Einen Frame warten, damit der Browser die Startposition rendert
-  // DANN transition starten
-  requestAnimationFrame(() => {
+    // Einen Frame warten, damit der Browser die Startposition rendert
+    // DANN transition starten
     requestAnimationFrame(() => {
-      const target = targetLogo.getBoundingClientRect();
+        requestAnimationFrame(() => {
+            const target = targetLogo.getBoundingClientRect();
 
-      bigLogo.style.top = target.top + 'px';
-      bigLogo.style.left = target.left + 'px';
-      bigLogo.style.width = target.width + 'px';
-      bigLogo.style.height = target.height + 'px';
+            bigLogo.style.top = target.top + 'px';
+            bigLogo.style.left = target.left + 'px';
+            bigLogo.style.width = target.width + 'px';
+            bigLogo.style.height = target.height + 'px';
+        });
     });
-  });
 
-  setTimeout(() => {
-    logoScreen.style.display = 'none';
-  }, 1400);
+    setTimeout(() => {
+        logoScreen.style.display = 'none';
+    }, 1400);
 }
 
 /**
  * Shows a greeting message based on the current time of day.
  */
-function showTheCurrentTime() {
+function showTheCurrentTime(name) {
     let currentTime = new Date().getHours();
     let greetingText = document.getElementById('showTheRightTimeLogin');
 
+    let greeting;
     if (currentTime < 12) {
-        greetingText.innerHTML = "Good Morning !!!";
+        greeting = "Good Morning";
     } else if (currentTime < 18) {
-        greetingText.innerHTML = "Good Afternoon !!!";
+        greeting = "Good Afternoon";
     } else {
-        greetingText.innerHTML = "Good Evening !!!";
+        greeting = "Good Evening";
     }
+
+    greetingText.innerHTML = name
+        ? `<span class="greetingText">${greeting}</span><br><span class="greetingName">${name}</span>`
+        : `<span class="greetingText">${greeting} </span>`;
 }
 
 /**
