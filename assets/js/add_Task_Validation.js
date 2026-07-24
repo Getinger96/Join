@@ -1,3 +1,42 @@
+
+/**
+ * Validates the title field on blur, reusing the message pattern
+ * from allInputFieldMissing().
+ */
+function checkValidationTitle() {
+    let title = document.getElementById('title').value.trim();
+    let titleField = document.getElementById('title');
+    let titleMissingMsg = document.getElementById('titleMissing');
+
+    if (title === '') {
+        titleField.classList.add('missing-input-border');
+        titleMissingMsg.innerHTML = `<span class="missingInput">Title is required</span>`;
+        return false;
+    }
+    titleField.classList.remove('missing-input-border');
+    titleMissingMsg.innerHTML = '';
+    return true;
+}
+
+/**
+ * Validates the category selection on blur, reusing the message pattern
+ * from allInputFieldMissing().
+ */
+function checkValidationCategory() {
+    let category = document.getElementById('Category').innerHTML.trim();
+    let categoryField = document.getElementById('select_containerId');
+    let categoryMissingMsg = document.getElementById('InputFieldsMissing');
+
+    if (category === 'Select Category') {
+        categoryField.classList.add('missing-input-border');
+        categoryMissingMsg.innerHTML = `<span class="missingInput">Please fill in or select the marked fields</span>`;
+        return false;
+    }
+    categoryField.classList.remove('missing-input-border');
+    categoryMissingMsg.innerHTML = '';
+    return true;
+}
+
 /**
  * This function check the validation of the input of the Date
  * 
@@ -5,19 +44,27 @@
  */
 function checkValidationDate() {
     let date = document.getElementById('dueDate').value;
+    let dateField = document.getElementById('dueDate');
+
+    if (date === '') {
+        dateField.classList.add('missing-input-border');
+        showInvalidDateMessage();
+        return false;
+    }
+
     let selectedDate = new Date(date);
     let currentDate = new Date();
     currentDate.setHours(0, 0, 0, 0);
 
     if (selectedDate < currentDate) {
-        document.getElementById("dueDate").classList.add("invalid-date-border");
+        dateField.classList.add("invalid-date-border");
         showInvalidDateMessage();
         return false;
     }
+    dateField.classList.remove("invalid-date-border");
+    dateField.classList.remove("missing-input-border");
     document.getElementById("WrongCurrentDateId").innerHTML = '';
-    document.getElementById("dueDate").classList.remove("invalid-date-border");
 }
-
 /**
  * This function cheks if the required input fileds are filled
  * 

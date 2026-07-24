@@ -103,19 +103,21 @@ body {
 
 .label {
   font-size: 20px !important;
+  font-weight: 400;
+  color: #2A3647;
 }
 
 .input_Title {
   width: 440px;
   height: 48px;
   border-radius: 10px;
-  border: 1px;
+  border: 1px solid #686868 !important;
   gap: 10px;
   display: flex;
   font-size: 20px;
   line-height: 24px;
   font-family: "Inter";
-  font-weight: 400;
+  font-weight: 300;
   outline: none;
 }
 
@@ -140,13 +142,13 @@ body {
   display: flex;
   gap: 10px;
   border-radius: 10px;
-  border: 1px;
+  border: 1px solid #686868 !important;
   font-size: 20px;
   line-height: 24px;
   font-family: "Inter";
-  font-weight: 400;
+  font-weight: 300;
   outline: none;
-  resize: none;
+
 }
 
 ::placeholder {
@@ -175,7 +177,7 @@ body {
   width: 420px;
   height: 48px;
   border-radius: 10px;
-  border: 1px solid #d1d1d1;
+  border: 1px solid #686868 !important;
   display: flex;
   justify-content: space-between;
   font-family: "Inter";
@@ -390,7 +392,7 @@ body {
 }
 
 .red {
-  color: red;
+  color: #FF8190;
 }
 
 .dividing_Line {
@@ -425,7 +427,7 @@ body {
 .input_date {
   height: 48px;
   width: 440px;
-  border: 1px solid #d1d1d1;
+  border: 1px solid #686868 !important;
   background-color: #ffffff;
   border-radius: 10px;
   font-family: "Inter";
@@ -729,7 +731,7 @@ body {
 .Subtask_Inputfield_Container {
   width: 440px;
   height: 48px;
-  border: 1px solid #d1d1d1;
+  border: 1px solid #686868;
   border-radius: 10px;
   background-color: #ffffff;
   display: flex;

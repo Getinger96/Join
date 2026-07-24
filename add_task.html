@@ -70,7 +70,7 @@
             <div class="input_Task_Container_left">
                 <div class="Title_Container">
                     <label class="label" for="title">Title<span class="red">*</span></label>
-                    <input id="title" placeholder="Enter a Title" class="input_Title" required type="text">
+                    <input id="title" placeholder="Enter a Title" class="input_Title" required type="text" onblur="checkValidationTitle()">
                     <div class="titlemissingmsg" id="titleMissing"></div>
                 </div>
                 <div class="Description_Container">
@@ -92,7 +92,7 @@
                 <div onclick="func1(event)" class="cataegory_Container">
                     <label class="label" for="Category">Category <span class="red">*</span></label>
                     <div id="select_containerId" class="select_container" onclick="openCategoryLIst(event)" tabindex="0"
-                        onkeydown="if(event.key==='Enter'||event.key===' ') openCategoryLIst(event)">
+                        onkeydown="if(event.key==='Enter'||event.key===' ') openCategoryLIst(event)" onblur="checkValidationCategory()">
                         <span id="Category" class="Category_Input">Select Category</span>
                         <div id="arrow_img_container_Category">
                             <img class="arrow_drop_downaa" src="assets/IMG/arrow_drop_downaa.svg" alt="">
