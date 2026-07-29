@@ -32,7 +32,7 @@ body {
 
 .privacyPolicy {
     margin-top: 120px;
-    margin-left: 280px;
+    margin-left: 240px;
 }
 
 
@@ -52,10 +52,13 @@ body {
 
     .privacyPolicy {
         margin-top: 40px;
-        margin-left: 40px;
+       margin-left: 15px;
     }
 
 }
+
+
+
 
 @media(max-width: 800px) {
 

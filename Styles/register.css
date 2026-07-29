@@ -388,7 +388,7 @@ footer {
   }
 
   .register {
-    padding: 0px 30px 15px 30px;
+
     cursor: pointer;
     margin-top: 50px;
     margin-bottom: 50px;
@@ -430,22 +430,43 @@ footer {
   }
 
   .back-button {
-  
-  left: 0px;
-  
-}
+
+    left: 0px;
+
+  }
 
 }
 
-@media (max-width: 380px) {
+
+
+@media (max-width: 530px) {
+
+  .register {
+    padding: 0px 30px 20px 30px;
+  }
+  
+}
+
+
+@media (max-width: 400px) {
+
+
+
+}
+
+ 
+
+@media (max-width: 376px) {
   .showMistakeValidation {
     flex-wrap: wrap;
     max-width: 200px;
   }
 
   .register {
-    padding: 0px 10px 15px 10px;
+    padding: 0px 40px 20px 40px;
   }
+
+  
 
   .loginandgustbutton {
     padding: 0px 0px 10px 0px;
@@ -479,13 +500,16 @@ footer {
 
   .inputemailsection {
     width: 230px;
+    margin-top: 40px;
   }
 
   .inputpasswordsection {
     width: 230px;
+    margin-top: 40px;
   }
 
   .inputpasswordconfirmsection {
     width: 230px;
+    margin-top: 40px;
   }
 }

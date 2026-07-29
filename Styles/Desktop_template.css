@@ -37,7 +37,6 @@ body {
 }
 
 .headblock-inner {
-    max-width: 1900px;
     height: 100%;
     display: flex;
     justify-content: space-between;
@@ -118,7 +117,7 @@ body {
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
-    top: 100%;
+    top: 9%;
     right: 0px;
     padding: 5px;
     z-index: 100;

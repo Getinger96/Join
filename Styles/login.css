@@ -16,7 +16,8 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: 20px 100px 20px 100px;
-  max-width: 1900px;
+  max-width: 1440px;
+  margin: 0 auto;
 
 }
 
@@ -399,7 +400,7 @@ body {
 
   .register {
     margin-top: 20px;
-    padding: 0px 10px 10px 10px;
+
   }
 
   .login-headline {
@@ -438,4 +439,12 @@ body {
     padding: 15px 0px 5px 0px;
   }
 
+}
+
+
+@media (max-width: 350px) {
+  .register {
+
+    padding: 0px 30px 20px 30px;
+  }
 }

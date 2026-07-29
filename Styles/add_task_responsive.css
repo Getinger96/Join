@@ -99,7 +99,7 @@
   }
 
   .add_task_content {
-    margin-left: 220px;
+    margin-left: 30px;
     margin-top: 85px;
 
   }
@@ -131,7 +131,7 @@
 
 
   .Btn_Container {
-    margin-left: 235px;
+    margin-left: 45px;
     margin-top: 20px;
     margin-bottom: 150px;
 
@@ -141,13 +141,10 @@
 }
 
 @media (max-width: 1230px) {
-  .add_task_content {
-    margin-left: 98px;
-
-  }
+  
 
   .Btn_Container {
-    margin-left: 98px;
+    
     display: flex;
     gap: 525px;
     margin-top: 60px;
@@ -157,10 +154,9 @@
 @media (max-width: 1100px) {
 
   .Btn_Container {
-    margin-left: 10px;
+    
     display: flex;
     gap: 510px;
-    margin-top: 10px;
   }
 
   .ForwardingBoard {
@@ -177,10 +173,7 @@
     height: 105px;
   }
 
-  .add_task_content {
-    margin-left: 0px;
-
-  }
+ 
 }
 
 @media (max-width: 1024px) {
